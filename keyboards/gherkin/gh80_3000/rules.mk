@@ -33,54 +33,26 @@ ARCH = AVR8
 #     CPU clock adjust registers or the clock division fuses), this will be equal to F_CPU.
 F_USB = $(F_CPU)
 
-# Bootloader
-#     This definition is optional, and if your keyboard supports multiple bootloaders of
-#     different sizes, comment this out, and the correct address will be loaded
-#     automatically (+60). See bootloader.mk for all options.
-BOOTLOADER = caterina
-
 # Interrupt driven control endpoint task(+60)
 OPT_DEFS += -DINTERRUPT_CONTROL_ENDPOINT
+
+
+# Boot Section Size in *bytes*
+OPT_DEFS += -DBOOTLOADER_SIZE=4096
+
 
 # Build Options
 #   comment out to disable the options.
 #
+BOOTMAGIC_ENABLE ?= no	# Virtual DIP switch configuration(+1000)
+MOUSEKEY_ENABLE ?= no	# Mouse keys(+4700)
+EXTRAKEY_ENABLE ?= yes	# Audio control and System control(+450)
+CONSOLE_ENABLE ?= no	# Console for debug(+400)
+COMMAND_ENABLE ?= no    # Commands for debug and configuration
+SLEEP_LED_ENABLE ?= no  # Breathing sleep LED during USB suspend
+NKRO_ENABLE ?= yes	# USB Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
+BACKLIGHT_ENABLE ?= no  # Enable keyboard backlight functionality
+AUDIO_ENABLE ?= no
+RGBLIGHT_ENABLE ?= no
 
-BACKLIGHT_ENABLE = yes  # Enable keyboard backlight functionality
-
-BACKLIGHT_BREATHING = no # yes # Enable keyboard backlight breathing
-
-TAP_DANCE_ENABLE = yes 	# Enable Tap Dance (comment if not being implemented)
-
-
-BOOTMAGIC_ENABLE = no  # yes	# Virtual DIP switch configuration(+1000)
-
-COMMAND_ENABLE = yes     # Commands for debug and configuration
-
-MAGIC_ENABLE = no
-
-
-HOLA_ENABLE = yes
-
-
-UNICODE_ENABLE = no    # ( mine )
-
-# UNICODEMAP_ENABLE = yes  ( mine - you can select or UNICODE or UNICODEMAP, but not both )
-
-MOUSEKEY_ENABLE = yes	  # Mouse keys(+4700)
-
-EXTRAKEY_ENABLE = no	  # Audio control and System control(+450)
-
-CONSOLE_ENABLE = no	    # Console for debug(+400)
-
-SLEEP_LED_ENABLE = no  # Breathing sleep LED during USB suspend
-
-
-NKRO_ENABLE = yes	     	# USB Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
-
-
-AUDIO_ENABLE = no       # Audio output on port C6
-
-RGBLIGHT_ENABLE = no    # Enable WS2812 RGB underlight.  Do not enable this with audio at the same time.
-
-LAYOUTS = ortho_3x10
+LAYOUTS = fullsize_ansi fullsize_iso

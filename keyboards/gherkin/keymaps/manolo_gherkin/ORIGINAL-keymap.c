@@ -1,7 +1,7 @@
 //
 //
 // manolo_gherkin
-//  TRASH  keymap.c
+//    keymap.c
 //
 //
 /* Copyright 2017 Brian Fong
@@ -20,11 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-
-// 🔴 MISSING CODE IN NEW FILE
 #include "quantum.h"
-// #include "keymap_PVIM.c"
-
 
 //#ifdef BACKLIGHT_BREATHING
 /*
@@ -36,8 +32,6 @@
 
 
 //#endif  // BACKLIGHT_CUSTOM_DRIVER
-
-#define GRAVE_MODS  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT)|MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI)|MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
 
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
@@ -112,7 +106,7 @@
 
 // Levels of breathing
 #define BR_CAPS 0
-#define BR_NMBR 2
+#define BR_NMBR 3000
 #define BR_DFLT 6
 
 #define UC_A_AC         0x0301    //   ́   for using with UC(0x0000)
@@ -173,7 +167,7 @@
 #define DT_BNDING KC_F23   // \UF71A
 #define SL_BNDING KC_F24   // \UF71B
 
-// 🔴 MISSING CODE IN NEW FILE
+
 enum custom_keycodes {
     FUN_MACRO  = 0 // SAFE_RANGE
     ,CUTE_ACC
@@ -211,7 +205,6 @@ enum custom_keycodes {
   ,DICTAD
   ,U_PVIM
   ,UPVIM
-  ,YPVIM
   ,IPVIM
   ,OPVIM
   ,P_PVIM
@@ -516,7 +509,8 @@ void U_APPS_finished (qk_tap_dance_state_t *state, void *user_data) {
                       register_code(KC_RCTL);
                       break;
 
-    case DOUBLE_TAP:        register_code(KC_LALT); register_code(KC_U); break;
+    case DOUBLE_TAP:        register_code(KC_U); unregister_code(KC_U);
+                            register_code(KC_U); break;
 
     case DOUBLE_HOLD:       register_code(KC_LALT); register_code(KC_U); break;  // diaeresis accent
 
@@ -539,7 +533,7 @@ void U_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
                       unregister_code(KC_RCTL);
                       break;
 
-    case DOUBLE_TAP:        unregister_code(KC_U); unregister_code(KC_LALT); break;
+    case DOUBLE_TAP:        unregister_code(KC_U); break;
 
     case DOUBLE_HOLD:       unregister_code(KC_U); unregister_code(KC_LALT); break;
 
@@ -687,7 +681,7 @@ void N_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
                       };
                       break;
 
-    case DOUBLE_TAP:        register_code(KC_LALT); register_code(KC_N); break;
+    case DOUBLE_TAP:        register_code(KC_N); unregister_code(KC_N); register_code(KC_N); break;
 
     case DOUBLE_HOLD:       // TOGGLE NUMBERS LAYER
                             if (numbers_layer_backlight == 0)  // NMBR enable
@@ -701,14 +695,12 @@ void N_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
                             {
                               layer_off(NMBR);
                               numbers_layer_backlight = 0;
-
-                              breathing_period_set(BR_DFLT);
-                              breathing_disable();
-
-                              if (caps_control_backlight)
+                              breathing_period_set(BR_CAPS);
+                              breathing_enable();
+                              if (!caps_control_backlight)
                               {
-                                breathing_period_set(BR_CAPS);
-                                breathing_enable();
+                                breathing_period_set(BR_DFLT);
+                                breathing_disable();
                               };
                             }; break;
 
@@ -732,7 +724,7 @@ void N_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
                       };
                       break;
 
-    case DOUBLE_TAP:        unregister_code(KC_N); unregister_code(KC_LALT); break;
+    case DOUBLE_TAP:        unregister_code(KC_N); break;
     case DOUBLE_HOLD:       break;
     case DOUBLE_SINGLE_TAP: unregister_code(KC_N); break;
   }
@@ -976,7 +968,7 @@ void DONMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
 // 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』   KC_A  -  C A P S L O C K  -  KC_A  『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
 //instanalize an instance of 'tap' for the 'A_CAPS' tap dance.
 
-void capslock_finished_function(void) { // MY CAPSLOCK FINISHED FUNCTION
+void capslock_finished(void) { // MY CAPSLOCK FINISHED FUNCTION
   if (caps_control_backlight == 0)
   {
 /*
@@ -1037,7 +1029,7 @@ void capslock_finished_function(void) { // MY CAPSLOCK FINISHED FUNCTION
   }
 } // MY CAPSLOCK FINISHED FUNCTION
 
-void capslock_reset_function(void) {  // MY CAPSLOCK RESET FUNCTION
+void capslock_reset(void) {  // MY CAPSLOCK RESET FUNCTION
   unregister_code(KC_CAPS); SEND_STRING(SS_UP(X_CAPSLOCK));
 }  // MY CAPSLOCK RESET FUNCTION
 
@@ -1055,7 +1047,7 @@ void A_CAPS_finished (qk_tap_dance_state_t *state, void *user_data) {
 
                       break;
 
-    case DOUBLE_TAP:        capslock_finished_function();  // MY CAPSLOCK FINISHED FUNCTION (the function defined just above)
+    case DOUBLE_TAP:        capslock_finished();  // MY CAPSLOCK FINISHED FUNCTION (the function defined just above)
                             break;
     case DOUBLE_HOLD:       register_code(KC_NO); break;
     case DOUBLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
@@ -1077,7 +1069,7 @@ void A_CAPS_reset (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_TAP:        unregister_code(KC_A); break;
     case SINGLE_HOLD:       unregister_code(KC_LSFT); break;
 
-    case DOUBLE_TAP:        capslock_reset_function();  // MY CAPSLOCK RESET FUNCTION (the function defined just above)
+    case DOUBLE_TAP:        capslock_reset();  // MY CAPSLOCK RESET FUNCTION (the function defined just above)
                             break;
 
     case DOUBLE_HOLD:       unregister_code(KC_NO); break;
@@ -1200,7 +1192,7 @@ void F_CAPS_finished (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_TAP:  register_code(KC_F); break;
     case SINGLE_HOLD: register_code(KC_LGUI); break;
 
-    case DOUBLE_TAP:        capslock_finished_function(); break;  // MY CAPSLOCK FINISHED FUNCTION
+    case DOUBLE_TAP:        capslock_finished(); break;  // MY CAPSLOCK FINISHED FUNCTION
     case DOUBLE_HOLD:       register_code(KC_NO); break;
     case DOUBLE_SINGLE_TAP: register_code(KC_F); unregister_code(KC_F); register_code(KC_F); break;
 
@@ -1220,7 +1212,7 @@ void F_CAPS_reset (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_TAP:  unregister_code(KC_F); break;
     case SINGLE_HOLD: unregister_code(KC_LGUI); break;
 
-    case DOUBLE_TAP:        capslock_reset_function(); break;  // MY CAPSLOCK RESET FUNCTION
+    case DOUBLE_TAP:        capslock_reset(); break;  // MY CAPSLOCK RESET FUNCTION
     case DOUBLE_HOLD:       unregister_code(KC_NO); break;
     case DOUBLE_SINGLE_TAP: unregister_code(KC_F); break;
 
@@ -1709,6 +1701,100 @@ void U_PVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
   U_PVIMtap_state.state = 0;
 }
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     B E G I N     O F     L I N E  &  P A R A G R A P H    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
+// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』    M O V E     B E G I N     O F     L I N E  &  P A R A G R A P H    『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
+//instanalize an instance of 'tap' for the 'UPVIM' tap dance.
+static tap UPVIMtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void UPVIM_finished (qk_tap_dance_state_t *state, void *user_data) {
+  UPVIMtap_state.state = cur_dance(state);
+  switch (UPVIMtap_state.state) {
+    case SINGLE_TAP: // [UPVIM_SHORTCUT] (GUI+LEFT) Move to START OF LINE       LCTL(LALT(KC_PAUS))
+                        register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_PAUS); break;
+    case SINGLE_HOLD:   register_code(KC_NO); break;
+    case DOUBLE_TAP: // [UPVIM_SHORTCUT] (ALT + UP) Move to START OF PARAGRAPH  LSFT(LCTL(LALT(KC_PAUS)))
+                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_PAUS); break;
+    case DOUBLE_SINGLE_TAP: register_code(KC_NO); break;
+  }
+}
+
+void UPVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (UPVIMtap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_PAUS); unregister_code(KC_LALT); unregister_code(KC_LCTL); break;
+    case SINGLE_HOLD: unregister_code(KC_NO); break;
+    case DOUBLE_TAP:  unregister_code(KC_PAUS); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT); break;
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_NO); break;
+  }
+  UPVIMtap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     B E G I N     O F     L I N E  &  P A R A G R A P H    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
+
+
+
+
+// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』    M O V E     T O    B E G I N N I N I N G     O F     W O R D    『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
+//instanalize an instance of 'tap' for the 'IPVIM' tap dance.
+static tap IPVIMtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void IPVIM_finished (qk_tap_dance_state_t *state, void *user_data) {
+  IPVIMtap_state.state = cur_dance(state);
+  switch (IPVIMtap_state.state) {
+    case SINGLE_TAP: // [IPVIM_SHORTCUT] (ALT+LEFT) Move to BEGINNING OF WORD       LCTL(LALT(KC_SLCT))
+                        register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_SLCT); break;
+    case SINGLE_HOLD:   register_code(KC_NO); break;
+    case DOUBLE_TAP: // [IPVIM_SHORTCUT] (CTL+ALT+LEFT) Move to BEGINNING OF SUBWORD  LSFT(LCTL(LALT(KC_SLCT)))
+                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_SLCT); break;
+    case DOUBLE_SINGLE_TAP: register_code(KC_NO); break;
+  }
+}
+
+void IPVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (IPVIMtap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_SLCT); unregister_code(KC_LALT); unregister_code(KC_LCTL); break;
+    case SINGLE_HOLD: unregister_code(KC_NO); break;
+    case DOUBLE_TAP:  unregister_code(KC_SLCT); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT); break;
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_NO); break;
+  }
+  IPVIMtap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     T O    B E G I N N I N I N G     O F     W O R D    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
+
+
+// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』    M O V E     T O    E N D     O F     W O R D    『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
+//instanalize an instance of 'tap' for the 'OPVIM' tap dance.
+static tap OPVIMtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void OPVIM_finished (qk_tap_dance_state_t *state, void *user_data) {
+  OPVIMtap_state.state = cur_dance(state);
+  switch (OPVIMtap_state.state) {
+    case SINGLE_TAP: // [OPVIM_SHORTCUT] (ALT+RIGHT) Move to BEGINNING OF WORD       LCTL(LALT(KC_EXEC))
+                        register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_EXEC); break;
+    case SINGLE_HOLD:   register_code(KC_NO); break;
+    case DOUBLE_TAP: // [OPVIM_SHORTCUT] (CTL+ALT+RIGHT) Move to END OF SUBWORD  LSFT(LCTL(LALT(KC_EXEC)))
+                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_EXEC); break;
+    case DOUBLE_SINGLE_TAP: register_code(KC_NO); break;
+  }
+}
+
+void OPVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (OPVIMtap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_EXEC); unregister_code(KC_LALT); unregister_code(KC_LCTL); break;
+    case SINGLE_HOLD: unregister_code(KC_NO); break;
+    case DOUBLE_TAP:  unregister_code(KC_EXEC); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT); break;
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_NO); break;
+  }
+  OPVIMtap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     T O    E N D     O F     W O R D    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
+
 
 
 // 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』    M O V E     E N D     O F     L I N E  &  P A R A G R A P H    『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
@@ -1740,166 +1826,6 @@ void P_PVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
   P_PVIMtap_state.state = 0;
 }
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     E N D     O F     L I N E  &  P A R A G R A P H    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
-
-
-
-
-
-
-
-
-
-
-
-
-
-// [BOOKMARK] 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//
-// [BOOKMARK] 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』    M O V E     P A R A G R A P H       U P   『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
-//instanalize an instance of 'tap' for the 'YPVIM' tap dance.
-static tap YPVIMtap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void YPVIM_finished (qk_tap_dance_state_t *state, void *user_data) {
-  YPVIMtap_state.state = cur_dance(state);
-  switch (YPVIMtap_state.state) {
-    case SINGLE_TAP: // [YPVIM_SHORTCUT] Move paragraph up       LSFT(LCTL(LALT(LGUI(KC_V)))), KC_P, KC_Y
-    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
-                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
-                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
-                        register_code(KC_P); unregister_code(KC_P);
-                        register_code(KC_Y); break;
-  }
-}
-
-void YPVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (YPVIMtap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_Y); break;
-  }
-  YPVIMtap_state.state = 0;
-}
-// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     P A R A G R A P H       U P   【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
-
-
-
-
-
-// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』    M O V E     B E G I N     O F     L I N E  &  P A R A G R A P H    『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
-//instanalize an instance of 'tap' for the 'UPVIM' tap dance.
-static tap UPVIMtap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void UPVIM_finished (qk_tap_dance_state_t *state, void *user_data) {
-  UPVIMtap_state.state = cur_dance(state);
-  switch (UPVIMtap_state.state) {
-    case SINGLE_TAP: // [uPVIM_SHORTCUT] (GUI+LEFT) Move to beginning of line      LSFT(LCTL(LALT(LGUI(KC_V)))), KC_P, KC_U
-    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
-                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
-                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
-                        register_code(KC_P); unregister_code(KC_P);
-                        register_code(KC_U); break;
-    case DOUBLE_TAP: // [UPVIM_SHORTCUT] (ALT + UP) Move to beginning of paragraph  LSFT(LCTL(LALT(LGUI(KC_V)))), KC_P, LSFT(KC_U)
-    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
-                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
-                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
-                        register_code(KC_P); unregister_code(KC_P);
-                        register_code(KC_LSFT); register_code(KC_U); break;
-  }
-}
-
-void UPVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (UPVIMtap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_U); break;
-    case DOUBLE_TAP:  unregister_code(KC_U); unregister_code(KC_LSFT); break;
-  }
-  UPVIMtap_state.state = 0;
-}
-// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     B E G I N     O F     L I N E  &  P A R A G R A P H    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
-
-
-// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』    M O V E     T O    B E G I N N I N I N G     O F     W O R D    『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
-//instanalize an instance of 'tap' for the 'IPVIM' tap dance.
-static tap IPVIMtap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void IPVIM_finished (qk_tap_dance_state_t *state, void *user_data) {
-  IPVIMtap_state.state = cur_dance(state);
-  switch (IPVIMtap_state.state) {
-    case SINGLE_TAP: // [IPVIM_SHORTCUT] (ALT+LEFT) Move to BEGINNING OF WORD       LSFT(LCTL(LALT(LGUI(KC_V)))), KC_P, KC_I
-    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
-                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
-                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
-                        register_code(KC_P); unregister_code(KC_P);
-                        register_code(KC_I); break;
-    case DOUBLE_TAP: // [IPVIM_SHORTCUT] (CTL+ALT+LEFT) Move to BEGINNING OF SUBWORD  LSFT(LCTL(LALT(LGUI(KC_V)))), KC_P, LSFT(KC_I)
-    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
-                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
-                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
-                        register_code(KC_P); unregister_code(KC_P);
-                        register_code(KC_LSFT); register_code(KC_I); break;
-  }
-}
-
-void IPVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (IPVIMtap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_I); break;
-    case DOUBLE_TAP:  unregister_code(KC_I); unregister_code(KC_LSFT); break;
-  }
-  IPVIMtap_state.state = 0;
-}
-// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     T O    B E G I N N I N I N G     O F     W O R D    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
-
-
-// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』    M O V E     T O    E N D     O F     W O R D    『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
-//instanalize an instance of 'tap' for the 'OPVIM' tap dance.
-static tap OPVIMtap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void OPVIM_finished (qk_tap_dance_state_t *state, void *user_data) {
-  OPVIMtap_state.state = cur_dance(state);
-  switch (OPVIMtap_state.state) {
-    case SINGLE_TAP: // [OPVIM_SHORTCUT] (ALT+RIGHT) Move to END OF WORD       LSFT(LCTL(LALT(LGUI(KC_V)))), KC_P, KC_O
-    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
-                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
-                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
-                        register_code(KC_P); unregister_code(KC_P);
-                        register_code(KC_O); break;
-    case DOUBLE_TAP: // [OPVIM_SHORTCUT] (CTL+ALT+RIGHT) Move to END OF SUBWORD  LSFT(LCTL(LALT(LGUI(KC_V)))), KC_P, LSFT(KC_O)
-    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
-                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
-                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
-                        register_code(KC_P); unregister_code(KC_P);
-                        register_code(KC_LSFT); register_code(KC_O); break;
-  }
-}
-
-void OPVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (OPVIMtap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_O); break;
-    case DOUBLE_TAP:  unregister_code(KC_O); unregister_code(KC_LSFT); break;
-  }
-  OPVIMtap_state.state = 0;
-}
-// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     T O    E N D     O F     W O R D    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
-
-
-
 // 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』    M O V E     E N D     O F     L I N E  &  P A R A G R A P H    『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
 //instanalize an instance of 'tap' for the 'PPVIM' tap dance.
 static tap PPVIMtap_state = {
@@ -1910,34 +1836,33 @@ static tap PPVIMtap_state = {
 void PPVIM_finished (qk_tap_dance_state_t *state, void *user_data) {
   PPVIMtap_state.state = cur_dance(state);
   switch (PPVIMtap_state.state) {
-    case SINGLE_TAP: // [PVIM_SHORTCUT] (GUI+RIGHT) Move to END OF LINE               LSFT(LCTL(LALT(LGUI(KC_V)))), KC_P, KC_P
-    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
-                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
-                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
-                        register_code(KC_P); unregister_code(KC_P);
-                        register_code(KC_P); break;
-    case DOUBLE_TAP: // [PVIM_SHORTCUT] (ALT + DOWN) Move to END OF PARAGRAPH         LSFT(LCTL(LALT(LGUI(KC_V)))), KC_P, LSFT(KC_P)
-    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
-                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
-                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
-                        register_code(KC_P); unregister_code(KC_P);
-                        register_code(KC_LSFT); register_code(KC_P); break;
+    case SINGLE_TAP: // [PVIM_SHORTCUT] (GUI+RIGHT) Move to END OF LINE               LCTL(LALT(KC_FIND))
+                        register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_FIND); break;
+    case SINGLE_HOLD:   register_code(KC_NO); break;
+    case DOUBLE_TAP: // [PVIM_SHORTCUT] (ALT + DOWN) Move to END OF PARAGRAPH         LSFT(LCTL(LALT(KC_FIND)))
+                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_FIND); break;
+    case DOUBLE_SINGLE_TAP: register_code(KC_NO); break;
   }
 }
 
 void PPVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (PPVIMtap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_P); break;
-    case DOUBLE_TAP:  unregister_code(KC_P); unregister_code(KC_LSFT); break;
+    case SINGLE_TAP:  unregister_code(KC_FIND); unregister_code(KC_LALT); unregister_code(KC_LCTL); break;
+    case SINGLE_HOLD: unregister_code(KC_NO); break;
+    case DOUBLE_TAP:  unregister_code(KC_FIND); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT); break;
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_NO); break;
   }
   PPVIMtap_state.state = 0;
 }
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     E N D     O F     L I N E  &  P A R A G R A P H    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
+
+
+
+
+// [BOOKMARK] 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+// Implementar Tap_dance para WordBackward y WordForward
+// [BOOKMARK] 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
 
 
@@ -2002,7 +1927,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // PVIM
  ,[U_PVIM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, U_PVIM_finished, U_PVIM_reset)
  ,[UPVIM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, UPVIM_finished, UPVIM_reset)
- ,[YPVIM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, YPVIM_finished, YPVIM_reset)
  ,[IPVIM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, IPVIM_finished, IPVIM_reset)
  ,[OPVIM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, OPVIM_finished, OPVIM_reset)
  ,[P_PVIM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, P_PVIM_finished, P_PVIM_reset)
@@ -2122,92 +2046,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 
 
-/*
-const uint16_t PROGMEM fn_actions[] = {
-  [0] = ACTION_FUNCTION(0),  // Calls action_function()
-  [1] = ACTION_FUNCTION(1)   // Calls action_function()
-};
-*/
-
-void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
-//  static uint8_t mods_pressed;
-
-  switch (id) {
-    case 0:
-      /* Handle the combined Grave/Esc key
-       */
-/*      mods_pressed = get_mods()&GRAVE_MODS; // Check to see what mods are pressed
-
-      if (record->event.pressed) {
-*/
-        /* The key is being pressed.
-         */
-/*        if (mods_pressed) {
-          add_key(KC_O);
-          send_keyboard_report();
-        } else {
-          add_key(KC_E);
-          send_keyboard_report();
-        }
-      } else {
-*/
-        /* The key is being released.
-         */
-/*        if (mods_pressed) {
-          del_key(KC_O);
-          send_keyboard_report();
-        } else {
-          del_key(KC_E);
-          send_keyboard_report();
-        }
-      }
-*/
-      break;
-    case 1:
-/*
-      if (record->event.pressed) {
-*/
-        /* The key is being pressed.
-
-        add_key(KC_LSFT); send_keyboard_report();
-        add_key(KC_LCTL); send_keyboard_report();
-        add_key(KC_LALT); send_keyboard_report();
-        add_key(KC_LGUI); send_keyboard_report();
-        add_key(KC_V);    send_keyboard_report();
-        del_key(KC_V);    send_keyboard_report();
-        del_key(KC_LGUI); send_keyboard_report();
-        del_key(KC_LCTL); send_keyboard_report();
-        del_key(KC_LALT); send_keyboard_report();
-        del_key(KC_LSFT); send_keyboard_report();
-        add_key(KC_P);    send_keyboard_report();
-        del_key(KC_P);    send_keyboard_report();
-        add_key(KC_Y);    send_keyboard_report();
-
-        */
-/* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
-//        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
-//        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-/* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
-//        register_code(KC_P); unregister_code(KC_P);
-//        register_code(KC_Y);
-/*
-SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v") ) ) ) );
-SEND_STRING("p");
-SEND_STRING(SS_DOWN(X_END));
 
 
 
-      } else {
-*/
-        /* The key is being released.
-         */
-/*
-         SEND_STRING(SS_UP(X_END));
-      }
-*/
-      break;
-  }
-}
+
 
 
 
@@ -2613,9 +2455,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [PVIM] = LAYOUT_ortho_3x10(  // layer 7: PVIM layer - Personal VIM layer   ⎯⎯⎯⎯⎯⎯⎯    FUNCTION KEYS FOR KEYBINDING COMBINATIONS !!!
 //|---------------|---------------|---------------+---------------+----------------||---------|-------------------|--------------|--------------+--------------.
-            XXXXXX,         XXXXXX,         XXXXXX,         F(0),           F(1),  TD(YPVIM),          TD(UPVIM),          TD(IPVIM),          TD(OPVIM),          TD(PPVIM),
+            XXXXXX,         XXXXXX,         XXXXXX,         XXXXXX,         XXXXXX,  LCTL(LALT(KC_PSCR)),          TD(UPVIM),          TD(IPVIM),          TD(OPVIM),          TD(PPVIM),
 //|---------------|---------------|---------------+---------------+----------------||---------|-------------------|--------------|--------------+--------------|
-            XXXXXX,         XXXXXX,       MO(DVIM),         XXXXXX,           F(0),  LCTL(LALT(KC_STOP)), LCTL(LALT(KC_F16)), LCTL(LALT(KC_F17)), LCTL(LALT(KC_F18)), LCTL(LALT(KC_F19)),
+            XXXXXX,         XXXXXX,       MO(DVIM),         XXXXXX,         XXXXXX,  LCTL(LALT(KC_STOP)), LCTL(LALT(KC_F16)), LCTL(LALT(KC_F17)), LCTL(LALT(KC_F18)), LCTL(LALT(KC_F19)),
 //|---------------|---------------|---------------+---------------+----------------||---------|-------------------|--------------|--------------+--------------|
           MO(XVIM),       MO(PVIM),       MO(ZVIM),       MO(SVIM),       MO(AVIM),   LCTL(LALT(KC_F20)), LCTL(LALT(KC_F21)), LCTL(LALT(KC_F22)), LCTL(LALT(KC_F23)),  LCTL(LALT(KC_F24))
 //|---------------|---------------|---------------+---------------+----------------||---------|-------------------|--------------|--------------+--------------'
@@ -2685,6 +2527,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
+/* Keymap MOUS 13: Mouse layer
+ * ,-----------------------------------.,----------------------------------.
+ * |      |      |      |      |      ||      |BginOf| Begin|  End |End of|
+ * |      |      |      |      |      ||      |▪︎Line |  of  |  of  |▪︎Line |
+ * |      |      |      |      |      ||      |▪︎▪︎Prgh| Word | Word |▪︎▪︎Prgh|
+ * |------+------+------+------+------||------+------+------+------+------|
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |      |      | DVIM |      |      ||      | mLeft| mDown|  mUp |mRight|
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |------+------+------+------+------||------+------+------+------+------|
+ * |      |      |      |      |      ||      | MOVE | MOVE | MOVE | MOVE |
+ * | XVIM |      | ZVIM | SVIM |      ||      | HOME | PAGE | PAGE |  END |
+ * |      |      |      |      |      ||      |      | DOWN |  UP  |      |
+ * '------+------+------+------+------'`------+------+------+------+------'
+*/
 
 /*
  *  ETC
@@ -2705,39 +2562,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 */
 
-/* ✅ Keymap MOUS 13: Mouse layer
-* ,-----------------------------------.,----------------------------------.
-* |      |      |      |      |      ||      |      |      |      |      |
-* |Accel0|      |Accel1|Accel2|      ||      | wLeft| wDown|  wUp |wRight|
-* |      |      |      |      |      ||      |      |      |      |      |
-* |------+------+------+------+------||------+------+------+------+------|
-* |      |      |      |      |      ||      |      |      |      |      |
-* |      |      |      | mBtn1|      ||      | mLeft| mDown|  mUp |mRight|
-* |      |      |      |      |      ||      |      |      |      |      |
-* |------+------+------+------+------||------+------+------+------+------|
-* |      |      |      |      |      ||      |      |      |      |      |
-* |      |      |      |      | mBtn2|| mBtn1| mBtn2| mBtn3| mBtn4| mBtn5|
-* |      |      |      |      |      ||      |      |      |      |      |
-* '------+------+------+------+------'`------+------+------+------+------'
-*/
 [MOUS] = LAYOUT_ortho_3x10(  // layer 13: mouse layer
   KC_ACL0, _______, KC_ACL1, KC_ACL2, _______,   _______, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R,
   _______, _______, _______, KC_BTN1, _______,   _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,
-  _______, _______, _______, _______, KC_BTN2,   KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_BTN5
+  _______, _______, _______, KC_BTN2, _______,   KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_BTN5
 ),
-/* ✅ END OF MOUS 12*/
 
 
 
 /* Keymap SUSR 14: superuser layer
 * ,-----------------------------------.,----------------------------------.
 * |      |      |      |      |      ||      |      |      |      |      |
-* |  Tab | Desk |Windws|Mision| RESET||      | Prev | Next |Launch| Spot |
+* |  Tab | Desk |Windws|Mision|      ||      | Prev | Next |Launch| Spot |
 * |      |      | Apps |Contrl|      ||      | APP  | APP  |  Bar | Light|
 * |------+------+------+------+------||------+------+------+------+------|
 * |      |      |      |      |      ||      |      |      |      |      |
 * | Menu | Dock | Tool |Status|Floati||      | Prev | Next |DELETE| ENTER|
-* | _bar | _bar | _bar | _bar |Window||      | win  | win  |      |      |
+* | _bar | _bar | _bar | _bar |Window||      | tab  | tab  |      |      |
 * |------+------+------+------+------||------+------+------+------+------|
 * |      |      |      |      |      ||      |      |      |  ❌  |      |
 * | Menu | Dock | Tool |Status|Floati||      | Prev | Next |DELETE| ENTER|
@@ -2748,7 +2589,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎// 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎// 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎
 [SUSR] = LAYOUT_ortho_3x10(  // layer 14: superuser gherkin layer
 //|---------------|---------------|---------------+---------------+----------------||---------|-------------------|-------------|------------+---------------|
-            KC_TAB,           DESK,    APP_WINDOWS,     MISION_CTL,        RESET,    _______,           PREV_APP,     NEXT_APP,     _______,   SPTLGHT_SIRI,
+            KC_TAB,           DESK,    APP_WINDOWS,     MISION_CTL,        _______,    _______,           PREV_APP,     NEXT_APP,     _______,   SPTLGHT_SIRI,
 // 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎// 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎// 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎
 //|---------------|---------------|---------------+---------------+----------------||---------|-------------------|-------------|------------+---------------|
            KC_CAPS,     TD(DICTAD),     ACTIVE_WIN,          SPEAK,       TO(SYMB),   TO(SYMB),           PREV_WIN,     NEXT_WIN,   DASHBOARD,         KC_SPC,

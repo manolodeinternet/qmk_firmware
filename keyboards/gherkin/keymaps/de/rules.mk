@@ -48,26 +48,26 @@ OPT_DEFS += -DINTERRUPT_CONTROL_ENDPOINT
 
 BACKLIGHT_ENABLE = yes  # Enable keyboard backlight functionality
 
-BACKLIGHT_BREATHING = no # yes # Enable keyboard backlight breathing
+BACKLIGHT_BREATHING = no # Enable keyboard backlight breathing
 
 TAP_DANCE_ENABLE = yes 	# Enable Tap Dance (comment if not being implemented)
 
 
 BOOTMAGIC_ENABLE = no  # yes	# Virtual DIP switch configuration(+1000)
 
-COMMAND_ENABLE = yes     # Commands for debug and configuration
+COMMAND_ENABLE = no     # Commands for debug and configuration
 
 MAGIC_ENABLE = no
 
 
-HOLA_ENABLE = yes
+# HOLA_ENABLE = yes
 
 
 UNICODE_ENABLE = no    # ( mine )
 
 # UNICODEMAP_ENABLE = yes  ( mine - you can select or UNICODE or UNICODEMAP, but not both )
 
-MOUSEKEY_ENABLE = yes	  # Mouse keys(+4700)
+MOUSEKEY_ENABLE = no	  # Mouse keys(+4700)
 
 EXTRAKEY_ENABLE = no	  # Audio control and System control(+450)
 

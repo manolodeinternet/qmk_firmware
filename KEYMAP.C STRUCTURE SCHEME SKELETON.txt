@@ -1,0 +1,193 @@
+/*
+
+// STRUCTURE OF /Users/navarro/qmk_firmware/keyboards/handwired/frenchdev/keymaps/default/keymap.c
+//
+//
+// # INCLUDES
+//
+#include "keymap_extras/keymap_bepo.h"
+
+// # LAYER DEFINES
+//
+// Each layer gets a name for readability, which is then used in the keymap matrix below.
+// The underscores don't mean anything - you can have a layer called STUFF or any other name.
+#define _BASE 0
+#define _SYMBOLS 1
+#define _MEDIA 2
+#define _TRNS 8
+
+// CONST SYSTEM USER # DEFINES
+//
+#define PEDAL_DELAY 250
+#define KEY_DELAY 130
+
+// ENUM MACROS
+//
+enum macros {
+    M_LP,   // left pedal
+    M_RP,   // right pedal
+    M_SF,   // shift
+    M_SFS,  // shift and space
+    M_L1E,  // L1 and space
+    L2INS,  // L2 and insert
+    L2LOC,  // Lock L2
+    M_UN,   // undo
+    M_CUT,  // cut
+    M_CP,   // copy
+    M_PS,   // paste
+    M_SE,   // search
+    M_SFU,  // shift and underscore
+};
+
+// STATIC SYSTEM USER VARIABLES
+// 
+static uint16_t key_timer_left_pedal;
+static uint16_t key_timer_right_pedal;
+static uint16_t key_timer_shift;
+static uint16_t key_timer_1;
+static uint16_t key_timer_2;
+
+static uint16_t shift_count = 0; //this is used to keep track of shift state and avoid inserting non breakable space
+static uint16_t l2_locked = 0; //this indicate wether L2 is locked
+
+// USER SHORTCUTS # DEFINE
+#define BP_CBSP  CTL_T(KC_BSPC)
+
+
+// KEYMAPS MATRIX
+
+// ACTION FUNCTIONS MATRIX
+// CUSTOM FUNCTIONS
+// OLD MACROS
+// ACTION FUNCTION DEFINITIONS
+// MATRIX INIT USER
+// ANOTHER USER VARIABLE DEFINITIONS
+// MATRIX SCAN USER
+// NEW MACROS WAY DEFINITIONS
+// ANOTHER CUSTOM USER FUNCTION DEFINITIONS
+
+
+
+// KEYMAPS MATRIX
+//
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  [_BASE] = KEYMAP(
+  ),
+//...
+  [_SYMBOLS] = KEYMAP(
+  ),
+};
+
+
+// ACTION FUNCTIONS MATRIX
+//
+const uint16_t PROGMEM fn_actions[] = {
+
+};
+
+
+// CUSTOM FUNCTIONS
+//
+// custom functions for using into macro algorithms
+// void hold_shift(void) {
+//   ;
+//   ;
+//   ;
+// }
+// ...
+// void ... {
+//   ...
+// }
+
+
+// OLD MACROS
+//
+// MACRO_T *ACTION GET MACRO
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
+{
+  switch(id) {
+    case M_LP: //left pedal
+      if (record->event.pressed) {
+//      ...
+      } else {
+//      ...
+      }
+    break;
+    case M_RP: //right pedal
+      if (record->event.pressed) {
+//      ...
+      } else {
+//      ...
+      }
+      break;
+    case M_SF: 
+// ...  
+// ...
+// ...
+    case M_SE: // search
+// ...
+  }
+  return MACRO_NONE;
+};
+
+
+// ACTION FUNCTION DEFINITIONS
+//
+void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
+
+}
+
+// MATRIX INIT USER
+//
+void matrix_init_user(void) {
+}
+
+
+// ANOTHER USER VARIABLE DEFINITIONS
+//
+// Bleah globals need to be initialized.
+uint8_t old_layer=_BASE;
+
+
+// MATRIX SCAN USER
+//
+void matrix_scan_user(void) {
+    uint8_t layer = biton32(layer_state);
+//  ...
+    switch (layer) {
+        case _BASE:
+//          ...
+            break;
+        case _SYMBOLS:
+//          ...
+            break;
+        case _MEDIA:
+//          ...
+        default:
+//          ...
+            break;
+    }
+}
+
+
+// NEW MACROS WAY DEFINITIONS
+//
+// PROCESS RECORD USER
+//
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  return true;
+}
+
+
+// ANOTHER CUSTOM USER FUNCTION DEFINITIONS
+//
+// custom user function
+void led_set_user(uint8_t usb_led) {
+  if (usb_led & (1<<USB_LED_CAPS_LOCK)){
+    frenchdev_led_3_on();
+  } else {
+    frenchdev_led_3_off();
+  }
+  return ;
+}
+*/

@@ -26,8 +26,35 @@
 /* number of backlight levels */
 #define BACKLIGHT_PIN B5
 #ifdef BACKLIGHT_PIN
-#define BACKLIGHT_LEVELS 3
+#define BACKLIGHT_LEVELS 15
 #endif
+
+///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨
+//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
+//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
+//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
+//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
+#define BACKLIGHT_BREATHING    //MINE I had to write this line because compiling, backlight_toggle() wasn't recognized
+#ifndef BREATHING_PERIOD
+#define BREATHING_PERIOD 6     //MINE I had to write this line because compiling, breathing_period wasn't recognized
+#endif
+
+
+
+/*
+#define MOUSEKEY_DELAY             300
+#define MOUSEKEY_INTERVAL          50
+#define MOUSEKEY_MAX_SPEED         10
+#define MOUSEKEY_TIME_TO_MAX       20
+#define MOUSEKEY_WHEEL_MAX_SPEED   8
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 40
+*/
+
+
+/*
+#define PERMISSIVE_HOLD        //MINE Let us register 'I' instead of 'ai' when you type fast 'a'+'i'.
+*/
+///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCING_DELAY 5

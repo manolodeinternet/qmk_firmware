@@ -84,7 +84,7 @@ void ENT_finished (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_TAP: register_code(KC_SPC); break;
     case SINGLE_HOLD: register_code(KC_LSFT); break;
     case DOUBLE_TAP: register_code(KC_ENT); break;
-    case DOUBLE_HOLD: register_code(KC_NO); break; // setting double hold to do nothing (change this if you want)
+    case DOUBLE_HOLD: MANOLO; break; // setting double hold to do nothing (change this if you want)
     case DOUBLE_SINGLE_TAP: register_code(KC_SPC); unregister_code(KC_SPC); register_code(KC_SPC);
     //Last case is for fast typing. Assuming your key is `f`:
     //For example, when typing the word `buffer`, and you want to make sure that you send `ff` and not `Esc`.

@@ -20,8 +20,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-
-// 🔴 MISSING CODE IN NEW FILE
 #include "quantum.h"
 // #include "keymap_PVIM.c"
 
@@ -173,7 +171,7 @@
 #define DT_BNDING KC_F23   // \UF71A
 #define SL_BNDING KC_F24   // \UF71B
 
-// 🔴 MISSING CODE IN NEW FILE
+
 enum custom_keycodes {
     FUN_MACRO  = 0 // SAFE_RANGE
     ,CUTE_ACC
@@ -516,7 +514,8 @@ void U_APPS_finished (qk_tap_dance_state_t *state, void *user_data) {
                       register_code(KC_RCTL);
                       break;
 
-    case DOUBLE_TAP:        register_code(KC_LALT); register_code(KC_U); break;
+    case DOUBLE_TAP:        register_code(KC_U); unregister_code(KC_U);
+                            register_code(KC_U); break;
 
     case DOUBLE_HOLD:       register_code(KC_LALT); register_code(KC_U); break;  // diaeresis accent
 
@@ -539,7 +538,7 @@ void U_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
                       unregister_code(KC_RCTL);
                       break;
 
-    case DOUBLE_TAP:        unregister_code(KC_U); unregister_code(KC_LALT); break;
+    case DOUBLE_TAP:        unregister_code(KC_U); break;
 
     case DOUBLE_HOLD:       unregister_code(KC_U); unregister_code(KC_LALT); break;
 
@@ -687,7 +686,7 @@ void N_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
                       };
                       break;
 
-    case DOUBLE_TAP:        register_code(KC_LALT); register_code(KC_N); break;
+    case DOUBLE_TAP:        register_code(KC_N); unregister_code(KC_N); register_code(KC_N); break;
 
     case DOUBLE_HOLD:       // TOGGLE NUMBERS LAYER
                             if (numbers_layer_backlight == 0)  // NMBR enable
@@ -701,14 +700,12 @@ void N_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
                             {
                               layer_off(NMBR);
                               numbers_layer_backlight = 0;
-
-                              breathing_period_set(BR_DFLT);
-                              breathing_disable();
-
-                              if (caps_control_backlight)
+                              breathing_period_set(BR_CAPS);
+                              breathing_enable();
+                              if (!caps_control_backlight)
                               {
-                                breathing_period_set(BR_CAPS);
-                                breathing_enable();
+                                breathing_period_set(BR_DFLT);
+                                breathing_disable();
                               };
                             }; break;
 
@@ -732,7 +729,7 @@ void N_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
                       };
                       break;
 
-    case DOUBLE_TAP:        unregister_code(KC_N); unregister_code(KC_LALT); break;
+    case DOUBLE_TAP:        unregister_code(KC_N); break;
     case DOUBLE_HOLD:       break;
     case DOUBLE_SINGLE_TAP: unregister_code(KC_N); break;
   }
@@ -2732,12 +2729,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap SUSR 14: superuser layer
 * ,-----------------------------------.,----------------------------------.
 * |      |      |      |      |      ||      |      |      |      |      |
-* |  Tab | Desk |Windws|Mision| RESET||      | Prev | Next |Launch| Spot |
+* |  Tab | Desk |Windws|Mision|      ||      | Prev | Next |Launch| Spot |
 * |      |      | Apps |Contrl|      ||      | APP  | APP  |  Bar | Light|
 * |------+------+------+------+------||------+------+------+------+------|
 * |      |      |      |      |      ||      |      |      |      |      |
 * | Menu | Dock | Tool |Status|Floati||      | Prev | Next |DELETE| ENTER|
-* | _bar | _bar | _bar | _bar |Window||      | win  | win  |      |      |
+* | _bar | _bar | _bar | _bar |Window||      | tab  | tab  |      |      |
 * |------+------+------+------+------||------+------+------+------+------|
 * |      |      |      |      |      ||      |      |      |  ❌  |      |
 * | Menu | Dock | Tool |Status|Floati||      | Prev | Next |DELETE| ENTER|
@@ -2748,7 +2745,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎// 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎// 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎
 [SUSR] = LAYOUT_ortho_3x10(  // layer 14: superuser gherkin layer
 //|---------------|---------------|---------------+---------------+----------------||---------|-------------------|-------------|------------+---------------|
-            KC_TAB,           DESK,    APP_WINDOWS,     MISION_CTL,        RESET,    _______,           PREV_APP,     NEXT_APP,     _______,   SPTLGHT_SIRI,
+            KC_TAB,           DESK,    APP_WINDOWS,     MISION_CTL,        _______,    _______,           PREV_APP,     NEXT_APP,     _______,   SPTLGHT_SIRI,
 // 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎// 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎// 💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎💎
 //|---------------|---------------|---------------+---------------+----------------||---------|-------------------|-------------|------------+---------------|
            KC_CAPS,     TD(DICTAD),     ACTIVE_WIN,          SPEAK,       TO(SYMB),   TO(SYMB),           PREV_WIN,     NEXT_WIN,   DASHBOARD,         KC_SPC,

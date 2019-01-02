@@ -1,0 +1,69 @@
+//
+//
+//
+//
+{
+// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』    M O V E     B E G I N     O F     L I N E  &  P A R A G R A P H    『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
+//instanalize an instance of 'tap' for the 'UPVIM' tap dance.
+static tap UPVIMtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void UPVIM_finished (qk_tap_dance_state_t *state, void *user_data) {
+  UPVIMtap_state.state = cur_dance(state);
+  switch (UPVIMtap_state.state) {
+    case SINGLE_TAP: // [uPVIM_SHORTCUT] (GUI+LEFT) Move to beginning of line       LCTL(LALT(LGUI(KC_V))), KC_U
+    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
+                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
+                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
+    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
+                        register_code(KC_P); unregister_code(KC_P);
+                        register_code(KC_U); break;
+    case DOUBLE_TAP: // [UPVIM_SHORTCUT] (ALT + UP) Move to beginning of paragraph  LCTL(LALT(LGUI(KC_V))), LSFT(KC_U)
+    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
+                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
+                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
+    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
+                        register_code(KC_P); unregister_code(KC_P);
+                        register_code(KC_LSFT); register_code(KC_U); break;
+  }
+}
+
+void UPVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (UPVIMtap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_U); break;
+    case DOUBLE_TAP:  unregister_code(KC_U); unregister_code(KC_LSFT); break;
+  }
+  UPVIMtap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     B E G I N     O F     L I N E  &  P A R A G R A P H    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
+
+// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』    M O V E     P A R A G R A P H       U P   『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
+//instanalize an instance of 'tap' for the 'YPVIM' tap dance.
+static tap YPVIMtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void YPVIM_finished (qk_tap_dance_state_t *state, void *user_data) {
+  YPVIMtap_state.state = cur_dance(state);
+  switch (YPVIMtap_state.state) {
+    case SINGLE_TAP: // [YPVIM_SHORTCUT] Move paragraph up       LCTL(LALT(LGUI(KC_V))), KC_Y
+    /* 🎹 beginning of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM 🎹*/
+                        register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_V);
+                        unregister_code(KC_V); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
+    /* 🎹 end of KEY TRIGGER SHORTCUTS FOR ACCESING MY PERSONAL KEYBINDINGS SYSTEM.  The next keystrokes are for the chosen shortcut 🎹*/
+                        register_code(KC_P); unregister_code(KC_P);
+                        register_code(KC_Y); break;
+  }
+}
+
+void YPVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (YPVIMtap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_Y); break;
+  }
+  YPVIMtap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】    M O V E     B E G I N     O F     L I N E  &  P A R A G R A P H    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
+}

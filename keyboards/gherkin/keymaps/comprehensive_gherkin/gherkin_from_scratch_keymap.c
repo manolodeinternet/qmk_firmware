@@ -1,0 +1,163 @@
+/* GHERKIN fromn scratch -  KEYMAP.C */
+
+// 🔆 🔆 🔆 ❗️❗️❗ 🔆 🔆 🔆️
+//
+// gherkin_from_scratch_keymap.c
+//
+/* Copyright 2017 Brian Fong
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#include QMK_KEYBOARD_H
+
+
+// 🔵 defining layers
+#define GHKN 0   // gherkin BASE       layer
+#define NMBR 1   // numbers            layer
+#define SYMB 2   // symbols            layer
+
+#define FNCT 3   // functions          layer
+#define XFNC 4   // eXtended Functions layer
+
+#define XTND 5   // eXtended default   layer
+#define APPS 6   // apps               layer
+
+#define PVIM 7   // Personal  VIM layer
+#define DVIM 8   // Delete    VIM layer
+#define SVIM 9   // Select    VIM layer
+#define XVIM 10  // eXtra     VIM layer
+#define ZVIM 11  // Z_extra   VIM layer
+#define AVIM 12  // Alignment VIM layer
+
+#define MOUS 13  // mouse      layer
+
+#define SUSR 14  // Super USeR layer  // for productivity
+
+#define BLIT 15  // BackLIghT  layer
+
+// 🔵 defining readibility codes
+#define _______	KC_TRNS
+#define NO_KEY  KC_NO    // XXXXXX KC_NO
+
+// 🔵 defining levels of backlighting
+#define BL_OFF  0
+#define BL_MIN  1
+#define BL_MAX 15
+#define BL_LOW  3
+#define BL_MED  7
+#define BL_HGH 12
+
+#define BL_NMBR  5
+#define BL_SYMB  7
+#define BL_FNCT  7
+#define BL_XFNC  9
+#define BL_XTND 10
+#define BL_APPS 12
+
+#define BL_PVIM  5
+#define BL_DVIM 15
+#define BL_SVIM 10
+#define BL_XVIM  7
+#define BL_ZVIM  9
+#define BL_AVIM  7
+
+#define BL_MOUS  3
+#define BL_SUSR 15
+
+#define BL_CAPS 15
+#define BL_RESE 15
+
+// 🔵 defining backlight breathing levels
+#define BR_CAPS  0
+#define BR_NMBR  2
+#define BR_DFLT  6
+
+// 🔵 defining Unicode Characters codes
+#define UC_A_AC  0x0301  // ´  acute accent for using with UC(0x...)
+
+// 🔵 defining XTND commands
+#define PREV_APP      LSFT(LGUI(KC_TAB))
+#define NEXT_APP           LGUI(KC_TAB)
+#define PREV_WIN      LSFT(LGUI(KC_GRAV))
+#define NEXT_WIN           LGUI(KC_GRAV)
+#define PREV_TAB      LSFT(LCTL(KC_TAB))
+#define NEXT_TAB           LCTL(KC_TAB)
+
+#define SPT_SIRI           LGUI(KC_SPC)
+
+#define DESK                    KC_F5
+#define APP_WIND           LCTL(KC_DOWN)
+#define MISS_CTL           LCTL(KC_UP)
+#define SPEAK    LCTL(LALT(LGUI(KC_H)))
+#define DASHBRD                 KC_F18
+#define ACTV_WIN           LCTL(KC_F4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
