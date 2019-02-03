@@ -1,0 +1,25 @@
+// author: MNF - sublime_text_shortcuts.txt
+// collects shortcuts from Sublime and from SublimePackages installed on it 
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// 2019/01/14/M 07:00
+// 🍎🍎🍎 [ALIGNING MULTIPLE LINES] 
+           [ctrl+cmd+a] {
+//         Alignment Package
+//         Allows aligning several lines with the one that was more to the right than all of them.
+
+// 🍏🍏🍏 To use:
+           * Select multiple contiguous lines (at the point where the cursor is on every one of them) - by pressing shft+ctrl+up/down,
+           or
+           * Select multiple lines on different places - by clicking them while the command key pressed,
+
+           * Then press ctrl+cmd+a for aligning all the selected lines with the one that was more to the right than all.
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+ lkdfj;ajfda;skfja
+
