@@ -78,7 +78,6 @@
 #define _______ KC_TRNS
 #define NO_KEY  KC_NO
 #define XXXXXXX KC_NO
-// defining readability codes
 
 // DEFINING LAYER LEVELS OF BACKLIGHTNING
 #define BL_OFF  0
@@ -107,13 +106,11 @@
 // DEFINING BACKLIGHTNING SITUATIONS
 #define BL_CAPS 15
 #define BL_RESE 15
-// defining backlightning situations
 
 // DEFINING BACKLIGHT BREATHING LELVELS
 #define BR_CAPS  1
 #define BR_NMBR  3
 #define BR_DFLT  6
-// defining backlight breathing lelvels
 
 // DEFINING XTND COMMANDS
 #define PREV_APP       LSFT(LGUI(KC_TAB))  // previous app
@@ -146,13 +143,78 @@
 #define PASTE                  LGUI(KC_V)   //PASTE
 #define P_MATCH    LSFT(LALT(LGUI(KC_V)))   //PASTE & MATCH STYLE
 #define P_ST_HY          LALT(LGUI(KC_V))   //(SUBLIME TEXT) PASTE FROM HISTORY
-// [DELETEME] Already implemented as tap dance
 // defining xtnd commands
 
 // DEFINING SUSR COMMANDS
 #define LCK_SCR          LCTL(LGUI(KC_Q))   //LOCK SCREEN (ask for pasword screen)
+// [DELETEME] Already implemented as tap dance
 #define LOGOUT     LSFT(LALT(LGUI(KC_Q)))   //logout withow menu popup
-// defining susr commands
+
+// TAP DANCE DECLARATIONS (LIST OF MY TAP DANCE CONFIGURATIONS)
+enum custom_keycodes {
+// SAFE_RANGE
+	FUN_MACRO = 0
+
+// TAP DANCE KEYCODES ACCESSIBLE FROM *GHKN (GHERKIN DEFAULT LAYER)
+	,Q_SUSR  //        super user layer  // ... **TAB
+    ,W_MOUS  //             mouse layer
+    ,R_APPS  // apps & multi apps layer  // ... ***RESET
+    ,U_APPS  // apps & multi apps layer  // ... ***diaeresis accent
+    ,P_SUSR  //        super user layer  
+    ,A_CAPS  //                          // ... **caps lock
+    ,F_CAPS  //        ***backlit layer  // ... **caps lock
+    ,B_NMBR  //           numbers layer
+    ,N_NMBR  //           numbers layer  // ... **tilde for building a ñ/Ñ
+
+// TAP DANCE KEYCODES ACCESSIBLE FROM *NMBR (NUMBERS LAYER)
+    ,DOUB_0  //                          // ... **00
+    ,TRIP_0  //                          // ... **000
+    ,DONMBR  //   return to *GHKN layer (gherkin default layer)  // ... dot
+    ,SLNMBR  //   return to *GHKN layer (gherkin default layer)  // ... slash
+
+// TAP DANCE KEYCODES ACCESSIBLE FROM *SYMB (SYMBOLS LAYER)
+    ,BSL_CI  // backslash & circumflex accent
+    ,QUOT_D  //     quote & double quote
+    ,DO_EUR  //     dolar & euro
+    ,EXCLAM  // american exclamation mark & inverted exclamation mark
+    ,QUESTI  // american    question mark & inverted    question mark
+
+// TAP DANCE KEYCODES FOR ACCENTS, ACCESSIBLE FROM *GHKN (GHERKIN DEFAULT LAYER)
+    ,I_CIRC  //    circumflex accent        'â'
+  //,U_APPS  //     diaeresis accent        'ä'  // it's already defined above
+    ,J_ACUT  // acute / grave accent  'á' / 'à'
+    ,N_TILD  //         tilde accent        'ñ'
+
+// TAP DANCE KEYCODES FOR *SUSR (SUPER USER LAYER)
+    ,LOGOUT   // logout user session
+    ,HRESET   // on hold RESET keyboard
+    ,SLEP_M   //   menu bar / (on hold) SLEEP
+    ,KILM_D   //   dock bar / (on hold) KILL MENU
+    ,KILA_T   //  tools bar / (on hold) KILL CURRENT APP
+    ,SHUT_S   // status bar / (on hold) COMPUTER SHUT DOWN
+    ,RSTT_F   // floating w / (on hold) COMPUTER   RESTART
+
+// TAP DANCE BACKLIGHT
+    ,BCKLIT  // 
+
+
+
+
+
+
+
+
+// tap dance for apps layer (for accessing layers -single or multi apps-)
+    ,NOTES_APP  // Notes app
+}
+
+
+
+
+
+
+
+
 
 
 
