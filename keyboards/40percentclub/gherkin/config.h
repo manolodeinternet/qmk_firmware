@@ -25,8 +25,32 @@
 /* number of backlight levels */
 #define BACKLIGHT_PIN B5
 #ifdef BACKLIGHT_PIN
-#define BACKLIGHT_LEVELS 3
+#define BACKLIGHT_LEVELS 15
 #endif
+
+
+
+
+
+///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨
+//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
+//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
+#define BACKLIGHT_BREATHING    //MINE I had to write this line because compiling, backlight_toggle() wasn't recognized
+#ifndef BREATHING_PERIOD
+#define BREATHING_PERIOD 15     //MINE I had to write this line because compiling, breathing_period wasn't recognized
+#endif
+//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
+//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
+///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨
+
+
+
+
+
+
+
+
+
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCING_DELAY 5
