@@ -154,29 +154,13 @@
 // DEFINING SUSR COMMANDS
 #define LCK_SCR          LCTL(LGUI(KC_Q))   //LOCK SCREEN (ask for pasword screen)
 
-  enum tap_dance_states { // EACH ONE RECEIVE ITS VALUE...
-   SINGLE_TAP           = 1,
-   SINGLE_HOLD          = 2,
-   DOUBLE_TAP           = 3,
-   DOUBLE_HOLD          = 4,
-   DOUBLE_SINGLE_TAP    = 5, //send SINGLE_TAP twice - NOT DOUBLE_TAP
-   TRIPLE_TAP           = 6,
-   TRIPLE_HOLD          = 7,
-   TRIPLE_SINGLE_TAP    = 8,
-   QUADRUPLE_TAP        = 9,
-   QUADRUPLE_HOLD       = 10,
-   QUADRUPLE_SINGLE_TAP = 11,
-   QUINTUPLE_TAP        = 12,
-   QUINTUPLE_HOLD       = 13,
-   QUINTUPLE_SINGLE_TAP = 14
-   // Add more enums here if you want for triple, quadruple, etc.
- };
-
 // TAP DANCE DECLARATIONS (LIST OF MY TAP DANCE CONFIGURATIONS)
-enum tapdance_keycodes { // IT BEGINS BY 0...
+enum custom_keycodes {
+// SAFE_RANGE
+	FUN_MACRO = 0
 
 // TAP DANCE KEYCODES ACCESSIBLE FROM *GHKN (GHERKIN DEFAULT LAYER)
-	 Q_SUSR = 0  //        super user layer  // ... **TAB
+	,Q_SUSR  //        super user layer  // ... **TAB
     ,W_MOUS  //             mouse layer
     ,R_APPS  // apps & multi apps layer  // ... ***RESET
     ,U_APPS  // apps & multi apps layer  // ... ***diaeresis accent
@@ -219,8 +203,17 @@ enum tapdance_keycodes { // IT BEGINS BY 0...
 
 
 
+
+
+
+
 // TAP DANCE FOR UNFOLDING KEYS INTO TWO FUNCTIONS IN *?VIM LAYERS
 // (i.e. KC_U: *'begin of line'/**'begin of paragraph')
+
+
+
+
+
 
 
 
@@ -228,13 +221,45 @@ enum tapdance_keycodes { // IT BEGINS BY 0...
 
 
 
+
+
+
+
+
+
 // tap dance for apps layer (for accessing layers -single or multi apps-)
-//    NOTES_APP = SAFE_RANGE  // Notes app
+    ,NOTES_APP  // Notes app
 
 
 
-};
 
+
+
+
+
+// MACROS
+    ,BLIT_OFF
+    ,BLIT_01 ,BLIT_02 ,BLIT_03 ,BLIT_04 ,BLIT_05
+    ,BLIT_06 ,BLIT_07 ,BLIT_08 ,BLIT_09 ,BLIT_10
+    ,BLIT_11 ,BLIT_12 ,BLIT_13 ,BLIT_14 ,BLIT_15
+
+    ,BRTH_01 ,BRTH_02 ,BRTH_03 ,BRTH_04 ,BRTH_05
+    ,BRTH_06 ,BRTH_07 ,BRTH_08 ,BRTH_09 ,BRTH_10
+             ,BRTH_12                   ,BRTH_15
+
+    ,DICTAD
+
+    ,LAYER_IS
+
+
+//[DELETEME]
+// THIS IS GOING TO BE IMPLEMENTED IN TAP DANCE FOR *APPS LAYER
+    ,NOTES
+//[deleteme]
+
+
+
+}; // enum custom keycodes
 
 
 void what_layer_is_this_mine(void) {
@@ -266,105 +291,8 @@ void what_layer_is_this_mine(void) {
    		default:   register_code(KC_X); unregister_code(KC_X);
 				   break;
 	}
-}
+};
 
-
-enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
-
-// MACROS for process_record_user()
-     BLIT_OFF = SAFE_RANGE
-    ,BLIT_01 ,BLIT_02 ,BLIT_03 ,BLIT_04 ,BLIT_05
-    ,BLIT_06 ,BLIT_07 ,BLIT_08 ,BLIT_09 ,BLIT_10
-    ,BLIT_11 ,BLIT_12 ,BLIT_13 ,BLIT_14 ,BLIT_15
-
-    ,BRTH_01 ,BRTH_02 ,BRTH_03 ,BRTH_04 ,BRTH_05
-    ,BRTH_06 ,BRTH_07 ,BRTH_08 ,BRTH_09 ,BRTH_10
-             ,BRTH_12                   ,BRTH_15
-
-    ,DICTAD
-
-    ,LAYER_IS
-
-
-//[DELETEME]
-// THIS IS GOING TO BE IMPLEMENTED IN TAP DANCE FOR *APPS LAYER
-    ,NOTES
-//[deleteme]
-
-
-
-}; // enum custom keycodes
-
-
-
-
-
-// [MACROS]
-// BEGINNING OF NEW MACROS WAY
-//
-// [UNDERSTANDING]
-// We implement MACROS when we need using QMK functions, or more than one keystroke in a specific layer
-// and we don't have the need to use tap dance cases
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch(keycode) {
-
-      case DICTAD:
-        if (record->event.pressed) {
-          register_code(KC_RGUI); unregister_code(KC_RGUI);
-          register_code(KC_RGUI); unregister_code(KC_RGUI);
-        return false;
-        };
-        break;
-
-      case LAYER_IS:
-        if (record->event.pressed) {
-          what_layer_is_this_mine();
-        return false;
-        };
-        break;
-
-      case BLIT_OFF:
-        if (record->event.pressed) {
-          backlight_level(0);
-          return false;
-        };
-        break;
-      case BLIT_01: if (record->event.pressed)       { backlight_level(1); return false; }; break;
-      case BLIT_02: if (record->event.pressed)       { backlight_level(2); return false; }; break;
-      case BLIT_03: if (record->event.pressed)       { backlight_level(3); return false; }; break;
-      case BLIT_04: if (record->event.pressed)       { backlight_level(4); return false; }; break;
-      case BLIT_05: if (record->event.pressed)       { backlight_level(5); return false; }; break;
-      case BLIT_06: if (record->event.pressed)       { backlight_level(6); return false; }; break;
-      case BLIT_07: if (record->event.pressed)       { backlight_level(7); return false; }; break;
-      case BLIT_08: if (record->event.pressed)       { backlight_level(8); return false; }; break;
-      case BLIT_09: if (record->event.pressed)       { backlight_level(9); return false; }; break;
-
-      case BLIT_10: if (record->event.pressed)      { backlight_level(10); return false; }; break;
-      case BLIT_11: if (record->event.pressed)      { backlight_level(11); return false; }; break;
-      case BLIT_12: if (record->event.pressed)      { backlight_level(12); return false; }; break;
-      case BLIT_13: if (record->event.pressed)      { backlight_level(13); return false; }; break;
-      case BLIT_14: if (record->event.pressed)      { backlight_level(14); return false; }; break;
-      case BLIT_15: if (record->event.pressed)      { backlight_level(15); return false; }; break;
-
-      case BRTH_01: if (record->event.pressed)  { breathing_period_set(1); return false; }; break;
-      case BRTH_02: if (record->event.pressed)  { breathing_period_set(2); return false; }; break;
-      case BRTH_03: if (record->event.pressed)  { breathing_period_set(3); return false; }; break;
-      case BRTH_04: if (record->event.pressed)  { breathing_period_set(4); return false; }; break;
-      case BRTH_05: if (record->event.pressed)  { breathing_period_set(5); return false; }; break;
-      case BRTH_06: if (record->event.pressed)  { breathing_period_set(6); return false; }; break;
-      case BRTH_07: if (record->event.pressed)  { breathing_period_set(7); return false; }; break;
-
-      case BRTH_12: if (record->event.pressed) { breathing_period_set(12); return false; }; break;
-      case BRTH_15: if (record->event.pressed) { breathing_period_set(15); return false; }; break;
-
-      default:
-        return true;  // I wrote the 'default' case with 'return true' instead of this code line.
-        break;
-	};
-
-	return true;
-}
-// END OF NEW MACROS WAY
 
 
 
@@ -421,6 +349,45 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case BRTH_12: if (record->event.pressed) { breathing_period_set(12); return false; }; break;
     case BRTH_15: if (record->event.pressed) { breathing_period_set(15); return false; }; break;
 */
+// [MACROS]
+// BEGINNING OF NEW MACROS WAY
+//
+// [UNDERSTANDING]
+// We implement MACROS when we need using QMK functions, or more than one keystroke in a specific layer
+// and we don't have the need to use tap dance cases
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch(keycode) 
+  {
+    case DICTAD:
+      if (record->event.pressed) {
+        register_code(KC_RGUI); unregister_code(KC_RGUI);
+        register_code(KC_RGUI); unregister_code(KC_RGUI);
+        return false;
+      };
+      break;
+
+    case LAYER_IS:
+      if (record->event.pressed) {
+        what_layer_is_this_mine();
+        return false;
+      };
+      break;
+
+
+
+	default:
+      if (record->event.pressed) {
+	    return true;
+      };    
+	  break;
+
+  };
+
+  return true;  // I wrote the 'default' case with 'return true' instead of this code line.
+};
+// END OF NEW MACROS WAY
+
 
 // global variables
 
@@ -431,6 +398,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 
 
+
+  enum tap_dance_states {
+   SINGLE_TAP           = 1,
+   SINGLE_HOLD          = 2,
+   DOUBLE_TAP           = 3,
+   DOUBLE_HOLD          = 4,
+   DOUBLE_SINGLE_TAP    = 5, //send SINGLE_TAP twice - NOT DOUBLE_TAP
+   TRIPLE_TAP           = 6,
+   TRIPLE_HOLD          = 7,
+   TRIPLE_SINGLE_TAP    = 8,
+   QUADRUPLE_TAP        = 9,
+   QUADRUPLE_HOLD       = 10,
+   QUADRUPLE_SINGLE_TAP = 11,
+   QUINTUPLE_TAP        = 12,
+   QUINTUPLE_HOLD       = 13,
+   QUINTUPLE_SINGLE_TAP = 14
+   // Add more enums here if you want for triple, quadruple, etc.
+ };
 
 
 // TAP DANCE GENERAL SETUP SECTION START //
@@ -490,7 +475,7 @@ int cur_dance (qk_tap_dance_state_t *state) {
       }
       else return 15; //magic number. At some point this method will expand to work for more presses
     }
-}
+};
 // TAP DANCE GENERAL SETUP SECTION END //
 
 ///// QUAD FUNCTION TAP DANCE PERSONALIZATION SECTION START /////
@@ -523,7 +508,7 @@ void reset_my_keyboard_function(void) {  // MY CAPSLOCK RESET FUNCTION
                       // ends backlight triple blink
                       reset_keyboard();
 
-}  // reset my keyboard function
+};  // reset my keyboard function
 
 
 
@@ -573,7 +558,7 @@ void R_APPS_finished (qk_tap_dance_state_t *state, void *user_data) {
 
 // 🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀//// 🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀///// 🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀🌀
   }
-}
+};
 
 void R_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (R_APPStap_state.state) {
@@ -587,7 +572,7 @@ void R_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
     case TRIPLE_SINGLE_TAP:  unregister_code(KC_R); break;
   }
   R_APPStap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】   R _ A P P S     -   R E S E T   -   R _ A P P S  【🔴】【🔴】【🔴】
 
 
@@ -628,7 +613,7 @@ void U_APPS_finished (qk_tap_dance_state_t *state, void *user_data) {
     // u with diaeresis 'ü' // u with diaeresis 'ü'
 */
   }
-}
+};
 
 void U_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (U_APPStap_state.state) {
@@ -655,7 +640,7 @@ void U_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
 */
   }
   U_APPStap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】   U _ A P P S    -    D I A E R E S I S    A C C E N T   【🔴】【🔴】【🔴】
 
 
@@ -690,7 +675,7 @@ void I_CIRC_finished (qk_tap_dance_state_t *state, void *user_data) {
     case TRIPLE_HOLD:       register_code(KC_NO); break;
     case TRIPLE_SINGLE_TAP: register_code(KC_LALT); register_code(KC_I); break;
   }
-}
+};
 
 void I_CIRC_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (I_CIRCtap_state.state) {
@@ -706,7 +691,7 @@ void I_CIRC_reset (qk_tap_dance_state_t *state, void *user_data) {
     case TRIPLE_SINGLE_TAP: unregister_code(KC_I); unregister_code(KC_LALT); break;
  }
   I_CIRCtap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】  C I R C U M F L E X    A C C E N T  【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 
 
@@ -756,7 +741,7 @@ void B_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
 
     case DOUBLE_SINGLE_TAP: register_code(KC_B); unregister_code(KC_B); register_code(KC_B); break;
   }
-}
+};
 
 void B_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (B_NMBRtap_state.state) {
@@ -782,7 +767,7 @@ void B_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: unregister_code(KC_B); break;
   }
   B_NMBRtap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】      B _ N M B R     【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 
 
@@ -827,7 +812,7 @@ void N_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
 
 
   }
-}
+};
 
 void N_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (N_NMBRtap_state.state) {
@@ -863,7 +848,7 @@ void N_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
 
   }
   N_NMBRtap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】      N _ N M B R     【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 
 // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 BOOKMARK - MARCAPAGINAS // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
@@ -890,7 +875,7 @@ void BSL_CI_finished (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP:        register_code(KC_LSFT); register_code(KC_6); break;
     case DOUBLE_SINGLE_TAP: register_code(KC_BSLS); unregister_code(KC_BSLS); register_code(KC_BSLS); break;
   }
-}
+};
 
 void BSL_CI_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (BSL_CItap_state.state) {
@@ -900,7 +885,7 @@ void BSL_CI_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: unregister_code(KC_BSLS); break;
   }
   BSL_CItap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】  B A C K S L A S H  【🔴】  - ( S Y M B O L ) -  【🔴】  C I R C U M F L E X  【🔴】【🔴】【🔴】
 
 
@@ -922,7 +907,7 @@ void QUOT_D_finished (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP:        register_code(KC_LSFT); register_code(KC_QUOT); break; // double quotes
     case DOUBLE_SINGLE_TAP: register_code(KC_LSFT); register_code(KC_QUOT); break; // double quotes
   }
-}
+};
 
 void QUOT_D_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (QUOT_Dtap_state.state) {
@@ -933,7 +918,7 @@ void QUOT_D_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: unregister_code(KC_QUOT); unregister_code(KC_LSFT); break;
   }
   QUOT_Dtap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】  Q U O T E    【🔴】  - ( S Y M B O L ) -  【🔴】    D O U B L E    Q U O T E S  【🔴】【🔴】【🔴】
 
 
@@ -959,7 +944,7 @@ void DO_EUR_finished (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP:        register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_2); break;  // euro
     case DOUBLE_SINGLE_TAP: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_2); break;  // euro
   }
-}
+};
 
 void DO_EUR_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (DO_EURtap_state.state) {
@@ -971,7 +956,7 @@ void DO_EUR_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: unregister_code(KC_2); unregister_code(KC_LALT); unregister_code(KC_LSFT); break;
   }
   DO_EURtap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】  D O L L A R    【🔴】  - ( S Y M B O L ) -  【🔴】    E U R O  【🔴】【🔴】【🔴】
 
 
@@ -995,7 +980,7 @@ void EXCLAM_finished (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP:        register_code(KC_LALT); register_code(KC_1); break;  //  inverted exclamation mark
     case DOUBLE_SINGLE_TAP: register_code(KC_LALT); register_code(KC_1); break;  //  inverted exclamation mark
   }
-}
+};
 
 void EXCLAM_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (EXCLAMtap_state.state) {
@@ -1007,7 +992,7 @@ void EXCLAM_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: unregister_code(KC_1); unregister_code(KC_LALT); break;
   }
   EXCLAMtap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】  E X C L A M A T I O N    M A R K _ S  【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 
 
@@ -1030,7 +1015,7 @@ void QUESTI_finished (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP:  register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_SLSH); break;  // inverted question mark
     case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_SLSH); break;  // inverted question mark
   }
-}
+};
 
 void QUESTI_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (QUESTItap_state.state) {
@@ -1041,7 +1026,7 @@ void QUESTI_reset (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_HOLD: unregister_code(KC_SLSH); unregister_code(KC_LALT); unregister_code(KC_LSFT); break;
   }
   QUESTItap_state.state = 0;
-}
+};
 
 /*                                                                                     */
 /*  X: ?, ¿                                                                            */
@@ -1083,7 +1068,7 @@ void TRIP_0_finished (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP:        register_code(KC_0); unregister_code(KC_0); register_code(KC_0); unregister_code(KC_0); register_code(KC_0); break;
     case DOUBLE_SINGLE_TAP: register_code(KC_0); unregister_code(KC_0); register_code(KC_0); unregister_code(KC_0); register_code(KC_0); break;
   }
-}
+};
 
 void TRIP_0_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (TRIP_0tap_state.state) {
@@ -1093,7 +1078,7 @@ void TRIP_0_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: unregister_code(KC_0);   break;
   }
   TRIP_0tap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】 A:   T R I P L E    Z E R O    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 
 
@@ -1112,7 +1097,7 @@ void DOUB_0_finished (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP:        register_code(KC_0); unregister_code(KC_0); register_code(KC_0); break;
     case DOUBLE_SINGLE_TAP: register_code(KC_0); unregister_code(KC_0); register_code(KC_0); break;
   }
-}
+};
 
 void DOUB_0_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (DOUB_0tap_state.state) {
@@ -1122,7 +1107,7 @@ void DOUB_0_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: unregister_code(KC_0); break;
   }
   DOUB_0tap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】  S:  D O U B L E    Z E R O    【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 
 
@@ -1159,7 +1144,7 @@ void DONMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: break;
 
   }
-}
+};
 
 void DONMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (DONMBRtap_state.state) {
@@ -1172,7 +1157,7 @@ void DONMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: break;
   }
   DONMBRtap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】   KC_B      C O M M A _ N M B R      KC_B   【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 
 
@@ -1208,7 +1193,7 @@ void SLNMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: break;
 
   }
-}
+};
 
 void SLNMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (SLNMBRtap_state.state) {
@@ -1220,7 +1205,7 @@ void SLNMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: break;
   }
   SLNMBRtap_state.state = 0;
-}
+};
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】   KC_N      S L A S H _ N M B R      KC_N   【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 
 
@@ -1289,6 +1274,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  ,[DONMBR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, DONMBR_finished, DONMBR_reset)
 //numpad
 
+
 };
 
 
@@ -1301,19 +1287,20 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 void matrix_init_user(void) {
 
+  debug_enable=true;
+
   breathing_disable();
 
   //backlight_level(BL_GHKN);
 
   // set_unicode_input_mode(UC_OSX); // REPLACE UC_XXXX with UC_OSX - the Unicode Input Mode for your OS. See table below.
-}
+};
 
 
 
 
 
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  /* Keymap GHKN 0: gherkin default layer
   * ,----------------------------------.,----------------------------------.
   * |      |      |      |      |      ||      |      |      |      |      |
@@ -1337,7 +1324,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [GHKN] = LAYOUT_ortho_3x10(  // layer 0 : default layer
 // LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
 //,-----------------+---------------+---------------+-----------+----------------++---------------+-----------+-----------------+------------------+-------------------.
-          TD(Q_SUSR),     TD(W_MOUS), LT(FNCT, KC_E), TD(R_APPS),           BL_TOGG,             KC_Y, TD(U_APPS),       TD(I_CIRC),              KC_O,         TD(P_SUSR), \
+          TD(Q_SUSR),     TD(W_MOUS), LT(FNCT, KC_E), TD(R_APPS), BL_TOGG, KC_Y, TD(U_APPS),       TD(I_CIRC),              KC_O,         TD(P_SUSR), \
 //|-----------------|---------------|---------------+-----------+----------------||---------------|-----------+-----------------+------------------+-------------------|
           TD(A_CAPS),   LCTL_T(KC_S),   LALT_T(KC_D), TD(F_CAPS), LT(SYMB, KC_G),   LT(SYMB, KC_H), TD(J_ACUT),     LALT_T(KC_K),      LCTL_T(KC_L),     LSFT_T(KC_SPC), \
 //|-----------------|---------------|---------------+-----------+----------------||---------------|-----------+-----------------+------------------+-------------------|
@@ -1345,17 +1332,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|-----------------+---------------+---------------+-----------+----------------++---------------+-----------+-----------------+------------------+-------------------.
 // END OF GHKN 0
 */
-
-  [0] = LAYOUT_ortho_3x10( \
-      KC_Q,    KC_W,    KC_E,   RESET,         BL_TOGG,  LAYER_IS, TD(U_APPS),    KC_I,     KC_O,            KC_P, \
-      KC_A,    KC_S,    KC_D,    KC_F,  LT(SYMB, KC_G),      KC_H,       KC_J,    KC_K,     KC_L,          KC_SPC, \
-      KC_Z,    KC_X,    KC_C,    KC_V,  LT(NMBR, KC_B),      KC_N,       KC_M,  KC_ESC,  KC_BSPC,          KC_ENT  \
-  ),
-
-
-
-
-
 // 🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴
 
 /* Keymap NMBR 1: numbers layer
@@ -1373,24 +1349,73 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * |      |      |      |      |      ||      |      |      |      |      |
 * `----------------------------------'`----------------------------------'
 */
+
+
+
+
+
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  [0] = LAYOUT_ortho_3x10( \
+      KC_Q,    KC_W,    KC_E,   RESET,         BL_TOGG,  LAYER_IS, TD(U_APPS),    KC_I,     KC_O,            KC_P, \
+      KC_A,    KC_S,    KC_D,    KC_F,  LT(SYMB, KC_G),      KC_H,       KC_J,    KC_K,     KC_L,          KC_SPC, \
+      KC_Z,    KC_X,    KC_C,    KC_V,  LT(NMBR, KC_B),      KC_N,       KC_M,  KC_ESC,  KC_BSPC,          KC_ENT  \
+  ),
 [NMBR] = LAYOUT_ortho_3x10(  // layer 1 : numbers layer
-  // LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
-  //,------------+---------------+---------------+---------------+------------------++---------------+---------------+-------------+-------------+---------------.
             KC_P1,          KC_P2,          KC_P3,          KC_P4,            KC_P5,         LAYER_IS,          KC_P7,        KC_P8,        KC_P9,          KC_P0, \
-  //|------------|---------------|---------------+---------------+------------------||---------------|---------------+-------------+-------------+---------------|
        TD(TRIP_0),     TD(DOUB_0),          KC_P0,        KC_PEQL,       TD(DO_EUR),          KC_PMNS,          KC_P4,        KC_P5,        KC_P6,        KC_PPLS, \
-  //|------------|---------------|---------------+---------------+------------------||---------------|---------------+-------------+-------------+---------------|
           KC_PENT,        KC_BSPC,         KC_TAB,        KC_COMM,       TD(DONMBR),       TD(SLNMBR),          KC_P1,        KC_P2,        KC_P3,        KC_PAST ),
 
 
 
 [SYMB] = LAYOUT_ortho_3x10(  // layer 02: symbols layer!
-KC_GRAVE,  KC_TILD, KC_EQUAL,  KC_UNDS, KC_PERC,                                         LAYER_IS,     KC_LPRN,     KC_RPRN, KC_ASTR,   KC_SLSH, 
+  KC_GRAVE,  KC_TILD, KC_EQUAL,  KC_UNDS, KC_PERC,                                         LAYER_IS,     KC_LPRN,     KC_RPRN, KC_ASTR,     KC_SLSH, 
 TD(QUOT_D),    KC_AT,  KC_PLUS, KC_MINUS,  KC_DLR,                                          KC_PIPE,     KC_LCBR,     KC_RCBR, KC_COLN,   KC_SCOLON, 
-KC_EXLM,  KC_QUES,  KC_LABK,  KC_RABK, KC_HASH,                                          KC_AMPR, KC_LBRACKET, KC_RBRACKET, KC_COMM,    KC_DOT )
+   KC_EXLM,  KC_QUES,  KC_LABK,  KC_RABK, KC_HASH,                                          KC_AMPR, KC_LBRACKET, KC_RBRACKET, KC_COMM,      KC_DOT )
 
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
+  //,------------+---------------+---------------+---------------+------------------++---------------+---------------+-------------+-------------+---------------.
+  //|------------|---------------|---------------+---------------+------------------||---------------|---------------+-------------+-------------+---------------|
+  //|------------|---------------|---------------+---------------+------------------||---------------|---------------+-------------+-------------+---------------|
   //,------------+---------------+---------------+---------------+------------------++---------------+---------------+-------------+-------------+---------------.
   // END OF NMBR 1
 
