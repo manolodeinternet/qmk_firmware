@@ -33,6 +33,8 @@
 
 // MY_OWN_PREPROCESSING_CODE_KEYWORDS for editing my code:
 
+// [info] some information about any reference relative to our code or application analytics
+
 // [BOOKMARK] for looking for the last point of the code I'm editing,
 //            for put a bookmark into the code.
 // [LAST]     for marking the point whre I'm working.
@@ -48,12 +50,40 @@
 // [FIXME]
 // [fixme]     there's something we have to fix for a clean and right code.
 
+////////////////////////////////////
+// COMMENTS SYNTAX FOR LEGIBILITY //
+////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_A  -  C A P S L O C K  -  KC_A                                         */
+/*                                                                                      */
+/*  KC_A:  aA  -  áÁ  -  LSHIFT  -  C A P S L O C K                                     */
+/*                                                                                      */
+/*                                                                                      */
+
+/* BODY                                                                                 */
+
+/*                                                                                      */
+/* [TAPDANCE] KC_A  -  C A P S L O C K  -  KC_A                                         */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////
+// comments syntax for legibility //
+////////////////////////////////////
+
+
 // my_own_preprocessing_code_keywords
 
 #include <print.h>
 #include QMK_KEYBOARD_H
 #include "quantum.h"
 #include "keycode.h"
+#include "action_util.h"
+
+#define GRAVE_MODS  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT)|MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI)|MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
+#define LSHIFT_MODS (MOD_BIT(KC_LSHIFT))
 
 
 // DEFINING LAYERS
@@ -94,8 +124,8 @@
 #define BL_MAX 15
 
 #define BL_GHKN  0
-#define BL_NMBR  8
-#define BL_SYMB  8
+#define BL_NMBR 15
+#define BL_SYMB 15
 #define BL_FNCT  5
 #define BL_XTND  5
 #define BL_APPS 10
@@ -110,12 +140,13 @@
 // defining layer levels of backlightning
 
 // DEFINING BACKLIGHTNING SITUATIONS
-#define BL_CAPS 15
+#define BL_CAPS 10
 #define BL_RESE 15
 
 // DEFINING BACKLIGHT BREATHING LELVELS
 #define BR_CAPS  1
-#define BR_NMBR  3
+#define BR_SYMB  1
+#define BR_NMBR  2
 #define BR_DFLT  6
 
 // DEFINING XTND COMMANDS
@@ -173,7 +204,7 @@
  };
 
 // TAP DANCE DECLARATIONS (LIST OF MY TAP DANCE CONFIGURATIONS)
-enum tapdance_keycodes { // IT BEGINS BY 0...
+enum tap_dance_keycodes { // IT BEGINS BY 0...
 
 // TAP DANCE KEYCODES ACCESSIBLE FROM *GHKN (GHERKIN DEFAULT LAYER)
 	 Q_SUSR = 0  //        super user layer  // ... **TAB
@@ -185,6 +216,8 @@ enum tapdance_keycodes { // IT BEGINS BY 0...
     ,F_CAPS  //        ***backlit layer  // ... **caps lock
     ,B_NMBR  //           numbers layer
     ,N_NMBR  //           numbers layer  // ... **tilde for building a ñ/Ñ
+    ,V_ACUT  //           acute trigger
+    ,SP_SHF  //           space / lshift
 
 // TAP DANCE KEYCODES ACCESSIBLE FROM *NMBR (NUMBERS LAYER)
     ,DOUB_0  //                          // ... **00
@@ -217,57 +250,15 @@ enum tapdance_keycodes { // IT BEGINS BY 0...
 // TAP DANCE BACKLIGHT
     ,BCKLIT   // accessing *BCKLIT layer from tap dance in *GHKN layer instead of *SUSR layer
 
-
-
 // TAP DANCE FOR UNFOLDING KEYS INTO TWO FUNCTIONS IN *?VIM LAYERS
 // (i.e. KC_U: *'begin of line'/**'begin of paragraph')
 
-
-
 // TAP DANCE FOR FUNCIONS
-
-
 
 // tap dance for apps layer (for accessing layers -single or multi apps-)
 //    NOTES_APP = SAFE_RANGE  // Notes app
 
-
-
 };
-
-
-
-void what_layer_is_this_mine(void) {
-	//fprintf("right now fprintf layer is %ld\n\n", layer_state);
-	println("right now println layer is WITHOUT arguments\n\n");
-	 printf("right now printf  layer is %ld\n\n", layer_state);
-	//uprintf("right now uprintf layer is %ld\n\n", layer_state);
-	switch (layer_state) {
-		case 0:    register_code(KC_0); unregister_code(KC_0);
-		           break;
-		case 1:    register_code(KC_1); unregister_code(KC_1);
-		           break;
-		case 2:    register_code(KC_2); unregister_code(KC_2);
-		           break;
-		case 3:    register_code(KC_3); unregister_code(KC_3);
-		           break;
-		case 4:    register_code(KC_4); unregister_code(KC_4);
-		           break;
-		case 5:    register_code(KC_5); unregister_code(KC_5);
-		           break;
-		case 6:    register_code(KC_6); unregister_code(KC_6);
-		           break;
-		case 7:    register_code(KC_7); unregister_code(KC_7);
-		           break;
-		case 8:    register_code(KC_8); unregister_code(KC_8);
-		           break;
-		case 9:    register_code(KC_9); unregister_code(KC_9);
-		           break;
-   		default:   register_code(KC_X); unregister_code(KC_X);
-				   break;
-	}
-}
-
 
 enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
@@ -285,155 +276,43 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
     ,LAYER_IS
 
-
+    ,E_ACUT_fn
 //[DELETEME]
 // THIS IS GOING TO BE IMPLEMENTED IN TAP DANCE FOR *APPS LAYER
     ,NOTES
 //[deleteme]
 
-
-
 }; // enum custom keycodes
 
 
+// GLOBAL VARIABLES
 
+   bool acute_requested      = false;
+   bool lshift_pressed       = false;
+   bool deactivated_lshift   = false;
 
-
-// [MACROS]
-// BEGINNING OF NEW MACROS WAY
-//
-// [UNDERSTANDING]
-// We implement MACROS when we need using QMK functions, or more than one keystroke in a specific layer
-// and we don't have the need to use tap dance cases
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch(keycode) {
-
-      case DICTAD:
-        if (record->event.pressed) {
-          register_code(KC_RGUI); unregister_code(KC_RGUI);
-          register_code(KC_RGUI); unregister_code(KC_RGUI);
-        return false;
-        };
-        break;
-
-      case LAYER_IS:
-        if (record->event.pressed) {
-          what_layer_is_this_mine();
-        return false;
-        };
-        break;
-
-      case BLIT_OFF:
-        if (record->event.pressed) {
-          backlight_level(0);
-          return false;
-        };
-        break;
-      case BLIT_01: if (record->event.pressed)       { backlight_level(1); return false; }; break;
-      case BLIT_02: if (record->event.pressed)       { backlight_level(2); return false; }; break;
-      case BLIT_03: if (record->event.pressed)       { backlight_level(3); return false; }; break;
-      case BLIT_04: if (record->event.pressed)       { backlight_level(4); return false; }; break;
-      case BLIT_05: if (record->event.pressed)       { backlight_level(5); return false; }; break;
-      case BLIT_06: if (record->event.pressed)       { backlight_level(6); return false; }; break;
-      case BLIT_07: if (record->event.pressed)       { backlight_level(7); return false; }; break;
-      case BLIT_08: if (record->event.pressed)       { backlight_level(8); return false; }; break;
-      case BLIT_09: if (record->event.pressed)       { backlight_level(9); return false; }; break;
-
-      case BLIT_10: if (record->event.pressed)      { backlight_level(10); return false; }; break;
-      case BLIT_11: if (record->event.pressed)      { backlight_level(11); return false; }; break;
-      case BLIT_12: if (record->event.pressed)      { backlight_level(12); return false; }; break;
-      case BLIT_13: if (record->event.pressed)      { backlight_level(13); return false; }; break;
-      case BLIT_14: if (record->event.pressed)      { backlight_level(14); return false; }; break;
-      case BLIT_15: if (record->event.pressed)      { backlight_level(15); return false; }; break;
-
-      case BRTH_01: if (record->event.pressed)  { breathing_period_set(1); return false; }; break;
-      case BRTH_02: if (record->event.pressed)  { breathing_period_set(2); return false; }; break;
-      case BRTH_03: if (record->event.pressed)  { breathing_period_set(3); return false; }; break;
-      case BRTH_04: if (record->event.pressed)  { breathing_period_set(4); return false; }; break;
-      case BRTH_05: if (record->event.pressed)  { breathing_period_set(5); return false; }; break;
-      case BRTH_06: if (record->event.pressed)  { breathing_period_set(6); return false; }; break;
-      case BRTH_07: if (record->event.pressed)  { breathing_period_set(7); return false; }; break;
-
-      case BRTH_12: if (record->event.pressed) { breathing_period_set(12); return false; }; break;
-      case BRTH_15: if (record->event.pressed) { breathing_period_set(15); return false; }; break;
-
-      default:
-        return true;  // I wrote the 'default' case with 'return true' instead of this code line.
-        break;
-	};
-
-	return true;
-}
-// END OF NEW MACROS WAY
-
-
-
-
-
+// [DELETEME] 
 /*
-    uint8_t layer;
-    if (record->event.pressed) {
-        layer = layer_switch_get_layer(record->event.key);
-        update_source_layers_cache(record->event.key, layer);
-    } else {
-        layer = read_source_layers_cache(record->event.key);
-    }
-//    keycode = keymap_key_to_keycode(layer, record->event.key);
-//    } else
-// #endif
-//    keycode = keymap_key_to_keycode(layer_switch_get_layer(key), key);
-//};
-
-
-
-  layer_state_set_user(layer);
+   void enable_capslock_after_accents_function(void) {};  // MY CAPSLOCK RESET FUNCTION
+   void disable_capslock_before_accents_function(void) {}; // MY CAPSLOCK FINISHED FUNCTION
+   void acute_finished_function(void) {};
+   void acute_reset_function(void) {};
 */
-	
-/*
-    case BLIT_OFF:
-      if (record->event.pressed) {
-        backlight_level(0);
-        return false;
-      };
-      break;
-    case BLIT_01: if (record->event.pressed) { backlight_level( 1); return false; }; break;
-    case BLIT_02: if (record->event.pressed) { backlight_level( 2); return false; }; break;
-    case BLIT_03: if (record->event.pressed) { backlight_level( 3); return false; }; break;
-    case BLIT_04: if (record->event.pressed) { backlight_level( 4); return false; }; break;
-    case BLIT_05: if (record->event.pressed) { backlight_level( 5); return false; }; break;
-    case BLIT_06: if (record->event.pressed) { backlight_level( 6); return false; }; break;
-    case BLIT_07: if (record->event.pressed) { backlight_level( 7); return false; }; break;
-    case BLIT_08: if (record->event.pressed) { backlight_level( 8); return false; }; break;
-    case BLIT_09: if (record->event.pressed) { backlight_level( 9); return false; }; break;
-    case BLIT_10: if (record->event.pressed) { backlight_level(10); return false; }; break;
-    case BLIT_11: if (record->event.pressed) { backlight_level(11); return false; }; break;
-    case BLIT_12: if (record->event.pressed) { backlight_level(12); return false; }; break;
-    case BLIT_13: if (record->event.pressed) { backlight_level(13); return false; }; break;
-    case BLIT_14: if (record->event.pressed) { backlight_level(14); return false; }; break;
-    case BLIT_15: if (record->event.pressed) { backlight_level( BL_MAX); return false; }; break;
-    case BRTH_01: if (record->event.pressed) { breathing_period_set( 1); return false; }; break;
-    case BRTH_02: if (record->event.pressed) { breathing_period_set( 2); return false; }; break;
-    case BRTH_03: if (record->event.pressed) { breathing_period_set( 3); return false; }; break;
-    case BRTH_04: if (record->event.pressed) { breathing_period_set( 4); return false; }; break;
-    case BRTH_05: if (record->event.pressed) { breathing_period_set( 5); return false; }; break;
-    case BRTH_06: if (record->event.pressed) { breathing_period_set( 6); return false; }; break;
-    case BRTH_07: if (record->event.pressed) { breathing_period_set( 7); return false; }; break;
-    case BRTH_12: if (record->event.pressed) { breathing_period_set(12); return false; }; break;
-    case BRTH_15: if (record->event.pressed) { breathing_period_set(15); return false; }; break;
-*/
-
-// global variables
-
+// [deleteme]
 // [FIXME]  CHANGE TO BOOLEAN VARIABLES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    uint8_t backlight_caps = 0;  // [FIXME]
    uint8_t disabled_caps_before_accent = 0;
    uint8_t caps_control_backlight = 0;
+// global variables
 
 
-
-
-
-// TAP DANCE GENERAL SETUP SECTION START //
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/*                                                                                      */
+/* TAP DANCE GENERAL SETUP SECTION START                                                */
+/*                                                                                      */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
 typedef struct {
 	bool is_press_action;
 	int  state;
@@ -491,20 +370,211 @@ int cur_dance (qk_tap_dance_state_t *state) {
       else return 15; //magic number. At some point this method will expand to work for more presses
     }
 }
-// TAP DANCE GENERAL SETUP SECTION END //
-
-///// QUAD FUNCTION TAP DANCE PERSONALIZATION SECTION START /////
-// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
-//instanalize an instance of 'tap' for the 'Q_SUSR' tap dance.
-
+/*                                                                                      */
+/* TAP DANCE GENERAL SETUP SECTION END                                                  */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] ACUTE & CAPSLOCK COMPLEMENTARY FUNCTIONS                                  */
+/*            KC_A, KC_E, KC_I, KC_O, KC_U,                                             */
+/*            KC_N                                                                      */
+/*            KC_J                                                                      */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+void press_capslock(void) { // MY CAPSLOCK FINISHED FUNCTION
+
+  SEND_STRING(SS_DOWN(X_CAPSLOCK));
+  register_code(KC_LCAP);
+
+  if (backlight_caps == 0)
+  {
+    backlight_caps  = 1;
+    breathing_period_set(BR_CAPS);
+    breathing_enable();
+  }
+  else
+  {
+    backlight_caps  = 0;
+    breathing_period_set(BR_DFLT);
+    breathing_disable();
+  }
+} //  my capslock finished function
+
+void release_capslock(void) {  // MY CAPSLOCK RESET FUNCTION
+  unregister_code(KC_CAPS); SEND_STRING(SS_UP(X_CAPSLOCK));
+}  // MY CAPSLOCK RESET FUNCTION
+
+void capslock_tap(void) {
+  //CAPS_LOCK tap
+  SEND_STRING(SS_DOWN(X_CAPSLOCK));  // press
+  register_code(KC_LCAP);            // press
+
+  unregister_code(KC_CAPS);          // release
+  SEND_STRING(SS_UP(X_CAPSLOCK));    // release
+}
+
+void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTION
+  if (disabled_caps_before_accent == 1)
+    {
+      capslock_tap();
+      disabled_caps_before_accent = 0;
+  }
+} // MY ENABLE_CAPSLOCK_AFTER_ACCENTS_FUNCTION
+
+void disable_capslock_before_accents_function(void) { // MY CAPSLOCK FINISHED FUNCTION
+
+  if (backlight_caps == 1)
+    {
+      capslock_tap();
+      disabled_caps_before_accent = 1;
+    }
+} // MY DISABLE_CAPSLOCK_BEFORE_ACCENTS_FUNCTION
+
+void acute_finished_function(void) {
+  register_code(KC_LALT); register_code(KC_E);
+}
+
+void acute_reset_function(void) {
+  unregister_code(KC_E); unregister_code(KC_LALT);
+}
+/*                                                                                      */
+/*            KC_J                                                                      */
+/*            KC_N                                                                      */
+/*            KC_A, KC_E, KC_I, KC_O, KC_U,                                             */
+/* [TAPDANCE] ACUTE & CAPSLOCK COMPLEMENTARY FUNCTIONS                                  */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_Q  -  Q _ S U S R  -  SUPER USER LAYER  -  TAB                         */
+/*                                                                                      */
+/*  KC_Q:  qQ  -  [SUSR]  -  TAB  -  [BLIT]                                             */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』   Q _ S U S R   『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
+//instantalize an instance of 'tap' for the 'Q_SUSR' tap dance.
+static tap Q_SUSRtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void Q_SUSR_finished (qk_tap_dance_state_t *state, void *user_data) {
+  Q_SUSRtap_state.state = cur_dance(state);
+  switch (Q_SUSRtap_state.state) {
+    case SINGLE_TAP:        register_code(KC_Q); break;
+    case SINGLE_HOLD:       layer_on(SUSR); break;
+
+    case DOUBLE_TAP:        register_code(KC_TAB); break;
+    case DOUBLE_HOLD:       layer_on(BLIT); break;
+    case DOUBLE_SINGLE_TAP: register_code(KC_Q); unregister_code(KC_Q);
+                            register_code(KC_Q); break;
+
+    case TRIPLE_TAP:        register_code(KC_Q); unregister_code(KC_Q);
+                            register_code(KC_Q); unregister_code(KC_Q);
+                            register_code(KC_Q); break;
+    case TRIPLE_SINGLE_TAP: register_code(KC_Q); unregister_code(KC_Q);
+                            register_code(KC_Q); unregister_code(KC_Q);
+                            register_code(KC_Q); break;
+  }
+}
+
+void Q_SUSR_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (Q_SUSRtap_state.state) {
+    case SINGLE_TAP:        unregister_code(KC_Q); break;
+    case SINGLE_HOLD:       layer_off(SUSR); break;
+    case DOUBLE_TAP:        unregister_code(KC_TAB); break;
+    case DOUBLE_HOLD:       layer_off(BLIT); break;
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_Q); break;
+    case TRIPLE_TAP:        unregister_code(KC_Q); break;
+    case TRIPLE_SINGLE_TAP: unregister_code(KC_Q); break;
+
+  }
+  Q_SUSRtap_state.state = 0;
+}
+/*                                                                                      */
+/* [TAPDANCE] KC_Q  -  Q _ S U S R  -  SUPER USER LAYER  -  TAB                         */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_W  -   W _ M O U S  -  MOUSE LAYER                                     */
+/*                                                                                      */
+/*  KC_W:  wW  -  [MOUS]                                                                */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'W_MOUS' tap dance.
+static tap W_MOUStap_state = {
+  .is_press_action = true,
+  .state = 0
+};
 
+void W_MOUS_finished (qk_tap_dance_state_t *state, void *user_data) {
+  W_MOUStap_state.state = cur_dance(state);
+  switch (W_MOUStap_state.state) {
+    case SINGLE_TAP:        register_code(KC_W);
+                            break;
+    case SINGLE_HOLD:       layer_on(MOUS);
+                            break;
+    case DOUBLE_TAP:        register_code(KC_W); unregister_code(KC_W);
+                            register_code(KC_W);
+                            break;
+    case DOUBLE_HOLD:       register_code(KC_NO);
+                            break;
+    case DOUBLE_SINGLE_TAP: register_code(KC_W); unregister_code(KC_W);
+                            register_code(KC_W);
+                            break;
+    case TRIPLE_TAP:        register_code(KC_W); unregister_code(KC_W);
+                            register_code(KC_W); unregister_code(KC_W);
+                            register_code(KC_W);
+                            break;
+    case TRIPLE_SINGLE_TAP: register_code(KC_W); unregister_code(KC_W);
+                            register_code(KC_W); unregister_code(KC_W);
+                            register_code(KC_W);
+                            break;
+  }
+}
+
+void W_MOUS_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (W_MOUStap_state.state) {
+    case SINGLE_TAP:        unregister_code(KC_W); break;
+    case SINGLE_HOLD:       layer_off(MOUS); break;
+    case DOUBLE_TAP:        unregister_code(KC_W); break;
+    case DOUBLE_HOLD:       unregister_code(KC_NO); break;
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_W); break;
+    case TRIPLE_TAP:        unregister_code(KC_W); break;
+    case TRIPLE_SINGLE_TAP: unregister_code(KC_W); break;
+
+  }
+  W_MOUStap_state.state = 0;
+}
+/*                                                                                      */
+/* [TAPDANCE] KC_W  -   W _ M O U S  -  MOUSE LAYER                                     */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/*                                                                                      */
+/* QUAD FUNCTION TAP DANCE PERSONALIZATION SECTION START                                */
+/*                                                                                      */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_R  -  PREAMBLE                                                         */
+/*                                                                                      */
+/*  R: FUNCTIONS USED BY R_APPS - RESET - R_APPS                                        */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
 // RESET MY KEYBOARD FUNCTION
 void reset_my_keyboard_function(void) {  // MY CAPSLOCK RESET FUNCTION
 
@@ -524,10 +594,13 @@ void reset_my_keyboard_function(void) {  // MY CAPSLOCK RESET FUNCTION
                       reset_keyboard();
 
 }  // reset my keyboard function
-
-
-
-// 『🔵』『🔵』『🔵』   R _ A P P S     -   R E S E T   -   R _ A P P S  『🔵』『🔵』『🔵』
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] R _ A P P S     -   R E S E T   -   R _ A P P S                           */
+/*                                                                                      */
+/*  KC_R:  rR  -  [APPS]  -  [MAPP]  -  R E S E T                                       */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'R_APPS' tap dance.
 static tap R_APPStap_state = {
   .is_press_action = true,
@@ -588,11 +661,19 @@ void R_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   R_APPStap_state.state = 0;
 }
-// 【🔴】【🔴】【🔴】   R _ A P P S     -   R E S E T   -   R _ A P P S  【🔴】【🔴】【🔴】
+/*                                                                                      */
+/* [tapdance] r _ a p p s     -   r e s e t   -   r _ a p p s                           */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-// 『🔵』『🔵』『🔵』   U _ A P P S    -    D I A E R E S I S    A C C E N T   『🔵』『🔵』『🔵』
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] U _ A P P S    -    D I A E R E S I S    A C C E N T                      */
+/*                                                                                      */
+/*  KC_U:  uU  -  úÚ  -  [APPS]  -  [MAPP]  -  ¨  -  üÜ  -                              */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'U_APPS' tap dance.
 static tap U_APPStap_state = {
   .is_press_action = true,
@@ -603,65 +684,86 @@ void U_APPS_finished (qk_tap_dance_state_t *state, void *user_data) {
   U_APPStap_state.state = cur_dance(state);
   switch (U_APPStap_state.state) {
 
-    case SINGLE_TAP:        register_code(KC_U);
-                            break;
-    case SINGLE_HOLD:       layer_state_set(0x00000002);
+    case SINGLE_TAP:        if (!acute_requested) {
+                                register_code(KC_U); 
+                            } else 
+                            {
+                            	disable_capslock_before_accents_function();
+                            	acute_finished_function();
+                            	register_code(KC_U);
+                            }
                             break;
 
-/*
-    case SINGLE_TAP:        register_code(KC_U);    break;
+// [DELETEME]
+//    case SINGLE_HOLD:       layer_state_set(0x00000002);
+//                            break;
+// [deleteme]
     case SINGLE_HOLD:       layer_on(APPS);         break;
 
     case DOUBLE_TAP:        register_code(KC_U); unregister_code(KC_U);
                             register_code(KC_U); break;
-    case DOUBLE_HOLD:       // layer_on(M_AP);
+
+    case DOUBLE_HOLD:       layer_on(APPS);
                             break;
 
-    case TRIPLE_TAP:        register_code(KC_LALT); register_code(KC_U); break;  // diaeresis accent
-    // u with diaeresis 'ü' // u with diaeresis 'ü'     
-    case TRIPLE_HOLD:       register_code(KC_LALT); register_code(KC_U);
+                         // diaeresis accent
+    case TRIPLE_TAP:        disable_capslock_before_accents_function();
+                            register_code(KC_LALT); register_code(KC_U);
+                            break;
+
+                         // u with diaeresis 'ü'     
+    case TRIPLE_HOLD:       
+    case QUADRUPLE_TAP:     disable_capslock_before_accents_function();
+                            register_code(KC_LALT); register_code(KC_U);
                             unregister_code(KC_U);  unregister_code(KC_LALT);
-                            register_code(KC_U);    break;
-    case QUADRUPLE_TAP:     register_code(KC_LALT); register_code(KC_U);
-                            unregister_code(KC_U);  unregister_code(KC_LALT);
-                            register_code(KC_U);    break;
-    // u with diaeresis 'ü' // u with diaeresis 'ü'
-*/
+                            enable_capslock_after_accents_function();
+                            register_code(KC_U);
+                            break;
   }
 }
 
 void U_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (U_APPStap_state.state) {
 
-    case SINGLE_TAP:        unregister_code(KC_U);
+    case SINGLE_TAP:        if (!acute_requested) {
+    	                        unregister_code(KC_U);
+                            } else 
+                            {
+                            	unregister_code(KC_U);
+                            	acute_reset_function();
+                            	enable_capslock_after_accents_function();
+                            }
                             break;
-    case SINGLE_HOLD:       layer_state_set(0x00000000);
-                            break;        
-/*
-                            unregister_code(KC_U); break;
+
+// [DELETEME]
+//    case SINGLE_HOLD:       layer_state_set(0x00000000);
+//                            break;        
+// [deleteme]
+
     case SINGLE_HOLD:       layer_off(APPS);       break;
 
     case DOUBLE_TAP:        unregister_code(KC_U); break;
-    case DOUBLE_HOLD:       // layer_off(M_AP);
+
+    case DOUBLE_HOLD:       layer_off(APPS);
+                            register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_H);
+                            unregister_code(KC_H); unregister_code(KC_LGUI); unregister_code(KC_LALT);
                             break;
 
-    case TRIPLE_TAP:        unregister_code(KC_U); unregister_code(KC_LALT); break;
+    case TRIPLE_TAP:        unregister_code(KC_U); unregister_code(KC_LALT);
+                            enable_capslock_after_accents_function();
+                            break;
 
-    case TRIPLE_HOLD:       unregister_code(KC_U); break;
-// [FIXME] REPAIR QUADRUPLE_HOLD & TRIPLE HOLD FOR GETTING A DIAERESIDED LETTER Ü
-// and disconnect caps_lock before diaeresis and connect it later, and the same for ~ on ñ as well
-    case QUADRUPLE_TAP:    unregister_code(KC_U); 
-                           register_code(KC_NO); unregister_code(KC_NO); break;
-*/
+    case TRIPLE_HOLD:       
+// [FIXME] disconnect caps_lock before diaeresis and connect it later, and the same for ~ on ñ as well
+    case QUADRUPLE_TAP:     unregister_code(KC_U); break;
+
   }
   U_APPStap_state.state = 0;
 }
-// 【🔴】【🔴】【🔴】   U _ A P P S    -    D I A E R E S I S    A C C E N T   【🔴】【🔴】【🔴】
-
-
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-// 2019-01-24 [BOOKMARK]
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+/*                                                                                      */
+/* [TAPDANCE] U _ A P P S    -    D I A E R E S I S    A C C E N T                      */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 // 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』  C I R C U M F L E X    A C C E N T  『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
@@ -712,6 +814,178 @@ void I_CIRC_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
+// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』      P _ S U S R     『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
+//instantalize an instance of 'tap' for the 'P_SUSR' tap dance.
+static tap P_SUSRtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void P_SUSR_finished (qk_tap_dance_state_t *state, void *user_data) {
+  P_SUSRtap_state.state = cur_dance(state);
+  switch (P_SUSRtap_state.state) {
+    case SINGLE_TAP:        register_code(KC_P);  break;
+    case SINGLE_HOLD:       layer_on(SUSR);       break;
+    case DOUBLE_TAP:        register_code(KC_P); unregister_code(KC_P);
+                            register_code(KC_P);
+                            break;
+    case DOUBLE_HOLD:       register_code(KC_NO); break;
+    case DOUBLE_SINGLE_TAP: register_code(KC_P); unregister_code(KC_P);
+                            register_code(KC_P);
+                            break;
+
+    case TRIPLE_TAP:        register_code(KC_P); unregister_code(KC_P);
+                            register_code(KC_P); unregister_code(KC_P);
+                            register_code(KC_P); break;
+    case TRIPLE_HOLD:       register_code(KC_NO); break;
+    case TRIPLE_SINGLE_TAP: register_code(KC_P); unregister_code(KC_P);
+                            register_code(KC_P); unregister_code(KC_P);
+                            register_code(KC_P); break;
+
+  }
+}
+
+void P_SUSR_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (P_SUSRtap_state.state) {
+    case SINGLE_TAP:        unregister_code(KC_P);  break;
+    case SINGLE_HOLD:       layer_off(SUSR);        break;
+
+    case DOUBLE_TAP:        unregister_code(KC_P);  break;
+    case DOUBLE_HOLD:       unregister_code(KC_NO); break;
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_P);  break;
+
+    case TRIPLE_TAP:        unregister_code(KC_P); break;
+    case TRIPLE_HOLD:       unregister_code(KC_NO); break;
+    case TRIPLE_SINGLE_TAP: unregister_code(KC_P); break;
+
+  }
+  P_SUSRtap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】      P _ S U S R     【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_A  -  C A P S L O C K  -  KC_A                                         */
+/*                                                                                      */
+/*  KC_A:  aA  -  áÁ  -  LSHIFT  -  C A P S L O C K                                     */
+/*                                                                                      */
+/*                                                                                      */
+//instantalize an instance of 'tap' for the 'A_CAPS' tap dance.
+static tap A_CAPStap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void A_CAPS_finished (qk_tap_dance_state_t *state, void *user_data) {
+  A_CAPStap_state.state = cur_dance(state);
+  switch (A_CAPStap_state.state) {
+    case SINGLE_TAP:        register_code(KC_A); break;
+
+    case SINGLE_HOLD:       register_code(KC_LSFT); break;
+
+    case DOUBLE_TAP:                                
+    case DOUBLE_HOLD:       press_capslock();  // MY CAPSLOCK FINISHED FUNCTION (the function defined just above)
+                            break;
+
+    case DOUBLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A);
+                            break;
+    case TRIPLE_TAP:        register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A);
+                            break;
+    case TRIPLE_HOLD:       register_code(KC_NO);
+                            break;
+    case TRIPLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A);
+                            break;
+  }
+}
+
+void A_CAPS_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (A_CAPStap_state.state) {
+    case SINGLE_TAP:        unregister_code(KC_A); break;
+    case SINGLE_HOLD:       unregister_code(KC_LSFT); break;
+
+    case DOUBLE_TAP:        
+    case DOUBLE_HOLD:       release_capslock();  // MY CAPSLOCK RESET FUNCTION (the function defined just above)
+                            break;
+
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_A);  break;
+
+    case TRIPLE_TAP:        unregister_code(KC_A);  break;
+    case TRIPLE_HOLD:       unregister_code(KC_NO); break;
+    case TRIPLE_SINGLE_TAP: unregister_code(KC_A);  break;
+
+  }
+  A_CAPStap_state.state = 0;
+}
+/*                                                                                      */
+/* [tapdance] kc_a  -  c a p s l o c k  -                                               */
+/*                                                                                      */
+// ************************************************************************************ //
+
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_F  -  C A P S L O C K  -  KC_F                                         */
+/*                                                                                      */
+/*  KC_A:  fF  -  LGUI  -  C A P S L O C K                                              */
+/*                                                                                      */
+/*                                                                                      */
+//instantalize an instance of 'tap' for the 'F_CAPS' tap dance.
+static tap F_CAPStap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void F_CAPS_finished (qk_tap_dance_state_t *state, void *user_data) {
+  F_CAPStap_state.state = cur_dance(state);
+  switch (F_CAPStap_state.state) {
+    case SINGLE_TAP:        register_code(KC_F); break;
+    case SINGLE_HOLD:       register_code(KC_LGUI); break;
+
+    case DOUBLE_TAP:        
+    case DOUBLE_HOLD:       press_capslock(); break;  // MY CAPSLOCK FINISHED FUNCTION
+
+    case DOUBLE_SINGLE_TAP: register_code(KC_F); unregister_code(KC_F);
+                            register_code(KC_F); break;
+
+    case TRIPLE_TAP:        register_code(KC_F); unregister_code(KC_F);
+                            register_code(KC_F); unregister_code(KC_F);
+                            register_code(KC_F); break;
+    case TRIPLE_HOLD:       register_code(KC_NO); break;
+    case TRIPLE_SINGLE_TAP: register_code(KC_F); unregister_code(KC_F);
+                            register_code(KC_F); unregister_code(KC_F);
+                            register_code(KC_F); break;
+  }
+}
+
+void F_CAPS_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (F_CAPStap_state.state) {
+    case SINGLE_TAP:        unregister_code(KC_F); break;
+    case SINGLE_HOLD:       unregister_code(KC_LGUI); break;
+
+    case DOUBLE_TAP:        
+    case DOUBLE_HOLD:       release_capslock(); break;  // MY CAPSLOCK RESET FUNCTION
+    
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_F); break;
+
+    case TRIPLE_TAP:        unregister_code(KC_F); break;
+    case TRIPLE_HOLD:       unregister_code(KC_NO); break;
+    case TRIPLE_SINGLE_TAP: unregister_code(KC_F); break;
+  }
+  F_CAPStap_state.state = 0;
+}
+/*                                                                                      */
+/* [tapdance] kc_f  -  c a p s l o c k  -  kc_f                                         */
+/*                                                                                      */
+// ************************************************************************************ //
 
 
 
@@ -722,12 +996,230 @@ void I_CIRC_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_J  -  A C U T E    &   G R A V E    A C C E N T  -  KC_J               */
+/*                                                                                      */
+/*  KC_A:  jJ  -  LGUI  -  ACUTE ACCENT  -  GRAVE ACCENT                                */
+/*                                                                                      */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'J_ACUT' tap dance.
+static tap J_ACUTtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void J_ACUT_finished (qk_tap_dance_state_t *state, void *user_data) {
+  J_ACUTtap_state.state = cur_dance(state);
+  switch (J_ACUTtap_state.state) {
+    case SINGLE_TAP:        register_code(KC_J); break;
+    case SINGLE_HOLD:       register_code(KC_LGUI); break;
+
+    case DOUBLE_TAP:        disable_capslock_before_accents_function(); // caps_lock will not affect accent
+                            acute_finished_function(); 
+                            break;  // acute accent
+
+    case DOUBLE_HOLD:       layer_on(BLIT);
+                            break;
+
+    case DOUBLE_SINGLE_TAP: disable_capslock_before_accents_function(); // caps_lock will not affect accent
+                            acute_finished_function();
+                            break;  // acute accent
+
+
+    case TRIPLE_TAP:        register_code(KC_LALT); register_code(KC_GRAVE); break;  // grave accent
+    case TRIPLE_HOLD:       register_code(KC_NO); break;
+    case TRIPLE_SINGLE_TAP: register_code(KC_J); unregister_code(KC_J);
+                            register_code(KC_J); unregister_code(KC_J);
+                            register_code(KC_J); break;
+  }
+}
+
+void J_ACUT_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (J_ACUTtap_state.state) {
+    case SINGLE_TAP:        unregister_code(KC_J); break;
+    case SINGLE_HOLD:       unregister_code(KC_LGUI); break;
+
+    case DOUBLE_TAP:        acute_reset_function();
+                            enable_capslock_after_accents_function();
+                            break;
+
+    case DOUBLE_HOLD:       layer_off(BLIT);
+                            break;
+
+    case DOUBLE_SINGLE_TAP: acute_reset_function(); 
+                            enable_capslock_after_accents_function();
+                            break;
+
+    case TRIPLE_TAP:        unregister_code(KC_GRAVE); unregister_code(KC_LALT); break;
+    case TRIPLE_HOLD:       unregister_code(KC_NO); break;
+    case TRIPLE_SINGLE_TAP: unregister_code(KC_J); break;
+  }
+  J_ACUTtap_state.state = 0;
+}
+/*                                                                                      */
+/* [tapdance] kc_j  -  a c u t e    &   g r a v e    a c c e n t  -  kc_j               */
+/*                                                                                      */
+// ************************************************************************************ //
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_V  -  A C U T E    T R I G G E R   -  KC_V                             */
+/*                                                                                      */
+/*  KC_V:  vV  -  ´ acute trigger                                                       */
+/*                                                                                      */
+/*                                                                                      */
+//instantalize an instance of 'tap' for the 'V_ACUT' tap dance.
+static tap V_ACUTtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void V_ACUT_finished (qk_tap_dance_state_t *state, void *user_data) {
+  V_ACUTtap_state.state = cur_dance(state);
+  switch (V_ACUTtap_state.state) {
+    case SINGLE_TAP:        register_code(KC_V); 
+                            break;
+
+    case SINGLE_HOLD:       acute_requested = true;
+                            break;
+
+/*
+    case DOUBLE_TAP:                                
+    case DOUBLE_HOLD:       press_capslock();  // MY CAPSLOCK FINISHED FUNCTION (the function defined just above)
+                            break;
+
+    case DOUBLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A);
+                            break;
+    case TRIPLE_TAP:        register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A);
+                            break;
+    case TRIPLE_HOLD:       register_code(KC_NO);
+                            break;
+    case TRIPLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A);
+                            break;
+*/
+  }
+}
+
+void V_ACUT_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (V_ACUTtap_state.state) {
+    case SINGLE_TAP:        unregister_code(KC_V); 
+                            break;
+
+    case SINGLE_HOLD:       acute_requested = false; 
+                            break;
+/*
+    case DOUBLE_TAP:        
+    case DOUBLE_HOLD:       release_capslock();  // MY CAPSLOCK RESET FUNCTION (the function defined just above)
+                            break;
+
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_A);  break;
+
+    case TRIPLE_TAP:        unregister_code(KC_A);  break;
+    case TRIPLE_HOLD:       unregister_code(KC_NO); break;
+    case TRIPLE_SINGLE_TAP: unregister_code(KC_A);  break;
+*/
+  }
+  V_ACUTtap_state.state = 0;
+}
+/*                                                                                      */
+/* [tapdance] kc_v  -  acute trigger                                                    */
+/*                                                                                      */
+// ************************************************************************************ //
+
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_SP  -  S P A C E  -  L S H I F T                                       */
+/*                                                                                      */
+/*  KC_SP:  SPACE  -  LEFT SHIFT                                                       */
+/*                                                                                      */
+/*                                                                                      */
+//instantalize an instance of 'tap' for the 'SP_SHF' tap dance.
+static tap SP_SHFtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void SP_SHF_finished (qk_tap_dance_state_t *state, void *user_data) {
+  SP_SHFtap_state.state = cur_dance(state);
+  switch (SP_SHFtap_state.state) {
+    case SINGLE_TAP:        register_code(KC_SPC);  
+                            break;
+
+    case SINGLE_HOLD:       {
+                              lshift_pressed = true; 
+                              register_code(KC_LSFT); 
+                              break;
+                            }  
+
+/*
+    case DOUBLE_TAP:                                
+    case DOUBLE_HOLD:       press_capslock();  // MY CAPSLOCK FINISHED FUNCTION (the function defined just above)
+                            break;
+
+    case DOUBLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A);
+                            break;
+    case TRIPLE_TAP:        register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A);
+                            break;
+    case TRIPLE_HOLD:       register_code(KC_NO);
+                            break;
+    case TRIPLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A); unregister_code(KC_A);
+                            register_code(KC_A);
+                            break;
+*/
+  }
+}
+
+void SP_SHF_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (SP_SHFtap_state.state) {
+    case SINGLE_TAP:        unregister_code(KC_SPC);  
+                            break;
+
+    case SINGLE_HOLD:       lshift_pressed = false;
+                            unregister_code(KC_LSFT);
+                            break;
+      
+/*
+    case DOUBLE_TAP:        
+    case DOUBLE_HOLD:       release_capslock();  // MY CAPSLOCK RESET FUNCTION (the function defined just above)
+                            break;
+
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_A);  break;
+
+    case TRIPLE_TAP:        unregister_code(KC_A);  break;
+    case TRIPLE_HOLD:       unregister_code(KC_NO); break;
+    case TRIPLE_SINGLE_TAP: unregister_code(KC_A);  break;
+*/
+  }
+  SP_SHFtap_state.state = 0;
+}
+/*                                                                                      */
+/* [tapdance] kc_sp  -  l e f t    s h i f t  -                                               */
+/*                                                                                      */
+// ************************************************************************************ //
 
 
 
 
-
-// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』      B _ N M B R     『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_B  -  B _ N M B R  -  KC_B                                             */
+/*                                                                                      */
+/*  KC_B:  bB  -  [NMBR] toggle layer -  [NMBR] fix layer                               */
+/*                                                                                      */
+/*                                                                                      */
 //instantalize an instance of 'tap' for the 'B_NMBR' tap dance.
 static tap B_NMBRtap_state = {
   .is_press_action = true,
@@ -742,8 +1234,8 @@ void B_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_HOLD:// SWITCH temporarily [NMBR] ON
                         layer_clear();
                         layer_on(NMBR);
-                        //breathing_period_set(BR_NMBR);
-                        //breathing_enable();
+                        breathing_period_set(BR_NMBR);
+                        breathing_enable();
                         break;
 
     case DOUBLE_TAP:    register_code(KC_B); unregister_code(KC_B); register_code(KC_B); break;
@@ -764,14 +1256,14 @@ void B_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
 
     case SINGLE_HOLD:// Return to [NMBR] OFF
                         layer_off(NMBR);
-                        //breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
-                        //breathing_enable();
+                        breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
+                        breathing_enable();
 
-                        //if (!caps_control_backlight)        // if CAPS_LOCK was NOT set out before [NMBR] was fixed ...
-                        //{
-                        //  breathing_period_set(BR_DFLT);
-                        //  breathing_disable();
-                        //};
+                        if (!caps_control_backlight)        // if CAPS_LOCK was NOT set out before [NMBR] was fixed ...
+                        {
+                          breathing_period_set(BR_DFLT);
+                          breathing_disable();
+                        };
                         break;
 
     case DOUBLE_TAP:        unregister_code(KC_B); break;
@@ -783,9 +1275,18 @@ void B_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   B_NMBRtap_state.state = 0;
 }
-// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】      B _ N M B R     【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
+/*                                                                                      */
+/* [tapdance] kc_b  -  b _ n m b r  -  kc_b                                             */
+/*                                                                                      */
+// ************************************************************************************ //
 
-
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_N  -  N _ N M B R  -  KC_N                                             */
+/*                                                                                      */
+/*  KC_N:  nN  -  [NMBR] toggle layer -  ñÑ  -  [NMBR] fix layer                        */
+/*                                                                                      */
+/*                                                                                      */
 // 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』      N _ N M B R     『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
 //instantalize an instance of 'tap' for the 'N_NMBR' tap dance.
 static tap N_NMBRtap_state = {
@@ -801,8 +1302,8 @@ void N_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_HOLD:// SWITCH temporarily [NMBR] ON
                         layer_clear();
                         layer_on(NMBR);
-                        //breathing_period_set(BR_NMBR);
-                        //breathing_enable();
+                        breathing_period_set(BR_NMBR);
+                        breathing_enable();
                         break;
 
                      // ~ for making a ñ
@@ -835,14 +1336,14 @@ void N_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
 
     case SINGLE_HOLD:// Return to [NMBR] OFF
                         layer_off(NMBR);
-                        //breathing_period_set(BR_CAPS);
-                        //breathing_enable();
+                        breathing_period_set(BR_CAPS);
+                        breathing_enable();
 
-                        //if (!caps_control_backlight)
-                        //{
-                        //  breathing_period_set(BR_DFLT);
-                        //  breathing_disable();
-                        //};
+                        if (!caps_control_backlight)
+                        {
+                          breathing_period_set(BR_DFLT);
+                          breathing_disable();
+                        };
                         break;
 
     case DOUBLE_TAP:        unregister_code(KC_N); unregister_code(KC_LALT); break;
@@ -859,13 +1360,13 @@ void N_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
     case TRIPLE_TAP:        unregister_code(KC_N); 
                             register_code(KC_NO); unregister_code(KC_NO); break;
 
-
-
   }
   N_NMBRtap_state.state = 0;
 }
-// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】      N _ N M B R     【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
-
+/*                                                                                      */
+/* [tapdance] kc_n  -  n _ n m b r  -  kc_n                                             */
+/*                                                                                      */
+// ************************************************************************************ //
 // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥 BOOKMARK - MARCAPAGINAS // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
  
@@ -1127,7 +1628,8 @@ void DOUB_0_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
-/* [TAPDANCE]-DONMBR- B: KC_PDOT, [NMBR]OFF                                            */
+/*                                                                                     */
+/*                [TAPDANCE] KC_B (DONMBR): KC_PDOT, [NMBR]OFF                         */
 /*                                                                                     */
 /* instantalize an instance of 'tap' for the 'DONMBR' tap dance.                       */
 static tap DONMBRtap_state = {
@@ -1264,15 +1766,35 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 //
 //LAYERS
+  [Q_SUSR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, Q_SUSR_finished, Q_SUSR_reset)
+ ,[W_MOUS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, W_MOUS_finished, W_MOUS_reset)
+ ,[P_SUSR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, P_SUSR_finished, P_SUSR_reset)
 
 //ACCESSING NUMBERS
-  [B_NMBR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, B_NMBR_finished, B_NMBR_reset)
+ ,[B_NMBR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, B_NMBR_finished, B_NMBR_reset)
  ,[N_NMBR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, N_NMBR_finished, N_NMBR_reset)
 //accessing numbers
 
-,[U_APPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, U_APPS_finished, U_APPS_reset)
+//ACCENTS & CAPSLOCK
+ ,[A_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, A_CAPS_finished, A_CAPS_reset)
+ ,[F_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, F_CAPS_finished, F_CAPS_reset)
+ ,[I_CIRC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, I_CIRC_finished, I_CIRC_reset)
+ ,[J_ACUT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, J_ACUT_finished, J_ACUT_reset)  // it includes J->command tap dance funcionality
+ ,[V_ACUT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, V_ACUT_finished, V_ACUT_reset)
+ ,[SP_SHF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SP_SHF_finished, SP_SHF_reset)
+//accents & capslock
 
+//RUNNING APPS
+ ,[R_APPS] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, R_APPS_finished, R_APPS_reset, 300)
+ ,[U_APPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, U_APPS_finished, U_APPS_reset)
+// ,[NOTES_APP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, NOTES_APP_finished, NOTES_APP_reset)
+//running apps
 
+//ACUTE ACCENTS
+/* [DELETEME]
+ ,[E_ACUT] = ACTION_TAP_DANCE_FN(E_ACUT_fn)
+*/
+//acute accents
 
 //SYMBOLS
  ,[BSL_CI] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, BSL_CI_finished, BSL_CI_reset)
@@ -1319,7 +1841,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |      |      |      |      |      ||      |      |      |      |      |
   * | ▪︎ Q  |   W  |   E  |   R  |   T  ||   Y  |   U  |   I  |   O  |   P  |
   * |▪︎▪︎ Tab|      |      | APPS |      ||      |U_DIAE|I_CIRC|      |      |
-  * | SUSR | MOUS |      | RESET|      ||      | APPS |      |      | SUSR |
+  * | SUSR | MOUS |      | RESET| BLIT || BLIT | APPS |      |      | SUSR |
   * |------+------+------+------+------||------+------+------+------+------|
   * |      |      |      |      |      ||      |      |      |      |      |
   * | ▪︎ A  |   S  |   D  |   F  |   G  ||   H  |   J  |   K  |   L  | Space|
@@ -1329,29 +1851,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |      |      |      |      |      ||      |      |      |      |      |
   * |   Z  |   X  |   C  |   V  |   B  ||   N  |   M  | ▪︎ ESC|      | Enter|
   * |      |      |      |      |      ||N_TILD|      |▪︎▪︎Acut|  ❌  |      |
-  * |L_XTND| PVIM | FNCT |      | NMBR || NMBR |      | FNCT |      |R_XTND|
+  * |L_XTND| PVIM | FNCT |      | NMBR || NMBR |      | FNCT | PVIM |R_XTND|
   * '----------------------------------''----------------------------------'
   */
 
-/*
 [GHKN] = LAYOUT_ortho_3x10(  // layer 0 : default layer
-// LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
+// [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
 //,-----------------+---------------+---------------+-----------+----------------++---------------+-----------+-----------------+------------------+-------------------.
-          TD(Q_SUSR),     TD(W_MOUS), LT(FNCT, KC_E), TD(R_APPS),           BL_TOGG,             KC_Y, TD(U_APPS),       TD(I_CIRC),              KC_O,         TD(P_SUSR), \
+          TD(Q_SUSR),     TD(W_MOUS),      F(0)/*E_ACUT_fn*/, TD(R_APPS),  LT(BLIT, KC_T),  LT(BLIT, KC_Y), TD(U_APPS),       TD(I_CIRC),              KC_O,         TD(P_SUSR), \
 //|-----------------|---------------|---------------+-----------+----------------||---------------|-----------+-----------------+------------------+-------------------|
-          TD(A_CAPS),   LCTL_T(KC_S),   LALT_T(KC_D), TD(F_CAPS), LT(SYMB, KC_G),   LT(SYMB, KC_H), TD(J_ACUT),     LALT_T(KC_K),      LCTL_T(KC_L),     LSFT_T(KC_SPC), \
+          TD(A_CAPS),   LCTL_T(KC_S),   LALT_T(KC_D), TD(F_CAPS), LT(SYMB, KC_G),   LT(SYMB, KC_H), TD(J_ACUT),     LALT_T(KC_K),      LCTL_T(KC_L),         TD(SP_SHF), \
 //|-----------------|---------------|---------------+-----------+----------------||---------------|-----------+-----------------+------------------+-------------------|
-    LT(L_XTND, KC_Z), LT(PVIM, KC_X), LT(FNCT, KC_C),       KC_V,     TD(B_NMBR),       TD(N_NMBR),       KC_M, LT(FNCT, KC_ESC), LT(PVIM, KC_BSPC), LT(R_XTND, KC_ENT) ),
+    LT(L_XTND, KC_Z), LT(PVIM, KC_X), LT(FNCT, KC_C), TD(V_ACUT)/*KC_V*/,     TD(B_NMBR),       TD(N_NMBR),       RESET/*KC_M*/, LT(FNCT, KC_ESC), LT(PVIM, KC_BSPC), LT(R_XTND, KC_ENT) ),
 //|-----------------+---------------+---------------+-----------+----------------++---------------+-----------+-----------------+------------------+-------------------.
 // END OF GHKN 0
-*/
-
-  [0] = LAYOUT_ortho_3x10( \
-      KC_Q,    KC_W,    KC_E,   RESET,         BL_TOGG,  LAYER_IS, TD(U_APPS),    KC_I,     KC_O,            KC_P, \
-      KC_A,    KC_S,    KC_D,    KC_F,  LT(SYMB, KC_G),      KC_H,       KC_J,    KC_K,     KC_L,          KC_SPC, \
-      KC_Z,    KC_X,    KC_C,    KC_V,  LT(NMBR, KC_B),      KC_N,       KC_M,  KC_ESC,  KC_BSPC,          KC_ENT  \
-  ),
-
 
 
 
@@ -1376,21 +1889,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [NMBR] = LAYOUT_ortho_3x10(  // layer 1 : numbers layer
   // LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
   //,------------+---------------+---------------+---------------+------------------++---------------+---------------+-------------+-------------+---------------.
-            KC_P1,          KC_P2,          KC_P3,          KC_P4,            KC_P5,         LAYER_IS,          KC_P7,        KC_P8,        KC_P9,          KC_P0, \
+            KC_P1,          KC_P2,          KC_P3,          KC_P4,            KC_P5,         LAYER_IS,          KC_P7,        KC_P8,        KC_P9,          KC_P0,
   //|------------|---------------|---------------+---------------+------------------||---------------|---------------+-------------+-------------+---------------|
-       TD(TRIP_0),     TD(DOUB_0),          KC_P0,        KC_PEQL,       TD(DO_EUR),          KC_PMNS,          KC_P4,        KC_P5,        KC_P6,        KC_PPLS, \
+       TD(TRIP_0),     TD(DOUB_0),          KC_P0,        KC_PEQL,       TD(DO_EUR),          KC_PMNS,          KC_P4,        KC_P5,        KC_P6,        KC_PPLS,
   //|------------|---------------|---------------+---------------+------------------||---------------|---------------+-------------+-------------+---------------|
           KC_PENT,        KC_BSPC,         KC_TAB,        KC_COMM,       TD(DONMBR),       TD(SLNMBR),          KC_P1,        KC_P2,        KC_P3,        KC_PAST ),
-
-
-
-[SYMB] = LAYOUT_ortho_3x10(  // layer 02: symbols layer!
-KC_GRAVE,  KC_TILD, KC_EQUAL,  KC_UNDS, KC_PERC,                                         LAYER_IS,     KC_LPRN,     KC_RPRN, KC_ASTR,   KC_SLSH, 
-TD(QUOT_D),    KC_AT,  KC_PLUS, KC_MINUS,  KC_DLR,                                          KC_PIPE,     KC_LCBR,     KC_RCBR, KC_COLN,   KC_SCOLON, 
-KC_EXLM,  KC_QUES,  KC_LABK,  KC_RABK, KC_HASH,                                          KC_AMPR, KC_LBRACKET, KC_RBRACKET, KC_COMM,    KC_DOT )
-
-};
-
   //,------------+---------------+---------------+---------------+------------------++---------------+---------------+-------------+-------------+---------------.
   // END OF NMBR 1
 
@@ -1411,41 +1914,47 @@ KC_EXLM,  KC_QUES,  KC_LABK,  KC_RABK, KC_HASH,                                 
  * |      |      |      |      |      ||      |      |      |      |      |
  * `----------------------------------'`----------------------------------'
 */
-//[FIXME]
-/*
-⁉️  ~ ⁉️  _  %     \  (  )  *  /
-'  @  +  ⁉️  $     |  {  }  :  ⁉️
-!  ?  <  >   #     &  ⁉️ ⁉️  ,  .
-*/
 // SYMBOLS
 
-/*
 [SYMB] = LAYOUT_ortho_3x10(  // layer 2: symbols layer
-/// 🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞
-// IMPLEMENTAR LOS 3 TAPDANCE PARA TILDE, EQUAL & BACKSLASH PARA INCLUIR A AT, HASH, CIRCUNFLEX !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 //,------------+---------------+---------------+---------------+------------------++---------------+---------------+-------------+-------------+---------------.
-         KC_GRV,        KC_TILD,         KC_EQL,        KC_UNDS,          KC_PERC,         LAYER_IS,        KC_LPRN,      KC_RPRN,      KC_ASTR,        KC_SLSH, \
+         KC_GRV,        KC_TILD,         KC_EQL,        KC_UNDS,          KC_PERC,       TD(BSL_CI),        KC_LPRN,      KC_RPRN,      KC_ASTR,        KC_SLSH,
 //|------------|---------------|---------------+---------------+------------------||---------------|---------------+-------------+-------------+---------------|
-     TD(QUOT_D),          KC_AT,        KC_PLUS,        KC_MINS,       TD(DO_EUR),          KC_PIPE,        KC_LCBR,      KC_RCBR,      KC_COLN,        KC_SCLN, \
+     TD(QUOT_D),          KC_AT,        KC_PLUS,        KC_MINS,       TD(DO_EUR),          KC_PIPE,        KC_LCBR,      KC_RCBR,      KC_COLN,        KC_SCLN,
 //|------------|---------------|---------------+---------------+------------------||---------------|---------------+-------------+-------------+---------------|
      TD(EXCLAM),     TD(QUESTI),        KC_LABK,        KC_RABK,          KC_HASH,          KC_AMPR,        KC_LBRC,      KC_RBRC,      KC_COMM,         KC_DOT ),
 //,------------+---------------+---------------+---------------+------------------++---------------+---------------+-------------+-------------+---------------.
-// EURO: http://www.fileformat.info/info/unicode/char/search.htm?q=euro&preview=entity
+// [info] EURO: http://www.fileformat.info/info/unicode/char/search.htm?q=euro&preview=entity
 // END OF SYMB 2
+
+
+
+/*  
+*  Keymap BLIT 15: BACKLIT - BackLIghT layer
+* .-----------------------------------------------------------------------------------------.
+* |  BL_1  |  BL_2  |  BL_3  |  BL_4  |  BL_5  |BREATH_1|BREATH_2|BREATH_3|BREATH_4|BREATH_T|
+* |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
+* |  BL_6  |  BL_7  |  BL_8  |  BL_9  |  BL_10 |BREATH_5|BREATH_6|BREATH_7|BREATH12|  BL_ON |
+* |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
+* |  BL_11 |  BL_12 |  BL_13 |  BL_14 |  BL_15 |BL_TOGGL| BL_ON | BL_INC | BL_DEC | BL_OFF |
+* '-----------------------------------------------------------------------------------------'
 */
 
+[BLIT] = LAYOUT_ortho_3x10( // layer 17: BLIT layer
+  BLIT_01, BLIT_02, BLIT_03, BLIT_04, BLIT_05, BRTH_01, BRTH_02, BRTH_03, BRTH_04,  BL_BRTG,
+  BLIT_06, BLIT_07, BLIT_08, BLIT_09, BLIT_10, BRTH_05, BRTH_06, BRTH_07, BRTH_12,    BL_ON,
+  BLIT_11, BLIT_12, BLIT_13, BLIT_14, BLIT_15, BL_TOGG,   BL_ON,  BL_INC,  BL_DEC, BLIT_OFF )// BL_OFF
+// QMK standard keycode BL_OFF doesn't work ❗️❗️❗️  
+// I've made a macro (BLIT_OFF) who call the function backlight_level(BL_OFF) ❗️❗️❗️
+// END OF BLIT 15
 
 
 
 
 
-/*
 
 };
 
-*/
-
 
 
 
@@ -1463,21 +1972,257 @@ KC_EXLM,  KC_QUES,  KC_LABK,  KC_RABK, KC_HASH,                                 
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】  END  【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】  END  【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 
-/*
+// testing reasons function.  It's called from process_record_user
+void what_layer_is_this_mine(void) {
+	//fprintf("right now fprintf layer is %ld\n\n", layer_state);
+	println("right now println layer is WITHOUT arguments\n\n");
+	 printf("right now printf  layer is %ld\n\n", layer_state);
+	//uprintf("right now uprintf layer is %ld\n\n", layer_state);
+	switch (layer_state) {
+		case 0:    register_code(KC_0); unregister_code(KC_0);
+		           break;
+		case 1:    register_code(KC_1); unregister_code(KC_1);
+		           break;
+		case 2:    register_code(KC_2); unregister_code(KC_2);
+		           break;
+		case 3:    register_code(KC_3); unregister_code(KC_3);
+		           break;
+		case 4:    register_code(KC_4); unregister_code(KC_4);
+		           break;
+		case 5:    register_code(KC_5); unregister_code(KC_5);
+		           break;
+		case 6:    register_code(KC_6); unregister_code(KC_6);
+		           break;
+		case 7:    register_code(KC_7); unregister_code(KC_7);
+		           break;
+		case 8:    register_code(KC_8); unregister_code(KC_8);
+		           break;
+		case 9:    register_code(KC_9); unregister_code(KC_9);
+		           break;
+   		default:   register_code(KC_X); unregister_code(KC_X);
+				   break;
+	}
+}
+
+const uint16_t PROGMEM fn_actions[] = {
+  [0] = ACTION_FUNCTION(0),  // Calls action_function()
+};
+
+
+void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
+//  static uint8_t mods_pressed;
+  static uint8_t mod_shift_enable;
+
+  switch (id) {
+    case 0:
+      //MODS
+      mod_shift_enable = get_mods()&LSHIFT_MODS;
+      //mods
+//      mods_pressed = get_mods()&GRAVE_MODS; // Check to see what mods are pressed
+      if (record->event.pressed) 
+      {
+        /* The key is being pressed.*/
+        if (acute_requested)
+        {
+            if (mod_shift_enable) 
+            {
+            };
+            if (lshift_pressed)
+        //  release LSHIFT  
+            {
+                deactivated_lshift = true;
+                del_mods(mod_shift_enable);
+                send_keyboard_report();
+            };
+        //  tap acute accent
+            disable_capslock_before_accents_function();         
+            acute_finished_function();              
+            acute_reset_function();
+            enable_capslock_after_accents_function();
+
+            if (deactivated_lshift) 
+        //  press LSHIFT
+            {
+                deactivated_lshift = false;
+                add_mods(mod_shift_enable);
+    //            SEND_STRING("d=t");
+    //            register_code(KC_LSFT);
+                send_keyboard_report();
+            };
+
+        };
+        register_code(KC_E);
+      }
+      else
+      {
+        unregister_code(KC_E);
+      };
+      break;
+ }
+}
+
+
+
+// [MACROS]
+// BEGINNING OF NEW MACROS WAY
+//
+// [UNDERSTANDING]
+// We implement MACROS when we need using QMK functions, or more than one keystroke in a specific layer
+// and we don't have the need to use tap dance cases
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode) {
+      
+      case E_ACUT_fn:
+        if (record->event.pressed) 
+        //press KC_E
+        {
+
+
+register_code(KC_SLSH); unregister_code(KC_SLSH);      
+unregister_code(KC_LSHIFT);
+unregister_code(KC_LSHIFT);
+unregister_code(KC_LSHIFT);
+unregister_code(KC_LSHIFT);
+unregister_code(KC_LSHIFT);
+register_code(KC_SLSH); unregister_code(KC_SLSH);
+            if (acute_requested)
+            {
+                SEND_STRING("\na=t");
+                //release KC_LSFT
+                if (lshift_pressed)
+                {
+                    register_code(KC_NO); unregister_code(KC_NO);
+                    unregister_code(KC_LSFT);
+                    register_code(KC_NO); unregister_code(KC_NO);
+                    deactivated_lshift = true;
+                    SEND_STRING("l=t");
+ //                   register_code(KC_9);
+ //                   SEND_STRING("unregister_code&KC_LSHIFT%= unregister_code&KC_LSHIFT%= deactivated_lshift = true= register_code&KC_9%=");
+        		}
+                else
+                {
+                    SEND_STRING("l=f");
+                };
+
+        	 // print acute accent
+        		disable_capslock_before_accents_function();        	
+        		acute_finished_function();        		
+        		acute_reset_function();
+        		enable_capslock_after_accents_function();
+
+                //press KC_LSFT
+                if (deactivated_lshift) 
+                {
+                    SEND_STRING("d=t");
+                	register_code(KC_LSFT);
+                	deactivated_lshift = false;
+                }
+                else
+                {
+                    SEND_STRING("d=f");                    
+                };
+        	}
+            else
+            {
+                SEND_STRING("a=f");
+            };
+         // press e or E over acute accent or no
+    	    register_code     (KC_O);
+        } 
+        else 
+        //release KC_E
+        {
+    	    unregister_code   (KC_O);
+        };
+        return false;
+        break;
+
+      case DICTAD:
+        if (record->event.pressed) {
+          register_code(KC_RGUI); unregister_code(KC_RGUI);
+          register_code(KC_RGUI); unregister_code(KC_RGUI);
+        return false;
+        };
+        break;
+
+      case LAYER_IS:                       // for testing reasons
+        if (record->event.pressed) {
+          what_layer_is_this_mine();
+        return false;
+        };
+        break;
+
+      case BLIT_OFF:
+        if (record->event.pressed) {
+          backlight_level(0);
+          return false;
+        };
+        break;
+      case BLIT_01: if (record->event.pressed)       { backlight_level(1); return false; }; break;
+      case BLIT_02: if (record->event.pressed)       { backlight_level(2); return false; }; break;
+      case BLIT_03: if (record->event.pressed)       { backlight_level(3); return false; }; break;
+      case BLIT_04: if (record->event.pressed)       { backlight_level(4); return false; }; break;
+      case BLIT_05: if (record->event.pressed)       { backlight_level(5); return false; }; break;
+      case BLIT_06: if (record->event.pressed)       { backlight_level(6); return false; }; break;
+      case BLIT_07: if (record->event.pressed)       { backlight_level(7); return false; }; break;
+      case BLIT_08: if (record->event.pressed)       { backlight_level(8); return false; }; break;
+      case BLIT_09: if (record->event.pressed)       { backlight_level(9); return false; }; break;
+
+      case BLIT_10: if (record->event.pressed)      { backlight_level(10); return false; }; break;
+      case BLIT_11: if (record->event.pressed)      { backlight_level(11); return false; }; break;
+      case BLIT_12: if (record->event.pressed)      { backlight_level(12); return false; }; break;
+      case BLIT_13: if (record->event.pressed)      { backlight_level(13); return false; }; break;
+      case BLIT_14: if (record->event.pressed)      { backlight_level(14); return false; }; break;
+      case BLIT_15: if (record->event.pressed)      { backlight_level(15); return false; }; break;
+
+      case BRTH_01: if (record->event.pressed)  { breathing_period_set(1); return false; }; break;
+      case BRTH_02: if (record->event.pressed)  { breathing_period_set(2); return false; }; break;
+      case BRTH_03: if (record->event.pressed)  { breathing_period_set(3); return false; }; break;
+      case BRTH_04: if (record->event.pressed)  { breathing_period_set(4); return false; }; break;
+      case BRTH_05: if (record->event.pressed)  { breathing_period_set(5); return false; }; break;
+      case BRTH_06: if (record->event.pressed)  { breathing_period_set(6); return false; }; break;
+      case BRTH_07: if (record->event.pressed)  { breathing_period_set(7); return false; }; break;
+
+      case BRTH_12: if (record->event.pressed) { breathing_period_set(12); return false; }; break;
+      case BRTH_15: if (record->event.pressed) { breathing_period_set(15); return false; }; break;
+
+      default:
+        if (record->event.pressed) 
+        { 
+          return true; 
+        } 
+        else
+        {
+          return true;
+        };  // I wrote the 'default' case with 'return true' instead of this code line.
+        break;
+	};
+
+	return true;
+}
+// END OF NEW MACROS WAY
+
+
+
 uint32_t layer_state_set_user(uint32_t state) {
     switch (biton32(state)) {
 
     case GHKN: //  0
-        backlight_level(0);
+        backlight_level(BL_GHKN);
+        breathing_disable();
         break; 
 
     case NMBR:   //  1
-        backlight_level(1);
+        backlight_level(BL_NMBR);
+        breathing_period_set(BR_NMBR);
+        breathing_enable();
         break;
     case SYMB:   //  2
-        backlight_level(15);
+        backlight_level(BL_SYMB);
+        breathing_period_set(BR_SYMB);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
+        breathing_enable();
         break;
-*/
+
 /*
     case FNCT:   //  3
         backlight_level(BL_FNCT);
@@ -1518,22 +2263,25 @@ uint32_t layer_state_set_user(uint32_t state) {
         backlight_level(BL_MOUS);
         break;
 */
-/*
-//    case BLIT:   // 15
-//        backlight_level(BL_1);
-//        break;
-//    default: //  for any other layers, or the default layer
-//        backlight_level(BL_MIN);
-//        break;
+
+    case BLIT:   // 15
+        backlight_level(BL_MIN);
+        break;
+    default: //  for any other layers, or the default layer
+        backlight_level(BL_LOW);
+        break;
     }
   return state;
-};
+}; // END OF THE PROGRAM  //
+//    END OF THE PROGRAM  //
+//    END OF THE PROGRAM  //
+////////////////////////////
+//#### T H E    E N D ####//
+////////////////////////////
 
-*/
 
 /*
-
-uint32_t layer_state_set_user(uint32_t state) {
+uint32_t layer_state_se//####t_user(uint32_t state) {
     switch (biton32(state)) {
 
 //    case GHKN: //  0

@@ -3,13 +3,105 @@
 // qmk_issues_log.txt
 // collects issues and its solutions while writing C code and compiling it in QMK firmware 
 // for my DIY keyboards (gherkin, miniDactyl, ... )
-
-
-
-
+//
+// NOTE:
+// please, be careful using an OS X layout, because we implement QMK layouts from scratch,
+// then, we use simple and basic U.S. layout
+// if we use `U.S.International - PC`, we'll get modifiers for Q(`), W(~), A('),
+// instead of symbol characters for those keystrokes.
+//
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
+
+2019/02/18/M 8:15
+// 🍎🍎🍎 ACUTE ACCENT DOESN'T WORK WHILE SHIFT KEY IS PRESSED
+    Acute accent work properly alone and while capslock is pressed 
+    (capslock is checked throug a flag -remember that capslock was implemented manually-
+    and disabled before acute modifier is typed and enabled again after acute modifiers is typed).
+    But if you had shift pressed, then we get acute symbol followed by a space, instead of acute modifier.
+    This was implement with 
+    'bool process_record_user(uint16_t keycode, keyrecord_t *record)'
+
+
+2019/02/18/M 8:15
+// 🍏🍏🍏 SOLVED - BULLETPROOF ACCENTED ACUTE VOWELS !!!
+                    AT LAST, WHAT A RELIEF !!!
+
+  It’s approached since low level coding, i.e.: modifying mods bits at QMK level of programming.  
+  This was inspired from QMK documentation,
+
+‘void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)’
+and 
+‘#define GRAVE_MODS  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT)|MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI)|MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))’
+at
+‘https://docs.qmk.fm/#/keymap?id=action_function’
+
+The issue with accented acute vowels was that acute modifier for vowels didn’t appear while shift key was pressed.  Instead of acute modifier for vowel, it appeared acute symbol followed by a space character, thus we couldn’t accentuate the vowel, it appeared the acute symbol and the vowel after it.
+
+Then, instead of use `bool process_record_user(uint16_t keycode, keyrecord_t *record) }`
+we use now
+`void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {`
+and we modify mods bits directly, using 
+`mod_shift_enable = get_mods()&LSHIFT_MODS;`
+`del_mods(mod_shift_enable);`
+`add_mods(mod_shift_enable);`
+
+And by this way, we can press acute accent and get an acute modifier, even while shift key is pressed !!!
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// 2019/02/01/F 06:00
+// 🍎🍎🍎 ABNORMAL KEYSTROKES BEHAVIOUR, MISSING KEYSTROKES {
+   for avoid anormal behaviour of keystrokes, missing keystrokes, etc, 
+
+[SYMB]:
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+  ⁉️     ~     ⁉️     _     %               \     (     )     *     /
+   '     @     +     ⁉️     $               |     {     }     :    ⁉️
+   !     ?     <     >      #               &     ⁉️    ⁉️    ,     .
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+[NMBR]:
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+  1     2     3     4     5               6     7     8     9     0
+  ⎵    ⌦     0     =     $               -     4     5     6     +
+  ⏎    ⁉️    ⁉️    ,     .               /     1     2     3     *
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+
+// 2019/02/12/M 07:00
+// 🍏🍏🍏 SOLVED - 
+   FIRST WE DECLARE:
+     enum tap_dance_states { // EACH ONE RECEIVE ITS VALUE...
+       SINGLE_TAP           = 1,
+       SINGLE_HOLD          = 2,
+       ...
+
+   SECOND WE DECLARE:
+     enum tap_dance_keycodes { // IT BEGINS BY 0...
+       Q_SUSR = 0  //        super user layer  // ... **TAB
+      ,W_MOUS      //        mouse layer
+      ...
+
+   AND AT THE LAST ONE THAT WE DECLARE:
+     enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
+       // MACROS for process_record_user()
+       DICTAD = SAFE_RANGE
+      ,BLIT_OFF
+      ,BLIT_01  ,BLIT_02 ,BLIT_03 ,BLIT_04 ,BLIT_05
+      ...
+
+   tap_dance_states must be enumerated, all of them.
+   And at the other hand, tap_dance_keycodes macros must begin by 0.
+   And at the third other hand, SAFE_RANGE must be the initial value for the first custom macro keycode, for working with process_record_user().
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 // 2019/01/03/T 07:00
 // 🍎🍎🍎 QMK compiling error - keymap_config_t {
