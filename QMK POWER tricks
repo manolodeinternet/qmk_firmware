@@ -1,0 +1,20 @@
+QMK POWER tricks
+author: manolodeinternet@gmail.com
+date:              20190223U
+last modification: 20190223U
+
+date:              20190223U
+****************************************************************************************************************************************
+* FOR KNOWING WHAT LAYER WE ARE AT THE MOMENT:
+
+        uint8_t layer = biton32(layer_state);
+        if (layer == _NUMPAD)
+        {
+            layer_off(_NUMPAD);
+        } else {
+            layer_on(_NUMPAD);
+        }
+
+date:              2019...
+****************************************************************************************************************************************
+* 
