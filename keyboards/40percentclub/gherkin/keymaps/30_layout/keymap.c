@@ -3420,7 +3420,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
     case N_TILDE:
       if (!record->event.pressed) 
       {
-        if (accent_pressed)
+        if (acute_requested)
         {
          /* The key is being pressed.*/
             if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
