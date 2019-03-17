@@ -4,41 +4,17 @@
 #include "../../config.h"
 #endif
 
-
-
-
-
-
-
-// Enable this in case KC_LCAP were not recognized instead of KC_CAPS
-/*
-#define LOCKING_SUPPORT_ENABLE
-#define LOCKING_RESYNC_ENABLE
-*/
-
-
-
-
-
-
-
-
-
-
-
 #define PREVENT_STUCK_MODIFIERS
 
 //Tap Dance Prerequisite
 #define TAPPING_TERM 200
 
-//Mousekeys Settings 0 16 7 60 0 ? ?
+//Mousekeys Settings
+#define MOUSEKEY_INTERVAL 16
 #define MOUSEKEY_DELAY 0
-#define MOUSEKEY_INTERVAL 32
-#define MOUSEKEY_MAX_SPEED 5
-#define MOUSEKEY_TIME_TO_MAX 30
-#define MOUSEKEY_WHEEL_DELAY 50
-#define MOUSEKEY_WHEEL_MAX_SPEED 3
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 200
+#define MOUSEKEY_TIME_TO_MAX 60
+#define MOUSEKEY_MAX_SPEED 7
+#define MOUSEKEY_WHEEL_DELAY 0
 
 /* for QMK DFU bootloader */
 /* not required if using default ProMicro bootloader */

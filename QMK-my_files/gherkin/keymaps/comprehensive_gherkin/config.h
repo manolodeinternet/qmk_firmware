@@ -36,9 +36,9 @@
 #define MOUSEKEY_INTERVAL 32
 #define MOUSEKEY_MAX_SPEED 5
 #define MOUSEKEY_TIME_TO_MAX 30
-#define MOUSEKEY_WHEEL_DELAY 50
+#define MOUSEKEY_WHEEL_DELAY 0
 #define MOUSEKEY_WHEEL_MAX_SPEED 3
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 200
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 255
 
 /* for QMK DFU bootloader */
 /* not required if using default ProMicro bootloader */

@@ -1,0 +1,336 @@
+
+// author: MNF - manolodeinternet@gmail.com
+// qmk_issues_log.txt
+// collects issues and its solutions while writing C code and compiling it in QMK firmware 
+// for my DIY keyboards (gherkin, miniDactyl, ... )
+//
+// #push_log
+//
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// 2019/01/26/S 06:30
+// 🍎🍎🍎 QMK spliting 'keymap.c' into multiple '.h' and '.c' files for readability
+//
+// I wanted to take apart all code about calling apps, as we do with Karabiner-Elements.
+// And then, do the same thing with all the layers, for gaining readability.
+// I looked for at stackoverflow, but I wasn't able to do this thing stand up,
+// I'm sorry !!!
+//
+// 🍏🍏🍏 SOLVED -> ❌ ❌ ❌ N O T  SOLVED ❌ ❌ ❌
+// ❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌❌
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// 2019/01/02/W : 
+// 🍎🍎🍎 QMK sintaxis - CAPSLOCK {
+	// This is a long investigation about fixing/unfixing CAPSLOCK
+		// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』   KC_A  -  C A P S L O C K  -  KC_A  『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
+
+	void capslock_finished_function(void) { // MY CAPSLOCK FINISHED FUNCTION
+	  if (backlight_caps == 0)
+	  {
+	/*
+	      register_code(KC_CAPS);
+	      //SEND_STRING("\n1) ccb==0->subir brillo y ccb=1");
+	      SEND_STRING("\n1");
+	      SEND_STRING(") c");
+
+
+	      SEND_STRING(SS_TAP(X_HOME));
+	      send_string_keycodes()
+	*/
+
+	      //unregister_code(KC_LCAP);
+	      SEND_STRING(SS_DOWN(X_CAPSLOCK));
+	      register_code(KC_LCAP);
+
+
+
+	      backlight_caps  = 1;
+	      breathing_period_set(BR_CAPS);
+	      breathing_enable();
+
+	      /*
+	      backlight_level_before_caps_look = get_backlight_level();
+	      backlight_level(BL_CAPS);
+	      */
+	  }
+	  else
+	  {
+	       //if (backlight_caps == 1)
+	       //{
+	/*
+	         register_code(KC_CAPS);
+	         //SEND_STRING("\n2) CCB==1->BAJAR BRILLO AL ANTERIOR Y CCB=0");
+	         SEND_STRING("\n2");
+	         SEND_STRING(") c");
+
+	        SEND_STRING(SS_TAP(X_HOME));
+
+	*/
+
+
+	        //unregister_code(KC_LCAP);
+	        SEND_STRING(SS_DOWN(X_CAPSLOCK));
+	        register_code(KC_LCAP);
+
+
+
+	         backlight_caps  = 0;
+	         breathing_period_set(BR_DFLT);
+	         breathing_disable();
+
+	         /*
+	         backlight_level(backlight_level_before_caps_look);
+	         */
+	       //}
+	  }
+	} // MY CAPSLOCK FINISHED FUNCTION
+
+	void capslock_reset_function(void) {  // MY CAPSLOCK RESET FUNCTION
+	  unregister_code(KC_CAPS); SEND_STRING(SS_UP(X_CAPSLOCK));
+	}  // MY CAPSLOCK RESET FUNCTION
+
+
+
+	void disable_capslock_before_accents_function(void) { // MY CAPSLOCK FINISHED FUNCTION
+
+	  if (backlight_caps == 1)
+	    {
+	    //CAPS_LOCK tap
+	      SEND_STRING(SS_DOWN(X_CAPSLOCK));  // press
+	      register_code(KC_LCAP);            // press
+	      unregister_code(KC_CAPS);          // release
+	      SEND_STRING(SS_UP(X_CAPSLOCK));    // release
+	      caps_disabled_before_accent = 1;
+	    }
+	} // MY DISABLE_CAPSLOCK_BEFORE_ACCENTS_FUNCTION
+
+	void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTION
+	  if (caps_disabled_before_accent == 1)
+	    {
+	    //CAPS_LOCK tap
+	      SEND_STRING(SS_DOWN(X_CAPSLOCK));  // press
+	      register_code(KC_LCAP);            // press
+	      unregister_code(KC_CAPS);          // release
+	      SEND_STRING(SS_UP(X_CAPSLOCK));    // release
+	      caps_disabled_before_accent = 0;
+	  }
+	} // MY ENABLE_CAPSLOCK_AFTER_ACCENTS_FUNCTION
+
+
+
+
+
+	//instantalize an instance of 'tap' for the 'A_CAPS' tap dance.
+	static tap A_CAPStap_state = {
+	  .is_press_action = true,
+	  .state = 0
+	};
+
+	void A_CAPS_finished (qk_tap_dance_state_t *state, void *user_data) {
+	  A_CAPStap_state.state = cur_dance(state);
+	  switch (A_CAPStap_state.state) {
+	    case SINGLE_TAP:  register_code(KC_A); break;
+	    case SINGLE_HOLD: register_code(KC_LSFT);
+	                      //breathing_toggle();
+
+	                      break;
+
+	    case DOUBLE_TAP:        capslock_finished_function();  // MY CAPSLOCK FINISHED FUNCTION (the function defined just above)
+	                            break;
+	    case DOUBLE_HOLD:       register_code(KC_NO); break;
+	    case DOUBLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
+	                            register_code(KC_A); break;
+
+	    case TRIPLE_TAP:        register_code(KC_A); unregister_code(KC_A);
+	                            register_code(KC_A); unregister_code(KC_A);
+	                            register_code(KC_A); break;
+	    case TRIPLE_HOLD:       register_code(KC_NO); break;
+	    case TRIPLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
+	                            register_code(KC_A); unregister_code(KC_A);
+	                            register_code(KC_A); break;
+
+	  }
+	}
+
+	void A_CAPS_reset (qk_tap_dance_state_t *state, void *user_data) {
+	  switch (A_CAPStap_state.state) {
+	    case SINGLE_TAP:        unregister_code(KC_A); break;
+	    case SINGLE_HOLD:       unregister_code(KC_LSFT); break;
+
+	    case DOUBLE_TAP:        capslock_reset_function();  // MY CAPSLOCK RESET FUNCTION (the function defined just above)
+	                            break;
+
+	    case DOUBLE_HOLD:       unregister_code(KC_NO); break;
+	    case DOUBLE_SINGLE_TAP: unregister_code(KC_A); break;
+	  }
+	  A_CAPStap_state.state = 0;
+	}
+	// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】   KC_A  -  C A P S L O C K  -  KC_A  【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
+
+} 
+
+// 2019/01/09/W : This is a long investigation about fixing/unfixing CAPSLOCK
+// 🍏🍏🍏 SOLVED - See code into this issue, just above
+/////////////////////////////////////////////////////////////////////////////////////////
+
+// 2019/01/03/T 07:00
+// 🍎🍎🍎 QMK compiling error - keymap_config_t {
+  // I got this error while compiling from terminal:
+
+  //
+  Compiling: ./tmk_core/common/magic.c                                                               ./tmk_core/common/magic.c:15:1: error: unknown type name 'keymap_config_t'; did you mean 'debug_config_t'?
+  keymap_config_t keymap_config;
+  ^~~~~~~~~~~~~~~
+  debug_config_t
+  ./tmk_core/common/magic.c: In function 'magic'
+  //
+}
+
+// 2019/01/03/T 07:30
+// 🍏🍏🍏 SOLVED - QMK_KEYBOARD_H {
+  // looking for keymap_config_t through my HDD using Spotlight,
+  // all the files that used keymap_config_t had '#include QMK_KEYBOARD_H' at the very beginning
+  The only necessary thing is writing the next line at the very beginning of 
+  ˜/qmk_firmware/tmk_core/common/magic.c :
+
+  #include QMK_KEYBOARD_H
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// 2019/01/02/W 07:06
+// 🍎🍎🍎 terminal error - git doesn't work {
+  // I ran into this error trying to use git, after upgrading my mac OS from Sierra to Mojave (from any version to any higher version really).
+
+  //
+  ✅ qmk_firmware 🐳 :git status
+  xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+  //
+}
+
+// 2019/01/02/W later
+// 🍏🍏🍏 SOLVED - xcode-select -- install {
+  // looking for this error in StackOverflow, I found this simple solution wich install command line again - but upgraded for the new mac OS
+
+  //
+  ✅ qmk_firmware 🐳 :xcode-select --install
+  xcode-select: note: install requested for command line developer tools
+  //
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// 2019/01/04/F 21:59
+// 🍎🍎🍎 QMK compiling error - undefined reference to: `tap_dance_actions`, `keymaps` {
+	// I got this error while compiling from terminal:
+
+	//
+	...
+	...
+	...                                                                                                 [OK]
+	Compiling: lib/lufa/LUFA/Drivers/USB/Core/USBTask.c                                                 [OK]
+	Linking: .build/gherkin_comprehensive_gherkin.elf                                                   [ERRORS]
+	 | 
+	 | /usr/local/opt/avr-binutils/bin/avr-ld: .build/obj_gherkin_comprehensive_gherkin/quantum/process_keycode/process_tap_dance.o: in function `process_tap_dance_action_on_reset':
+	 | /Users/navarro/qmk_firmware/quantum/process_keycode/process_tap_dance.c:107: undefined reference to `tap_dance_actions'
+	 | /usr/local/opt/avr-binutils/bin/avr-ld: /Users/navarro/qmk_firmware/quantum/process_keycode/process_tap_dance.c:107: undefined reference to `tap_dance_actions'
+	 | /usr/local/opt/avr-binutils/bin/avr-ld: /Users/navarro/qmk_firmware/quantum/process_keycode/process_tap_dance.c:107: undefined reference to `tap_dance_actions'
+	 | /usr/local/opt/avr-binutils/bin/avr-ld: /Users/navarro/qmk_firmware/quantum/process_keycode/process_tap_dance.c:107: undefined reference to `tap_dance_actions'
+	 | /usr/local/opt/avr-binutils/bin/avr-ld: /Users/navarro/qmk_firmware/quantum/process_keycode/process_tap_dance.c:108: undefined reference to `tap_dance_actions'
+	 | /usr/local/opt/avr-binutils/bin/avr-ld: .build/obj_gherkin_comprehensive_gherkin/quantum/process_keycode/process_tap_dance.o:/Users/navarro/qmk_firmware/quantum/process_keycode/process_tap_dance.c:108: more undefined references to `tap_dance_actions' follow
+	 | /usr/local/opt/avr-binutils/bin/avr-ld: .build/obj_gherkin_comprehensive_gherkin/quantum/keymap_common.o: in function `keymap_key_to_keycode':
+	 | /Users/navarro/qmk_firmware/quantum/keymap_common.c:190: undefined reference to `keymaps'
+	 | /usr/local/opt/avr-binutils/bin/avr-ld: /Users/navarro/qmk_firmware/quantum/keymap_common.c:190: undefined reference to `keymaps'
+	 | collect2: error: ld returned 1 exit status
+	 | 
+	make[1]: *** [.build/gherkin_comprehensive_gherkin.elf] Error 1
+	make: *** [gherkin:comprehensive_gherkin] Error 1
+	Make finished with errors
+	//
+}
+
+// 2019/01/04/F 08:00  while walking to work, thinking about it on the street
+//                    (we can think fresher and better when we're far from computer)
+// 🍏🍏🍏 SOLVED - keymap.c file needed {
+	// I had on my QMK gherkin folder '/Users/navarro/qmk_firmware/keyboards/gherkin/keymaps/comprehensive_gherkin/' the C file named 'gherkin_from_scratch_keymap.c' and the 'make' command in 'make gherkin:comprehensive_gherkin:avrdude' was expecting for a 'keymap.c' named file.
+	// then I renamed 'gherkin_from_scratch_keymap.c' into 'keymap.c' and That'sAllFolks!!!
+	//
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// 2019/01/09/W 06:11 This is not an issue.
+// It's for checking what error appears when we remove `#include QMK_KEYBOARD_H` line from the code.
+// 🍎🍎🍎 QMK compiling error - unknown type name `uint8_t`, `bool`, `qk_tap_dance_state_t`, `true`,... {
+	Compiling: keyboards/gherkin/keymaps/comprehensive_gherkin/keymap.c                                keyboards/gherkin/keymaps/comprehensive_gherkin/keymap.c:155:4: error: unknown type name 'uint8_t'
+    uint8_t caps_control_backlight = 0;
+    ^~~~~~~
+	keyboards/gherkin/keymaps/comprehensive_gherkin/keymap.c:156:4: error: unknown type name 'uint8_t'
+	    uint8_t caps_disable_before_accent = 0;
+	    ^~~~~~~
+	keyboards/gherkin/keymaps/comprehensive_gherkin/keymap.c:158:4: error: unknown type name 'uint8_t'
+	    uint8_t breathing_period = BREATHING_PERIOD;
+	    ^~~~~~~
+	keyboards/gherkin/keymaps/comprehensive_gherkin/keymap.c:159:4: error: unknown type name 'uint8_t'
+	    uint8_t level_of_breathing_before = 0;
+	    ^~~~~~~
+	keyboards/gherkin/keymaps/comprehensive_gherkin/keymap.c:183:2: error: unknown type name 'bool'
+	  bool is_press_action;
+	  ^~~~
+	keyboards/gherkin/keymaps/comprehensive_gherkin/keymap.c:187:16: error: unknown type name 'qk_tap_dance_state_t'
+	 int cur_dance (qk_tap_dance_state_t *state) {
+	                ^~~~~~~~~~~~~~~~~~~~
+	keyboards/gherkin/keymaps/comprehensive_gherkin/keymap.c:228:22: error: 'true' undeclared here (not in a function)
+	   .is_press_action = true,
+	                      ^~~~
+}
+
+// 2019/01/09/W 06:11 instantly
+// 🍏🍏🍏 SOLVED - QMK_KEYBOARD_H {
+	// The only necessary thing is writing the next line at the very beginning of our `keymap.c` file
+
+	   #include QMK_KEYBOARD_H
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

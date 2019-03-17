@@ -11,6 +11,117 @@
 // instead of symbol characters for those keystrokes.
 //
 
+[FIXME]
+// 🍎🍎🍎 
+[#009]
+  BULLETPROOF ACCENTED ACUTE FOR ALL   5   VOWELS AND N TILDE !!!
+
+* modified files:  keyboards/40percentclub/gdherkin/keymaps/30_layout/keymap.c
+
+    * IMPLEMENTING 150 ms keypress time for shift key(space),
+
+    * A, I, O, U vowels implemented with implicit acute accent included,
+
+        * As I need having tap_dance functions over KC_A, KC_U, KC_I and 
+                tap_dance doesn’t get acute modifying character when shift is pressed,
+                I have implemented acute modifying character with action_function,
+                but over a new [ACUT] layer for not to overlapping previous tap_dance over A, U, I.
+                And I access this new layer by pressing acute accent trigger (KC_V, KC_M),
+
+        * It appeared a new problem when once in [ACUT] layer, I need KC_A for two
+                functions again: ( á  |  Á ) and ( LSHIFT while acute accent trigger is pressed ).
+                I have solved this issue, by implementing a new tap_dance for KC_A called
+                A_AC_ON, who calls action_function directly with a NULL keyrecord_t parameter.
+                This way, I can activate LSHIFT when hold, or call action_function directly
+                 from the code (not from KEYMAP, as I believed that was the only way to call it).
+                 It’s a solution, not too much elegant, but a solution.
+                 A better solution it should be to rewrite tap_dance_function at process_tap_dance 
+                 files at ‘qmk_firmware/quantum/process_keycode/process_tap_dance.h & .c’ 
+
+* added files:  QMK POWER tricks,
+    * where I’m going to collect all new power discoveries of C, QMK, algorithms, or whatever it brights by itself !
+        * The first annotation is about how to manage what layer I am at present time, whenever I want to know it.
+
+[#008]  
+  BULLETPROOF ACCENTED ACUTE VOWELS !!!
+  AT LAST, WHAT A RELIEF !!!
+
+  It’s approached since low level coding, i.e.: modifying mods bits at QMK level of programming.  This was inspired from QMK documentation,
+
+‘void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)’
+and 
+‘#define GRAVE_MODS  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT)|MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI)|MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))’
+at
+‘https://docs.qmk.fm/#/keymap?id=action_function’
+
+The issue with accented acute vowels was that acute modifier for vowels didn’t appear while shift key was pressed.  Instead of acute modifier for vowel, it appeared acute symbol followed by a space character, thus we couldn’t accentuate the vowel, it appeared the acute symbol and the vowel after it.
+
+  Then, instead of use `bool process_record_user(uint16_t keycode, keyrecord_t *record) }`
+we use now
+`void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {`
+and we modify mods bits directly, using
+`mod_shift_enable = get_mods()&LSHIFT_MODS;`
+`del_mods(mod_shift_enable);`
+`add_mods(mod_shift_enable);`
+
+  In ˜/qmk_firmware/tmk_core/common/action_code.h we have codification for mods at bit level.
+/** \brief Key Actions
+ *
+ * Mod bits:    43210
+ *   bit 0      ||||+- Control
+ *   bit 1      |||+-- Shift
+ *   bit 2      ||+--- Alt
+ *   bit 3      |+---- Gui
+ *   bit 4      +----- LR flag(Left:0, Right:1)
+ */
+enum mods_bit {
+    MOD_LCTL = 0x01,
+    MOD_LSFT = 0x02,
+    MOD_LALT = 0x04,
+    MOD_LGUI = 0x08,
+    MOD_RCTL = 0x11,
+    MOD_RSFT = 0x12,
+    MOD_RALT = 0x14,
+    MOD_RGUI = 0x18,
+};
+
+
+And by this way, we can press acute accent and get an acute modifier, even while shift key is pressed !!!
+
+    * modified file:   keyboards/40percentclub/gdherkin/keymaps/30_layout/keymap.c,
+                       for correct acute accent behaviour while shift key is pressed.
+
+    * renamed file:    qmk_issues_log.txt into QMK_issues_log.txt,
+
+    * modified file:   QMK_issues_log.txt
+                       by adding the present acute accent issue committed in this commit
+
+// 🍏🍏🍏 SOLVED - 
+[fixme]
+
+2019/02/23/S 15:00
+// 🍎🍎🍎 BIG COMPILING ERROR WITHOUT ANY IMPORTANCE
+If we get an error like the following:
+******************************************************************************************************************************************************************************************
+Compiling: keyboards/40percentclub/gherkin/keymaps/30_layout/keymap.c                              keyboards/40percentclub/gherkin/keymaps/30_layout/keymap.c: In function 'A_CAPS_reset':
+keyboards/40percentclub/gherkin/keymaps/30_layout/keymap.c:1908:1: error: '__progmem__' attribute ignored [-Werror=attributes]
+ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+ ^~~~~
+keyboards/40percentclub/gherkin/keymaps/30_layout/keymap.c:2121:1: error: '__progmem__' attribute ignored [-Werror=attributes]
+ const uint16_t PROGMEM fn_actions[] = {
+ ^~~~~
+keyboards/40percentclub/gherkin/keymaps/30_layout/keymap.c:2376:1: error: expected declaration or statement at end of input
+ }; // END OF THE PROGRAM  //
+ ^
+keyboards/40percentclub/gherkin/keymaps/30_layout/keymap.c:2121:24: error: unused variable 'fn_actions' [-Werror=unused-variable]
+ const uint16_t PROGMEM fn_actions[] = {
+                        ^~~~~~~~~~
+keyboards/40percentclub/gherkin/keymaps/30_layout/keymap.c:1908:24: error: unused variable 'keymaps' [-Werror=unused-variable]
+******************************************************************************************************************************************************************************************
+it has been because we forgot to close a curly brace(from an if sentence) into a tap_dance_reset function.  And the code line of the error is a thousand after the missing '}'. That's all
+
+2019/02/23/S 15:05
+// 🍏🍏🍏 SOLVED - 
 
 /////////////////////////////////////////////////////////////////////////////////////////
 

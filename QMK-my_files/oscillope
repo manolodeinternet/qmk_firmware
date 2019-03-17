@@ -1,0 +1,36 @@
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (record->event.pressed) {
+    switch(keycode) {
+      case CC_ARRW:
+        SEND_STRING("->");
+        return false;
+      case CC_PRN:
+        SEND_STRING("()"SS_TAP(X_LEFT));
+        return false;
+      case CC_BRC:
+        SEND_STRING("[]"SS_TAP(X_LEFT));
+        return false;
+      case CC_CBR:
+        SEND_STRING("{}"SS_TAP(X_LEFT));
+        return false;
+      //
+      // The following 'default case' manages the rest of ALL possible keystrokes, when they are pressed ...
+      // ... i.e.(KC_A, KC_ENTER, RESET, KC_VOLU, KC_RGHT, KC_PLUS, etc.)
+      //
+      // With 'return true' we allow the normal behaviour for the rest ...
+      // ... of ALL possible keystrokes besides CC_ARRW, CC_PRN, CC_BRC, CC_CBR
+      //
+      default:        
+        return true;  
+    }
+  }
+  //
+  // The following instruction allow the normal behaviour for ALL the ...
+  // ... keystrokes when they are released.
+  //
+  return true;
+  //
+  // In this way, we have all the ends tied.  
+  // All the keystrokes when they are pressed and when they are released.
+  //
+}
