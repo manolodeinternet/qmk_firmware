@@ -152,6 +152,19 @@
 //
 // defining layers
 
+
+
+
+    
+
+
+
+
+
+
+
+
+
 // DEFINING READABILITY CODES 
 #define _______ KC_TRNS
 #define NO_KEY  KC_NO
@@ -360,10 +373,11 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
      BLIT_OFF = SAFE_RANGE
 
+
 // MACROS for APPS layer
-    ,APP_Q_QQQQQ ,APP_W_WWWWW ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI ,APP_Y_YYYYY ,APP_U_UUUUU ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF 
-    ,APP_A_AAAAA ,APP_S_SAFAR ,APP_D_DDDDD ,APP_F_FINDE ,APP_G_GGGGG ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KVIEW ,APP_L_LLLLL ,APP_SP_SPSP 
-    ,APP_Z_STUDI ,APP_X_XXXXX ,APP_C_CCCCC ,APP_V_VVVVV ,APP_B_BBBBB ,APP_N_NOTES ,APP_M_MMMMM ,APP_ES_ESES ,APP_BS_BSBS ,APP_EN_ENEN   
+    ,APP_Q_QQQQQ ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI ,APP_Y_TYPIN ,APP_U_UUUUU ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF 
+    ,APP_A_AAAAA ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
+    ,APP_Z_STUDI ,APP_X_XXXXX ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BBBBB ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_ESES ,APP_BS_BSBS ,APP_EN_ENEN   
 // macros for apps layer
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -391,26 +405,26 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 //    ,LAYER_IS
 //[delete]
 
-    ,PVIM_H,
+    ,PVIM_H
 
-                     DVIM_I,  DVIM_O            // it's used tap_dance for U,P
-    ,DVIM_H, DVIM_J, DVIM_K,  DVIM_L,  DVIM_SP
-            ,DVIM_M, DVIM_ES, DVIM_BS, DVIM_EN
+                    ,DVIM_I  ,DVIM_O            // it's used tap_dance for U,P
+    ,DVIM_H ,DVIM_J ,DVIM_K  ,DVIM_L  ,DVIM_SP
+            ,DVIM_M ,DVIM_ES ,DVIM_BS ,DVIM_EN
 
     ,SVIM_Y                                    // it's used tap_dance for U,P
     ,SVIM_N
 
-    ,XVIM_Y, XVIM_U, XVIM_I,           XVIM_P
-    ,XVIM_H, XVIM_J, XVIM_K,  XVIM_L,  XVIM_SP
-    ,XVIM_N, XVIM_M, XVIM_ES, XVIM_BS, XVIM_EN
+    ,XVIM_Y ,XVIM_U ,XVIM_I           ,XVIM_P
+    ,XVIM_H ,XVIM_J ,XVIM_K  ,XVIM_L  ,XVIM_SP
+    ,XVIM_N ,XVIM_M ,XVIM_ES ,XVIM_BS ,XVIM_EN
 
-    ,ZVIM_Y, ZVIM_U, ZVIM_I,  ZVIM_O,  ZVIM_P
-    ,ZVIM_H, ZVIM_J, ZVIM_K,  ZVIM_L,  ZVIM_SP
-    ,ZVIM_N, ZVIM_M, ZVIM_ES, ZVIM_BS, ZVIM_EN
+    ,ZVIM_Y ,ZVIM_U                   ,ZVIM_P
+    ,ZVIM_H ,ZVIM_J ,ZVIM_K  ,ZVIM_L  ,ZVIM_SP
+    ,ZVIM_N
 
-    ,AVIM_Y, AVIM_U, AVIM_I,  AVIM_O,  AVIM_P
-    ,AVIM_H, AVIM_J, AVIM_K,  AVIM_L,  AVIM_SP
-    ,AVIM_N, AVIM_M, AVIM_ES, AVIM_BS, AVIM_EN
+    ,AVIM_Y ,AVIM_U ,AVIM_I  ,AVIM_O  ,AVIM_P
+    ,AVIM_H ,AVIM_J                   ,AVIM_SP
+    ,AVIM_N ,AVIM_M ,AVIM_ES
 
 }; // enum custom keycodes
 
@@ -2609,13 +2623,13 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // activates accents variable
 
 // ACCENTS & CAPSLOCK
- ,[A_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, A_CAPS_finished, A_CAPS_reset, 150)
+ ,[A_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, A_CAPS_finished, A_CAPS_reset, 160)
  ,[F_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, F_CAPS_finished, F_CAPS_reset)
  ,[J_ACUT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, J_ACUT_finished, J_ACUT_reset)  // it includes J->command tap dance funcionality
 // accents & capslock
 
 // SPACE / SHIFT
- ,[SP_SHF]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, SP_SHF_finished, SP_SHF_reset, 150)
+ ,[SP_SHF]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, SP_SHF_finished, SP_SHF_reset, 160)
 // space / shift
 
 // MOUSE / FUNCTIONS
@@ -2637,7 +2651,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // MOUS / ZVIM
  ,[MOU_ZV]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, MOU_ZV_finished, MOU_ZV_reset, 250)
 // vim layers
-/*
+
 // SYMBOLS (TWO IN A KEY)
  ,[BSL_CI] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, BSL_CI_finished, BSL_CI_reset)
  ,[QUOT_D] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, QUOT_D_finished, QUOT_D_reset)
@@ -2649,8 +2663,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // NUMPAD
  ,[TRIP_0] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, TRIP_0_finished, TRIP_0_reset)
  ,[DOUB_0] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, DOUB_0_finished, DOUB_0_reset)
- */
-
+ 
  ,[SLNMBR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLNMBR_finished, SLNMBR_reset)
  ,[DONMBR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, DONMBR_finished, DONMBR_reset)
 //numpad
@@ -2718,7 +2731,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   *  ## SET    a layer  through double tap
   *  @@ get a keystroke through double tap
   */
-
 [GHKN] = LAYOUT_ortho_3x10(  // layer 0 : default layer
 // [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
 //,-----------------+---------------+-------------+---------------+----------------++---------------+---------------+-------------+------------------+-------------------.
@@ -2726,7 +2738,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|-----------------|---------------|-------------+---------------+----------------||---------------|---------------+-------------+------------------+-------------------|
           TD(A_CAPS),   LCTL_T(KC_S), LALT_T(KC_D),     TD(F_CAPS),     TD(G_SYMB),   LT(SYMB, KC_H),     TD(J_ACUT), LALT_T(KC_K),      LCTL_T(KC_L),        TD(SP_SHF), \
 //|-----------------|---------------|-------------+---------------+----------------||---------------|---------------+-------------+------------------+-------------------|
-    LT(L_XTND, KC_Z), LT(DVIM, KC_X),   TD(MOU_FN), LT(PVIM, KC_V),     TD(B_NMBR),       TD(N_NMBR), LT(PVIM, KC_M),  F(A_VOWEL) /*TD(ESC_FN)*/, LT(DVIM, KC_BSPC), LT(R_XTND, KC_ENT) ),
+    LT(L_XTND, KC_Z), LT(DVIM, KC_X),   TD(MOU_FN), LT(PVIM, KC_V),     TD(B_NMBR),       TD(N_NMBR), LT(PVIM, KC_M),   TD(ESC_FN), LT(DVIM, KC_BSPC), LT(R_XTND, KC_ENT) ),
 //|-----------------+---------------+-------------+---------------+----------------++---------------+---------------+-------------+------------------+-------------------.
 // END OF GHKN 0
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2777,8 +2789,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      ||      |      |      |      |      |
  * `----------------------------------'`----------------------------------'
 */
-// SYMBOLS
-
+// SYMBOLS 
 [SYMB] = LAYOUT_ortho_3x10(  // layer 2: symbols layer
 //,------------+---------------+---------------+---------------+------------------++---------------+---------------+-------------+-------------+---------------.
          KC_GRV,        KC_TILD,         KC_EQL,        KC_UNDS,          KC_PERC,       TD(BSL_CI),        KC_LPRN,      KC_RPRN,      KC_ASTR,        KC_SLSH,
@@ -2877,30 +2888,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Keymap APPS 6: APPS layer
  * ,----------------------------------.,----------------------------------.
- * |      |@@@@@@| EVER |      | TERMI||      |      | TEXT |@@@@@@|SYSTEM|
- * |      |@@@@@@|-NOTE |      |-NAL  ||      |      |-EDIT |@@@@@@|PREFE-|
- * |      |      |      |      |      ||      |      |      |OMNIFO|RENCES|
+ * |      |@@@@@@| EVER |      | TERMI|| TYPI |      | TEXT |@@@@@@|SYSTEM|
+ * |      |@@@@@@|-NOTE |      |-NAL  ||-NATOR|      |-EDIT |@@@@@@|PREFE-|
+ * |      |TWITTR|      |      |      ||      |      |      |OMNIFO|RENCES|
  * |------+------+------+------+------||------+------+------+------+------|
- * |      |      |      |      |      ||      | SUBLI|KARBNR|      |      |
- * |      |SAFARI|      |FINDER|      ||SKETCH|-ME   |VIEW &|      |      |
- * |      |      |      |      |      ||      | TEXT |ELMNTS|      |      |
+ * |      |      |  DAY |      |GOOGLE||      | SUBLI|KARBNR| CALEN|      |
+ * |      |SAFARI|  ONE |FINDER|CHROME||SKETCH|-ME   | EVENT|-DAR  |      |
+ * |      |      |      |      |      ||      | TEXT |VIEWER|      |      |
  * |------+------+------+------+------||------+------+------+------+------|
- * | STU  |      |      |      |      ||      |      |      |      |      |
- * |-DIES |      |      |      |      || NOTES|      |      |      |      |
+ * | STU  |      | CALCU|      |      ||      |      |      |      |      |
+ * |-DIES |      |-LATOR|      |      || NOTES| MAIL |      |      |      |
  * |      |      |      |      |      ||      |      |      |      |      |
  * `----------------------------------'`----------------------------------'
 */
 // APPS layer 6
-
-
 [APPS] = LAYOUT_ortho_3x10(  // layer 6 : apps layer
-  //,--------------+------------+------------+------------+-------------++------------+------------+------------+-----------+--------------.
-            _______, APP_W_WWWWW, APP_E_EVERN,     _______, APP_T_TERMI,       _______,     _______, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
-  //|--------------|------------|------------+------------+-------------||------------|------------+------------+-----------+--------------|
-            _______, APP_S_SAFAR,     _______, APP_F_FINDE,     _______,   APP_H_SKTCH, APP_J_SUBLI, APP_K_KVIEW,     _______,     _______,
-  //|--------------|------------|------------+------------+-------------||------------|------------+------------+-----------+--------------|
-      APP_Z_STUDI,     _______,     _______,     _______,     _______,   APP_N_NOTES,     _______,     _______,     _______,      _______ ),
-  //,--------------+------------+------------+------------+-------------++------------+------------+------------+-----------+--uuu------------.
+  //,------------+------------+------------+------------+-------------++------------+------------+------------+------------+--------------.
+          _______, APP_W_TWTTR, APP_E_EVERN,     _______, APP_T_TERMI,   APP_Y_TYPIN,     _______, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
+  //|------------|------------|------------+------------+-------------||------------|------------+------------+------------+--------------|
+          _______, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,   APP_H_SKTCH, APP_J_SUBLI, APP_K_KVIEW, APP_L_CLNDR,     XXXXXXX,
+  //|------------|------------|------------+------------+-------------||------------|------------+------------+------------+--------------|
+      APP_Z_STUDI,     XXXXXXX, APP_C_CALCU,     XXXXXXX,     XXXXXXX,   APP_N_NOTES,  APP_M_MAIL,     XXXXXXX,     XXXXXXX,     XXXXXXX ),
+  //,------------+------------+------------+------------+-------------++------------+------------+------------+------------+--------------.
 // END OF APPS 6
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -2925,7 +2934,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * '------+------+------+------+------'`------+------+------+------+------'
 */
 // SUSR layer 7
-
 [SUSR] = LAYOUT_ortho_3x10(  // layer 7: Super USeR productivity layer
 //|-----------|-----------|-----------+-----------+------------||--------|--------|--------|--------+----------.
       MO(BLIT), TD(LOGOUT),    LCK_SCR, TD(HRESET),    XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MO(BLIT),
@@ -2947,7 +2955,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      ||  Up  |Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
  * |------+------+------+------+------||------+------+------+------+------|
  * |      |      |      |      |      ||Center| Move | Move | Move | Move |
- * |      |      |      |      |      ||LineIn|      |      |      |      |
+ * | LSft | LCtl | LAlt | LGui |      ||LineIn|      |      |      |      |
  * |      |      |      |      |      || View | LEFT |  UP  | DOWN | RIGHT|
  * |------+------+------+------+------||------+------+------+------+------|
  * |[SVIM]|[DVIM]|[MOUS]|@@@@@@|      || Move | Move | Move | Move | Move |
@@ -2980,24 +2988,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      ||      | Begin| Word | Word |End Of|
  * |      |      |      |      |      ||      |Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
  * |------+------+------+------+------||------+------+------+------+------|
- * |      |      |      |      |      ||      |Delete|Delete|Delete|Delete|
- * |      |      |      |      |      || Yank | Char | Line | Line | Char |
- * |      |      |      |      |      ||      | LEFT |  UP  | DOWN | RIGHT|
+ * |Delete|Delete|Delete|Delete|      ||      |Delete|Delete|Delete|Delete|
+ * | Char | Line | Line | Char |      || Yank | Char | Line | Line | Char |
+ * | LEFT |  UP  | DOWN | RIGHT|      ||      | LEFT |  UP  | DOWN | RIGHT|
  * |------+------+------+------+------||------+------+------+------+------|
- * |      |@@@@@@|      |@@@@@@|      ||      |Delete|Delete|Delete|Delete|
- * |      |      |      |@@@@@@|      ||      |      | Page | Page |      |
- * |      |      |      |@@@@@@|      ||      | HOME |  UP  | DOWN |  END |
+ * |      |@@@@@@|      |@@@@@@|      ||      |Delete|Delete|@@@@@@|Delete|
+ * |      |      |      |@@@@@@|      ||      |      | Page |Delete|      |
+ * |      |      |      |@@@@@@|      ||      | HOME |  UP  |PgDown|  END |
  * `----------------------------------'`----------------------------------'
 */
 // DVIM layer 9
-
 [DVIM] = LAYOUT_ortho_3x10(  // layer 9 : DVIM layer
   //,--------+--------+--------+--------+---------++--------+------------+--------+--------+-------------.
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, TD(DVIM_uU),  DVIM_I,  DVIM_O, TD(DVIM_pP),  // DVIM_Y is empty
   //|--------|--------|--------+--------+---------||--------+------------+--------+--------+-------------|
-      _______, _______, _______, _______, _______,    DVIM_H,      DVIM_J,  DVIM_K,  DVIM_L,     DVIM_SP,
+       DVIM_J,  DVIM_K,  DVIM_L, DVIM_SP, XXXXXXX,    DVIM_H,      DVIM_J,  DVIM_K,  DVIM_L,     DVIM_SP,
   //|--------|--------|--------+--------+---------||--------+------------+--------+--------+-------------|
-      _______, _______, _______, _______, _______,   XXXXXXX,      DVIM_M, DVIM_ES, DVIM_BS,     DVIM_EN ),// DVIM_N is empty
+      _______, _______, _______, _______, XXXXXXX,   XXXXXXX,      DVIM_M, DVIM_ES, DVIM_BS,     DVIM_EN ),// DVIM_N is empty
   //,--------+--------+--------+--------+---------++--------+------------+--------+--------+-------------.
   // END OF DVIM 9
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3020,14 +3027,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `----------------------------------'`----------------------------------'
 */
 // SVIM layer 10
-
 [SVIM] = LAYOUT_ortho_3x10(  // layer 10 : SVIM layer
   //,--------+--------+--------+--------+---------++--------+--------------+--------------------+--------------------+---------------.
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    SVIM_Y,   TD(SVIM_uU), LSFT(LALT(KC_LEFT)), LSFT(LALT(KC_RGHT)),   TD(SVIM_pP),
   //|--------|--------|--------+--------+---------||--------+--------------+--------------------+--------------------+---------------|
-      _______, _______, _______, _______, _______,   XXXXXXX, LSFT(KC_LEFT),         LSFT(KC_UP),       LSFT(KC_DOWN), LSFT(KC_RGHT), // SVIM_H is empty
+      _______, _______, _______, _______, XXXXXXX,   XXXXXXX, LSFT(KC_LEFT),         LSFT(KC_UP),       LSFT(KC_DOWN), LSFT(KC_RGHT), // SVIM_H is empty
   //|--------|--------|--------+--------+---------||--------+--------------+--------------------+--------------------+---------------|
-      _______, _______, _______, _______, _______,    SVIM_N, LSFT(KC_HOME),       LSFT(KC_PGUP),     LSFT(KC_PGDOWN),  LSFT(KC_END) ),
+      _______, _______, _______, _______, XXXXXXX,    SVIM_N, LSFT(KC_HOME),       LSFT(KC_PGUP),     LSFT(KC_PGDOWN),  LSFT(KC_END) ),
   //,--------+--------+--------+--------+---------++--------+--------------+--------------------+--------------------+---------------.
   // END OF SVIM 10                               // SVIM_H is empty
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3050,14 +3056,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `----------------------------------'`----------------------------------'
 */
 // XVIM layer 11
-
 [XVIM] = LAYOUT_ortho_3x10(  // layer 11 : XVIM layer
   //,--------+--------+--------+--------+---------++-------+-------+--------+--------+---------.
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XVIM_Y, XVIM_U,  XVIM_I, XXXXXXX,  XVIM_P,
   //|--------|--------|--------+--------+---------||-------+-------+--------+--------+---------|
-      _______, _______, _______, _______, _______,   XVIM_H, XVIM_J,  XVIM_K,  XVIM_L, XVIM_SP,
+      _______, _______, _______, _______, XXXXXXX,   XVIM_H, XVIM_J,  XVIM_K,  XVIM_L, XVIM_SP,
   //|--------|--------|--------+--------+---------||-------+-------+--------+------------------|
-      _______, _______, _______, _______, _______,   XVIM_N, XVIM_M, XVIM_ES, XVIM_BS, XVIM_EN ),
+      _______, _______, _______, _______, XXXXXXX,   XVIM_N, XVIM_M, XVIM_ES, XVIM_BS, XVIM_EN ),
   //,--------+--------+--------+--------+---------++-------+-------+--------+--------+---------.
   // END OF XVIM 11
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3080,7 +3085,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `----------------------------------'`----------------------------------'
 */
 // ZVIM layer 12 
-
 [ZVIM] = LAYOUT_ortho_3x10(  // layer 12 : ZVIM layer
   //,--------+--------+--------+--------+---------++-------+--------+--------+--------+---------.
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   ZVIM_Y,  ZVIM_U, XXXXXXX, XXXXXXX,  ZVIM_P,
@@ -3110,14 +3114,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `----------------------------------'`----------------------------------'
 */
 // AVIM layer 13
-
 [AVIM] = LAYOUT_ortho_3x10(  // layer 13 : AVIM layer
   //,--------+--------+--------+--------+---------++-------+-------+--------+--------+---------.
-      _______, _______, _______, _______, _______,   AVIM_Y, AVIM_U,  AVIM_I,  AVIM_O,  AVIM_P,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   AVIM_Y, AVIM_U,  AVIM_I,  AVIM_O,  AVIM_P,
   //|--------|--------|--------+--------+---------||-------+-------+--------+--------+---------|
-      _______, _______, _______, _______, _______,   AVIM_H, AVIM_J,  AVIM_K,  AVIM_L, AVIM_SP,
+      _______, _______, _______, _______, XXXXXXX,   AVIM_H, AVIM_J, XXXXXXX, XXXXXXX, AVIM_SP,
   //|--------|--------|--------+--------+---------||-------+-------+--------+--------+---------|
-      _______, _______, _______, _______, _______,   AVIM_N, AVIM_M, AVIM_ES, AVIM_BS, AVIM_EN ),
+      _______, _______, _______, _______, XXXXXXX,   AVIM_N, AVIM_M, AVIM_ES, XXXXXXX, XXXXXXX ),
   //,--------+--------+--------+--------+---------++-------+-------+--------+--------+---------.
   // END OF AVIM 13
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3140,7 +3143,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * '------+------+------+------+------'`------+------+------+------+------'
 */
 // MOUS layer 14
-
 [MOUS] = LAYOUT_ortho_3x10(  // layer 14: mouse layer
   KC_ACL0, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R,
   _______, _______, _______, _______, XXXXXXX,   XXXXXXX, KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R,
@@ -3171,7 +3173,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * '-----------------------------------------------------------------------------------------'
 */
 // BLIT layer 15
-
 [BLIT] = LAYOUT_ortho_3x10( // layer 15: BLIT layer
   BLIT_01, BLIT_02, BLIT_03, BLIT_04, BLIT_05, BRTH_01, BRTH_02, BRTH_03, BRTH_04,  BL_BRTG,
   BLIT_06, BLIT_07, BLIT_08, BLIT_09, BLIT_10, BRTH_05, BRTH_06, BRTH_07, BRTH_12,  BL_TOGG,
@@ -3199,7 +3200,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `----------------------------------'`----------------------------------'
 */
 // TEST transparent layer 31
-
 [TEST] = LAYOUT_ortho_3x10(  // layer 31 : TEST layer 
   //,-----------+--------+-----------+--------+---------++-----------+-----------+-----------+-----------+----------.
          _______, _______, F(E_VOWEL), _______, _______, /*LAYER_IS*/_______, F(U_VOWEL), F(I_VOWEL), F(O_VOWEL), _______,
@@ -3521,46 +3521,46 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     {
         switch(keycode)
         {
-//    ,APP_Q_QQQQQ ,APP_W_WWWWW ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI ,APP_Y_YYYYY ,APP_U_UUUUU ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF 
-//    ,APP_A_AAAAA ,APP_S_SAFAR ,APP_D_DDDDD ,APP_F_FINDE ,APP_G_GGGGG ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KVIEW ,APP_L_LLLLL ,APP_SP_SPSP 
-//    ,APP_Z_STUDI ,APP_X_XXXXX ,APP_C_CCCCC ,APP_V_VVVVV ,APP_B_BBBBB ,APP_N_NOTES ,APP_M_MMMMM ,APP_ES_ESES ,APP_BS_BSBS ,APP_EN_ENEN   
-/*
-            case APP_Q_QQQQQ: callApp("");                   return false; break;
-            case APP_W_WWWWW: callApp("Twitter");            return false; break;
-            case APP_E_EVERN: callApp("Evernote");           return false; break;
-            case APP_R_RRRRR: callApp("");                   return false; break;
-            case APP_T_TERMI: callApp("Terminal");           return false; break;  //
+//    ,APP_Q_QQQQQ ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI ,APP_Y_TYPIN ,APP_U_UUUUU ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF 
+//    ,APP_A_AAAAA ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
+//    ,APP_Z_STUDI ,APP_X_XXXXX ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BBBBB ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_ESES ,APP_BS_BSBS ,APP_EN_ENEN   
 
-            case APP_Y_YYYYY: callApp("");                   return false; break;
+            case APP_Q_QQQQQ: callApp("");                   return false; break;
+            case APP_W_TWTTR: callApp("Tw");                 return false; break;
+            case APP_E_EVERN: callApp("Eve");                return false; break;
+            case APP_R_RRRRR: callApp("");                   return false; break;
+            case APP_T_TERMI: callApp("Term");               return false; break;  //
+
+            case APP_Y_TYPIN: callApp("Typina");             return false; break;
             case APP_U_UUUUU: callApp("");                   return false; break;
-            case APP_I_TEDIT: callApp("TextEdit");           return false; break;  //
+            case APP_I_TEDIT: callApp("TextE");              return false; break;  //
             case APP_O_OMNIF: callApp("OmniF");              return false; break;  // OmniFocus
-            case APP_P_SPREF: callApp("system Pr");          return false; break;  // system Preferences
+            case APP_P_SPREF: callApp("Sy Pr");              return false; break;  // system Preferences
 
             case APP_A_AAAAA: callApp("");                   return false; break;
-            case APP_S_SAFAR: callApp("Safari"); _delay_ms(50); return false; break;  //
-            case APP_D_DDDDD: callApp("");                   return false; break;
-            case APP_F_FINDE: callApp("Finder");             return false; break;
-            case APP_G_GGGGG: callApp("");                   return false; break;
+            case APP_S_SAFAR: callApp("Saf");                return false; break;  // _delay_ms(50);
+            case APP_D_D_ONE: callApp("Day O");              return false; break;
+            case APP_F_FINDE: callApp("Find");               return false; break;
+            case APP_G_CHRME: callApp("Chrom");              return false; break;
 
-            case APP_H_SKTCH: callApp("Sketch");             return false; break;
-            case APP_J_SUBLI: callApp("Sublime");            return false; break;  // Sublime Text
-            case APP_K_KVIEW: callApp("");                   return false; break;
-            case APP_L_LLLLL: callApp("");                   return false; break;
+            case APP_H_SKTCH: callApp("Sketch.app");         return false; break;
+            case APP_J_SUBLI: callApp("Subl");               return false; break;  // Sublime Text
+            case APP_K_KVIEW: callApp("KEV");                return false; break;
+            case APP_L_CLNDR: callApp("Cale");               return false; break;
             case APP_SP_SPSP: callApp("");                   return false; break;
 
             case APP_Z_STUDI: callApp("Stud");               return false; break;  // Studies
             case APP_X_XXXXX: callApp("");                   return false; break;
-            case APP_C_CCCCC: callApp("");                   return false; break;
+            case APP_C_CALCU: callApp("Calc");               return false; break;
             case APP_V_VVVVV: callApp("");                   return false; break;
             case APP_B_BBBBB: callApp("");                   return false; break;
 
             case APP_N_NOTES: callApp("Notes");              return false; break;  //
-            case APP_M_MMMMM: callApp("");                   return false; break;
+            case APP_M_MAIL:  callApp("Mail");               return false; break;
             case APP_ES_ESES: callApp("");                   return false; break;
             case APP_BS_BSBS: callApp("");                   return false; break;
             case APP_EN_ENEN: callApp("");                   return false; break;
-*/
+
 
 
 
