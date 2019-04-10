@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifndef MOUSEKEY_WHEEL_MAX
-    #define MOUSEKEY_WHEEL_MAX      127  // 3
+    #define MOUSEKEY_WHEEL_MAX      127
 #elif MOUSEKEY_WHEEL_MAX > 127
     #error MOUSEKEY_WHEEL_MAX needs to be smaller than 127
 #endif
@@ -54,10 +54,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_TIME_TO_MAX 20
 #endif
 #ifndef MOUSEKEY_WHEEL_MAX_SPEED
-#define MOUSEKEY_WHEEL_MAX_SPEED     8  // 3
+#define MOUSEKEY_WHEEL_MAX_SPEED 8
 #endif
 #ifndef MOUSEKEY_WHEEL_TIME_TO_MAX
-#define MOUSEKEY_WHEEL_TIME_TO_MAX  40
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 40
 #endif
 
 

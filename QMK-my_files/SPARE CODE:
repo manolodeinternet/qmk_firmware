@@ -1,0 +1,257 @@
+SPARE CODE:
+*FOR HAVING E, O VOWELS WITH MORE THAN ACCENTS, WE MUST HAVE TAP_DANCE FUNCTIONS FOR MANAGING THIS.
+(but if no, we can call action_function directly from keymap.  If we fix the case statement into action funcion...
+... managing the 'else' part of 'if (record->event.pressed' for having the 'unregister_code(KC_E) at this side(into the else), not into the if')
+
+
+AND WE WILL HAVE:
+
+
+[GHKN] = LAYOUT_ortho_3x10(  // layer 0 : default layer
+// [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
+//,-----------------+---------------+---------------+-----------+----------------++---------------+-----------+-----------------+------------------+-------------------.
+          TD(Q_SUSR),     TD(W_MOUS),     F(E_VOWEL),      TD(R_APPS), LT(BLIT, KC_T),            RESET, TD(U_APPS),       TD(I_CIRC),     TD(O_TD),         TD(P_SUSR), \
+//|-----------------|---------------|---------------+-----------+----------------||---------------|-----------+-----------------+------------------+-------------------|
+          TD(A_CAPS)/*TD(A_CAPS)*/,   LCTL_T(KC_S),   LALT_T(KC_D), TD(F_CAPS), LT(SYMB, KC_G),   LT(SYMB, KC_H), TD(J_ACUT),     LALT_T(KC_K),      LCTL_T(KC_L),         TD(SP_SHF), \
+//|-----------------|---------------|---------------+-----------+----------------||---------------|-----------+-----------------+------------------+-------------------|
+    LT(L_XTND, KC_Z), LT(PVIM, KC_X), LT(FNCT, KC_C), TD(V_ACUT), TD(B_NMBR),     TD(N_NMBR),       TD(M_ACUT), LT(FNCT, KC_ESC), LT(PVIM, KC_BSPC), LT(R_XTND, KC_ENT) ),
+//|-----------------+---------------+---------------+-----------+----------------++---------------+-----------+-----------------+------------------+-------------------.
+// END OF GHKN 0
+
+
+
+
+
+
+
+void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
+//  static uint8_t mods_pressed;
+//MODS
+//  static uint8_t shift_flag;
+  shift_flag = get_mods()&LSHIFT_MODS;
+  accent_pressed = acute_requested | diaeresis_requested | grave_requested | circumflex_requested;
+  switch (id) {
+
+...
+...
+...
+
+    case E_VOWEL:
+      if (record->event.pressed) 
+      {
+        if (accent_pressed)
+        {
+         /* The key is being pressed.*/
+            if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
+            {
+            //  release LSHIFT
+                del_mods(shift_flag);
+                del_weak_mods(shift_flag);
+                send_keyboard_report();
+            };
+        //  tap accent
+            disable_capslock_before_accents_function();
+            if (acute_requested) { acute_accent_function(); }
+                else { if (diaeresis_requested) { diaeresis_accent_function(); }
+                else { if (grave_requested) { grave_accent_function(); } 
+                else { if (circumflex_requested) { circumflex_accent_function(); } } } }
+            enable_capslock_after_accents_function();
+            if (shift_flag)
+            {
+            //  press LSHIFT
+                add_mods(shift_flag);
+                add_weak_mods(shift_flag);
+                send_keyboard_report();
+            };
+            
+        }
+        register_code(KC_E);
+        unregister_code(KC_E);
+      }
+      break;
+
+...
+
+    case O_VOWEL:
+
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'O_TD' tap dance.
+static tap O_TDtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void O_TD_finished (qk_tap_dance_state_t *state, void *user_data) {
+  O_TDtap_state.state = cur_dance(state);
+  switch (O_TDtap_state.state) {
+
+    case SINGLE_TAP:        
+                            action_function(NULL, O_VOWEL, O_VOWEL);
+                            break;
+
+/*
+    case SINGLE_HOLD:       layer_on(APPS);         break;
+
+    case DOUBLE_TAP:        register_code(KC_U); unregister_code(KC_U);
+                            register_code(KC_U); break;
+
+    case DOUBLE_HOLD:       layer_on(APPS);
+                            break;
+
+                         // diaeresis accent
+    case TRIPLE_TAP:        disable_capslock_before_accents_function();
+                            register_code(KC_LALT); register_code(KC_U);
+                            break;
+
+                         // u with diaeresis 'ü'     
+    case TRIPLE_HOLD:       
+    case QUADRUPLE_TAP:     disable_capslock_before_accents_function();
+                            register_code(KC_LALT); register_code(KC_U);
+                            unregister_code(KC_U);  unregister_code(KC_LALT);
+                            enable_capslock_after_accents_function();
+                            register_code(KC_U);
+                            break;
+*/
+  }
+}
+
+void O_TD_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (O_TDtap_state.state) {
+
+    case SINGLE_TAP:        
+                            break;
+
+/*
+    case SINGLE_HOLD:       layer_off(APPS);       break;
+
+    case DOUBLE_TAP:        unregister_code(KC_U); break;
+
+    case DOUBLE_HOLD:       layer_off(APPS);
+                            register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_H);
+                            unregister_code(KC_H); unregister_code(KC_LGUI); unregister_code(KC_LALT);
+                            break;
+
+    case TRIPLE_TAP:        unregister_code(KC_U); unregister_code(KC_LALT);
+                            enable_capslock_after_accents_function();
+                            break;
+
+    case TRIPLE_HOLD:       
+// [FIXME] disconnect caps_lock before diaeresis and connect it later, and the same for ~ on ñ as well
+    case QUADRUPLE_TAP:     unregister_code(KC_U); break;
+*/
+  }
+  O_TDtap_state.state = 0;
+}
+/*                                                                                      */
+/* [TAPDANCE] U _ A P P S    -    D I A E R E S I S    A C C E N T                      */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+WAYS TO REACH SYSTEM KEYBINDINGS (FROM BEST TO WORST):
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                                                            */
+/*   W A Y    0    T O    A C C E S I N G    K E Y B I N D I N G S     F R O M      M A C    O S X     S Y S T E M            */
+/*                                                                                                                            */
+/*              pvim(j);                                                                                                      */
+/*                                                                                                                            */
+/*              this is the best one and it's posible because of the following function definition:                           */
+/*                                                                                                                            */
+/*              void pvim(char *key)                                                                                          */
+/*              {                                                                                                             */
+/*                SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"p");                                                   */
+/*                send_string(key);                                                                                           */
+/*              }                                                                                                             */
+/*                                                                                                                            */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                                                            */
+/*   W A Y    1    T O    A C C E S I N G    K E Y B I N D I N G S     F R O M      M A C    O S X     S Y S T E M            */
+/*                                                                                                                            */
+/*              SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"pj");                                                    */
+/*                                                                                                                            */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////            
+/*                                                                                                                            */
+/*   W A Y    2    T O    A C C E S I N G    K E Y B I N D I N G S     F R O M      M A C    O S X     S Y S T E M            */
+/*                                                                                                                            */
+/*              actual_mods = get_mods();                                                                                     */
+/*              add_mods(ALL_MODS); send_keyboard_report();                                                                   */
+/*              SEND_STRING("v");                                                                                             */
+/*              set_mods(actual_mods); send_keyboard_report();                                                                */
+/*              SEND_STRING("pj");                                                                                            */
+/*                                                                                                                            */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                                                            */
+/*   W A Y    3    T O    A C C E S I N G    K E Y B I N D I N G S     F R O M      M A C    O S X     S Y S T E M            */
+/*                                                                                                                            */
+/*              register_code(KC_LSFT);   register_code(KC_LCTL);   register_code(KC_LALT);   register_code(KC_LGUI);         */
+/*              register_code(KC_V);    unregister_code(KC_V);                                                                */
+/*            unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);         */
+/*              register_code(KC_P);    unregister_code(KC_P);                                                                */                               
+/*              register_code(KC_J);    unregister_code(KC_J);                                                                */
+/*                                                                                                                            */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                                                            */
+/*   W A Y    4    T O    A C C E S I N G    K E Y B I N D I N G S     F R O M      M A C    O S X     S Y S T E M            */
+/*                                                                                                                            */
+/*                            T H I S    W A Y     D O E S N ' T      W O R K  ! ! !                                          */
+/*              register_code(MOD_HYPR); register_code(KC_V); unregister_code(KC_V); unregister_code(MOD_HYPR);               */
+/*              register_code(KC_HYPR); register_code(KC_V); unregister_code(KC_V); unregister_code(KC_HYPR);                 */
+/*              register_code(HYPR); register_code(KC_V); unregister_code(KC_V); unregister_code(HYPR);                       */
+/*              register_code(KC_P);    unregister_code(KC_P);                                                                */                               
+/*              register_code(KC_J);    unregister_code(KC_J);                                                                */
+/*                                                                                                                            */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// testing reasons function.  It's called from process_record_user
+void what_layer_is_this_mine(void) {
+    //fprintf("right now fprintf layer is %ld\n\n", layer_state);
+    println("right now println layer is WITHOUT arguments\n\n");
+     printf("right now printf  layer is %ld\n\n", layer_state);
+    //uprintf("right now uprintf layer is %ld\n\n", layer_state);
+    switch (layer_state) {
+        case 0:    register_code(KC_0); unregister_code(KC_0);
+                   break;
+        case 1:    register_code(KC_1); unregister_code(KC_1);
+                   break;
+        case 2:    register_code(KC_2); unregister_code(KC_2);
+                   break;
+        case 3:    register_code(KC_3); unregister_code(KC_3);
+                   break;
+        case 4:    register_code(KC_4); unregister_code(KC_4);
+                   break;
+        case 5:    register_code(KC_5); unregister_code(KC_5);
+                   break;
+        case 6:    register_code(KC_6); unregister_code(KC_6);
+                   break;
+        case 7:    register_code(KC_7); unregister_code(KC_7);
+                   break;
+        case 8:    register_code(KC_8); unregister_code(KC_8);
+                   break;
+        case 9:    register_code(KC_9); unregister_code(KC_9);
+                   break;
+        default:   register_code(KC_X); unregister_code(KC_X);
+                   break;
+    }
+}
+

@@ -86,7 +86,6 @@ static uint8_t move_unit(void)
 static uint8_t wheel_unit(void)
 {
     uint16_t unit;
-    uint16_t myUnit;
     if (mousekey_accel & (1<<0)) {
         unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed)/4;
     } else if (mousekey_accel & (1<<1)) {
@@ -100,21 +99,6 @@ static uint8_t wheel_unit(void)
     } else {
         unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed * mousekey_repeat) / mk_wheel_time_to_max;
     }
-
-// [manolodeinternet@gmail.com]
-// NEXT LINE IS MINE !!!
-// THIS IS FOR GETTING WHEEL MOUSE TO MOVE SLOWER (10 TIMES SLOWER),
-
-    if (unit != 0) {
-        myUnit = unit / 50;
-    } 
-    else
-    {
-        myUnit = 0;
-    }
-    unit = myUnit;
-    //////////////////////////////////////
-
     return (unit > MOUSEKEY_WHEEL_MAX ? MOUSEKEY_WHEEL_MAX : (unit == 0 ? 1 : unit));
 }
 

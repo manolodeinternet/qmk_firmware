@@ -11,6 +11,62 @@
 // instead of symbol characters for those keystrokes.
 //
 
+
+
+
+
+2019/03/17 22:00
+// 🍎🍎🍎 [#010] WHEELMOUSE SCROLL IS TOO FAST, 
+                 even having the following parameters in config.h,
+/*
+#define MOUSEKEY_DELAY 20
+#define MOUSEKEY_INTERVAL 20
+#define MOUSEKEY_MAX_SPEED 6
+#define MOUSEKEY_TIME_TO_MAX 30
+#define MOUSEKEY_WHEEL_DELAY 50
+#define MOUSEKEY_WHEEL_INTERVAL 255
+#define MOUSEKEY_WHEEL_MAX_SPEED 1
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 255  // max. value: 255
+*/
+
+2019/03/18 07:30
+// 🍏🍏🍏 [#010] SOLVED - I HAVE TOUCHED TMK CORE FILE: 
+//Users/navarro/qmk_firmware/tmk_core/common/mousekey.c
+adding a code line for divide by 10 the value of wheel movement before return it: 
+
+/*
+static uint8_t wheel_unit(void)
+{
+    uint16_t unit;
+    if (mousekey_accel & (1<<0)) {
+        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed)/4;
+    } else if (mousekey_accel & (1<<1)) {
+        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed)/2;
+    } else if (mousekey_accel & (1<<2)) {
+        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed);
+    } else if (mousekey_repeat == 0) {
+        unit = MOUSEKEY_WHEEL_DELTA;
+    } else if (mousekey_repeat >= mk_wheel_time_to_max) {
+        unit = MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed;
+    } else {
+        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed * mousekey_repeat) / mk_wheel_time_to_max;
+
+// [manolodeinternet@gmail.com]
+// NEXT LINE IS MINE !!!
+// THIS IS FOR GETTING WHEEL MOUSE TO MOVE SLOWER (10 TIMES SLOWER),
+
+        unit = (unit == 0 ? unit : unit / 10);
+        //////////////////////////////////////
+
+    }
+    return (unit > MOUSEKEY_WHEEL_MAX ? MOUSEKEY_WHEEL_MAX : (unit == 0 ? 1 : unit));
+}
+*/
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 [FIXME]
 // 🍎🍎🍎 
 [#009]

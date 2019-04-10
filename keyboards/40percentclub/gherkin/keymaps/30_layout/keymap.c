@@ -1,4 +1,4 @@
-/*                              // keymap lleno de send_string para monitorear action_function A_VOWEL.c
+S/*                              // keymap lleno de send_string para monitorear action_function A_VOWEL.c
  * PROJECT NAME: '30_layout'
  *
  * VERSION NAME: 'cleaning the code'
@@ -119,6 +119,7 @@
 #define O_VOWEL 3
 #define U_VOWEL 4
 #define N_TILDE 5
+#define RXTND_CAPS 6
 
 
 
@@ -320,6 +321,7 @@ enum tap_dance_keycodes { // IT BEGINS BY 0...
     ,ESC_FN  //        *functions layer  /  **functions layer
 
     ,G_SYMB  //           symbols layer
+    ,H_SYMB  //           symbols layer
 
     ,B_NMBR  //           numbers layer
     ,N_NMBR  //           numbers layer  // ... **tilde for building a 'tilded n'
@@ -376,8 +378,8 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
 // MACROS for APPS layer
     ,APP_Q_QQQQQ ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI ,APP_Y_TYPIN ,APP_U_UUUUU ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF 
-    ,APP_A_AAAAA ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
-    ,APP_Z_STUDI ,APP_X_XXXXX ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BBBBB ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_ESES ,APP_BS_BSBS ,APP_EN_ENEN   
+    ,APP_A_SNOTE ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
+    ,APP_Z_STUDI ,APP_X_XXXXX ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BBBBB ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB   
 // macros for apps layer
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -456,6 +458,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
    uint8_t disabled_caps_before_accent = 0;
    uint8_t backlight_caps = 0;
    static uint8_t gherkinBacklightLevel = 0;
+   static uint8_t gherkinBacklightLevelBeforeCapsLock = 0;   
 
 // global variables
 
@@ -583,7 +586,9 @@ void callApp(char *appName)
 {
     register_code(KC_LGUI);   register_code (KC_SPC);
   unregister_code (KC_SPC); unregister_code(KC_LGUI);
-    send_string  (appName);
+    send_string  (appName); 
+    // next delay is for avoiding that SpotLight remains on screen without calling our app
+    _delay_ms(30); 
     register_code (KC_ENT); unregister_code (KC_ENT);
 }  
 
@@ -605,13 +610,17 @@ void press_capslock(void) { // MY CAPSLOCK FINISHED FUNCTION
     backlight_caps  = 1;
     breathing_period_set(BR_CAPS);
     breathing_enable();
+    gherkinBacklightLevelBeforeCapsLock = gherkinBacklightLevel;
+    gherkinBacklightLevel = BL_CAPS;
   }
   else
   {
     backlight_caps  = 0;
     breathing_period_set(BR_DFLT);
     breathing_disable();
+    gherkinBacklightLevel = gherkinBacklightLevelBeforeCapsLock;
   }
+  layer_clear();
 } //  my capslock finished function
 
 void release_capslock(void) {  // MY CAPSLOCK RESET FUNCTION
@@ -1048,15 +1057,13 @@ void A_CAPS_finished (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_HOLD:       left_shift_pressed = true;
                             register_code(KC_LSFT); 
                             break;
-    case DOUBLE_TAP:        register_code(KC_A); unregister_code(KC_A);
+    case DOUBLE_TAP:        
+    case DOUBLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
                             register_code(KC_A);
                             break;
 
  // MY CAPSLOCK FINISHED FUNCTION (the function defined above)                           
     case DOUBLE_HOLD:       press_capslock();  
-                            break;
-    case DOUBLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
-                            register_code(KC_A);
                             break;
 /*    case TRIPLE_TAP:        
     case TRIPLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
@@ -1115,11 +1122,13 @@ void F_CAPS_finished (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_TAP:        register_code(KC_F); break;
     case SINGLE_HOLD:       register_code(KC_LGUI); break;
 
-    case DOUBLE_TAP:        
-    case DOUBLE_HOLD:       press_capslock(); break;  // MY CAPSLOCK FINISHED FUNCTION
-
+    case DOUBLE_TAP:
     case DOUBLE_SINGLE_TAP: register_code(KC_F); unregister_code(KC_F);
                             register_code(KC_F); break;
+
+    case TRIPLE_TAP:        
+    case TRIPLE_HOLD:       press_capslock(); break;  // MY CAPSLOCK FINISHED FUNCTION
+
   }
 }
 
@@ -1128,10 +1137,12 @@ void F_CAPS_reset (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_TAP:        unregister_code(KC_F); break;
     case SINGLE_HOLD:       unregister_code(KC_LGUI); break;
 
-    case DOUBLE_TAP:        
-    case DOUBLE_HOLD:       release_capslock(); break;  // MY CAPSLOCK RESET FUNCTION
-    
+    case DOUBLE_TAP:
     case DOUBLE_SINGLE_TAP: unregister_code(KC_F); break;
+
+    case TRIPLE_TAP:        
+    case TRIPLE_HOLD:       release_capslock(); break;  // MY CAPSLOCK RESET FUNCTION
+    
   }
   F_CAPStap_state.state = 0;
 }
@@ -1359,18 +1370,19 @@ void B_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
   switch (B_NMBRtap_state.state) {
     case SINGLE_TAP:    register_code(KC_B); break;
 
+    case DOUBLE_HOLD:
     case SINGLE_HOLD:// SWITCH temporarily [NMBR] ON
-                        layer_clear();
+                  //      layer_clear();
                         layer_on(NMBR);
-                        breathing_period_set(BR_NMBR);
-                        breathing_enable();
+                  //      breathing_period_set(BR_NMBR);
+                  //      breathing_enable();
                         break;
 
-    case DOUBLE_HOLD:// SET [NMBR] ON
+/*    case DOUBLE_HOLD:// SET [NMBR] ON
                         layer_on(NMBR);
                         breathing_period_set(BR_NMBR);
                         breathing_enable();
-                        break;
+                        break; */
 
     case DOUBLE_TAP:        
     case DOUBLE_SINGLE_TAP: register_code(KC_B); unregister_code(KC_B); register_code(KC_B); break;
@@ -1379,9 +1391,24 @@ void B_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
 
 void B_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (B_NMBRtap_state.state) {
-    case SINGLE_TAP:    unregister_code(KC_B); break;
+    case SINGLE_TAP:    
+    case DOUBLE_TAP:        
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_B); break;
 
-    case SINGLE_HOLD:// Return to [NMBR] OFF
+    case SINGLE_HOLD: if (backlight_caps)
+                      {
+                        breathing_period_set(BR_CAPS);
+                        breathing_enable();
+                      }
+                      else
+                      {
+                        breathing_period_set(BR_DFLT);
+                        breathing_disable();
+                      }
+                      layer_clear();
+                      break;      
+
+/*    case SINGLE_HOLD:// Return to [NMBR] OFF
                         layer_off(NMBR);
                         breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
                         breathing_enable();
@@ -1391,13 +1418,11 @@ void B_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
                           breathing_period_set(BR_DFLT);
                           breathing_disable();
                         };
-                        break;
+                        break; */
 
     case DOUBLE_HOLD:    // I left it intentionally empty for allowing 'SET [NMBBR] ON' works properly
                         break;
 
-    case DOUBLE_TAP:        
-    case DOUBLE_SINGLE_TAP: unregister_code(KC_B); break;
   }
   B_NMBRtap_state.state = 0;
 }
@@ -1436,10 +1461,10 @@ void G_SYMB_finished (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_TAP:    register_code(KC_G); break;
 
     case SINGLE_HOLD:// SWITCH temporarily [SYMB] ON
-                        layer_clear();
+                  //      layer_clear();
                         layer_on(SYMB);
-                        breathing_period_set(BR_SYMB);
-                        breathing_enable();
+                  //      breathing_period_set(BR_SYMB);
+                  //      breathing_enable();
                         break;
 
     case DOUBLE_TAP:        
@@ -1453,7 +1478,19 @@ void G_SYMB_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP:        
     case DOUBLE_SINGLE_TAP: unregister_code(KC_G); break;
 
-    case SINGLE_HOLD:// Return to [SYMB] OFF
+    case SINGLE_HOLD: if (backlight_caps)
+                      {
+                        breathing_period_set(BR_CAPS);
+                        breathing_enable();
+                      }
+                      else
+                      {
+                        breathing_period_set(BR_DFLT);
+                        breathing_disable();
+                      }
+                      layer_clear();
+                      break;      
+/* case SINGLE_HOLD:// Return to [SYMB] OFF
                         layer_off(SYMB);
                         breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
                         breathing_enable();
@@ -1463,7 +1500,7 @@ void G_SYMB_reset (qk_tap_dance_state_t *state, void *user_data) {
                           breathing_period_set(BR_DFLT);
                           breathing_disable();
                         };
-                        break;
+                        break; */
   }
   G_SYMBtap_state.state = 0;
 }
@@ -1474,7 +1511,72 @@ void G_SYMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_H  -  H _ S Y M B  -  KC_H                                             */
+/*                                                                                      */
+/*  KC_H:  hH  -  hh  -  HH  -  [SYMB]                                                  */
+/*                                                                                      */
+/*                                                                                      */
+//instantalize an instance of 'tap' for the 'H_SYMB' tap dance.
+static tap H_SYMBtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
 
+void H_SYMB_finished (qk_tap_dance_state_t *state, void *user_data) {
+  H_SYMBtap_state.state = cur_dance(state);
+  switch (H_SYMBtap_state.state) {
+    case SINGLE_TAP:    register_code(KC_H); break;
+
+    case SINGLE_HOLD:// SWITCH temporarily [SYMB] ON
+                    //    layer_clear();
+                        layer_on(SYMB);
+                    //    breathing_period_set(BR_SYMB);
+                    //    breathing_enable();
+                        break;
+
+    case DOUBLE_TAP:        
+    case DOUBLE_SINGLE_TAP: register_code(KC_H); unregister_code(KC_H); register_code(KC_H); break;
+  }
+}
+
+void H_SYMB_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (H_SYMBtap_state.state) {
+    case SINGLE_TAP:    
+    case DOUBLE_TAP:        
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_H); break;
+
+    case SINGLE_HOLD: if (backlight_caps)
+                      {
+                        breathing_period_set(BR_CAPS);
+                        breathing_enable();
+                      }
+                      else
+                      {
+                        breathing_period_set(BR_DFLT);
+                        breathing_disable();
+                      }
+                      layer_clear();
+                      break;      
+/* case SINGLE_HOLD:// Return to [SYMB] OFF
+                        layer_off(SYMB);
+                        breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
+                        breathing_enable();
+
+                        if (!backlight_caps)        // if CAPS_LOCK was NOT set out before [NMBR] was fixed ...
+                        {
+                          breathing_period_set(BR_DFLT);
+                          breathing_disable();
+                        };
+                        break; */
+  }
+  H_SYMBtap_state.state = 0;
+}
+/*                                                                                      */
+/* [tapdance] kc_h  -  h _ s y m b  -  kc_h                                             */
+/*                                                                                      */
+// ************************************************************************************ //
 
 
 
@@ -1502,20 +1604,21 @@ void N_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
                         action_function(NULL, N_TILDE, N_TILDE); break;
 
     case SINGLE_HOLD:// SWITCH temporarily [NMBR] ON
-                        layer_clear();
+    case DOUBLE_HOLD: 
+                  //      layer_clear();
                         layer_on(NMBR);
-                        breathing_period_set(BR_NMBR);
-                        breathing_enable();
+                  //      breathing_period_set(BR_NMBR);
+                  //      breathing_enable();
                         break;
 
                      // ~ for making a ñ
     case DOUBLE_TAP:    register_code(KC_LALT); register_code(KC_N); break;
 
-    case DOUBLE_HOLD:// SET [NMBR] ON
+/*    case DOUBLE_HOLD:// SET [NMBR] ON
                         layer_on(NMBR);
-                        breathing_period_set(BR_NMBR);
-                        breathing_enable();
-                        break;
+                  //      breathing_period_set(BR_NMBR);
+                  //      breathing_enable();
+                        break; */
 
     case DOUBLE_SINGLE_TAP: register_code(KC_N); unregister_code(KC_N); register_code(KC_N); break;
 
@@ -1532,8 +1635,20 @@ void N_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
 void N_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (N_NMBRtap_state.state) {
     case SINGLE_TAP:    break;
+    case SINGLE_HOLD: if (backlight_caps)
+                      {
+                        breathing_period_set(BR_CAPS);
+                        breathing_enable();
+                      }
+                      else
+                      {
+                        breathing_period_set(BR_DFLT);
+                        breathing_disable();
+                      }
+                      layer_clear();
+                      break;      
 
-    case SINGLE_HOLD:// Return to [NMBR] OFF
+/*    case SINGLE_HOLD:// Return to [NMBR] OFF
                         layer_off(NMBR);
                         breathing_period_set(BR_CAPS);
                         breathing_enable();
@@ -1543,7 +1658,7 @@ void N_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
                           breathing_period_set(BR_DFLT);
                           breathing_disable();
                         };
-                        break;
+                        break; */
 
     case DOUBLE_TAP:        unregister_code(KC_N); unregister_code(KC_LALT); break;
 
@@ -1854,7 +1969,20 @@ void DONMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
   switch (DONMBRtap_state.state) {
     case SINGLE_TAP:        register_code(KC_PDOT); break;
 
-    case DOUBLE_HOLD:    // SET [NMBR] OFF
+    case DOUBLE_HOLD: if (backlight_caps)
+                      {
+                        breathing_period_set(BR_CAPS);
+                        breathing_enable();
+                      }
+                      else
+                      {
+                        breathing_period_set(BR_DFLT);
+                        breathing_disable();
+                      }
+                      layer_clear();
+                      break;      
+
+/*    case DOUBLE_HOLD:    // SET [NMBR] OFF
                             layer_off(NMBR);
                             breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
                             breathing_enable();
@@ -1864,7 +1992,7 @@ void DONMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
                               breathing_period_set(BR_DFLT);
                               breathing_disable();
                             };
-                            break;
+                            break; */
   }
 }
 
@@ -1898,6 +2026,19 @@ void SLNMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
   switch (SLNMBRtap_state.state) {
     case SINGLE_TAP:        register_code(KC_PSLS); break;
 
+    case DOUBLE_HOLD: if (backlight_caps)
+                      {
+                        breathing_period_set(BR_CAPS);
+                        breathing_enable();
+                      }
+                      else
+                      {
+                        breathing_period_set(BR_DFLT);
+                        breathing_disable();
+                      }
+                      layer_clear();
+                      break;      
+/*
     case DOUBLE_HOLD:    // SET [NMBR] OFF
                          // layer_clear();
                             layer_off(NMBR);
@@ -1909,7 +2050,7 @@ void SLNMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
                               breathing_period_set(BR_DFLT);
                               breathing_disable();
                             };
-                            break;
+                            break;*/
   }
 }
 
@@ -2617,26 +2758,27 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  ,[O_APPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, O_APPS_finished, O_APPS_reset)
 //running apps
 
-// ACTIVATES ACCENTS VARIBLE
- ,[R_AC_RE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, R_AC_RE_finished, R_AC_RE_reset)
- ,[U_ACCE]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, U_ACCE_finished,  U_ACCE_reset )
+// ACTIVATES ACCENTS VARIABLE
+ ,[R_AC_RE] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, R_AC_RE_finished, R_AC_RE_reset, 170)
+ ,[U_ACCE]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, U_ACCE_finished,  U_ACCE_reset,  170)
 // activates accents variable
 
 // ACCENTS & CAPSLOCK
- ,[A_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, A_CAPS_finished, A_CAPS_reset, 160)
+ ,[A_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, A_CAPS_finished, A_CAPS_reset, 180)
  ,[F_CAPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, F_CAPS_finished, F_CAPS_reset)
  ,[J_ACUT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, J_ACUT_finished, J_ACUT_reset)  // it includes J->command tap dance funcionality
 // accents & capslock
 
 // SPACE / SHIFT
- ,[SP_SHF]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, SP_SHF_finished, SP_SHF_reset, 160)
+ ,[SP_SHF]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, SP_SHF_finished, SP_SHF_reset, 180)
 // space / shift
 
 // MOUSE / FUNCTIONS
  ,[MOU_FN] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, MOU_FN_finished, MOU_FN_reset, 250)
  ,[ESC_FN] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, ESC_FN_finished, ESC_FN_reset, 250)
 // mouse / functions
- ,[G_SYMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, G_SYMB_finished, G_SYMB_reset)
+ ,[G_SYMB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, G_SYMB_finished, G_SYMB_reset, 170)
+ ,[H_SYMB] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, H_SYMB_finished, H_SYMB_reset, 170)
 
 // ACCESSING NUMBERS
  ,[B_NMBR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, B_NMBR_finished, B_NMBR_reset)
@@ -2736,7 +2878,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //,-----------------+---------------+-------------+---------------+----------------++---------------+---------------+-------------+------------------+-------------------.
           TD(Q_SUSR),     TD(W_APPS),   F(E_VOWEL),    TD(R_AC_RE), LT(TEST, KC_T),   LT(BLIT, KC_Y),     TD(U_ACCE),   F(I_VOWEL),        TD(O_APPS),        TD(P_SUSR), \
 //|-----------------|---------------|-------------+---------------+----------------||---------------|---------------+-------------+------------------+-------------------|
-          TD(A_CAPS),   LCTL_T(KC_S), LALT_T(KC_D),     TD(F_CAPS),     TD(G_SYMB),   LT(SYMB, KC_H),     TD(J_ACUT), LALT_T(KC_K),      LCTL_T(KC_L),        TD(SP_SHF), \
+          TD(A_CAPS),   LCTL_T(KC_S), LALT_T(KC_D),     TD(F_CAPS),     TD(G_SYMB),       TD(H_SYMB),     TD(J_ACUT), LALT_T(KC_K),      LCTL_T(KC_L),        TD(SP_SHF), \
 //|-----------------|---------------|-------------+---------------+----------------||---------------|---------------+-------------+------------------+-------------------|
     LT(L_XTND, KC_Z), LT(DVIM, KC_X),   TD(MOU_FN), LT(PVIM, KC_V),     TD(B_NMBR),       TD(N_NMBR), LT(PVIM, KC_M),   TD(ESC_FN), LT(DVIM, KC_BSPC), LT(R_XTND, KC_ENT) ),
 //|-----------------+---------------+-------------+---------------+----------------++---------------+---------------+-------------+------------------+-------------------.
@@ -2763,11 +2905,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [NMBR] = LAYOUT_ortho_3x10(  // layer 1 : numbers layer
   // LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
   //,-----------+------------+-------+--------+------------++-----------+------+------+------+---------.
-           KC_P1,       KC_P2,  KC_P3,   KC_P4,      KC_P5,        KC_P6, KC_P7, KC_P8, KC_P9,   KC_P0,
+            KC_1,        KC_2,   KC_3,    KC_4,       KC_5,         KC_6,  KC_7,  KC_8,  KC_9,    KC_0,
   //|-----------|------------|-------+--------+------------||-----------|------+------+------+---------|
-      TD(TRIP_0),  TD(DOUB_0),  KC_P0, KC_PEQL, TD(DO_EUR),      KC_PMNS, KC_P4, KC_P5, KC_P6, KC_PPLS,
+      TD(TRIP_0),  TD(DOUB_0),  KC_P0, KC_PEQL, TD(DO_EUR),      KC_PMNS,  KC_4,  KC_5,  KC_6, KC_PPLS,
   //|-----------|------------|-------+--------+------------||-----------|------+------+------+---------|
-         KC_PENT,     KC_BSPC, KC_TAB, KC_COMM, TD(DONMBR),   TD(SLNMBR), KC_P1, KC_P2, KC_P3, KC_PAST ),
+         KC_PENT,     KC_BSPC, KC_TAB, KC_COMM, TD(DONMBR),   TD(SLNMBR),  KC_1,  KC_2,  KC_3, KC_PAST ),
   //,-----------+------------+-------+--------+------------++-----------+------+------+------+---------.
   // END OF NMBR 1
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2879,7 +3021,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|--------|-------|---------+---------+----------||--------|----------|------------|---------+--------|
      KC_TAB,   DESK, APP_WIND, MISS_CTL, FLOA_WIN,   XXXXXXX, KC__VOLUP, KC__VOLDOWN, KC__MUTE, XXXXXXX,
 //|--------|-------|---------+---------+----------||--------|----------|------------|---------+--------|
-    KC_CAPS, DICTAD,  P_ST_HY,    SPEAK, ACTV_WIN,   XXXXXXX,   _______,       KC_UP,  _______, _______,
+    F(RXTND_CAPS), DICTAD,  P_ST_HY,    SPEAK, ACTV_WIN,   XXXXXXX,   _______,       KC_UP,  _______, _______,
 //|--------|-------|---------+---------+----------||--------|----------|------------|---------+--------|
     XT_UNDO, XT_CUT,  XT_COPY,  XT_PAST,  XT_MTCH,   XT_REDO,   KC_LEFT,     KC_DOWN,  KC_RGHT, _______ ), 
 //|--------|-------|---------+---------+----------||--------|----------|------------|---------+--------|
@@ -2892,23 +3034,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |@@@@@@|-NOTE |      |-NAL  ||-NATOR|      |-EDIT |@@@@@@|PREFE-|
  * |      |TWITTR|      |      |      ||      |      |      |OMNIFO|RENCES|
  * |------+------+------+------+------||------+------+------+------+------|
- * |      |      |  DAY |      |GOOGLE||      | SUBLI|KARBNR| CALEN|      |
- * |      |SAFARI|  ONE |FINDER|CHROME||SKETCH|-ME   | EVENT|-DAR  |      |
+ * |SIMPLE|      |  DAY |      |GOOGLE||      | SUBLI|KARBNR| CALEN|      |
+ * | NOTE |SAFARI|  ONE |FINDER|CHROME||SKETCH|-ME   | EVENT|-DAR  |      |
  * |      |      |      |      |      ||      | TEXT |VIEWER|      |      |
  * |------+------+------+------+------||------+------+------+------+------|
- * | STU  |      | CALCU|      |      ||      |      |      |      |      |
- * |-DIES |      |-LATOR|      |      || NOTES| MAIL |      |      |      |
+ * | STU  |      | CALCU|      |      ||      |      | KEY- |      | NUM- |
+ * |-DIES |      |-LATOR|      |      || NOTES| MAIL | NOTE | PAGES| BERS |
  * |      |      |      |      |      ||      |      |      |      |      |
  * `----------------------------------'`----------------------------------'
 */
 // APPS layer 6
 [APPS] = LAYOUT_ortho_3x10(  // layer 6 : apps layer
   //,------------+------------+------------+------------+-------------++------------+------------+------------+------------+--------------.
-          _______, APP_W_TWTTR, APP_E_EVERN,     _______, APP_T_TERMI,   APP_Y_TYPIN,     _______, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
+      APP_Q_QQQQQ, APP_W_TWTTR, APP_E_EVERN, APP_R_RRRRR, APP_T_TERMI,   APP_Y_TYPIN, APP_U_UUUUU, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
   //|------------|------------|------------+------------+-------------||------------|------------+------------+------------+--------------|
-          _______, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,   APP_H_SKTCH, APP_J_SUBLI, APP_K_KVIEW, APP_L_CLNDR,     XXXXXXX,
+      APP_A_SNOTE, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,   APP_H_SKTCH, APP_J_SUBLI, APP_K_KVIEW, APP_L_CLNDR, APP_SP_SPSP,
   //|------------|------------|------------+------------+-------------||------------|------------+------------+------------+--------------|
-      APP_Z_STUDI,     XXXXXXX, APP_C_CALCU,     XXXXXXX,     XXXXXXX,   APP_N_NOTES,  APP_M_MAIL,     XXXXXXX,     XXXXXXX,     XXXXXXX ),
+      APP_Z_STUDI, APP_X_XXXXX, APP_C_CALCU, APP_V_VVVVV, APP_B_BBBBB,   APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB ),
   //,------------+------------+------------+------------+-------------++------------+------------+------------+------------+--------------.
 // END OF APPS 6
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2920,7 +3062,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * ,-----------------------------------.,---------------------------------.
 * |@@@@@@|      |      |      |      ||      |      |      |      |@@@@@@| 
 * |@@@@@@|      |      |onHold|      ||      |      |      |      |@@@@@@|
-* | BLIT |LOGOUT|LCKSCR| RESET| REDO ||      |      |      |      | BLIT |
+* | BLIT |LOGOUT|LCKSCR| RESET|      ||      |      |      |      | BLIT |
 * |------+------+------+------+------||------+------+------+------+------|
 * | Menu | Dock | Tool |Status|Float.||      |      |      |      |      |
 * | _bar | _bar | _bar | _bar |Window||      |      |      |      |      |
@@ -3175,7 +3317,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // BLIT layer 15
 [BLIT] = LAYOUT_ortho_3x10( // layer 15: BLIT layer
   BLIT_01, BLIT_02, BLIT_03, BLIT_04, BLIT_05, BRTH_01, BRTH_02, BRTH_03, BRTH_04,  BL_BRTG,
-  BLIT_06, BLIT_07, BLIT_08, BLIT_09, BLIT_10, BRTH_05, BRTH_06, BRTH_07, BRTH_12,  BL_TOGG,
+  BLIT_06, BLIT_07, BLIT_08, BLIT_09, BLIT_10, BRTH_05, KC_LGUI, BRTH_07, BRTH_12,  BL_TOGG,
   BLIT_11, BLIT_12, BLIT_13, BLIT_14, BLIT_15, BRTH_15,   BL_ON,  BL_INC,  BL_DEC, BLIT_OFF ),// BL_OFF
 // QMK standard keycode BL_OFF doesn't work ! ! !
 // I've made a macro (BLIT_OFF) who call the function backlight_level(BL_OFF) ! ! !
@@ -3220,6 +3362,7 @@ const uint16_t PROGMEM fn_actions[] = {
   [O_VOWEL] = ACTION_FUNCTION(O_VOWEL),
   [U_VOWEL] = ACTION_FUNCTION(U_VOWEL),
   [N_TILDE] = ACTION_FUNCTION(N_TILDE),
+  [RXTND_CAPS] = ACTION_FUNCTION(RXTND_CAPS)
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3236,7 +3379,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
 //    SEND_STRING("switch WORKING\n");
     case A_VOWEL:
 //      SEND_STRING("case A_VOWEL\n");
-      if (!record->event.pressed) 
+      if (record->event.pressed) 
       {
 //        SEND_STRING("recordeventpressed\n");
         if (accent_pressed)
@@ -3302,7 +3445,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
                 add_weak_mods(shift_flag);
                 send_keyboard_report();
             };
-            
+           
         }
         register_code(KC_E);
         unregister_code(KC_E);
@@ -3313,7 +3456,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
       break;
 
     case I_VOWEL:
-      if (!record->event.pressed) 
+      if (record->event.pressed) 
       {
         if (accent_pressed)
         {
@@ -3341,16 +3484,16 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
             };
             
         }
-        register_code(KC_I);
-        unregister_code(KC_I);
       }
       else
       {
+        register_code(KC_I);
+        unregister_code(KC_I);
       }
       break;
 
     case O_VOWEL:
-      if (!record->event.pressed) 
+      if (record->event.pressed) 
       {
         if (accent_pressed)
         {
@@ -3381,10 +3524,13 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
         register_code(KC_O);
         unregister_code(KC_O);
       }
+      else
+      {
+      }
       break;
 
     case U_VOWEL:
-      if (!record->event.pressed) 
+      if (record->event.pressed) 
       {
         if (accent_pressed)
         {
@@ -3412,13 +3558,16 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
             };
             
         }
-        register_code(KC_U);
+        register_code(KC_U);       
         unregister_code(KC_U);
       }
+      else
+      {
+      }  
       break;
 
     case N_TILDE:
-      if (!record->event.pressed) 
+      if (record->event.pressed) 
       {
         if (acute_requested)
         {
@@ -3433,9 +3582,6 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
         //  tap accent
             disable_capslock_before_accents_function();
             if (acute_requested) { tilde_accent_function(); }
-                else { if (diaeresis_requested) { diaeresis_accent_function(); }
-                else { if (grave_requested) { grave_accent_function(); } 
-                else { if (circumflex_requested) { circumflex_accent_function(); } } } }
             enable_capslock_after_accents_function();
             if (shift_flag)
             {
@@ -3448,6 +3594,22 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
         }
         register_code(KC_N);
         unregister_code(KC_N);
+      }
+      else 
+      {
+      }
+      break;
+
+
+    case RXTND_CAPS:
+      if (record->event.pressed) 
+      {
+         /* The key is being pressed.*/
+        press_capslock();
+      }
+      else 
+      {
+        release_capslock();
       }
       break;
 
@@ -3522,44 +3684,44 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         switch(keycode)
         {
 //    ,APP_Q_QQQQQ ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI ,APP_Y_TYPIN ,APP_U_UUUUU ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF 
-//    ,APP_A_AAAAA ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
-//    ,APP_Z_STUDI ,APP_X_XXXXX ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BBBBB ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_ESES ,APP_BS_BSBS ,APP_EN_ENEN   
+//    ,APP_A_SNOTE ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
+//    ,APP_Z_STUDI ,APP_X_XXXXX ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BBBBB ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB   
 
-            case APP_Q_QQQQQ: callApp("");                   return false; break;
-            case APP_W_TWTTR: callApp("Tw");                 return false; break;
-            case APP_E_EVERN: callApp("Eve");                return false; break;
-            case APP_R_RRRRR: callApp("");                   return false; break;
-            case APP_T_TERMI: callApp("Term");               return false; break;  //
+            case APP_Q_QQQQQ: callApp("");                   return false; break;  //
+            case APP_W_TWTTR: callApp("Tw");                 return false; break;  // Twitter
+            case APP_E_EVERN: callApp("Eve");                return false; break;  // Evernote
+            case APP_R_RRRRR: callApp("");                   return false; break;  //
+            case APP_T_TERMI: callApp("Term");               return false; break;  // Terminal
 
-            case APP_Y_TYPIN: callApp("Typina");             return false; break;
-            case APP_U_UUUUU: callApp("");                   return false; break;
-            case APP_I_TEDIT: callApp("TextE");              return false; break;  //
+            case APP_Y_TYPIN: callApp("Typina");             return false; break;  // Typinator
+            case APP_U_UUUUU: callApp("");                   return false; break;  //
+            case APP_I_TEDIT: callApp("TextE");              return false; break;  // TextEdit
             case APP_O_OMNIF: callApp("OmniF");              return false; break;  // OmniFocus
-            case APP_P_SPREF: callApp("Sy Pr");              return false; break;  // system Preferences
+            case APP_P_SPREF: callApp("Sy Pr");              return false; break;  // System Preferences
 
-            case APP_A_AAAAA: callApp("");                   return false; break;
-            case APP_S_SAFAR: callApp("Saf");                return false; break;  // _delay_ms(50);
-            case APP_D_D_ONE: callApp("Day O");              return false; break;
-            case APP_F_FINDE: callApp("Find");               return false; break;
-            case APP_G_CHRME: callApp("Chrom");              return false; break;
+            case APP_A_SNOTE: callApp("sim .app");           return false; break;  // Simplenote
+            case APP_S_SAFAR: callApp("Saf");                return false; break;  // Safari        // _delay_ms(50);
+            case APP_D_D_ONE: callApp("Day O");              return false; break;  // Day One
+            case APP_F_FINDE: callApp("Find");               return false; break;  // Finder
+            case APP_G_CHRME: callApp("Chrom");              return false; break;  // Google Chrome
 
-            case APP_H_SKTCH: callApp("Sketch.app");         return false; break;
+            case APP_H_SKTCH: callApp("Sketch.app");         return false; break;  // Sketch
             case APP_J_SUBLI: callApp("Subl");               return false; break;  // Sublime Text
-            case APP_K_KVIEW: callApp("KEV");                return false; break;
-            case APP_L_CLNDR: callApp("Cale");               return false; break;
-            case APP_SP_SPSP: callApp("");                   return false; break;
+            case APP_K_KVIEW: callApp("KEV");                return false; break;  // Karabiner Event Viewer
+            case APP_L_CLNDR: callApp("Cale");               return false; break;  // Calendar
+            case APP_SP_SPSP: callApp("");                   return false; break;  //
 
             case APP_Z_STUDI: callApp("Stud");               return false; break;  // Studies
-            case APP_X_XXXXX: callApp("");                   return false; break;
-            case APP_C_CALCU: callApp("Calc");               return false; break;
-            case APP_V_VVVVV: callApp("");                   return false; break;
-            case APP_B_BBBBB: callApp("");                   return false; break;
+            case APP_X_XXXXX: callApp("");                   return false; break;  //
+            case APP_C_CALCU: callApp("Calc");               return false; break;  // Calculator
+            case APP_V_VVVVV: callApp("");                   return false; break;  //
+            case APP_B_BBBBB: callApp("");                   return false; break;  // 
 
-            case APP_N_NOTES: callApp("Notes");              return false; break;  //
-            case APP_M_MAIL:  callApp("Mail");               return false; break;
-            case APP_ES_ESES: callApp("");                   return false; break;
-            case APP_BS_BSBS: callApp("");                   return false; break;
-            case APP_EN_ENEN: callApp("");                   return false; break;
+            case APP_N_NOTES: callApp("Notes");              return false; break;  // Notes
+            case APP_M_MAIL:  callApp("Mail");               return false; break;  // Mail
+            case APP_ES_KEYN: callApp("Keynot");                   return false; break;  //
+            case APP_BS_PAGE: callApp("Page");                   return false; break;  //
+            case APP_EN_NUMB: callApp("Numb");                   return false; break;  //
 
 
 
@@ -3652,43 +3814,43 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case LAYER_IS:              // for testing reasons
       what_layer_is_this_mine(); return false; break;
 */
-            case BLIT_OFF: gherkinBacklightLevel = 0; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_01:  gherkinBacklightLevel = 1; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_02:  gherkinBacklightLevel = 2; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_03:  gherkinBacklightLevel = 3; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_04:  gherkinBacklightLevel = 4; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_05:  gherkinBacklightLevel = 5; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_06:  gherkinBacklightLevel = 6; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_07:  gherkinBacklightLevel = 7; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_08:  gherkinBacklightLevel = 8; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_09:  gherkinBacklightLevel = 9; layer_clear(); layer_on(BLIT); return false; break;
+            case BLIT_OFF: gherkinBacklightLevel =  0; layer_clear(); return false; 
+            case BLIT_01:  gherkinBacklightLevel =  1; layer_clear(); return false;
+            case BLIT_02:  gherkinBacklightLevel =  2; layer_clear(); return false;
+            case BLIT_03:  gherkinBacklightLevel =  3; layer_clear(); return false;
+            case BLIT_04:  gherkinBacklightLevel =  4; layer_clear(); return false;
+            case BLIT_05:  gherkinBacklightLevel =  5; layer_clear(); return false; 
 
-            case BLIT_10:  gherkinBacklightLevel = 10; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_11:  gherkinBacklightLevel = 11; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_12:  gherkinBacklightLevel = 12; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_13:  gherkinBacklightLevel = 13; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_14:  gherkinBacklightLevel = 14; layer_clear(); layer_on(BLIT); return false; break;
-            case BLIT_15:  gherkinBacklightLevel = 15; layer_clear(); layer_on(BLIT); return false; break;
+            case BLIT_06:  gherkinBacklightLevel =  6; layer_clear(); return false;
+            case BLIT_07:  gherkinBacklightLevel =  7; layer_clear(); return false;
+            case BLIT_08:  gherkinBacklightLevel =  8; layer_clear(); return false;
+            case BLIT_09:  gherkinBacklightLevel =  9; layer_clear(); return false;
+            case BLIT_10:  gherkinBacklightLevel = 10; layer_clear();  return false;
 
-           case BRTH_01:  breathing_period_set(1); breathing_enable(); return false; break;
-           case BRTH_02:  breathing_period_set(2); breathing_enable(); return false; break;
-           case BRTH_03:  breathing_period_set(3); breathing_enable(); return false; break;
-           case BRTH_04:  breathing_period_set(4); breathing_enable(); return false; break;
-           case BRTH_05:  breathing_period_set(5); breathing_enable(); return false; break;
-           case BRTH_06:  breathing_period_set(6); breathing_enable(); return false; break;
-           case BRTH_07:  breathing_period_set(7); breathing_enable(); return false; break;
+            case BLIT_11:  gherkinBacklightLevel = 11; layer_clear(); return false;
+            case BLIT_12:  gherkinBacklightLevel = 12; layer_clear(); return false;
+            case BLIT_13:  gherkinBacklightLevel = 13; layer_clear(); return false;
+            case BLIT_14:  gherkinBacklightLevel = 14; layer_clear(); return false;
+            case BLIT_15:  gherkinBacklightLevel = 15; layer_clear(); return false;
 
-           case BRTH_12:  breathing_period_set(12); breathing_enable(); return false; break;
-           case BRTH_15:  breathing_period_set(15); breathing_enable(); return false; break;
-/*
-*/
-           default: return true; break; 
+           case BRTH_01:  breathing_period_set(1); breathing_enable(); return false; 
+           case BRTH_02:  breathing_period_set(2); breathing_enable(); return false; 
+           case BRTH_03:  breathing_period_set(3); breathing_enable(); return false; 
+           case BRTH_04:  breathing_period_set(4); breathing_enable(); return false; 
+           case BRTH_05:  breathing_period_set(5); breathing_enable(); return false; 
+           case BRTH_06:  breathing_period_set(6); breathing_enable(); return false;
+           case BRTH_07:  breathing_period_set(7); breathing_enable(); return false; 
+
+           case BRTH_12:  breathing_period_set(12); breathing_enable(); return false; 
+           case BRTH_15:  breathing_period_set(15); breathing_enable(); return false; 
+
+           default: return true; 
       }
 	}
-    else
-    {
-        return true;
-    }  // I wrote the 'default' case with 'return true' instead of this code line.
+  else
+  {
+    return true;
+  }
 }
 // END OF NEW MACROS WAY
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
