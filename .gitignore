@@ -1,6 +1,8 @@
-keyboards/40percentclub/gherkin/keymaps/30_layout/keymap_c-copies/
+<<<<<<< HEAD
 
-
+=======
+.history/
+>>>>>>> 45620fd289ad81f6bd34cf6a95e86f86d7577b9a
 .dep
 *.o
 *.bin
