@@ -105,7 +105,7 @@ void mousekey_task(void) {
   }
   if (mouse_report.x == 0 && mouse_report.y == 0 && mouse_report.v == 0 && mouse_report.h == 0) {
     return;
-	}
+  }
   if (mousekey_repeat != UINT8_MAX) mousekey_repeat++;
   if (mouse_report.x > 0) mouse_report.x = move_unit();
   if (mouse_report.x < 0) mouse_report.x = move_unit() * -1;
@@ -142,41 +142,6 @@ void mousekey_on(uint8_t code) {
   else if (code == KC_MS_ACCEL2)   mousekey_accel |= (1<<2);
 }
 
-<<<<<<< HEAD
-static uint8_t wheel_unit(void)
-{
-    uint16_t unit;
-    uint16_t myUnit;
-    if (mousekey_accel & (1<<0)) {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed)/4;
-    } else if (mousekey_accel & (1<<1)) {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed)/2;
-    } else if (mousekey_accel & (1<<2)) {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed);
-    } else if (mousekey_repeat == 0) {
-        unit = MOUSEKEY_WHEEL_DELTA;
-    } else if (mousekey_repeat >= mk_wheel_time_to_max) {
-        unit = MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed;
-    } else {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed * mousekey_repeat) / mk_wheel_time_to_max;
-    }
-
-// [manolodeinternet@gmail.com]
-// NEXT LINE IS MINE !!!
-// THIS IS FOR GETTING WHEEL MOUSE TO MOVE SLOWER (10 TIMES SLOWER),
-
-    if (unit != 0) {
-        myUnit = unit / 50;
-    } 
-    else
-    {
-        myUnit = 0;
-    }
-    unit = myUnit;
-    //////////////////////////////////////
-
-    return (unit > MOUSEKEY_WHEEL_MAX ? MOUSEKEY_WHEEL_MAX : (unit == 0 ? 1 : unit));
-=======
 void mousekey_off(uint8_t code) {
   if      (code == KC_MS_UP       && mouse_report.y < 0) mouse_report.y = 0;
   else if (code == KC_MS_DOWN     && mouse_report.y > 0) mouse_report.y = 0;
@@ -196,7 +161,6 @@ void mousekey_off(uint8_t code) {
   else if (code == KC_MS_ACCEL2) mousekey_accel &= ~(1<<2);
   if (mouse_report.x == 0 && mouse_report.y == 0 && mouse_report.v == 0 && mouse_report.h == 0)
     mousekey_repeat = 0;
->>>>>>> 45620fd289ad81f6bd34cf6a95e86f86d7577b9a
 }
 
 

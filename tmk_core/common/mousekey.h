@@ -32,11 +32,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifndef MOUSEKEY_WHEEL_MAX
-<<<<<<< HEAD
+//<<<<<<< HEAD
     #define MOUSEKEY_WHEEL_MAX      127  // 3
-=======
+//=======
   #define MOUSEKEY_WHEEL_MAX      127
->>>>>>> 45620fd289ad81f6bd34cf6a95e86f86d7577b9a
+//>>>>>>> 45620fd289ad81f6bd34cf6a95e86f86d7577b9a
 #elif MOUSEKEY_WHEEL_MAX > 127
   #error MOUSEKEY_WHEEL_MAX needs to be smaller than 127
 #endif

@@ -1,4 +1,4 @@
-S/*                              // keymap lleno de send_string para monitorear action_function A_VOWEL.c
+/*                              // keymap lleno de send_string para monitorear action_function A_VOWEL.c
  * PROJECT NAME: '30_layout'
  *
  * VERSION NAME: 'cleaning the code'
@@ -13,6 +13,7 @@ S/*                              // keymap lleno de send_string para monitorear 
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
+
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
