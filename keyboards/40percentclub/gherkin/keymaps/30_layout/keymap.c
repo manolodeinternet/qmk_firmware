@@ -589,7 +589,7 @@ void callApp(char *appName)
   unregister_code (KC_SPC); unregister_code(KC_LGUI);
     send_string  (appName); 
     // next delay is for avoiding that SpotLight remains on screen without calling our app
-    _delay_ms(30); 
+    _delay_ms(40); 
     register_code (KC_ENT); unregister_code (KC_ENT);
 }  
 
@@ -699,11 +699,12 @@ void tilde_accent_function(void) {
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'Q_SUSR' tap dance.
+
+/*
 static tap Q_SUSRtap_state = {
   .is_press_action = true,
   .state = 0
 };
-
 void Q_SUSR_finished (qk_tap_dance_state_t *state, void *user_data) {
   Q_SUSRtap_state.state = cur_dance(state);
   switch (Q_SUSRtap_state.state) {
@@ -718,7 +719,6 @@ void Q_SUSR_finished (qk_tap_dance_state_t *state, void *user_data) {
                             register_code(KC_Q);     break;
   }
 }
-
 void Q_SUSR_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (Q_SUSRtap_state.state) {
     case SINGLE_TAP:        
@@ -730,11 +730,49 @@ void Q_SUSR_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   Q_SUSRtap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [TAPDANCE] KC_Q  -  Q _ S U S R  -  SUPER USER LAYER  -  TAB                         */
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_Q  -  Q _ S U _ T B  -  SUPER USER LAYER  -  TAB                       */
+/*                                                                                      */
+/*  KC_Q:  qQ  -  [SU_TB]  -  TAB  -                                                    */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'Q_SU_TB' tap dance.
+static tap Q_SU_TBtap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void Q_SU_TB_finished (qk_tap_dance_state_t *state, void *user_data) {
+  Q_SU_TBtap_state.state = cur_dance(state);
+  switch (Q_SU_TBtap_state.state) {
+    case SINGLE_TAP:        register_code(KC_TAB);   break;
+    case SINGLE_HOLD:       layer_on(SUSR);          break;
+    case DOUBLE_HOLD:       layer_on(BLIT);          break;
+  }
+}
+
+void Q_SU_TB_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (Q_SU_TBtap_state.state) {
+    case SINGLE_TAP:        unregister_code(KC_TAB);   break;
+    case SINGLE_HOLD:       layer_off(SUSR);         break;
+    case DOUBLE_HOLD:       layer_off(BLIT);         break;
+  }
+  Q_SU_TBtap_state.state = 0;
+}
+/*                                                                                      */
+/* [TAPDANCE] KC_Q  -  Q _ S U S R  -  SUPER USER LAYER  -  TAB                         */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1066,11 +1104,11 @@ void A_CAPS_finished (qk_tap_dance_state_t *state, void *user_data) {
  // MY CAPSLOCK FINISHED FUNCTION (the function defined above)                           
     case DOUBLE_HOLD:       press_capslock();  
                             break;
-/*    case TRIPLE_TAP:        
+/*
+    case TRIPLE_TAP:        
     case TRIPLE_SINGLE_TAP: register_code(KC_A); unregister_code(KC_A);
                             register_code(KC_A); unregister_code(KC_A);
-                            register_code(KC_A);
-                            break;
+                            register_code(KC_A); break;
 */                            
   }
 }
@@ -1082,14 +1120,13 @@ void A_CAPS_reset (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_HOLD:       left_shift_pressed = false;
                             if (!right_shift_pressed) 
                             {
-                                unregister_code(KC_LSFT); break;
-                            }
-    case DOUBLE_TAP:        unregister_code(KC_A);    break;
+                                unregister_code(KC_LSFT);
+                            }; break;
+    case DOUBLE_TAP:        
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_A);    break;
 
  // MY CAPSLOCK RESET FUNCTION (the function defined above)
-    case DOUBLE_HOLD:       release_capslock();       break;
-
-    case DOUBLE_SINGLE_TAP: unregister_code(KC_A);    break;
+    case DOUBLE_HOLD:       release_capslock();       break;  // MY CAPSLOCK RESET FUNCTION
 /*
     case TRIPLE_TAP:        
     case TRIPLE_SINGLE_TAP: unregister_code(KC_A);    break;
@@ -1127,9 +1164,13 @@ void F_CAPS_finished (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_SINGLE_TAP: register_code(KC_F); unregister_code(KC_F);
                             register_code(KC_F); break;
 
+    case DOUBLE_HOLD:       press_capslock(); break;  // MY CAPSLOCK FINISHED FUNCTION
+/*
     case TRIPLE_TAP:        
-    case TRIPLE_HOLD:       press_capslock(); break;  // MY CAPSLOCK FINISHED FUNCTION
-
+    case TRIPLE_SINGLE_TAP: register_code(KC_F); unregister_code(KC_F);
+                            register_code(KC_F); unregister_code(KC_F);
+                            register_code(KC_F); break;
+*/                            
   }
 }
 
@@ -1141,9 +1182,11 @@ void F_CAPS_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP:
     case DOUBLE_SINGLE_TAP: unregister_code(KC_F); break;
 
+    case DOUBLE_HOLD:       release_capslock(); break;  // MY CAPSLOCK RESET FUNCTION
+/*
     case TRIPLE_TAP:        
-    case TRIPLE_HOLD:       release_capslock(); break;  // MY CAPSLOCK RESET FUNCTION
-    
+    case TRIPLE_SINGLE_TAP: unregister_code(KC_F);    break;
+*/    
   }
   F_CAPStap_state.state = 0;
 }
@@ -2848,25 +2891,72 @@ void matrix_init_user(void) {
 
   // set_unicode_input_mode(UC_OSX); // REPLACE UC_XXXX with UC_OSX - the Unicode Input Mode for your OS. See table below.
 } // end of matrix_init_user
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
- /* Keymap GHKN 0: gherkin default layer
+ /* Keymap ALPH 0: gherkin default layer
   * ,--------------------------------------------. ,--------------------------------------------.
-  * |@@ Tab  |        |        |        |        | |        |        |        |        |        |
+  * |        |        |accented|        |        | |        |accented|accented|accented|        |
   * |    Q   |    W   |    E   |    R   |   T    | |    Y   |    U   |    I   |    O   |    P   |
-  * |**[BLIT]|**[MAPS]|        |  5* RST|        | |        |        |        |**[MAPS]|**[BLIT]|
-  * | *[SUSR]| *[APPS]|        |1.4* ACC| [TEST] | |        |1.4* ACC|        | *[APPS]| *[SUSR]|
+  * |        |        |        |  5* RST|        | |        |        |        |        |        |
+  * |        |        |        |1.4* ACC|        | |        |1.4* ACC|        |        |        |
   * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
-  * |@@ Caps |        |        |@@ Caps |        | |        |        |        |        |        |
+  * |accented|        |        |        |        | |        |        |        |        |        |
   * |    A   |    S   |    D   |    F   |    G   | |    H   |    J   |    K   |    L   |  Space |
-  * |        |        |        |        |        | |        |@@ Acute|        |        |        |
-  * |  LSft  |  LCtl  |  LAlt  |  LGui  | [SYMB] | | [SYMB] |  LGui  |  LAlt  |  LCtl  |  LSft  |
+  * |        |        |        |        |        | |        |        |        |        |        |
+  * |@@ Caps |        |        |@@ Caps |        | |        |@@ Acute|        |        |        |
+  * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
+  * |        |        |        |        |        | |        |        |        |        |        |
+  * |    Z   |    X   |    C   |    V   |    B   | |    N   |    M   | Escape |Bckspace|  Enter |
+  * |        |        |        |        |        | |        |        |        |        |        |
+  * |  LSft  |        |        |        | *[LYRS]| | *[LYRS]|        |        |        |  LSft  |
+  * '--------------------------------------------' '--------------------------------------------'
+  *  LEGENDS for all KEYMAPS:
+  *   * access a layer  through one    tap
+  *  ** access a layer  through double tap
+  *  ## SET    a layer  through double tap
+  *  @@ get a keystroke through double tap
+  */
+[ALPH] = LAYOUT_ortho_3x10(  // layer 0 : default layer
+// [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
+//,-------------+---------+-----------+------------+----------------++---------------+-----------+-----------+-----------+---------------.
+            KC_Q,     KC_W, F(E_VOWEL), TD(R_AC_RE),           KC_T,             KC_Y, TD(U_ACCE), F(I_VOWEL), F(O_VOWEL),          KC_P, \
+//|-------------|---------|-----------+------------+----------------||---------------|-----------+-----------+-----------+---------------|
+      TD(A_ALPH),     KC_S,       KC_D,  TD(F_ALPH),           KC_G,             KC_H, TD(J_ALPH),       KC_K,       KC_L,        KC_SPC, \
+//|-------------|---------|-----------+------------+----------------||---------------|-----------+-----------+-----------+---------------|
+    LSFT_T(KC_Z),     KC_X,       KC_C,        KC_V, LT(LYRS, KC_B),   LT(LYRS, KC_N),       KC_M,     KC_ESC,    KC_BSPC, LSFT_T(KC_ENT) ),
+//|-------------+---------+-----------+------------+----------------++---------------+-----------+-----------+-----------+---------------.
+// END OF ALPH 0
+//
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+ /* Keymap LYRS 1: gherkin layers
+  * ,--------------------------------------------. ,--------------------------------------------.
+  * |   Tab  |        |        |        |        | |        |        |        |        |        |
+  * |        |        |        |        |        | |        |        |        |        |        |
+  * |**[BLIT]|**[MAPS]|        |  5* RST|        | |        |        |        |**[MAPS]|**[BLIT]|
+  * | *[SUSR]| *[APPS]| *[FNCT]|1.4* ACC| [TEST] | |        |1.4* ACC| *[FNCT]| *[APPS]| *[SUSR]|
+  * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
+  * |  Caps  |        |        |  Caps  |        | |        |@@ Acute|        |        |        |
+  * |        |        |        |        |        | |        |        |        |        |        |
+  * |        |        |        |        |        | |        |        |        |        |        |
+  * |  LSft  |  LCtl  |  LAlt  |  LGui  | *[SYMB]| | *[SYMB]|  LGui  |  LAlt  |  LCtl  |  LSft  |
+[BOOKMARK] cambiar los numeros de las capas para que se puedan poner todos correlativos.
+[BOOKMARK] cambiar los numeros de las capas para que se puedan poner todos correlativos.
+[BOOKMARK] cambiar los numeros de las capas para que se puedan poner todos correlativos.
+[BOOKMARK] cambiar los numeros de las capas para que se puedan poner todos correlativos.
+[BOOKMARK] cambiar los numeros de las capas para que se puedan poner todos correlativos.
+[BOOKMARK] cambiar los numeros de las capas para que se puedan poner todos correlativos.
+[BOOKMARK] cambiar los numeros de las capas para que se puedan poner todos correlativos.
   * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
   * |        |        |        |        |        | |        |        |        |        |        |
   * |    Z   |    X   |    C   |    V   |    B   | |    N   |    M   | Escape |Bckspace|  Enter |
   * |        |        |**[FNCT]|        |##[NMBR]| |##[NMBR]|        |**[FNCT]|        |        |
-  * |[L_XTND]| [DVIM] | *[MOUS]| [PVIM] | *[NMBR]| | *[NMBR]| [PVIM] | *[FNCT]| [DVIM] |[R_XTND]|
+  * | *L_XTND| *[DVIM]| *[MOUS]| *[PVIM]| *[NMBR]| | *[NMBR]| *[PVIM]| *[FNCT]| *[DVIM]| *R_XTND|
   * '--------------------------------------------' '--------------------------------------------'
   *  LEGENDS for all KEYMAPS:
   *   * access a layer  through one    tap    
@@ -2874,16 +2964,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   *  ## SET    a layer  through double tap
   *  @@ get a keystroke through double tap
   */
-[GHKN] = LAYOUT_ortho_3x10(  // layer 0 : default layer
+
+[BOOKMARK] cambiar los numeros de las capas para que se puedan poner todos correlativos.
+NEW TAP_DANCE ON LAYERS: 
+* SU_TB
+* L_APP
+* SH_CP
+* L_NMB
+
+
+
+[LYRS] = LAYOUT_ortho_3x10(  // layer 1 : default layer
 // [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
-//,-----------------+---------------+-------------+---------------+----------------++---------------+---------------+-------------+------------------+-------------------.
-          TD(Q_SUSR),     TD(W_APPS),   F(E_VOWEL),    TD(R_AC_RE), LT(TEST, KC_T),   LT(BLIT, KC_Y),     TD(U_ACCE),   F(I_VOWEL),        TD(O_APPS),        TD(P_SUSR), \
-//|-----------------|---------------|-------------+---------------+----------------||---------------|---------------+-------------+------------------+-------------------|
-          TD(A_CAPS),   LCTL_T(KC_S), LALT_T(KC_D),     TD(F_CAPS),     TD(G_SYMB),       TD(H_SYMB),     TD(J_ACUT), LALT_T(KC_K),      LCTL_T(KC_L),        TD(SP_SHF), \
-//|-----------------|---------------|-------------+---------------+----------------||---------------|---------------+-------------+------------------+-------------------|
-    LT(L_XTND, KC_Z), LT(DVIM, KC_X),   TD(MOU_FN), LT(PVIM, KC_V),     TD(B_NMBR),       TD(N_NMBR), LT(PVIM, KC_M),   TD(ESC_FN), LT(DVIM, KC_BSPC), LT(R_XTND, KC_ENT) ),
-//|-----------------+---------------+-------------+---------------+----------------++---------------+---------------+-------------+------------------+-------------------.
-// END OF GHKN 0
+//,-----------+----------+---------+---------+-----------++----------+---------+---------+----------+------------.
+     TD(SU_TB), TD(L_APP), MO(FNCT),  XXXXXXX,  MO(TEST),    MO(TEST),  XXXXXXX, MO(FNCT), TD(L_APP),   MO(SUSR), \
+//|-----------|----------|---------+---------+-----------||----------|---------+---------+----------+------------|
+     TD(SH_CP),   KC_LCTL,  KC_LALT,  KC_LGUI,  MO(SYMB),    MO(SYMB),  KC_LGUI,  KC_LALT,   KC_LCTL,    KC_LSFT, \
+//|-----------|----------|---------+---------+-----------||----------|---------+---------+----------+------------|
+    MO(L_XTND),  MO(DVIM), MO(MOUS), MO(PVIM), TD(L_NMB),   TD(L_NMB), MO(PVIM), MO(MOUS),  MO(DVIM), MO(R_XTND) ),
+//|-----------+----------+---------+---------+-----------++----------+---------+---------+----------+------------.
+// END OF LYRS 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
