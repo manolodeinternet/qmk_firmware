@@ -768,6 +768,7 @@ void tilde_accent_function(void) {
 /* [TAPDANCE] KC_Q  -  Q _ S U S R  -  SUPER USER LAYER  -  TAB                         */
 /*                                                                                      */
 /*  KC_Q:  qQ  -  [SUSR]  -  TAB  -  [BLIT]                                             */
+
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'Q_SUSR' tap dance.
@@ -827,17 +828,17 @@ static tap Q_P_SU_TB_tap_state = {
 void Q_P_SU_TB_finished (qk_tap_dance_state_t *state, void *user_data) {
   Q_P_SU_TB_tap_state.state = cur_dance(state);
   switch (Q_P_SU_TB_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_TAB);   break;
-    case SINGLE_HOLD:       layer_on(SUSR);          break;
-    case DOUBLE_HOLD:       layer_on(BLIT);          break;
+    case SINGLE_TAP:        register_code(KC_TAB);         break;
+    case SINGLE_HOLD:       layer_on(SUSR);                break;
+    case DOUBLE_HOLD:       layer_on(BLIT);                break;
   }
 }
 
 void Q_P_SU_TB_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (Q_P_SU_TB_tap_state.state) {
-    case SINGLE_TAP:        unregister_code(KC_TAB);   break;
-    case SINGLE_HOLD:       layer_off(SUSR);         break;
-    case DOUBLE_HOLD:       layer_off(BLIT);         break;
+    case SINGLE_TAP:        unregister_code(KC_TAB);         break;
+    case SINGLE_HOLD:       layer_off(SUSR);                 break;
+    case DOUBLE_HOLD:       layer_off(BLIT);                 break;
   }
   Q_P_SU_TB_tap_state.state = 0;
 }
@@ -3998,7 +3999,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |        |        |        |@@ Caps |        | |        |        |        |        |        |
   * |  LSft  | *[DVIM]|        | *[PVIM]| *[LYRS]| | *[LYRS]|        |        |        |  LSft  |
   * '--------------------------------------------' '--------------------------------------------'
-  *  LEGENDS for all KEYMAPS:
+  */
+
+  /*  LEGENDS for all KEYMAPS:
   *   * access a layer  through one    tap
   *  ** access a layer  through double tap
   *  ## SET    a layer  through double tap
@@ -4006,13 +4009,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   */
 [ALPH] = LAYOUT_ortho_3x10(  // layer 0 : default layer
 // [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
-//,------------+---------------+-----------+------------+----------------++---------------+------------+-----------+-----------+------------.
-           KC_Q,           KC_W, F(E_VOWEL), TD(R_AC_RE), LT(SYMB, KC_T),   LT(SYMB, KC_Y),  TD(U_ACCE), F(I_VOWEL), F(O_VOWEL),       KC_P, \
-//|------------|---------------|-----------+------------+----------------||---------------|------------+-----------+-----------+------------|
-     F(A_VOWEL),           KC_S,       KC_D,        KC_F, LT(NMBR, KC_G),   LT(SYMB, KC_H),        KC_J,       KC_K,       KC_L,     KC_SPC, \
-//|------------|---------------|-----------+------------+----------------||---------------|------------+-----------+-----------+------------|
-     TD(Z_ALPH), LT(DVIM, KC_X),       KC_C,  TD(V_PVIM), LT(LYRS, KC_B),   LT(LYRS, KC_N),        KC_M,     KC_ESC,    KC_BSPC, TD(EN_ALPH) ),
-//|------------+---------------+-----------+------------+----------------++---------------+------------+-----------+-----------+------------.
+//,------------+---------------+---------------+------------+----------------++---------------+------------+-----------+-----------+------------.
+           KC_Q,           KC_W,     F(E_VOWEL), TD(R_AC_RE), LT(SYMB, KC_T),   LT(SYMB, KC_Y),  TD(U_ACCE), F(I_VOWEL), F(O_VOWEL),       KC_P, \
+//|------------|---------------|---------------+------------+----------------||---------------|------------+-----------+-----------+------------|
+     F(A_VOWEL),           KC_S,           KC_D,        KC_F, LT(NMBR, KC_G),   LT(SYMB, KC_H),        KC_J,       KC_K,       KC_L,     KC_SPC, \
+//|------------|---------------|---------------+------------+----------------||---------------|------------+-----------+-----------+------------|
+     TD(Z_ALPH), LT(DVIM, KC_X), LT(MOUS, KC_C),  TD(V_PVIM), LT(LYRS, KC_B),   LT(LYRS, KC_N),        KC_M,     KC_ESC,    KC_BSPC, TD(EN_ALPH) ),
+//|------------+---------------+---------------+------------+----------------++---------------+------------+-----------+-----------+------------.
 // END OF ALPH 0kffff
 //
 
@@ -4090,6 +4093,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |        |        |        |        |##[NMBR]| |##[NMBR]|        |        |        |        |
   * | *L_XTND| *[DVIM]| *[MOUS]| *[PVIM]| *[NMBR]| | *[NMBR]| *[PVIM]| *[FNCT]| *[DVIM]| *R_XTND|
   * '--------------------------------------------' '--------------------------------------------'
+  */
+/*
   *  LEGENDS for all KEYMAPS:
   *   * access a layer  through one    tap    
   *  ** access a layer  through double tap
@@ -4312,7 +4317,7 @@ NEW TAP_DANCE ON LAYERS:
 * ,-----------------------------------.,---------------------------------.
 * |@@@@@@|      |      |      |      ||      |      |      |      |@@@@@@| 
 * |@@@@@@|      |      |onHold|      ||      |      |      |      |@@@@@@|
-* | BLIT |LOGOUT|LCKSCR| RESET|      ||      |      |      |      | BLIT |
+* |      |LOGOUT|LCKSCR| RESET|      ||      |      |      |      |      |
 * |------+------+------+------+------||------+------+------+------+------|
 * | Menu | Dock | Tool |Status|Float.||      |      |      |      |      |
 * | _bar | _bar | _bar | _bar |Window||      |      |      |      |      |
@@ -4328,7 +4333,7 @@ NEW TAP_DANCE ON LAYERS:
 // SUSR layer 8
 [SUSR] = LAYOUT_ortho_3x10(  // layer 8: Super USeR productivity layer
 //|-----------|-----------|-----------+-----------+------------||--------|--------|--------|--------+----------.
-      MO(BLIT), TD(LOGOUT),    LCK_SCR, TD(HRESET),    XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MO(BLIT),
+       XXXXXXX, TD(LOGOUT),    LCK_SCR, TD(HRESET),    XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
 //|-----------|-----------|-----------+-----------+------------||--------|--------|--------|--------+----------|
     TD(SLEP_M), TD(KILM_D), TD(KILA_T), TD(SHUT_S), TD(RSTT_F),   XXXXXXX, _______, _______, _______,  _______,
 //               ALT+CMD+ESC SFT+ALT+CMD+ESC
@@ -4367,7 +4372,7 @@ NEW TAP_DANCE ON LAYERS:
   //|---------|---------|---------+--------+---------||------+--------------+--------------+----------------+--------------|
        KC_LSFT,  _______,  _______, _______, XXXXXXX,  PVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,     KC_RGHT,
   //|---------|---------|---------+--------+---------||------+--------------+--------------+----------------+--------------|
-      MO(XVIM), MO(AVIM), MO(ZVIM), _______, XXXXXXX,  PVIM_N, LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),  // LCTL(LGUI(KC_DOWN))
+      MO(ZVIM), MO(AVIM), MO(XVIM), _______, XXXXXXX,  PVIM_N, LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),  // LCTL(LGUI(KC_DOWN))
   //,---------+---------+---------+--------+---------||------+--------------+--------------+----------------+--------------.
   // END OF PVIM 9
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4992,9 +4997,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 
 
-
 // PVIM
-            case PVIM_H: pvim("h"); return false; break;
+            case PVIM_Y: pvim("y");  return false; break;
+            case PVIM_H: pvim("h");  return false; break;
+            case PVIM_N: pvim("n");  return false; break;
 /* [info]
  * [#ref] Escape sequences in C
  * wikipedia link: 
@@ -5003,12 +5009,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case PVIM_BS:if (record->event.pressed) { pvim("\b"); } break;   // \b    \x0008   // register_code(KC_BSPC); unregister_code(KC_BSPC); } break;
 
         case PVIM_EN:if (record->event.pressed) { pvim("\n"); } break;   // \n    \x000A      new line
-                                                                         // \r    \x000D      carriage return   
                                                                                            // register_code (KC_ENT); unregister_code (KC_ENT); } break; 
+                                                                         // \r    \x000D      carriage return
  */
-// PVIM
-            case PVIM_Y: pvim("y");  return false; break;
-            case PVIM_N: pvim("n");  return false; break;
 // DVIM
             case DVIM_I: dvim("i");  return false; break;
             case DVIM_O: dvim("o");  return false; break;
@@ -5084,24 +5087,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case LAYER_IS:              // for testing reasons
       what_layer_is_this_mine(); return false; break;
 */
-            case BLIT_OFF: gherkinBacklightLevel =  0; layer_clear(); return false; 
-            case BLIT_01:  gherkinBacklightLevel =  1; layer_clear(); return false;
-            case BLIT_02:  gherkinBacklightLevel =  2; layer_clear(); return false;
-            case BLIT_03:  gherkinBacklightLevel =  3; layer_clear(); return false;
-            case BLIT_04:  gherkinBacklightLevel =  4; layer_clear(); return false;
-            case BLIT_05:  gherkinBacklightLevel =  5; layer_clear(); return false; 
+            case BLIT_OFF: gherkinBacklightLevel =  0; backlight_level(gherkinBacklightLevel); return false; 
+            case BLIT_01:  gherkinBacklightLevel =  1; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_02:  gherkinBacklightLevel =  2; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_03:  gherkinBacklightLevel =  3; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_04:  gherkinBacklightLevel =  4; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_05:  gherkinBacklightLevel =  5; backlight_level(gherkinBacklightLevel); return false; 
 
-            case BLIT_06:  gherkinBacklightLevel =  6; layer_clear(); return false;
-            case BLIT_07:  gherkinBacklightLevel =  7; layer_clear(); return false;
-            case BLIT_08:  gherkinBacklightLevel =  8; layer_clear(); return false;
-            case BLIT_09:  gherkinBacklightLevel =  9; layer_clear(); return false;
-            case BLIT_10:  gherkinBacklightLevel = 10; layer_clear();  return false;
+            case BLIT_06:  gherkinBacklightLevel =  6; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_07:  gherkinBacklightLevel =  7; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_08:  gherkinBacklightLevel =  8; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_09:  gherkinBacklightLevel =  9; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_10:  gherkinBacklightLevel = 10; backlight_level(gherkinBacklightLevel); return false;
 
-            case BLIT_11:  gherkinBacklightLevel = 11; layer_clear(); return false;
-            case BLIT_12:  gherkinBacklightLevel = 12; layer_clear(); return false;
-            case BLIT_13:  gherkinBacklightLevel = 13; layer_clear(); return false;
-            case BLIT_14:  gherkinBacklightLevel = 14; layer_clear(); return false;
-            case BLIT_15:  gherkinBacklightLevel = 15; layer_clear(); return false;
+            case BLIT_11:  gherkinBacklightLevel = 11; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_12:  gherkinBacklightLevel = 12; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_13:  gherkinBacklightLevel = 13; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_14:  gherkinBacklightLevel = 14; backlight_level(gherkinBacklightLevel); return false;
+            case BLIT_15:  gherkinBacklightLevel = 15; backlight_level(gherkinBacklightLevel); return false;
 
            case BRTH_01:  breathing_period_set(1); breathing_enable(); return false; 
            case BRTH_02:  breathing_period_set(2); breathing_enable(); return false; 
@@ -5125,37 +5128,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // END OF NEW MACROS WAY
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-// QMK POWER tricks
-// *****************************************************************************************************
-// FOR KNOWING WHAT LAYER WE ARE AT THE MOMENT:
-/*
-        uint8_t layer = biton32(layer_state);
-void what_layer_is_this_mine(void) {
-  switch (layer) {
-    case GHKN:   SEND_STRING("GHKN");   break;
-    case SYMB:   SEND_STRING("SYMB");   break;
-    case L_XTND: SEND_STRING("L_XTND"); break;
-    case R_XTND: SEND_STRING("R_XTND"); break;
-    case PVIM:   SEND_STRING("PVIM");   break;
-    case DVIM:   SEND_STRING("DVIM");   break;
-    case NMBR:   SEND_STRING("NMBR");   break;
-    case FNCT:   SEND_STRING("FNCT");   break;
-    case APPS:   SEND_STRING("APPS");   break;
-    case SUSR:   SEND_STRING("SUSR");   break;
-    case SVIM:   SEND_STRING("SVIM");   break;
-    case XVIM:   SEND_STRING("XVIM");   break;
-    case ZVIM:   SEND_STRING("ZVIM");   break;
-    case AVIM:   SEND_STRING("AVIM");   break;
-    case MOUS:   SEND_STRING("MOUS");   break;
-    case BLIT:   SEND_STRING("BLIT");   break;
-    case TEST:   SEND_STRING("TEST");   break;
-    default:     SEND_STRING("UNKNOWN");break;
-  }
-}
-*/
-
 uint32_t layer_state_set_user(uint32_t state) {
     switch (biton32(state)) {
 
@@ -5167,43 +5139,27 @@ uint32_t layer_state_set_user(uint32_t state) {
         SEND_STRING(" [Level GHKN]; ");
         */
 
+        backlight_level(gherkinBacklightLevel);
+//        if (blitON == true) 
+//        {
+//            layer_on(BLIT);
+//        } 
+//        else
+//        {
+  //        layer_clear();    // [DANGER] I have commented this line.  Maybe it must be mandatory !
+  //        breathing_disable();
 
-
-
-
-
-//        backlight_level(gherkinBacklightLevel);
-
-
-
-
-
-
-
-
-
-//        layer_clear();    // [DANGER] I have commented this line.  Maybe it must be mandatory !
-//        breathing_disable();
-
-
-
-
-                      if (backlight_caps)
-                      {
-                        breathing_period_set(BR_CAPS);
-                        breathing_enable();
-                      }
-                      else
-                      {
-                        breathing_period_set(BR_DFLT);
-                        breathing_disable();
-                      }
-                      break;      
-
-
-
-
-
+          if (backlight_caps)
+          {
+            breathing_period_set(BR_CAPS);
+            breathing_enable();
+          }
+          else
+          {
+            breathing_period_set(BR_DFLT);
+            breathing_disable();
+          }
+//        }
         break; 
 
     case NMBR:   //  1
@@ -5290,7 +5246,41 @@ uint32_t layer_state_set_user(uint32_t state) {
 */
     }
   return state;
-}; // END OF THE PROGRAM  //
+}; 
+
+
+
+// QMK POWER tricks
+// *****************************************************************************************************
+// FOR KNOWING WHAT LAYER WE ARE AT THE MOMENT:
+/*
+        uint8_t layer = biton32(layer_state);
+void what_layer_is_this_mine(void) {
+  switch (layer) {
+    case GHKN:   SEND_STRING("GHKN");   break;
+    case SYMB:   SEND_STRING("SYMB");   break;
+    case L_XTND: SEND_STRING("L_XTND"); break;
+    case R_XTND: SEND_STRING("R_XTND"); break;
+    case PVIM:   SEND_STRING("PVIM");   break;
+    case DVIM:   SEND_STRING("DVIM");   break;
+    case NMBR:   SEND_STRING("NMBR");   break;
+    case FNCT:   SEND_STRING("FNCT");   break;
+    case APPS:   SEND_STRING("APPS");   break;
+    case SUSR:   SEND_STRING("SUSR");   break;
+    case SVIM:   SEND_STRING("SVIM");   break;
+    case XVIM:   SEND_STRING("XVIM");   break;
+    case ZVIM:   SEND_STRING("ZVIM");   break;
+    case AVIM:   SEND_STRING("AVIM");   break;
+    case MOUS:   SEND_STRING("MOUS");   break;
+    case BLIT:   SEND_STRING("BLIT");   break;
+    case TEST:   SEND_STRING("TEST");   break;
+    default:     SEND_STRING("UNKNOWN");break;
+  }
+}
+*/
+
+
+// END OF THE PROGRAM  //
 //    END OF THE PROGRAM  //
 //    END OF THE PROGRAM  //
 ////////////////////////////
