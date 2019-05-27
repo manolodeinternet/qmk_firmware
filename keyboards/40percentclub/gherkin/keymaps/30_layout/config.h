@@ -15,6 +15,75 @@
 
 //Tap Dance Prerequisite
 #define TAPPING_TERM 200
+#define PERMISSIVE_HOLD  // MODIFIED, IS IT RIGHT ???  [FIXME, please !!!]
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// 
+/*  //  P E R M I S S I V E _ H O L D
+//  https://docs.qmk.fm/#/feature_advanced_keycodes
+//
+This makes tap and hold keys (like Mod Tap) work better for fast typist, or for high TAPPING_TERM settings.
+
+If you press a Mod Tap key, 
+tap another key (press and release) and then 
+release the Mod Tap key, 
+all within the tapping term, 
+it will output the "tapping" function for both keys.
+
+For Instance:
+
+SHFT_T(KC_A) Down
+KC_X Down
+KC_X Up
+SHFT_T(KC_A) Up
+
+Normally, if you do all this within the TAPPING_TERM (default: 200ms) 
+this will be registered as     ax     by the firmware and host system. 
+With permissive hold enabled, it would registered as       X (SHIFT+x).
+//
+*/  //  p e r m i s s i v e _ h o l d
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#define IGNORE_MOD_TAP_INTERRUPT
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+/*  //  I G N O R E _ M O D _ T A P _ I N T E R R U P T
+//  https://docs.qmk.fm/#/feature_advanced_keycodes
+//
+//  manolodeinternet:
+//  This option feature enabled allows me:  fast typing over home row, who has the modifiers included in the holding tapping.
+//  I no longer get 'Ctrl+o' when I want to fast typing 'so', and so on.
+//
+Similar to Permissive Hold, this alters how the firmware processes input for fast typist. 
+If you press a Mod Tap key, press another key, release the Mod Tap key, and then release the normal key, 
+it would normally output the "tapping" function for both keys. This may not be desirable for rolling combo keys.
+
+Setting Ignore Mod Tap Interrupt requires holding both keys for the TAPPING_TERM to trigger the hold function (the mod).
+
+For Instance:
+
+SHFT_T(KC_A) Down
+KC_X Down
+SHFT_T(KC_A) Up
+KC_X Up
+
+Normally, this would send X (SHIFT+x). 
+With Ignore Mod Tap Interrupt enabled, holding both keys are required for the TAPPING_TERM to register the hold action. 
+A quick tap will output ax in this case, while a hold on both will still output X (SHIFT+x).
+
+Note: This only concerns modifiers and not layer switching keys.
+
+NOTE:
+If you have Permissive Hold enabled, as well, this will modify how both work. 
+The regular key has the modifier added if the first key is released first 
+or if both keys are held longer than the TAPPING_TERM.
+//
+*/ //   i g n o r e _ m o d _ t a p _ i n t e r r u p t
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 // Enable this in case KC_LCAP were not recognized instead of KC_CAPS

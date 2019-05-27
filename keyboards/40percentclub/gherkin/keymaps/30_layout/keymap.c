@@ -1,4 +1,4 @@
-/*                              // keymap lleno de send_string para monitorear action_function A_VOWEL.c
+/*                              // keymap lleno de send_string para monitorear action_function ACCNTD_A.c
  * PROJECT NAME: '30_layout'
  *
  * VERSION NAME: 'cleaning the code'
@@ -117,16 +117,23 @@
 // #define ALL_MODS    (MOD_BIT(KC_LSFT)|MOD_BIT(KC_LCTL)|MOD_BIT(KC_LALT)|MOD_BIT(KC_LGUI))
 // [inspiringcode]
 #define LSHIFT_MODS (MOD_BIT(KC_LSHIFT))
+#define LGUI_MODS   (MOD_BIT(KC_LGUI))
 
-#define A_VOWEL 0
-#define E_VOWEL 1
-#define I_VOWEL 2
-#define O_VOWEL 3
-#define U_VOWEL 4
-#define N_TILDE 5
-#define RXTND_CAPS 6
+#define ACCNTD_A    0
+#define ACCNTD_E    1
+#define ACCNTD_I    2
+#define ACCNTD_O    3
+#define ACCNTD_U    4
 
+#define TILDED_N    5
 
+#define DIAERS_A    6
+#define DIAERS_E    7
+#define DIAERS_I    8
+#define DIAERS_O    9
+#define DIAERS_U   10
+
+#define RXTND_CAPS 11
 
 
 
@@ -134,42 +141,36 @@
 //
 // [UNDERSTANDING]
 // FOR ACCESING LAYERS FROM KEYMAP 'LT(LAYER, KC)', NUMBER LAYER MUST BE BETWEEN 0 AND 15
-#define ALPH   0  // 0 gherkin ALPHAS           layer // must be       layer number  0
-#define LYRS   1  // 0 gherkin LAYERS           layer // must be       layer number  0
-#define SYMB   3  // 1 symbols                  layer // must be under layer number 16
-#define L_XTND 5  // 2 LEFT  extended   default layer // must be under layer number 16
-#define R_XTND 6  // 3 RIGHT extended   default layer // must be under layer number 16
-#define PVIM   9  // 4 Personal             VIM layer // must be under layer number 16
-#define DVIM  10  // 5 Delete               VIM layer // must be under layer number 16
-
+#define ALPH   0  //  gherkin ALPHAS DEFAULT    layer 
+#define ACCN   1  //  gherkin ACCENTS           layer 
+#define RSET   2  //  gherkin RESET & diaereis  layer
+#define NMBR   3  //  gherkin numbers           layer 
+#define SYMB   4  //  gherkin symbols           layer 
+#define FNCT   5  //  gherkin functions         layer 
+#define L_XT   6  //  gherkin LEFT extended     layer 
+//#define R_XT   6  //  RIGHT extended          layer
+#define APPS   7  // 18 apps                    layer
+#define SUSR   8  // 19 SUPER USER productivity layer
+#define PVIM   9  // 4 Personal             VIM layer
+#define DVIM  10  // 5 Delete               VIM layer
+   
 // BUT YOU IN ADDITION TO USING LAYERS AMONG 0...15, YOU CAN USE LAYERS AMONG 16...31 IF... 
 // ...YOU AREN'T GOING TO ACCESS THEM FROM KEYMAP, BUT CODE, USING 'layer_on(LAYER)', 'layer_off(LAYER)'
-#define NMBR   2  // 16 numbers                 layer // I can change it to 15...31 layer's interval
-#define FNCT   4  // 17 functions & extended f. layer // I can change it to 15...31 layer's interval
-#define APPS   7  // 18 apps                    layer // I can change it to 15...31 layer's interval
-#define SUSR   8  // 19 SUPER USER productivity layer // I can change it to 15...31 layer's interval
+
 /*
 #define SVIM  10  // 20 Select              VIM layer // I can change it to 15...31 layer's interval
+We don't use SVIM because we use instead: 'SHIFT' for getting the same result, but easier and clearer !!!
 */
-#define XVIM  11  // 21 eXtra               VIM layer // I can change it to 15...31 layer's interval
-#define ZVIM  12  // 22 Z extra             VIM layer // I can change it to 15...31 layer's interval
-#define AVIM  13  // 23 Alignment           VIM layer // I can change it to 15...31 layer's interval
+
+#define ZVIM  11  // 21 eXtra               VIM layer // I can change it to 15...31 layer's interval
+#define XVIM  12  // 23 Alignment           VIM layer // I can change it to 15...31 layer's interval
+#define CVIM  13  // 22 Z extra             VIM layer // I can change it to 15...31 layer's interval
 #define MOUS  14  // 24 mouse                   layer // I can change it to 15...31 layer's interval
 #define BLIT  15  // 25 backlight               layer // I can change it to 15...31 layer's interval
 #define TEST  31  // 31 LAYER FOR TRYING AND TESTING  // must be over layer number 15
 // [understanding]
 //
 // defining layers
-
-
-
-
-    
-
-
-
-
-
 
 
 
@@ -193,7 +194,9 @@
 #define BL_VIM   6
 #define BL_PVIM  8
 #define BL_APPS 10
+/*
 #define BL_SVIM 10
+*/
 #define BL_MOUS 10
 #define BL_SYMB 11
 #define BL_DVIM 15
@@ -212,6 +215,8 @@
 #define BR_DFLT  6
 
 // DEFINING SYMBOLS
+#define SYM_CIRC               LSFT(KC_6)  // circumflex symbol
+#define SYM_DOLL               LSFT(KC_4)  // dollar symbol
 #define SYM_EURO         LSFT(LALT(KC_2))  // euro symbol
 #define SYM_QUES            LSFT(KC_SLSH)  // question mark
 #define SYM_I_QU      LSFT(LALT(KC_SLSH))  // inverted question mark
@@ -228,13 +233,16 @@
 
 #define SPT_SIRI             LGUI(KC_SPC)  // spotlight & siri
 
-#define     DESK                    KC_F5
+#define AUTCOMPL                    KC_F5  // autocompletion
+#define     DESK                    KC_F6  // show desktop
 #define APP_WIND            LCTL(KC_DOWN)  // applications windows
 #define MISS_CTL              LCTL(KC_UP)  // mission control
-#define    SPEAK   LCTL(LALT(LGUI(KC_H)))
+#define    SPEAK               LCAG(KC_H)  // start/stop to speak selected text 
+                                                //or all the text if any is selected
+                                                //Hold Left Control, Alt and GUI and press kc
 #define  LNCHPAD                   KC_F17  // F17 (set at 'System Preferences/Keyboard/Shortcuts/Launchpad&Doc')
 #define  DASHBRD                   KC_F18
-#define ACTV_WIN              LCTL(KC_F4)  //   active window
+#define ACTV_WIN              LCTL(KC_F4)  // active window
 #define FLOA_WIN              LCTL(KC_F6)  // floating window
 
 #define REOPEN_L         LSFT(LGUI(KC_T))  // reopen last closed window/tab
@@ -252,6 +260,19 @@
 
 // DEFINING SUSR COMMANDS
 #define LCK_SCR          LCTL(LGUI(KC_Q))   //LOCK SCREEN (ask for pasword screen)
+#define SLEP_MNUBAR      TD(SLEP_M)
+#define KILMNU_DOCK      TD(KILM_D)
+#define KILAP_TOLBR      TD(KILA_T)
+#define SHUTD_STATB      TD(SHUT_S)
+#define RSTRT_FLOAT      TD(RSTT_F)
+#define ZOOM_FOLLOW      LCAG(KC_SLSH)             //Hold Left Control, Alt and GUI and press kc
+#define ZOOM_ON_OFF      LCAG(KC_SCLN)
+#define ZOOM_IN          LCAG(KC_EQL)
+#define ZOOM_OUT         LCAG(KC_MINS)
+#define ZOOM_SMOOTH      LCAG(KC_BSLS)
+#define INVERT_COLOR     LSFT(LCTL(LGUI(KC_8)))
+#define CONTRST_UP       LCAG(KC_DOT)              //Hold Left Control, Alt and GUI and press kc
+#define CONTRST_DOWN     LCAG(KC_COMM)
 // defining susr commands
 
 // SUBLIME COMMANDS
@@ -279,24 +300,24 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 
 
   enum tap_dance_states { // EACH ONE RECEIVE ITS VALUE...
-   SINGLE_TAP           = 1,
-   SINGLE_HOLD          = 2,
-   DOUBLE_TAP           = 3,
-   DOUBLE_HOLD          = 4,
-   DOUBLE_SINGLE_TAP    = 5, //send SINGLE_TAP twice - NOT DOUBLE_TAP
-   TRIPLE_TAP           = 6,
-   TRIPLE_HOLD          = 7,
-   TRIPLE_SINGLE_TAP    = 8,
-   QUADRUPLE_TAP        = 9,
-   QUADRUPLE_HOLD       = 10,
-   QUADRUPLE_SINGLE_TAP = 11,
-   QUINTUPLE_TAP        = 12,
-   QUINTUPLE_HOLD       = 13,
-   QUINTUPLE_SINGLE_TAP = 14,
-   SEXTUPLE_TAP         = 15,
-   SEXTUPLE_HOLD        = 16,
-   SEXTUPLE_SINGLE_TAP  = 17
-   // Add more enums here if you want for sevenfold, eightfold], etc.
+    SINGLE_TAP           = 1
+   ,SINGLE_HOLD          = 2
+   ,DOUBLE_TAP           = 3
+   ,DOUBLE_HOLD          = 4
+   ,DOUBLE_SINGLE_TAP    = 5 //send SINGLE_TAP twice - NOT DOUBLE_TAP
+   ,TRIPLE_TAP           = 6
+   ,TRIPLE_HOLD          = 7
+   ,TRIPLE_SINGLE_TAP    = 8
+   ,QUADRUPLE_TAP        = 9
+   ,QUADRUPLE_HOLD       = 10
+   ,QUADRUPLE_SINGLE_TAP = 11
+   ,QUINTUPLE_TAP        = 12
+   ,QUINTUPLE_HOLD       = 13
+   ,QUINTUPLE_SINGLE_TAP = 14
+   ,SEXTUPLE_TAP         = 15
+   ,SEXTUPLE_HOLD        = 16
+   ,SEXTUPLE_SINGLE_TAP  = 17
+ // Add more enums here if you want for sevenfold, eightfold], etc.
  };
  // [TRANSLATION]
  //
@@ -326,18 +347,22 @@ enum tap_dance_keycodes { // IT BEGINS BY 0...
 */
 
 //   ACCESIBLE FROM LAYER LYRS #1
-     Q_P_SU_TB = 0  // *super user layer  // **tab
-    ,W_O_APP    // *multiapps & **apps layer
+
+/*
+     Q_P_APP = 0    // *multiapps & **apps layer
+
+    ,W_O_SU_BL  // *super user layer  // **tab
 
     ,A_SH_CP    // capslock  // *shift
     ,SP_SH_CP   // capslock  // *shift
-
-    ,LY_NMB     // *numbers layer
+*/
+//    ,LY_NMB     // *numbers layer
 //   accesible from layer lyrs #1
 
-
+/*
     ,R_AC_RE // left  accents trigger    // ... ***RESET                           // V_ACCE -> R_AC_RE
     ,U_ACCE  // right accents trigger                                              // M_ACCE -> U_ACCE
+*/
 
 /*
     ,A_CAPS  //                          // ... **caps lock
@@ -352,12 +377,16 @@ enum tap_dance_keycodes { // IT BEGINS BY 0...
     ,H_SYMB  //           symbols layer
 */
 //    ,B_NMBR  //           numbers layer
+/*    
     ,N_LYRS  //           numbers layer  // ... **tilde for building a 'tilded n'
     ,B_LYRS  //           numbers layer  // ... **tilde for building a 'tilded n'
-    ,X_DVIM
-    ,V_PVIM
+*/
+
+//    ,X_DVIM
+//    ,V_PVIM
 
 // F_ALPH,
+/*
  ,G_NMBR
  ,H_LYRS
  ,T_SYMB
@@ -366,6 +395,7 @@ enum tap_dance_keycodes { // IT BEGINS BY 0...
  ,Z_ALPH
 // N_NMBR,
  ,EN_ALPH
+*/
 
 /*
 OLD TAP_DANCE ON ALPHA: 
@@ -383,8 +413,8 @@ NEW TAP_DANCE ON ALPHA:
 * EN_ALPH
 
 NEW TAP_DANCE ON LAYERS: 
-* Q_P_SU_TB
-* W_O_APP
+* W_O_SU_BL
+* Q_P_APP
 * A_SH_CP
 * SP_SH_CP
 * LY_NMB
@@ -398,21 +428,23 @@ NEW TAP_DANCE ON LAYERS:
 
 
 // TAP DANCE KEYCODES ACCESSIBLE FROM *NMBR (NUMBERS LAYER)
-    ,TRIP_0  //                          // ...  *  space / **          000
+TRIP_0  //                          // ...  *  space / **          000
     ,DOUB_0  //                          // ...  * delete / **           00
 //  ,SING_0  //                          // ...  *      0 / ** percentaje %
     ,DONMBR  //   return to *GHKN layer (gherkin default layer)  // ... dot
     ,SLNMBR  //   return to *GHKN layer (gherkin default layer)  // ... slash
 
 // TAP DANCE KEYCODES ACCESSIBLE FROM *SYMB (SYMBOLS LAYER)
-    ,BSL_CI  // backslash & circumflex accent
-    ,QUOT_D  //     quote & double quote
-    ,DO_EUR  //     dolar & euro
-    ,EXCLAM  // american exclamation mark & inverted exclamation mark
-    ,QUESTI  // american    question mark & inverted    question mark
+    ,Y_AMCI  // ampersand & circumflex accent
+
+//    ,W_QUOT  //     quote & double quote
+    ,G_DOEU  //     dolar & euro
+
+    ,Z_EXCL
+    ,X_QUES
 
 // TAP DANCE KEYCODES FOR ACCENTS, ACCESSIBLE FROM *GHKN (GHERKIN DEFAULT LAYER)
-    ,J_ACUT  // acute / grave accent  'á' / 'à'
+//    ,J_ACUT  // acute / grave accent  'á' / 'à'
 
 // TAP DANCE KEYCODES FOR *SUSR (SUPER USER LAYER)
     ,LOGOUT   // logout user session
@@ -423,20 +455,29 @@ NEW TAP_DANCE ON LAYERS:
     ,SHUT_S   // status bar / (on hold) COMPUTER SHUT DOWN
     ,RSTT_F   // floating w / (on hold) COMPUTER   RESTART
 
-// TAP DANCE BACKLIGHT
-    ,BCKLIT   // accessing *BCKLIT layer from tap dance in *GHKN layer instead of *SUSR layer
+    ,RC_RWND // right control / rewind
+    ,RA_PLAY // right alt     / play/pause
+    ,RG_FRWD // right gui     / forward
 
-// TAP DANCE FOR UNFOLDING KEYS INTO TWO FUNCTIONS IN *?VIM LAYERS
-    ,SX_VIM                                                                 // NEW
-    ,DA_VIM                                                                 // NEW
-    ,MOU_ZV  //      SVIM or ZVIM layer                                     // NEW: SZ_VIM -> MOU_ZV  
+    ,RG_ZOOM // right gui     / zoom on/off
+    ,RA_ZOIN // right alt     / zoom in
+    ,RC_ZOUT // right control / zoom out
+    ,RS_INCO // right shift   / invert colors
+
+// TAP DANCE BACKLIGHT
+//    ,BCKLIT   // accessing *BCKLIT layer from tap dance in *GHKN layer instead of *SUSR layer
+
+// TAP DANCE FOR UNFOLDING KEYS INTO TWO FUNCTIONS IN *ZVIM LAYERS
+//    ,SX_VIM                                                                 // NEW
+//    ,DA_VIM                                                                 // NEW
+//    ,MOU_ZV  //      SVIM or CVIM layer                                     // NEW: SZ_VIM -> MOU_ZV  
 
 // (i.e. KC_U: *'begin of line'/**'begin of paragraph')
-    ,PVIM_uU ,PVIM_pP
+    ,PVIM_uU ,PVIM_iI ,PVIM_oO ,PVIM_pP
 
     ,DVIM_uU ,DVIM_pP
 
-    ,SVIM_uU ,SVIM_pP
+//    ,SVIM_uU ,SVIM_pP
 
 // TAP DANCE FOR FUNCIONS
 
@@ -446,11 +487,20 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
      BLIT_OFF = SAFE_RANGE
 
+// MACROS for ACCNT layer
+    ,CIRCU_RQ ,GRAVE_RQ ,DIAER_RQ 
+// macros for accnt layer
+
+// MACROS for SUSR layer
+    ,VOL_1
+    ,VOL_8
+    ,BRIGHT_1
+// macros for susr layer
 
 // MACROS for APPS layer
-    ,APP_Q_QQQQQ ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI ,APP_Y_TYPIN ,APP_U_UUUUU ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF 
-    ,APP_A_SNOTE ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
-    ,APP_Z_STUDI ,APP_X_XXXXX ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BBBBB ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB   
+    ,APP_Q_QQQQQ ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI ,APP_Y_TYPIN ,APP_U_SUBLI ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF 
+    ,APP_A_SNOTE ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME ,APP_H_SKTCH ,APP_J_JJJJJ ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
+    ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BOOKS ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB   
 // macros for apps layer
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -467,7 +517,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,BRTH_01 ,BRTH_02 ,BRTH_03 ,BRTH_04 ,BRTH_05
     ,BRTH_06 ,BRTH_07 ,BRTH_08 ,BRTH_09 ,BRTH_10
              ,BRTH_12                   ,BRTH_15
-// macros for blit
+// macros for BLIT
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -486,20 +536,20 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,DVIM_H ,DVIM_J ,DVIM_K  ,DVIM_L  ,DVIM_SP
             ,DVIM_M ,DVIM_ES ,DVIM_BS ,DVIM_EN
 
-    ,SVIM_Y                                    // it's used tap_dance for U,P
-    ,SVIM_N
+//    ,SVIM_Y                                    // it's used tap_dance for U,P
+//    ,SVIM_N
 
-    ,XVIM_Y ,XVIM_U ,XVIM_I           ,XVIM_P
-    ,XVIM_H ,XVIM_J ,XVIM_K  ,XVIM_L  ,XVIM_SP
-    ,XVIM_N ,XVIM_M ,XVIM_ES ,XVIM_BS ,XVIM_EN
-
-    ,ZVIM_Y ,ZVIM_U                   ,ZVIM_P
+    ,ZVIM_Y ,ZVIM_U ,ZVIM_I           ,ZVIM_P
     ,ZVIM_H ,ZVIM_J ,ZVIM_K  ,ZVIM_L  ,ZVIM_SP
-    ,ZVIM_N
+    ,ZVIM_N ,ZVIM_M ,ZVIM_ES ,ZVIM_BS ,ZVIM_EN
 
-    ,AVIM_Y ,AVIM_U ,AVIM_I  ,AVIM_O  ,AVIM_P
-    ,AVIM_H ,AVIM_J                   ,AVIM_SP
-    ,AVIM_N ,AVIM_M ,AVIM_ES
+    ,CVIM_Y ,CVIM_U                   ,CVIM_P
+    ,CVIM_H ,CVIM_J ,CVIM_K  ,CVIM_L  ,CVIM_SP
+    ,CVIM_N
+
+    ,XVIM_Y ,XVIM_U ,XVIM_I  ,XVIM_O  ,XVIM_P
+    ,XVIM_H ,XVIM_J                   ,XVIM_SP
+    ,XVIM_N ,XVIM_M ,XVIM_ES
 
 }; // enum custom keycodes
 
@@ -507,6 +557,8 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 // GLOBAL VARIABLES
 
   static uint8_t shift_flag;
+  static uint8_t gui_flag;
+  static bool    hide_other_apps = false;
 //  static uint8_t shift_flag_tmp;
 
    bool  left_shift_pressed  = false;
@@ -631,17 +683,13 @@ void dvim(char *key)
     send_string(key);
 }
 
+/*
 void svim(char *key)
 {
     SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"s");
     send_string(key);
 }
-
-void xvim(char *key)
-{
-    SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"x");
-    send_string(key);
-}
+*/
 
 void zvim(char *key)
 {
@@ -649,7 +697,13 @@ void zvim(char *key)
     send_string(key);
 }
 
-void avim(char *key)
+void cvim(char *key)
+{
+    SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"x");
+    send_string(key);
+}
+
+void xvim(char *key)
 {
     SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"a");
     send_string(key);
@@ -814,36 +868,40 @@ void Q_SUSR_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /*                                                                                      */
-/* [LYRS] - [TAPDANCE] - KC_Q, KC_P :   S U _ T B  -  SUPER USER LAYER  -  TAB         */
+/* [LYRS] - [TAPDANCE] - KC_W, KC_O :   SUPER USER LAYER  -  BLIT LAYER                 */
 /*                                                                                      */
-/*  KC_Q, KC_P:   [Q_P_SU_TB]  -  TAB                                                   */
+/*  KC_W, KC_O:   [SUSR]  -  [BLIT]                                                   */
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'Q_P_SU_TB' tap dance.
-static tap Q_P_SU_TB_tap_state = {
+//instantalize an instance of 'tap' for the 'W_O_SU_BL' tap dance.
+
+/*
+static tap W_O_SU_BL_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void Q_P_SU_TB_finished (qk_tap_dance_state_t *state, void *user_data) {
-  Q_P_SU_TB_tap_state.state = cur_dance(state);
-  switch (Q_P_SU_TB_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_TAB);         break;
+void W_O_SU_BL_finished (qk_tap_dance_state_t *state, void *user_data) {
+  W_O_SU_BL_tap_state.state = cur_dance(state);
+  switch (W_O_SU_BL_tap_state.state) {
+
     case SINGLE_HOLD:       layer_on(SUSR);                break;
     case DOUBLE_HOLD:       layer_on(BLIT);                break;
   }
 }
 
-void Q_P_SU_TB_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (Q_P_SU_TB_tap_state.state) {
-    case SINGLE_TAP:        unregister_code(KC_TAB);         break;
+void W_O_SU_BL_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (W_O_SU_BL_tap_state.state) {
+
     case SINGLE_HOLD:       layer_off(SUSR);                 break;
     case DOUBLE_HOLD:       layer_off(BLIT);                 break;
   }
-  Q_P_SU_TB_tap_state.state = 0;
+  W_O_SU_BL_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
-/* [lyrs] - [tapdance] - kc_q, kc_p :   s u _ t b  -  super user layer  -  tab          */
+/* [lyrs] - [tapdance] - kc_w, kc_o :   super user layer  -  blit layer                 */
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -896,36 +954,41 @@ void W_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /*                                                                                      */
-/* [LYRS] - [TAPDANCE] - KC_W, KC_O :   A P P S,   M A P S                              */
+/* [LYRS] - [TAPDANCE] - KC_Q, KC_P :   A P P S,   T A B    (MAPS on ALPH layer)        */
 /*                                                                                      */
-/*  KC_W, KC_O:   [APPS]  -  [MAPS]                                                     */
+/*  KC_Q, KC_P:   [APPS]  -  [MAPS on ALPH layer]   -   TAB                             */
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'W_O_APP' tap dance.
-static tap W_O_APP_tap_state = {
+//instantalize an instance of 'tap' for the 'Q_P_APP' tap dance.
+
+/*
+static tap Q_P_APP_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void W_O_APP_finished (qk_tap_dance_state_t *state, void *user_data) {
-  W_O_APP_tap_state.state = cur_dance(state);
-  switch (W_O_APP_tap_state.state) {
+void Q_P_APP_finished (qk_tap_dance_state_t *state, void *user_data) {
+  Q_P_APP_tap_state.state = cur_dance(state);
+  switch (Q_P_APP_tap_state.state) {
 
-    case SINGLE_HOLD:        
-    case DOUBLE_HOLD:        layer_on(APPS);      break;
+    case SINGLE_TAP:         register_code(KC_TAB); break;
+    case SINGLE_HOLD:        layer_on(APPS);        break;
   }
 }
 
-void W_O_APP_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (W_O_APP_tap_state.state) {
+void Q_P_APP_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (Q_P_APP_tap_state.state) {
 
-    case DOUBLE_HOLD:        HIDEOTH;
-    case SINGLE_HOLD:        layer_off(APPS);       break;
+    case SINGLE_TAP:         unregister_code(KC_TAB); break;
+    case SINGLE_HOLD:        HIDEOTH;
+                             layer_off(APPS);         break;
   }
-  W_O_APP_tap_state.state = 0;
+  Q_P_APP_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
-/* [lyrs] - [tapdance] - kc_w, kc_o :   a p p s,   m a p s                              */
+/* [lyrs] - [tapdance] - kc_q, kc_p :   a p p s,   t a b    (maps on alph layer)        */
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -974,6 +1037,8 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 }  // reset my keyboard function
 
 //instantalize an instance of 'tap' for the 'R_AC_RE' tap dance.
+
+/*
 static tap R_AC_RE_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -1024,6 +1089,8 @@ void R_AC_RE_reset(qk_tap_dance_state_t* state, void* user_data) {
     }
     R_AC_RE_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [alph] - [tapdance] - kc_r :   r  -  acute, diaereis, grave, circumflex  -  reset    */
 /*                                                                                      */
@@ -1041,6 +1108,8 @@ void R_AC_RE_reset(qk_tap_dance_state_t* state, void* user_data) {
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'U_ACCE' tap dance.
+
+/*
 static tap U_ACCE_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -1051,7 +1120,7 @@ void U_ACCE_finished(qk_tap_dance_state_t* state, void* user_data) {
 
   switch (U_ACCE_tap_state.state) {
 
-    case SINGLE_TAP:        action_function(NULL, U_VOWEL, U_VOWEL);
+    case SINGLE_TAP:        action_function(NULL, ACCNTD_U, ACCNTD_U);
                             break;
 
     case TRIPLE_TAP: 
@@ -1090,6 +1159,8 @@ void U_ACCE_reset(qk_tap_dance_state_t* state, void* user_data) {
     }
     U_ACCE_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [alph] - [tapdance] - kc_u :   u  -  acute, diaereis, grave, circumflex              */
 /*                                                                                      */
@@ -1115,7 +1186,7 @@ void O_APPS_finished (qk_tap_dance_state_t *state, void *user_data) {
   O_APPS_tap_state.state = cur_dance(state);
   switch (O_APPS_tap_state.state) {
 
-    case SINGLE_TAP:        action_function(NULL, O_VOWEL, O_VOWEL); break;
+    case SINGLE_TAP:        action_function(NULL, ACCNTD_O, ACCNTD_O); break;
 
     case DOUBLE_TAP:
     case DOUBLE_SINGLE_TAP: register_code(KC_O); 
@@ -1215,8 +1286,8 @@ void A_CAPS_finished (qk_tap_dance_state_t *state, void *user_data) {
     A_CAPS_tap_state.state = cur_dance(state);
    // shift_flag = get_mods()&LSHIFT_MODS;  // ✳️ shift_flag is moved at the very beginning of (action_function)
   switch (A_CAPS_tap_state.state) {
-    case SINGLE_TAP:        // SEND_STRING("\ncalling action_function with: NULL, A_VOWEL, A_VOWEL\n");
-                            action_function(NULL, A_VOWEL, A_VOWEL);
+    case SINGLE_TAP:        // SEND_STRING("\ncalling action_function with: NULL, ACCNTD_A, ACCNTD_A\n");
+                            action_function(NULL, ACCNTD_A, ACCNTD_A);
                             break;
     case SINGLE_HOLD:       left_shift_pressed = true;
                             register_code(KC_LSFT); 
@@ -1281,6 +1352,7 @@ void A_CAPS_reset (qk_tap_dance_state_t *state, void *user_data) {
 // ************************************************************************************ //
 //instantalize an instance of 'tap' for the 'Z_ALPH' tap dance.
 
+/*
 static tap Z_ALPH_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -1320,6 +1392,8 @@ void Z_ALPH_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   Z_ALPH_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [alph] - [tapdance] - kc_z :   z   -   l _ s h i f t   -   kc_z                      */
 /*                                                                                      */
@@ -1340,6 +1414,7 @@ void Z_ALPH_reset (qk_tap_dance_state_t *state, void *user_data) {
 // ************************************************************************************ //
 //instantalize an instance of 'tap' for the 'EN_ALPH' tap dance.
 
+/*
 static tap EN_ALPH_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -1384,6 +1459,7 @@ void EN_ALPH_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   EN_ALPH_tap_state.state = 0;
 }
+*/
 
 /*                                                                                      */
 /* [alph] - [tapdance] - kc_en :   enter   -   l _ s h i f t                            */
@@ -1406,6 +1482,8 @@ void EN_ALPH_reset (qk_tap_dance_state_t *state, void *user_data) {
 /*                                                                                      */
 // ************************************************************************************ //
 //instantalize an instance of 'tap' for the 'A_SH_CP' tap dance.
+
+/*
 static tap A_SH_CP_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -1439,6 +1517,8 @@ void A_SH_CP_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   A_SH_CP_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [lyrs] - [tapdance] - kc_a :   s h i f t   -   c a p s l o c k                       */
 /*                                                                                      */
@@ -1458,6 +1538,8 @@ void A_SH_CP_reset (qk_tap_dance_state_t *state, void *user_data) {
 /*                                                                                      */
 // ************************************************************************************ //
 //instantalize an instance of 'tap' for the 'SP_SH_CP' tap dance.
+
+/*
 static tap SP_SH_CP_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -1491,6 +1573,8 @@ void SP_SH_CP_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   SP_SH_CP_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [lyrs] - [tapdance] - kc_sp :   s h i f t   -   c a p s l o c k                      */
 /*                                                                                      */
@@ -1983,6 +2067,8 @@ void B_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'LY_NMB' tap dance.
+
+/*
 static tap LY_NMB_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -2000,11 +2086,11 @@ void LY_NMB_finished (qk_tap_dance_state_t *state, void *user_data) {
                   //      breathing_enable();
                         break;
 
-/*    case DOUBLE_HOLD:// SET [NMBR] ON
-                        layer_on(NMBR);
-                        breathing_period_set(BR_NMBR);
-                        breathing_enable();
-                        break; */
+//    case DOUBLE_HOLD:// SET [NMBR] ON
+//                        layer_on(NMBR);
+//                        breathing_period_set(BR_NMBR);
+//                        breathing_enable();
+//                        break; 
   }
 }
 
@@ -2024,23 +2110,25 @@ void LY_NMB_reset (qk_tap_dance_state_t *state, void *user_data) {
                       layer_off(NMBR);
                       break;      
 
-/*    case SINGLE_HOLD:// Return to [NMBR] OFF
-                        layer_off(NMBR);
-                        breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was selected ...
-                        breathing_enable();
+//    case SINGLE_HOLD:// Return to [NMBR] OFF
+//                        layer_off(NMBR);
+//                        breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was selected ...
+//                        breathing_enable();
 
-                        if (!backlight_caps)        // if CAPS_LOCK was NOT set out before [NMBR] was selected ...
-                        {
-                          breathing_period_set(BR_DFLT);
-                          breathing_disable();
-                        };
-                        break; */
+//                        if (!backlight_caps)        // if CAPS_LOCK was NOT set out before [NMBR] was selected ...
+//                        {
+//                          breathing_period_set(BR_DFLT);
+//                          breathing_disable();
+//                        };
+//                        break; 
 
     case DOUBLE_HOLD:// I left it intentionally empty for allowing 'SET [NMBR] ON' works properly
                         break;
   }
   LY_NMB_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [tapdance] [lyrs] kc_b, kc_n  -   n _ n m b r s   -   kc_b, kc_n                     */
 /*                                                                                      */
@@ -2062,6 +2150,7 @@ void LY_NMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 //instantalize an instance of 'tap' for the 'T_SYMB' tap dance.
 
 
+/*
 static tap T_SYMB_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -2092,20 +2181,19 @@ void T_SYMB_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP:        
     case DOUBLE_SINGLE_TAP: unregister_code(KC_T); break;
 
-/*
-    case SINGLE_HOLD: if (backlight_caps)
-                      {
-                        breathing_period_set(BR_CAPS);
-                        breathing_enable();
-                      }
-                      else
-                      {
-                        breathing_period_set(BR_DFLT);
-                        breathing_disable();
-                      }
-                      layer_clear();
-                      break;
-*/
+
+//    case SINGLE_HOLD: if (backlight_caps)
+//                      {
+//                        breathing_period_set(BR_CAPS);
+//                        breathing_enable();
+//                      }
+//                      else
+//                      {
+//                        breathing_period_set(BR_DFLT);
+//                        breathing_disable();
+//                      }
+//                      layer_clear();
+//                      break;
 
     case SINGLE_HOLD:// Return to [SYMB] OFF
                         layer_off(SYMB);
@@ -2122,6 +2210,7 @@ void T_SYMB_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   T_SYMB_tap_state.state = 0;
 }
+*/
 
 /*                                                                                      */
 /* [tapdance] kc_t  -  t _ s y m b  -  kc_t                                             */
@@ -2142,6 +2231,7 @@ void T_SYMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
+/*
 static tap Y_SYMB_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -2172,20 +2262,19 @@ void Y_SYMB_reset (qk_tap_dance_state_t *state, void *user_data) {
     case DOUBLE_TAP:        
     case DOUBLE_SINGLE_TAP: unregister_code(KC_Y); break;
 
-/*
-    case SINGLE_HOLD: if (backlight_caps)
-                      {
-                        breathing_period_set(BR_CAPS);
-                        breathing_enable();
-                      }
-                      else
-                      {
-                        breathing_period_set(BR_DFLT);
-                        breathing_disable();
-                      }
-                      layer_clear();
-                      break;      
-*/
+//    case SINGLE_HOLD: if (backlight_caps)
+//                      {
+//                        breathing_period_set(BR_CAPS);
+//                        breathing_enable();
+//                      }
+//                      else
+//                      {
+//                        breathing_period_set(BR_DFLT);
+//                        breathing_disable();
+//                      }
+//                      layer_clear();
+//                      break;      
+//
     case SINGLE_HOLD:// Return to [SYMB] OFF
                         layer_off(SYMB);
                         breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
@@ -2201,6 +2290,7 @@ void Y_SYMB_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   Y_SYMB_tap_state.state = 0;
 }
+*/
 
 /*                                                                                      */
 /* [tapdance] kc_y  -  y _ s y m b  -  kc_y                                             */
@@ -2220,6 +2310,8 @@ void Y_SYMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'G_NMBR' tap dance.
+
+/*
 static tap G_NMBR_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -2271,6 +2363,8 @@ void G_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   G_NMBR_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [alph] - [tapdance] - kc_g :     kc_g   -   g _ n m b r s                            */
 /*                                                                                      */
@@ -2289,6 +2383,8 @@ void G_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'H_LYRS' tap dance.
+
+/*
 static tap H_LYRS_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -2335,21 +2431,23 @@ void H_LYRS_reset (qk_tap_dance_state_t *state, void *user_data) {
                       }
                       layer_off(LYRS);
                       break;      
-/* case SINGLE_HOLD:// Return to [SYMB] OFF
-                        layer_off(SYMB);
-                        breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
-                        breathing_enable();
-
-                        if (!backlight_caps)        // if CAPS_LOCK was NOT set out before [NMBR] was fixed ...
-                        {
-                          breathing_period_set(BR_DFLT);
-                          breathing_disable();
-                        };
-                        break; */
+// case SINGLE_HOLD:// Return to [SYMB] OFF
+//                        layer_off(SYMB);
+//                        breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
+//                        breathing_enable();
+//
+//                        if (!backlight_caps)        // if CAPS_LOCK was NOT set out before [NMBR] was fixed ...
+//                        {
+//                          breathing_period_set(BR_DFLT);
+//                          breathing_disable();
+//                        };
+//                        break;
     case DOUBLE_HOLD: release_capslock(); break;
   }
   H_LYRS_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [alph] - [tapdance] - kc_h :     kc_h   -   h _ l y r s                              */
 /*                                                                                      */
@@ -2383,7 +2481,7 @@ void N_NMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
   N_NMBR_tap_state.state = cur_dance(state);
   switch (N_NMBR_tap_state.state) {
     case SINGLE_TAP:    
-                        action_function(NULL, N_TILDE, N_TILDE); break;
+                        action_function(NULL, TILDED_N, TILDED_N); break;
 
     case SINGLE_HOLD:// SWITCH temporarily [NMBR] ON
     case DOUBLE_HOLD: 
@@ -2481,6 +2579,8 @@ void N_NMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'B_LYRS' tap dance.
+
+/*
 static tap B_LYRS_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -2529,6 +2629,8 @@ void B_LYRS_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   B_LYRS_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [alph] - [tapdance] - kc_b :   kc_b   -   l a y e r s                                */
 /*                                                                                      */
@@ -2548,6 +2650,8 @@ void B_LYRS_reset (qk_tap_dance_state_t *state, void *user_data) {
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'N_LYRS' tap dance.
+
+/*
 static tap N_LYRS_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -2559,7 +2663,7 @@ void N_LYRS_finished (qk_tap_dance_state_t *state, void *user_data) {
 
     case SINGLE_HOLD:       layer_on(LYRS); break;
 
-    case SINGLE_TAP:        action_function(NULL, N_TILDE, N_TILDE); break;
+    case SINGLE_TAP:        action_function(NULL, TILDED_N, TILDED_N); break;
 
     case DOUBLE_TAP:
     case DOUBLE_SINGLE_TAP: register_code(KC_N); unregister_code(KC_N);
@@ -2599,6 +2703,8 @@ void N_LYRS_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   N_LYRS_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [alph] - [tapdance] - kc_n :   kc_n   -   l a y e r s   -   ññ                       */
 /*                                                                                      */
@@ -2619,6 +2725,8 @@ void N_LYRS_reset (qk_tap_dance_state_t *state, void *user_data) {
 /*  KC_X:  xX   -   xxXX   -   [DVIM] toggle layer                                      */
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
+
+/*
 //instantalize an instance of 'tap' for the 'X_DVIM' tap dance.
 static tap X_DVIM_tap_state = {
   .is_press_action = true,
@@ -2666,6 +2774,8 @@ void X_DVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   X_DVIM_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [alph] - [tapdance] - kc_x :   kc_x   -   x _ d v i m                                */
 /*                                                                                      */
@@ -2687,6 +2797,8 @@ void X_DVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'V_PVIM' tap dance.
+
+/*
 static tap V_PVIM_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -2736,6 +2848,8 @@ void V_PVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
   }
   V_PVIM_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [alph] - [tapdance] - kc_v :   kc_v   -   v _ p v i m                                */
 /*                                                                                      */
@@ -2744,201 +2858,11 @@ void V_PVIM_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
 //           T A P   D A N C E    F O R  - ( S Y M B O L S     L A Y E R ) -            //
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-//           B A C K S L A S H     - ( S Y M B O L ) -    C I R C U M F L E X           //
-//instantalize an instance of 'tap' for the 'BSL_CI' tap dance.
-static tap BSL_CI_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void BSL_CI_finished (qk_tap_dance_state_t *state, void *user_data) {
-  BSL_CI_tap_state.state = cur_dance(state);
-  switch (BSL_CI_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_BSLS); break;
-
-    case SINGLE_HOLD:       
-    case DOUBLE_TAP:        register_code(KC_LSFT); register_code(KC_6); break;
-    case DOUBLE_SINGLE_TAP: register_code(KC_BSLS); unregister_code(KC_BSLS); register_code(KC_BSLS); break;
-  }
-}
-
-void BSL_CI_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (BSL_CI_tap_state.state) {
-    case SINGLE_TAP:        unregister_code(KC_BSLS); break;
-
-    case SINGLE_HOLD:       
-    case DOUBLE_TAP:        unregister_code(KC_6); unregister_code(KC_LSFT); break;
-    case DOUBLE_SINGLE_TAP: unregister_code(KC_BSLS); break;
-  }
-  BSL_CI_tap_state.state = 0;
-}
-// 【🔴】【🔴】【🔴】  B A C K S L A S H  【🔴】  - ( S Y M B O L ) -  【🔴】  C I R C U M F L E X  【🔴】【🔴】【🔴】
-
-
-
-// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』  Q U O T E    『🔵』  - ( S Y M B O L ) -  『🔵』    D O U B L E    Q U O T E S  『🔵』『🔵』『🔵』
-//instantalize an instance of 'tap' for the 'QUOT_D' tap dance.
-static tap QUOT_D_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void QUOT_D_finished (qk_tap_dance_state_t *state, void *user_data) {
-  QUOT_D_tap_state.state = cur_dance(state); 
-  switch (QUOT_D_tap_state.state) {
-
-    case SINGLE_TAP:        register_code(KC_QUOT);                         break; // single quote
-
-    case SINGLE_HOLD:       
-    case DOUBLE_TAP:        
-    case DOUBLE_SINGLE_TAP: register_code(KC_LSFT); register_code(KC_QUOT); break; // double quotes
-  }
-}
-
-void QUOT_D_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (QUOT_D_tap_state.state) {
-    case SINGLE_TAP:        unregister_code(KC_QUOT); break;
-
-    case SINGLE_HOLD:       
-    case DOUBLE_TAP:        
-    case DOUBLE_SINGLE_TAP: unregister_code(KC_QUOT); unregister_code(KC_LSFT); break;
-  }
-  QUOT_D_tap_state.state = 0;
-}
-// 【🔴】【🔴】【🔴】  Q U O T E    【🔴】  - ( S Y M B O L ) -  【🔴】    D O U B L E    Q U O T E S  【🔴】【🔴】【🔴】
-
-
-
-
-
-
-// 『🔵』『🔵』『🔵』  D O L L A R    『🔵』  - ( S Y M B O L ) -  『🔵』    E U R O  『🔵』『🔵』『🔵』
-//instantalize an instance of 'tap' for the 'DO_EUR' tap dance.
-///// QUAD FUNCTION TAP DANCE PERSONALIZATION SECTION START /////
-//instantalize an instance of 'tap' for the 'DO_EUR' tap dance.
-static tap DO_EUR_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void DO_EUR_finished (qk_tap_dance_state_t *state, void *user_data) {
-  DO_EUR_tap_state.state = cur_dance(state);
-  switch (DO_EUR_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_LSFT); register_code(KC_4);                         break;  // dollar
-
-    case SINGLE_HOLD:       
-    case DOUBLE_TAP:        
-    case DOUBLE_SINGLE_TAP: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_2); break;  // euro
-  }
-}
-
-void DO_EUR_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (DO_EUR_tap_state.state) {
-
-    case SINGLE_TAP:        unregister_code(KC_4); unregister_code(KC_LSFT); break;
-
-    case SINGLE_HOLD:       
-    case DOUBLE_TAP:        
-    case DOUBLE_SINGLE_TAP: unregister_code(KC_2); unregister_code(KC_LALT); unregister_code(KC_LSFT); break;
-  }
-  DO_EUR_tap_state.state = 0;
-}
-// 【🔴】【🔴】【🔴】  D O L L A R    【🔴】  - ( S Y M B O L ) -  【🔴】    E U R O  【🔴】【🔴】【🔴】
-
-
-
-
-
-// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』  E X C L A M A T I O N    M A R K _ S  『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
-//instantalize an instance of 'tap' for the 'EXCLAM' tap dance.
-static tap EXCLAM_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void EXCLAM_finished (qk_tap_dance_state_t *state, void *user_data) {
-  EXCLAM_tap_state.state = cur_dance(state);
-  switch (EXCLAM_tap_state.state) {
-
-    case SINGLE_TAP:        register_code(KC_LSFT); register_code(KC_1); break;  //  exclamation mark
-
-    case SINGLE_HOLD:       
-    case DOUBLE_TAP:        
-    case DOUBLE_SINGLE_TAP: register_code(KC_LALT); register_code(KC_1); break;  //  inverted exclamation mark
-  }
-}
-
-void EXCLAM_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (EXCLAM_tap_state.state) {
-
-    case SINGLE_TAP:        unregister_code(KC_1); unregister_code(KC_LSFT); break;
-
-    case SINGLE_HOLD:       
-    case DOUBLE_TAP:        
-    case DOUBLE_SINGLE_TAP: unregister_code(KC_1); unregister_code(KC_LALT); break;
-  }
-  EXCLAM_tap_state.state = 0;
-}
-// 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】  E X C L A M A T I O N    M A R K _ S  【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
-
-
-
-
-
-// 『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』  Q U E S T I O N    M A R K _ S  『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』『🔵』
-//instantalize an instance of 'tap' for the 'QUESTI' tap dance.
-static tap QUESTI_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void QUESTI_finished (qk_tap_dance_state_t *state, void *user_data) {
-  QUESTI_tap_state.state = cur_dance(state);
-  switch (QUESTI_tap_state.state) {
-
-    case SINGLE_TAP:  register_code(KC_LSFT); register_code(KC_SLSH);                         break;  //  question mark
-
-    case DOUBLE_TAP:  
-    case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_SLSH); break;  // inverted question mark
-  }
-}
-
-void QUESTI_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (QUESTI_tap_state.state) {
-
-    case SINGLE_TAP:  unregister_code(KC_SLSH); unregister_code(KC_LSFT);                           break;
-
-    case DOUBLE_TAP:  
-    case SINGLE_HOLD: unregister_code(KC_SLSH); unregister_code(KC_LALT); unregister_code(KC_LSFT); break;
-  }
-  QUESTI_tap_state.state = 0;
-}
-
-
-
-
-
-/*                                                                                     */
-/*  X: ?, ¿                                                                            */
-/*                                                                                     */
-/*  [TAPDANCE]   QUESTI   //  Q U E S T I O N    M A R K                               */
-/////////////////////////////////////////////////////////////////////////////////////////
-/*                                                                                     */
-/*   T A P   D A N C E    F O R :   S Y M B O L S    L A Y E R                         */
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-
-
+//
+// It's empty !!!
 
 
 
@@ -2951,7 +2875,7 @@ void QUESTI_reset (qk_tap_dance_state_t *state, void *user_data) {
 /*                                                                                     */
 /*                   [TAPDANCE]   TRIP_0     -     T R I P L E    Z E R O              */
 /*                                                                                     */
-/*  KC_A: BACKSPACE, 000                                                               */
+/*  KC_A: SPACE, 000                                                                   */
 /*                                                                                     */
 //instantalize an instance of 'tap' for the 'TRIP_0' tap dance.
 static tap TRIP_0_tap_state = {
@@ -3044,36 +2968,19 @@ void DONMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
   switch (DONMBR_tap_state.state) {
     case SINGLE_TAP:        register_code(KC_PDOT); break;
 
-    case DOUBLE_HOLD: if (backlight_caps)
-                      {
-                        breathing_period_set(BR_CAPS);
-                        breathing_enable();
-                      }
-                      else
-                      {
-                        breathing_period_set(BR_DFLT);
-                        breathing_disable();
-                      }
-                      layer_clear();
+    case DOUBLE_HOLD: layer_clear();
                       break;      
 
-/*    case DOUBLE_HOLD:    // SET [NMBR] OFF
-                            layer_off(NMBR);
-                            breathing_period_set(BR_CAPS);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
-                            breathing_enable();
-
-                            if (!backlight_caps)        // if CAPS_LOCK was NOT set out before [NMBR] was fixed ...
-                            {
-                              breathing_period_set(BR_DFLT);
-                              breathing_disable();
-                            };
-                            break; */
   }
 }
 
 void DONMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (DONMBR_tap_state.state) {
-    case SINGLE_TAP:        unregister_code(KC_PDOT); break;
+
+    case SINGLE_TAP:    unregister_code(KC_PDOT); break;
+
+    case DOUBLE_HOLD:   break;
+
   }
   DONMBR_tap_state.state = 0;
 }
@@ -3090,7 +2997,7 @@ void DONMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
 /*                                  l                                                   */
 /*  KC_N:   KC_KP_SLASH,  [NMBR]OFFl                                                    */
 /*                                                                                      */
-//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////kj
 //instantalize an instance of 'tap' for the 'SLNMBR' tap dance.
 static tap SLNMBR_tap_state = {
   .is_press_action = true,
@@ -3102,18 +3009,11 @@ void SLNMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
   switch (SLNMBR_tap_state.state) {
     case SINGLE_TAP:        register_code(KC_PSLS); break;
 
-    case DOUBLE_HOLD: if (backlight_caps)
-                      {
-                        breathing_period_set(BR_CAPS);
-                        breathing_enable();
-                      }
-                      else
-                      {
-                        breathing_period_set(BR_DFLT);
-                        breathing_disable();
-                      }
-                      layer_clear();
-                      break;      
+    case SINGLE_HOLD:// I left it intentionally empty for allowing 'SET [NMBR] ON' works properly
+                        break;
+
+    case DOUBLE_HOLD:   layer_clear();
+                        break;      
 /*
     case DOUBLE_HOLD:    // SET [NMBR] OFF
                          // layer_clear();
@@ -3132,7 +3032,15 @@ void SLNMBR_finished (qk_tap_dance_state_t *state, void *user_data) {
 
 void SLNMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (SLNMBR_tap_state.state) {
-    case SINGLE_TAP:        unregister_code(KC_PSLS); break;
+
+    case SINGLE_TAP:    unregister_code(KC_PSLS); break;
+
+    case SINGLE_HOLD:// SET [NMBR] ON
+                        layer_on(NMBR);
+                        break;
+
+    case DOUBLE_HOLD:   break;
+
   }
   SLNMBR_tap_state.state = 0;
 }
@@ -3150,9 +3058,9 @@ void SLNMBR_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /*                                                                                      */
-/*                   [TAPDANCE] KC_Z into [PVIM]:   SVIM   /   XVIM                     */
+/*                   [TAPDANCE] KC_Z into [PVIM]:   SVIM   /   ZVIM                     */
 /*                                                                                      */
-/*  KC_Z:  SVIM / XVIM                                                                  */
+/*  KC_Z:  SVIM / ZVIM                                                                  */
 /*                                                                                      */
 /*                                                                                      */
 //instantalize an instance of 'tap' for the 'SX_VIM' tap dance.
@@ -3167,21 +3075,21 @@ void SX_VIM_finished(qk_tap_dance_state_t* state, void* user_data) {
 
     switch (SX_VIM_tap_state.state) {
         case SINGLE_HOLD:  layer_on(SVIM);  break;
-        case DOUBLE_HOLD:  layer_on(XVIM);  break;
+        case DOUBLE_HOLD:  layer_on(ZVIM);  break;
     }
 }
 
 void SX_VIM_reset(qk_tap_dance_state_t* state, void* user_data) {
     switch (SX_VIM_tap_state.state) {
         case SINGLE_HOLD:  layer_off(SVIM); break;
-        case DOUBLE_HOLD:  layer_off(XVIM); break;
+        case DOUBLE_HOLD:  layer_off(ZVIM); break;
     }
     SX_VIM_tap_state.state = 0;
 }
 */
 
 /*                                                                                      */
-/* [tapdance] kc_z  -  svim / xvim                                                      */
+/* [tapdance] kc_z  -  svim / ZVIM                                                      */
 /*                                                                                      */
 // ************************************************************************************ //
 
@@ -3189,9 +3097,9 @@ void SX_VIM_reset(qk_tap_dance_state_t* state, void* user_data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /*                                                                                      */
-/*                   [TAPDANCE] KC_X into [PVIM]:   DVIM   /   AVIM                     */
+/*                   [TAPDANCE] KC_X into [PVIM]:   DVIM   /   XVIM                     */
 /*                                                                                      */
-/*  KC_X:  DVIM / AVIM                                                                  */
+/*  KC_X:  DVIM / XVIM                                                                  */
 /*                                                                                      */
 /*                                                                                      */
 //instantalize an instance of 'tap' for the 'DA_VIM' tap dance.
@@ -3206,21 +3114,21 @@ void DA_VIM_finished(qk_tap_dance_state_t* state, void* user_data) {
 
     switch (DA_VIM_tap_state.state) {
         case SINGLE_HOLD:  layer_on(DVIM);  break;
-        case DOUBLE_HOLD:  layer_on(AVIM);  break;
+        case DOUBLE_HOLD:  layer_on(XVIM);  break;
     }
 }
 
 void DA_VIM_reset(qk_tap_dance_state_t* state, void* user_data) {
     switch (DA_VIM_tap_state.state) {
         case SINGLE_HOLD:  layer_off(DVIM); break;
-        case DOUBLE_HOLD:  layer_off(AVIM); break;
+        case DOUBLE_HOLD:  layer_off(XVIM); break;
     }
     DA_VIM_tap_state.state = 0;
 }
 */
 
 /*                                                                                      */
-/* [tapdance] kc_x  -  dvim / avim                                                      */
+/* [tapdance] kc_x  -  dvim / XVIM                                                      */
 /*                                                                                      */
 // ************************************************************************************ //
 
@@ -3228,9 +3136,9 @@ void DA_VIM_reset(qk_tap_dance_state_t* state, void* user_data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 /*                                                                                      */
-/*                   [TAPDANCE] KC_C into [PVIM]:   MOUS   /   ZVIM                     */
+/*                   [TAPDANCE] KC_C into [PVIM]:   MOUS   /   CVIM                     */
 /*                                                                                      */
-/*  KC_C:  MOUS / ZVIM                                                                  */
+/*  KC_C:  MOUS / CVIM                                                                  */
 /*                                                                                      */
 /*                                                                                      */
 //instantalize an instance of 'tap' for the 'MOU_ZV' tap dance.
@@ -3245,21 +3153,21 @@ void MOU_ZV_finished(qk_tap_dance_state_t* state, void* user_data) {
 
     switch (MOU_ZV_tap_state.state) {
         case SINGLE_HOLD:  layer_on(MOUS);  break;
-        case DOUBLE_HOLD:  layer_on(ZVIM);  break;
+        case DOUBLE_HOLD:  layer_on(CVIM);  break;
     }
 }
 
 void MOU_ZV_reset(qk_tap_dance_state_t* state, void* user_data) {
     switch (MOU_ZV_tap_state.state) {
         case SINGLE_HOLD:  layer_off(MOUS); break;
-        case DOUBLE_HOLD:  layer_off(ZVIM); break;
+        case DOUBLE_HOLD:  layer_off(CVIM); break;
     }
     MOU_ZV_tap_state.state = 0;
 }
 */
 
 /*                                                                                      */
-/* [tapdance] kc_c  -  mous / zvim                                                      */
+/* [tapdance] kc_c  -  mous / CVIM                                                      */
 /*                                                                                      */
 // ************************************************************************************ //
 
@@ -3319,6 +3227,64 @@ void PVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
 }
 /*                                                                                      */
 /* [tapdance] kc_p  [ pvim ]  -  end of line  /  paragraph                              */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_I [ PVIM ]  -  M O V E    W O R D  /  S U B W O R D    B A C K W A R D */
+/*                                                                                      */
+/*  KC_I:   M O V E    W O R D  /  S U B W O R D    B A C K W A R D                     */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'PVIM_iI' tap dance.
+static tap PVIM_iI_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void PVIM_iI_function (qk_tap_dance_state_t *state, void *user_data) {
+  PVIM_iI_tap_state.state = cur_dance(state);
+  switch (PVIM_iI_tap_state.state) {
+    case SINGLE_TAP:        register_code(KC_LALT);   register_code(KC_LEFT);
+                          unregister_code(KC_LEFT); unregister_code(KC_LALT); break;
+
+    case DOUBLE_TAP:        register_code(KC_LCTL);   register_code(KC_LEFT);
+                          unregister_code(KC_LEFT);   unregister_code(KC_LCTL); break;
+  }
+  PVIM_iI_tap_state.state = 0;
+}
+/*                                                                                      */
+/* [tapdance] kc_i [ pvim ]  -  m o v e    w o r d  /  s u b w o r d    b a c k w a r d */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+/*                                                                                      */
+/* [TAPDANCE] KC_O [ PVIM ]   -   M O V E    W O R D  /  S U B W O R D    F O R W A R D */
+/*                                                                                      */
+/*  KC_O:   M O V E    W O R D  /  S U B W O R D    F O R W A R D                       */
+/*                                                                                      */
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'PVIM_oO' tap dance. esterNoCleiDoMastoiDeo
+static tap PVIM_oO_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void PVIM_oO_function (qk_tap_dance_state_t *state, void *user_data) {
+  PVIM_oO_tap_state.state = cur_dance(state);
+  switch (PVIM_oO_tap_state.state) {
+    case SINGLE_TAP:        register_code(KC_LALT);   register_code(KC_RGHT);
+                          unregister_code(KC_RGHT); unregister_code(KC_LALT); break;
+
+    case DOUBLE_TAP:        register_code(KC_LCTL);   register_code(KC_RGHT);
+                          unregister_code(KC_RGHT); unregister_code(KC_LCTL); break;
+  }
+  PVIM_oO_tap_state.state = 0;
+}
+/*                                                                                      */
+/* [tapdance] kc_o [ pvim ]   -   m o v e    w o r d  /  s u b w o r d    f o r w a r d */
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -3385,6 +3351,8 @@ void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'SVIM_uU' tap dance.
+
+/*
 static tap SVIM_uU_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -3403,6 +3371,8 @@ void SVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
   }
   SVIM_uU_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [tapdance] kc_u  [ svim ]  -  select to beginning of line  /  paragraph              */
 /*                                                                                      */
@@ -3415,6 +3385,8 @@ void SVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
 /*                                                                                      */
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'SVIM_pP' tap dance.
+
+/*
 static tap SVIM_pP_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -3433,6 +3405,8 @@ void SVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
   }
   SVIM_pP_tap_state.state = 0;
 }
+*/
+
 /*                                                                                      */
 /* [tapdance] kc_p  [ svim ]  -  select to end of line  /  paragraph                    */
 /*                                                                                      */
@@ -3699,6 +3673,75 @@ void KILA_T_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 // 『🔵』『🔵』『🔵』   S T A T U S   B A R    /    S H U T   D O W N    『🔵』『🔵』『🔵』
 //instantalize an instance of 'tap' for the 'SHUT_S' tap dance.
+
+void volumeSetToLevel1(void) {
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+}
+
+void volumeSetToLevel8(void) {
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+}
+
+void brightSetToLevel1(void) {
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_SLCK); unregister_code(KC_SLCK);
+  register_code(KC_PAUS); unregister_code(KC_PAUS);
+}
+
+
 static tap SHUT_S_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -3710,23 +3753,7 @@ void SHUT_S_finished (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_F8);
                       break;
     case SINGLE_HOLD:                        
-    case DOUBLE_TAP:  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-                      register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+    case DOUBLE_TAP:  volumeSetToLevel1();
 
                   //  keystrokes for shutting down:  (guessed by try and fail method)
                       register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
@@ -3817,6 +3844,261 @@ void RSTT_F_reset (qk_tap_dance_state_t *state, void *user_data) {
 }
 // 【🔴】【🔴】【🔴】    F L O A T I N G   W I N D O W   /   R E S T A R T    【🔴】【🔴】【🔴】
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+// 『🔵』『🔵』『🔵』   RIGHT CONTROL   /   REWIND   『🔵』『🔵』『🔵』
+//instantalize an instance of 'tap' for the 'RC_RWND' tap dance.
+static tap RC_RWND_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RC_RWND_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RC_RWND_tap_state.state = cur_dance(state);
+  switch (RC_RWND_tap_state.state) {
+    case SINGLE_TAP:  register_code(KC_MRWD);
+                      break;
+                      
+    case SINGLE_HOLD: register_code(KC_RCTL);
+                      break;
+  }
+}
+
+void RC_RWND_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RC_RWND_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_MRWD);
+                      break;
+
+    case SINGLE_HOLD: unregister_code(KC_RCTL);
+                      break;                       
+  }
+  RC_RWND_tap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】   RIGHT CONTROL   /   REWIND   【🔴】【🔴】【🔴】
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// 『🔵』『🔵』『🔵』   RIGHT ALT   /   PLAY/PAUSE   『🔵』『🔵』『🔵』
+//instantalize an instance of 'tap' for the 'RA_PLAY' tap dance.
+static tap RA_PLAY_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RA_PLAY_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RA_PLAY_tap_state.state = cur_dance(state);
+  switch (RA_PLAY_tap_state.state) {
+    case SINGLE_TAP:  register_code(KC_MPLY);
+                      break;
+                                                  
+    case SINGLE_HOLD: register_code(KC_RALT);
+                      break;
+  }
+}
+
+void RA_PLAY_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RA_PLAY_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_MPLY);
+                      break;
+                     
+    case SINGLE_HOLD: unregister_code(KC_RALT);
+                      break;                       
+  }
+  RA_PLAY_tap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】   RIGHT ALT   /   PLAY/PAUSE   【🔴】【🔴】【🔴】
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// 『🔵』『🔵』『🔵』   RIGHT GUI   /   FORWARD   『🔵』『🔵』『🔵』
+//instantalize an instance of 'tap' for the 'RG_FRWD' tap dance.
+static tap RG_FRWD_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RG_FRWD_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RG_FRWD_tap_state.state = cur_dance(state);
+  switch (RG_FRWD_tap_state.state) {
+    case SINGLE_TAP:  register_code(KC_MFFD);
+                      break;
+                      
+    case SINGLE_HOLD: register_code(KC_RGUI);
+                      break;
+  }
+}
+
+void RG_FRWD_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RG_FRWD_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_MFFD);
+                      break;
+                     
+    case SINGLE_HOLD: unregister_code(KC_RGUI);
+                      break;                       
+  }
+  RG_FRWD_tap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】   RIGHT GUI   /   FORWARD   【🔴】【🔴】【🔴】
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// 『🔵』『🔵』『🔵』   RIGHT GUI   /   ZOOM ON/OFF   『🔵』『🔵』『🔵』
+//instantalize an instance of 'tap' for the 'RG_ZOOM' tap dance.
+static tap RG_ZOOM_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RG_ZOOM_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RG_ZOOM_tap_state.state = cur_dance(state);
+  switch (RG_ZOOM_tap_state.state) {
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT);   register_code(KC_LGUI);   register_code(KC_SCLN);
+                      break;
+
+    case SINGLE_HOLD: register_code(KC_RGUI);
+                      break;
+  }
+}
+
+void RG_ZOOM_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RG_ZOOM_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_SCLN);  unregister_code(KC_LGUI); unregister_code(KC_LALT);      unregister_code(KC_LCTL);
+                      break;
+                     
+    case SINGLE_HOLD: unregister_code(KC_RGUI);
+                      break;                       
+  }
+  RG_ZOOM_tap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】   RIGHT GUI   /   ZOOM ON/OFF   【🔴】【🔴】【🔴】
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// 『🔵』『🔵』『🔵』   RIGHT ALT   /   ZOOM IN   『🔵』『🔵』『🔵』
+//instantalize an instance of 'tap' for the 'RA_ZOIN' tap dance.
+static tap RA_ZOIN_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RA_ZOIN_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RA_ZOIN_tap_state.state = cur_dance(state);
+  switch (RA_ZOIN_tap_state.state) {
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT);   register_code(KC_LGUI);   register_code(KC_EQL);
+                      break;
+
+    case SINGLE_HOLD: register_code(KC_RALT);
+                      break;
+  }
+}
+
+void RA_ZOIN_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RA_ZOIN_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_EQL);  unregister_code(KC_LGUI); unregister_code(KC_LALT);      unregister_code(KC_LCTL);
+                      break;
+                     
+    case SINGLE_HOLD: unregister_code(KC_RALT);
+                      break;                       
+  }
+  RA_ZOIN_tap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】   RIGHT ALT   /   ZOOM IN   【🔴】【🔴】【🔴】
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+// 『🔵』『🔵』『🔵』   RIGHT CTRL   /   ZOOM OUT   『🔵』『🔵』『🔵』
+//instantalize an instance of 'tap' for the 'RC_ZOUT' tap dance.
+static tap RC_ZOUT_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RC_ZOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RC_ZOUT_tap_state.state = cur_dance(state);
+  switch (RC_ZOUT_tap_state.state) {
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT);   register_code(KC_LGUI);   register_code(KC_MINS);
+                      break;
+
+    case SINGLE_HOLD: register_code(KC_RCTL);
+                      break;
+  }
+}
+
+void RC_ZOUT_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RC_ZOUT_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_MINS);  unregister_code(KC_LGUI); unregister_code(KC_LALT);      unregister_code(KC_LCTL);
+                      break;
+                     
+    case SINGLE_HOLD: unregister_code(KC_RCTL);
+                      break;                       
+  }
+  RC_ZOUT_tap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】   RIGHT CTRL   /   ZOOM OUT   【🔴】【🔴】【🔴】
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+// 『🔵』『🔵』『🔵』   RIGHT SHIFT   /   INVERT COLORS   『🔵』『🔵』『🔵』
+//instantalize an instance of 'tap' for the 'RS_INCO' tap dance.
+static tap RS_INCO_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RS_INCO_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RS_INCO_tap_state.state = cur_dance(state);
+  switch (RS_INCO_tap_state.state) {
+    case SINGLE_TAP:  register_code(KC_LSFT); register_code(KC_LCTL);  register_code(KC_LGUI);   register_code(KC_8);
+                      break;
+
+    case SINGLE_HOLD: register_code(KC_RSFT);
+                      break;
+  }
+}
+
+void RS_INCO_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RS_INCO_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_8);  unregister_code(KC_LGUI); unregister_code(KC_LCTL);      unregister_code(KC_LSFT);
+                      break;
+                     
+    case SINGLE_HOLD: unregister_code(KC_RSFT);
+                      break;                       
+  }
+  RS_INCO_tap_state.state = 0;
+}
+// 【🔴】【🔴】【🔴】   RIGHT SHIFT   /   INVERT COLORS   【🔴】【🔴】【🔴】
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】  T A P   D A N C E    F O R   - S U P E R U S E R     L A Y E R ) -   【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
 // 【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】【🔴】
@@ -3828,7 +4110,7 @@ void RSTT_F_reset (qk_tap_dance_state_t *state, void *user_data) {
 //Tap Dance Definitions
 //THIS SECTION HAS TO BE AT THE END OF THE TAP DANCE SECTION
 qk_tap_dance_action_t tap_dance_actions[] = {
-//
+// [TD_ESC_CAPS]  = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS)
 // [INFO]
 // ACTION_TAP_DANCE_DUAL_ROLE(kc, layer): Sends the kc keycode when tapped once, ...
 //   ... or moves to layer. (this is similar to the keycode: 'TO' layer)
@@ -3837,24 +4119,36 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // [A_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS)
 // Other declarations would go here, separated by commas, if you have them
 //
+
+// SYMBOLS (TWO IN A KEY)
+  [Z_EXCL] = ACTION_TAP_DANCE_DOUBLE(SYM_EXCL, SYM_I_EX)
+ ,[X_QUES] = ACTION_TAP_DANCE_DOUBLE(SYM_QUES, SYM_I_QU)
+
+ ,[G_DOEU] = ACTION_TAP_DANCE_DOUBLE(SYM_DOLL, SYM_EURO)
+// ,[W_QUOT] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, LSFT(KC_QUOT))
+
+ ,[Y_AMCI] = ACTION_TAP_DANCE_DOUBLE(KC_AMPR, KC_CIRC)
+// symbols (two in a key)
+
+
+//,[W_O_SU_BL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, W_O_SU_BL_finished, W_O_SU_BL_reset)
+
 // LAYERS
 //  [Q_SUSR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, Q_SUSR_finished, Q_SUSR_reset)
-  [Q_P_SU_TB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, Q_P_SU_TB_finished, Q_P_SU_TB_reset)
-
 // ,[P_SUSR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, P_SUSR_finished, P_SUSR_reset)
 
 // RUNNING APPS
 // ,[W_APPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, W_APPS_finished, W_APPS_reset)
 // ,[O_APPS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, O_APPS_finished, O_APPS_reset)
- ,[W_O_APP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, W_O_APP_finished, W_O_APP_reset)
+//,[Q_P_APP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, Q_P_APP_finished, Q_P_APP_reset)
  //running apps
 
 // ACTIVATES ACCENTS VARIABLE
- ,[R_AC_RE]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, R_AC_RE_finished,  R_AC_RE_reset,  170)
- ,[U_ACCE]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, U_ACCE_finished,   U_ACCE_reset,   170)
+//,[R_AC_RE]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, R_AC_RE_finished,  R_AC_RE_reset,  90)
+//,[U_ACCE]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, U_ACCE_finished,   U_ACCE_reset,   90)
 
- ,[Z_ALPH]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, Z_ALPH_finished,  Z_ALPH_reset,  170)
- ,[EN_ALPH] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, EN_ALPH_finished, EN_ALPH_reset, 170) 
+//,[Z_ALPH]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, Z_ALPH_finished,  Z_ALPH_reset,  170)
+ //,[EN_ALPH] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, EN_ALPH_finished, EN_ALPH_reset, 170) 
 
 /*
  ,[T_SYMB]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, T_SYMB_finished, T_SYMB_reset, 180)
@@ -3864,8 +4158,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // ,[F_ALPH] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, F_ALPH_finished, F_ALPH_reset, 180)
 // ,[J_ALPH] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, J_ALPH_finished, J_ALPH_reset, 180)  
 
- ,[A_SH_CP]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, A_SH_CP_finished,  A_SH_CP_reset,  170) // remove _TIME
- ,[SP_SH_CP] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, SP_SH_CP_finished, SP_SH_CP_reset, 170) // remove _TIME
+//,[A_SH_CP]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, A_SH_CP_finished,  A_SH_CP_reset,  170) // remove _TIME
+//,[SP_SH_CP] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, SP_SH_CP_finished, SP_SH_CP_reset, 170) // remove _TIME
 
 /*
  ,[G_NMBR]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, G_NMBR_finished, G_NMBR_reset, 180)
@@ -3877,9 +4171,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  ,[B_LYRS]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, B_LYRS_finished, B_LYRS_reset, 180)
  */
 
- ,[X_DVIM]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, X_DVIM_finished, X_DVIM_reset, 180)
- ,[V_PVIM]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, V_PVIM_finished, V_PVIM_reset, 180)
- ,[LY_NMB]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, LY_NMB_finished, LY_NMB_reset, 170)
+// ,[X_DVIM]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, X_DVIM_finished, X_DVIM_reset, 180)
+//,[V_PVIM]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, V_PVIM_finished, V_PVIM_reset, 180)
+//,[LY_NMB]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, LY_NMB_finished, LY_NMB_reset)
 
 // activates accents variable
 
@@ -3910,24 +4204,14 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // accessing numbers
 
 // VIM LAYERS
-// SVIM / XVIM
+// SVIM / ZVIM
 // ,[SX_VIM]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, SX_VIM_finished, SX_VIM_reset, 250)
-// DVIM / AVIM
+// DVIM / XVIM
 // ,[DA_VIM]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, DA_VIM_finished, DA_VIM_reset, 250)
-// MOUS / ZVIM
+// MOUS / CVIM
 // ,[MOU_ZV]  = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, MOU_ZV_finished, MOU_ZV_reset, 250)
 // vim layers
 
-// SYMBOLS (TWO IN A KEY)
-
-
- ,[BSL_CI] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, BSL_CI_finished, BSL_CI_reset)
- ,[QUOT_D] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, QUOT_D_finished, QUOT_D_reset)
- ,[DO_EUR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, DO_EUR_finished, DO_EUR_reset)
- ,[EXCLAM] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, EXCLAM_finished, EXCLAM_reset)
- ,[QUESTI] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, QUESTI_finished, QUESTI_reset)
-
-// symbols (two in a key)
 
 // NUMPAD
  ,[TRIP_0] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, TRIP_0_finished, TRIP_0_reset)
@@ -3945,10 +4229,19 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  ,[KILA_T]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, KILA_T_finished, KILA_T_reset)
  ,[SHUT_S]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SHUT_S_finished, SHUT_S_reset)
  ,[RSTT_F]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RSTT_F_finished, RSTT_F_reset)
+ ,[RC_RWND]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RC_RWND_finished, RC_RWND_reset) 
+ ,[RA_PLAY]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RA_PLAY_finished, RA_PLAY_reset) 
+ ,[RG_FRWD]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RG_FRWD_finished, RG_FRWD_reset) 
+ ,[RG_ZOOM]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RG_ZOOM_finished, RG_ZOOM_reset) 
+ ,[RA_ZOIN]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RA_ZOIN_finished, RA_ZOIN_reset) 
+ ,[RC_ZOUT]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RC_ZOUT_finished, RC_ZOUT_reset) 
+ ,[RS_INCO]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RS_INCO_finished, RS_INCO_reset) 
  //susr 
 
 // PVIM
  ,[PVIM_uU] = ACTION_TAP_DANCE_FN(PVIM_uU_function)
+ ,[PVIM_iI] = ACTION_TAP_DANCE_FN(PVIM_iI_function)
+ ,[PVIM_oO] = ACTION_TAP_DANCE_FN(PVIM_oO_function)
  ,[PVIM_pP] = ACTION_TAP_DANCE_FN(PVIM_pP_function)
 // pvim
 
@@ -3958,8 +4251,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // dvim
 
 // SVIM
- ,[SVIM_uU] = ACTION_TAP_DANCE_FN(SVIM_uU_function)
- ,[SVIM_pP] = ACTION_TAP_DANCE_FN(SVIM_pP_function)
+// ,[SVIM_uU] = ACTION_TAP_DANCE_FN(SVIM_uU_function)
+// ,[SVIM_pP] = ACTION_TAP_DANCE_FN(SVIM_pP_function)
 // svim
 
 };
@@ -3987,92 +4280,128 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |        |        |accented|        |        | |        |accented|accented|accented|        |
   * |    Q   |    W   |    E   |    R   |   T    | |    Y   |    U   |    I   |    O   |    P   |
   * |        |        |        |  5* RST|        | |        |        |        |        |        |
-  * |        |        |        |1.4* ACC| *[SYMB]| | *[SYMB]|1.4* ACC|        |        |        |
+  * |*[MAPPS]|        |        |1.4* ACC| *[SYMB]| | *[SYMB]|1.4* ACC|        |        |*[MAPPS]|
   * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
   * |accented|        |        |        |        | |        |        |        |        |        |
   * |    A   |    S   |    D   |    F   |    G   | |    H   |    J   |    K   |    L   |  Space |
   * |        |        |        |        |        | |        |        |        |        |        |
-  * |        |        |        |        | *[NMBR]| | *[SYMB]|        |        |        |        |
+  * |        |  LCtl  |  LAlt  |  LGui  |        | |        |  LGui  |  LAlt  |  LCtl  |        |
   * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
   * |        |        |        |        |        | |        |        |        |        |        |
   * |    Z   |    X   |    C   |    V   |    B   | |    N   |    M   | Escape |Bckspace|  Enter |
   * |        |        |        |@@ Caps |        | |        |        |        |        |        |
-  * |  LSft  | *[DVIM]|        | *[PVIM]| *[LYRS]| | *[LYRS]|        |        |        |  LSft  |
+  * |  LSft  | *[DVIM]| *[MOUS]| *[PVIM]| *[LYRS]| | *[LYRS]| *[PVIM]| *[FNCT]|        |  LSft  |
   * '--------------------------------------------' '--------------------------------------------'
-  */
-
-  /*  LEGENDS for all KEYMAPS:
+  *  LEGENDS for all KEYMAPS:
   *   * access a layer  through one    tap
   *  ** access a layer  through double tap
   *  ## SET    a layer  through double tap
   *  @@ get a keystroke through double tap
-  */
 [ALPH] = LAYOUT_ortho_3x10(  // layer 0 : default layer
 // [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
 //,------------+---------------+---------------+------------+----------------++---------------+------------+-----------+-----------+------------.
-           KC_Q,           KC_W,     F(E_VOWEL), TD(R_AC_RE), LT(SYMB, KC_T),   LT(SYMB, KC_Y),  TD(U_ACCE), F(I_VOWEL), F(O_VOWEL),       KC_P, \
+    LT(APPS, KC_Q),           KC_W,     F(ACCNTD_E),    TD(R_AC_RE), LT(SYMB, KC_T),   LT(SYMB, KC_Y),  TD(U_ACCE), F(ACCNTD_I), F(ACCNTD_O), LT(APPS, KC_P), \
 //|------------|---------------|---------------+------------+----------------||---------------|------------+-----------+-----------+------------|
-     F(A_VOWEL),           KC_S,           KC_D,        KC_F, LT(NMBR, KC_G),   LT(SYMB, KC_H),        KC_J,       KC_K,       KC_L,     KC_SPC, \
+       F(ACCNTD_A), CTL_T(KC_S),    ALT_T(KC_D),    GUI_T(KC_F), LT(NMBR, KC_G),   LT(SYMB, KC_H),   GUI_T(KC_J),    ALT_T(KC_K),    CTL_T(KC_L), SFT_T(KC_SPC), \
 //|------------|---------------|---------------+------------+----------------||---------------|------------+-----------+-----------+------------|
-     TD(Z_ALPH), LT(DVIM, KC_X), LT(MOUS, KC_C),  TD(V_PVIM), LT(LYRS, KC_B),   LT(LYRS, KC_N),        KC_M,     KC_ESC,    KC_BSPC, TD(EN_ALPH) ),
+       LSFT_T(KC_Z), LT(DVIM, KC_X), LT(MOUS, KC_C), LT(PVIM, KC_V), LT(LYRS, KC_B),   LT(LYRS, KC_N),        KC_M,     KC_ESC,    KC_BSPC,   LSFT_T(KC_ENT) ),
 //|------------+---------------+---------------+------------+----------------++---------------+------------+-----------+-----------+------------.
-// END OF ALPH 0kffff
-//
-
-/*
+// END OF ALPH 0
 OLD TAP_DANCE ON ALPHA: 
-* R_AC_RE
-* U_ACCE.
+  * R_AC_RE * U_ACCE.
 NEW TAP_DANCE ON ALPHA: 
-* F_ALPH,
-* G_NMBR,
-* H_LYRS,
-* J_ALPH,
-* Z_ALPH,
-* N_LYRS,
-* EN_ALPH.
+  * F_ALPH, * G_NMBR, * H_LYRS, * J_ALPH, * Z_ALPH, * N_LYRS, * EN_ALPH.
 */
 
+
 /*
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-*/
- /* Keymap GHKN 0: gherkin default layer
   * ,--------------------------------------------. ,--------------------------------------------.
-  * |@@ Tab  |        |        |        |        | |        |        |        |        |        |
-  * |    Q   |    W   |    E   |    R   |   T    | |    Y   |    U   |    I   |    O   |    P   |
-  * |**[BLIT]|**[MAPS]|        |  5* RST|        | |        |        |        |**[MAPS]|**[BLIT]|
-  * | *[SUSR]| *[APPS]|        |1.4* ACC| [TEST] | |        |1.4* ACC|        | *[APPS]| *[SUSR]|
+  * |        |        |        |        |        | |        |        |        |        |        |
+  * |    Q   |    W   |    E   |    R   |   T    | |    Y   |    U   |    I   |    O   |    P   | // CMD + P  =  [SINGLE APPS LAYER]
+  * |⌘[SAPPS]|        |        |        |        | |        |        |        |        |⌘[SAPPS]| // CMD + Q  =  [SINGLE APPS LAYER]
+  * | *[APPS]| *[SUSR]| *[BLIT]| *[RSET]| *[SYMB]| |        |        | *[BLIT]| *[SUSR]| *[APPS]|
   * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
-  * |@@ Caps |        |        |@@ Caps |        | |        |        |        |        |        |
+  * |        |        |        |        |        | |        |        |        |        |        |
   * |    A   |    S   |    D   |    F   |    G   | |    H   |    J   |    K   |    L   |  Space |
-  * |        |        |        |        |        | |        |@@ Acute|        |        |        |
-  * |  LSft  |  LCtl  |  LAlt  |  LGui  | [SYMB] | | [SYMB] |  LGui  |  LAlt  |  LCtl  |  LSft  |
+  * |        |        |        |        |        | |        |        |        |        |        |
+  * |  LSft  |  LCtl  |  LAlt  |  LGui  | *[ACCN]| | *[ACCN]|  LGui  |  LAlt  |  LCtl  |  LSft  |
   * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
   * |        |        |        |        |        | |        |        |        |        |        |
   * |    Z   |    X   |    C   |    V   |    B   | |    N   |    M   | Escape |Bckspace|  Enter |
-  * |        |        |**[FNCT]|        |##[NMBR]| |##[NMBR]|        |**[FNCT]|        |        |
-  * |[L_XTND]| [DVIM] | *[MOUS]| [PVIM] | *[NMBR]| | *[NMBR]| [PVIM] | *[FNCT]| [DVIM] |[R_XTND]|
+  * |        |        |        |        |        | |        |        |        |        |        |
+  * |  *L_XT | *[MOUS]| *[FNCT]| *[PVIM]| *[NMBR]| | *[SYMB]| *[PVIM]| *[FNCT]|        |        |
   * '--------------------------------------------' '--------------------------------------------'
-  *  LEGENDS for all KEYMAPS:
-  *   * access a layer  through one    tap    
-  *  ** access a layer  through double tap
-  *  ## SET    a layer  through double tap
-  *  @@ get a keystroke through double tap
-  */
-/*
-[GHKN] = LAYOUT_ortho_3x10(  // layer 0 : default layer
-// [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
-//,-----------------+---------------+-------------+---------------+----------------++---------------+---------------+-------------+------------------+-------------------.
-          TD(Q_SUSR),     TD(W_APPS),   F(E_VOWEL),    TD(R_AC_RE), LT(TEST, KC_T),   LT(BLIT, KC_Y),     TD(U_ACCE),   F(I_VOWEL),        TD(O_APPS),        TD(P_SUSR), \
-//|-----------------|---------------|-------------+---------------+----------------||---------------|---------------+-------------+------------------+-------------------|
-          TD(A_CAPS),   LCTL_T(KC_S), LALT_T(KC_D),     TD(F_CAPS),     TD(G_SYMB),       TD(H_SYMB),     TD(J_ACUT), LALT_T(KC_K),      LCTL_T(KC_L),        TD(SP_SHF), \
-//|-----------------|---------------|-------------+---------------+----------------||---------------|---------------+-------------+------------------+-------------------|
-    LT(L_XTND, KC_Z), LT(DVIM, KC_X),   TD(MOU_FN), LT(PVIM, KC_V),     TD(B_NMBR),       TD(N_NMBR), LT(PVIM, KC_M),   TD(ESC_FN), LT(DVIM, KC_BSPC), LT(R_XTND, KC_ENT) ),
-//|-----------------+---------------+-------------+---------------+----------------++---------------+---------------+-------------+------------------+-------------------.
-// END OF GHKN 0
-////////////////////////////////////////////////////////////////////////////////////////////////////////
 */
+[ALPH] = LAYOUT_ortho_3x10(  // layer 0 : default layer
+// [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
+//,---------------+---------------+---------------+---------------+----------------+     +---------------+---------------+-----------------+---------------+-----------------.
+    LT(APPS, KC_Q), LT(SUSR, KC_W), LT(BLIT, KC_E), LT(RSET, KC_R), LT(SYMB, KC_T),                  KC_Y,           KC_U,   LT(BLIT, KC_I), LT(SUSR, KC_O),   LT(APPS, KC_P), \
+//|---------------|---------------|---------------+---------------+----------------|     |---------------|---------------+-----------------+---------------+-----------------|
+      LSFT_T(KC_A),    CTL_T(KC_S),    ALT_T(KC_D),    GUI_T(KC_F), LT(ACCN, KC_G),        LT(ACCN, KC_H),    GUI_T(KC_J),      ALT_T(KC_K),    CTL_T(KC_L),   LSFT_T(KC_SPC), \
+//|---------------|---------------|---------------+---------------+----------------|     |---------------|---------------+-----------------+---------------+-----------------|
+    LT(L_XT, KC_Z), LT(MOUS, KC_X), LT(FNCT, KC_C), LT(PVIM, KC_V), LT(NMBR, KC_B),        LT(SYMB, KC_N), LT(PVIM, KC_M), LT(FNCT, KC_ESC),        KC_BSPC,          KC_ENT ),
+//|---------------+---------------+---------------+---------------+----------------+     +---------------+---------------+-----------------+---------------+-----------------.
+//[BOOKMARK] [FIXME]   //remove any reminder of EN_ALPH, Z_ALPH
+//[BOOKMARK] [FIXME]   //remove any reminder of R_AC_RE, U_ACCE
+// END OF ALPH 0kffff
+//
+
+/* Keymap ACCN 1: ACCN layer
+ * ,----------------------------------.,----------------------------------.
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |      |      |   E  |      |      ||      |   U  |   I  |   O  |      |
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |------+------+------+------+------||------+------+------+------+------|
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |   A  |      |      |      |      ||      |      |      |      |      |
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |------+------+------+------+------||------+------+------+------+------|
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |      |      |      |      |      ||   N  |      |      |      |      |
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * `----------------------------------'`----------------------------------'
+*/
+// ACCN accent layer 1
+[ACCN] = LAYOUT_ortho_3x10(  // layer 1 : ACCN layer 
+  //,-----------+--------+-----------+--------+---------++-----------+-----------+-----------+-----------+----------.
+         _______, _______, F(ACCNTD_E), _______, _______,      _______, F(ACCNTD_U), F(ACCNTD_I), F(ACCNTD_O), _______,
+  //|-----------|--------|-----------+--------+---------||-----------|-----------+-----------+-----------+----------|
+      F(ACCNTD_A), CIRCU_RQ,  GRAVE_RQ, DIAER_RQ, _______,      _______,    DIAER_RQ,    GRAVE_RQ,    CIRCU_RQ, _______,
+  //|-----------|--------|-----------+--------+---------||-----------|-----------+-----------+-----------+----------|
+         _______, _______,    _______, _______, _______,   F(TILDED_N),    _______,    _______,    _______, _______ ),
+  //,-----------+--------+-----------+--------+---------++-----------+-----------+-----------+-----------+----------.
+  // END OF ACCN 1
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/* Keymap RSET 2: RESET & DIAERESIS layer
+ * ,----------------------------------.,----------------------------------.
+ * |      |      |diaers|[RSET]|      ||      |diaers|diaers|diaers|      |
+ * |      |      |   E  |[RSET]| RESET||      |   U  |   I  |   O  |      |
+ * |      |      |      |[RSET]|      ||      |      |      |      |      |
+ * |------+------+------+------+------||------+------+------+------+------|
+ * |diaers|      |      |      |      ||      |      |      |      |      |
+ * |   A  |      |      |      |      ||      |      |      |      |      |
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |------+------+------+------+------||------+------+------+------+------|
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * `----------------------------------'`----------------------------------'
+*/
+// RSET RESET & diaereis layer 2
+[RSET] = LAYOUT_ortho_3x10(  // layer 2 : RESET & diaeresis layer 
+  //,------------+--------+------------+--------+------------++--------+------------+------------+------------+----------.
+          _______, _______, F(DIAERS_E), _______, TD(HRESET),   _______, F(DIAERS_U), F(DIAERS_I), F(DIAERS_O), _______,
+  //|------------|--------|------------+--------+------------||--------|------------+------------+------------+----------|
+      F(DIAERS_A), _______,     _______, _______,    _______,   _______,     _______,     _______,     _______, _______,
+  //|------------|--------|------------+--------+------------||--------|------------+------------+------------+----------|
+          _______, _______,     _______, _______,    _______,   _______,     _______,     _______,     _______, _______ ),
+  //,------------+--------+------------+--------+------------++--------+------------+------------+------------+----------.
+  // END OF RSET 2
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4091,35 +4420,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |        |        |        |        |        | |        |        |        |        |        |
   * |        |        |        |        |        | |        |        |        |        |        |
   * |        |        |        |        |##[NMBR]| |##[NMBR]|        |        |        |        |
-  * | *L_XTND| *[DVIM]| *[MOUS]| *[PVIM]| *[NMBR]| | *[NMBR]| *[PVIM]| *[FNCT]| *[DVIM]| *R_XTND|
+  * | *[L_XT]| *[DVIM]| *[MOUS]| *[PVIM]| *[NMBR]| | *[NMBR]| *[PVIM]| *[FNCT]| *[DVIM]| *[R_XT]|
   * '--------------------------------------------' '--------------------------------------------'
   */
 /*
   *  LEGENDS for all KEYMAPS:
-  *   * access a layer  through one    tap    
-  *  ** access a layer  through double tap
-  *  ## SET    a layer  through double tap
+  *   * access a layer  through single hold    
+  *  ** access a layer  through double hold
+  *  ## SET    a layer  through double hold
   *  @@ get a keystroke through double tap
-  */
+*/
 
 /*
 NEW TAP_DANCE ON LAYERS: 
-* Q_P_SU_TB
-* W_O_APP
+* W_O_SU_BL
+* Q_P_APP
 * A_SH_CP
 * SP_SH_CP
 * LY_NMB
 */
 
+/*
 [LYRS] = LAYOUT_ortho_3x10(  // layer 1 : default layer
 // [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
 //,--------------+------------+---------+---------+------------++-----------+---------+---------+------------+---------------.
-    TD(Q_P_SU_TB), TD(W_O_APP), MO(FNCT),  XXXXXXX,   MO(SYMB),     MO(SYMB),  XXXXXXX, MO(FNCT), TD(W_O_APP), TD(Q_P_SU_TB), \
+      TD(Q_P_APP), TD(W_O_SU_BL), MO(FNCT),  XXXXXXX,   MO(SYMB),     MO(SYMB),  XXXXXXX, MO(FNCT), TD(W_O_SU_BL), TD(Q_P_APP), \
 //|--------------|------------|---------+---------+------------||-----------|---------+---------+------------+---------------|
       TD(A_SH_CP),     KC_LCTL,  KC_LALT,  KC_LGUI,   MO(SYMB),     MO(SYMB),  KC_LGUI,  KC_LALT,     KC_LCTL,  TD(SP_SH_CP), \
 //|--------------|------------|---------+---------+------------||-----------|---------+---------+------------+---------------|
-       MO(L_XTND),    MO(DVIM), MO(MOUS), MO(PVIM), TD(LY_NMB),   TD(LY_NMB), MO(PVIM), MO(MOUS),    MO(DVIM),     MO(R_XTND) ),
+         MO(L_XT),    MO(DVIM), MO(MOUS), MO(PVIM), TD(LY_NMB),   TD(LY_NMB), MO(PVIM), MO(MOUS),    MO(DVIM),       MO(R_XT) ),
 //|--------------+------------+---------+---------+------------++-----------+---------+---------+------------+---------------.
+*/
 // END OF LYRS 1
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4132,20 +4463,47 @@ NEW TAP_DANCE ON LAYERS:
 * |      |      |      |      |      ||      |      |      |      |      |
 * |------+------+------+------+------||------+------+------+------+------|
 * |      |      |      |      |      ||      |      |      |      |      |
-* | SPACE|DELETE|      |   =  | $ / €||   -  |   4  |   5  |   6  |   +  |
+* | SPACE|DELETE|      |   =  | $  € ||   -  |   4  |   5  |   6  |   +  |
 * |  000 |  00  |   0  |      |      ||      |      |      |      |      |
 * |------+------+------+------+------||------+------+------+------+------|
 * |      |      |      |      |      ||      |      |      |      |      |
 * | ENTER|BCKSPC|  TAB |   ,  |   .  ||   /  |   1  |   2  |   3  |   *  |
 * |      |      |      |      |      ||      |      |      |      |      |
 * `----------------------------------'`----------------------------------'
+
+
+
+
+
+
+
+[NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!!
+* ,----------------------------------.,----------------------------------.
+* |      |      |      |      |      ||      |      |      |      |      |
+* |   1  |   2  |   3  |   4  |   5  ||   6  |   7  |   8  |   9  |   0  |
+* |      |      |      |      |      ||      |      |      |      |      |
+* |------+------+------+------+------||------+------+------+------+------|
+* | LSft | LCtl | LAlt | LGui |      ||      |      |      |      |      |
+* | SPACE|DELETE|   =  |   .  | $  € ||   -  |   4  |   5  |   6  |   +  |
+* |  000 |  00  |      |      |      ||      |      |      |      |      |
+* |------+------+------+------+------||------+------+------+------+------|
+* |      |      |      |      |[NMBR]||      |      |      |      |      |
+* | ENTER|BCKSPC|  TAB |   ,  |[NMBR]||   /  |   1  |   2  |   3  |   *  |
+* |      |      |      |      |[NMBR]||      |      |      |      |      |
+* `----------------------------------'`----------------------------------'
+[NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!!
+
+
+
+
+
 */
 [NMBR] = LAYOUT_ortho_3x10(  // layer 2 : numbers layer
   // LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
   //,-----------+------------+-------+--------+------------++-----------+------+------+------+---------.
             KC_1,        KC_2,   KC_3,    KC_4,       KC_5,         KC_6,  KC_7,  KC_8,  KC_9,    KC_0,
   //|-----------|------------|-------+--------+------------||-----------|------+------+------+---------|
-      TD(TRIP_0),  TD(DOUB_0),  KC_P0, KC_PEQL, TD(DO_EUR),      KC_PMNS,  KC_4,  KC_5,  KC_6, KC_PPLS,
+      TD(TRIP_0),  TD(DOUB_0),  KC_P0, KC_PEQL, TD(G_DOEU),      KC_PMNS,  KC_4,  KC_5,  KC_6, KC_PPLS,
   //|-----------|------------|-------+--------+------------||-----------|------+------+------+---------|
          KC_PENT,     KC_BSPC, KC_TAB, KC_COMM, TD(DONMBR),   TD(SLNMBR),  KC_1,  KC_2,  KC_3, KC_PAST ),
   //,-----------+------------+-------+--------+------------++-----------+------+------+------+---------.
@@ -4161,23 +4519,47 @@ NEW TAP_DANCE ON LAYERS:
  * |      |      |      |      |      ||      |      |      |      |      |
  * |------+------+------+------+------||------+------+------+------+------|
  * |      |      |      |      |      ||      |      |      |      |      |
- * | '  " |   @  |   +  |   -  | $   €||   |  |   {  |   }  |   :  |   ;  |
+ * | '  " |   @  |   +  |   -  | $  € ||   |  |   {  |   }  |   :  |   ;  |
  * |      |      |      |      |      ||      |      |      |      |      |
  * |------+------+------+------+------||------+------+------+------+------|
  * |      |      |      |      |      ||      |      |      |      |      |
  * | !  ¡ | ?  ¿ |   <  |   >  |   #  ||   &  |   [  |   ]  |   ,  |   .  |
  * |      |      |      |      |      ||      |      |      |      |      |
  * `----------------------------------'`----------------------------------'
+
+
+
+
+[NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!!
+ * ,----------------------------------.,----------------------------------.
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |   +  |   @  |   #  |   =  |   %  || &  ^ |   (  |   )  |   _  |   -  |
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * |------+------+------+------+------||------+------+------+------+------|
+ * | LSft | LCtl | LAlt | LGui |      ||      | LGui | LAlt | LCtl | LSft |
+ * |      |      |      |      |      ||      |      |      |      |      |
+ * | `  ~ | '  " |   \  |   /  | $  € ||   |  |   [  |   ]  |   ,  |   .  |
+ * |------+------+------+------+------||------+------+------+------+------|
+ * |      |      |      |      |      ||[SYMB]|      |      |      |      |
+ * | !  ¡ | ?  ¿ |   <  |   >  |   *  ||[SYMB]|   {  |   }  |   :  |   ;  |
+ * |      |      |      |      |      ||[SYMB]|      |      |      |      |
+ * `----------------------------------'`----------------------------------'
+[NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!!
+
+
+
+
+
 */
 // SYMBOLS 
 [SYMB] = LAYOUT_ortho_3x10(  // layer 3: symbols layer
-//,------------+-----------+---------------+---------------+------------++-----------+---------------+-------------+-------------+---------------.
-         KC_GRV,    KC_TILD,         KC_EQL,        KC_UNDS,    KC_PERC,   TD(BSL_CI),        KC_LPRN,      KC_RPRN,      KC_ASTR,       KC_SLSH,
-//|------------|-----------|---------------+---------------+------------||-----------|---------------+-------------+-------------+---------------|
-    TD(QUOT_D),       KC_AT,        KC_PLUS,        KC_MINS,  TD(DO_EUR),      KC_PIPE,        KC_LCBR,      KC_RCBR,      KC_COLN,       KC_SCLN,
-//|------------|-----------|---------------+---------------+------------||-----------|---------------+-------------+-------------+---------------|
-    TD(EXCLAM),  TD(QUESTI),        KC_LABK,        KC_RABK,    KC_HASH,      KC_AMPR,        KC_LBRC,      KC_RBRC,      KC_COMM,        KC_DOT ),
-//,------------+-----------+---------------+---------------+------------++-----------+---------------+-------------+-------------+---------------.
+//,---------------+---------------+---------------+---------------+-----------+          +----------------+---------------+---------------+---------------+---------------.
+           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,                 TD(Y_AMCI),        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,    
+//|---------------|---------------|---------------+---------------+-----------|          |----------------|---------------+---------------+---------------+---------------|
+    LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),                      KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
+//|---------------|---------------|---------------+---------------+-----------|          |----------------|---------------+---------------+---------------+---------------|
+        TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK,    KC_ASTR,            LT(SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_COLN,       KC_SCLN ),
+//,---------------+---------------+---------------+---------------+-----------+          +----------------+---------------+---------------+---------------+---------------.
 // [info] EURO: http://www.fileformat.info/info/unicode/char/search.htm?q=euro&preview=entity
 // END OF SYMB 3
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4222,7 +4604,7 @@ NEW TAP_DANCE ON LAYERS:
  * |      |      | Apps |Contrl|Window||  APP | APP  | APP  |  Pad |••SIRI|
  * |------+------+------+------+------||------+------+------+------+------|
  * |      |      |      |      |      ||      |      |      |      |      |
- * | Caps |Dictat| EMPTY| Speak|Active|| Close| Prev | Next | Dash | SPACE|
+ * | Caps |Dictat| EMPTY| Speak|Active|| Close| Prev | Next | Dash | SPACE| // Active Window  // ACTV_WIN
  * |      |      |      |      |Window||Window|Window|Window| Board|      |
  * |------+------+------+------+------||------+------+------+------+------|
  * |APP   |APP   |APP   |APP   |      ||      |      |      |      |      |
@@ -4231,56 +4613,59 @@ NEW TAP_DANCE ON LAYERS:
  * '------+------+------+------+------'`------+------+------+------+------'
 */
 
-/* Keymap L_XTND 5: LEFT eXtended default layer
+/* Keymap L_XT 5: LEFT eXtended default layer
  * ,-----------------------------------.,----------------------------------.
- * |      |      | Vol. | Vol. |      ||      |      |      |      | •Spot|
- * |      | Mute |      |      |      || Close| Prev | Next |Launch| Light|
- * |      |      | Down |  Up  |      ||  APP | APP  | APP  |  Pad |••SIRI|
- * |------+------+------+------+------||------+------+------+------+------|
  * |      |      |      |      |      ||      |      |      |      |      |
- * |      |Rewind|  UP  |Forwrd| Play || Close| Prev | Next | Dash | SPACE|
- * |      |      |      |      |      ||Window|Window|Window| Board|      |
+ * | Mute |Rewind| Play |Forwrd|      || Close| Prev | Next |Windws|  Tab |
+ * |      |      |      |      |      ||  APP | APP  | APP  | Apps |      |
+ * |------+------+------+------+------||------+------+------+------+------|
+ * |      |      |      |      |Reopen||      |      |      |      |      |
+ * |      |Dictat|  UP  | Speak|window|| Close| Prev | Next |Mision| Caps |
+ * |      |      |      |      | / tab||Window|Window|Window|Contrl| Lock |
  * |------+------+------+------+------||------+------+------+------+------|
  * |@@@@@@|      |      |      |      ||      |      |      |      |      |
- * |@@@@@@| LEFT | DOWN | RIGHT|Reopen|| Close| Prev | Next |DELETE| ENTER|
- * |@@@@@@|      |      |      |  tab ||  tab | tab  | tab  |      |      |
+ * |@@@@@@| LEFT | DOWN | RIGHT|  Tab || Close| Prev | Next |DELETE| Desk |
+ * |@@@@@@|      |      |      |      ||  tab | tab  | tab  |      |      |
  * '------+------+------+------+------'`------+------+------+------+------'
 */
-[L_XTND] = LAYOUT_ortho_3x10(  // layer 5: LEFT eXtended default layer
-//|---------|------------|----------+--------+----------||--------|---------|---------|--------+----------|
-    KC__MUTE, KC__VOLDOWN, KC__VOLUP, KC_SLCK,  KC_PAUS,   CLOSE_A, PREV_APP, NEXT_APP, LNCHPAD, SPT_SIRI,
-//|---------|------------|----------+--------+----------||--------|---------|---------|--------+----------|
-     _______,     KC_MRWD,     KC_UP, KC_MFFD,  KC_MPLY,   CLOSE_W, PREV_WIN, NEXT_WIN, DASHBRD,   KC_SPC,
-//|---------|------------|----------+--------+----------||--------|---------|---------|--------+----------|
-     _______,     KC_LEFT,   KC_DOWN, KC_RGHT, REOPEN_L,   CLOSE_T, PREV_TAB, NEXT_TAB,  KC_DEL,   KC_ENT ), 
-//|---------|------------|----------+--------+----------||--------|---------|---------|--------+----------|
-// END OF L_XTND 5
+[L_XT] = LAYOUT_ortho_3x10(  // layer 5: LEFT eXtended default layer
+//|---------|--------|--------+--------+----------||--------|---------|---------|---------+---------------|
+    KC__MUTE, KC_MRWD, KC_MPLY, KC_MFFD,  XXXXXXX,   CLOSE_A, PREV_APP, NEXT_APP, APP_WIND,        KC_TAB,
+//|---------|--------|--------+--------+----------||--------|---------|---------|---------+---------------|
+     _______,  DICTAD,   KC_UP,   SPEAK, REOPEN_L,   CLOSE_W, PREV_WIN, NEXT_WIN, MISS_CTL, F(RXTND_CAPS),
+//|---------|--------|--------+--------+----------||--------|---------|---------|---------+---------------|
+     _______, KC_LEFT, KC_DOWN, KC_RGHT,   KC_TAB,   CLOSE_T, PREV_TAB, NEXT_TAB,   KC_DEL,         DESK ), 
+//|---------|--------|--------+--------+----------||--------|---------|---------|---------+---------------|
+// END OF L_XT 5
 // KC_BRIGHTNESS_DOWN(KC_BRID); KC_BRIGHTNESS_UP(KC_BRIU)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-/* Keymap R_XTND 6: RIGHT eXtended default layer
+/* Keymap R_XT 6: RIGHT eXtended default layer
  * ,----------------------------------.,----------------------------------.
- * |      |      |      |      |      ||      | Vol. | Vol. |      |      |
- * |  Tab | Desk |Windws|Mision|Float.||      |      |      | Mute |      |
- * |      |      | Apps |Contrl|Window||      |  Up  | Down |      |      |
+ * |      |      |      |      |      ||Bright|Bright| Vol. | Vol. |      |
+ * |  Tab | Desk |Windws|Mision|Float.||      |      |      |      | Mute |
+ * |      |      | Apps |Contrl|Window||  Up  | Down |  Up  | Down |      |
  * |------+------+------+------+------||------+------+------+------+------|
- * |      |      |Sublim|      |      ||      |      |      |      |      |
- * | Caps |Dictat|Text 3| Speak|Active||      |      |  UP  |      |      |
- * |      |      |Histry|      |Window||      |      |      |      |      |
+ * |      |      |      |      |Sublim|| Zoom | Zoom |      | Zoom |      | // Active Window  // ACTV_WIN
+ * | Caps | REDO |Dictat| Speak|Text 3||      |      |  UP  |      |      | // Zoom shortcuts duplicated
+ * |      |      |      |      |Histry||ON/OFF|  In  |      |  Out |      | // Original ones are on [SUSR]
  * |------+------+------+------+------||------+------+------+------+------|
  * |      |      |      |      | PASTE||      |      |      |      |@@@@@@|
- * |      |      |      |      |   &  ||      | LEFT | DOWN | RIGHT|@@@@@@|
- * | UNDO |  CUT | COPY | PASTE| MATCH|| REDO |      |      |      |@@@@@@|
+ * |      |      |      |      |   &  ||  Tab | LEFT | DOWN | RIGHT|@@@@@@|
+ * | UNDO |  CUT | COPY | PASTE| MATCH||      |      |      |      |@@@@@@|
  * '------+------+------+------+------'`------+------+------+------+------'
  */
-[R_XTND] = LAYOUT_ortho_3x10(  // layer 6: RIGHT eXtended default layer
-//|--------------|-------|---------+---------+----------||--------|--------|----------|------------+----------|
-           KC_TAB,   DESK, APP_WIND, MISS_CTL, FLOA_WIN,   KC_PAUS, KC_SLCK, KC__VOLUP, KC__VOLDOWN, KC__MUTE,
-//|--------------|-------|---------+---------+----------||--------|--------|----------|------------+----------|
-    F(RXTND_CAPS), DICTAD,  P_ST_HY,    SPEAK, ACTV_WIN,   XXXXXXX, _______,     KC_UP,     _______,  _______,
-//|--------------|-------|---------+---------+----------||--------|--------|----------|------------+----------|
-          XT_UNDO, XT_CUT,  XT_COPY,  XT_PAST,  XT_MTCH,   XT_REDO, KC_LEFT,   KC_DOWN,     KC_RGHT,  _______ ), 
-//|--------------|-------|---------+---------+----------||--------|--------|----------|------------+----------|
-// END OF R_XTND 6
+/*
+[R_XT] = LAYOUT_ortho_3x10(  // layer 6: RIGHT eXtended default layer
+//|--------------|--------|---------+---------+----------||--------|--------|----------|------------+----------|
+           KC_TAB,    DESK, APP_WIND, MISS_CTL, FLOA_WIN,   KC_PAUS, KC_SLCK, KC__VOLUP, KC__VOLDOWN, KC__MUTE,
+//|--------------|--------|---------+---------+----------||--------|--------|----------|------------+----------|
+    F(RXTND_CAPS), XT_REDO,   DICTAD,    SPEAK,  P_ST_HY,   LCTL(LALT(LGUI(KC_SCLN))), LCTL(LALT(LGUI(KC_EQL))), KC_UP, LCTL(LALT(LGUI(KC_MINS))),  _______,  // Active Window  // ACTV_WIN
+//|--------------|--------|---------+---------+----------||--------|--------|----------|------------+----------|
+          XT_UNDO,  XT_CUT,  XT_COPY,  XT_PAST,  XT_MTCH,    KC_TAB, KC_LEFT,   KC_DOWN,     KC_RGHT,  _______ ), 
+//|--------------|--------|---------+---------+----------||--------|--------|----------|------------+----------|
+// [BOOKMARK]  // [FIXME] Remove UNDO, REDO, CUT, COPY, PASTE , PASTE&MATCH   because is faster and more intuitive use them directly through COMMAND modifier. 
+// END OF R_XT 6
+*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /* Keymap APPS 7: APPS layer
@@ -4301,11 +4686,11 @@ NEW TAP_DANCE ON LAYERS:
 // APPS layer 7
 [APPS] = LAYOUT_ortho_3x10(  // layer 7 : apps layer
   //,------------+------------+------------+------------+-------------++------------+------------+------------+------------+--------------.
-      APP_Q_QQQQQ, APP_W_TWTTR, APP_E_EVERN, APP_R_RRRRR, APP_T_TERMI,   APP_Y_TYPIN, APP_U_UUUUU, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
+      APP_Q_QQQQQ, APP_W_TWTTR, APP_E_EVERN, APP_R_RRRRR, APP_T_TERMI,   APP_Y_TYPIN, APP_U_SUBLI, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
   //|------------|------------|------------+------------+-------------||------------|------------+------------+------------+--------------|
-      APP_A_SNOTE, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,   APP_H_SKTCH, APP_J_SUBLI, APP_K_KVIEW, APP_L_CLNDR, APP_SP_SPSP,
+      APP_A_SNOTE, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,   APP_H_SKTCH, APP_J_JJJJJ, APP_K_KVIEW, APP_L_CLNDR, APP_SP_SPSP,
   //|------------|------------|------------+------------+-------------||------------|------------+------------+------------+--------------|
-      APP_Z_STUDI, APP_X_XXXXX, APP_C_CALCU, APP_V_VVVVV, APP_B_BBBBB,   APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB ),
+      APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_VVVVV, APP_B_BOOKS,   APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB ),
   //,------------+------------+------------+------------+-------------++------------+------------+------------+------------+--------------.
 // END OF APPS 7
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4315,34 +4700,58 @@ NEW TAP_DANCE ON LAYERS:
 
 /* Keymap SUSR 8: Super USeR productivity layer
 * ,-----------------------------------.,---------------------------------.
-* |@@@@@@|      |      |      |      ||      |      |      |      |@@@@@@| 
-* |@@@@@@|      |      |onHold|      ||      |      |      |      |@@@@@@|
-* |      |LOGOUT|LCKSCR| RESET|      ||      |      |      |      |      |
+* |      |@@@@@@|      |      |      ||      |      |      |@@@@@@|      |
+* |      |@@@@@@|      |onHold|      ||      |      |      |@@@@@@|      |
+* |LOGOUT|      |LCKSCR| RESET|      ||      |      |      |      |      |
 * |------+------+------+------+------||------+------+------+------+------|
-* | Menu | Dock | Tool |Status|Float.||      |      |      |      |      |
-* | _bar | _bar | _bar | _bar |Window||      |      |      |      |      |
-* |      |      |      |      |      ||      |      |      |      |      |
-* |onHold|onHold|onHold|onHold|onHold||      | LGui | LAlt | LCtl | LSft |
-* | SLEEP|K_MENU|KILL_A|SHUT_D|RSTART||      |      |      |      |      |
+* | Menu | Dock | Tool |Status|Float.||Toogle|      |      |      |Toogle|
+* | _bar | _bar | _bar | _bar |Window||Keybrd| Zoom | Zoom | Zoom |Smooth|
+* |      |      |      |      |      || Focus|      |      |      |      |
+* |onHold|onHold|onHold|onHold|onHold||follo-|ON/OFF|  In  |  Out |Images|
+* | SLEEP|K_MENU|KILL_A|SHUT_D|RSTART|| wing |      |      |      |      |
 * |------+------+------+------+------||------+------+------+------+------|
 * |      |      |      |      |      ||      |      |      |      |      |
 * |      |      |      |      |      ||      |      |      |      |      |
 * | RSft | RCtl | RAlt | RGui |      ||      | RGui | RAlt | RCtl | RSft |
 * '------+------+------+------+------'`------+------+------+------+------'
+
+
+
+
+[NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!!
+* ,-----------------------------------.,---------------------------------.
+* |      |@@@@@@|      |      |      ||      |      |      |@@@@@@|      |
+* |      |@@@@@@|      |onHold|      ||midVol|minVol|      |@@@@@@| Vol. |
+* |LOGOUT|LCKSCR|      | RESET|      || lev.8| lev.1|Vol.Up|VolDwn| Mute |
+* |------+------+------+------+------||------+------+------+------+------|
+* |      |Rewind| Play/|Forwrd|Toogle||Toogle| Zoom | Zoom | Zoom |Invert|
+* |      |      | Pause|      |Smooth||Keybrd|ON/OFF|  IN  |  OUT |Colors|
+* |      |      |      |      |Images||follow|      |      |      |      |
+* |RShift|RCntrl| RAlt | RCmnd|      || Focus| RCmnd| RAlt |RCntrl|RShift|
+* |------+------+------+------+------||------+------+------+------+------|
+* | Menu | Dock | Tool |Status|Float.||Cntrst|Bright|Bright|Bright|Cntrst|
+* | _bar | _bar | _bar | _bar |Window||      |  min.|      |      |      |
+* |      |      |      |      |      ||      | level|      |      |      |
+* | SLEEP|KILLAP|K_MENU|SHUT_D|RSTART||  Up  |   1  |  Up  | Down | Down |
+* '------+------+------+------+------'`------+------+------+------+------'
+[NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!![NEW]!!!
+
+
+
+
 */
 // SUSR layer 8
 [SUSR] = LAYOUT_ortho_3x10(  // layer 8: Super USeR productivity layer
-//|-----------|-----------|-----------+-----------+------------||--------|--------|--------|--------+----------.
-       XXXXXXX, TD(LOGOUT),    LCK_SCR, TD(HRESET),    XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,
+//|-----------|-----------|-----------+-----------+------------||--------|--------|--------|--------+----------.  //[FIXME] //[BOOKMARK]
+    TD(LOGOUT),    LCK_SCR,    XXXXXXX, TD(HRESET),    XXXXXXX,   VOL_8,   VOL_1, KC__VOLUP, KC__VOLDOWN,  KC__MUTE,   //TRANSLATE THE FOLLOWING GALIMATIAS INTO #define definitions
 //|-----------|-----------|-----------+-----------+------------||--------|--------|--------|--------+----------|
-    TD(SLEP_M), TD(KILM_D), TD(KILA_T), TD(SHUT_S), TD(RSTT_F),   XXXXXXX, _______, _______, _______,  _______,
-//               ALT+CMD+ESC SFT+ALT+CMD+ESC
+       KC_RSFT,   RCTL_T(KC_F7), RALT_T(KC_SPC), RGUI_T(KC_F9), ZOOM_SMOOTH,   ZOOM_FOLLOW, TD(RG_ZOOM), TD(RA_ZOIN), TD(RC_ZOUT), TD(RS_INCO),    //RSFT_T(kc) 
+//            SFT+ALT+CMD+ESC  ALT+CMD+ESC
 //|-----------|-----------|-----------+-----------+------------||--------|--------|--------|--------+----------|
-       KC_RSFT,    KC_RCTL,    KC_RALT,    KC_RGUI,    XXXXXXX,   XXXXXXX, KC_RGUI, KC_RALT, KC_RCTL,  KC_RSFT ), 
+    SLEP_MNUBAR, KILAP_TOLBR, KILMNU_DOCK,  SHUTD_STATB, RSTRT_FLOAT,   CONTRST_UP, BRIGHT_1, KC_PAUS, KC_SLCK,  CONTRST_DOWN ), 
 //|-----------|-----------|-----------+-----------+------------||--------|--------|--------|--------+----------'
 // END OF SUSR 8
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 /* Keymap PVIM 9: PVIM layer
@@ -4353,11 +4762,11 @@ NEW TAP_DANCE ON LAYERS:
  * |------+------+------+------+------||------+------+------+------+------|
  * |      |      |      |      |      ||Center| Move | Move | Move | Move |
  * |[SVIM]|      |      |      |      ||LineIn|      |      |      |      |
- * |      |      |      |      |      || View | LEFT |  UP  | DOWN | RIGHT|
+ * |      |      |[DVIM]|      |      || View | LEFT |  UP  | DOWN | RIGHT|
  * |------+------+------+------+------||------+------+------+------+------|
  * |      |      |      |@@@@@@|      || Move | Move | Move | Move | Move |
  * |      |      |      |@@@@@@|      ||Prgrph|      | Page | Page |      |
- * |[XVIM]|[AVIM]|[ZVIM]|@@@@@@|      || Down | HOME |  UP  | DOWN |  END |
+ * |[ZVIM]|[XVIM]|[CVIM]|@@@@@@|      || Down | HOME |  UP  | DOWN |  END |
  * `----------------------------------'`----------------------------------'
 */
 // PVIM layer 9
@@ -4367,13 +4776,15 @@ NEW TAP_DANCE ON LAYERS:
 //#define K_PERV(kc) send_string(kc)
 //[delete]
 [PVIM] = LAYOUT_ortho_3x10(  // layer 9 : PVIM layer
-  //,---------+---------+---------+--------+---------||------+--------------+--------------+----------------+--------------.
-       XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,  PVIM_Y,   TD(PVIM_uU), LALT(KC_LEFT),   LALT(KC_RGHT), TD(PVIM_pP),  // LCTL(LGUI(KC_UP))
-  //|---------|---------|---------+--------+---------||------+--------------+--------------+----------------+--------------|
-       KC_LSFT,  _______,  _______, _______, XXXXXXX,  PVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,     KC_RGHT,
-  //|---------|---------|---------+--------+---------||------+--------------+--------------+----------------+--------------|
-      MO(ZVIM), MO(AVIM), MO(XVIM), _______, XXXXXXX,  PVIM_N, LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),  // LCTL(LGUI(KC_DOWN))
-  //,---------+---------+---------+--------+---------||------+--------------+--------------+----------------+--------------.
+  //,---------+---------+---------+---------+---------||-------------------+--------------+--------------+----------------+--------------.
+       XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,    LCTL(LGUI(KC_UP)),   TD(PVIM_uU),  TD(PVIM_iI),      TD(PVIM_oO), TD(PVIM_pP),    // LCTL(LGUI(KC_UP))
+  //|---------|---------|---------+---------+---------||-------------------+--------------+--------------+----------------+--------------|
+       KC_LSFT,  _______, MO(DVIM),  _______, XXXXXXX,               PVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,     KC_RGHT,
+  //|---------|---------|---------+---------+---------||-------------------+--------------+--------------+----------------+--------------|
+      MO(CVIM), MO(XVIM), MO(ZVIM), MO(PVIM), XXXXXXX,  LCTL(LGUI(KC_DOWN)), LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),  // LCTL(LGUI(KC_DOWN))
+  //,---------+---------+---------+---------+---------||-------------------+--------------+--------------+----------------+--------------.
+//     MO(CVIM), MO(XVIM), MO(ZVIM), MO(PVIM), XXXXXXX, //this allo us change from any ?VIM layer to each other ?VIM layer, ...
+//                                                      //...because we put '_______' in this locations in the rest of the ?VIM layers.
   // END OF PVIM 9
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4385,13 +4796,13 @@ NEW TAP_DANCE ON LAYERS:
  * |      |      |      |      |      ||      | Begin| Word | Word |End Of|
  * |      |      |      |      |      ||      |Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
  * |------+------+------+------+------||------+------+------+------+------|
- * |Delete|Delete|Delete|Delete|      ||      |Delete|Delete|Delete|Delete|
- * | Char | Line | Line | Char |      || Yank | Char | Line | Line | Char |
- * | LEFT |  UP  | DOWN | RIGHT|      ||      | LEFT |  UP  | DOWN | RIGHT|
+ * |      |      |[DVIM]|      |      ||      |Delete|Delete|Delete|Delete|
+ * |      |      |[DVIM]|      |      || Yank | Char | Line | Line | Char |
+ * |      |      |[DVIM]|      |      ||      | LEFT |  UP  | DOWN | RIGHT|
  * |------+------+------+------+------||------+------+------+------+------|
- * |      |@@@@@@|      |@@@@@@|      ||      |Delete|Delete|@@@@@@|Delete|
- * |      |      |      |@@@@@@|      ||      |      | Page |Delete|      |
- * |      |      |      |@@@@@@|      ||      | HOME |  UP  |PgDown|  END |
+ * |      |      |      |[PVIM]|      ||      |Delete|Delete|@@@@@@|Delete|
+ * |      |      |      |[PVIM]|      ||      |      | Page |Delete|      |
+ * |      |      |      |[PVIM]|      ||      | HOME |  UP  |PgDown|  END |
  * `----------------------------------'`----------------------------------'
 */
 // DVIM layer 10
@@ -4399,7 +4810,7 @@ NEW TAP_DANCE ON LAYERS:
   //,--------+--------+--------+--------+---------++--------+------------+--------+--------+-------------.
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, TD(DVIM_uU),  DVIM_I,  DVIM_O, TD(DVIM_pP),  // DVIM_Y is empty
   //|--------|--------|--------+--------+---------||--------+------------+--------+--------+-------------|
-       DVIM_J,  DVIM_K,  DVIM_L, DVIM_SP, XXXXXXX,    DVIM_H,      DVIM_J,  DVIM_K,  DVIM_L,     DVIM_SP,
+      _______, _______, _______, _______, XXXXXXX,    DVIM_H,      DVIM_J,  DVIM_K,  DVIM_L,     DVIM_SP,
   //|--------|--------|--------+--------+---------||--------+------------+--------+--------+-------------|
       _______, _______, _______, _______, XXXXXXX,   XXXXXXX,      DVIM_M, DVIM_ES, DVIM_BS,     DVIM_EN ),// DVIM_N is empty
   //,--------+--------+--------+--------+---------++--------+------------+--------+--------+-------------.
@@ -4441,7 +4852,7 @@ NEW TAP_DANCE ON LAYERS:
 
 
 
-/* Keymap XVIM 11: XVIM layer
+/* Keymap ZVIM 11: ZVIM layer
  * ,----------------------------------.,----------------------------------.
  * |      |      |      |      |      || Copy |Upper |Capita|      |Lower |
  * |      |      |      |      |      || prev.|case  |lize  |      |case  |
@@ -4456,50 +4867,21 @@ NEW TAP_DANCE ON LAYERS:
  * |@@@@@@|      |      |@@@@@@|      ||prgrph| HOME |  UP  | DOWN |  END |
  * `----------------------------------'`----------------------------------'
 */
-// XVIM layer 11
-[XVIM] = LAYOUT_ortho_3x10(  // layer 11 : XVIM layer
+// ZVIM layer 11
+[ZVIM] = LAYOUT_ortho_3x10(  // layer 11 : ZVIM layer
   //,--------+--------+--------+--------+---------++-------+-------+--------+--------+---------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XVIM_Y, XVIM_U,  XVIM_I, XXXXXXX,  XVIM_P,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   ZVIM_Y, ZVIM_U,  ZVIM_I, XXXXXXX,  ZVIM_P,
   //|--------|--------|--------+--------+---------||-------+-------+--------+--------+---------|
-      _______, _______, _______, _______, XXXXXXX,   XVIM_H, XVIM_J,  XVIM_K,  XVIM_L, XVIM_SP,
+      _______, _______, _______, _______, XXXXXXX,   ZVIM_H, ZVIM_J,  ZVIM_K,  ZVIM_L, ZVIM_SP,
   //|--------|--------|--------+--------+---------||-------+-------+--------+------------------|
-      _______, _______, _______, _______, XXXXXXX,   XVIM_N, XVIM_M, XVIM_ES, XVIM_BS, XVIM_EN ),
+      _______, _______, _______, _______, XXXXXXX,   ZVIM_N, ZVIM_M, ZVIM_ES, ZVIM_BS, ZVIM_EN ),
   //,--------+--------+--------+--------+---------++-------+-------+--------+--------+---------.
-  // END OF XVIM 11
+  // END OF ZVIM 11
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-/* Keymap ZVIM 12: ZVIM layer
- * ,----------------------------------.,----------------------------------.
- * |      |      |      |      |      ||Insert|Trans |      |      |Trans |
- * |      |      |      |      |      ||LnAbve|pose  |      |      |pose  |
- * |      |      |      |      |      ||prgrph| Words|      |      |Chrctr|
- * |------+------+------+------+------||------+------+------+------+------|
- * |      |      |      |      |      ||Select|Select|Select|Select|Select|
- * |      |      |      |      |      ||& Copy|& Copy|& Copy|& Copy|& Copy|
- * |      |      |      |      |      ||Chrctr| Word | Line |prgrph|  All |
- * |------+------+------+------+------||------+------+------+------+------|
- * |      |      |      |@@@@@@|      ||Insert|      |      |      |      |
- * |      |      |@@@@@@|@@@@@@|      ||LnBlow|      |      |      |      |
- * |      |      |@@@@@@|@@@@@@|      ||prgrph|      |      |      |      |
- * `----------------------------------'`----------------------------------'
-*/
-// ZVIM layer 12 
-[ZVIM] = LAYOUT_ortho_3x10(  // layer 12 : ZVIM layer
-  //,--------+--------+--------+--------+---------++-------+--------+--------+--------+---------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   ZVIM_Y,  ZVIM_U, XXXXXXX, XXXXXXX,  ZVIM_P,
-  //|--------|--------|--------+--------+---------||-------+--------+--------+--------+---------|
-      _______, _______, _______, _______, XXXXXXX,   ZVIM_H,  ZVIM_J,  ZVIM_K,  ZVIM_L, ZVIM_SP,
-  //|--------|--------|--------+--------+---------||-------+--------+--------+--------+---------|
-      _______, _______, _______, _______, XXXXXXX,   ZVIM_N, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX ),
-  //,--------+--------+--------+--------+---------++-------+--------+--------+--------+---------.
-  // END OF ZVIM 12
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-/* Keymap AVIM 13: AVIM layer
+/* Keymap XVIM 12: XVIM layer
  * ,----------------------------------.,----------------------------------.
  * |      |      |      |      |      || Super|Align |Align |Align |Align |
  * |      |      |      |      |      ||script|      |      | Justi|      |
@@ -4514,18 +4896,47 @@ NEW TAP_DANCE ON LAYERS:
  * |      |@@@@@@|      |@@@@@@|      ||      |      |      |      |      |
  * `----------------------------------'`----------------------------------'
 */
-// AVIM layer 13
-[AVIM] = LAYOUT_ortho_3x10(  // layer 13 : AVIM layer
+// XVIM layer 12
+[XVIM] = LAYOUT_ortho_3x10(  // layer 12 : XVIM layer
   //,--------+--------+--------+--------+---------++-------+-------+--------+--------+---------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   AVIM_Y, AVIM_U,  AVIM_I,  AVIM_O,  AVIM_P,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XVIM_Y, XVIM_U,  XVIM_I,  XVIM_O,  XVIM_P,
   //|--------|--------|--------+--------+---------||-------+-------+--------+--------+---------|
-      _______, _______, _______, _______, XXXXXXX,   AVIM_H, AVIM_J, XXXXXXX, XXXXXXX, AVIM_SP,
+      _______, _______, _______, _______, XXXXXXX,   XVIM_H, LGUI(KC_LBRC), XXXXXXX, XXXXXXX, LGUI(KC_RBRC),
   //|--------|--------|--------+--------+---------||-------+-------+--------+--------+---------|
-      _______, _______, _______, _______, XXXXXXX,   AVIM_N, AVIM_M, AVIM_ES, XXXXXXX, XXXXXXX ),
+      _______, _______, _______, _______, XXXXXXX,   XVIM_N, XVIM_M, XVIM_ES, XXXXXXX, XXXXXXX ),
   //,--------+--------+--------+--------+---------++-------+-------+--------+--------+---------.
-  // END OF AVIM 13
+  // END OF XVIM 12
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+/* Keymap CVIM 13: CVIM layer
+ * ,----------------------------------.,----------------------------------.
+ * |      |      |      |      |      ||Insert|Trans |      |      |Trans |
+ * |      |      |      |      |      ||LnAbve|pose  |      |      |pose  |
+ * |      |      |      |      |      ||prgrph| Words|      |      |Chrctr|
+ * |------+------+------+------+------||------+------+------+------+------|
+ * |      |      |      |      |      ||Select|Select|Select|Select|Select|
+ * |      |      |      |      |      ||& Copy|& Copy|& Copy|& Copy|& Copy|
+ * |      |      |      |      |      ||Chrctr| Word | Line |prgrph|  All |
+ * |------+------+------+------+------||------+------+------+------+------|
+ * |      |      |      |@@@@@@|      ||Insert|      |      |      |      |
+ * |      |      |@@@@@@|@@@@@@|      ||LnBlow|      |      |      |      |
+ * |      |      |@@@@@@|@@@@@@|      ||prgrph|      |      |      |      |
+ * `----------------------------------'`----------------------------------'
+*/
+// CVIM layer 13
+[CVIM] = LAYOUT_ortho_3x10(  // layer 13 : CVIM layer
+  //,--------+--------+--------+--------+---------++-------+--------+--------+--------+---------.
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   CVIM_Y,  CVIM_U, XXXXXXX, XXXXXXX,  CVIM_P,
+  //|--------|--------|--------+--------+---------||-------+--------+--------+--------+---------|
+      _______, _______, _______, _______, XXXXXXX,   CVIM_H,  CVIM_J,  CVIM_K,  CVIM_L, CVIM_SP,
+  //|--------|--------|--------+--------+---------||-------+--------+--------+--------+---------|
+      _______, _______, _______, _______, XXXXXXX,   CVIM_N, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX ),
+  //,--------+--------+--------+--------+---------++-------+--------+--------+--------+---------.
+  // END OF CVIM 13
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 /* Keymap MOUS 14: Mouse layer
@@ -4615,11 +5026,11 @@ NEW TAP_DANCE ON LAYERS:
 // TEST transparent layer 31
 [TEST] = LAYOUT_ortho_3x10(  // layer 31 : TEST layer 
   //,-----------+--------+-----------+--------+---------++-----------+-----------+-----------+-----------+----------.
-         _______, _______, F(E_VOWEL), _______, _______,      _______, F(U_VOWEL), F(I_VOWEL), F(O_VOWEL), _______,
+         _______, _______, F(ACCNTD_E), _______, _______,      _______, F(ACCNTD_U), F(ACCNTD_I), F(ACCNTD_O), _______,
   //|-----------|--------|-----------+--------+---------||-----------|-----------+-----------+-----------+----------|
-      F(A_VOWEL), _______,    _______, _______, _______,      _______,    _______,    _______,    _______, _______,
+      F(ACCNTD_A), _______,    _______, _______, _______,      _______,    _______,    _______,    _______, _______,
   //|-----------|--------|-----------+--------+---------||-----------|-----------+-----------+-----------+----------|
-         _______, _______,    _______, _______, _______,   F(N_TILDE),    _______,    _______,    _______, _______ )
+         _______, _______,    _______, _______, _______,   F(TILDED_N),    _______,    _______,    _______, _______ )
   //,-----------+--------+-----------+--------+---------++-----------+-----------+-----------+-----------+----------.
   // END OF TEST 31
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4628,12 +5039,20 @@ NEW TAP_DANCE ON LAYERS:
 
 
 const uint16_t PROGMEM fn_actions[] = {
-  [A_VOWEL] = ACTION_FUNCTION(A_VOWEL),  // Calls action_function()
-  [E_VOWEL] = ACTION_FUNCTION(E_VOWEL),
-  [I_VOWEL] = ACTION_FUNCTION(I_VOWEL),
-  [O_VOWEL] = ACTION_FUNCTION(O_VOWEL),
-  [U_VOWEL] = ACTION_FUNCTION(U_VOWEL),
-  [N_TILDE] = ACTION_FUNCTION(N_TILDE),
+  [ACCNTD_A] = ACTION_FUNCTION(ACCNTD_A),
+  [ACCNTD_E] = ACTION_FUNCTION(ACCNTD_E),
+  [ACCNTD_I] = ACTION_FUNCTION(ACCNTD_I),
+  [ACCNTD_O] = ACTION_FUNCTION(ACCNTD_O),
+  [ACCNTD_U] = ACTION_FUNCTION(ACCNTD_U),
+
+  [TILDED_N] = ACTION_FUNCTION(TILDED_N),
+
+  [DIAERS_A] = ACTION_FUNCTION(DIAERS_A),
+  [DIAERS_E] = ACTION_FUNCTION(DIAERS_E),
+  [DIAERS_I] = ACTION_FUNCTION(DIAERS_I),
+  [DIAERS_O] = ACTION_FUNCTION(DIAERS_O),
+  [DIAERS_U] = ACTION_FUNCTION(DIAERS_U),
+  
   [RXTND_CAPS] = ACTION_FUNCTION(RXTND_CAPS)
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4641,60 +5060,57 @@ const uint16_t PROGMEM fn_actions[] = {
 
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
-//  static uint8_t mods_pressed;
-//MODS
-//  static uint8_t shift_flag;
-//    SEND_STRING(" \n    \n    action_function WORKING !!!\n");
   shift_flag = get_mods()&LSHIFT_MODS;
-  accent_pressed = acute_requested | diaeresis_requested | grave_requested | circumflex_requested;
   switch (id) {
-//    SEND_STRING("switch WORKING\n");
-    case A_VOWEL:
-//      SEND_STRING("case A_VOWEL\n");
+    case ACCNTD_A:
       if (record->event.pressed) 
       {
-//        SEND_STRING("recordeventpressed\n");
-        if (accent_pressed)
+       /* The key is being pressed.*/
+        if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
         {
-//            SEND_STRING("accent pressed\n");
-         /* The key is being pressed.*/
-            if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
-            {
-//                SEND_STRING("shift flag\n");
-            //  release LSHIFT
-                del_mods(shift_flag);
-                del_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-        //  tap accent
-            disable_capslock_before_accents_function();
-            if (acute_requested) { acute_accent_function(); }
-                else { if (diaeresis_requested) { diaeresis_accent_function(); }
-                else { if (grave_requested) { grave_accent_function(); } 
-                else { if (circumflex_requested) { circumflex_accent_function(); } } } }
-            enable_capslock_after_accents_function();
-            if (shift_flag)
-            {
-            //  press LSHIFT
-                add_mods(shift_flag);
-                add_weak_mods(shift_flag);
-                send_keyboard_report();
-            };            
-        } // [FIXME] [FIX THE FO LINE LOCATION]
-        register_code(KC_A);
-        unregister_code(KC_A);
+        //  release LSHIFT
+            del_mods(shift_flag);
+            del_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+    //  tap accent
+        disable_capslock_before_accents_function();
+//            if (acute_requested) { acute_accent_function(); }
+//                else { if (diaeresis_requested) { diaeresis_accent_function(); }
+//                else { if (grave_requested) { grave_accent_function(); } 
+//                else { if (circumflex_requested) { circumflex_accent_function(); } } } }
+        
+        if (circumflex_requested)    { circumflex_accent_function(); }
+
+          else { if (grave_requested)    { grave_accent_function(); }
+
+             else { if (diaeresis_requested) { diaeresis_accent_function(); } 
+
+                else                             { acute_accent_function(); } 
+        } }
+
+        enable_capslock_after_accents_function();
+        if (shift_flag)
+        {
+        //  press LSHIFT
+            add_mods(shift_flag);
+            add_weak_mods(shift_flag);
+            send_keyboard_report();
+        };            
+     // [FIXME] [FIX THE FO LINE LOCATION]
+      register_code(KC_A);
+      unregister_code(KC_A);
     }
     else
     {
 //        SEND_STRING("NO record event pressed");
     }
-      break;
+    break;
 
-    case E_VOWEL:
+
+    case ACCNTD_E:
       if (record->event.pressed) 
       {
-        if (accent_pressed)
-        {
          /* The key is being pressed.*/
             if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
             {
@@ -4705,10 +5121,16 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
             };
         //  tap accent
             disable_capslock_before_accents_function();
-            if (acute_requested) { acute_accent_function(); }
-                else { if (diaeresis_requested) { diaeresis_accent_function(); }
-                else { if (grave_requested) { grave_accent_function(); } 
-                else { if (circumflex_requested) { circumflex_accent_function(); } } } }
+            
+            if (circumflex_requested)    { circumflex_accent_function(); }
+
+              else { if (grave_requested)    { grave_accent_function(); }
+
+                 else { if (diaeresis_requested) { diaeresis_accent_function(); } 
+
+                    else                             { acute_accent_function(); } 
+            } }
+
             enable_capslock_after_accents_function();
             if (shift_flag)
             {
@@ -4718,7 +5140,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
                 send_keyboard_report();
             };
            
-        }
+//        }
         register_code(KC_E);
         unregister_code(KC_E);
       }
@@ -4727,11 +5149,9 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
       }
       break;
 
-    case I_VOWEL:
+    case ACCNTD_I:
       if (record->event.pressed) 
       {
-        if (accent_pressed)
-        {
          /* The key is being pressed.*/
             if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
             {
@@ -4742,10 +5162,16 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
             };
         //  tap accent
             disable_capslock_before_accents_function();
-            if (acute_requested) { acute_accent_function(); }
-                else { if (diaeresis_requested) { diaeresis_accent_function(); }
-                else { if (grave_requested) { grave_accent_function(); } 
-                else { if (circumflex_requested) { circumflex_accent_function(); } } } }
+            
+            if (circumflex_requested)    { circumflex_accent_function(); }
+
+              else { if (grave_requested)    { grave_accent_function(); }
+
+                 else { if (diaeresis_requested) { diaeresis_accent_function(); } 
+
+                    else                             { acute_accent_function(); } 
+            } }
+
             enable_capslock_after_accents_function();
             if (shift_flag)
             {
@@ -4755,7 +5181,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
                 send_keyboard_report();
             };
             
-        }
+//        }
         register_code(KC_I);
         unregister_code(KC_I);
       }
@@ -4764,11 +5190,9 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
       }
       break;
 
-    case O_VOWEL:
+    case ACCNTD_O:
       if (record->event.pressed) 
       {
-        if (accent_pressed)
-        {
          /* The key is being pressed.*/
             if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
             {
@@ -4779,10 +5203,16 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
             };
         //  tap accent
             disable_capslock_before_accents_function();
-            if (acute_requested) { acute_accent_function(); }
-                else { if (diaeresis_requested) { diaeresis_accent_function(); }
-                else { if (grave_requested) { grave_accent_function(); } 
-                else { if (circumflex_requested) { circumflex_accent_function(); } } } }
+            
+            if (circumflex_requested)    { circumflex_accent_function(); }
+
+              else { if (grave_requested)    { grave_accent_function(); }
+
+                 else { if (diaeresis_requested) { diaeresis_accent_function(); } 
+
+                    else                             { acute_accent_function(); } 
+            } }
+
             enable_capslock_after_accents_function();
             if (shift_flag)
             {
@@ -4792,7 +5222,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
                 send_keyboard_report();
             };
             
-        }
+//        }
         register_code(KC_O);
         unregister_code(KC_O);
       }
@@ -4801,11 +5231,9 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
       }
       break;
 
-    case U_VOWEL:
+    case ACCNTD_U:
       if (record->event.pressed) 
       {
-        if (accent_pressed)
-        {
          /* The key is being pressed.*/
             if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
             {
@@ -4816,10 +5244,16 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
             };
         //  tap accent
             disable_capslock_before_accents_function();
-            if (acute_requested) { acute_accent_function(); }
-                else { if (diaeresis_requested) { diaeresis_accent_function(); }
-                else { if (grave_requested) { grave_accent_function(); } 
-                else { if (circumflex_requested) { circumflex_accent_function(); } } } }
+            
+            if (circumflex_requested)    { circumflex_accent_function(); }
+
+              else { if (grave_requested)    { grave_accent_function(); }
+
+                 else { if (diaeresis_requested) { diaeresis_accent_function(); } 
+
+                    else                             { acute_accent_function(); } 
+            } }
+
             enable_capslock_after_accents_function();
             if (shift_flag)
             {
@@ -4829,7 +5263,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
                 send_keyboard_report();
             };
             
-        }
+//        }
         register_code(KC_U);       
         unregister_code(KC_U);
       }
@@ -4838,11 +5272,9 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
       }  
       break;
 
-    case N_TILDE:
+    case TILDED_N:
       if (record->event.pressed) 
       {
-        if (acute_requested)
-        {
          /* The key is being pressed.*/
             if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
             {
@@ -4853,7 +5285,9 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
             };
         //  tap accent
             disable_capslock_before_accents_function();
+
             tilde_accent_function();
+            
             enable_capslock_after_accents_function();
             if (shift_flag)
             {
@@ -4863,7 +5297,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
                 send_keyboard_report();
             };
             
-        }
+//        }
         register_code(KC_N);
         unregister_code(KC_N);
       }
@@ -4871,6 +5305,169 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
       {
       }
       break;
+
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+
+    case DIAERS_A:
+      if (record->event.pressed) 
+      {
+       /* The key is being pressed.*/
+        if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
+        {
+        //  release LSHIFT
+            del_mods(shift_flag);
+            del_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+    //  tap accent
+        disable_capslock_before_accents_function();
+        diaeresis_accent_function();
+        enable_capslock_after_accents_function();
+        if (shift_flag)
+        {
+        //  press LSHIFT
+            add_mods(shift_flag);
+            add_weak_mods(shift_flag);
+            send_keyboard_report();
+        };            
+     // [FIXME] [FIX THE FO LINE LOCATION]
+      register_code(KC_A);
+      unregister_code(KC_A);
+    }
+    else
+    {
+//        SEND_STRING("NO record event pressed");
+    }
+    break;
+
+
+    case DIAERS_E:
+      if (record->event.pressed) 
+      {
+     /* The key is being pressed.*/
+        if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
+        {
+        //  release LSHIFT
+            del_mods(shift_flag);
+            del_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+    //  tap accent
+        disable_capslock_before_accents_function();
+        diaeresis_accent_function();
+        enable_capslock_after_accents_function();
+        if (shift_flag)
+        {
+        //  press LSHIFT
+            add_mods(shift_flag);
+            add_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+       
+        register_code(KC_E);
+        unregister_code(KC_E);
+      }
+      else
+      {
+      }
+      break;
+
+    case DIAERS_I:
+      if (record->event.pressed) 
+      {
+         /* The key is being pressed.*/
+            if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
+            {
+            //  release LSHIFT
+                del_mods(shift_flag);
+                del_weak_mods(shift_flag);
+                send_keyboard_report();
+            };
+        //  tap accent
+            disable_capslock_before_accents_function();
+            diaeresis_accent_function();
+            enable_capslock_after_accents_function();
+            if (shift_flag)
+            {
+            //  press LSHIFT
+                add_mods(shift_flag);
+                add_weak_mods(shift_flag);
+                send_keyboard_report();
+            };
+            
+        register_code(KC_I);
+        unregister_code(KC_I);
+      }
+      else
+      {
+      }
+      break;
+
+    case DIAERS_O:
+      if (record->event.pressed) 
+      {
+         /* The key is being pressed.*/
+            if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
+            {
+            //  release LSHIFT
+                del_mods(shift_flag);
+                del_weak_mods(shift_flag);
+                send_keyboard_report();
+            };
+        //  tap accent
+            disable_capslock_before_accents_function();
+            diaeresis_accent_function();
+            enable_capslock_after_accents_function();
+            if (shift_flag)
+            {
+            //  press LSHIFT
+                add_mods(shift_flag);
+                add_weak_mods(shift_flag);
+                send_keyboard_report();
+            };
+            
+        register_code(KC_O);
+        unregister_code(KC_O);
+      }
+      else
+      {
+      }
+      break;
+
+    case DIAERS_U:
+      if (record->event.pressed) 
+      {
+         /* The key is being pressed.*/
+            if (shift_flag)  // ✳️ shift_flag is grabbed at the very beginning of this function (action_function)
+            {
+            //  release LSHIFT
+                del_mods(shift_flag);
+                del_weak_mods(shift_flag);
+                send_keyboard_report();
+            };
+        //  tap accent
+            disable_capslock_before_accents_function();
+            diaeresis_accent_function();
+            enable_capslock_after_accents_function();
+            if (shift_flag)
+            {
+            //  press LSHIFT
+                add_mods(shift_flag);
+                add_weak_mods(shift_flag);
+                send_keyboard_report();
+            };
+            
+        register_code(KC_U);       
+        unregister_code(KC_U);
+      }
+      else
+      {
+      }  
+      break;
+
+
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
 
     case RXTND_CAPS:
@@ -4888,7 +5485,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
  }
 }
 // end of action_function
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////´EÉ´EáaaaAAaaaAAAaaaAAAÁÉÉÁÍÓOIAÁUAÁÁUAUA
 
 
 
@@ -4951,49 +5548,58 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 /*              register_code(KC_J);    unregister_code(KC_J);                                                                */
 /*                                                                                                                            */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed)
     {
         switch(keycode)
         {
-//    ,APP_Q_QQQQQ ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI ,APP_Y_TYPIN ,APP_U_UUUUU ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF 
-//    ,APP_A_SNOTE ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
-//    ,APP_Z_STUDI ,APP_X_XXXXX ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BBBBB ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB   
+            case CIRCU_RQ:    circumflex_requested = true;          return false; break;  // requested circumflex accent
+            case GRAVE_RQ:    grave_requested      = true;          return false; break;  // requested grave      accent
+            case DIAER_RQ:    diaeresis_requested  = true;          return false; break;  // requested diaeresis  accent
+            case VOL_1:       volumeSetToLevel1();                  return false; break;  // set volume to minimum (level 1)
+            case VOL_8:       volumeSetToLevel8();                  return false; break;  // set volume to middle  (level 8)
+            case BRIGHT_1:    brightSetToLevel1();                  return false; break;  // set bright to minimum (level 1)
+//    ,APP_Q_QQQQQ ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI ,APP_Y_TYPIN ,APP_U_SUBLI ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF 
+//    ,APP_A_SNOTE ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME ,APP_H_SKTCH ,APP_J_JJJJJ ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
+//    ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BOOKS ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB   
 
-            case APP_Q_QQQQQ: callApp("");                   return false; break;  //
-            case APP_W_TWTTR: callApp("Twitter");            return false; break;  // Twitter
-            case APP_E_EVERN: callApp("Evernote");           return false; break;  // Evernote
-            case APP_R_RRRRR: callApp("");                   return false; break;  //
-            case APP_T_TERMI: callApp("Terminal");           return false; break;  // Terminal
+            case APP_Q_QQQQQ: callApp("");                          return false; break;  //
+            case APP_W_TWTTR: callApp("Twitter.app");               return false; break;  // t W itter
+            case APP_E_EVERN: callApp("Evernote.app");              return false; break;  // E vernote
+            case APP_R_RRRRR: callApp("");                          return false; break;  //
+            case APP_T_TERMI: callApp("Terminal.app");              return false; break;  // T erminal
 
-            case APP_Y_TYPIN: callApp("Typinator");          return false; break;  // Typinator
-            case APP_U_UUUUU: callApp("");                   return false; break;  //
-            case APP_I_TEDIT: callApp("TextEdit");           return false; break;  // TextEdit
-            case APP_O_OMNIF: callApp("OmniFocus");          return false; break;  // OmniFocus
-            case APP_P_SPREF: callApp("System Preferences"); return false; break;  // System Preferences
+            case APP_Y_TYPIN: callApp("Typinator.app");             return false; break;  // t Y pinator
+            case APP_U_SUBLI: callApp("Sublime Text.app");          return false; break;  // s U blime Text
+            case APP_I_TEDIT: callApp("TextEdit.app");              return false; break;  // textEd I t
+            case APP_O_OMNIF: callApp("OmniFocus.app");             return false; break;  // O mnifocus
+            case APP_P_SPREF: callApp("System Preferences.app");    return false; break;  // system Preferences
 
-            case APP_A_SNOTE: callApp("Simplenote");         return false; break;  // Simplenote
-            case APP_S_SAFAR: callApp("Safari");             return false; break;  // Safari        // _delay_ms(50);
-            case APP_D_D_ONE: callApp("Day One Classic");    return false; break;  // Day One
-            case APP_F_FINDE: callApp("Finder");             return false; break;  // Finder
-            case APP_G_CHRME: callApp("Chrome");             return false; break;  // Google Chrome
+            case APP_A_SNOTE: callApp("Simplenote.app");            return false; break;  // simplenote
+            case APP_S_SAFAR: callApp("Safari.app");                return false; break;  // S afari        // _delay_ms(50);
+            case APP_D_D_ONE: callApp("Day One Classic.app");       return false; break;  // D ay one
+            case APP_F_FINDE: callApp("Finder.app");                return false; break;  // F inder
+            case APP_G_CHRME: callApp("Google Chrome.app");         return false; break;  // G oogle chrome
 
-            case APP_H_SKTCH: callApp("Sketch.app");         return false; break;  // Sketch
-            case APP_J_SUBLI: callApp("Sublime Text");       return false; break;  // Sublime Text
-            case APP_K_KVIEW: callApp("Karabiner-EventViewer");return false; break;  // Karabiner Event Viewer
-            case APP_L_CLNDR: callApp("Calendar");           return false; break;  // Calendar
-            case APP_SP_SPSP: callApp("");                   return false; break;  //
+            case APP_H_SKTCH: callApp("Sketch.app");                return false; break;  // sketc H
+            case APP_J_JJJJJ: callApp("");                          return false; break;  // 
+            case APP_K_KVIEW: callApp("Karabiner-EventViewer.app"); return false; break;  // Karabiner Event Viewer
+            case APP_L_CLNDR: callApp("Calendar.app");              return false; break;  // Calendar
+            case APP_SP_SPSP: callApp("");                          return false; break;  //
 
-            case APP_Z_STUDI: callApp("Studies");            return false; break;  // Studies
-            case APP_X_XXXXX: callApp("");                   return false; break;  //
-            case APP_C_CALCU: callApp("Calculator");         return false; break;  // Calculator
-            case APP_V_VVVVV: callApp("");                   return false; break;  //
-            case APP_B_BBBBB: callApp("");                   return false; break;  // 
+            case APP_Z_STUDI: callApp("Studies.app");               return false; break;  // Studies
+            case APP_X_XCODE: callApp("Xcode.app");                 return false; break;  // Xcode
+            case APP_C_CALCU: callApp("Calculator.app");            return false; break;  // Calculator
+            case APP_V_VVVVV: callApp("");                          return false; break;  //
+            case APP_B_BOOKS: callApp("Books.app");                 return false; break;  // Books
 
-            case APP_N_NOTES: callApp("Notes.app");              return false; break;  // Notes
-            case APP_M_MAIL:  callApp("Mail");               return false; break;  // Mail
-            case APP_ES_KEYN: callApp("Keynote");                   return false; break;  //
-            case APP_BS_PAGE: callApp("Pages");                   return false; break;  //
-            case APP_EN_NUMB: callApp("Numbers");                   return false; break;  //
+            case APP_N_NOTES: callApp("Notes.app");                 return false; break;  // Notes
+            case APP_M_MAIL:  callApp("Mail");                      return false; break;  // Mail
+            case APP_ES_KEYN: callApp("Keynote");                   return false; break;  // Keynote
+            case APP_BS_PAGE: callApp("Pages");                     return false; break;  // Pages
+            case APP_EN_NUMB: callApp("Numbers");                   return false; break;  // Numbers
 
 
 
@@ -5028,30 +5634,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case DVIM_EN:dvim("\n"); return false; break;
       
 // SVIM
-            case SVIM_Y: svim("y");  return false; break;
-            case SVIM_N: svim("n");  return false; break;
-      
-// XVIM
-            case XVIM_Y: xvim("y");  return false; break;
-            case XVIM_U: xvim("u");  return false; break;
-            case XVIM_I: xvim("i");  return false; break;
-            case XVIM_P: xvim("p");  return false; break;
-
-            case XVIM_H: xvim("h");  return false; break;
-            case XVIM_J: xvim("j");  return false; break;
-            case XVIM_K: xvim("k");  return false; break;
-            case XVIM_L: xvim("l");  return false; break;
-            case XVIM_SP:xvim(" ");  return false; break;
-
-            case XVIM_N: xvim("n");  return false; break;
-            case XVIM_M: xvim("m");  return false; break;
-            case XVIM_ES:xvim("\e"); return false; break;
-            case XVIM_BS:xvim("\b"); return false; break;
-            case XVIM_EN:xvim("\n"); return false; break;
+//            case SVIM_Y: svim("y");  return false; break;
+//            case SVIM_N: svim("n");  return false; break;
       
 // ZVIM
             case ZVIM_Y: zvim("y");  return false; break;
             case ZVIM_U: zvim("u");  return false; break;
+            case ZVIM_I: zvim("i");  return false; break;
             case ZVIM_P: zvim("p");  return false; break;
 
             case ZVIM_H: zvim("h");  return false; break;
@@ -5061,21 +5650,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case ZVIM_SP:zvim(" ");  return false; break;
 
             case ZVIM_N: zvim("n");  return false; break;
+            case ZVIM_M: zvim("m");  return false; break;
+            case ZVIM_ES:zvim("\e"); return false; break;
+            case ZVIM_BS:zvim("\b"); return false; break;
+            case ZVIM_EN:zvim("\n"); return false; break;
       
-// AVIM
-            case AVIM_Y: avim("y");  return false; break;
-            case AVIM_U: avim("u");  return false; break;
-            case AVIM_I: avim("i");  return false; break;
-            case AVIM_O: avim("o");  return false; break;
-            case AVIM_P: avim("p");  return false; break;
+// CVIM
+            case CVIM_Y: cvim("y");  return false; break;
+            case CVIM_U: cvim("u");  return false; break;
+            case CVIM_P: cvim("p");  return false; break;
 
-            case AVIM_H: avim("h");  return false; break;
-            case AVIM_J: avim("j");  return false; break;
-            case AVIM_SP:avim(" ");  return false; break;
+            case CVIM_H: cvim("h");  return false; break;
+            case CVIM_J: cvim("j");  return false; break;
+            case CVIM_K: cvim("k");  return false; break;
+            case CVIM_L: cvim("l");  return false; break;
+            case CVIM_SP:cvim(" ");  return false; break;
 
-            case AVIM_N: avim("n");  return false; break;
-            case AVIM_M: avim("m");  return false; break;
-            case AVIM_ES:avim("\e"); return false; break;
+            case CVIM_N: cvim("n");  return false; break;
+      
+// XVIM
+            case XVIM_Y: xvim("y");  return false; break;
+            case XVIM_U: xvim("u");  return false; break;
+            case XVIM_I: xvim("i");  return false; break;
+            case XVIM_O: xvim("o");  return false; break;
+            case XVIM_P: xvim("p");  return false; break;
+
+            case XVIM_H: xvim("h");  return false; break;
+            case XVIM_J: xvim("j");  return false; break;
+            case XVIM_SP:xvim(" ");  return false; break;
+
+            case XVIM_N: xvim("n");  return false; break;
+            case XVIM_M: xvim("m");  return false; break;
+            case XVIM_ES:xvim("\e"); return false; break;
       
 
 
@@ -5118,36 +5724,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
            case BRTH_15:  breathing_period_set(15); breathing_enable(); return false; 
 
            default: return true; 
+        }
+	  }
+    else
+    {
+      switch(keycode)
+      {
+        case CIRCU_RQ:    circumflex_requested = false;          return false; break;  // non-requested circumflex accent
+        case GRAVE_RQ:    grave_requested      = false;          return false; break;  // non-requested grave      accent
+        case DIAER_RQ:    diaeresis_requested  = false;          return false; break;  // non-requested diaeresis  accent
+
+     // this line is responsible of the treatment for the releases of the rest of the keys.
+        default:                                                 return true;
       }
-	}
-  else
-  {
-    return true;
-  }
+    }
 }
 // END OF NEW MACROS WAY
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 uint32_t layer_state_set_user(uint32_t state) {
-    switch (biton32(state)) {
+  switch (biton32(state)) {
 
     case ALPH: //  
-        /*
-        myLevel = layer_state;
-        send_string(myLevel);
-        send_string(gherkinBacklightLevel);
-        SEND_STRING(" [Level GHKN]; ");
-        */
+        
+        if (hide_other_apps == true)
+        {
+          SEND_STRING(SS_LALT(SS_LGUI("h"))); //register_code(LALT(LGUI(KC_H))); //wrong sintaxis
+          hide_other_apps = false;
+        }
 
         backlight_level(gherkinBacklightLevel);
-//        if (blitON == true) 
-//        {
-//            layer_on(BLIT);
-//        } 
-//        else
-//        {
-  //        layer_clear();    // [DANGER] I have commented this line.  Maybe it must be mandatory !
-  //        breathing_disable();
 
           if (backlight_caps)
           {
@@ -5159,84 +5765,63 @@ uint32_t layer_state_set_user(uint32_t state) {
             breathing_period_set(BR_DFLT);
             breathing_disable();
           }
-//        }
         break; 
 
     case NMBR:   //  1
-        /*
-        SEND_STRING(" [Level NMBR]; ");
-        */
         backlight_level(BL_NMBR);
         breathing_period_set(BR_NMBR);      // if CAPS_LOCK was set out before [NMBR] was fixed ...
         breathing_enable();
         break;
+
     case SYMB:   //  2
-    /*
-        SEND_STRING(" [Level SYMB]; ");
-    */
         backlight_level(BL_SYMB);
-        breathing_period_set(BR_SYMB); // [LAST]      // BUT if CAPS_LOCK was set out before [SYMB] we loose thhe breathing ...
+        breathing_period_set(BR_SYMB); // [LAST]      // BUT if CAPS_LOCK was set out before [SYMB] we loose the breathing ...
         breathing_enable();
         break;
 
+    case APPS:
+      gui_flag = get_mods()&LGUI_MODS;
+      if (gui_flag)
+      {
+        hide_other_apps = true;
+      }
+      break;
 /*
     case FNCT:   //  3
-// [TESTING]        SEND_STRING(" [Level FNCT]; ");     [testing]
         backlight_level(BL_FNCT);
         break;
-    case L_XTND: //  4
-// [TESTING]        SEND_STRING(" [Level L_XTND]; ");     [testing]
-    case R_XTND: //  5
-// [TESTING]        SEND_STRING(" [Level R_XTND]; ");     [testing]
+    case L_XT: //  4
+    case R_XT: //  5
         backlight_level(BL_XTND);
         break;
     case APPS:   //  6
-// [TESTING]        SEND_STRING(" [Level APPS]; ");     [testing]
         backlight_level(BL_APPS);
         break;
     case SUSR:   //  7
-// [TESTING]        SEND_STRING(" [Level SUSR]; ");     [testing]
         backlight_level(BL_SUSR);
         break;
     case PVIM:   //  8
-// [TESTING]        SEND_STRING(" [Level PVIM]; ");     [testing]
         backlight_level(BL_PVIM);
         break;
     case DVIM:   //  9
-// [TESTING]        SEND_STRING(" [Level DVIM]; ");     [testing]
         backlight_level(BL_DVIM);
         break;
     case SVIM:   // 10
-// [TESTING]        SEND_STRING(" [Level SVIM]; ");     [testing]
         backlight_level(BL_SVIM);
         break;
-
-
-
-    case XVIM:   // 11
-// [TESTING]        SEND_STRING(" [Level XVIM]; ");     [testing]
+    case ZVIM:   // 11
 //        backlight_level(BL_VIM);  //V
 //        break;
-    case ZVIM:   // 12
-// [TESTING]        SEND_STRING(" [Level ZVIM]; ");     [testing]
+    case CVIM:   // 12
 //        backlight_level(BL_VIM);  //V
 //        break;
-    case AVIM:   // 13
-// [TESTING]        SEND_STRING(" [Level AVIM]; ");     [testing]
+    case XVIM:   // 13
         backlight_level(BL_VIM);  //V
         break;
-
-
-
     case MOUS:   // 14
-// [TESTING]        SEND_STRING(" [Level MOUS]; ");     [testing]
         backlight_level(BL_MOUS);
         break;
-*/
-
-/*
     case BLIT:   // 15
-// [TESTING]        SEND_STRING(" [Level BLIT]; ");     [testing]
         backlight_level(BL_MIN);
         break;
     default: //  for any other layers, or the default layer
@@ -5244,7 +5829,7 @@ uint32_t layer_state_set_user(uint32_t state) {
         backlight_level(BL_LOW);
         break;
 */
-    }
+  }
   return state;
 }; 
 
@@ -5259,8 +5844,8 @@ void what_layer_is_this_mine(void) {
   switch (layer) {
     case GHKN:   SEND_STRING("GHKN");   break;
     case SYMB:   SEND_STRING("SYMB");   break;
-    case L_XTND: SEND_STRING("L_XTND"); break;
-    case R_XTND: SEND_STRING("R_XTND"); break;
+    case L_XT:   SEND_STRING("L_XT");   break;
+    case R_XT:   SEND_STRING("R_XT");   break;
     case PVIM:   SEND_STRING("PVIM");   break;
     case DVIM:   SEND_STRING("DVIM");   break;
     case NMBR:   SEND_STRING("NMBR");   break;
@@ -5268,9 +5853,9 @@ void what_layer_is_this_mine(void) {
     case APPS:   SEND_STRING("APPS");   break;
     case SUSR:   SEND_STRING("SUSR");   break;
     case SVIM:   SEND_STRING("SVIM");   break;
-    case XVIM:   SEND_STRING("XVIM");   break;
     case ZVIM:   SEND_STRING("ZVIM");   break;
-    case AVIM:   SEND_STRING("AVIM");   break;
+    case CVIM:   SEND_STRING("CVIM");   break;
+    case XVIM:   SEND_STRING("XVIM");   break;
     case MOUS:   SEND_STRING("MOUS");   break;
     case BLIT:   SEND_STRING("BLIT");   break;
     case TEST:   SEND_STRING("TEST");   break;

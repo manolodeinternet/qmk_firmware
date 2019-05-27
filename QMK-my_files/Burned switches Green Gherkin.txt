@@ -1,0 +1,26 @@
+
+              G R E E N     G H E R K I N
+              =========     =============
+         WRONG BURNED SWITCHES WHILE DESOLDERING
+       .---------------------------------------.
+       |q w e r        y u i o p        // T    |
+       |  s d f g      h   k l b        // A, J |
+       |z x   v b      n m ⎋   ⏎        // C, ⌫ |
+       `---------------------------------------´
+
+
+  qwer T        yuiop      wrong switch: T
+A sdfg          h J kl⎵    wrong switches: A, J
+zxcvb           nm⎋  ⌫ ⏎   wrong switches:  C, ⌫
+
+
+code for skipping errors after flashing QMK:
+
+[ALPH] = LAYOUT_ortho_3x10(  // layer 0 : default layer
+//,---------------+---------------+---------------+---------------+----------------+     +---------------+---------------+-----------------+---------------+-----------------.
+    LT(APPS, KC_Q), LT(SUSR, KC_W), LT(BLIT, KC_E), LT(RSET, KC_R), /*LT(SYMB, KC_T)*/XXXXXXX,                  KC_Y,           KC_U,   LT(BLIT, KC_I), LT(SUSR, KC_O),   LT(APPS, KC_P), \
+//|---------------|---------------|---------------+---------------+----------------|     |---------------|---------------+-----------------+---------------+-----------------|
+      /*LSFT_T(KC_A)*/XXXXXXX,    CTL_T(KC_S),    ALT_T(KC_D),    GUI_T(KC_F), LT(ACCN, KC_G),        LT(ACCN, KC_H),    /*GUI_T(KC_J)*/XXXXXXX,      ALT_T(KC_K),    CTL_T(KC_L),   LSFT_T(KC_SPC), \
+//|---------------|---------------|---------------+---------------+----------------|     |---------------|---------------+-----------------+---------------+-----------------|
+    LT(L_XT, KC_Z), LT(MOUS, KC_X), /*LT(FNCT, KC_C)*/XXXXXXX, LT(PVIM, KC_V), LT(NMBR, KC_B),        LT(SYMB, KC_N), LT(PVIM, KC_M), LT(FNCT, KC_ESC),        /*KC_BSPC*/XXXXXXX,          KC_ENT ),
+//|---------------+---------------+---------------+---------------+----------------+     +---------------+---------------+-----------------+---------------+-----------------.

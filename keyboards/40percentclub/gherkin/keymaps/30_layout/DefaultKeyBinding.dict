@@ -123,8 +123,8 @@
             /* H[DVIM] */                "h" = yank:;
 
             /* J[DVIM] */                "j" =  deleteBackward:;
-            /* K[DVIM] */                "k" = (moveDownAndModifySelection:, delete:); /* deleteDownward:; */
-            /* L[DVIM] */                "l" = (moveUpAndModifySelection:,   delete:); /* deleteUpward: */
+            /* K[DVIM] */                "k" = (moveUpAndModifySelection:,   delete:); /* deleteUpward: */
+            /* L[DVIM] */                "l" = (moveDownAndModifySelection:, delete:); /* deleteDownward:; */
             /* GHKN_SPACE[DVIM] */  "\U0020" =  deleteForward:;
 
           /* line 🔵 3 DVIM: NM(ESC),(BSPC),(ENT) */
@@ -163,8 +163,8 @@
             /* H[SVIM] */             /* "h" = empty */
 
             /* J[SVIM] */                "j" = moveBackwardAndModifySelection:;
-            /* K[SVIM] */                "k" = moveDownAndModifySelection:;
-            /* L[SVIM] */                "l" = moveUpAndModifySelection:;
+            /* K[SVIM] */                "k" = moveUpAndModifySelection:;
+            /* L[SVIM] */                "l" = moveDownAndModifySelection:;
             /* GHKN_SPACE[SVIM] */  "\U0020" = moveForwardAndModifySelection:;
 
           /* line 🔵 3 SVIM: NM(ESC),(BSPC),(ENT) */
@@ -205,38 +205,44 @@
                        delete:, yank:, insertNewlineIgnoringFieldEditor:, yank:, swapWithMark:);
 
             /* J[XVIM] */              "j" =
-              (moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
-               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
-               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
-               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:);
-
-            /* K[XVIM] */              "k" =
-              (moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
-               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
-               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
-               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
-               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
-               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
-               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
-               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
-               centerSelectionInVisibleArea:);
-
-            /* L[XVIM] */              "l" =
               (moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
                moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
-               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
-               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
-               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
-               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
-               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
-               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
-               centerSelectionInVisibleArea:);
-
-            /* GHKN_SPACE[XVIM] */  "\U0020" =
-              (moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
                moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
                moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
                moveUp:, moveUp:, moveUp:, moveUp:, moveUp:);
+
+            /* K[XVIM] */              "k" =
+              (moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+               centerSelectionInVisibleArea:);
+
+            /* L[XVIM] */              "l" =
+              (moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               centerSelectionInVisibleArea:);
+
+            /* GHKN_SPACE[XVIM] */  "\U0020" =
+              (moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:);
 
           /* line 🔵 3 XVIM: NM(ESC),(BSPC),(ENT) */
 
@@ -282,7 +288,7 @@
             /*   Y[ZVIM] */    "y" = (moveToBeginningOfParagraph:, insertNewlineIgnoringFieldEditor:, moveBackward:);
 
             /* transposeWord:; doesn't work.
-               This implementation is MINE.
+               Then, I have made this implementation for transposing two words.
                Cursor must be to the right of any character from the second word, before transposing */
             /* U[ZVIM] */                 "u" = (selectWord:, moveForwardAndModifySelection:, setMark:, deleteToMark:,
                                                  moveBackward:, moveWordBackward:,
