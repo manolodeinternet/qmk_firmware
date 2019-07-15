@@ -1,0 +1,16 @@
+ // [TRANSLATION]
+ //
+ // web link:https://www.practicaespanol.com/los-multiplos-en-espanol-doble-triple-cuadruple/
+ // spanish: doble, triple, cuádruple, quíntuple, séxtuple,
+ //          séptuple, óctuple, nónuplo, décuplo,
+ //          undécuplo, duodécuplo, terciodécuplo, cuartodécuplo, quintodécuplo, sextodécuplo,
+ //          septodécuplo, octodécuplo, novodécuplo, ... céntuple, ...
+ //
+ // web link:https://www.collinsdictionary.com/dictionary/english/quintuple
+ // english: double, triple/trifold, quadruple/fourfold, quintuple/fivefold, sextuple/sixfold,
+ //          septuple/sevenfold, octuple/eightfold, nonuple/ninefold, decuple/tenfold,
+ //          eleventhfold, twelfthfold, thirdfold, fourthfold, fifthfold, sixthfold,
+ //          seventhfold, eighthfold, ninethfold, ... hundredfold, ...
+ //
+ // [translation]
+
