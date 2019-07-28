@@ -22,6 +22,15 @@
   If not, see <http://www.gnu.org/licenses/>.
 */
 
+/////////////////////////////////////////////////////////////////////////////////////// LINE TOO LONG !!!
+
+///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/* MAXIMUM LINE WIDTH FOR RIGHT PRINTING  XX 105  CHARACTERS XX  MAXIMUM LINE WIDTH FOR RIGHT PRINTING */
+/*XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XX*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
 // [MY_OWN_PREPROCESSING_KEYWORDS] for editing my code:
 //
 // [ADVICE]
@@ -175,7 +184,7 @@
 #define _DVIM  10  //  Delete                VIM layer
 /*
 #define _AVIM  X12X  //  select              VIM layer
-We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, but easier and clearer !!!
+We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, but easier and clearer !
 */
 #define _CVIM  11  //  power edition         VIM layer
 #define _XVIM  12  //  movement              VIM layer
@@ -192,12 +201,12 @@ We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, 
 // I can implement the call to _DVIM,_CVIM & _XVIM from TAP_DANCE functions...
 //...renumbering this layers above 16 or even above 32, ...
 //...this wayl we'll have THREE FREE LAYERS more for using directly from any keymap (0..15)
-                                                       // ... but it works even above 31 & 32 & 33 ...
-                                                       // ... consuming an exaggerated amount of memory, ...
-                                                       // ... the higher the number of the layer, ...
-                                                       // ... the more memory consumed.  
+     // ... but it works even above 31 & 32 & 33 ...
+     // ... consuming an exaggerated amount of memory, ...
+     // ... the higher the number of the layer, ...
+     // ... the more memory consumed.  
 // IMPORTANT: IN ADDITION TO USING LAYERS AMONG 0...15, YOU CAN USE LAYERS AMONG 16...31, IF... 
-// ...IF YOU AREN'T GOING TO ACCESS THEM FROM KEYMAP, BUT FROM CODE, USING 'layer_on(LAYER)', 'layer_off(LAYER)'
+// ...IF YOU AREN'T GOING TO ACCESS THEM FROM KEYMAP, BUT FROM CODE, USING 'layer_on / layer_off(LAYER)'
 // [understanding]
 //                                                                                      //
 // defining layers                                                                      //
@@ -580,8 +589,8 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
                                                 // LCTL = Hold Left Control, Alt and GUI and press kc
 // [SYSTEM PREFERENCES]
 #define     DESK                    KC_F6  // show desktop
-#define LANCHPAD                   KC_F17  // F17 (set at 'System Preferences/Keyboard/Shortcuts/Launchpad & Doc')
-#define  DASHBRD                   KC_F18  // F18 (set at 'System Preferences/Keyboard/Shortcuts/Mission Control')
+#define LANCHPAD                   KC_F17  // F17 (set at 'Sys.Pref./Keyboard/Shortcuts/Launchpad & Doc')
+#define  DASHBRD                   KC_F18  // F18 (set at 'Sys.Pref./Keyboard/Shortcuts/Mission Control')
 #define ACTV_WIN              LCTL(KC_F4)  // active window
 #define FLOA_WIN              LCTL(KC_F6)  // floating window
 // [system preferences]
@@ -631,7 +640,7 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 #define INVRT_COLOR      LSFT(LCTL(LGUI(KC_8)))  
 // [INFO]
 // it can't be used into an 'ACTION_TAP_DANCE_DOUBLE()'
-// it can't be used into a statement of tap_dance: 'case SINGLE_TAP:  INVRT_COLOR;'  We would get only '8'
+// it can't be used into a statement of tap_dance: 'case SINGLE_TAP: INVRT_COLOR;'  We would get only '8'
 // it can't be used into a 'RSFT_T(INVRT_COLOR)' neither
 // [info]
 // [unused]
@@ -647,7 +656,7 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 // _APPS COMMANDS 7                                                                     //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-#define HIDEOTH          SEND_STRING(SS_LALT(SS_LGUI("h")))  //LALT(LGUI(KC_H))   //HIDE OTHER _APPS
+#define HIDEOTH          SEND_STRING(SS_LALT(SS_LGUI("h"))) //LALT(LGUI(KC_H)) //HIDE OTHER _APPS
 //                                                                                      //
 // _apps commands 7                                                                     //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -761,13 +770,13 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,BRTH_06 ,BRTH_07  ,BRTH_08  ,BRTH_09 ,BRTH_10
              ,BRTH_12                     ,BRTH_15
 // macros for _blit 15
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 // MACROS FOR _ACCN LAYER 1
     ,CIRCU ,GRAVE ,DIAER 
 // macros for _accn layer 1
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 // MACROS FOR _POWR LAYER 8
@@ -775,32 +784,35 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,VOL_8
     ,BRIGHT_1
 // macros for _powr layer 8
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 // MACROS FOR _APPS LAYER 7
-    ,APP_Q_QQQQQ ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI ,APP_Y_TYPIN ,APP_U_SUBLI ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF 
-    ,APP_A_SNOTE ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME ,APP_H_SKTCH ,APP_J_JJJJJ ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
-    ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BOOKS ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB   
+    ,APP_Q_QQQQQ ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI
+                                         ,APP_Y_TYPIN ,APP_U_SUBLI ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF
+    ,APP_A_SNOTE ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME
+                                         ,APP_H_SKTCH ,APP_J_JJJJJ ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
+    ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BOOKS
+                                         ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB
 // macros for _apps layer 7
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 // MACROS FOR _DALY LAYR 6
     ,DICTAD
 // macros for _daly layer 6
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 // MACROS FOR _?VIM 9, 10, 11, 12, 13
 
 // _PVIM LAYER
-// this layer is all implemented without using '/Users/myUserName/Library/KeyBindings/DefaultKeyBinding.dict'
+// this layer is all implemented without using '/Users/myUser/Library/KeyBindings/DefaultKeyBinding.dict'
 // except for the 'H' key:
     ,PVIM_H
 // _pvim layer
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 // _DVIM LAYER
@@ -808,14 +820,14 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,DVIM_H ,DVIM_J ,DVIM_K  ,DVIM_L  ,DVIM_SP
             ,DVIM_M ,DVIM_ES ,DVIM_BS ,DVIM_EN
 // _dvim layer
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 // _AVIM LAYER
 //    ,AVIM_Y                     // _AVIM is for select VIM layr
 //    ,AVIM_N                     // it's used SHIFT+key for the rest of the right side of the keyboard
 // _avim layer
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 // _CVIM LAYER
@@ -823,7 +835,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,CVIM_H ,CVIM_J ,CVIM_K  ,CVIM_L  ,CVIM_SP
     ,CVIM_N ,CVIM_M ,CVIM_ES ,CVIM_BS ,CVIM_EN
 // _cvim layer
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 // _XVIM LAYER
@@ -831,7 +843,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,XVIM_H ,XVIM_J ,XVIM_K  ,XVIM_L  ,XVIM_SP
     ,XVIM_N ,XVIM_M ,XVIM_ES ,XVIM_BS ,XVIM_EN
 // _xvim layer
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 // _ZVIM LAYER
@@ -839,9 +851,9 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,ZVIM_H ,ZVIM_J ,ZVIM_K  ,ZVIM_L  ,ZVIM_SP
     ,ZVIM_N ,ZVIM_M ,ZVIM_ES ,ZVIM_BS ,ZVIM_EN
 // _zvim layer
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 // macros for _?vim 9, 10, 11, 12, 13
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 }; // enum custom keycodes
 //                                                                                      //
@@ -1814,8 +1826,11 @@ void LOGOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
                       // (guessed by try and fail method)
                       // if we only keystroke SFT+GUI as described at Apple Menu, it appears a menu
                       // if we add ALT, we don't have to answer any menu, we logout directly
-    case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_Q);
-                      unregister_code(KC_Q); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LSFT);
+    case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_Q);
+
+                      unregister_code(KC_Q);
+                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LSFT);
                       break;
   }
 }
@@ -1916,13 +1931,13 @@ void SLEP_M_finished (qk_tap_dance_state_t *state, void *user_data) {
                   /* KC_EJCT keycode doesn't work with QMK, but with KarabinerElements works vey well*/
                   /*register_code(KC_LSFT);   register_code(KC_LCTL); register_code(KC_EJCT);*/
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*                                                                                                    */
-/*   KC_POWER works very well.  It makes appear shut down menu (Restart, Sleep, Cancel, Shut down)    */
-/*                                                                                                    */
-/*                          register_code(KC_POWER);                                                  */
-/*                                                                                                    */
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+/*                                                                                                     */
+/*   KC_POWER works very well.  It makes appear shut down menu (Restart, Sleep, Cancel, Shut down)     */
+/*                                                                                                     */
+/*                          register_code(KC_POWER);                                                   */
+/*                                                                                                     */
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
   }
 }
 
@@ -1931,7 +1946,8 @@ void SLEP_M_reset (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_TAP:  unregister_code(KC_F2); unregister_code(KC_LCTL); break;
                      
     case SINGLE_HOLD: /* if we unregister_code(KC_POWER) here, at SLEP_M_reset
-                         it will appear the POWER dialog box and we have to press the related initial letter
+                         it will appear the POWER dialog box and 
+                         we have to press the related initial letter
                          or chosing an option with the mouse.
 
                          unregister_code(KC_POWER);
@@ -1979,7 +1995,8 @@ void KILA_D_finished (qk_tap_dance_state_t *state, void *user_data) {
                             
     case SINGLE_HOLD: 
     case DOUBLE_TAP: 
-                      register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_ESC);
+                      register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_ESC);
                       break;
 
 // [INFO] HOW TO KILL CURRNT APP THROUGH KEYBOARD              
@@ -2003,7 +2020,8 @@ void KILA_D_reset (qk_tap_dance_state_t *state, void *user_data) {
                      
     case SINGLE_HOLD: 
     case DOUBLE_TAP: 
-                      unregister_code(KC_ESC); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LSFT); 
+                      unregister_code(KC_ESC); unregister_code(KC_LGUI); unregister_code(KC_LALT);
+                      unregister_code(KC_LSFT); 
                       break;
           
   }
@@ -2120,9 +2138,11 @@ void SHUT_S_finished (qk_tap_dance_state_t *state, void *user_data) {
 // [INFO]
                    /* The KC_EJCT keycode doesn't work */
                       /*
-                      register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_EJCT);
+                      register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_EJCT);
                       _delay_ms(2000);
-                      unregister_code(KC_EJCT); unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
+                      unregister_code(KC_EJCT);
+                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
                       */
 // [info]
   }
@@ -2237,7 +2257,8 @@ void RG_ZOOM_finished (qk_tap_dance_state_t *state, void *user_data) {
   switch (RG_ZOOM_tap_state.state) {
 
 // [SYSTEM PREFERENCES]
-    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT);   register_code(KC_LGUI);   register_code(KC_SCLN);
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_SCLN);
                       break;
 // [system preferences]
 
@@ -2248,7 +2269,8 @@ void RG_ZOOM_finished (qk_tap_dance_state_t *state, void *user_data) {
 
 void RG_ZOOM_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (RG_ZOOM_tap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_SCLN);  unregister_code(KC_LGUI); unregister_code(KC_LALT);      unregister_code(KC_LCTL);
+    case SINGLE_TAP:  unregister_code(KC_SCLN);
+                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
                       break;
                      
     case SINGLE_HOLD: unregister_code(KC_RGUI);
@@ -2285,7 +2307,8 @@ void RA_ZOIN_finished (qk_tap_dance_state_t *state, void *user_data) {
   switch (RA_ZOIN_tap_state.state) {
 
 // [SYSTEM PREFERENCES]    
-    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT);   register_code(KC_LGUI);   register_code(KC_EQL);
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_EQL);
                       break;
 // [system preferences]                      
 
@@ -2296,7 +2319,8 @@ void RA_ZOIN_finished (qk_tap_dance_state_t *state, void *user_data) {
 
 void RA_ZOIN_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (RA_ZOIN_tap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_EQL);  unregister_code(KC_LGUI); unregister_code(KC_LALT);      unregister_code(KC_LCTL);
+    case SINGLE_TAP:  unregister_code(KC_EQL);
+                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
                       break;
                      
     case SINGLE_HOLD: unregister_code(KC_RALT);
@@ -2332,7 +2356,8 @@ void RC_ZOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
   switch (RC_ZOUT_tap_state.state) {
 
 // [SYSTEM PREFERENCES]
-    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT);   register_code(KC_LGUI);   register_code(KC_MINS);
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_MINS);
                       break;
 // [system preferences]
 
@@ -2343,7 +2368,8 @@ void RC_ZOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
 
 void RC_ZOUT_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (RC_ZOUT_tap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_MINS);  unregister_code(KC_LGUI); unregister_code(KC_LALT);      unregister_code(KC_LCTL);
+    case SINGLE_TAP:  unregister_code(KC_MINS);
+                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
                       break;
                      
     case SINGLE_HOLD: unregister_code(KC_RCTL);
@@ -2379,7 +2405,8 @@ void RS_INCO_finished (qk_tap_dance_state_t *state, void *user_data) {
   switch (RS_INCO_tap_state.state) {
 
 // [SYSTEM PREFERENCES]
-    case SINGLE_TAP:  register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LGUI); register_code(KC_8);
+    case SINGLE_TAP:  register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LGUI);
+                      register_code(KC_8);
                       break;
 // [system preferences]
 
@@ -2390,7 +2417,8 @@ void RS_INCO_finished (qk_tap_dance_state_t *state, void *user_data) {
 
 void RS_INCO_reset (qk_tap_dance_state_t *state, void *user_data) {
   switch (RS_INCO_tap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_8); unregister_code(KC_LGUI); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
+    case SINGLE_TAP:  unregister_code(KC_8);
+                      unregister_code(KC_LGUI); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
                       break;
                      
     case SINGLE_HOLD: unregister_code(KC_RSFT);
@@ -2515,7 +2543,8 @@ void matrix_init_user(void) {
 
   //backlight_level(BL_GHKN);
 
-  // set_unicode_input_mode(UC_OSX); // REPLACE UC_XXXX with UC_OSX - the Unicode Input Mode for your OS. See table below.
+  // set_unicode_input_mode(UC_OSX);
+  // REPLACE UC_XXXX with UC_OSX - the Unicode Input Mode for your OS. See table below.
 } // end of matrix_init_user
 //                                                                                      //
 //                        m a t r i x   i n i t   u s e r                               //
@@ -2523,16 +2552,16 @@ void matrix_init_user(void) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//                                                                                      //
-//                     K E Y M A P S        ( L A Y O U T S )                           //
-//                                                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                     //
+//                                                                                                     //
+//                              K E Y M A P S         ( L A Y O U T S )                                //
+//                                                                                                     //
+//                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 /*
   *  LEGENDS for all KEYMAPS:
   *   * get a keystroke through single tap
@@ -2540,7 +2569,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   *   @ access a layer  through single hold (or modifier)   
   *  @@ access a layer  through double hold (or clean all layers)
 */
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 /* Keymap _ALPH 0: Default layer = _ALPH layer
@@ -2565,6 +2594,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 [_ALPH] = LAYOUT_ortho_3x10(  // layer 0 : default layer
 // [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
+// ###
+///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,--------------------------------------------------------------------------------------.  ,------------------------------------------------------------------------------------------.
     LT(_APPS, KC_Q), LT(_POWR, KC_W),            KC_E, LT(_DIAE, KC_R), LT(_SYMB, KC_T),                 KC_Y,            KC_U,              KC_I, LT(_POWR, KC_O),   LT(_APPS, KC_P),
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
@@ -2572,8 +2603,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
     LT(_DALY, KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_PVIM, KC_V), LT(_NUMB, KC_B),      LT(_SYMB, KC_N), LT(_PVIM, KC_M), LT(_FUNC, KC_ESC),         KC_BSPC, LT(_DALY, KC_ENT) ),
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
+///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
+// ###
 // END OF _ALPH 0
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+
+/*
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+// LEFT_HAND
+//,--------------------------------------------------------------------------------------.
+    LT(_APPS, KC_Q), LT(_POWR, KC_W),            KC_E, LT(_DIAE, KC_R), LT(_SYMB, KC_T),
+//|----------------+----------------+----------------+----------------+------------------|
+       LSFT_T(KC_A),     CTL_T(KC_S),     ALT_T(KC_D),     GUI_T(KC_F), LT(_ACCN, KC_G),
+//|----------------+----------------+----------------+----------------+------------------|
+    LT(_DALY, KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_PVIM, KC_V), LT(_NUMB, KC_B),
+//'--------------------------------------------------------------------------------------'
+
+             // RIGHT_HAND
+             ,------------------------------------------------------------------------------------------.
+                         KC_Y,            KC_U,              KC_I, LT(_POWR, KC_O),   LT(_APPS, KC_P),
+             |----------------+----------------+------------------+----------------+--------------------|
+               LT(_ACCN, KC_H),     GUI_T(KC_J),       ALT_T(KC_K),     CTL_T(KC_L),    LSFT_T(KC_SPC),
+             |----------------+----------------+------------------+----------------+--------------------|
+               LT(_SYMB, KC_N), LT(_PVIM, KC_M), LT(_FUNC, KC_ESC),         KC_BSPC, LT(_DALY, KC_ENT) ),
+             '------------------------------------------------------------------------------------------'
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+*/
 
 
 /* Keymap _ACCN 1: _ACCN layer
@@ -2593,15 +2648,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 // _ACCN accent layer 1
 [_ACCN] = LAYOUT_ortho_3x10(  // layer 1 : _ACCN layer 
-  //,------------------------------------------------.  ,--------------------------------------------------.
-       _______, _______, F(ACC_E), _______, _______,       _______, F(ACC_U), F(ACC_I), F(ACC_O), _______,
-  //|---------|--------|---------+--------+----------|  |---------|---------+---------+---------+----------|
-      F(ACC_A),   CIRCU,    GRAVE,   DIAER, _______,       _______,    DIAER,    GRAVE,    CIRCU, _______,
-  //|---------|--------|---------+--------+----------|  |---------|---------+---------+---------+----------|
-       _______, _______,  _______, _______, _______,      F(TIL_N),  _______,  _______,  _______, _______ ),
-  //'------------------------------------------------'  '--------------------------------------------------'
-  // END OF _ACCN 1
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//,------------------------------------------------. ,--------------------------------------------------.
+     _______, _______, F(ACC_E), _______, _______,      _______, F(ACC_U), F(ACC_I), F(ACC_O), _______,
+//|---------|--------|---------+--------+----------| |---------|---------+---------+---------+----------|
+    F(ACC_A),   CIRCU,    GRAVE,   DIAER, _______,      _______,    DIAER,    GRAVE,    CIRCU, _______,
+//|---------|--------|---------+--------+----------| |---------|---------+---------+---------+----------|
+     _______, _______,  _______, _______, _______,     F(TIL_N),  _______,  _______,  _______, _______ ),
+//'------------------------------------------------' '--------------------------------------------------'
+// END OF _ACCN 1
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 /* Keymap _DIAE 2: RESET & DIAERESIS layer
  * ,----------------------------------.  ,----------------------------------.
@@ -2620,15 +2675,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 // _DIAE RESET & diaereis layer 2
 [_DIAE] = LAYOUT_ortho_3x10(  // layer 2 : RESET & diaeresis layer 
-  //,--------------------------------------------------.  ,-------------------------------------------------.
-      TD(HRESET), _______, F(DIA_E), _______, _______,      _______, F(DIA_U), F(DIA_I), F(DIA_O), _______,
-  //|-----------+--------+---------+--------+----------|  |--------+---------+---------+---------+----------|
-        F(DIA_A), _______,  KC_PEQL, KC_PCMM, KC_PDOT,      KC_PSLS,  KC_PAST,  KC_PMNS,  KC_PPLS, KC_PENT,
-  //|-----------+--------+---------+--------+----------|  |--------+---------+---------+---------+----------|
-           KC_P1,   KC_P2,    KC_P3,   KC_P4,   KC_P5,        KC_P6,    KC_P7,    KC_P8,    KC_P9,   KC_P0 ),
-  //'--------------------------------------------------'  '-------------------------------------------------'
-  // END OF _DIAE 2
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//,--------------------------------------------------.,-------------------------------------------------.
+    TD(HRESET), _______, F(DIA_E), _______, _______,    _______, F(DIA_U), F(DIA_I), F(DIA_O), _______,
+//|-----------+--------+---------+--------+----------||--------+---------+---------+---------+----------|
+      F(DIA_A), _______,  KC_PEQL, KC_PCMM, KC_PDOT,    KC_PSLS,  KC_PAST,  KC_PMNS,  KC_PPLS, KC_PENT,
+//|-----------+--------+---------+--------+----------||--------+---------+---------+---------+----------|
+         KC_P1,   KC_P2,    KC_P3,   KC_P4,   KC_P5,      KC_P6,    KC_P7,    KC_P8,    KC_P9,   KC_P0 ),
+//'--------------------------------------------------''-------------------------------------------------'
+// END OF _DIAE 2
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 /* Keymap _NUMB 3: numbers layer
@@ -2648,17 +2703,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 // _NUMB layer 3
 [_NUMB] = LAYOUT_ortho_3x10(  // layer 3 : numbers layer
-  // LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
-  //,---------------------------------------------------------------------------.  ,-------------------------------------------.
-               KC_1,          KC_2,           KC_3,           KC_4,       KC_5,            KC_6,  KC_7,  KC_8,  KC_9,    KC_0,
-  //|--------------+--------------+---------------+---------------+-------------|  |-----------+------+------+------+----------|
-      SFT_T(KC_SPC), CTL_T(KC_DEL), ALT_T(KC_COMM),  GUI_T(KC_DOT), TD(G_DOEU),         KC_MINS,  KC_4,  KC_5,  KC_6, KC_PLUS,
-  //|--------------+--------------+---------------+---------------+-------------|  |-----------+------+------+------+----------|
-             KC_ENT,       KC_BSPC,         KC_TAB,         KC_EQL, TD(PENUMB),      TD(SLNUMB),  KC_1,  KC_2,  KC_3, KC_ASTR ),
-  //'---------------------------------------------------------------------------'  '-------------------------------------------'
-  // END OF _NUMB 3
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
+// ###
+///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
+//,--------------------------------------------------------------------------.  ,-------------------------------------------.
+             KC_1,          KC_2,           KC_3,          KC_4,       KC_5,            KC_6,  KC_7,  KC_8,  KC_9,    KC_0,
+//|--------------+--------------+---------------+--------------+-------------|  |-----------+------+------+------+----------|
+    SFT_T(KC_SPC), CTL_T(KC_DEL), ALT_T(KC_COMM), GUI_T(KC_DOT), TD(G_DOEU),         KC_MINS,  KC_4,  KC_5,  KC_6, KC_PLUS,
+//|--------------+--------------+---------------+--------------+-------------|  |-----------+------+------+------+----------|
+           KC_ENT,       KC_BSPC,         KC_TAB,        KC_EQL, TD(PENUMB),      TD(SLNUMB),  KC_1,  KC_2,  KC_3, KC_ASTR ),
+//'--------------------------------------------------------------------------'  '-------------------------------------------'
+///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
+// ###
+// END OF _NUMB 3
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
+/*
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+// LEFT_HAND
+//,--------------------------------------------------------------------------.
+             KC_1,          KC_2,           KC_3,          KC_4,       KC_5,
+//|--------------+--------------+---------------+--------------+-------------|
+    SFT_T(KC_SPC), CTL_T(KC_DEL), ALT_T(KC_COMM), GUI_T(KC_DOT), TD(G_DOEU),
+//|--------------+--------------+---------------+--------------+-------------|
+           KC_ENT,       KC_BSPC,         KC_TAB,        KC_EQL, TD(PENUMB),
+//'--------------------------------------------------------------------------'
+
+                                                            // RIGHT_HAND
+                                                            ,-------------------------------------------.
+                                                                    KC_6,  KC_7,  KC_8,  KC_9,    KC_0,
+                                                            |-----------+------+------+------+----------|
+                                                                 KC_MINS,  KC_4,  KC_5,  KC_6, KC_PLUS,
+                                                            |-----------+------+------+------+----------|
+                                                              TD(SLNUMB),  KC_1,  KC_2,  KC_3, KC_ASTR ),
+                                                            '-------------------------------------------'
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+*/
 
 /* Keymap _SYMB 4: symbols Layer
  * ,----------------------------------.  ,----------------------------------.
@@ -2677,16 +2757,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 // SYMBOLS layer 4
 [_SYMB] = LAYOUT_ortho_3x10(  // layer 4: symbols layer
+// ###
+///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,-----------------------------------------------------------------------------.  ,-----------------------------------------------------------------------------------.
-           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,            TD(Y_AMCI),        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,    
+           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,            TD(Y_AMCI),        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
     LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
         TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK,    KC_ASTR,      LT(_SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_COLN,        KC_SCLN ),
 //,-----------------------------------------------------------------------------'  '-----------------------------------------------------------------------------------.
+///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
+// ###
 // [info] EURO: http://www.fileformat.info/info/unicode/char/search.htm?q=euro&preview=entity
 // END OF _SYMB 4
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+
+/*
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+// LEFT_HAND
+//,-----------------------------------------------------------------------------.
+           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,
+//|---------------+---------------+---------------+---------------+-------------|
+    LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),
+//|---------------+---------------+---------------+---------------+-------------|
+        TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK,    KC_ASTR,
+//,-----------------------------------------------------------------------------'
+
+                    // RIGHT_HAND
+                    ,-----------------------------------------------------------------------------------.
+                            TD(Y_AMCI),        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,    
+                    |-----------------+---------------+---------------+---------------+-----------------|
+                               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
+                    |-----------------+---------------+---------------+---------------+-----------------|
+                      LT(_SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_COLN,        KC_SCLN ),
+                    '-----------------------------------------------------------------------------------.
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+*/
 
 
 /* Keymap _FUNC 5: functions Layer
@@ -2707,16 +2813,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // _FUNC layer 5
 [_FUNC] = LAYOUT_ortho_3x10(  // layer 5 : multiple apps layer
 // LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
-//,------------------------------------------------------.  ,----------------------------------------------.
-     KC_F1,  KC_F2,             KC_F3,  KC_F4,    KC_F5,        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,
-//|-------+-------+------------------+-------+-----------|  |--------+--------+--------+---------+---------|
-    KC_F11, KC_F12,            KC_F13, KC_F14,   KC_F15,       KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
-//|-------+-------+------------------+-------+-----------|  |--------+--------+--------+---------+---------|
-    KC_F21, KC_F22, LT(_FUNC, KC_F23), KC_F24,  XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX ),  
-//'------------------------------------------------------'  '----------------------------------------------.
+//,-----------------------------------------------------.,----------------------------------------------.
+     KC_F1,  KC_F2,             KC_F3,  KC_F4,   KC_F5,        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,
+//|-------+-------+------------------+-------+----------||--------+--------+--------+---------+---------|
+    KC_F11, KC_F12,            KC_F13, KC_F14,  KC_F15,       KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
+//|-------+-------+------------------+-------+----------||--------+--------+--------+---------+---------|
+    KC_F21, KC_F22, LT(_FUNC, KC_F23), KC_F24, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX ),
+//'-----------------------------------------------------''----------------------------------------------.
 //KC_F24,         ,             ,        ,        ,         ,          ),  
 // END OF _FUNC 5
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 /* Keymap _DALY 6: DAiLY commands layer
@@ -2736,13 +2842,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 // DALY layer 6
 [_DALY] = LAYOUT_ortho_3x10(  // layer 6: DAiLY commands layer
-//,--------------------------------------------------.  ,--------------------------------------------------.
-       KC_TAB,   DICTAD, KC_CAPW, KC_CAPP, FLOA_WIN,      CLOSE_A, PREV_APP, NEXT_APP, MISS_CTL, LANCHPAD,
-//|----------+---------+--------+--------+-----------|  |--------+---------+---------+---------+-----------|
-     F(CAPSL), SPT_SIRI,   KC_UP,   SPEAK, ACTV_WIN,      CLOSE_W, PREV_WIN, NEXT_WIN, APP_WIND,  DASHBRD,
-//|----------+---------+--------+--------+-----------|  |--------+---------+---------+---------+-----------|
-    S(KC_TAB),  KC_LEFT, KC_DOWN, KC_RGHT, REOPEN_L,      CLOSE_T, PREV_TAB, NEXT_TAB,   KC_DEL,     DESK ), 
-//'-------------------------------------------------'  '--------------------------------------------------'
+//,--------------------------------------------------.,-------------------------------------------------.
+       KC_TAB,   DICTAD, KC_CAPW, KC_CAPP, FLOA_WIN,    CLOSE_A, PREV_APP, NEXT_APP, MISS_CTL, LANCHPAD,
+//|----------+---------+--------+--------+-----------||--------+---------+---------+---------+----------|
+     F(CAPSL), SPT_SIRI,   KC_UP,   SPEAK, ACTV_WIN,    CLOSE_W, PREV_WIN, NEXT_WIN, APP_WIND,  DASHBRD,
+//|----------+---------+--------+--------+-----------||--------+---------+---------+---------+----------|
+    S(KC_TAB),  KC_LEFT, KC_DOWN, KC_RGHT, REOPEN_L,    CLOSE_T, PREV_TAB, NEXT_TAB,   KC_DEL,     DESK),
+//'--------------------------------------------------''-------------------------------------------------'
 // ^ + KC_CAPW = KC_CPYW
 // ^ + KC_CAPP = KC_CPYP
 // END OF _DALY 6
@@ -2766,6 +2872,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 // _APPS layer 7
 [_APPS] = LAYOUT_ortho_3x10(  // layer 7 : apps layer
+// ###
+///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,-----------------------------------------------------------------.  ,------------------------------------------------------------------.
     APP_Q_QQQQQ, APP_W_TWTTR, APP_E_EVERN, APP_R_RRRRR, APP_T_TERMI,     APP_Y_TYPIN, APP_U_SUBLI, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
 //|------------+------------+------------+------------+-------------|  |------------+------------+------------+------------+--------------|
@@ -2773,8 +2881,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|------------+------------+------------+------------+-------------|  |------------+------------+------------+------------+--------------|
     APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_VVVVV, APP_B_BOOKS,     APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB ),
 //'-----------------------------------------------------------------'  '------------------------------------------------------------------'
+///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
+// ###
 // END OF _APPS 7
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+
+/*
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+// LEFT_HAND
+//,-----------------------------------------------------------------.
+    APP_Q_QQQQQ, APP_W_TWTTR, APP_E_EVERN, APP_R_RRRRR, APP_T_TERMI,
+//|------------+------------+------------+------------+-------------|
+    APP_A_SNOTE, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,
+//|------------+------------+------------+------------+-------------|
+    APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_VVVVV, APP_B_BOOKS,
+//'-----------------------------------------------------------------'
+
+                                     // RIGHT_HAND
+                                     ,------------------------------------------------------------------.
+                                       APP_Y_TYPIN, APP_U_SUBLI, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
+                                     |------------+------------+------------+------------+--------------|
+                                       APP_H_SKTCH, APP_J_JJJJJ, APP_K_KVIEW, APP_L_CLNDR, APP_SP_SPSP,
+                                     |------------+------------+------------+------------+--------------|
+                                       APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB ),
+                                     '------------------------------------------------------------------'
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+*/
 
 
 /* Keymap _POWR 8: POWeR productivity layer
@@ -2799,20 +2931,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 // _POWR layer 8
 [_POWR] = LAYOUT_ortho_3x10(  // layer 8: POWeR productivity layer
-//,-------------------------------------------------------------------------.  ,----------------------------------------------------------------------------.
-     TD(LOGOUT),       LCK_SCR,      MO(_BLIT),    TD(HRESET),     XXXXXXX,      TD(V8_TEST), TD(V1_LAST), LT(_BLIT, KC__VOLUP), KC__VOLDOWN,     KC__MUTE,
-//|------------+--------------+---------------+--------------+--------------|  |------------+------------+---------------------+------------+---------------|
-        KC_RSFT, RCTL_T(KC_F7), RALT_T(KC_SPC), RGUI_T(KC_F9), ZOOM_SMOOTH,      ZOOM_FOLLOW, TD(RG_ZOOM),          TD(RA_ZOIN), TD(RC_ZOUT),  TD(RS_INCO),
-//|------------+--------------+---------------+--------------+--------------|  |------------+------------+---------------------+------------+---------------|
-    SLEP_MNUBAR,   KILAPP_DOCK,    KILMNU_TOOL,   SHUTD_STATB, RSTRT_FLOAT,       CONTRST_UP,    BRIGHT_1,              KC_PAUS,     KC_SLCK, CONTRST_DWN ), 
-//'-------------------------------------------------------------------------'  '----------------------------------------------------------------------------'
+// ###
+///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
+//,-------------------------------------------------------------------------.  ,-----------------------------------------------------------------------------.
+     TD(LOGOUT),       LCK_SCR,      MO(_BLIT),    TD(HRESET),     XXXXXXX,      TD(V8_TEST), TD(V1_LAST), LT(_BLIT,  KC__VOLUP), KC__VOLDOWN,     KC__MUTE,
+//|------------+--------------+---------------+--------------+--------------|  |------------+------------+----------------------+------------+---------------|
+        KC_RSFT, RCTL_T(KC_F7), RALT_T(KC_SPC), RGUI_T(KC_F9), ZOOM_SMOOTH,      ZOOM_FOLLOW, TD(RG_ZOOM),           TD(RA_ZOIN), TD(RC_ZOUT),  TD(RS_INCO),
+//|------------+--------------+---------------+--------------+--------------|  |------------+------------+----------------------+------------+---------------|
+    SLEP_MNUBAR,   KILAPP_DOCK,    KILMNU_TOOL,   SHUTD_STATB, RSTRT_FLOAT,       CONTRST_UP,    BRIGHT_1,               KC_PAUS,     KC_SLCK, CONTRST_DWN ),
+//'-------------------------------------------------------------------------'  '-----------------------------------------------------------------------------'
+///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
+// ###
 // RSFT_T(kc) <--- [BOOKMARK] [FIXME]
 //             SFT+ALT+CMD+ESC,    ALT+CMD+ESC,
 //[bookmark]
 //[fixme]
 // END OF _POWR 8 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
+/*
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+// LEFT_HAND
+//,-------------------------------------------------------------------------.
+     TD(LOGOUT),       LCK_SCR,      MO(_BLIT),    TD(HRESET),     XXXXXXX,
+//|------------+--------------+---------------+--------------+--------------|
+        KC_RSFT, RCTL_T(KC_F7), RALT_T(KC_SPC), RGUI_T(KC_F9), ZOOM_SMOOTH,
+//|------------+--------------+---------------+--------------+--------------|
+    SLEP_MNUBAR,   KILAPP_DOCK,    KILMNU_TOOL,   SHUTD_STATB, RSTRT_FLOAT,
+//'-------------------------------------------------------------------------'
+
+                          // RIGHT_HAND
+                          ,-----------------------------------------------------------------------------.
+                            TD(V8_TEST), TD(V1_LAST), LT(_BLIT,  KC__VOLUP), KC__VOLDOWN,     KC__MUTE,
+                          |------------+------------+----------------------+------------+---------------|
+                            ZOOM_FOLLOW, TD(RG_ZOOM),           TD(RA_ZOIN), TD(RC_ZOUT),  TD(RS_INCO),
+                          |------------+------------+----------------------+------------+---------------|
+                             CONTRST_UP,    BRIGHT_1,               KC_PAUS,     KC_SLCK, CONTRST_DWN ), 
+                          '-----------------------------------------------------------------------------'
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+*/
 
 /* Keymap _PVIM 9: _PVIM layer
  * ,--------------------------------------------.  ,----------------------------------.
@@ -2834,17 +2991,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 // _PVIM layer 9
 [_PVIM] = LAYOUT_ortho_3x10(  // layer 9 : _PVIM layer
-//,------------------------------------------------------.  ,----------------------------------------------------------------------------------.
-      XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,       LCTL(LGUI(KC_UP)),    TD(PVIM_uU),   TD(PVIM_iI),     TD(PVIM_oO), TD(PVIM_pP),
-//|----------+----------|----------+----------+----------|  |-------------------+---------------+--------------+----------------+--------------|
-      _______,   _______,   XXXXXXX,   XXXXXXX, XXXXXXX,                  PVIM_H,        KC_LEFT,         KC_UP,         KC_DOWN,     KC_RGHT,
-//|----------+----------|----------+----------+----------|  |-------------------+---------------+--------------+----------------+--------------|
+// ###
+///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
+//,------------------------------------------------------.  ,-----------------------------------------------------------------------------------.
+      XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,        LCTL(LGUI(KC_UP)),   TD(PVIM_uU),   TD(PVIM_iI),     TD(PVIM_oO),  TD(PVIM_pP),
+//|----------+----------|----------+----------+----------|  |--------------------+--------------+--------------+----------------+---------------|
+      _______,   _______,   XXXXXXX,   XXXXXXX, XXXXXXX,                   PVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,      KC_RGHT,
+//|----------+----------|----------+----------+----------|  |--------------------+--------------+--------------+----------------+---------------|
     MO(_ZVIM), MO(_XVIM), MO(_CVIM), MO(_PVIM), XXXXXXX,      LCTL(LGUI(KC_DOWN)), LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),
-//'------------------------------------------------------'  '----------------------------------------------------------------------------------'
-//     MO(_ZVIM), MO(_XVIM), MO(_CVIM), MO(_PVIM), XXXXXXX, //this allow us changing from any ?VIM layer to each other ?VIM layer, ...
-//                                                      //...because we put '_______' in this locations in the rest of the ?VIM layers.
+//'------------------------------------------------------'  '-----------------------------------------------------------------------------------'
+///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
+// ###
+// MO(_ZVIM),MO(_XVIM),MO(_CVIM),MO(_PVIM) allow us changing from any ?VIM_layer to each other ?VIM_layer
+// ... because we put '_______' in this locations in the rest of the ?VIM layers
 // END OF _PVIM 9
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+
+/*
+
+// LEFT_HAND
+//,------------------------------------------------------.
+      XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,  
+//|----------+----------|----------+----------+----------|
+      _______,   _______,   XXXXXXX,   XXXXXXX, XXXXXXX,  
+//|----------+----------|----------+----------+----------|
+    MO(_ZVIM), MO(_XVIM), MO(_CVIM), MO(_PVIM), XXXXXXX,  
+//'------------------------------------------------------'
+                                     // RIGHT_HAND
+                    ,-----------------------------------------------------------------------------------.
+                        LCTL(LGUI(KC_UP)),   TD(PVIM_uU),   TD(PVIM_iI),     TD(PVIM_oO),  TD(PVIM_pP),
+                    |--------------------+--------------+--------------+----------------+---------------|
+                                   PVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,      KC_RGHT,
+                    |--------------------+--------------+--------------+----------------+---------------|
+                      LCTL(LGUI(KC_DOWN)), LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),
+                    '-----------------------------------------------------------------------------------'
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+*/
 
 
 /* Keymap _DVIM 10: _DVIM layer  // delete layer
@@ -2864,16 +3046,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 // _DVIM layer 10
 [_DVIM] = LAYOUT_ortho_3x10(  // layer 10 : _DVIM layer  // delete layer
-//,------------------------------------------------.  ,------------------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       DVIM_Y, TD(DVIM_uU),  DVIM_I,  DVIM_O, TD(DVIM_pP),
-//|----------+--------+--------+--------+----------|  |--------+------------+--------+--------+--------------|
-      _______, _______, _______, _______, XXXXXXX,       DVIM_H,      DVIM_J,  DVIM_K,  DVIM_L,     DVIM_SP,
-//|----------+--------+--------+--------+----------|  |--------+------------+--------+--------+--------------|
-      _______, _______, _______, _______, XXXXXXX,      XXXXXXX,      DVIM_M, DVIM_ES, DVIM_BS,     DVIM_EN ),
-//'------------------------------------------------'  '------------------------------------------------------'
+//,---------------------------------------------.,------------------------------------------------------.
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    DVIM_Y, TD(DVIM_uU),  DVIM_I,  DVIM_O, TD(DVIM_pP),
+//|--------+--------+--------+--------+---------||--------+------------+--------+--------+--------------|
+    _______, _______, _______, _______, XXXXXXX,    DVIM_H,      DVIM_J,  DVIM_K,  DVIM_L,     DVIM_SP,
+//|--------+--------+--------+--------+---------||--------+------------+--------+--------+--------------|
+    _______, _______, _______, _______, XXXXXXX,   XXXXXXX,      DVIM_M, DVIM_ES, DVIM_BS,     DVIM_EN ),
+//'---------------------------------------------''------------------------------------------------------'
 // DVIM_H is empty, DVIM_N is empty
 // END OF _DVIM 10
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 /* Keymap _AVIM X10X: _AVIM layer  // select VIM layer
@@ -2894,6 +3076,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // _AVIM layer X10X
 /*
 [_AVIM] = LAYOUT_ortho_3x10(  // layer X10X : _AVIM layer  // select VIM layer
+// ###
+///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,----------------------------------------------.  ,----------------------------------------------------------------------------------.
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       AVIM_Y,   TD(AVIM_uU), LSFT(LALT(KC_LEFT)), LSFT(LALT(KC_RGHT)),   TD(AVIM_pP),
 //|--------+--------+--------+--------+----------|  |--------+--------------+--------------------+--------------------+----------------|
@@ -2901,9 +3085,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|--------+--------+--------+--------+----------|  |--------+--------------+--------------------+--------------------+----------------|
     _______, _______, _______, _______, XXXXXXX,       AVIM_N, LSFT(KC_HOME),       LSFT(KC_PGUP),     LSFT(KC_PGDOWN),  LSFT(KC_END) ),
 //'----------------------------------------------'  '----------------------------------------------------------------------------------'
-*/
+///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
+// ###
 // END OF _AVIM X10X  // AVIM_H is empty
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+// LEFT_HAND
+//,----------------------------------------------.
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  
+//|--------+--------+--------+--------+----------|
+    _______, _______, _______, _______, XXXXXXX,  
+//|--------+--------+--------+--------+----------|
+    _______, _______, _______, _______, XXXXXXX,  
+//'----------------------------------------------'
+
+                                     // RIGHT_HAND
+                     ,----------------------------------------------------------------------------------.
+                        AVIM_Y,   TD(AVIM_uU), LSFT(LALT(KC_LEFT)), LSFT(LALT(KC_RGHT)),   TD(AVIM_pP),
+                     |--------+--------------+--------------------+--------------------+----------------|
+                       XXXXXXX, LSFT(KC_LEFT),         LSFT(KC_UP),       LSFT(KC_DOWN), LSFT(KC_RGHT),
+                     |--------+--------------+--------------------+--------------------+----------------|
+                        AVIM_N, LSFT(KC_HOME),       LSFT(KC_PGUP),     LSFT(KC_PGDOWN),  LSFT(KC_END) ),
+                     '----------------------------------------------------------------------------------'
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+*/
 
 
 /* Keymap _CVIM 11: _CVIM layer  // power edition layer
@@ -2934,7 +3140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // 'OUTDENT = LGUI(KC_LBRC)' implemented because 'outdent:;' in 'DefaultKeyBinding.dict' doesn't work !!!
 // ... it happens the same as in 'transposeWord:;' !!!
 // END OF _CVIM 11
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 /* Keymap _XVIM 12: _XVIM layer  // movement VIM layer
@@ -2962,7 +3168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, XXXXXXX,      XVIM_N, XVIM_M, XVIM_ES, XVIM_BS, XVIM_EN ),
 //'----------------------------------------------'  '--------------------------------------------'
 // END OF _XVIM 12
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 /* Keymap _ZVIM 13: _ZVIM layer  // alignment VIM layer
@@ -2990,7 +3196,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, XXXXXXX,      ZVIM_N,  ZVIM_M, ZVIM_ES, ZVIM_BS, ZVIM_EN ),
 //'----------------------------------------------'  '---------------------------------------------'
 // END OF _ZVIM 13
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 /* Keymap _MOUS 14: Mouse layer
@@ -3029,7 +3235,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 40
 */
 // END OF _MOUS 14
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 /*  
@@ -3060,7 +3266,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 */
 // END OF _BLIT 15
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 /*  
@@ -3069,8 +3275,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * |  BL_1  |  BL_2  |  BL_3  |  BL_4  |  BL_5  |BREATH_1|BREATH_2|BREATH_3|BREATH_4|BREATH_T|
 * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
 * |  BL_6  |  BL_7  |  BL_8  |  BL_9  |  BL_10 |BREATH_5|BREATH_6|BREATH_7|BREATH12|BL_TOGGL|
-* |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|F
-* |  BL_11 |  BL_12 |  BL_13 |  BL_14 |  BL_15 |BREATH15| BL_ON | BL_INC | BL_DEC | BL_OFF |
+* |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
+* |  BL_11 |  BL_12 |  BL_13 |  BL_14 |  BL_15 |BREATH15|  BL_ON | BL_INC | BL_DEC | BL_OFF |
 * '-----------------------------------------------------------------------------------------'
 */
 // _LAST layer 17
@@ -3083,7 +3289,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     BLIT_11, BLIT_12, BLIT_13, BLIT_14, BLIT_15,      BRTH_15,   BL_ON,  BL_INC,  BL_DEC, BLIT_OFF ),
 //'----------------------------------------------'  '-----------------------------------------------'
 // END OF _LAST 17
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 /* Keymap _TEST 16: _TEST transparent layer
  * ,----------------------------------.  ,----------------------------------.
@@ -3101,16 +3307,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * '----------------------------------'  '----------------------------------'
 */
 // _TEST transparent layer 16
-[_TEST] = LAYOUT_ortho_3x10(  // layer 16 : _TEST layer 
+[_TEST] = LAYOUT_ortho_3x10(  // layer 16 : _TEST layer
+// ###
+///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,-----------------------------------------------------------------------------.  ,-----------------------------------------------------------------------------------.
-           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,            TD(Y_AMCI),         BEEP_1,         BEEP_2,         BEEP_3,        KC_MINS,    
+           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,            TD(Y_AMCI),         BEEP_1,         BEEP_2,         BEEP_3,        KC_MINS,
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
     LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
         TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK,    KC_ASTR,      LT(_SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_COLN,        KC_SCLN )
 //,-----------------------------------------------------------------------------'  '-----------------------------------------------------------------------------------.
+///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
+// ###
 // END OF _TEST 16
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+
+/*
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+// LEFT_HAND
+//,-----------------------------------------------------------------------------.
+           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,
+//|---------------+---------------+---------------+---------------+-------------|
+    LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),
+//|---------------+---------------+---------------+---------------+-------------|
+        TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK,    KC_ASTR,
+//,-----------------------------------------------------------------------------'
+
+                    // RIGHT_HAND
+                    ,-----------------------------------------------------------------------------------.
+                            TD(Y_AMCI),         BEEP_1,         BEEP_2,         BEEP_3,        KC_MINS,    
+                    |-----------------+---------------+---------------+---------------+-----------------|
+                               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
+                    |-----------------+---------------+---------------+---------------+-----------------|
+                      LT(_SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_COLN,        KC_SCLN ),
+                    '-----------------------------------------------------------------------------------.
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+*/
+
+
+
+
+
 
 };
 //                                                                                      //
@@ -3145,7 +3382,7 @@ const uint16_t PROGMEM fn_actions[] = {
   
   [CAPSL] = ACTION_FUNCTION(CAPSL)
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 
@@ -3155,7 +3392,11 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
     case ACC_A:
       if (record->event.pressed) 
       {
-       /* The key is being pressed.*/
+      /*The key is being pressed.*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/* MAXIMUM LINE WIDTH FOR RIGHT PRINTING  XX 105  CHARACTERS XX  MAXIMUM LINE WIDTH FOR RIGHT PRINTING */
+/*XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XX*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
         {
         //  release LSHIFT
@@ -3189,7 +3430,53 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
 
             } // if (grave_requested)
 
-        } // if (circumflex_requested)
+          } // if (circumflex_requested)
+
+          enable_capslock_after_accents_function();
+          if (shift_flag)
+          {
+          //  press LSHIFT
+              add_mods(shift_flag);
+              add_weak_mods(shift_flag);
+              send_keyboard_report();
+          };            
+       // [FIXME] [FIX THE FO LINE LOCATION]
+        register_code(KC_A);
+        unregister_code(KC_A);
+      }
+      else
+      {
+  //        SEND_STRING("NO record event pressed");
+      }
+    break;
+
+
+    case ACC_E:
+      if (record->event.pressed) 
+      {
+      /*The key is being pressed.*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+/* MAXIMUM LINE WIDTH FOR RIGHT PRINTING  XX 105  CHARACTERS XX  MAXIMUM LINE WIDTH FOR RIGHT PRINTING */
+/*XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XX*/
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+        {
+        //  release LSHIFT
+            del_mods(shift_flag);
+            del_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+    //  tap accent
+        disable_capslock_before_accents_function();
+        
+        if (circumflex_requested)           { circumflex_accent_function(); }
+
+          else { if (grave_requested)            { grave_accent_function(); }
+
+             else { if (diaeresis_requested) { diaeresis_accent_function(); } 
+
+                else                             { acute_accent_function(); } 
+        } }
 
         enable_capslock_after_accents_function();
         if (shift_flag)
@@ -3198,224 +3485,177 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
             add_mods(shift_flag);
             add_weak_mods(shift_flag);
             send_keyboard_report();
-        };            
-     // [FIXME] [FIX THE FO LINE LOCATION]
-      register_code(KC_A);
-      unregister_code(KC_A);
-    }
-    else
-    {
-//        SEND_STRING("NO record event pressed");
-    }
-    break;
-
-
-    case ACC_E:
-      if (record->event.pressed) 
-      {
-         /* The key is being pressed.*/
-            if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-            {
-            //  release LSHIFT
-                del_mods(shift_flag);
-                del_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-        //  tap accent
-            disable_capslock_before_accents_function();
-            
-            if (circumflex_requested)           { circumflex_accent_function(); }
-
-              else { if (grave_requested)            { grave_accent_function(); }
-
-                 else { if (diaeresis_requested) { diaeresis_accent_function(); } 
-
-                    else                             { acute_accent_function(); } 
-            } }
-
-            enable_capslock_after_accents_function();
-            if (shift_flag)
-            {
-            //  press LSHIFT
-                add_mods(shift_flag);
-                add_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
+        };
            
-//        }
         register_code(KC_E);
         unregister_code(KC_E);
       }
       else
       {
       }
-      break;
+    break;
 
     case ACC_I:
       if (record->event.pressed) 
       {
-         /* The key is being pressed.*/
-            if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-            {
-            //  release LSHIFT
-                del_mods(shift_flag);
-                del_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-        //  tap accent
-            disable_capslock_before_accents_function();
+      /*The key is being pressed.*/
+        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+        {
+        //  release LSHIFT
+            del_mods(shift_flag);
+            del_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+    //  tap accent
+        disable_capslock_before_accents_function();
+        
+        if (circumflex_requested)    { circumflex_accent_function(); }
+
+          else { if (grave_requested)         { grave_accent_function(); }
+
+             else { if (diaeresis_requested)  { diaeresis_accent_function(); } 
+
+                else                                  { acute_accent_function(); } 
+        } }
+
+        enable_capslock_after_accents_function();
+        if (shift_flag)
+        {
+        //  press LSHIFT
+            add_mods(shift_flag);
+            add_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
             
-            if (circumflex_requested)    { circumflex_accent_function(); }
-
-              else { if (grave_requested)         { grave_accent_function(); }
-
-                 else { if (diaeresis_requested)  { diaeresis_accent_function(); } 
-
-                    else                                  { acute_accent_function(); } 
-            } }
-
-            enable_capslock_after_accents_function();
-            if (shift_flag)
-            {
-            //  press LSHIFT
-                add_mods(shift_flag);
-                add_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-            
-//        }
         register_code(KC_I);
         unregister_code(KC_I);
       }
       else
       {
       }
-      break;
+    break;
 
     case ACC_O:
       if (record->event.pressed) 
       {
-         /* The key is being pressed.*/
-            if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-            {
-            //  release LSHIFT
-                del_mods(shift_flag);
-                del_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-        //  tap accent
-            disable_capslock_before_accents_function();
+      /*The key is being pressed.*/
+        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+        {
+        //  release LSHIFT
+            del_mods(shift_flag);
+            del_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+    //  tap accent
+        disable_capslock_before_accents_function();
+        
+        if (circumflex_requested)           { circumflex_accent_function(); }
+
+          else { if (grave_requested)            { grave_accent_function(); }
+
+             else { if (diaeresis_requested) { diaeresis_accent_function(); } 
+
+                else                             { acute_accent_function(); } 
+        } }
+
+        enable_capslock_after_accents_function();
+        if (shift_flag)
+        {
+        //  press LSHIFT
+            add_mods(shift_flag);
+            add_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
             
-            if (circumflex_requested)           { circumflex_accent_function(); }
-
-              else { if (grave_requested)            { grave_accent_function(); }
-
-                 else { if (diaeresis_requested) { diaeresis_accent_function(); } 
-
-                    else                             { acute_accent_function(); } 
-            } }
-
-            enable_capslock_after_accents_function();
-            if (shift_flag)
-            {
-            //  press LSHIFT
-                add_mods(shift_flag);
-                add_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-            
-//        }
         register_code(KC_O);
         unregister_code(KC_O);
       }
       else
       {
       }
-      break;
+    break;
 
     case ACC_U:
       if (record->event.pressed) 
       {
-         /* The key is being pressed.*/
-            if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-            {
-            //  release LSHIFT
-                del_mods(shift_flag);
-                del_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-        //  tap accent
-            disable_capslock_before_accents_function();
+      /*The key is being pressed.*/
+        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+        {
+        //  release LSHIFT
+            del_mods(shift_flag);
+            del_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+    //  tap accent
+        disable_capslock_before_accents_function();
+        
+        if (circumflex_requested)           { circumflex_accent_function(); }
+
+          else { if (grave_requested)            { grave_accent_function(); }
+
+             else { if (diaeresis_requested) { diaeresis_accent_function(); } 
+
+                else                             { acute_accent_function(); } 
+        } }
+
+        enable_capslock_after_accents_function();
+        if (shift_flag)
+        {
+        //  press LSHIFT
+            add_mods(shift_flag);
+            add_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
             
-            if (circumflex_requested)           { circumflex_accent_function(); }
-
-              else { if (grave_requested)            { grave_accent_function(); }
-
-                 else { if (diaeresis_requested) { diaeresis_accent_function(); } 
-
-                    else                             { acute_accent_function(); } 
-            } }
-
-            enable_capslock_after_accents_function();
-            if (shift_flag)
-            {
-            //  press LSHIFT
-                add_mods(shift_flag);
-                add_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-            
-//        }
         register_code(KC_U);       
         unregister_code(KC_U);
       }
       else
       {
       }  
-      break;
+    break;
 
 
 
     case TIL_N:
       if (record->event.pressed) 
       {
-         /* The key is being pressed.*/
-            if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-            {
-            //  release LSHIFT
-                del_mods(shift_flag);
-                del_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-        //  tap accent
-            disable_capslock_before_accents_function();
+      /*The key is being pressed.*/
+        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+        {
+        //  release LSHIFT
+            del_mods(shift_flag);
+            del_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+    //  tap accent
+        disable_capslock_before_accents_function();
 
-            tilde_accent_function();
+        tilde_accent_function();
+        
+        enable_capslock_after_accents_function();
+        if (shift_flag)
+        {
+        //  press LSHIFT
+            add_mods(shift_flag);
+            add_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
             
-            enable_capslock_after_accents_function();
-            if (shift_flag)
-            {
-            //  press LSHIFT
-                add_mods(shift_flag);
-                add_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-            
-//        }
         register_code(KC_N);
         unregister_code(KC_N);
       }
       else 
       {
       }
-      break;
+    break;
 
 
 
     case DIA_A:
       if (record->event.pressed) 
       {
-       /* The key is being pressed.*/
+      /*The key is being pressed.*/
         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
         {
         //  release LSHIFT
@@ -3448,7 +3688,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
     case DIA_E:
       if (record->event.pressed) 
       {
-     /* The key is being pressed.*/
+      /*The key is being pressed.*/
         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
         {
         //  release LSHIFT
@@ -3479,26 +3719,26 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
     case DIA_I:
       if (record->event.pressed) 
       {
-         /* The key is being pressed.*/
-            if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-            {
-            //  release LSHIFT
-                del_mods(shift_flag);
-                del_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-        //  tap accent
-            disable_capslock_before_accents_function();
-            diaeresis_accent_function();
-            enable_capslock_after_accents_function();
-            if (shift_flag)
-            {
-            //  press LSHIFT
-                add_mods(shift_flag);
-                add_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-            
+      /*The key is being pressed.*/
+        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+        {
+        //  release LSHIFT
+            del_mods(shift_flag);
+            del_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+    //  tap accent
+        disable_capslock_before_accents_function();
+        diaeresis_accent_function();
+        enable_capslock_after_accents_function();
+        if (shift_flag)
+        {
+        //  press LSHIFT
+            add_mods(shift_flag);
+            add_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+        
         register_code(KC_I);
         unregister_code(KC_I);
       }
@@ -3510,25 +3750,25 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
     case DIA_O:
       if (record->event.pressed) 
       {
-         /* The key is being pressed.*/
-            if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-            {
-            //  release LSHIFT
-                del_mods(shift_flag);
-                del_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-        //  tap accent
-            disable_capslock_before_accents_function();
-            diaeresis_accent_function();
-            enable_capslock_after_accents_function();
-            if (shift_flag)
-            {
-            //  press LSHIFT
-                add_mods(shift_flag);
-                add_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
+      /*The key is being pressed.*/
+        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+        {
+        //  release LSHIFT
+            del_mods(shift_flag);
+            del_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+    //  tap accent
+        disable_capslock_before_accents_function();
+        diaeresis_accent_function();
+        enable_capslock_after_accents_function();
+        if (shift_flag)
+        {
+        //  press LSHIFT
+            add_mods(shift_flag);
+            add_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
             
         register_code(KC_O);
         unregister_code(KC_O);
@@ -3541,25 +3781,25 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
     case DIA_U:
       if (record->event.pressed) 
       {
-         /* The key is being pressed.*/
-            if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-            {
-            //  release LSHIFT
-                del_mods(shift_flag);
-                del_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
-        //  tap accent
-            disable_capslock_before_accents_function();
-            diaeresis_accent_function();
-            enable_capslock_after_accents_function();
-            if (shift_flag)
-            {
-            //  press LSHIFT
-                add_mods(shift_flag);
-                add_weak_mods(shift_flag);
-                send_keyboard_report();
-            };
+      /*The key is being pressed.*/
+        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+        {
+        //  release LSHIFT
+            del_mods(shift_flag);
+            del_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
+    //  tap accent
+        disable_capslock_before_accents_function();
+        diaeresis_accent_function();
+        enable_capslock_after_accents_function();
+        if (shift_flag)
+        {
+        //  press LSHIFT
+            add_mods(shift_flag);
+            add_weak_mods(shift_flag);
+            send_keyboard_report();
+        };
             
         register_code(KC_U);       
         unregister_code(KC_U);
@@ -3574,7 +3814,7 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
     case CAPSL:
       if (record->event.pressed) 
       {
-      /* The key is being pressed.*/
+      /*The key is being pressed.*/
          capslock_tap();
       }
       else 
@@ -3593,288 +3833,288 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
 
 
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//                                                                                      //
-//                                  M  A  C  R   O  S                                   //
-//                                                                                      //
-//                                                                                      //
-//                       P R O C E S S    R E C O R D    U S E R                        //
-//                                                                                      //
-//                                                                                      //
-// BEGINNING OF NEW MACROS WAY                                                          //
-//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+//                                                                                                     //
+//                                                                                                     //
+//                                          M  A  C  R   O  S                                          //
+//                                                                                                     //
+//                                                                                                     //
+//                               P R O C E S S    R E C O R D    U S E R                               //
+//                                                                                                     //
+//                                                                                                     //
+// BEGINNING OF NEW MACROS WAY                                                                         //
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 //
 // [UNDERSTANDING]
-// We implement MACROS when we need using QMK functions, or more than one keystroke in a specific keymap layer
+// We implement MACROS when we need QMK functions, or more than one keystroke in a specific keymap layer
 // and we don't have the need to use tap dance cases.
 //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*                                                                                                                            */
-/*   W A Y    0    T O    A C C E S I N G    K E Y B I N D I N G S     F R O M      M A C    O S X     S Y S T E M            */
-/*                                                                                                                            */
-/*              pvim(j);                                                                                                      */
-/*                                                                                                                            */
-/*              this is the best one and it's posible because of the following function definition:                           */
-/*                                                                                                                            */
-/*              void pvim(char *key)                                                                                          */
-/*              {                                                                                                             */
-/*                SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"p");                                                   */
-/*                send_string(key);                                                                                           */
-/*              }                                                                                                             */
-/*                                                                                                                            */
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*                                                                                                                            */
-/*   W A Y    1    T O    A C C E S I N G    K E Y B I N D I N G S     F R O M      M A C    O S X     S Y S T E M            */
-/*                                                                                                                            */
-/*              SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"pj");                                                    */
-/*                                                                                                                            */
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////            
-/*                                                                                                                            */
-/*   W A Y    2    T O    A C C E S I N G    K E Y B I N D I N G S     F R O M      M A C    O S X     S Y S T E M            */
-/*                                                                                                                            */
-/*              actual_mods = get_mods();                                                                                     */
-/*              add_mods(ALL_MODS); send_keyboard_report();                                                                   */
-/*              SEND_STRING("v");                                                                                             */
-/*              set_mods(actual_mods); send_keyboard_report();                                                                */
-/*              SEND_STRING("pj");                                                                                            */
-/*                                                                                                                            */
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*                                                                                                                            */
-/*   W A Y    3    T O    A C C E S I N G    K E Y B I N D I N G S     F R O M      M A C    O S X     S Y S T E M            */
-/*                                                                                                                            */
-/*              register_code(KC_LSFT);   register_code(KC_LCTL);   register_code(KC_LALT);   register_code(KC_LGUI);         */
-/*              register_code(KC_V);    unregister_code(KC_V);                                                                */
-/*            unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);         */
-/*              register_code(KC_P);    unregister_code(KC_P);                                                                */                               
-/*              register_code(KC_J);    unregister_code(KC_J);                                                                */
-/*                                                                                                                            */
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*                                                                                                                            */
-/*   W A Y    4    T O    A C C E S I N G    K E Y B I N D I N G S     F R O M      M A C    O S X     S Y S T E M            */
-/*                                                                                                                            */
-/*                            T H I S    W A Y     D O E S N ' T      W O R K  ! ! !                                          */
-/*              register_code(MOD_HYPR); register_code(KC_V); unregister_code(KC_V); unregister_code(MOD_HYPR);               */
-/*              register_code(KC_HYPR); register_code(KC_V); unregister_code(KC_V); unregister_code(KC_HYPR);                 */
-/*              register_code(HYPR); register_code(KC_V); unregister_code(KC_V); unregister_code(HYPR);                       */
-/*              register_code(KC_P);    unregister_code(KC_P);                                                                */                               
-/*              register_code(KC_J);    unregister_code(KC_J);                                                                */
-/*                                                                                                                            */
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+/*                                                                                                     */
+/*  W A Y   0   T O   A C C E S I N G   K E Y B I N D I N G S   F R O M   M A C   O S X   S Y S T E M  */
+/*                                                                                                     */
+/*   pvim(j);                                                                                          */
+/*                                                                                                     */
+/*   this is the best one and it's posible because of the following function definition:               */
+/*                                                                                                     */
+/*   void pvim(char *key)                                                                              */
+/*   {                                                                                                 */
+/*     SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"p");                                       */
+/*     send_string(key);                                                                               */
+/*   }                                                                                                 */
+/*                                                                                                     */
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+/*                                                                                                     */
+/*  W A Y   1   T O   A C C E S I N G   K E Y B I N D I N G S   F R O M   M A C   O S X   S Y S T E M  */
+/*                                                                                                     */
+/*   SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"pj");                                        */
+/*                                                                                                     */
+//////////////////////////////////////////////////////////////////////////////////////////////////////###            
+/*                                                                                                     */
+/*  W A Y   2   T O   A C C E S I N G   K E Y B I N D I N G S   F R O M   M A C   O S X   S Y S T E M  */
+/*                                                                                                     */
+/*   actual_mods = get_mods();                                                                         */
+/*   add_mods(ALL_MODS); send_keyboard_report();                                                       */
+/*   SEND_STRING("v");                                                                                 */
+/*   SEND_STRING("pj");                                                                                */
+/*                                                                                                     */
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+/*                                                                                                     */
+/*  W A Y   3   T O   A C C E S I N G   K E Y B I N D I N G S   F R O M   M A C   O S X   S Y S T E M  */
+/*                                                                                                     */
+/*   register_code(KC_LSFT);   register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI); */
+/*   register_code(KC_V);    unregister_code(KC_V);                                                    */
+/* unregister_code(KC_LGUI); unregister_code(KC_LALT);                                                 */
+/* unregister_code(KC_LCTL); unregister_code(KC_LSFT);                                                 */
+/*   register_code(KC_P);    unregister_code(KC_P);                                                    */                               
+/*   register_code(KC_J);    unregister_code(KC_J);                                                    */
+/*                                                                                                     */
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+/*                                                                                                     */
+/*  W A Y   4   T O   A C C E S I N G   K E Y B I N D I N G S   F R O M   M A C   O S X   S Y S T E M  */
+/*                                                                                                     */
+/*           T H I S    W A Y     D O E S N ' T      W O R K  ! ! !                                    */
+/*   register_code(MOD_HYPR); register_code(KC_V); unregister_code(KC_V); unregister_code(MOD_HYPR);   */
+/*   register_code(KC_HYPR);  register_code(KC_V); unregister_code(KC_V); unregister_code(KC_HYPR);    */
+/*   register_code(HYPR);     register_code(KC_V); unregister_code(KC_V); unregister_code(HYPR);       */
+/*   register_code(KC_P);   unregister_code(KC_P);                                                     */                               
+/*   register_code(KC_J);   unregister_code(KC_J);                                                     */
+/*                                                                                                     */
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed)
+  if (record->event.pressed)
+  {
+    switch(keycode)
     {
-        switch(keycode)
-        {
-            case CIRCU:    circumflex_requested = true;          return false; break;  // requested circumflex accent
-            case GRAVE:    grave_requested      = true;          return false; break;  // requested grave      accent
-            case DIAER:    diaeresis_requested  = true;          return false; break;  // requested diaeresis  accent
-            case VOL_1:       volumeSetToLevel1();                  return false; break;  // set volume to minimum (level 1)
-            case VOL_8:       volumeSetToLevel8();                  return false; break;  // set volume to middle  (level 8)
-            case BRIGHT_1:    brightSetToLevel1();                  return false; break;  // set bright to minimum (level 1)
+      case CIRCU:    circumflex_requested = true; return false; break; // requested circumflex accent
+      case GRAVE:    grave_requested      = true; return false; break; // requested grave      accent
+      case DIAER:    diaeresis_requested  = true; return false; break; // requested diaeresis  accent
+      case VOL_1:    volumeSetToLevel1();         return false; break; // set volume to minimum (level 1)
+      case VOL_8:    volumeSetToLevel8();         return false; break; // set volume to middle  (level 8)
+      case BRIGHT_1: brightSetToLevel1();         return false; break; // set bright to minimum (level 1)
 
-            case APP_Q_QQQQQ: callApp("");                          return false; break;  //
-            case APP_W_TWTTR: callApp("Twitter.app");               return false; break;  // t W itter
-            case APP_E_EVERN: callApp("Evernote.app");              return false; break;  // E vernote
-            case APP_R_RRRRR: callApp("");                          return false; break;  //
-            case APP_T_TERMI: callApp("Terminal.app");              return false; break;  // T erminal
+      case APP_Q_QQQQQ: callApp("");                          return false; break; //
+      case APP_W_TWTTR: callApp("Twitter.app");               return false; break; // t W itter
+      case APP_E_EVERN: callApp("Evernote.app");              return false; break; // E vernote
+      case APP_R_RRRRR: callApp("");                          return false; break; //
+      case APP_T_TERMI: callApp("Terminal.app");              return false; break; // T erminal
 
-            case APP_Y_TYPIN: callApp("Typinator.app");             return false; break;  // t Y pinator
-            case APP_U_SUBLI: callApp("Sublime Text.app");          return false; break;  // s U blime Text
-            case APP_I_TEDIT: callApp("TextEdit.app");              return false; break;  // textEd I t
-            case APP_O_OMNIF: callApp("OmniFocus.app");             return false; break;  // O mnifocus
-            case APP_P_SPREF: callApp("System Preferences.app");    return false; break;  // system Preferences
+      case APP_Y_TYPIN: callApp("Typinator.app");             return false; break; // t Y pinator
+      case APP_U_SUBLI: callApp("Sublime Text.app");          return false; break; // s U blime Text
+      case APP_I_TEDIT: callApp("TextEdit.app");              return false; break; // textEd I t
+      case APP_O_OMNIF: callApp("OmniFocus.app");             return false; break; // O mnifocus
+      case APP_P_SPREF: callApp("System Preferences.app");    return false; break; // system P references
 
-            case APP_A_SNOTE: callApp("Simplenote.app");            return false; break;  // simplenote
-            case APP_S_SAFAR: callApp("Safari.app");                return false; break;  // S afari        // _delay_ms(50);
-            case APP_D_D_ONE: callApp("Day One Classic.app");       return false; break;  // D ay one
-            case APP_F_FINDE: callApp("Finder.app");                return false; break;  // F inder
-            case APP_G_CHRME: callApp("Google Chrome.app");         return false; break;  // G oogle chrome
+      case APP_A_SNOTE: callApp("Simplenote.app");            return false; break; // simplenote
+      case APP_S_SAFAR: callApp("Safari.app");                return false; break; // S afari _delay_ms50
+      case APP_D_D_ONE: callApp("Day One Classic.app");       return false; break; // D ay one
+      case APP_F_FINDE: callApp("Finder.app");                return false; break; // F inder
+      case APP_G_CHRME: callApp("Google Chrome.app");         return false; break; // G oogle chrome
 
-            case APP_H_SKTCH: callApp("Sketch.app");                return false; break;  // sketc H
-            case APP_J_JJJJJ: callApp("");                          return false; break;  // 
-            case APP_K_KVIEW: callApp("Karabiner-EventViewer.app"); return false; break;  // Karabiner Event Viewer
-            case APP_L_CLNDR: callApp("Calendar.app");              return false; break;  // Calendar
-            case APP_SP_SPSP: callApp("");                          return false; break;  //
+      case APP_H_SKTCH: callApp("Sketch.app");                return false; break; // sketc H
+      case APP_J_JJJJJ: callApp("");                          return false; break; // 
+      case APP_K_KVIEW: callApp("Karabiner-EventViewer.app"); return false; break; // K arabiner Evnt Vwr
+      case APP_L_CLNDR: callApp("Calendar.app");              return false; break; // Calendar
+      case APP_SP_SPSP: callApp("");                          return false; break; //
 
-            case APP_Z_STUDI: callApp("Studies.app");               return false; break;  // Studies
-            case APP_X_XCODE: callApp("Xcode.app");                 return false; break;  // Xcode
-            case APP_C_CALCU: callApp("Calculator.app");            return false; break;  // Calculator
-            case APP_V_VVVVV: callApp("");                          return false; break;  //
-            case APP_B_BOOKS: callApp("Books.app");                 return false; break;  // Books
+      case APP_Z_STUDI: callApp("Studies.app");               return false; break; // Studies
+      case APP_X_XCODE: callApp("Xcode.app");                 return false; break; // Xcode
+      case APP_C_CALCU: callApp("Calculator.app");            return false; break; // Calculator
+      case APP_V_VVVVV: callApp("");                          return false; break; //
+      case APP_B_BOOKS: callApp("Books.app");                 return false; break; // Books
 
-            case APP_N_NOTES: callApp("Notes.app");                 return false; break;  // Notes
-                              // next 2 lines have been copied & pasted from a command line C program in xcode who was running perfectly !
-                              // any of them works properly for open an app from Terminal !  But they don' work under QMK code !
-                              //system("open //Applications//Notes.app");
-                              //system("osascript -e 'launch application \"Notes\"' -e 'activate application \"Notes\"' -e end");
-            case APP_M_MAIL:  callApp("Mail");                      return false; break;  // Mail
-            case APP_ES_KEYN: callApp("Keynote");                   return false; break;  // Keynote
-            case APP_BS_PAGE: callApp("Pages");                     return false; break;  // Pages
-            case APP_EN_NUMB: callApp("Numbers");                   return false; break;  // Numbers
+      case APP_N_NOTES: callApp("Notes.app");                 return false; break;  // Notes
+   // Next 2 lines have been copied & pasted from a command line C program in xcode who run perfectly !
+   // Any of them works properly for opening an app from Terminal !  But they don' work under QMK code !
+   //   system("open //Applications//Notes.app");
+   //   system("osascript -e 'launch application \"Notes\"' -e 'activate application \"Notes\"' -e end");
+      case APP_M_MAIL:  callApp("Mail");                      return false; break; // Mail
+      case APP_ES_KEYN: callApp("Keynote");                   return false; break; // Keynote
+      case APP_BS_PAGE: callApp("Pages");                     return false; break; // Pages
+      case APP_EN_NUMB: callApp("Numbers");                   return false; break; // Numbers
 
-// _PVIM
-// this layer is all implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
-// except for the 'H' key:
-            case PVIM_H: pvim("h");  return false; break;
-// _pvim
+   // _PVIM
+   // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
+   // ... except for the 'H' key:
+      case PVIM_H: pvim("h");  return false; break;
+   // _pvim
 
 // [INFO]
 /*
- * [#ref] Escape sequences in C
- * wikipedia link: 
- * https://en.wikipedia.org/wiki/Escape_sequences_in_C        
+* [#ref] Escape sequences in C
+* wikipedia link: 
+* https://en.wikipedia.org/wiki/Escape_sequences_in_C        
 
- * \e  \x001B  
- * register_code (KC_ESC); unregister_code (KC_ESC); } break;
- * case PVIM_ES:if (record->event.pressed) { pvim("\e"); } break;
+* \e  \x001B  
+* register_code (KC_ESC); unregister_code (KC_ESC); } break;
+* case PVIM_ES:if (record->event.pressed) { pvim("\e"); } break;
 
- * \b  \x0008
- * register_code(KC_BSPC); unregister_code(KC_BSPC); } break;   
- * case PVIM_BS:if (record->event.pressed) { pvim("\b"); } break;
+* \b  \x0008
+* register_code(KC_BSPC); unregister_code(KC_BSPC); } break;   
+* case PVIM_BS:if (record->event.pressed) { pvim("\b"); } break;
 
- * \n  \x000A      new line
- * register_code (KC_ENT); unregister_code (KC_ENT); } break; 
- * \r  \x000D      carriage return
-        case PVIM_EN:if (record->event.pressed) { pvim("\n"); } break;
- */
+* \n  \x000A      new line
+* register_code (KC_ENT); unregister_code (KC_ENT); } break; 
+* \r  \x000D      carriage return
+      case PVIM_EN:if (record->event.pressed) { pvim("\n"); } break;
+*/
 // [info]
 
 // _DVIM
-            case DVIM_Y: dvim("y");  return false; break;
-            //   DVIM_uU is tap_dance
-            case DVIM_I: dvim("i");  return false; break;
-            case DVIM_O: dvim("o");  return false; break;
-            //   DVIM_pP is tap_dance
+      case DVIM_Y: dvim("y");  return false; break;
+      //   DVIM_uU is tap_dance
+      case DVIM_I: dvim("i");  return false; break;
+      case DVIM_O: dvim("o");  return false; break;
+      //   DVIM_pP is tap_dance
 
-            case DVIM_H: dvim("h");  return false; break;
-            case DVIM_J: dvim("j");  return false; break;
-            case DVIM_K: dvim("k");  return false; break;
-            case DVIM_L: dvim("l");  return false; break;
-            case DVIM_SP:dvim(" ");  return false; break;
+      case DVIM_H: dvim("h");  return false; break;
+      case DVIM_J: dvim("j");  return false; break;
+      case DVIM_K: dvim("k");  return false; break;
+      case DVIM_L: dvim("l");  return false; break;
+      case DVIM_SP:dvim(" ");  return false; break;
 
-            case DVIM_M: dvim("m");  return false; break;
-            case DVIM_ES:dvim("\e"); return false; break;
-            case DVIM_BS:dvim("\b"); return false; break;
-            case DVIM_EN:dvim("\n"); return false; break;
-      
+      case DVIM_M: dvim("m");  return false; break;
+      case DVIM_ES:dvim("\e"); return false; break;
+      case DVIM_BS:dvim("\b"); return false; break;
+      case DVIM_EN:dvim("\n"); return false; break;
+
 // select _AVIM
 //            case AVIM_Y: avim("y");  return false; break;
 //            case AVIM_N: avim("n");  return false; break;
 // the rest of the keys are combination of _PVIM + SHIFT key            
 
 // _CVIM
-            case CVIM_Y: cvim("y");  return false; break;
-            case CVIM_U: cvim("u");  return false; break;
-            case CVIM_I: cvim("i");  return false; break;
-            case CVIM_O: cvim("o");  return false; break;
-            case CVIM_P: cvim("p");  return false; break;
+      case CVIM_Y: cvim("y");  return false; break;
+      case CVIM_U: cvim("u");  return false; break;
+      case CVIM_I: cvim("i");  return false; break;
+      case CVIM_O: cvim("o");  return false; break;
+      case CVIM_P: cvim("p");  return false; break;
 
-            case CVIM_H: cvim("h");  return false; break;
-            case CVIM_J: cvim("j");  return false; break;
-            case CVIM_K: cvim("k");  return false; break;
-            case CVIM_L: cvim("l");  return false; break;
-            case CVIM_SP:cvim(" ");  return false; break;
+      case CVIM_H: cvim("h");  return false; break;
+      case CVIM_J: cvim("j");  return false; break;
+      case CVIM_K: cvim("k");  return false; break;
+      case CVIM_L: cvim("l");  return false; break;
+      case CVIM_SP:cvim(" ");  return false; break;
 
-            case CVIM_N: cvim("n");  return false; break;
-            case CVIM_M: cvim("m");  return false; break;
-            case CVIM_ES:cvim("\e"); return false; break;
-            case CVIM_BS:cvim("\b"); return false; break;
-            case CVIM_EN:cvim("\n"); return false; break;                        
-      
+      case CVIM_N: cvim("n");  return false; break;
+      case CVIM_M: cvim("m");  return false; break;
+      case CVIM_ES:cvim("\e"); return false; break;
+      case CVIM_BS:cvim("\b"); return false; break;
+      case CVIM_EN:cvim("\n"); return false; break;                        
+
 // _XVIM
-            case XVIM_Y: xvim("y");  return false; break;
-            case XVIM_U: xvim("u");  return false; break;
-            case XVIM_I: xvim("i");  return false; break;
-            case XVIM_O: xvim("o");  return false; break;
-            case XVIM_P: xvim("p");  return false; break;
+      case XVIM_Y: xvim("y");  return false; break;
+      case XVIM_U: xvim("u");  return false; break;
+      case XVIM_I: xvim("i");  return false; break;
+      case XVIM_O: xvim("o");  return false; break;
+      case XVIM_P: xvim("p");  return false; break;
 
-            case XVIM_H: xvim("h");  return false; break;
-            case XVIM_J: xvim("j");  return false; break;
-            case XVIM_K: xvim("k");  return false; break;
-            case XVIM_L: xvim("l");  return false; break;
-            case XVIM_SP:xvim(" ");  return false; break;
+      case XVIM_H: xvim("h");  return false; break;
+      case XVIM_J: xvim("j");  return false; break;
+      case XVIM_K: xvim("k");  return false; break;
+      case XVIM_L: xvim("l");  return false; break;
+      case XVIM_SP:xvim(" ");  return false; break;
 
-            case XVIM_N:  xvim("n");  return false; break;
-            case XVIM_M:  xvim("m");  return false; break;
-            case XVIM_ES: xvim("\e"); return false; break;
-            case XVIM_BS: xvim("\b"); return false; break;
-            case XVIM_EN: xvim("\n"); return false; break;
+      case XVIM_N:  xvim("n");  return false; break;
+      case XVIM_M:  xvim("m");  return false; break;
+      case XVIM_ES: xvim("\e"); return false; break;
+      case XVIM_BS: xvim("\b"); return false; break;
+      case XVIM_EN: xvim("\n"); return false; break;
 
-      
-      
+
+
 // _ZVIM
-            case ZVIM_Y: zvim("y");  return false; break;
-            case ZVIM_U: zvim("u");  return false; break;
-            case ZVIM_I: zvim("i");  return false; break;
-            case ZVIM_O: zvim("o");  return false; break;
-            case ZVIM_P: zvim("p");  return false; break;
+      case ZVIM_Y: zvim("y");  return false; break;
+      case ZVIM_U: zvim("u");  return false; break;
+      case ZVIM_I: zvim("i");  return false; break;
+      case ZVIM_O: zvim("o");  return false; break;
+      case ZVIM_P: zvim("p");  return false; break;
 
-            case ZVIM_H: zvim("h");  return false; break;
-            case ZVIM_J: zvim("j");  return false; break;
-            case ZVIM_K: zvim("k");  return false; break;
-            case ZVIM_L: zvim("l");  return false; break;
-            case ZVIM_SP:zvim(" ");  return false; break;
+      case ZVIM_H: zvim("h");  return false; break;
+      case ZVIM_J: zvim("j");  return false; break;
+      case ZVIM_K: zvim("k");  return false; break;
+      case ZVIM_L: zvim("l");  return false; break;
+      case ZVIM_SP:zvim(" ");  return false; break;
 
-            case ZVIM_N: zvim("n");  return false; break;
-            case ZVIM_M: zvim("m");  return false; break;
-            case ZVIM_ES:zvim("\e"); return false; break;
-            case ZVIM_BS:zvim("\b"); return false; break;
-            case ZVIM_EN:zvim("\n"); return false; break;
-      
+      case ZVIM_N: zvim("n");  return false; break;
+      case ZVIM_M: zvim("m");  return false; break;
+      case ZVIM_ES:zvim("\e"); return false; break;
+      case ZVIM_BS:zvim("\b"); return false; break;
+      case ZVIM_EN:zvim("\n"); return false; break;
 
-            case DICTAD:
-                register_code(KC_RGUI); unregister_code(KC_RGUI);
-                register_code(KC_RGUI); unregister_code(KC_RGUI);
-                return false; break;
 
-            case BLIT_OFF: gherkinBacklightLevel =  0; backlight_level(gherkinBacklightLevel); return false; 
-            case BLIT_01:  gherkinBacklightLevel =  1; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_02:  gherkinBacklightLevel =  2; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_03:  gherkinBacklightLevel =  3; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_04:  gherkinBacklightLevel =  4; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_05:  gherkinBacklightLevel =  5; backlight_level(gherkinBacklightLevel); return false; 
+      case DICTAD:
+        register_code(KC_RGUI); unregister_code(KC_RGUI);
+        register_code(KC_RGUI); unregister_code(KC_RGUI);
+        return false; break;
 
-            case BLIT_06:  gherkinBacklightLevel =  6; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_07:  gherkinBacklightLevel =  7; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_08:  gherkinBacklightLevel =  8; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_09:  gherkinBacklightLevel =  9; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_10:  gherkinBacklightLevel = 10; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_OFF: gherkinBacklightLevel =  0; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_01:  gherkinBacklightLevel =  1; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_02:  gherkinBacklightLevel =  2; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_03:  gherkinBacklightLevel =  3; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_04:  gherkinBacklightLevel =  4; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_05:  gherkinBacklightLevel =  5; backlight_level(gherkinBacklightLevel); return false;
 
-            case BLIT_11:  gherkinBacklightLevel = 11; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_12:  gherkinBacklightLevel = 12; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_13:  gherkinBacklightLevel = 13; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_14:  gherkinBacklightLevel = 14; backlight_level(gherkinBacklightLevel); return false;
-            case BLIT_15:  gherkinBacklightLevel = 15; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_06:  gherkinBacklightLevel =  6; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_07:  gherkinBacklightLevel =  7; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_08:  gherkinBacklightLevel =  8; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_09:  gherkinBacklightLevel =  9; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_10:  gherkinBacklightLevel = 10; backlight_level(gherkinBacklightLevel); return false;
 
-           case BRTH_01:  breathing_period_set(1); breathing_enable(); return false; 
-           case BRTH_02:  breathing_period_set(2); breathing_enable(); return false; 
-           case BRTH_03:  breathing_period_set(3); breathing_enable(); return false; 
-           case BRTH_04:  breathing_period_set(4); breathing_enable(); return false; 
-           case BRTH_05:  breathing_period_set(5); breathing_enable(); return false; 
-           case BRTH_06:  breathing_period_set(6); breathing_enable(); return false;
-           case BRTH_07:  breathing_period_set(7); breathing_enable(); return false; 
+      case BLIT_11:  gherkinBacklightLevel = 11; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_12:  gherkinBacklightLevel = 12; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_13:  gherkinBacklightLevel = 13; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_14:  gherkinBacklightLevel = 14; backlight_level(gherkinBacklightLevel); return false;
+      case BLIT_15:  gherkinBacklightLevel = 15; backlight_level(gherkinBacklightLevel); return false;
 
-           case BRTH_12:  breathing_period_set(12); breathing_enable(); return false; 
-           case BRTH_15:  breathing_period_set(15); breathing_enable(); return false; 
+      case BRTH_01:  breathing_period_set(1); breathing_enable();  return false;
+      case BRTH_02:  breathing_period_set(2); breathing_enable();  return false;
+      case BRTH_03:  breathing_period_set(3); breathing_enable();  return false;
+      case BRTH_04:  breathing_period_set(4); breathing_enable();  return false;
+      case BRTH_05:  breathing_period_set(5); breathing_enable();  return false;
+      case BRTH_06:  breathing_period_set(6); breathing_enable();  return false;
+      case BRTH_07:  breathing_period_set(7); breathing_enable();  return false;
 
-           default: return true; 
-        }
-	  }
-//^^if (record->event.pressed)^^
-    else 
-    {
-      switch(keycode)
-      {
-        case CIRCU:    circumflex_requested = false;          return false; break;  // non-requested circumflex accent
-        case GRAVE:    grave_requested      = false;          return false; break;  // non-requested grave      accent
-        case DIAER:    diaeresis_requested  = false;          return false; break;  // non-requested diaeresis  accent
+      case BRTH_12:  breathing_period_set(12); breathing_enable(); return false;
+      case BRTH_15:  breathing_period_set(15); breathing_enable(); return false;
 
-     // this line is responsible of the treatment for the releases of the rest of the keys.
-        default:                                              return true;  break;  // [LAST] [BUG?] // 'break;' added
-      }
+      default: return true; 
     }
+  }
+//^^if (record->event.pressed)^^
+  else 
+  {
+    switch(keycode)
+    {
+      case CIRCU: circumflex_requested = false; return false; break; // non-requested circumflex accent
+      case GRAVE: grave_requested      = false; return false; break; // non-requested grave      accent
+      case DIAER: diaeresis_requested  = false; return false; break; // non-requested diaeresis  accent
+
+   // this line is responsible of the management of the releases for THE REST of the keys.
+      default:                                  return true;  break;
+    }
+  }
 }
 //                                                                                      //
 //                                                                                      //
