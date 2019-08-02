@@ -160,8 +160,11 @@
 #include QMK_KEYBOARD_H
 
 // [INSPIRINGCODE]
-// #define GRAVE_MODS  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT)|MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI)|MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
-// #define ALL_MODS    (MOD_BIT(KC_LSFT)|MOD_BIT(KC_LCTL)|MOD_BIT(KC_LALT)|MOD_BIT(KC_LGUI))
+// #define GRAVE_MODS  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT)
+//                     |MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI)
+//                     |MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
+
+// #define ALL_LMODS   (MOD_BIT(KC_LSFT)|MOD_BIT(KC_LCTL)|MOD_BIT(KC_LALT)|MOD_BIT(KC_LGUI))
 // [inspiringcode]
 #define LSHIFT_MODS    (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
 #define LGUI_MODS      (MOD_BIT(KC_LGUI)  |MOD_BIT(KC_RGUI)  )
@@ -2579,7 +2582,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |        |        |        |        |        |  |        |        |        |        |        |
   * |    Q   |    W   |    E   |    R   |    T   |  |    Y   |    U   |    I   |    O   |    P   |
   * |⌘[_1APP]|        |        |        |        |  |        |        |        |        |⌘[_1APP]|
-  * |@[_APPS]|@[_POWR]|        |@[_DIAE]|@[_SYMB]|  |        |        |        |@[_POWR]|@[_APPS]|
+  * |@[_APPS]|@[_POWR]|@[_DIAE]|@[_DALY]|@[_SYMB]|  |        |@[_DALY]|        |@[_POWR]|@[_APPS]|
   * |--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------|
   * |        |        |        |        |        |  |        |        |        |        |        |
   * |    A   |    S   |    D   |    F   |    G   |  |    H   |    J   |    K   |    L   |  Space |
@@ -2589,7 +2592,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |        |        |        |        |        |  |        |        |        |        |        |
   * |    Z   |    X   |    C   |    V   |    B   |  |    N   |    M   | Escape |Bckspace|  Enter |
   * |        |        |        |        |        |  |        |        |        |        |        |
-  * |[@_DALY]|@[_DVIM]|@[_MOUS]|@[_PVIM]|@[_NUMB]|  |@[_SYMB]|@[_PVIM]|@[_FUNC]|        |@[_DALY]|
+  * |  @LSft |@[_DVIM]|@[_MOUS]|@[_PVIM]|@[_NUMB]|  |@[_SYMB]|@[_PVIM]|@[_FUNC]|        |  @LSft |
   * '--------------------------------------------'  '--------------------------------------------'
 */
 [_ALPH] = LAYOUT_ortho_3x10(  // layer 0 : default layer
@@ -2597,11 +2600,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,--------------------------------------------------------------------------------------.  ,------------------------------------------------------------------------------------------.
-    LT(_APPS, KC_Q), LT(_POWR, KC_W),            KC_E, LT(_DIAE, KC_R), LT(_SYMB, KC_T),                 KC_Y,            KC_U,              KC_I, LT(_POWR, KC_O),   LT(_APPS, KC_P),
+    LT(_APPS, KC_Q), LT(_POWR, KC_W), LT(_DIAE, KC_E), LT(_DALY, KC_R), LT(_SYMB, KC_T),                 KC_Y, LT(_DALY, KC_U),              KC_I, LT(_POWR, KC_O),   LT(_APPS, KC_P),
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
        LSFT_T(KC_A),     CTL_T(KC_S),     ALT_T(KC_D),     GUI_T(KC_F), LT(_ACCN, KC_G),      LT(_ACCN, KC_H),     GUI_T(KC_J),       ALT_T(KC_K),     CTL_T(KC_L),    LSFT_T(KC_SPC),
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
-    LT(_DALY, KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_PVIM, KC_V), LT(_NUMB, KC_B),      LT(_SYMB, KC_N), LT(_PVIM, KC_M), LT(_FUNC, KC_ESC),         KC_BSPC, LT(_DALY, KC_ENT) ),
+       LSFT_T(KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_PVIM, KC_V), LT(_NUMB, KC_B),      LT(_SYMB, KC_N), LT(_PVIM, KC_M), LT(_FUNC, KC_ESC),         KC_BSPC,    LSFT_T(KC_ENT) ),
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###

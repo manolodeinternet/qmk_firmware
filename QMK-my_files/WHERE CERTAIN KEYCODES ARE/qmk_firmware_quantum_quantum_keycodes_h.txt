@@ -1,0 +1,64 @@
+// LAYERS
+* #define LT(layer, kc) (kc | QK_LAYER_TAP | ((layer & 0xF) << 8))
+* #define TO(layer) (layer | QK_TO | (ON_PRESS << 0x4))
+* MO, DF, TG, OSL, LM, OSM, TT, MT
+// Momentary switch layer - 256 layer max
+#define MO(layer) (layer | QK_MOMENTARY)
+
+// Set default layer - 256 layer max
+#define DF(layer) (layer | QK_DEF_LAYER)
+
+// Toggle to layer - 256 layer max
+#define TG(layer) (layer | QK_TOGGLE_LAYER)
+
+// One-shot layer - 256 layer max
+#define OSL(layer) (layer | QK_ONE_SHOT_LAYER)
+
+// L-ayer M-od: Momentary switch layer with modifiers active - 16 layer max, left mods only
+#define LM(layer, mod) (QK_LAYER_MOD | (((layer) & 0xF) << 4) | ((mod) & 0xF))
+
+// One-shot mod
+#define OSM(mod) ((mod) | QK_ONE_SHOT_MOD)
+
+// Layer tap-toggle
+#define TT(layer) (layer | QK_LAYER_TAP_TOGGLE)
+
+// M-od, T-ap - 256 keycode max
+#define MT(mod, kc) (kc | QK_MOD_TAP | (((mod) & 0x1F) << 8))
+
+
+
+
+
+// RGB LIGHTING
+* #define RGB_M_P RGB_MODE_PLAIN
+* #define RGB_M_B RGB_MODE_BREATHE
+* #define RGB_M_R RGB_MODE_RAINBOW
+* #define RGB_M_SW RGB_MODE_SWIRL
+* #define RGB_M_SN RGB_MODE_SNAKE
+* ...
+
+
+
+
+
+// MODs
+// Ability to use mods in layouts
+* #define LCTL(kc) (kc | QK_LCTL)
+* #define LSFT(kc) (kc | QK_LSFT)
+
+* #define HYPR(kc) (kc | QK_LCTL | QK_LSFT | QK_LALT | QK_LGUI)
+
+
+
+
+
+// SHIFTED
+// Aliases for shifted symbols
+* #define KC_TILD LSFT(KC_GRV)    // ~
+* #define KC_TILDE    KC_TILD
+
+* #define KC_EXLM LSFT(KC_1)      // !
+* #define KC_EXCLAIM  KC_EXLM
+
+* 
