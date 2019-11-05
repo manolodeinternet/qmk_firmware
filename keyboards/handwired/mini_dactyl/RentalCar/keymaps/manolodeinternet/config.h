@@ -1,3 +1,7 @@
+// MiniDactyl 2019/11/04
+// =================================================================
+// CONFIG.H
+
 #ifndef CONFIG_USER_H
 #define CONFIG_USER_H
 

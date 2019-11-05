@@ -174,7 +174,7 @@
 // DEFINING LAYERS                      L A Y E R S                                     //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-#define _ALPH   0  //  gherkin ALPHAS DEFAULT    layer 
+#define _DFLT   0  //  gherkin ALPHAS DEFAULT    layer 
 #define _ACCN   1  //  gherkin ACCENTS           layer 
 #define _DIAE   2  //  gherkin RESET & diaereis  layer
 #define _NUMB   3  //  gherkin numbers           layer 
@@ -183,7 +183,7 @@
 #define _DALY   6  //  gherkin DAiLY commands    layer 
 #define _APPS   7  //  APPlicationS              layer
 #define _POWR   8  //  POWER        productivity layer
-#define _PVIM   9  //  Personal              VIM layer
+#define _FVIM   9  //  Personal              VIM layer
 #define _DVIM  10  //  Delete                VIM layer
 /*
 #define _AVIM  X12X  //  select              VIM layer
@@ -271,7 +271,7 @@ We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, 
 #define BL_FUNC  5
 #define BL_SYMB 10
 #define BL_NUMB  8
-#define BL_PVIM  8
+#define BL_FVIM  8
 #define BL_DALY 10
 #define BL_APPS 10
 #define BL_VIM  12
@@ -744,7 +744,7 @@ enum tap_dance_keycodes {
 // tap dance keycodes for _powr (power layer) 8
 
 // (i.e. KC_U: *'begin of line'/**'begin of paragraph')
-    ,PVIM_uU ,PVIM_iI ,PVIM_oO ,PVIM_pP
+    ,FVIM_uU ,FVIM_iI ,FVIM_oO ,FVIM_pP
 
     ,DVIM_uU ,DVIM_pP
 };
@@ -810,11 +810,11 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
 // MACROS FOR _?VIM 9, 10, 11, 12, 13
 
-// _PVIM LAYER
+// _FVIM LAYER
 // this layer is all implemented without using '/Users/myUser/Library/KeyBindings/DefaultKeyBinding.dict'
 // except for the 'H' key:
-    ,PVIM_H
-// _pvim layer
+    ,FVIM_H
+// _fvim layer
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
@@ -980,17 +980,17 @@ int cur_dance (qk_tap_dance_state_t *state) {
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [FUNCTIONS] [_PVIM], [_DVIM], [_CVIM],     [_XVIM],     [_ZVIM]     & [_APPS]        //
-//               KC_V,    KC_X,  [_PVIM]KC_C, [_PVIM]KC_X, [_PVIM]KC_Z   (KC_Q & KC_P)  //
+// [FUNCTIONS] [_FVIM], [_DVIM], [_CVIM],     [_XVIM],     [_ZVIM]     & [_APPS]        //
+//               KC_V,    KC_X,  [_FVIM]KC_C, [_FVIM]KC_X, [_FVIM]KC_Z   (KC_Q & KC_P)  //
 //                                                                                      //
 // FUNCTIONS FOR ACCESING KEYBINDINGS MAPPED FUNCTIONS                                  //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void pvim(char *key)
+void fvim(char *key)
 {
 //  SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v")))));
     HYPR_V;
-    SEND_STRING("p");
+    SEND_STRING("f");
     send_string(key);
 }
 /* select
@@ -1039,8 +1039,8 @@ void callApp(char *appName)
     register_code (KC_ENT); unregister_code (KC_ENT);
 }  
 //                                                                                      //
-// [functions] [_pvim], [_dvim], [_cvim],     [_xvim],     [_zvim]     & [_apps]        //
-//               kc_v,    kc_x,  [_pvim]kc_c, [_pvim]kc_x, [_pvim]kc_z   (kc_q & kc_p)  //
+// [functions] [_fvim], [_dvim], [_cvim],     [_xvim],     [_zvim]     & [_apps]        //
+//               kc_v,    kc_x,  [_fvim]kc_c, [_fvim]kc_x, [_fvim]kc_z   (kc_q & kc_p)  //
 //                                                                                      //
 // functions for accesing keybindings mapped functions                                  //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1432,7 +1432,7 @@ void SLNUMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [ _PVIM ] KC_U (PVIM_uU)                                                  //
+// [TAPDANCE] [ _FVIM ] KC_U (FVIM_uU)                                                  //
 //                                                                                      //
 //  B E G I N N I N G   O F   L I N E    /    P A R A G R A P H                         //
 //                                                                                      //
@@ -1440,25 +1440,25 @@ void SLNUMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 //        ** BEGINING OF PARAGRAPH                                                      //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'PVIM_uU' tap dance.
-static tap PVIM_uU_tap_state = {
+//instantalize an instance of 'tap' for the 'FVIM_uU' tap dance.
+static tap FVIM_uU_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void PVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
-  PVIM_uU_tap_state.state = cur_dance(state);
-  switch (PVIM_uU_tap_state.state) {
+void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
+  FVIM_uU_tap_state.state = cur_dance(state);
+  switch (FVIM_uU_tap_state.state) {
     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_LEFT);
                           unregister_code(KC_LEFT); unregister_code(KC_LGUI); break;
 
     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_UP);
                           unregister_code(KC_UP);   unregister_code(KC_LALT); break;
   }
-  PVIM_uU_tap_state.state = 0;
+  FVIM_uU_tap_state.state = 0;
 }
 //                                                                                      //
-// [tapdance] [ _pvim ] kc_u (pvim_uu)                                                  //
+// [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
 //                                                                                      //
 //  b e g i n n i n g   o f   l i n e    /    p a r a g r a p h                         //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1466,7 +1466,7 @@ void PVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [ _PVIM ] KC_P (PVIM_pP)                                                  //
+// [TAPDANCE] [ _FVIM ] KC_P (FVIM_pP)                                                  //
 //                                                                                      //
 //  E N D   O F   L I N E  /  P A R A G R A P H                                         //
 //                                                                                      //
@@ -1474,25 +1474,25 @@ void PVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
 //        ** END OF PARAGRAPH                                                           //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'PVIM_pP' tap dance.
-static tap PVIM_pP_tap_state = {
+//instantalize an instance of 'tap' for the 'FVIM_pP' tap dance.
+static tap FVIM_pP_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void PVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
-  PVIM_pP_tap_state.state = cur_dance(state);
-  switch (PVIM_pP_tap_state.state) {
+void FVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
+  FVIM_pP_tap_state.state = cur_dance(state);
+  switch (FVIM_pP_tap_state.state) {
     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_RGHT);
                           unregister_code(KC_RGHT); unregister_code(KC_LGUI); break;
 
     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_DOWN);
                           unregister_code(KC_DOWN); unregister_code(KC_LALT); break;
   }
-  PVIM_pP_tap_state.state = 0;
+  FVIM_pP_tap_state.state = 0;
 }
 //                                                                                      //
-// [tapdance] [ _pvim ] kc_p (pvim_pp)                                                  //
+// [tapdance] [ _fvim ] kc_p (fvim_pp)                                                  //
 //                                                                                      //
 //  e n d   o f   l i n e  /  p a r a g r a p h                                         //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1500,7 +1500,7 @@ void PVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [ _PVIM ] KC_I (PVIM_iI)                                                  //
+// [TAPDANCE] [ _FVIM ] KC_I (FVIM_iI)                                                  //
 //                                                                                      //
 //  M O V E   W O R D   B A C K W A R D  /  M O V E   S U B W O R D   B A C K W A R D   //
 //                                                                                      //
@@ -1508,25 +1508,25 @@ void PVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
 //        ** MOVE SUBWORD BACKWARD                                                      //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'PVIM_iI' tap dance.
-static tap PVIM_iI_tap_state = {
+//instantalize an instance of 'tap' for the 'FVIM_iI' tap dance.
+static tap FVIM_iI_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void PVIM_iI_function (qk_tap_dance_state_t *state, void *user_data) {
-  PVIM_iI_tap_state.state = cur_dance(state);
-  switch (PVIM_iI_tap_state.state) {
+void FVIM_iI_function (qk_tap_dance_state_t *state, void *user_data) {
+  FVIM_iI_tap_state.state = cur_dance(state);
+  switch (FVIM_iI_tap_state.state) {
     case SINGLE_TAP:        register_code(KC_LALT);   register_code(KC_LEFT);
                           unregister_code(KC_LEFT); unregister_code(KC_LALT); break;
 
     case DOUBLE_TAP:        register_code(KC_LCTL);   register_code(KC_LEFT);
                           unregister_code(KC_LEFT);   unregister_code(KC_LCTL); break;
   }
-  PVIM_iI_tap_state.state = 0;
+  FVIM_iI_tap_state.state = 0;
 }
 //                                                                                      //
-// [tapdance] [ _pvim ] kc_i (pvim_ii)                                                  //
+// [tapdance] [ _fvim ] kc_i (fvim_ii)                                                  //
 //                                                                                      //
 //  m o v e   w o r d   b a c k w a r d  /  m o v e   s u b w o r d   b a c k w a r d   //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1534,7 +1534,7 @@ void PVIM_iI_function (qk_tap_dance_state_t *state, void *user_data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [ _PVIM ] KC_O (PVIM_oO)                                                  //
+// [TAPDANCE] [ _FVIM ] KC_O (FVIM_oO)                                                  //
 //                                                                                      //
 //  M O V E   W O R D   F O R W A R D    /    M O V E   S U B W O R D   F O R W A R D   //
 //                                                                                      //
@@ -1542,25 +1542,25 @@ void PVIM_iI_function (qk_tap_dance_state_t *state, void *user_data) {
 //        ** MOVE SUBWORD FORWARD                                                       //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'PVIM_oO' tap dance. esterNoCleiDoMastoiDeo
-static tap PVIM_oO_tap_state = {
+//instantalize an instance of 'tap' for the 'FVIM_oO' tap dance. esterNoCleiDoMastoiDeo
+static tap FVIM_oO_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void PVIM_oO_function (qk_tap_dance_state_t *state, void *user_data) {
-  PVIM_oO_tap_state.state = cur_dance(state);
-  switch (PVIM_oO_tap_state.state) {
+void FVIM_oO_function (qk_tap_dance_state_t *state, void *user_data) {
+  FVIM_oO_tap_state.state = cur_dance(state);
+  switch (FVIM_oO_tap_state.state) {
     case SINGLE_TAP:        register_code(KC_LALT);   register_code(KC_RGHT);
                           unregister_code(KC_RGHT); unregister_code(KC_LALT); break;
 
     case DOUBLE_TAP:        register_code(KC_LCTL);   register_code(KC_RGHT);
                           unregister_code(KC_RGHT); unregister_code(KC_LCTL); break;
   }
-  PVIM_oO_tap_state.state = 0;
+  FVIM_oO_tap_state.state = 0;
 }
 //                                                                                      //
-// [tapdance] [ _pvim ] kc_o (pvim_oo)                                                  //
+// [tapdance] [ _fvim ] kc_o (fvim_oo)                                                  //
 //                                                                                      //
 //  m o v e   w o r d   f o r w a r d    /    m o v e   s u b w o r d   f o r w a r d   //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -2506,12 +2506,12 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  ,[RS_INCO]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RS_INCO_finished, RS_INCO_reset) 
  // [_powr] layer
 
-// [_PVIM] LAYER
- ,[PVIM_uU] = ACTION_TAP_DANCE_FN(PVIM_uU_function)
- ,[PVIM_iI] = ACTION_TAP_DANCE_FN(PVIM_iI_function)
- ,[PVIM_oO] = ACTION_TAP_DANCE_FN(PVIM_oO_function)
- ,[PVIM_pP] = ACTION_TAP_DANCE_FN(PVIM_pP_function)
-// [_pvim] layer
+// [_FVIM] LAYER
+ ,[FVIM_uU] = ACTION_TAP_DANCE_FN(FVIM_uU_function)
+ ,[FVIM_iI] = ACTION_TAP_DANCE_FN(FVIM_iI_function)
+ ,[FVIM_oO] = ACTION_TAP_DANCE_FN(FVIM_oO_function)
+ ,[FVIM_pP] = ACTION_TAP_DANCE_FN(FVIM_pP_function)
+// [_fvim] layer
 
 // [_DVIM] LAYER
  ,[DVIM_uU] = ACTION_TAP_DANCE_FN(DVIM_uU_function)
@@ -2575,7 +2575,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
-/* Keymap _ALPH 0: Default layer = _ALPH layer
+/* Keymap _DFLT 0: Default layer = _DFLT layer
 // CMD + P  =  [SINGLE _APPS LAYER]
 // CMD + Q  =  [SINGLE _APPS LAYER]
   * ,--------------------------------------------.  ,--------------------------------------------.
@@ -2592,23 +2592,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |        |        |        |        |        |  |        |        |        |        |        |
   * |    Z   |    X   |    C   |    V   |    B   |  |    N   |    M   | Escape |Bckspace|  Enter |
   * |        |        |        |        |        |  |        |        |        |        |        |
-  * |  @LSft |@[_DVIM]|@[_MOUS]|@[_PVIM]|@[_NUMB]|  |@[_SYMB]|@[_PVIM]|@[_FUNC]|        |  @LSft |
+  * |  @LSft |@[_DVIM]|@[_MOUS]|@[_FVIM]|@[_NUMB]|  |@[_SYMB]|@[_FVIM]|@[_FUNC]|        |  @LSft |
   * '--------------------------------------------'  '--------------------------------------------'
 */
-[_ALPH] = LAYOUT_ortho_3x10(  // layer 0 : default layer
+[_DFLT] = LAYOUT_ortho_3x10(  // layer 0 : default layer
 // [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,--------------------------------------------------------------------------------------.  ,------------------------------------------------------------------------------------------.
-    LT(_APPS, KC_Q), LT(_POWR, KC_W), LT(_DIAE, KC_E), LT(_DALY, KC_R), LT(_SYMB, KC_T),                 KC_Y, LT(_DALY, KC_U),              KC_I, LT(_POWR, KC_O),   LT(_APPS, KC_P),
+    LT(_APPS, KC_Q), LT(_POWR, KC_W), LT(_DIAE, KC_E),            KC_R, LT(_SYMB, KC_T),                 KC_Y,            KC_U,              KC_I, LT(_POWR, KC_O),   LT(_APPS, KC_P),
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
        LSFT_T(KC_A),     CTL_T(KC_S),     ALT_T(KC_D),     GUI_T(KC_F), LT(_ACCN, KC_G),      LT(_ACCN, KC_H),     GUI_T(KC_J),       ALT_T(KC_K),     CTL_T(KC_L),    LSFT_T(KC_SPC),
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
-       LSFT_T(KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_PVIM, KC_V), LT(_NUMB, KC_B),      LT(_SYMB, KC_N), LT(_PVIM, KC_M), LT(_FUNC, KC_ESC),         KC_BSPC,    LSFT_T(KC_ENT) ),
+    LT(_DALY, KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_FVIM, KC_V), LT(_NUMB, KC_B),      LT(_SYMB, KC_N), LT(_FVIM, KC_M), LT(_FUNC, KC_ESC),         KC_BSPC, LT(_DALY, KC_ENT) ),
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
-// END OF _ALPH 0
+// END OF _DFLT 0
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 /*
@@ -2619,7 +2619,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|----------------+----------------+----------------+----------------+------------------|
        LSFT_T(KC_A),     CTL_T(KC_S),     ALT_T(KC_D),     GUI_T(KC_F), LT(_ACCN, KC_G),
 //|----------------+----------------+----------------+----------------+------------------|
-    LT(_DALY, KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_PVIM, KC_V), LT(_NUMB, KC_B),
+    LT(_DALY, KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_FVIM, KC_V), LT(_NUMB, KC_B),
 //'--------------------------------------------------------------------------------------'
 
              // RIGHT_HAND
@@ -2628,7 +2628,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              |----------------+----------------+------------------+----------------+--------------------|
                LT(_ACCN, KC_H),     GUI_T(KC_J),       ALT_T(KC_K),     CTL_T(KC_L),    LSFT_T(KC_SPC),
              |----------------+----------------+------------------+----------------+--------------------|
-               LT(_SYMB, KC_N), LT(_PVIM, KC_M), LT(_FUNC, KC_ESC),         KC_BSPC, LT(_DALY, KC_ENT) ),
+               LT(_SYMB, KC_N), LT(_FVIM, KC_M), LT(_FUNC, KC_ESC),         KC_BSPC, LT(_DALY, KC_ENT) ),
              '------------------------------------------------------------------------------------------'
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 */
@@ -2922,7 +2922,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * |      |      | Pause|      |Smooth|  |Keybrd|ON/OFF|  IN  |  OUT |Colors|
 * |      |      |      |      |Images|  |follow|      |      |      |      |
 * |RShift|RCntrl| RAlt | RCmnd|      |  | Focus| RCmnd| RAlt |RCntrl|RShift|
-* |------+------+------+------+------|  |------+------+------+------+------|
+v* |------+------+------+------+------|  |------+------+------+------+------|
 * | Menu | Dock | Tool |Status|Float.|  |Cntrst|Bright|Bright|Bright|Cntrst|
 * | _bar | _bar | _bar | _bar |Window|  |      |  min.|      |      |      |
 * |      |      |      |      |      |  |  Up  |lev. 1|  Up  | Down | Down |
@@ -2974,7 +2974,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 */
 
-/* Keymap _PVIM 9: _PVIM layer
+/* Keymap _FVIM 9: _FVIM layer
  * ,--------------------------------------------.  ,----------------------------------.
  * |        |        |        |        |        |  | Shift| Move | Move | Move | Move |
  * |        |        |        |        |        |  |Prgrph| Begin| Word | Word |End Of|
@@ -2992,22 +2992,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |@[_ZVIM]|@[_XVIM]|@[_CVIM]|@@@@@@@@|        |  | Down | HOME |  UP  | DOWN |  END |
  * '--------------------------------------------'  '----------------------------------'
 */
-// _PVIM layer 9
-[_PVIM] = LAYOUT_ortho_3x10(  // layer 9 : _PVIM layer
+// _FVIM layer 9
+[_FVIM] = LAYOUT_ortho_3x10(  // layer 9 : _FVIM layer
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,------------------------------------------------------.  ,-----------------------------------------------------------------------------------.
-      XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,        LCTL(LGUI(KC_UP)),   TD(PVIM_uU),   TD(PVIM_iI),     TD(PVIM_oO),  TD(PVIM_pP),
+      XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,        LCTL(LGUI(KC_UP)),   TD(FVIM_uU),   TD(FVIM_iI),     TD(FVIM_oO),  TD(FVIM_pP),
 //|----------+----------|----------+----------+----------|  |--------------------+--------------+--------------+----------------+---------------|
-      _______,   _______,   XXXXXXX,   XXXXXXX, XXXXXXX,                   PVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,      KC_RGHT,
+      _______,   _______,   XXXXXXX,   XXXXXXX, XXXXXXX,                   FVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,      KC_RGHT,
 //|----------+----------|----------+----------+----------|  |--------------------+--------------+--------------+----------------+---------------|
-    MO(_ZVIM), MO(_XVIM), MO(_CVIM), MO(_PVIM), XXXXXXX,      LCTL(LGUI(KC_DOWN)), LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),
+    MO(_ZVIM), MO(_XVIM), MO(_CVIM), MO(_FVIM), XXXXXXX,      LCTL(LGUI(KC_DOWN)), LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),
 //'------------------------------------------------------'  '-----------------------------------------------------------------------------------'
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
-// MO(_ZVIM),MO(_XVIM),MO(_CVIM),MO(_PVIM) allow us changing from any ?VIM_layer to each other ?VIM_layer
+// MO(_ZVIM),MO(_XVIM),MO(_CVIM),MO(_FVIM) allow us changing from any ?VIM_layer to each other ?VIM_layer
 // ... because we put '_______' in this locations in the rest of the ?VIM layers
-// END OF _PVIM 9
+// END OF _FVIM 9
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 /*
@@ -3018,13 +3018,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|----------+----------|----------+----------+----------|
       _______,   _______,   XXXXXXX,   XXXXXXX, XXXXXXX,  
 //|----------+----------|----------+----------+----------|
-    MO(_ZVIM), MO(_XVIM), MO(_CVIM), MO(_PVIM), XXXXXXX,  
+    MO(_ZVIM), MO(_XVIM), MO(_CVIM), MO(_FVIM), XXXXXXX,  
 //'------------------------------------------------------'
                                      // RIGHT_HAND
                     ,-----------------------------------------------------------------------------------.
-                        LCTL(LGUI(KC_UP)),   TD(PVIM_uU),   TD(PVIM_iI),     TD(PVIM_oO),  TD(PVIM_pP),
+                        LCTL(LGUI(KC_UP)),   TD(FVIM_uU),   TD(FVIM_iI),     TD(FVIM_oO),  TD(FVIM_pP),
                     |--------------------+--------------+--------------+----------------+---------------|
-                                   PVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,      KC_RGHT,
+                                   FVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,      KC_RGHT,
                     |--------------------+--------------+--------------+----------------+---------------|
                       LCTL(LGUI(KC_DOWN)), LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),
                     '-----------------------------------------------------------------------------------'
@@ -3856,11 +3856,11 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
 /*                                                                                                     */
 /*  W A Y   0   T O   A C C E S I N G   K E Y B I N D I N G S   F R O M   M A C   O S X   S Y S T E M  */
 /*                                                                                                     */
-/*   pvim(j);                                                                                          */
+/*   fvim(j);                                                                                          */
 /*                                                                                                     */
 /*   this is the best one and it's posible because of the following function definition:               */
 /*                                                                                                     */
-/*   void pvim(char *key)                                                                              */
+/*   void fvim(char *key)                                                                              */
 /*   {                                                                                                 */
 /*     SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"p");                                       */
 /*     send_string(key);                                                                               */
@@ -3957,11 +3957,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case APP_BS_PAGE: callApp("Pages");                     return false; break; // Pages
       case APP_EN_NUMB: callApp("Numbers");                   return false; break; // Numbers
 
-   // _PVIM
+   // _FVIM
    // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
    // ... except for the 'H' key:
-      case PVIM_H: pvim("h");  return false; break;
-   // _pvim
+      case FVIM_H: fvim("h");  return false; break;
+   // _fvim
 
 // [INFO]
 /*
@@ -3971,16 +3971,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 * \e  \x001B  
 * register_code (KC_ESC); unregister_code (KC_ESC); } break;
-* case PVIM_ES:if (record->event.pressed) { pvim("\e"); } break;
+* case FVIM_ES:if (record->event.pressed) { fvim("\e"); } break;
 
 * \b  \x0008
 * register_code(KC_BSPC); unregister_code(KC_BSPC); } break;   
-* case PVIM_BS:if (record->event.pressed) { pvim("\b"); } break;
+* case FVIM_BS:if (record->event.pressed) { fvim("\b"); } break;
 
 * \n  \x000A      new line
 * register_code (KC_ENT); unregister_code (KC_ENT); } break; 
 * \r  \x000D      carriage return
-      case PVIM_EN:if (record->event.pressed) { pvim("\n"); } break;
+      case FVIM_EN:if (record->event.pressed) { fvim("\n"); } break;
 */
 // [info]
 
@@ -4005,7 +4005,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // select _AVIM
 //            case AVIM_Y: avim("y");  return false; break;
 //            case AVIM_N: avim("n");  return false; break;
-// the rest of the keys are combination of _PVIM + SHIFT key            
+// the rest of the keys are combination of _FVIM + SHIFT key            
 
 // _CVIM
       case CVIM_Y: cvim("y");  return false; break;
@@ -4141,7 +4141,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 uint32_t layer_state_set_user(uint32_t state) {
   switch (biton32(state)) {
 
-    case _ALPH:   //  0  
+    case _DFLT:   //  0  
         
         if (hide_other_apps == true)
         {
@@ -4207,8 +4207,8 @@ uint32_t layer_state_set_user(uint32_t state) {
         backlight_level(BL_POWR);
         break;
 
-    case _PVIM:   //  9
-        backlight_level(BL_PVIM);
+    case _FVIM:   //  9
+        backlight_level(BL_FVIM);
         break;
     case _DVIM:   // 10
         backlight_level(BL_DVIM);

@@ -15,11 +15,8 @@
 
 //Tap Dance Prerequisite
 #define TAPPING_TERM 200
-#define PERMISSIVE_HOLD  // MODIFIED, IS IT RIGHT ???  [FIXME, please !!!]
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//  is this responsible of getting 'volume minus' (from [SUSR]('W'trigger)) when I type 'word' fast ?
-//  ?????????????????????????????????????????????????????????????????????????????????????????????????
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+#define PERMISSIVE_HOLD
+//  this is responsible of getting 'volume minus' (from [SUSR]('W'trigger)) when I type 'word' fast
 // //////////////////////////////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////////////////////////////
 // 
@@ -87,6 +84,30 @@ or if both keys are held longer than the TAPPING_TERM.
 */ //   i g n o r e _ m o d _ t a p _ i n t e r r u p t
 // //////////////////////////////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#define TAPPING_FORCE_HOLD
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+/*       If TAPPING_FORCE_HOLD is active:
+     if you 
+            press and release a Mod Tap key,
+            press the same Mod Tap key (quickly after tap),
+            wait more than TAPPING_TERM,
+            release the key,
+
+            it will NOT output the auto repeat function for the tapped key,
+
+            it WILL output the tapped key once,
+                       and the modded key (waiting for more keys to be modded, until it was released),
+
+
+     With TAPPING_FORCE_HOLD, the second press will be interpreted as a Shift,
+     ...allowing to use it as a modifier shortly after having used it as a tap.
+*/
+//https://docs.qmk.fm/#/feature_advanced_keycodes?id=tapping-force-hold
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 

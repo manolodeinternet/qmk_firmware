@@ -1,4 +1,6 @@
 /*
+MiniDactyl 2019/11/04
+
 Custom Tapping Term
 
 By default, the tapping term is defined globally, and is not configurable by key. For most users, this is perfectly fine. But in come cases, dual function keys would be greatly improved by different timeouts than LT keys, or because some keys may be easier to hold than others. Instead of using custom key codes for each, this allows for per key configurable TAPPING_TERM.
