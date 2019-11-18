@@ -213,23 +213,23 @@ extern LED_TYPE led[RGBLED_NUM];
 //
 #define _DFLT   0  //  gherkin ALPHAS DEFAULT    layer 
 //#define _ALPH   1  // finger alphas, full thumbs layer
-#define _ACCN   7  //  gherkin ACCENTS           layer 
-#define _NUMB   1  //  gherkin numbers           layer 
-#define _FVIM   2  //  Fake                  VIM layer
+#define _ACCN   1  //  gherkin ACCENTS           layer 
+#define _NUMB   2  //  gherkin numbers           layer 
+#define _FVIM   3  //  Fake                  VIM layer
 /*
 #define _AVIM  X12X  //  select              VIM layer
 We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, but easier and clearer !
 */
 #define _CVIM   4  //  power edition         VIM layer
 #define _XVIM   5  //  movement              VIM layer
-#define _DVIM   3  //  Delete                VIM layer
-#define _MOUS   6  //  mouse                     layer
-#define _DALY   9  //  gherkin DAiLY commands    layer 
-#define _FUNC   8  //  gherkin functions         layer 
-#define _SYMB  10  //  gherkin symbols           layer 
-#define _APPS  11  //  APPlicationS              layer
+#define _DVIM   6  //  Delete                VIM layer
+//#define _MOUS   7  //  mouse                     layer
+#define _DALY   8  //  gherkin DAiLY commands    layer 
+//#define _FUNC   9  //  gherkin functions         layer 
+#define _SYMB  9  //  gherkin symbols           layer 
+#define _APPS  10  //  APPlicationS              layer
 #define _RGBL  12  //  backlight                 layer
-#define _POWR  13  //  POWER        productivity layer
+#define _POWR  11  //  POWER        productivity layer
 
 /*
 #define _LAST  17  //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -261,28 +261,28 @@ We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, 
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 
-#define COLOR_CAPS HSV_RED       // capslock color
+#define COLOR_CAPS HSV_MY_CORAL     // capslock color
 
-// #define COLOR_DFLT HSV_EMPTY     // layer 00      // (   0,    0,    0)  // 00
+// #define COLOR_DFLT HSV_MY_EMPTY     // layer 00      // (   0,    0,    0)  // 00
 
-#define COLOR_NUMB HSV_BLUE      // layer 01
-#define COLOR_FVIM HSV_MAGENTA   // layer 02      // (0x00, 0x80, 0x80)  // 09
-#define COLOR_DVIM HSV_RED       // layer 03      // (0xFF, 0x00, 0x00)  // 10
+#define COLOR_NUMB HSV_MY_BLUE      // layer 01
+#define COLOR_FVIM HSV_MY_MAGENTA   // layer 02      // (0x00, 0x80, 0x80)  // 09
+#define COLOR_DVIM HSV_MY_RED       // layer 03      // (0xFF, 0x00, 0x00)  // 10
 
-//#define COLOR_CVIM HSV_PINK    // layer 04      // ( 320,  255,  255)  // 11
-//#define COLOR_XVIM HSV_PINK    // layer 05      // ( 320,  255,  255)  // 12
-#define COLOR_VIM_ HSV_PINK
+//#define COLOR_CVIM HSV_MY_PINK    // layer 04      // ( 320,  255,  255)  // 11
+//#define COLOR_XVIM HSV_MY_PINK    // layer 05      // ( 320,  255,  255)  // 12
+#define COLOR_VIM_ HSV_MY_PINK
 
-#define COLOR_MOUS HSV_CYAN      // layer 06      // (0x00, 0xFF, 0x00)  // 14
+#define COLOR_MOUS HSV_MY_CYAN      // layer 06      // (0x00, 0xFF, 0x00)  // 14
 
-#define COLOR_ACCN HSV_GOLDENROD // layer 07      // (0xD9, 0xA5, 0x21)  // 02
-#define COLOR_FUNC HSV_TURQUOISE // layer 08      // (0x99, 0xF5, 0xFF)  // 05
-#define COLOR_DALY HSV_PURPLE    // layer 09      // (0x7A, 0x00, 0xFF)  // 06
-#define COLOR_POWR HSV_YELLOW    // layer 10      // (0xFF, 0xFF, 0x00)  // 08
-#define COLOR_SYMB HSV_GREEN     // layer 11      // (0x00, 0xFF, 0x00)  // 04
-#define COLOR_APPS HSV_ORANGE    // layer 12      // (0xFF, 0x80, 0xBF)  // 07
+#define COLOR_ACCN HSV_MY_WHITE     // HSV_MY_GOLDENROD // layer 07      // (0xD9, 0xA5, 0x21)  // 02
+#define COLOR_FUNC HSV_MY_TURQUOISE // layer 08      // (0x99, 0xF5, 0xFF)  // 05
+#define COLOR_DALY HSV_MY_PURPLE    // layer 09      // (0x7A, 0x00, 0xFF)  // 06
+#define COLOR_POWR HSV_MY_YELLOW    // layer 10      // (0xFF, 0xFF, 0x00)  // 08
+#define COLOR_SYMB HSV_MY_GREEN     // layer 11      // (0x00, 0xFF, 0x00)  // 04
+#define COLOR_APPS HSV_MY_ORANGE    // layer 12      // (0xFF, 0x80, 0xBF)  // 07
 
-// #define COLOR_RGBL HSV_EMPTY     // layer 13      // (   0,    0,    0)  // 15
+// #define COLOR_RGBL HSV_MY_EMPTY     // layer 13      // (   0,    0,    0)  // 15
 //
 //                                                                                      //
 // defining color layers                      c o l o r     l a y e r s                 //
@@ -751,7 +751,7 @@ enum tap_dance_keycodes {
 //    ,PVI_CL  // CapsLock    when tapped or _FVIM layer when holded        on alpha layer
      APPS_MODE
     ,DVIM_Bck    // Backspace when tapping, _NUMB when holding 
-    ,NUMB_Del
+//    ,NUMB_Del
 //    ,SYMB_Ent
     ,APPS_Esc
 //  ,MOUS_Tab
@@ -1479,6 +1479,8 @@ void show_RGB_LEDs(void)  // MY SWITCH CAPSCLOCK INDICATORS ON FUNCTION
       // LEFT = default color
       dflt_rght_sta = OUTER_RGHT;
       dflt_rght_end = INNER_RGHT + 1;
+
+      
       // RGHT = default color
       dflt_left_sta = INNER_LEFT;
       dflt_left_end = OUTER_LEFT + 1;
@@ -1559,7 +1561,7 @@ void tilde_accent_function(void) {
 /*
 void rgb_bspc_or_del_pressed(void)
 {
-  rgblight_sethsv_noeeprom(HSV_RED);
+  rgblight_sethsv_noeeprom(HSV_MY_RED);
   set_default_hsv();
 }
 //
@@ -1592,8 +1594,8 @@ void rgb_bspc_or_del_released(void)
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 void flashing_LEDs(uint8_t times, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t r2, uint8_t g2, uint8_t b2)
-//RGB_WHITE
-//RGB_RED
+//RGB_MY_WHITE
+//RGB_MY_RED
 {
   for (uint8_t i = 0; i < times; i++)
   {
@@ -1627,7 +1629,7 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
   rgblight_enable_noeeprom();
   _delay_ms(1);
 
-  flashing_LEDs(5, RGB_WHITE, RGB_RED);
+  flashing_LEDs(5, RGB_MY_WHITE, RGB_MY_RED);
   reset_keyboard();
 }
 //                                                                                      //
@@ -1776,6 +1778,8 @@ void DVIM_Bck_reset (qk_tap_dance_state_t *state, void *user_data) {
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 //instantalize an instance of 'tap' for the 'NUMB_Del_f_always' tap dance.
+
+/*
 static tap NUMB_Del_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -1792,9 +1796,9 @@ void NUMB_Del_finished (qk_tap_dance_state_t *state, void *user_data) {
     case    SINGLE_TAP: register_code(KC_DEL);   break;
 
     case   SINGLE_HOLD: layer_on(_NUMB);
-/*
-case GUI_plus_HOLD:
-*/
+
+//case GUI_plus_HOLD:
+
   }
 }
 
@@ -1804,13 +1808,15 @@ void NUMB_Del_reset (qk_tap_dance_state_t *state, void *user_data) {
     case    SINGLE_TAP: unregister_code(KC_DEL); break;
 
     case   SINGLE_HOLD: layer_off(_NUMB);
-/*
-    case GUI_plus_HOLD:
-*/
+
+//    case GUI_plus_HOLD:
+
   }
   show_RGB_LEDs();
   NUMB_Del_tap_state.state = 0;
 }
+*/
+
 // [tapdance] [_dflt] thumb_l3 (numb_del)                                               //
 //                                                                                      //
 //  d e l e t e    /    s y m b o l s    l a y e r                                      //
@@ -2857,7 +2863,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  [APPS_MODE] = ACTION_TAP_DANCE_FN_ADVANCED (APPS_MODE_f_always,    APPS_MODE_finished, APPS_MODE_reset)
 
 ,[DVIM_Bck]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(DVIM_Bck_f_always, DVIM_Bck_finished, DVIM_Bck_reset, 100)
-,[NUMB_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(NUMB_Del_f_always, NUMB_Del_finished, NUMB_Del_reset, 100)
+//,[NUMB_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(NUMB_Del_f_always, NUMB_Del_finished, NUMB_Del_reset, 100)
 //,[SYMB_Ent]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(SYMB_Ent_f_always, SYMB_Ent_finished, SYMB_Ent_reset, 100)
 //,[MOUS_Tab]=ACTION_TAP_DANCE_FN_ADVANCED     (MOUS_Tab_f_always, MOUS_Tab_finished, MOUS_Tab_reset     )
 //,[APPS_Esc]=ACTION_TAP_DANCE_FN_ADVANCED     (APPS_Esc_f_always, APPS_Esc_finished, APPS_Esc_reset     )
@@ -2991,15 +2997,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
        LSFT_T(KC_A),     CTL_T(KC_S),     ALT_T(KC_D),     GUI_T(KC_F), LT(_ACCN, KC_G),      LT(_ACCN, KC_H),     GUI_T(KC_J),       ALT_T(KC_K),     CTL_T(KC_L),    LSFT_T(KC_SPC),
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
-    LT(_DALY, KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_FVIM, KC_V), LT(_NUMB, KC_B),      LT(_SYMB, KC_N), LT(_FVIM, KC_M),            KC_SPC,         KC_BSPC, LT(_DALY, KC_ENT),
+    LT(_DALY, KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_FVIM, KC_V), LT(_NUMB, KC_B),      LT(_SYMB, KC_N), LT(_FVIM, KC_M),            KC_ESC,         KC_BSPC, LT(_DALY, KC_ENT),
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
 
 //                        ,----------------------------------+---------------------------,   ,------------------+-----------,
-                                                    MO(_MOUS),             LAUNCHING_APPS,             MO(_POWR), OSL(_ACCN),
+                                               LAUNCHING_APPS,                  /*MO(_MOUS)*/_______,             MO(_POWR), OSL(_ACCN),
 //                        |----------------------------------+---------------------------|   |------------------+-----------|
                                                                                   XXXXXXX,               XXXXXXX,
 //                                                           |---------------------------|   |------------------|
-                          TD(DVIM_Bck),             MO(_FVIM),               TD(NUMB_Del),             MO(_SYMB),     KC_SPC, MO(_DALY)         
+                          TD(DVIM_Bck),             MO(_FVIM),               MO(_NUMB)/*TD(NUMB_Del)*/,             MO(_NUMB),  MO(_SYMB),   MO(_DALY)         
 //                                                                               THUMB_R2_NUMB_DVIM_FVIM_MOUS_SP, LT(_SYMB, KC_ENT)
 //             '----------+----------------------------------+---------------------------.   .------------------+-----------+--------------'
 //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
@@ -3105,18 +3111,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
        LSFT_T(KC_A),     CTL_T(KC_S),     ALT_T(KC_D),     GUI_T(KC_F),        KC_G,                     KC_H,     GUI_T(KC_J),       ALT_T(KC_K),     CTL_T(KC_L),    LSFT_T(KC_SPC),
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
-               KC_Z,            KC_X,            KC_C,            KC_V,        KC_B,                     KC_N,            KC_M,            KC_SPC,         KC_BSPC,            KC_ENT,
+               KC_Z,            KC_X,            KC_C,            KC_V,        KC_B,                     KC_N,            KC_M,            KC_ESC,         KC_BSPC,            KC_ENT,
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
 
 //                        ,----------------------------------+---------------------------,   ,-------------+-----------,
-                                                                MO(_MOUS), LAUNCHING_APPS,        MO(_POWR), OSL(_ACCN),
+                                               LAUNCHING_APPS,                  /*MO(_MOUS)*/_______,        MO(_POWR), OSL(_ACCN),
 //                                                            TD(APPS_Esc),  TD(MOUS_Tab),        MO(_POWR), OSL(_ACCN),               
 //                                              MO(_FUNC),                                          THUMB_R4_POWR_RGBL,
 //                        |----------------------------------+---------------------------|   |-------------+-----------|
                                                                                   XXXXXXX,          XXXXXXX,
 //                                                           |---------------------------|   |-------------|
-                                            TD(DVIM_Bck),    MO(_FVIM),      TD(NUMB_Del),        MO(_SYMB),     KC_SPC, MO(_DALY)
+//                                            TD(DVIM_Bck),    MO(_FVIM),      TD(NUMB_Del),        MO(_SYMB),     KC_SPC, MO(_DALY)
 //                       TD(BCK_DV_AP),   THUMB_L2_FVIM_SYMB_DALY_POWR_CAPSL, TD(DEL_SYM),    LT(_SYMB, KC_ENT), /*THUMB_R2_NUMB_DVIM_FVIM_MOUS_SP*/, TD(DALY_Esc)
+                          TD(DVIM_Bck),             MO(_FVIM),               MO(_NUMB)/*TD(NUMB_Del)*/,        MO(_NUMB),  MO(_SYMB),   MO(_DALY)         
 //             '----------+----------------------------------+---------------------------.   .-------------+-----------+---------------'
 //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
@@ -3173,13 +3180,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|---------|--------|---------+--------+----------| |---------|---------+---------+---------+----------|
      KC_RSFT, KC_RCTL,  KC_RALT, KC_RGUI, XXXXXXX,     F(TIL_N),  KC_RGUI,  KC_RALT,  KC_RCTL, KC_RSFT,
 //|---------+--------+---------+--------+----------| |---------+---------+---------+---------+----------|
-//                            ,--------+---------,         ,--------+----------,
-                                _______,  _______,           _______, _______,
-//                            |--------+---------|         |--------+----------|
-                                          _______,            _______,
-//                                     |---------|         |---------|
-                   MO(_RGBL), F(CAPSL), MO(_FUNC),          TD(NUMB_Del), MO(_FVIM), TD(DVIM_Bck)
-//                   '--------+--------+---------.         .--------+--------+---------'
+//                         ,------------+----------,         ,------------+------------,
+                              MO(_SYMB), MO(_POWR),             MO(_POWR),   _______,
+//                          |-----------+----------|         |------------+------------|
+                                            _______,               _______,
+//                                      |----------|         |------------|
+                    MO(_DALY), MO(_RGBL), /*MO(_FUNC)*/_______,          /*TD(NUMB_Del)*/_______, MO(_FVIM), TD(DVIM_Bck)
+//                   '--------+---------+----------.         .------------+----------+--------------'
 ),
 //'------------------------------------------------' '--------------------------------------------------'
 // END OF _ACCN 01
@@ -3216,11 +3223,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_ENT,       KC_BSPC,         KC_TAB,        KC_PEQL, KC_PERC,      KC_PSLS,  KC_1,  KC_2,  KC_3, KC_ASTR,
 //,------------------------------------------------------------------------.  ,----------------------------------------.
 //                               ,---------+----------,  ,-----------+----------,
-                                    _______, _______,         _______, _______,
+                                    _______, _______,       MO(_POWR), _______,
 //                               |---------+----------|  |-----------+----------|
                                              _______,         _______,
 //                                         |----------|  |-----------|
-                         SYM_EURO,  _______, _______,      TD(SETNMB), _______, _______
+                         SYM_EURO,  _______, _______,         _______, TD(SETNMB), _______
+                         // SYM_EURO,  _______, _______,      TD(SETNMB), _______, _______
 //                      '--------+---------+----------.  .-----------+--------+----------'
 ),
 /*
@@ -3596,6 +3604,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * '------+------+------+------+------'  '------+------+------+------+------'
 */
 // _MOUS layer 07
+
+/*
 [_MOUS] = KEYMAP(  // layer 07: mouse layer
 /////////////////////////////////////////////////////////////////////////////////////////////////////###
 //,----------------------------------------------.       ,----------------------------------------------.
@@ -3606,13 +3616,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ACL0, KC_ACL2, XXXXXXX, KC_ACL1, KC_ACL0,           KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_BTN5,
 //'----------------------------------------------'       '----------------------------------------------'
 //                            ,--------+---------,       ,--------+----------,
-                               _______, MO(_POWR),       MO(_POWR),   KC_UP,
+                               MO(_POWR), _______,       MO(_POWR),   KC_UP,
 //                            |--------+---------|       |--------+----------|
-                                         _______,          _______,
+                                          _______,         _______,
 //                                     |---------|       |---------|
-                    MO(_DALY), _______, MO(_SYMB),          KC_LEFT, KC_DOWN, KC_RGHT
+//                    MO(_DALY), _______, MO(_SYMB),          KC_LEFT, KC_DOWN, KC_RGHT
+                        _______, _______, _______,         KC_LEFT, KC_DOWN, KC_RGHT
 //                   '--------+--------+---------.       .--------+--------+----------'
 ),
+*/
+
 /*    
 //                               ,---------+----------,  ,-----------+----------,
                                    _______, _______,         _______, _______,
@@ -3670,17 +3683,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //,--------------------------------------------------.,-------------------------------------------------.
        KC_TAB,   DICTAD, KC_CAPW, KC_CAPP, FLOA_WIN,    CLOSE_A, PREV_APP, NEXT_APP, MISS_CTL, LANCHPAD,
 //|----------+---------+--------+--------+-----------||--------+---------+---------+---------+----------|
-     F(CAPSL), SPT_SIRI,   KC_UP,   SPEAK, ACTV_WIN,    CLOSE_W, PREV_WIN, NEXT_WIN, APP_WIND,  DASHBRD,
+     F(CAPSL),     DESK,   KC_UP,   SPEAK, ACTV_WIN,    CLOSE_W, PREV_WIN, NEXT_WIN, APP_WIND, KC_SPACE,
 //|----------+---------+--------+--------+-----------||--------+---------+---------+---------+----------|
-    S(KC_TAB),  KC_LEFT, KC_DOWN, KC_RGHT, REOPEN_L,    CLOSE_T, PREV_TAB, NEXT_TAB,  KC_DEL,      DESK,
+      DASHBRD,  KC_LEFT, KC_DOWN, KC_RGHT, REOPEN_L,    CLOSE_T, PREV_TAB, NEXT_TAB,  KC_DEL,    KC_ENT,
 //'--------------------------------------------------''-------------------------------------------------'
-//                               ,---------+----------,  ,-----------+----------,
-                                     KC_ENT,    KC_TAB,       _______,  KC_ESC,
-//                               |---------+----------|  |-----------+----------|
+//                               ,---------+----------,  ,-----------+-----------,
+                                       DESK,  SPT_SIRI,       _______, S(KC_TAB),
+//                               |---------+----------|  |-----------+-----------|
                                                _______,       _______,
 //                                         |----------|  |-----------|
-                          KC_BSPC, F(CAPSL),    KC_DEL,       _______, _______, _______
-//                      '--------+---------+----------.  .-----------+--------+----------'
+                          KC_BSPC, F(CAPSL),    KC_DEL,       _______,  KC_SPACE, _______
+//                      '--------+---------+----------.  .-----------+-----------+----------'
 ),
 /*
 //                              ,---------+----------,,--------+----------,
@@ -3714,6 +3727,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * '------------------------------------'  '----------------------------------'
 */
 // _FUNC layer 10
+
+/*
 [_FUNC] = KEYMAP(  // layer 10 : multiple apps layer
 // LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
 //,------------------------------------------.           ,----------------------------------------------.
@@ -3726,7 +3741,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F21, KC_F22, KC_F23, KC_F24, XXXXXXX,               XXXXXXX,  KC_F24, XXXXXXX, XXXXXXX, XXXXXXX,
 //'------------------------------------------'           '----------------------------------------------.
 //                       ,--------+----------,           ,--------+----------,
-                           _______, _______,             MO(_POWR), _______,
+                           _______, _______,            */ /*MO(_POWR)*/ /*_______, _______,
 //                       |--------+----------|           |--------+----------|
                                     _______,               _______,
 //                                |----------|           |----------|
@@ -3737,6 +3752,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //    multiple_apps_mode                                         multiple_apps_mode
 //              '--------+--------+----------.           .--------+--------+----------'
 ),
+*/
+
 /*
 //                               ,---------+----------,  ,-----------+----------,
                                     _______, _______,         _______, _______,
@@ -3791,7 +3808,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                        |---------+-----------|  |--------+----------|
                                                                        _______,      _______,
 //                                                                  |-----------|  |--------|
-                                                SYM_EURO, O_COMMENT, C_COMMENT,      _______, _______, _______
+                                                SYM_EURO, O_COMMENT, MO(_NUMB),      _______, _______, C_COMMENT
+                                                // SYM_EURO, O_COMMENT, C_COMMENT,      _______, _______, _______                                                
 //                                            '---------+----------+------------.  .--------+--------+---------'
 ),
 /*
@@ -3868,13 +3886,15 @@ X_QUES
     APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_K_KVIEW, APP_B_BOOKS,     APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB,
 //'-----------------------------------------------------------------'  '------------------------------------------------------------------'
 //                               ,---------+----------,  ,-----------+----------,
-                                    _______,   _______,     MO(_POWR), _______,
+                                    _______, MO(_POWR),     MO(_POWR), THUMB_R5_KAR_APPS,
 //                               |---------+----------|  |-----------+----------|
                                                _______,       _______,
 //                                         |----------|  |-----------|
-                          _______,  _______,   _______,       _______, THUMB_R5_KAR_APPS, _______
+                        MO(_DALY), KC_SPACE, MO(_SYMB),  MO(_NUMB)/*TD(NUMB_Del)*/, MO(_FVIM), TD(DVIM_Bck)
+//                          _______,  _______,   _______,       _______, THUMB_R5_KAR_APPS, _______
 //                      '--------+---------+----------.  .-----------+----------+----------'
 ),
+/*,*/
 /*
 //                                       ,------------+-------------,  ,------------+--------------,
                                               _______,      _______,         _______,     _______,
@@ -3929,6 +3949,7 @@ X_QUES
 '--------------------------------------------------' '-------------------------------------------------'
 */
 // _RGBL layer 13
+
 [_RGBL] = KEYMAP( // layer 13: _RGBL layer
 //'-----------------------------------------------'    '-----------------------------------------------'
      CH_RED, CH_CORL, CH_ORNG, CH_GOLR, CH_GOLD,         CH_YLLW, RGB_HUD, RGB_HUI, SAV_COL, RGB_RMOD,
@@ -3938,13 +3959,18 @@ X_QUES
     CH_CYAN, CH_AZUR, CH_BLUE, CH_PRPL, CH_MGNT,         CH_PINK, RGB_VAD, RGB_VAI, CH_EMPT,  RGB_TOG,
 //'-----------------------------------------------'    '-----------------------------------------------'
 //                           ,---------+----------,    ,---------+----------,
-                                _______, _______,       MO(_POWR), _______,
+                                _______, _______,      MO(_POWR), _______,
 //                           |---------+----------|    |---------+----------|
                                          _______,         _______,
 //                                     |----------|    |---------|
                       _______,  _______, _______,         _______, _______, _______
 //                  '--------+---------+----------.    .---------+--------+----------'
 ),
+
+
+
+
+
 // END OF _RGBL 13
 /////////////////////////////////////////////////////////////////////////////////////////////////////###
 
@@ -3980,6 +4006,8 @@ X_QUES
 // KC_MRWD:->KC_F7, KC_MPLY:->KC_SPC, KC_MFFD:->KC_F9,
 */
 // _POWR layer 09
+
+
 [_POWR] = KEYMAP(  // layer 09: POWeR productivity layer
 // ###
 //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
@@ -4003,6 +4031,8 @@ MY_TOOG_INDICAT,       KC_F7,      KC_SPC,       KC_F9, ZOOM_SMOOTH,      ZOOM_F
 )
 //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 /////////////////////////////////////////////////////////////////////////////////////////////////////###
+
+
 /*
 // LEFT_HAND
 //,-------------------------------------------------------------------------.
@@ -4407,7 +4437,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
 
-      case KC_BSPC:  rgblight_sethsv_noeeprom(HSV_RED);
+      case KC_BSPC:  rgblight_sethsv_noeeprom(HSV_MY_RED);
                      return true;
                      
 // 🔥💀☠️🔥
@@ -4470,7 +4500,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       //                   return false;
       //                 }
 
-     case KC_DEL:    rgblight_sethsv_noeeprom(HSV_RED);
+     case KC_DEL:    rgblight_sethsv_noeeprom(HSV_MY_RED);
                      return true;
       
 // 🔥💀☠️🔥
@@ -4809,25 +4839,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 /*            HSV COLORS            */
 /*
-#define HSV_EMPTY          0,   0,   0  //   0,   0,   0  //   0°,   0.0%,   0.0%
-#define HSV_WHITE          0,   0, 255  //   0,   0, 255  //   0°,   0.0%, 100.0%
-#define HSV_RED            0, 255, 255  //   0, 255, 255  //   0°, 100.0%, 100.0%
-#define HSV_CORAL         11, 176, 255  //  16, 178, 255  //  16°,  69.8%, 100.0%
-#define HSV_ORANGE        28, 255, 255  //  30, 255, 255  //  30°, 100.0%, 100.0%
-#define HSV_GOLDENROD     30, 218, 218  //  43, 216, 217  //  43°,  84.8%,  85.1%
-#define HSV_GOLD          36, 255, 255  //  51, 255, 255  //  51°, 100.0%, 100.0%
-#define HSV_YELLOW        43, 255, 255  //  60, 255, 255  //  60°, 100.0%, 100.0%
-#define HSV_CHARTREUSE    64, 255, 255  //  90, 255, 255  //  90°, 100.0%, 100.0%
-#define HSV_GREEN         85, 255, 255  // 120, 255, 255  // 120°, 100.0%, 100.0%
-#define HSV_SPRINGGREEN  106, 255, 255  // 150, 255, 255  // 150°, 100.0%, 100.0%  
-#define HSV_TURQUOISE    123,  90, 112  // 174,  90, 110  // 174°,  35.5%,  43.1%
-#define HSV_TEAL         128, 255, 128  // 180, 255, 128  // 180°, 100.0%,  50.2%
-#define HSV_CYAN         128, 255, 255  // 180, 255, 255  // 180°, 100.0%, 100.0%
-#define HSV_AZURE        132, 102, 255  // 186, 102, 255  // 186°,  40.0%, 100.0%
-#define HSV_BLUE         170, 255, 255  // 240, 255, 255  // 240°, 100.0%, 100.0%
-#define HSV_PURPLE       191, 255, 255  // 269, 255, 255  // 269°, 100.0%, 100.0%   300 255 128  300 100.0 50.0
-#define HSV_MAGENTA      213, 255, 255  // 300, 255, 255  // 300°, 100.0%, 100.0%
-#define HSV_PINK         234, 128, 255  // 330, 127, 255  // 330°,  49.8%, 100.0%  wikipedia 330 59.0 100.0
+#define HSV_MY_EMPTY          0,   0,   0  //   0,   0,   0  //   0°,   0.0%,   0.0%
+#define HSV_MY_WHITE          0,   0, 255  //   0,   0, 255  //   0°,   0.0%, 100.0%
+#define HSV_MY_RED            0, 255, 255  //   0, 255, 255  //   0°, 100.0%, 100.0%
+#define HSV_MY_CORAL         11, 176, 255  //  16, 178, 255  //  16°,  69.8%, 100.0%
+#define HSV_MY_ORANGE        28, 255, 255  //  30, 255, 255  //  30°, 100.0%, 100.0%
+#define HSV_MY_GOLDENROD     30, 218, 218  //  43, 216, 217  //  43°,  84.8%,  85.1%
+#define HSV_MY_GOLD          36, 255, 255  //  51, 255, 255  //  51°, 100.0%, 100.0%
+#define HSV_MY_YELLOW        43, 255, 255  //  60, 255, 255  //  60°, 100.0%, 100.0%
+#define HSV_MY_CHARTREUSE    64, 255, 255  //  90, 255, 255  //  90°, 100.0%, 100.0%
+#define HSV_MY_GREEN         85, 255, 255  // 120, 255, 255  // 120°, 100.0%, 100.0%
+#define HSV_MY_SPRINGGREEN  106, 255, 255  // 150, 255, 255  // 150°, 100.0%, 100.0%  
+#define HSV_MY_TURQUOISE    123,  90, 112  // 174,  90, 110  // 174°,  35.5%,  43.1%
+#define HSV_MY_TEAL         128, 255, 128  // 180, 255, 128  // 180°, 100.0%,  50.2%
+#define HSV_MY_CYAN         128, 255, 255  // 180, 255, 255  // 180°, 100.0%, 100.0%
+#define HSV_MY_AZURE        132, 102, 255  // 186, 102, 255  // 186°,  40.0%, 100.0%
+#define HSV_MY_BLUE         170, 255, 255  // 240, 255, 255  // 240°, 100.0%, 100.0%
+#define HSV_MY_PURPLE       191, 255, 255  // 269, 255, 255  // 269°, 100.0%, 100.0%   300 255 128  300 100.0 50.0
+#define HSV_MY_MAGENTA      213, 255, 255  // 300, 255, 255  // 300°, 100.0%, 100.0%
+#define HSV_MY_PINK         234, 128, 255  // 330, 127, 255  // 330°,  49.8%, 100.0%  wikipedia 330 59.0 100.0
 */
 
 
@@ -4847,10 +4877,10 @@ RGB COMMANDS
                  // and read it back and set it again after returning to base layer.
       case SAV_COL: set_default_hsv();
                     eeconfig_update_rgblight(rgblight_config.raw);
-                    flashing_LEDs(10, RGB_AZURE, RGB_PURPLE);
+                    flashing_LEDs(10, RGB_MY_AZURE, RGB_MY_PURPLE);
                     return false;
 
-      case GET_HSV: flashing_LEDs(5, RGB_YELLOW, RGB_PURPLE);
+      case GET_HSV: flashing_LEDs(5, RGB_MY_YELLOW, RGB_MY_PURPLE);
                     SEND_STRING("\n=============================================================");
                     SEND_STRING("\nget_hsv() -> rgblight_get_hue, rgblight_get_sat, rgblight_get_val");
                     get_hsv();
@@ -4872,37 +4902,37 @@ RGB COMMANDS
 /*
 ROW 1 COLORS
 */
-      case CH_RED:  rgblight_sethsv_noeeprom(HSV_RED);         return false;
-      case CH_CORL: rgblight_sethsv_noeeprom(HSV_CORAL);       return false;
-      case CH_ORNG: rgblight_sethsv_noeeprom(HSV_ORANGE);      return false;
-      case CH_GOLR: rgblight_sethsv_noeeprom(HSV_GOLDENROD);   return false;
-      case CH_GOLD: rgblight_sethsv_noeeprom(HSV_GOLD);        return false;
+      case CH_RED:  rgblight_sethsv_noeeprom(HSV_MY_RED);         return false;
+      case CH_CORL: rgblight_sethsv_noeeprom(HSV_MY_CORAL);       return false;
+      case CH_ORNG: rgblight_sethsv_noeeprom(HSV_MY_ORANGE);      return false;
+      case CH_GOLR: rgblight_sethsv_noeeprom(HSV_MY_GOLDENROD);   return false;
+      case CH_GOLD: rgblight_sethsv_noeeprom(HSV_MY_GOLD);        return false;
 
-      case CH_YLLW: rgblight_sethsv(HSV_YELLOW);               return false;
+      case CH_YLLW: rgblight_sethsv(HSV_MY_YELLOW);               return false;
 
 /*
 ROW 2 COLORS
 */
-      case CH_CHRT: rgblight_sethsv_noeeprom(HSV_CHARTREUSE);  return false;
-      case CH_GREN: rgblight_sethsv_noeeprom(HSV_GREEN);       return false;
-      case CH_SPRG: rgblight_sethsv_noeeprom(HSV_SPRINGGREEN); return false;
-      case CH_TRQS: rgblight_sethsv_noeeprom(HSV_TURQUOISE);   return false;
-      case CH_TEAL: rgblight_sethsv_noeeprom(HSV_TEAL);        return false;
+      case CH_CHRT: rgblight_sethsv_noeeprom(HSV_MY_CHARTREUSE);  return false;
+      case CH_GREN: rgblight_sethsv_noeeprom(HSV_MY_GREEN);       return false;
+      case CH_SPRG: rgblight_sethsv_noeeprom(HSV_MY_SPRINGGREEN); return false;
+      case CH_TRQS: rgblight_sethsv_noeeprom(HSV_MY_TURQUOISE);   return false;
+      case CH_TEAL: rgblight_sethsv_noeeprom(HSV_MY_TEAL);        return false;
 
-      case CH_WHIT: rgblight_sethsv_noeeprom(HSV_WHITE);       return false;
+      case CH_WHIT: rgblight_sethsv_noeeprom(HSV_MY_WHITE);       return false;
 
 /*
 ROW 3 COLORS
 */
-      case CH_CYAN: rgblight_sethsv_noeeprom(HSV_CYAN);        return false;
-      case CH_AZUR: rgblight_sethsv_noeeprom(HSV_AZURE);       return false;
-      case CH_BLUE: rgblight_sethsv_noeeprom(HSV_BLUE);        return false;
-      case CH_PRPL: rgblight_sethsv_noeeprom(HSV_PURPLE);      return false;
-      case CH_MGNT: rgblight_sethsv(HSV_MAGENTA);              return false;
+      case CH_CYAN: rgblight_sethsv_noeeprom(HSV_MY_CYAN);        return false;
+      case CH_AZUR: rgblight_sethsv_noeeprom(HSV_MY_AZURE);       return false;
+      case CH_BLUE: rgblight_sethsv_noeeprom(HSV_MY_BLUE);        return false;
+      case CH_PRPL: rgblight_sethsv_noeeprom(HSV_MY_PURPLE);      return false;
+      case CH_MGNT: rgblight_sethsv(HSV_MY_MAGENTA);              return false;
 
-      case CH_PINK: rgblight_sethsv_noeeprom(HSV_PINK);        return false;
+      case CH_PINK: rgblight_sethsv_noeeprom(HSV_MY_PINK);        return false;
 
-      case CH_EMPT: rgblight_sethsv_noeeprom(HSV_EMPTY);       return false;
+      case CH_EMPT: rgblight_sethsv_noeeprom(HSV_MY_EMPTY);       return false;
 
 // [_rgbl]
 
@@ -5245,25 +5275,25 @@ ROW 3 COLORS
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 /*              RGB COLORS
-#define RGB_EMPTY        0x00, 0x00, 0x00
-#define RGB_WHITE        0xFF, 0xFF, 0xFF
-#define RGB_RED          0xFF, 0x00, 0x00
-#define RGB_CORAL        0xFF, 0x7C, 0x4D
-#define RGB_ORANGE       0xFF, 0x80, 0x00
-#define RGB_GOLDENROD    0xD9, 0xA5, 0x21
-#define RGB_GOLD         0xFF, 0xD9, 0x00
-#define RGB_YELLOW       0xFF, 0xFF, 0x00
-#define RGB_CHARTREUSE   0x80, 0xFF, 0x00
-#define RGB_GREEN        0x00, 0xFF, 0x00
-#define RGB_SPRINGGREEN  0x00, 0xFF, 0x80
-#define RGB_TURQUOISE    0x47, 0x6E, 0x6A
-#define RGB_TEAL         0x00, 0x80, 0x80
-#define RGB_CYAN         0x00, 0xFF, 0xFF
-#define RGB_AZURE        0x99, 0xf5, 0xFF
-#define RGB_BLUE         0x00, 0x00, 0xFF
-#define RGB_PURPLE       0x7A, 0x00, 0xFF
-#define RGB_MAGENTA      0xFF, 0x00, 0xFF
-#define RGB_PINK         0xFF, 0x80, 0xBF
+#define RGB_MY_EMPTY        0x00, 0x00, 0x00
+#define RGB_MY_WHITE        0xFF, 0xFF, 0xFF
+#define RGB_MY_RED          0xFF, 0x00, 0x00
+#define RGB_MY_CORAL        0xFF, 0x7C, 0x4D
+#define RGB_MY_ORANGE       0xFF, 0x80, 0x00
+#define RGB_MY_GOLDENROD    0xD9, 0xA5, 0x21
+#define RGB_MY_GOLD         0xFF, 0xD9, 0x00
+#define RGB_MY_YELLOW       0xFF, 0xFF, 0x00
+#define RGB_MY_CHARTREUSE   0x80, 0xFF, 0x00
+#define RGB_MY_GREEN        0x00, 0xFF, 0x00
+#define RGB_MY_SPRINGGREEN  0x00, 0xFF, 0x80
+#define RGB_MY_TURQUOISE    0x47, 0x6E, 0x6A
+#define RGB_MY_TEAL         0x00, 0x80, 0x80
+#define RGB_MY_CYAN         0x00, 0xFF, 0xFF
+#define RGB_MY_AZURE        0x99, 0xf5, 0xFF
+#define RGB_MY_BLUE         0x00, 0x00, 0xFF
+#define RGB_MY_PURPLE       0x7A, 0x00, 0xFF
+#define RGB_MY_MAGENTA      0xFF, 0x00, 0xFF
+#define RGB_MY_PINK         0xFF, 0x80, 0xBF
 */
 //                                                                                      //
 // p r e d e f i n e d      c o l o r s                                                 //
@@ -5313,8 +5343,13 @@ uint32_t layer_state_set_user(uint32_t state) {
 // #define _RGBL  13  //  backlight                 layer
 //
 
-    case _NUMB:   //  1
-//        active_layer = 1;
+     case _ACCN:   //  1
+// //        active_layer = 1;
+         rgblight_sethsv_noeeprom(COLOR_ACCN); // (0xD9, 0xA5, 0x21)
+         break;
+
+    case _NUMB:   //  2
+//        active_layer = 2;
         numbers_is_active = true; // #01
 //        send_string(string_state_number);
 //        SEND_STRING("[_NUMB]");
@@ -5322,13 +5357,9 @@ uint32_t layer_state_set_user(uint32_t state) {
         show_RGB_LEDs();
         break;
 
-    case _FVIM:   //  2
-//        active_layer = 2;
-        rgblight_sethsv_noeeprom(COLOR_FVIM); // (0x00, 0x80, 0x80)
-        break;
-    case _DVIM:   // 3
+    case _FVIM:   //  3
 //        active_layer = 3;
-        rgblight_sethsv_noeeprom(COLOR_DVIM); // (0xFF, 0x00, 0x00)
+        rgblight_sethsv_noeeprom(COLOR_FVIM); // (0x00, 0x80, 0x80)
         break;
     case _CVIM:   // 4
 //        active_layer = 4;
@@ -5336,39 +5367,41 @@ uint32_t layer_state_set_user(uint32_t state) {
 //        active_layer = 5;
         rgblight_sethsv_noeeprom(COLOR_VIM_); // (320, 255, 255)
         break; 
-
-    case _MOUS:   // 6
+    case _DVIM:   // 6
 //        active_layer = 6;
+        rgblight_sethsv_noeeprom(COLOR_DVIM); // (0xFF, 0x00, 0x00)
+        break;
+
+
+/*
+    case _MOUS:   // 7
+//        active_layer = 7;
         rgblight_sethsv_noeeprom(COLOR_MOUS); // (0x00,  0xFF, 0x00)
         break;
+*/
 
-//     case _ACCN:   //  7
-// //        active_layer = 7;
-//         rgblight_sethsv_noeeprom(COLOR_ACCN); // (0xD9, 0xA5, 0x21)
-//         break;
 
-    case _FUNC:   //  8
+    case _DALY:   //  8
 //        active_layer = 8;
-        rgblight_sethsv_noeeprom(COLOR_FUNC); // (0x99, 0xF5, 0xFF)
-        break;
-
-    case _DALY:   //  9
-//        active_layer = 9;
         rgblight_sethsv_noeeprom(COLOR_DALY); // (0x7A, 0x00, 0xFF)
         break;
 
-    case _POWR:   //  10
-//        active_layer = 10;
-        rgblight_sethsv_noeeprom(COLOR_POWR); // (0xFF, 0xFF, 0x00)
-        break;
 
-    case _SYMB:   //  11
-//        active_layer = 11;
+/*
+    case _FUNC:   //  9
+//        active_layer = 9;
+        rgblight_sethsv_noeeprom(COLOR_FUNC); // (0x99, 0xF5, 0xFF)
+        break;
+*/
+
+
+    case _SYMB:   //  10
+//        active_layer = 10;
         rgblight_sethsv_noeeprom(COLOR_SYMB); // (0x00,  0xFF, 0x00)
         break;
 
-    case _APPS:   //  12
-//        active_layer = 12;
+    case _APPS:   //  11
+//        active_layer = 11;
         // shift_flag = get_mods()&SHIFT_MODS;
         // if (shift_flag)
         // {
@@ -5378,10 +5411,17 @@ uint32_t layer_state_set_user(uint32_t state) {
         apps_just_activated = true;
         break;
 
-    case _RGBL:   // 13
-//      active_layer = 13;
+/*
+    case _RGBL:   // 12
+//      active_layer = 12;
         BEEP_1;
         break;
+
+    case _POWR:   //  13
+//        active_layer = 13;
+        rgblight_sethsv_noeeprom(COLOR_POWR); // (0xFF, 0xFF, 0x00)
+        break;
+*/
 
     default:  break;  //  for any other layers
 //        active_layer = 16;
@@ -5420,7 +5460,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 
     case _ACCN:   //  1
         active_layer = 1;
-        rgblight_sethsv_noeeprom(HSV_GOLDENROD); // (0xD9, 0xA5, 0x21)
+        rgblight_sethsv_noeeprom(HSV_MY_GOLDENROD); // (0xD9, 0xA5, 0x21)
         break;
     
     case _NUMB:   //  3
@@ -5434,22 +5474,22 @@ uint32_t layer_state_set_user(uint32_t state) {
 
     case _SYMB:   //  4
         active_layer = 4;
-        rgblight_sethsv_noeeprom(HSV_GREEN); // (0x00,  0xFF, 0x00)
+        rgblight_sethsv_noeeprom(HSV_MY_GREEN); // (0x00,  0xFF, 0x00)
         break;
 
     case _FUNC:   //  5
         active_layer = 5;
-        rgblight_sethsv_noeeprom(HSV_TURQUOISE); // (0x99, 0xF5, 0xFF)
+        rgblight_sethsv_noeeprom(HSV_MY_TURQUOISE); // (0x99, 0xF5, 0xFF)
         break;
 
     case _DALY:   //  6
         active_layer = 6;
-        rgblight_sethsv_noeeprom(HSV_PURPLE); // (0x7A, 0x00, 0xFF)
+        rgblight_sethsv_noeeprom(HSV_MY_PURPLE); // (0x7A, 0x00, 0xFF)
         break;
 
     case _APPS:   //  7
         active_layer = 7;
-      rgblight_sethsv_noeeprom(HSV_ORANGE); // (0xFF, 0x80, 0xBF)
+      rgblight_sethsv_noeeprom(HSV_MY_ORANGE); // (0xFF, 0x80, 0xBF)
       gui_flag = get_mods()&GUI_MODS;
       if (gui_flag)
       {
@@ -5459,30 +5499,30 @@ uint32_t layer_state_set_user(uint32_t state) {
 
     case _POWR:   //  8
         active_layer = 8;
-        rgblight_sethsv_noeeprom(HSV_YELLOW); // (0xFF, 0xFF, 0x00)
+        rgblight_sethsv_noeeprom(HSV_MY_YELLOW); // (0xFF, 0xFF, 0x00)
         break;
 
     case _FVIM:   //  9
         active_layer = 9;
-        rgblight_sethsv_noeeprom(HSV_MAGENTA); // (0x00, 0x80, 0x80)
+        rgblight_sethsv_noeeprom(HSV_MY_MAGENTA); // (0x00, 0x80, 0x80)
         break;
     case _DVIM:   // 10
         active_layer = 10;
-        rgblight_sethsv_noeeprom(HSV_RED); // (0xFF, 0x00, 0x00)
+        rgblight_sethsv_noeeprom(HSV_MY_RED); // (0xFF, 0x00, 0x00)
         break;
 
     case _CVIM:   // 11
         active_layer = 11;
-        rgblight_sethsv_noeeprom(HSV_PINK); // (320, 255, 255)
+        rgblight_sethsv_noeeprom(HSV_MY_PINK); // (320, 255, 255)
         break;
     case _XVIM:   // 12
         active_layer = 12;
-        rgblight_sethsv_noeeprom(HSV_PINK); // (320, 255, 255)
+        rgblight_sethsv_noeeprom(HSV_MY_PINK); // (320, 255, 255)
         break; 
 
     case _MOUS:   // 14
         active_layer = 14;
-        rgblight_sethsv_noeeprom(HSV_CYAN); // (0x00,  0xFF, 0x00)
+        rgblight_sethsv_noeeprom(HSV_MY_CYAN); // (0x00,  0xFF, 0x00)
         break;
 
     case _RGBL:   // 15
