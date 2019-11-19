@@ -50,6 +50,7 @@
 //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
 #define HSV_MY_CORAL          0, 120, 240 //(  0°,  47%,  94%)✔︎
+#define HSV_MY_CORAL_2        0, 166, 255 //(  0°,  65%, 100%)✔︎
 #define HSV_MY_ORANGE        28, 255, 255 //( 39°, 100%, 100%)✔︎
 #define HSV_MY_GOLDENROD     30, 218, 218
 #define HSV_MY_GOLD          36, 255, 255 //( 51°, 100%, 100%)✔︎
