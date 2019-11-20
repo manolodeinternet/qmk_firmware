@@ -255,7 +255,7 @@ We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, 
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 
-#define COLOR_CAPS HSV_MY_CORAL_2   // capslock color
+#define COLOR_CAPS HSV_MY_DARK_CORAL // capslock color
 
 // #define COLOR_DFLT HSV_MY_EMPTY     // layer 00      // (   0,    0,    0)  // 00
 
@@ -746,7 +746,7 @@ enum tap_dance_keycodes {
 //    ,PVI_CL  // CapsLock    when tapped or _FVIM layer when holded        on alpha layer
 //     APPS_MODE
      DVIM_Bck    // Backspace when tapping, _NUMB when holding 
-//    ,NUMB_Del
+    ,NUMB_Del
 //    ,SYMB_Ent
     ,APPS_Esc
 //  ,MOUS_Tab
@@ -1775,7 +1775,7 @@ void DVIM_Bck_reset (qk_tap_dance_state_t *state, void *user_data) {
 //
 //instantalize an instance of 'tap' for the 'NUMB_Del_f_always' tap dance.
 
-/*
+
 static tap NUMB_Del_tap_state = {
   .is_press_action = true,
   .state = 0
@@ -1811,7 +1811,6 @@ void NUMB_Del_reset (qk_tap_dance_state_t *state, void *user_data) {
   show_RGB_LEDs();
   NUMB_Del_tap_state.state = 0;
 }
-*/
 
 // [tapdance] [_dflt] thumb_l3 (numb_del)                                               //
 //                                                                                      //
@@ -2863,7 +2862,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // [APPS_MODE] = ACTION_TAP_DANCE_FN_ADVANCED (APPS_MODE_f_always,    APPS_MODE_finished, APPS_MODE_reset)
 
  [DVIM_Bck]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(DVIM_Bck_f_always, DVIM_Bck_finished, DVIM_Bck_reset, 100)
-//,[NUMB_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(NUMB_Del_f_always, NUMB_Del_finished, NUMB_Del_reset, 100)
+,[NUMB_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(NUMB_Del_f_always, NUMB_Del_finished, NUMB_Del_reset, 100)
 //,[SYMB_Ent]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(SYMB_Ent_f_always, SYMB_Ent_finished, SYMB_Ent_reset, 100)
 //,[MOUS_Tab]=ACTION_TAP_DANCE_FN_ADVANCED     (MOUS_Tab_f_always, MOUS_Tab_finished, MOUS_Tab_reset     )
 //,[APPS_Esc]=ACTION_TAP_DANCE_FN_ADVANCED     (APPS_Esc_f_always, APPS_Esc_finished, APPS_Esc_reset     )
@@ -3001,11 +3000,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
 
 //                        ,----------------------------------+---------------------------,   ,------------------+-----------,
-                                               LAUNCHING_APPS,                  /*MO(_MOUS)*/_______,             MO(_POWR), OSL(_ACCN),
+                                               LAUNCHING_APPS,                  MO(_MOUS),             MO(_POWR), OSL(_ACCN),
 //                        |----------------------------------+---------------------------|   |------------------+-----------|
                                                                                   XXXXXXX,               XXXXXXX,
 //                                                           |---------------------------|   |------------------|
-                          TD(DVIM_Bck),             MO(_FVIM),               MO(_NUMB)/*TD(NUMB_Del)*/,             MO(_NUMB),  MO(_SYMB),   MO(_DALY)         
+                          TD(DVIM_Bck),             MO(_FVIM),               /*MO(_NUMB)*/TD(NUMB_Del),             MO(_NUMB),  MO(_SYMB),   MO(_DALY)         
 //                                                                               THUMB_R2_NUMB_DVIM_FVIM_MOUS_SP, LT(_SYMB, KC_ENT)
 //             '----------+----------------------------------+---------------------------.   .------------------+-----------+--------------'
 //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
@@ -3115,7 +3114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
 
 //                        ,----------------------------------+---------------------------,   ,-------------+-----------,
-                                               LAUNCHING_APPS,                  /*MO(_MOUS)*/_______,        MO(_POWR), OSL(_ACCN),
+                                               LAUNCHING_APPS,                  MO(_MOUS),        MO(_POWR), OSL(_ACCN),
 //                                                            TD(APPS_Esc),  TD(MOUS_Tab),        MO(_POWR), OSL(_ACCN),               
 //                                              MO(_FUNC),                                          THUMB_R4_POWR_RGBL,
 //                        |----------------------------------+---------------------------|   |-------------+-----------|
@@ -3123,7 +3122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                           |---------------------------|   |-------------|
 //                                            TD(DVIM_Bck),    MO(_FVIM),      TD(NUMB_Del),        MO(_SYMB),     KC_SPC, MO(_DALY)
 //                       TD(BCK_DV_AP),   THUMB_L2_FVIM_SYMB_DALY_POWR_CAPSL, TD(DEL_SYM),    LT(_SYMB, KC_ENT), /*THUMB_R2_NUMB_DVIM_FVIM_MOUS_SP*/, TD(DALY_Esc)
-                          TD(DVIM_Bck),             MO(_FVIM),               MO(_NUMB)/*TD(NUMB_Del)*/,        MO(_NUMB),  MO(_SYMB),   MO(_DALY)         
+                          TD(DVIM_Bck),             MO(_FVIM),               /*MO(_NUMB)*/TD(NUMB_Del),        MO(_NUMB),  MO(_SYMB),   MO(_DALY)         
 //             '----------+----------------------------------+---------------------------.   .-------------+-----------+---------------'
 //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
@@ -3807,7 +3806,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                        |---------+-----------|  |--------+----------|
                                                                        _______,      _______,
 //                                                                  |-----------|  |--------|
-                                                SYM_EURO, O_COMMENT, MO(_NUMB),      _______, _______, C_COMMENT
+                                                SYM_EURO,    _______, MO(_NUMB),      _______, _______, _______
+                                                // SYM_EURO, O_COMMENT, MO(_NUMB),      _______, _______, C_COMMENT
                                                 // SYM_EURO, O_COMMENT, C_COMMENT,      _______, _______, _______                                                
 //                                            '---------+----------+------------.  .--------+--------+---------'
 ),
@@ -4347,14 +4347,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       register_code(KC_F20);
                       return false;
 
-
-      case O_COMMENT: send_string("/*");
 /*
-                      tap_code       (KC_SLSH);
+      case O_COMMENT: tap_code       (KC_SLSH);
                       register_code  (KC_LSFT);
                       tap_code       (KC_8);
                       unregister_code(KC_LSFT);
-*/
                       return false;
 
       case C_COMMENT: register_code  (KC_LSFT);
@@ -4362,6 +4359,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       unregister_code(KC_LSFT);
                       tap_code       (KC_SLSH);
                       return false;
+*/
 
       case MY_CLEAR:  layer_clear(); return false;
 
@@ -4863,7 +4861,7 @@ RGB COMMANDS
                     return false;
 
       case GET_HSV: flashing_LEDs(5, RGB_MY_YELLOW, RGB_MY_PURPLE);
-                    SEND_STRING("\n=============================================================");
+                    SEND_STRING("\n===");
                     SEND_STRING("\nget_hsv() -> rgblight_get_hue, rgblight_get_sat, rgblight_get_val");
                     get_hsv();
                     BEEP_1;
@@ -4885,10 +4883,14 @@ RGB COMMANDS
 ROW 1 COLORS
 */
       case CH_RED:  rgblight_sethsv_noeeprom(HSV_MY_RED);         return false;
-      case CH_CORL: rgblight_sethsv_noeeprom(HSV_MY_CORAL_2);     return false;
-      case CH_ORNG: rgblight_sethsv_noeeprom(HSV_MY_ORANGE);      return false;
-      case CH_GOLR: rgblight_sethsv_noeeprom(HSV_MY_GOLDENROD);   return false;
+      case CH_CORL: rgblight_sethsv_noeeprom(HSV_MY_DARK_CORAL); return false;
+      case CH_ORNG: rgblight_sethsv_noeeprom(HSV_MY_ORANGE_RED);      return false;
+      case CH_GOLR: rgblight_sethsv_noeeprom(HSV_MY_LIGHT_CORAL_2);   return false;
       case CH_GOLD: rgblight_sethsv_noeeprom(HSV_MY_GOLD);        return false;
+      // case CH_CORL: rgblight_sethsv_noeeprom(HSV_MY_LIGHT_CORAL_2); return false;
+      // case CH_ORNG: rgblight_sethsv_noeeprom(HSV_MY_ORANGE);      return false;
+      // case CH_GOLR: rgblight_sethsv_noeeprom(HSV_MY_GOLDENROD);   return false;
+      // case CH_GOLD: rgblight_sethsv_noeeprom(HSV_MY_GOLD);        return false;
 
       case CH_YLLW: rgblight_sethsv(HSV_MY_YELLOW);               return false;
 
