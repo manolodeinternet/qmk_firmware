@@ -2582,7 +2582,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |        |        |        |        |        |  |        |        |        |        |        |
   * |    Q   |    W   |    E   |    R   |    T   |  |    Y   |    U   |    I   |    O   |    P   |
   * |⌘[_1APP]|        |        |        |        |  |        |        |        |        |⌘[_1APP]|
-  * |@[_APPS]|@[_POWR]|@[_DIAE]|@[_DALY]|@[_SYMB]|  |        |@[_DALY]|        |@[_POWR]|@[_APPS]|
+  * |@[_APPS]|@[_POWR]|@[_DIAE]|        |@[_SYMB]|  |        |        |        |@[_POWR]|@[_APPS]|
   * |--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------|
   * |        |        |        |        |        |  |        |        |        |        |        |
   * |    A   |    S   |    D   |    F   |    G   |  |    H   |    J   |    K   |    L   |  Space |
@@ -2592,7 +2592,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |        |        |        |        |        |  |        |        |        |        |        |
   * |    Z   |    X   |    C   |    V   |    B   |  |    N   |    M   | Escape |Bckspace|  Enter |
   * |        |        |        |        |        |  |        |        |        |        |        |
-  * |  @LSft |@[_DVIM]|@[_MOUS]|@[_FVIM]|@[_NUMB]|  |@[_SYMB]|@[_FVIM]|@[_FUNC]|        |  @LSft |
+  * |@[_DALY]|@[_DVIM]|@[_MOUS]|@[_FVIM]|@[_NUMB]|  |@[_SYMB]|@[_FVIM]|@[_FUNC]|        |@[_DALY]|
   * '--------------------------------------------'  '--------------------------------------------'
 */
 [_DFLT] = LAYOUT_ortho_3x10(  // layer 0 : default layer
@@ -2679,7 +2679,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // _DIAE RESET & diaereis layer 2
 [_DIAE] = LAYOUT_ortho_3x10(  // layer 2 : RESET & diaeresis layer 
 //,--------------------------------------------------.,-------------------------------------------------.
-    TD(HRESET), _______, F(DIA_E), _______, _______,    _______, F(DIA_U), F(DIA_I), F(DIA_O), _______,
+     TO(_DFLT), F(DIA_E),_______,TD(HRESET),_______,    _______, F(DIA_U), F(DIA_I), F(DIA_O), _______,
 //|-----------+--------+---------+--------+----------||--------+---------+---------+---------+----------|
       F(DIA_A), _______,  KC_PEQL, KC_PCMM, KC_PDOT,    KC_PSLS,  KC_PAST,  KC_PMNS,  KC_PPLS, KC_PENT,
 //|-----------+--------+---------+--------+----------||--------+---------+---------+---------+----------|

@@ -13,14 +13,23 @@
 // #define USE_I2C
 
 /* Select hand configuration */
-
 //#define MASTER_LEFT
 //#define _MASTER_RIGHT
- #define EE_HANDS
+#define EE_HANDS
+
+
+
+/*(just added, @drashna)*/
+//#define RGBLIGHT_SPLIT
+//#define RGBLED_SPLIT { 0, 12 }
+/*(just added, @drashna)*/
+
+
 
 #undef  RGBLED_NUM
 
 //#define RGBLIGHT_ANIMATIONS
+
 
 //#define RGBLIGHT_EFFECT_BREATHING
 //#define RGBLIGHT_MODE_BREATHING   3                         // [MINE] Is it ok ?
@@ -37,10 +46,9 @@
 
 
 
-
 //You have to comment one of these two lines:
 //#define ALPHAS_OVERCHARGED
-  #define SINGLE_ALPHAS
+#define SINGLE_ALPHAS
 
 
 

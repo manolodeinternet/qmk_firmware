@@ -82,23 +82,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //https://docs.qmk.fm/#/feature_advanced_keycodes?id=ignore-mod-tap-interrupt
 
 #define TAPPING_FORCE_HOLD
-/*       If TAPPING_FORCE_HOLD is active:
-     if you 
-            press and release a Mod Tap key,
-            press the same Mod Tap key (quickly after tap),
-            wait more than TAPPING_TERM,
-            release the key,
 
-            it will NOT output the auto repeat function for the tapped key,
+/*
+If TAPPING_FORCE_HOLD is enabled:
+     if   ● you press and release a Mod Tap key,
+          ● you press the same Mod Tap key (quickly after tap)
+          ● you wait more than TAPPING_TERM, keeping it pressed
+          ● you release the key,
 
-            it WILL output the tapped key once,
-                       and the modded key (waiting for more keys to be modded, until it was released),
+        ➜ it will NOT output the auto repeat function for the tapped key,
 
+        ➜ it WILL output:
+          ● the tapped keycode, in the first press, and
+          ● the modifier keycode (waiting for modifying following keys, until it is released) in the second press,
 
-     With TAPPING_FORCE_HOLD, the second press will be interpreted as a Shift,
-     ...allowing to use it as a modifier shortly after having used it as a tap.
+     e.g.: LSFT_T(KC_SPC)
+        ➜ the first tap will be an spacebar and
+        ➜ the second press (holding more than TAPPING_TERM) will be interpreted as a Shift,
+     ...allowing us to use it as a common Shift key instantly after having used it as a spacebar.
+ 
+Nota:  If you miss having spacebar with autorepeat function (as I do), 
+       you can have a 'KC_SPC keycode' set in the same place, but in another layer.
+       It's very usefull.
+
+https://docs.qmk.fm/#/feature_advanced_keycodes?id=tapping-force-hold
+
 */
-//https://docs.qmk.fm/#/feature_advanced_keycodes?id=tapping-force-hold
 
 #ifndef CONFIG_H
 #define CONFIG_H
