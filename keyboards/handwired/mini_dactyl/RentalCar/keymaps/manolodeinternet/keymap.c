@@ -321,13 +321,19 @@ We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, 
 // DEFININING RGB CONSTANTS                                                             //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+//
+// RGHT HAND
 #define OUTER_RGHT  0
-#define INNER_RGHT  6
+#define INNER_RGHT 22 //6
 
 // LEFT HAND
-#define INNER_LEFT  7
-#define OUTER_LEFT 12
-//                                                                                      //
+#define INNER_LEFT 23 //7
+#define OUTER_LEFT 28 //12
+
+// THUMB LEDs
+#define THUMB_LEDS  8
+//
+//////////////////////////////////////////////////////////////////////////////////////////
 // definining rgb constants                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -831,7 +837,10 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 //    ,THUMB_L4_DALY_RGBL_POWR
 //    ,THUMB_R5_ACCN
 
-    ,MY_STEP_INDICAT  // it increments step indicator for RGB LEDs
+// THIS FUNCTION IS NOT GOING TO BE USED WITH 23 LEDS PER HAND
+//  ,MY_STEP_INDICAT  // it increments step indicator for RGB LEDs
+// this function is not going to be used with 23 leds per hand
+
     ,MY_TOOG_INDICAT  // it toggles keyboard as whole indicator for capslock ON/OFF
 // macros for default layer 0
 /////////////////////////////////////////////////////////////////////////////////////////////////////###
@@ -967,8 +976,11 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
   static bool disabled_caps_before_accent = false;
   static bool capslock_is_active = false;
   static bool whole_keyboard_as_indicator = true;
-  static int  diff = 2;
-  static int  prev_diff = 2;
+
+// THIS VARIABLES ARE NOT GOING TO BE USED WITH 23 LEDS PER HAND
+  // static int  diff = 2;
+  // static int  prev_diff = 2;
+// this variables are not going to be used with 23 leds per hand
 
   static bool numbers_is_active = false; // #01
   static bool numbers_is_set = false;  
@@ -1392,29 +1404,54 @@ void show_RGB_LEDs(void)  // MY SWITCH CAPSCLOCK INDICATORS ON FUNCTION
     }
     else // whole_keyboard_as_indicator = false
     {
-      // rght = red
-      caps_rght_sta = INNER_RGHT - diff - 1;
-      caps_rght_end = INNER_RGHT + 1;
+    //   // rght = red
+    //   caps_rght_sta = INNER_RGHT - diff - 1;
+    //   caps_rght_end = INNER_RGHT + 1;
 
-      if (numbers_is_active) // #01
-      {
-        // left = blue
-        numb_left_sta = INNER_LEFT;
-        numb_left_end = INNER_LEFT + diff + 1; // 1;
-      }
-      else // rgb_num = false 
-      {
-        // left = red
-        caps_left_sta = INNER_LEFT;
-        caps_left_end = INNER_LEFT + diff + 1; // 1;
-      }
-      // rght = default color
-      dflt_rght_sta = OUTER_RGHT;
-      dflt_rght_end = INNER_RGHT - diff - 1;  // /* 1 LED more separated from CapsLock indicator          */ - 2;
-      // left = default color
-      dflt_left_sta = INNER_LEFT + diff + 1;  // /* 1 LED more separated from CapsLock or _NUMB indicator */ + 2;
-      dflt_left_end = OUTER_LEFT        + 1;
+    //   if (numbers_is_active) // #01
+    //   {
+    //     // left = blue
+    //     numb_left_sta = INNER_LEFT;
+    //     numb_left_end = INNER_LEFT + diff + 1; // 1;
+    //   }
+    //   else // rgb_num = false 
+    //   {
+    //     // left = red
+    //     caps_left_sta = INNER_LEFT;
+    //     caps_left_end = INNER_LEFT + diff + 1; // 1;
+    //   }
+    //   // rght = default color
+    //   dflt_rght_sta = OUTER_RGHT;
+    //   dflt_rght_end = INNER_RGHT - diff - 1;  // /* 1 LED more separated from CapsLock indicator          */ - 2;
+    //   // left = default color
+    //   dflt_left_sta = INNER_LEFT + diff + 1;  // /* 1 LED more separated from CapsLock or _NUMB indicator */ + 2;
+    //   dflt_left_end = OUTER_LEFT        + 1;
+    // }
+
+    // right_thumbs = red
+       caps_rght_sta = INNER_RGHT - THUMB_LEDS - 1;
+       caps_rght_end = INNER_RGHT              + 1;
+
+       if (numbers_is_active)
+       {
+         // left = blue
+         numb_left_sta = INNER_LEFT;
+         numb_left_end = INNER_LEFT + THUMB_LEDS + 1;
+       }               
+       else // rgb_num = false
+       {
+         // left = red
+         caps_left_sta = INNER_LEFT;
+         caps_left_end = INNER_LEFT + THUMB_LEDS + 1;
+       }
+       // rght = default color
+       dflt_rght_sta = OUTER_RGHT;
+       dflt_rght_end = INNER_RGHT - THUMB_LEDS - 1;
+       // left = default color
+       dflt_left_sta = INNER_LEFT + THUMB_LEDS + 1;
+       dflt_left_end = OUTER_LEFT              + 1;
     }
+
   }
   else // capslock_is_active = false  
   {
@@ -1446,19 +1483,32 @@ void show_RGB_LEDs(void)  // MY SWITCH CAPSCLOCK INDICATORS ON FUNCTION
       }
       else // whole_keyboard_as_indicator = false
       {
+        // // rght = blue
+        // numb_rght_sta = INNER_RGHT - diff - 1;
+        // numb_rght_end = INNER_RGHT + 1;
+        // // left = blue
+        // numb_left_sta = INNER_LEFT;
+        // numb_left_end = INNER_LEFT + diff + 1; // 1;
+
+        // // rght = default color
+        // dflt_rght_sta = OUTER_RGHT;
+        // dflt_rght_end = INNER_RGHT - diff - 1;  // /* 1 LED more separated from CapsLock indicator          */ - 2;
+        // // left = default color
+        // dflt_left_sta = INNER_LEFT + diff + 1;  // /* 1 LED more separated from CapsLock or _NUMB indicator */ + 2;
+        // dflt_left_end = OUTER_LEFT        + 1;
+
         // rght = blue
-        numb_rght_sta = INNER_RGHT - diff - 1;
-        numb_rght_end = INNER_RGHT + 1;
+        numb_rght_sta = INNER_RGHT - THUMB_LEDS - 1;
+        numb_rght_end = INNER_RGHT              + 1;
         // left = blue
         numb_left_sta = INNER_LEFT;
-        numb_left_end = INNER_LEFT + diff + 1; // 1;
-
+        numb_left_end = INNER_LEFT + THUMB_LEDS + 1;
         // rght = default color
         dflt_rght_sta = OUTER_RGHT;
-        dflt_rght_end = INNER_RGHT - diff - 1;  // /* 1 LED more separated from CapsLock indicator          */ - 2;
+        dflt_rght_end = INNER_RGHT - THUMB_LEDS - 1;
         // left = default color
-        dflt_left_sta = INNER_LEFT + diff + 1;  // /* 1 LED more separated from CapsLock or _NUMB indicator */ + 2;
-        dflt_left_end = OUTER_LEFT        + 1;
+        dflt_left_sta = INNER_LEFT + THUMB_LEDS + 1;
+        dflt_left_end = OUTER_LEFT              + 1;
       }
 
     }
@@ -3987,7 +4037,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ###
 //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 //,------------------------------------------------------------------.  ,----------------------------------------------------------------.
-MY_STEP_INDICAT,      LOGOUT,  LOCKSCREEN,    MY_RESET,     XXXXXXX,            VOL_8, KC__VOLUP, KC__VOLDOWN,       VOL_1,    KC__MUTE,
+/*MY_STEP_INDICAT*/_______,      LOGOUT,  LOCKSCREEN,    MY_RESET,     XXXXXXX,            VOL_8, KC__VOLUP, KC__VOLDOWN,       VOL_1,    KC__MUTE,
 //|------------+------------+------------+------------+--------------|  |------------+----------+------------+------------+--------------|
 MY_TOOG_INDICAT,       KC_F7,      KC_SPC,       KC_F9, ZOOM_SMOOTH,      ZOOM_FOLLOW,   ZOOM_IN,    ZOOM_OUT, ZOOM_ON_OFF, INVRT_COLOR,
 //|------------+------------+------------+------------+--------------|  |------------+----------+------------+------------+--------------|
@@ -4387,21 +4437,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
       case MY_TOOG_INDICAT:   if (rgblight_config.enable && (capslock_is_active || numbers_is_active))
                       {
-                        if (whole_keyboard_as_indicator)
-                        {
-                          diff = prev_diff;
-                        }
-                        else
-                        {
-                          prev_diff = diff;
-                          diff = 2;
-                        }
+                        // if (whole_keyboard_as_indicator)
+                        // {
+                        //   diff = prev_diff;
+                        // }
+                        // else
+                        // {
+                        //   prev_diff = diff;
+                        //   diff = 2;
+                        // }
                         whole_keyboard_as_indicator = !whole_keyboard_as_indicator;
                         show_RGB_LEDs();                        
                       }
                       return false;
 
-      case MY_STEP_INDICAT:
+//
+// THIS FUNCTION IS NOT GOING TO BE USED WITH 23 LEDS PER HAND
+//    case MY_STEP_INDICAT:
       //////////////////////////////////////////////////////////////////////////////////////////
       //                                                                                      //
       // [PROCESS_RECORD_USER] [_POWR] KC_Q (MY_STEP_INDICAT)                                 //
@@ -4413,14 +4465,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       //  KC_Q:   *  STEPS UP RGB WIDTH USED AS INDICATORS FOR CAPSLOCK, [_NUMB] LAYER,...    //
       //                                                                                      //
       //////////////////////////////////////////////////////////////////////////////////////////
-          //
-          if ( rgblight_config.enable && !whole_keyboard_as_indicator
-             && (capslock_is_active || numbers_is_active) )
-          {
-            diff = (diff < 5 ? diff + 1 : 2 );
-            show_RGB_LEDs();
-          }
-          return false;
+      //
+          // if ( rgblight_config.enable && !whole_keyboard_as_indicator
+          //    && (capslock_is_active || numbers_is_active) )
+          // {
+          //   diff = (diff < 5 ? diff + 1 : 2 );
+          //   show_RGB_LEDs();
+          // }
+          // return false;
+// this function is not going to be used with 23 leds per hand
+//
 
       case KC_BSPC:  rgblight_sethsv_noeeprom(HSV_MY_RED);
                      return true;
