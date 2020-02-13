@@ -2763,11 +2763,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,-----------------------------------------------------------------------------.  ,-----------------------------------------------------------------------------------.
-           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,            TD(Y_AMCI),        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,
+           KC_PLUS,          KC_AT,        KC_HASH,        KC_ASTR,    KC_PERC,            TD(Y_AMCI),        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
-    LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
+    LSFT_T(KC_GRV), CTL_T(KC_QUOT),  ALT_T(KC_EQL), GUI_T(KC_SLSH), KC_PIPE,                  KC_BSLS, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
+//  LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
-        TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK,    KC_ASTR,      LT(_SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_COLN,        KC_SCLN ),
+        TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK, TD(G_DOEU),               KC_CIRC,        KC_LCBR,        KC_RCBR,        KC_SCLN,        KC_COLN ),
+//      TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK,    KC_ASTR,      LT(_SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_SCLN,        KC_COLN,
 //,-----------------------------------------------------------------------------'  '-----------------------------------------------------------------------------------.
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###

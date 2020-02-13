@@ -833,7 +833,9 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
 //    ,THUMB_R1_ESC_DALY_APPS
 //    ,THUMB_R2_NUMB_DVIM_FVIM_MOUS_SP
-//    ,THUMB_R4_POWR_RGBL
+    ,THUMB_R2_SYMB_FVIM
+    ,THUMB_R5_ACCN_NUMB
+    ,THUMB_L4_FUNC_RGBL
 //    ,THUMB_L4_DALY_RGBL_POWR
 //    ,THUMB_R5_ACCN
 
@@ -3157,7 +3159,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
 
 //                        ,----------------------------------+---------------------------,   ,-------------+-----------,
-                                                 /*TD(DVIM_Del)*/MO(_RGBL),                  MO(_FUNC),        MO(_POWR), OSL(_ACCN),
+                                            MO(_MOUS), THUMB_L4_FUNC_RGBL/*MO(_FUNC)*/,        MO(_POWR), THUMB_R5_ACCN_NUMB,
 //                                                            TD(APPS_Esc),  TD(MOUS_Tab),        MO(_POWR), OSL(_ACCN),               
 //                                              MO(_FUNC),                                          THUMB_R4_POWR_RGBL,
 //                        |----------------------------------+---------------------------|   |-------------+-----------|
@@ -3165,8 +3167,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                           |---------------------------|   |-------------|
 //                                            TD(DVIM_Bck),    MO(_FVIM),      TD(NUMB_Del),        MO(_SYMB),     KC_SPC, MO(_DALY)
 //                       TD(BCK_DV_AP),   THUMB_L2_FVIM_SYMB_DALY_POWR_CAPSL, TD(DEL_SYM),    LT(_SYMB, KC_ENT), /*THUMB_R2_NUMB_DVIM_FVIM_MOUS_SP*/, TD(DALY_Esc)
-                          MO(_DALY),        LAUNCHING_APPS,                     MO(_MOUS),        MO(_FVIM),  MO(_SYMB),  MO(_NUMB)         
+                          TD(DVIM_Del),        MO(_FVIM),                     MO(_NUMB),        LAUNCHING_APPS,  THUMB_R2_SYMB_FVIM,  MO(_DALY)
 //             '----------+----------------------------------+---------------------------.   .-------------+-----------+---------------'
+// //                        ,----------------------------------+---------------------------,   ,-------------+-----------,
+//                                             TD(DVIM_Del), THUMB_L4_FUNC_RGBL/*MO(_FUNC)*/,        MO(_POWR), OSL(_ACCN),
+// //                        |----------------------------------+---------------------------|   |-------------+-----------|
+//                                                                                   XXXXXXX,          XXXXXXX,
+// //                                                           |---------------------------|   |-------------|
+//                           MO(_DALY),        LAUNCHING_APPS,                     MO(_MOUS),        MO(_FVIM),  MO(_SYMB),  MO(_NUMB)         
+// //             '----------+----------------------------------+---------------------------.   .-------------+-----------+---------------'
+
 //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
 ),
@@ -3837,13 +3847,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 // ###
 //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-//,-----------------------------------------------------------------------------.  ,-----------------------------------------------------------------------------------.
-           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL, KC_PERC,               KC_AMPR,        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,
-//|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
-    LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH),  KC_DLR,               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
-//|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
-           KC_EXLM,        KC_QUES,        KC_LABK,        KC_RABK, KC_ASTR,               KC_CIRC,        KC_LCBR,        KC_RCBR,        KC_COLN,        KC_SCLN,
-//,-----------------------------------------------------------------------------'  '-----------------------------------------------------------------------------------.
+//,-------------------------------------------------------------------------.  ,--------------------------------------------------------------------------.
+           KC_PLUS,          KC_AT,        KC_HASH,       KC_ASTR, KC_PERC,      KC_AMPR,        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,
+//|---------------+---------------+---------------+--------------+----------|  |--------+---------------+---------------+---------------+-----------------|
+    LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_EQL), GUI_T(KC_SLSH), KC_PIPE,      KC_BSLS, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
+//|---------------+---------------+---------------+--------------+----------|  |--------+---------------+---------------+---------------+-----------------|
+           KC_EXLM,        KC_QUES,        KC_LABK,       KC_RABK,  KC_DLR,      KC_CIRC,        KC_LCBR,        KC_RCBR,        KC_SCLN,        KC_COLN,
+//,-------------------------------------------------------------------------'  '--------------------------------------------------------------------------.
 //                                                        ,---------+-----------,  ,--------+----------,
                                                             SYM_I_EX, SYM_I_QU,      MO(_POWR), _______,
 //                                                        |---------+-----------|  |--------+----------|
@@ -4424,16 +4434,43 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         return false;
                       }
                       
-      // case THUMB_R4_POWR_RGBL:
-      //                 if (get_mods()&ALT_MODS)
-      //                 {
-      //                   layer_on(_RGBL);
-      //                 }
-      //                 else
-      //                 {
-      //                   layer_on(_POWR);
-      //                 }
-      //                 return false;
+      case THUMB_L4_FUNC_RGBL:
+                      if (get_mods()&GUI_MODS)
+                      {
+                        layer_on(_RGBL);
+                      }
+                      else
+                      {
+                        layer_on(_FUNC);
+                      }
+                      return false;
+
+      case THUMB_R2_SYMB_FVIM:
+                      if (get_mods()&GUI_MODS)
+                      {
+                        layer_on(_FVIM);
+                      }
+                      else
+                      {
+                        layer_on(_SYMB);
+                      }
+                      return false;
+
+      case THUMB_R5_ACCN_NUMB:
+                      if (get_mods()&GUI_MODS)
+                      {
+                        layer_on(_NUMB);
+                      }
+                      else
+                      {
+                        set_oneshot_layer(_ACCN, ONESHOT_START);
+                        rgblight_sethsv_noeeprom(COLOR_ACCN); // (0xD9, 0xA5, 0x21)
+                        // clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED)
+                        // reset_oneshot_layer()
+                      }
+                      return false;
+
+
 
       case MY_TOOG_INDICAT:   if (rgblight_config.enable && (capslock_is_active || numbers_is_active))
                       {
@@ -5020,17 +5057,54 @@ ROW 3 COLORS
                       }
                       return false;
 
-      // case THUMB_R4_POWR_RGBL:
-      //                 if (state_number == _POWR)
-      //                 {
-      //                    layer_off(_POWR);
-      //                 }
-      //                 else
-      //                 if (state_number == _RGBL)
-      //                 {
-      //                   layer_off(_RGBL);
-      //                 }
-      //                 return false;
+      case THUMB_L4_FUNC_RGBL:
+                      if (state_number == _FUNC)
+                      {
+                         layer_off(_FUNC);
+                         show_RGB_LEDs();
+                      }
+                      else
+                      if (state_number == _RGBL)
+                      {
+                        layer_off(_RGBL);
+                        show_RGB_LEDs();
+                      }
+                      return false;
+  
+      case THUMB_R5_ACCN_NUMB:
+                      if (state_number == _ACCN)
+                      {
+                        // set_oneshot_layer(_ACCN, ONESHOT_START);
+                        clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
+                        show_RGB_LEDs();
+                        // reset_oneshot_layer()
+                      }
+                      else
+                      if (state_number == _NUMB)
+                      {
+                        layer_off(_NUMB);
+                        show_RGB_LEDs();
+                      }
+                      return false;
+  
+        case THUMB_R2_SYMB_FVIM:
+                      if (state_number == _SYMB)
+                      {
+                         layer_off(_SYMB);
+                         show_RGB_LEDs();
+                      }
+                      else
+                      if (state_number == _FVIM)
+                      {
+                        layer_off(_FVIM);
+                        show_RGB_LEDs();
+                      }
+                      return false;
+  
+
+
+
+
                       
       case KC_BSPC:  show_RGB_LEDs();
                      return true;
