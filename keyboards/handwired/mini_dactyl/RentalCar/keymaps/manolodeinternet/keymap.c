@@ -324,14 +324,14 @@ We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, 
 //
 // RGHT HAND
 #define OUTER_RGHT  0
-#define INNER_RGHT 22 //6
+#define INNER_RGHT 6 //6
 
 // LEFT HAND
-#define INNER_LEFT 23 //7
-#define OUTER_LEFT 28 //12
+#define INNER_LEFT 7 //7
+#define OUTER_LEFT 12 //12
 
 // THUMB LEDs
-#define THUMB_LEDS  8
+#define THUMB_LEDS  2
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 // definining rgb constants                                                             //
