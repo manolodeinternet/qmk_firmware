@@ -3159,7 +3159,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
 
 //                        ,----------------------------------+---------------------------,   ,-------------+-----------,
-                                            MO(_MOUS), THUMB_L4_FUNC_RGBL/*MO(_FUNC)*/,        MO(_POWR), THUMB_R5_ACCN_NUMB,
+                                            MO(_MOUS), /*THUMB_L4_FUNC_RGBL  MO(_FUNC)*/MO(_RGBL),        MO(_POWR), THUMB_R5_ACCN_NUMB,
 //                                                            TD(APPS_Esc),  TD(MOUS_Tab),        MO(_POWR), OSL(_ACCN),               
 //                                              MO(_FUNC),                                          THUMB_R4_POWR_RGBL,
 //                        |----------------------------------+---------------------------|   |-------------+-----------|
@@ -3989,9 +3989,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //'-----------------------------------------------'    '-----------------------------------------------'
      CH_RED, CH_CORL, CH_ORNG, CH_GOLR, CH_GOLD,         CH_YLLW, RGB_HUD, RGB_HUI, SAV_COL, RGB_RMOD,
 
-    CH_CHRT, CH_GREN, CH_SPRG, CH_TRQS, CH_TEAL,         CH_WHIT, RGB_SAD, RGB_SAI, GET_HSV,  RGB_MOD,
+    RGB_MOD, RGB_RMOD, CH_SPRG, CH_TRQS, CH_TEAL,         CH_WHIT, RGB_SAD, RGB_SAI, GET_HSV,  RGB_MOD,
 
-    CH_CYAN, CH_AZUR, CH_BLUE, CH_PRPL, CH_MGNT,         CH_PINK, RGB_VAD, RGB_VAI, CH_EMPT,  RGB_TOG,
+    RGB_TOG, CH_AZUR, CH_BLUE, CH_PRPL, CH_MGNT,         CH_PINK, RGB_VAD, RGB_VAI, CH_EMPT,  RGB_TOG,
 //'-----------------------------------------------'    '-----------------------------------------------'
 //                           ,---------+----------,    ,---------+----------,
                                 _______, _______,      MO(_POWR), _______,

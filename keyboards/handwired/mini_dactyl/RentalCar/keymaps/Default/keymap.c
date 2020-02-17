@@ -423,6 +423,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 };
 
 void matrix_init_user(void) {
+	// every time we switch on the keyboard, it starts with QWERTY
+	persistent_default_layer_set(1UL<<_QWERTY); 
 }
 
 void matrix_scan_user(void) {

@@ -11,11 +11,20 @@
 
 #define USE_SERIAL
 // #define USE_I2C
+#define EE_HANDS
+
+
+
+
 
 /* Select hand configuration */
 //#define MASTER_LEFT
-//#define _MASTER_RIGHT
-#define EE_HANDS
+//#define MASTER_RIGHT
+
+
+//#define RGBLED_SPLIT { 6, 7 } // 2020/02/17
+
+
 
 
 
