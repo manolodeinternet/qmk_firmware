@@ -1,0 +1,5 @@
+//NOTE/keymap_POWR_layer
+//
+// KC_BRIGHTNESS_DOWN(KC_BRID):->KC_SLCK               instead of 
+// KC_BRIGHTNESS_UP  (KC_BRIU):->KC_PAUS
+// REWIND: KC_MRWD: -> KC_F7, PLAY: KC_MPLY: -> KC_SPC, FORWARD: KC_MFFD: -> KC_F9,
