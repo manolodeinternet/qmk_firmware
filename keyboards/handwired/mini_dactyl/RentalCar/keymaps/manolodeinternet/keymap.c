@@ -5075,7 +5075,8 @@ ROW 3 COLORS
                       if (state_number == _ACCN)
                       {
                         // set_oneshot_layer(_ACCN, ONESHOT_START);
-                        clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
+                        reset_oneshot_layer();
+                        //clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
                         show_RGB_LEDs();
                         // reset_oneshot_layer()
                       }
