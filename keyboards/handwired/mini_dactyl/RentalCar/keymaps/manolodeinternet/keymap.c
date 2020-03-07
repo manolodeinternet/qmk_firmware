@@ -108,6 +108,9 @@ uint16_t get_tapping_term(uint16_t keycode) {
 // [REFLEXION]
 // [reflexion]     maybe things can be coded (thinked) different !!!
 //
+// [SAVING_SPACE]
+// [saving_space]   ways of saving space for fitting the whole firmware into the microcontroller
+//
 // [SYSTEM PREFERENCES]
 // [system preferences] sortcut defined in 'System Preferences'
 //
@@ -196,7 +199,7 @@ uint16_t get_tapping_term(uint16_t keycode) {
 
 // #define ALL_LMODS   (MOD_BIT(KC_LSFT)|MOD_BIT(KC_LCTL)|MOD_BIT(KC_LALT)|MOD_BIT(KC_LGUI))
 // [inspiringcode]
-#define SHIFT_MODS    (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
+#define SHFT_MODS    (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
 #define CTRL_MODS     (MOD_BIT(KC_LCTL)  |MOD_BIT(KC_RCTL)  )
 #define ALT_MODS      (MOD_BIT(KC_LALT)  |MOD_BIT(KC_RALT)  )
 #define GUI_MODS      (MOD_BIT(KC_LGUI)  |MOD_BIT(KC_RGUI)  )
@@ -836,13 +839,13 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     // ,LAUNCHING_APPS
 
     ,CHANGE_SYMB_TO_NUMB
+    ,THUMB_L3_KAR_APPS
     ,THUMB_L4_FUNC_RGBL
 
     ,THUMB_R1_DALY_MOUS
     ,THUMB_R2_SYMB_FVIM
     ,THUMB_R3_APPS_NUMB
     ,THUMB_R4_POWR_RGBL
-    ,THUMB_R5_KAR_APPS
 
 // THIS FUNCTION IS NOT GOING TO BE USED WITH 23 LEDS PER HAND
 //  ,MY_STEP_INDICAT  // it increments step indicator for RGB LEDs
@@ -867,12 +870,12 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
 
 // MACROS FOR _APPS LAYER 7
-    ,APP_Q_SNOTE /*,APP_W_TWTTR*/ ,APP_E_EVERN /*,APP_R_APSTO*/,APP_T_TERMI
+    ,APP_Q_SNOTE ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_APSTO,APP_T_TERMI
                                          ,APP_Y_TYPIN ,APP_U_UROOM ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF
-    /*,APP_A_SCRPT*/ ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME
-                                         ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KRBNR ,APP_L_CLNDR /*,APP_SP_SLCK*/
-    /*,APP_Z_STUDI*/ /*,APP_X_XCODE ,APP_C_CALCU ,APP_K_KVIEW ,APP_B_BOOKS
-                                         ,APP_N_NOTES ,APP_M_MAIL*/  ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB
+    ,APP_A_SCRPT ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME
+                                         ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KRBNR ,APP_L_CLNDR ,APPSP_EMPTY
+    ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_KVIEW ,APP_B_BOOKS
+                                         ,APP_N_NOTES ,APP_M_MAIL  ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB
 // macros for _apps layer 7
 /////////////////////////////////////////////////////////////////////////////////////////////////////###
 
@@ -968,11 +971,16 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
   static uint8_t control_flag;
   static uint8_t  option_flag;
   static uint8_t     gui_flag;
+  static uint8_t current_flag;
+
+  bool             shift_was_activated     = false;
 
   static bool    multi_apps                = false;
   static bool    multi_apps_karabiner      = false;  
   static bool          apps_just_activated = false;
   static bool          apps_working        = false;
+  static bool karabiner_apps_working       = false;
+  static bool changing_apps                = false;           
 
   static bool          symbols_pressed     = false;
 // [REFLEXION]
@@ -1142,20 +1150,6 @@ int cur_dance (qk_tap_dance_state_t *state) {
 // FUNCTIONS FOR ACCESING KEYBINDINGS MAPPED FUNCTIONS                                  //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-bool triggered_gui(void)
-{
-  gui_flag = get_mods()&GUI_MODS;
-  if (gui_flag)
-  {
-    del_mods(gui_flag);
-    del_weak_mods(gui_flag);
-    send_keyboard_report();
-
-    return true;
-  }
-  return false;
-}
-
 void fvim(char *key)
 {
 //  SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v")))));
@@ -1217,87 +1211,95 @@ void get_hsv(void)
   itoa(int_2, str_2, 10);
   itoa(int_3, str_3, 10);
 
-  SEND_STRING("\nrgblight_get_hue(): ");
+  SEND_STRING("rgblight_get_hue(): ");
   send_string   (str_1);
-  SEND_STRING("\nrgblight_get_sat(): ");
+  SEND_STRING(", sat: ");
   send_string   (str_2);
-  SEND_STRING("\nrgblight_get_val(): ");
+  SEND_STRING(", val: ");
   send_string   (str_3);
   BEEP_1;
 }
 //[fixme]  // make this function smaller, please !!!
 
+void add_desired_mod(uint8_t desired_mod)
+{
+  add_mods     (desired_mod);
+  add_weak_mods(desired_mod);
+  send_keyboard_report();
+}
+
+void remove_activated_mod(uint8_t activated_mod)
+{
+  del_mods     (activated_mod);
+  del_weak_mods(activated_mod);
+  send_keyboard_report();
+}
+//
+// [SAVING_SPACE]
 // this function saves from 158 to 216 (58 bytes)
 // ... instead of repeating this bunch or code into 'process_record_user' for ...
 // ... SL_MEN, KA_DCK, KM_TOL, SH_STA, RT_FLO, ...
 // ... we call this function into every function !!!
-void remove_control_mod(void)
+bool remove_control_mod(void)
 {
   control_flag = get_mods()&CTRL_MODS;
   if (control_flag)
   {
-    del_mods     (control_flag);
-    del_weak_mods(control_flag);
-    send_keyboard_report();
-  }
-}
-
-void remove_option_mod(void)
-{
-  option_flag = get_mods()&ALT_MODS;
-  if (option_flag)
-  {
-    del_mods     (option_flag);
-    del_weak_mods(option_flag);
-    send_keyboard_report();
-  }
-}
-
-
-                               //  option_flag = get_mods()&ALT_MODS;
-                               //  if (option_flag)
-                               //  {
-                               //    del_mods(option_flag);
-                               //    del_weak_mods(option_flag);
-                               //    send_keyboard_report();
-
-
-                               // // if (get_mods()&ALT_MODS)
-                               // // {
-                               // //   del_mods(gui_flag);
-                               // //   del_weak_mods(gui_flag);
-                               // //   send_keyboard_report();
-
-
-                               //   layer_on(_NUMB);
-                               //   //show_RGB_LEDs();
-                               // }
-                               // else
-                               // {
-                               //   rgblight_sethsv_noeeprom(COLOR_APPS);
-                               //   apps_working = true;
-                               //   if (triggered_gui())
-                               //   multi_apps = true;
-                               //   layer_on(_APPS);
-                               // }
-                               // return false;
-
-
-
-
-bool triggered_gui(void)
-{
-  gui_flag = get_mods()&GUI_MODS;
-  if (gui_flag)
-  {
-    del_mods(gui_flag);
-    del_weak_mods(gui_flag);
-    send_keyboard_report();
-
+    remove_activated_mod(control_flag);
+    // del_mods     (control_flag);
+    // del_weak_mods(control_flag);
+    // send_keyboard_report();
     return true;
   }
   return false;
 }
+//
+// [SAVING_SPACE]
+// as this function is used only once, for triggering slack app,
+// ... it saves from 66 to 86 (20 bytes) using it directly instead of calling a function
+// void remove_shift_mod(void)
+// {
+//   shift_flag = get_mods()&SHFT_MODS;
+//   if (shift_flag)
+//   {
+//     del_mods     (shift_flag);
+//     del_weak_mods(shift_flag);
+//     send_keyboard_report();
+//   }
+// }
+
+
+
+// void my_delay(void)
+// {
+//   wait_ms(50);
+// }
+
+// bool triggered_gui(void)
+// {
+//   gui_flag = get_mods()&GUI_MODS;
+//   if (gui_flag)
+//   {
+//     remove_activated_mod(gui_flag);
+//     return true;
+//   }
+//   return false;
+// }
+
+
+// old who worked fine
+// bool triggered_gui(void)
+// {
+//   gui_flag = get_mods()&GUI_MODS;
+//   if (gui_flag)
+//   {
+//     del_mods     (gui_flag);
+//     del_weak_mods(gui_flag);
+//     send_keyboard_report();
+//     return true;
+//   }
+//   return false;
+// }
 
 void callApp(char *app_initial)
 {
@@ -1312,7 +1314,7 @@ void callApp(char *app_initial)
 
 // inside Typinator Expansion it is a 0.01 seconds delay
 // wait_ms(10);
-// _delay_ms(100);
+// wait_ms(100);
 }
 
 // [CURIOSITY]
@@ -1324,11 +1326,11 @@ void callApp(char ascii_code)
   uint8_t keycode;
 
     tap_code(KC_CLEAR);
-    _delay_ms(5);
+    wait_ms(5);
       register_code(KC_LGUI);
             tap_code(KC_SPC);
     unregister_code(KC_LGUI);
-    _delay_ms(5);
+    wait_ms(5);
 
     keycode = pgm_read_byte(&ascii_to_keycode_lut[(uint8_t)ascii_code]);
 
@@ -1336,11 +1338,11 @@ void callApp(char ascii_code)
     tap_code(keycode);
  
     register_code  (KC_ENT);
-    _delay_ms(20);   
+    wait_ms(20);   
     unregister_code(KC_ENT);
 
     // next delay is for avoiding that SpotLight remains on screen without calling our app
-//  _delay_ms(30);
+//  wait_ms(30);
 //    register_code (KC_ENT);
 //    unregister_code (KC_ENT);
 }
@@ -1566,7 +1568,7 @@ void show_RGB_LEDs(void)  // MY SWITCH CAPSCLOCK INDICATORS ON FUNCTION
       }
 
     }
-    else // number_is_active = false & capslock_is_active = false as well !!!
+    else // numbers_is_active = false & capslock_is_active = false as well !!!
     {
       // LEFT = default color
       dflt_rght_sta = OUTER_RGHT;
@@ -1692,10 +1694,11 @@ void flashing_LEDs(uint8_t times, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t r2
   for (uint8_t i = 0; i < times; i++)
   {
     rgblight_setrgb(r1, g1, b1);
-    _delay_ms (50);
+    // _delay_ms (50);
+    wait_ms(50);
 
     rgblight_setrgb(r2, g2, b2);
-    _delay_ms(100);
+    wait_ms(100);
   }
 }
 //                                                                                      //
@@ -1717,9 +1720,10 @@ void flashing_LEDs(uint8_t times, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t r2
 void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 
   BEEP_1;
-  _delay_ms(1);
+  // _delay_ms (1);
+  wait_ms(1);
   rgblight_enable_noeeprom();
-  _delay_ms(1);
+  wait_ms(1);
 
   flashing_LEDs(5, RGB_MY_WHITE, RGB_MY_RED);
   reset_keyboard();
@@ -2340,11 +2344,24 @@ void SETNMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //  s e t   n u m b e r s   l a y e r   u p    -    n u m b e r s   l a y e r   o f f   //
 //////////////////////////////////////////////////////////////////////////////////////////
-//
+//                                                                                      //
 //                                                                                      //
 //             t a p   d a n c e   f o r    [ _ n u m b ]  l a y e r                    //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -2699,7 +2716,7 @@ void LOGLCK_function (qk_tap_dance_state_t *state, void *user_data) {
 
                       register_code(KC_LSFT);
                       register_code(KC_POWER);
-                      _delay_ms(500); 
+                      wait_ms(500); 
                       */
 
                   /* KC_EJCT keycode doesn't work with QMK, but with KarabinerElements works vey well*/
@@ -2721,7 +2738,7 @@ void SLEP_M_function(qk_tap_dance_state_t *state, void *user_data) {
                       
     case SINGLE_HOLD: register_code(KC_POWER);
                    // without this delay, POWER doesn't work !!!   
-                      _delay_ms(500); 
+                      wait_ms(500); 
                       unregister_code(KC_POWER);
                    // SEND_STRING("s");  // 's' for selecting button sleep but it's not necessary
                       reset_tap_dance(state); break;
@@ -2750,7 +2767,7 @@ void SLEP_M_function(qk_tap_dance_state_t *state, void *user_data) {
                       /* The KC_EJCT keycode doesn't work */
                       /*
                       register_code(KC_LCTL); register_code(KC_LGUI); register_code(KC_EJCT);
-                      _delay_ms(2000);
+                      wait_ms(2000);
                       unregister_code(KC_EJCT); unregister_code(KC_LGUI); unregister_code(KC_LCTL);
                       */
 /*
@@ -2791,7 +2808,7 @@ void KILA_D_function(qk_tap_dance_state_t *state, void *user_data) {
                       /* The KC_EJCT keycode doesn't work */
                       /*
                       register_code(KC_LCTL); register_code(KC_LGUI); register_code(KC_EJCT);
-                      _delay_ms(2000);
+                      wait_ms(2000);
                       unregister_code(KC_EJCT); unregister_code(KC_LGUI); unregister_code(KC_LCTL);
                       */
 // [info] how to access kill menu through keyboard
@@ -2828,7 +2845,7 @@ void KILM_T_function (qk_tap_dance_state_t *state, void *user_data) {
 //////////////////////////////////////////////////////////////////////////////////////////
 // [OLDWAY]
                    // Another way for shutting down, but much less elegant:
-                   // register_code(KC_POWER); _delay_ms(2000); unregister_code(KC_POWER);
+                   // register_code(KC_POWER); wait_ms(2000); unregister_code(KC_POWER);
                    // register_code(KC_ENT); unregister_code(KC_ENT);
 // [oldway]
 
@@ -2837,7 +2854,7 @@ void KILM_T_function (qk_tap_dance_state_t *state, void *user_data) {
                       /*
                       register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
                       register_code(KC_EJCT);
-                      _delay_ms(2000);
+                      wait_ms(2000);
                       unregister_code(KC_EJCT);
                       unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
                       */
@@ -2881,14 +2898,14 @@ void SHUT_S_function(qk_tap_dance_state_t *state, void *user_data) {
 //////////////////////////////////////////////////////////////////////////////////////////
 // [OLDWAY]
                    // Another way for restarting, but much less elegant:
-                   // register_code(KC_POWER); _delay_ms(2000); unregister_code(KC_POWER);
+                   // register_code(KC_POWER); wait_ms(2000); unregister_code(KC_POWER);
                    // register_code(KC_R); unregister_code(KC_R);
 // [oldway]                      
 
                    /* The KC_EJCT keycode doesn't work */
                       /*
                       register_code(KC_LCTL); register_code(KC_LGUI); register_code(KC_EJCT);
-                      _delay_ms(2000);
+                      wait_ms(2000);
                       unregister_code(KC_EJCT); unregister_code(KC_LGUI); unregister_code(KC_LCTL);
                       */
 /*
@@ -2956,9 +2973,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 //
 
 // [_DFLT] LAYER
-// [APPS_MODE] = ACTION_TAP_DANCE_FN_ADVANCED (APPS_MODE_f_always,    APPS_MODE_finished, APPS_MODE_reset)
+   [DVIM_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(DVIM_Del_f_always, DVIM_Del_finished, DVIM_Del_reset, 100)
 
- [DVIM_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(DVIM_Del_f_always, DVIM_Del_finished, DVIM_Del_reset, 100)
+//,[APPS_MODE] = ACTION_TAP_DANCE_FN_ADVANCED (APPS_MODE_f_always,    APPS_MODE_finished, APPS_MODE_reset)
 //,[NUMB_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(NUMB_Del_f_always, NUMB_Del_finished, NUMB_Del_reset, 100)
 //,[SYMB_Ent]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(SYMB_Ent_f_always, SYMB_Ent_finished, SYMB_Ent_reset, 100)
 //,[MOUS_Tab]=ACTION_TAP_DANCE_FN_ADVANCED     (MOUS_Tab_f_always, MOUS_Tab_finished, MOUS_Tab_reset     )
@@ -2983,12 +3000,12 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 
 // [_NUMB] LAYER
-// ,[PENUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, PENUMB_finished, PENUMB_reset)
+  ,[SETNMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SETNMB_finished, SETNMB_reset)
 
+// ,[PENUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, PENUMB_finished, PENUMB_reset)
 // [GHERKIN]
 // ,[SLNUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLNUMB_finished, SLNUMB_reset)
 // [gherkin]
-  ,[SETNMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SETNMB_finished, SETNMB_reset)
 // [UNDERSTANDING]
 // TIME 50: is too dificult to typing   so fast !!!
 // TIME 70 is a right time for typing very fast !!!
@@ -3239,13 +3256,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //,--------------------------------------------------------------------------------------.  ,------------------------------------------------------------------------------------------.
                KC_Q,            KC_W,            KC_E,            KC_R,        KC_T,                     KC_Y,            KC_U,              KC_I,            KC_O,              KC_P,
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
-       LSFT_T(KC_A),     CTL_T(KC_S),     ALT_T(KC_D),     GUI_T(KC_F),        KC_G,                     KC_H,     GUI_T(KC_J),       ALT_T(KC_K),     CTL_T(KC_L),    LSFT_T(KC_SPC),
+//     LSFT_T(KC_A),     CTL_T(KC_S),     ALT_T(KC_D),     GUI_T(KC_F),        KC_G,                     KC_H,     GUI_T(KC_J),       ALT_T(KC_K),     CTL_T(KC_L),    LSFT_T(KC_SPC),
+//|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
+//|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
+       LCTL_T(KC_A),    LALT_T(KC_S),    LGUI_T(KC_D),    LSFT_T(KC_F),        KC_G,                     KC_H,    LSFT_T(KC_J),      LGUI_T(KC_K),    LALT_T(KC_L),    LCTL_T(KC_SPC),
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
                KC_Z,            KC_X,            KC_C,            KC_V,        KC_B,                     KC_N,            KC_M,            KC_ESC,         KC_BSPC,            KC_ENT,
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
 
 //                        ,----------------------------------+---------------------------,   ,-------------+-----------,
-                                                MO(_MOUS),           THUMB_L4_FUNC_RGBL,          THUMB_R4_POWR_RGBL/*MO(_POWR)*/, OSL(_ACCN),
+                                            LT(_MOUS, KC_TAB),           THUMB_L4_FUNC_RGBL,          THUMB_R4_POWR_RGBL/*MO(_POWR)*/, OSL(_ACCN),
 //                        |----------------------------------+---------------------------|   |-------------+-----------|
                                                                                 XXXXXXX,            XXXXXXX,
 //                                                           |---------------------------|   |-------------|
@@ -3360,7 +3380,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //,------------------------------------------------------------------------.  ,----------------------------------------.
              KC_1,          KC_2,           KC_3,           KC_4,    KC_5,         KC_6,  KC_7,  KC_8,  KC_9,    KC_0,
 //|--------------+--------------+---------------+---------------+----------|  |--------+------+------+------+----------|
-    SFT_T(KC_SPC), CTL_T(KC_DEL), ALT_T(KC_COMM), GUI_T(KC_PDOT),  KC_DLR,      KC_MINS,  KC_4,  KC_5,  KC_6, KC_PLUS,
+   LCTL_T(KC_SPC),LALT_T(KC_DEL),LGUI_T(KC_COMM),LSFT_T(KC_PDOT),  KC_DLR,      KC_MINS,  KC_4,  KC_5,  KC_6, KC_PLUS,
 //|--------------+--------------+---------------+---------------+----------|  |--------+------+------+------+----------|
            KC_ENT,       KC_BSPC,         KC_TAB,        KC_PEQL, KC_PERC,      KC_PSLS,  KC_1,  KC_2,  KC_3, KC_ASTR,
 //,------------------------------------------------------------------------.  ,----------------------------------------.
@@ -3452,11 +3472,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       XXXXXXX,   KC_LEFT,   KC_DOWN,   KC_RGHT, XXXXXXX,      C(G(KC_DOWN)),  A(KC_HOME), A(KC_PGUP), A(KC_PGDN),   A(KC_END),    
 //'------------------------------------------------------'  '------------------------------------------------------------------'
 //                                    ,--------+---------,  ,--------+----------,
-                                          KC_UP, _______,   MO(_POWR), _______,
+                                        _______, _______,   MO(_POWR), _______,
 //                                    |--------+---------|  |--------+----------|
                                                  _______,     _______,
 //                                             |---------|  |---------|
-                               KC_LEFT, KC_DOWN, KC_RGHT,     _______, MO(_CVIM),  _______
+                               _______, _______, _______,     _______, MO(_CVIM),  _______
 //                           '--------+--------+---------.  .--------+----------+----------'
 ),
 /*
@@ -3593,7 +3613,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //,--------------------------------------------.        ,---------------------------------------------.
      XVIM_P,  XVIM_O,  XVIM_I, XVIM_U, XVIM_Y,             CVIM_Y, CVIM_U,  CVIM_I,  CVIM_O,  CVIM_P,
 //|--------+--------+--------+-------+---------|        |--------+-------+--------+--------+----------|
-    XVIM_SP,  XVIM_L,  XVIM_K, XVIM_J, XVIM_H,            OUTDNT, CVIM_J,  CVIM_K,  CVIM_L, CVIM_SP,
+    XVIM_SP,  XVIM_L,  XVIM_K, XVIM_J, XVIM_H,             OUTDNT, CVIM_J,  CVIM_K,  CVIM_L, CVIM_SP,
 //|--------+--------+--------+-------+---------|        |--------+-------+--------+--------+----------|
     XVIM_EN, XVIM_BS, XVIM_ES, XVIM_M, XVIM_N,             CVIM_N, CVIM_M, CVIM_ES, CVIM_BS, CVIM_EN,
 //'--------------------------------------------'        '---------------------------------------------'
@@ -3828,23 +3848,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |  Tab |Dictat|Window|Selct.|Float.|  | Close| Prev | Next |Mision|Launch|
  * |@@@@@@|      |^:Copy|^:Copy|window|  |  APP | APP  | APP  |Contrl|@@pad@|
  * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |SptLig|*XXXXX|      |      |  |      |      |      |      |      |
- * | Caps |   &  |      | Speak|Active|  | Close| Prev | Next |Windws| Dash |
- * | Lock | Siri |      |      |window|  |Window|Window|Window| Apps | board|
+ * |      |      |      |      |      |  |      |      |      |      |      |
+ * | Caps | Dash |  UP  | Speak|Active|  | Close| Prev | Next |Windws| Space|
+ * | Lock | board|      |      |window|  |Window|Window|Window| Apps |      |
  * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |*XXXXX|*XXXXX|*XXXXX|Reopen|  |      |      |      |      |      |
- * |SftTab|      |      |      |window|  | Close| Prev | Next |DELETE| Desk |
- * |      |      |      |      | / tab|  |  tab | tab  | tab  |      |      |
+ * |      |      |      |      |Reopen|  |      |      |      |      |      |
+ * |SftTab| LEFT | DOWN | RIGHT|window|  | Close| Prev | Next |DELETE|Launch|
+ * |      |      |      |      | / tab|  |  tab | tab  | tab  |      |  pad |
  * '------+------+------+------+------'  '------+------+------+------+------'
 */
 // DALY layer 07
 [_DALY] = KEYMAP(  // layer 07: DAiLY commands layer
 //,--------------------------------------------------.,-------------------------------------------------.
-       KC_TAB,   DICTAD, CAPSCR, CAPSLC, FLOA_W,    CLOS_A, PREV_APP, NEXT_APP, MISCTL,   KC_TAB,
+       KC_TAB,   DICTAD,  CAPSCR,  CAPSLC,    FLOA_W,    CLOS_A, PREV_APP, NEXT_APP,   MISCTL,     DESK,
 //|----------+---------+--------+--------+-----------||--------+---------+---------+---------+----------|
-     F(CAPSL),     DESK,   KC_UP,   SPEAK, ACTV_W,    CLOS_W, PREV_W, NEXT_W, APPS_W, KC_SPACE,
+     F(CAPSL),  DASHBRD,   KC_UP,   SPEAK,    ACTV_W,    CLOS_W,   PREV_W,   NEXT_W,   APPS_W, KC_SPACE,
 //|----------+---------+--------+--------+-----------||--------+---------+---------+---------+----------|
-      DSHBRD,  KC_LEFT, KC_DOWN, KC_RGHT, REOPEN,    CLOS_T, PREV_T, NEXT_T,  KC_DEL,  LNCHPD,
+    S(KC_TAB),  KC_LEFT, KC_DOWN, KC_RGHT,    REOPEN,    CLOS_T,   PREV_T,   NEXT_T,   KC_DEL,   LNCHPD,
 //'--------------------------------------------------''-------------------------------------------------'
 //                               ,---------+----------,  ,-----------+--------,
                                     _______,   _______,     MO(_POWR), _______, 
@@ -3929,15 +3949,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap _SYMB 09: symbols Layer
  * ,----------------------------------.  ,----------------------------------.
  * |      |      |      |      |@@@@@@|  |      |      |      |      |      |
- * |   +  |   @  |   #  |   =  |   %  |  |   &  |   (  |   )  |   _  |   -  |
+ * |   +  |   =  |   #  |   *  |   %  |  |   &  |   (  |   )  |   _  |   -  |
  * |      |      |      |      |@@@@@@|  |      |      |      |      |      |
  * |------+------+------+------+------|  |------+------+------+------+------|
  * | LSft | LCtl | LAlt | LGui |      |  |      | LGui | LAlt | LCtl | LSft |
  * |      |      |      |      |      |  |      |      |      |      |      |
- * | `  ~ | '  " |   \  |   /  |   $  |  |   |  |   [  |   ]  |   ,  |   .  |
+ * | `  ~ | '  " |   \  |   /  |   |  |  |   @  |   [  |   ]  |   ,  |   .  |
  * |------+------+------+------+------|  |------+------+------+------+------|
  * |      |      |      |      |      |  |@@@@@@|      |      |      |      |
- * | !  ¡ | ?  ¿ |   <  |   >  |   *  |  |   ^  |   {  |   }  |   :  |   ;  |
+ * | !  ¡ | ?  ¿ |   <  |   >  |   $  |  |   ^  |   {  |   }  |   ;  |   :  |
  * |      |      |      |      |      |  |@@@@@@|      |      |      |      |
  * '----------------------------------'  '----------------------------------'
 */
@@ -3957,12 +3977,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //,--------------------------------------------------------------------------.  ,--------------------------------------------------------------------------.
            KC_PLUS,         KC_EQL,        KC_HASH,        KC_ASTR, KC_PERC,      KC_AMPR,        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,
 //|---------------+---------------+---------------+---------------+----------|  |--------+---------------+---------------+---------------+-----------------|
-    LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), KC_PIPE,        KC_AT, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
+    LCTL_T(KC_GRV),LALT_T(KC_QUOT),LGUI_T(KC_BSLS),LSFT_T(KC_SLSH), KC_PIPE,        KC_AT,LSFT_T(KC_LBRC),LGUI_T(KC_RBRC),LALT_T(KC_COMM), LCTL_T(KC_DOT),
 //|---------------+---------------+---------------+---------------+----------|  |--------+---------------+---------------+---------------+-----------------|
            KC_EXLM,        KC_QUES,   KC_LABK, KC_RABK,/*TD(G_DOEU)*/KC_DLR,      KC_CIRC,        KC_LCBR,        KC_RCBR,        KC_SCLN,        KC_COLN,
 //,--------------------------------------------------------------------------'  '--------------------------------------------------------------------------.
 //                                                        ,---------+-----------,  ,--------+----------,
-                                                            INV_EX, INV_QU,      MO(_POWR), EURO,
+                                                              INV_EX,   INV_QU,    MO(_POWR),     EURO,
 //                                                        |---------+-----------|  |--------+----------|
                                                                        _______,      _______,
 //                                                                  |-----------|  |--------|
@@ -4009,19 +4029,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Keymap _APPS 10: _APPS layer
  * ,----------------------------------.  ,----------------------------------.
- * |      |      | EVER |@@@@@@| TERMI|  | TYPI |@@@@@@| TEXT |      |SYSTEM|
- * |*XXXXX|TWITTR|-NOTE |*XXXXX| -NAL |  |-NATOR|SUBLME|-EDIT |OMNIFO|PREFE-|
- * |      |      |      |@@@@@@|      |  |      |@@@@@@|      |      |RENCES|
+ * |SIMPLE|      | *QE* |  APP | TERMI|  | TYPI |      | TEXT | *QE* |SYSTEM|
+ * | NOTE |TWITTR| EVER | STORE| -NAL |  |-NATOR| UROOM|-EDIT | OMNI |PREFE-|
+ * |      |      |-NOTE |      |      |  |      |      |      |-FOCUS|RENCES|
  * |------+------+------+------+------|  |------+------+------+------+------|
- * |SIMPLE|      |  DAY |      |GOOGLE|  |      |      |KARBNR| CALEN|      |
- * | NOTE |SAFARI|  ONE |FINDER|CHROME|  |SKETCH|*XXXXX| EVENT|-DAR  |*XXXXX|
- * |      |      |      |      |      |  |      |      |VIEWER|      |      |
+ * | APPLE| *⌘L* | *QE* |      |GOOGLE|  |      |SUBLME|KARBNR| CALEN|      |
+ * |SCRIPT|SAFARI|  DAY |FINDER|CHROME|  |SKETCH| TEXT |ELMNTS|-DAR  |*XXXXX|
+ * |      | SLACK|  ONE |      |      |  |      |      |      |      |      |
  * |------+------+------+------+------|  |------+------+------+------+------|
- * | STU  |      | CALCU|      |      |  |      |      | KEY- |      | NUM- |
- * |-DIES | XCODE|-LATOR|*XXXXX| BOOKS|  | NOTES| MAIL | NOTE | PAGES| BERS |
- * |      |      |      |      |      |  |      |      |      |      |      |
+ * | STU  |      | CALCU|KARBNR|      |  |      |      | KEY- |      | NUM- |
+ * |-DIES | XCODE|-LATOR|EVENT | BOOKS|  | NOTES| MAIL | NOTE | PAGES| BERS |
+ * |      |      |      |VIEWER|      |  |      |      |      |      |      |
  * '----------------------------------'  '----------------------------------'
-*/
+ *                  ,-----------------.  ,-----------------.
+ *                  |        |        |  |        |        |
+ *                  |        |        |  |        |        |
+ *                  |        |        |  |        |        |
+ *                  |        |        |  | _POWR  |        |
+ *         ,--------+--------+--------|  |--------+--------|--------.
+ *         |        |        |        |  |        |        |        |
+ *         |        |        |        |  |        |        |        |
+ *         |        |KARABINR|        |  |        |        |        |
+ *         |        |  APPS  |        |  |        |        |        |
+ *         '--------------------------'  '--------------------------'
+*/ // *QE*: QUICK ENTRY
 // _APPS layer 10
 [_APPS] = KEYMAP(  // layer 10 : apps layer
 // ###
@@ -4030,20 +4061,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Feedly
 // [pending]
 //,-----------------------------------------------------------------.  ,------------------------------------------------------------------.
-    APP_Q_SNOTE, _______,/*APP_W_TWTTR*/ APP_E_EVERN, /*APP_R_APSTO*/_______, APP_T_TERMI,     APP_Y_TYPIN, APP_U_UROOM, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
+    APP_Q_SNOTE, APP_W_TWTTR, APP_E_EVERN, APP_R_APSTO, APP_T_TERMI,     APP_Y_TYPIN, APP_U_UROOM, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
 //|------------+------------+------------+------------+-------------|  |------------+------------+------------+------------+--------------|
-    /*APP_A_SCRPT*/_______, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,     APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, /*APP_SP_SLCK*/_______,
+    APP_A_SCRPT, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,     APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, APPSP_EMPTY,
 //|------------+------------+------------+------------+-------------|  |------------+------------+------------+------------+--------------|
-    _______, _______,       _______,     _______,     _______,         _______,      _______,     APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB, 
-  //APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_K_KVIEW, APP_B_BOOKS,     APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB,
+    APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_KVIEW, APP_B_BOOKS,     APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB,
 //'-----------------------------------------------------------------'  '------------------------------------------------------------------'
 //                               ,---------+----------,  ,-----------+----------,
-                                    _______, MO(_POWR),     MO(_POWR), THUMB_R5_KAR_APPS,
+                                    _______,   _______,     MO(_POWR), _______,
 //                               |---------+----------|  |-----------+----------|
                                                _______,       _______,
 //                                         |----------|  |-----------|
-                             _______, _______, _______,       _______,   _______, _______
-//                      '--------+---------+----------.  .-----------+----------+----------'
+                   _______, _______, THUMB_L3_KAR_APPS,       _______,   _______, _______
+//               '--------+--------+------------------.  .-----------+----------+----------'
 ),
 //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
@@ -4058,14 +4088,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|------------+------------+------------+------------+-------------|
     APP_A_SCRPT, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,
 //|------------+------------+------------+------------+-------------|
-    APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_K_KVIEW, APP_B_BOOKS,
+    APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_KVIEW, APP_B_BOOKS,
 //'-----------------------------------------------------------------'
 
                                      // RIGHT_HAND
                                      ,------------------------------------------------------------------.
                                        APP_Y_TYPIN, APP_U_UROOM, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
                                      |------------+------------+------------+------------+--------------|
-                                       APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, APP_SP_SLCK,
+                                       APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, APPSP_EMPTY,
                                      |------------+------------+------------+------------+--------------|
                                        APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB ),
                                      '------------------------------------------------------------------'
@@ -4086,6 +4116,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 |   CYAN   |  AZURE |    BLUE   |  PURPLE | MAGENTA| |  PINK  |   VALUE  |   VALUE  | WITHOUT| BL_OFF  |
 |          |        |           |         |        | |        | DECREMENT| INCREMENT|  COLOR |RGBToggle|
 '--------------------------------------------------' '-------------------------------------------------'
+*                  ,-----------------.  ,-----------------.
+*                  |        |        |  |        |        |
+*                  |        |        |  |        |        |
+*                  |        |        |  |        |        |
+*                  |        |        |  |  _POWR |        |
+*         ,--------+--------+--------|  |--------+--------|--------.
+*         |        |        |        |  |        |        |        |
+*         |        |        |        |  |        |        |        |
+*         |        |        |        |  |        |        |        |
+*         |        |        |        |  |        |        |        |
+*         '--------------------------'  '--------------------------'
 */
 // _RGBL layer 11
 
@@ -4095,14 +4136,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     CH_CHRT, CH_GREN, CH_SPRG, CH_TRQS, CH_TEAL,         CH_WHIT, RGB_SAI, RGB_SAD, GET_HSV,  RGB_MOD,
 
-    RGB_TOG, CH_AZUR, CH_BLUE, CH_PRPL, CH_MGNT,          CH_PINK, RGB_VAI, RGB_VAD, CH_EMPT,  RGB_TOG,
+    RGB_TOG, CH_EMPT, CH_BLUE, CH_PRPL, CH_MGNT,          CH_PINK, RGB_VAI, RGB_VAD, CH_EMPT,  RGB_TOG,
 //'-----------------------------------------------'    '-----------------------------------------------'
 //                           ,---------+----------,    ,---------+----------,
-                                _______, _______,      MO(_POWR), _______,
+                                _______, _______,       MO(_POWR), _______,
 //                           |---------+----------|    |---------+----------|
                                          _______,         _______,
 //                                     |----------|    |---------|
-                      CH_CYAN,  _______, _______,        _______, _______, _______
+                      CH_CYAN,  CH_AZUR, _______,        _______, _______, _______
 //                  '--------+---------+----------.    .---------+--------+----------'
 ),
 
@@ -4116,14 +4157,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Keymap _POWR 12: POWeR productivity layer
 * ,----------------------------------.  ,----------------------------------.
-* | Step |@@@@@@|      |      |      |  |midVol|Volume|Volume|minVol|Volume|
-* |throug|LOGOUT|LCKSCR|onCtrl|      |  | lev.8|  Up  | Down | lev.1| Mute |
+* |Toggle|@@@@@@|      |      |      |  |midVol|Volume|Volume|minVol|Volume|
+* | Whole|LOGOUT|LCKSCR|onCtrl|      |  | lev.8|  Up  | Down | lev.1| Mute |
 * |Indctr|@@@@@@|      | RESET|      |  |      |      |      |@@@@@@|      |
 * |------+------+------+------+------|  |------+------+------+------+------|
-* |Toggle|Rewind| Play/|Forwrd|Toogle|  |Toogle| Zoom | Zoom | Zoom |Invert|
-* | Whole|      | Pause|      |Smooth|  |Keybrd|  IN  |  OUT |ON/OFF|Colors|
-* |Indctr|      |      |      |Images|  |follow|      |      |      |      |
-* |      |      |      |      |      |  | Focus|      |      |      |      |
+* |      |Rewind| Play/|Forwrd|Toogle|  |Toogle| Zoom | Zoom | Zoom |Invert|
+* |      |      | Pause|      |Smooth|  |Keybrd|  IN  |  OUT |ON/OFF|Colors|
+* |      |      |      |      |Images|  |follow|      |      |      |      |
+* |RCntrl| RAlt | RCmnd|RShift|      |  | Focus|      |      |      |      |
 * |------+------+------+------+------|  |------+------+------+------+------|
 * | Menu | Dock | Tool |Status|Float.|  |Cntrst|Bright|Bright|Bright|Cntrst|
 * | _bar | _bar | _bar | _bar |Window|  |      |      |      |  min.|      |
@@ -4143,17 +4184,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *         '--------------------------'  '--------------------------'
 //NOTES/keymap_POWR_layer*/
 // _POWR layer 12
-
-
 [_POWR] = KEYMAP(  // layer 12: POWeR productivity layer
 // ###
 // ////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 //,---------------------------------------------------------------.  ,---------------------------------------------------------------.
-      _______,      LOGOUT,  LCKSCR,    MY_RESET,     XXXXXXX,         VOL_8, KC__VOLUP, KC__VOLDOWN,       VOL_1,    KC__MUTE,
+       TOG_ID,      LOGOUT,      LCKSCR,    MY_RESET,    XXXXXXX,           VOL_8,KC__VOLUP, KC__VOLDOWN,       VOL_1,     KC__MUTE,
 //|-----------+------------+------------+------------+------------|  |------------+---------+------------+------------+--------------|
-    TOG_ID,       KC_RW,      KC_SPC,       KC_FF, ZOMSMTH,   ZOM_FOL,   ZOM_IN,    ZOM_OUT, ZOM_TOG, INV_CLR,
+     KC_RCTL, RALT_T(KC_F7),RGUI_T(KC_SPC), RSFT_T(KC_F9),ZOMSMTH,         ZOM_FOL,   ZOM_IN,     ZOM_OUT,     ZOM_TOG,      INV_CLR,
+//      TOG_ID,       KC_RW,      KC_SPC,       KC_FF,    ZOMSMTH,         ZOM_FOL,   ZOM_IN,     ZOM_OUT,     ZOM_TOG,      INV_CLR,
 //|-----------+------------+------------+------------+------------|  |------------+---------+------------+------------+--------------|
-    SL_MEN, KA_DCK, KM_TOL, SH_STA, RT_FLO,    CNTR_UP,   KC_PAUS,     KC_SLCK,    BRIGHT_1, CNTR_DN,
+        SL_MEN,      KA_DCK,      KM_TOL,      SH_STA,     RT_FLO,         CNTR_UP,  KC_PAUS,     KC_SLCK,    BRIGHT_1,      CNTR_DN,
 //'---------------------------------------------------------------'  '---------------------------------------------------------------'
 // You can reach _POWR key anywhere because it's always at the same position: THUMB_R4, but ...
 // ... maybe you're lost into a layer, which you don't know which one it is and ...
@@ -4253,6 +4293,7 @@ void keyboard_post_init_user(void) {
 // Call the post init code.
 
 // Wenset default color variables from the initial color of the keyboard and ...
+
   set_default_hsv();
 
 // [UNCOMMENTTHIS]
@@ -4299,7 +4340,7 @@ const uint16_t PROGMEM fn_actions[] = {
 /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
-  shift_flag = get_mods()&SHIFT_MODS;
+  shift_flag = get_mods()&SHFT_MODS;
   switch (id) {
 
     case ACC_A ... TIL_N:
@@ -4309,9 +4350,11 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
         if (shift_flag)  // shift_flag is grabbed at the very beginning of action_function()
         {
         //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
+            // old way who worked fine
+            // del_mods(shift_flag);
+            // del_weak_mods(shift_flag);
+            // send_keyboard_report();
+          remove_activated_mod(shift_flag);
         };
     //  tap accent
         disable_capslock_before_accents_function();
@@ -4333,9 +4376,10 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
         if (shift_flag)
         {
         //  press LSHIFT
-            add_mods(shift_flag);
-            add_weak_mods(shift_flag);
-            send_keyboard_report();
+          add_desired_mod(shift_flag);
+          // add_mods(shift_flag);
+          // add_weak_mods(shift_flag);
+          // send_keyboard_report();
         };
       }
     break;
@@ -4477,7 +4521,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed)
   // Do something when pressed
   {
-    option_flag = get_mods()&ALT_MODS;
+    shift_flag   = get_mods()&SHFT_MODS;
+    control_flag = get_mods()&CTRL_MODS;
+    option_flag  = get_mods()&ALT_MODS;
+    gui_flag     = get_mods()&GUI_MODS;
 
     switch(keycode)
     {
@@ -4486,30 +4533,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       register_code  (KC_LSFT);
                       tap_code       (KC_TAB);
                       unregister_code(KC_LSFT);
+                      changing_apps = true;
                       return false;                      
 
-      case NEXT_APP: register_code  (KC_LGUI);
+      case NEXT_APP:  register_code  (KC_LGUI);
                       tap_code       (KC_TAB);
+                      changing_apps = true;
                       return false;
 
-      case CHANGE_SYMB_TO_NUMB:
-                      layer_off(_SYMB);
-                      layer_on(_NUMB);
-                      return false;
-
-      case THUMB_R5_KAR_APPS:  
-                      if (multi_apps)
-                      {
-                        multi_apps_karabiner = true;
-                        add_mods(gui_flag);
-                        add_weak_mods(gui_flag);
-                        send_keyboard_report();
-                      }
-                      
-                      layer_off(_APPS);
-                      rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)                                           
-                      register_code(KC_F20);
-                      return false;
 
 /*
       case O_COMMENT: tap_code       (KC_SLSH);
@@ -4532,6 +4563,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         reset_my_keyboard_function();
                         return false;
                       }
+
+      case CHANGE_SYMB_TO_NUMB:
+                      layer_off(_SYMB);
+                      layer_on(_NUMB);
+                      return false;
+
+      case THUMB_L3_KAR_APPS:  
+                      karabiner_apps_working = true;
+                      if (multi_apps_karabiner)
+                      {
+                        // triggered_gui();
+                        add_desired_mod(current_flag);
+                        // add_mods(current_flag);
+                        // add_weak_mods(current_flag);
+                        // send_keyboard_report();
+                      }
+                      
+                      layer_off(_APPS);
+                      register_code(KC_F20);
+                      return false;
                       
       case THUMB_L4_FUNC_RGBL:
                       if (get_mods()&ALT_MODS)
@@ -4575,36 +4626,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       //                      layer_on(_APPS);
       //                      return false;
 
-      case THUMB_R3_APPS_NUMB: 
-
-/*
-MARCADOR 
-MARCAPAGINAS
-*/
-                                option_flag = get_mods()&ALT_MODS;
-                                if (option_flag)
-                                {
-                                  del_mods(option_flag);
-                                  del_weak_mods(option_flag);
-                                  send_keyboard_report();
-
-
-                               // if (get_mods()&ALT_MODS)
-                               // {
-                               //   del_mods(gui_flag);
-                               //   del_weak_mods(gui_flag);
-                               //   send_keyboard_report();
-
-
-                                 layer_on(_NUMB);
-                                 //show_RGB_LEDs();
+      case THUMB_R3_APPS_NUMB: if (option_flag)
+                               {
+                                  layer_on(_NUMB);
                                }
                                else
                                {
-                                 rgblight_sethsv_noeeprom(COLOR_APPS);
                                  apps_working = true;
-                                 if (triggered_gui())
-                                 multi_apps = true;
+                                 if (gui_flag)
+                                 {
+                                   current_flag = gui_flag;
+                                   multi_apps = true;
+                                   multi_apps_karabiner = true;
+                                 }
                                  layer_on(_APPS);
                                }
                                return false;
@@ -4637,7 +4671,6 @@ MARCAPAGINAS
                       return false;
 
 
-
 //
 // THIS FUNCTION IS NOT GOING TO BE USED WITH 23 LEDS PER HAND
 //    case MY_STEP_INDICAT:
@@ -4665,6 +4698,9 @@ MARCAPAGINAS
 
       case KC_BSPC:  rgblight_sethsv_noeeprom(HSV_MY_RED);
                      return true;
+
+      case KC_DEL:   rgblight_sethsv_noeeprom(HSV_MY_RED);
+                     return true;
                      
 // 🔥💀☠️🔥
 
@@ -4684,7 +4720,7 @@ MARCAPAGINAS
       //                   layer_on(_POWR);
       //                 }
       //                 else
-      //                 if (get_mods()&SHIFT_MODS)
+      //                 if (get_mods()&SHFT_MODS)
       //                 {
       //                   capslock_tap();
       //                   show_RGB_LEDs();
@@ -4715,7 +4751,7 @@ MARCAPAGINAS
       //                   return false;
       //                 }
       //                 else
-      //                 if (get_mods()&SHIFT_MODS)
+      //                 if (get_mods()&SHFT_MODS)
       //                 {
       //                   layer_on(_MOUS);
       //                   return false;
@@ -4726,18 +4762,16 @@ MARCAPAGINAS
       //                   return false;
       //                 }
 
-     case KC_DEL:    rgblight_sethsv_noeeprom(HSV_MY_RED);
-                     return true;
       
 // 🔥💀☠️🔥
-
-      case SL_MEN:
-                      remove_control_mod();
-                      if (control_flag)
+      //
+      //[SAVING_SPACE]
+      // using remove_control_mod as a bool function, we save from 38 to 66 bytes --> 28 bytes saved
+      case SL_MEN:    if (remove_control_mod())
                       {
                          register_code(KC_POWER);
                       // without this delay, POWER doesn't work !!!   
-                         _delay_ms(500); 
+                         wait_ms(500);
                          unregister_code(KC_POWER);
                       // SEND_STRING("s");  // 's' for selecting button sleep but it's not necessary
                       }
@@ -4746,10 +4780,8 @@ MARCAPAGINAS
                          register_code(KC_LCTL); tap_code(KC_F2); unregister_code(KC_LCTL);
                       }
                       return false;
- 
-      case KA_DCK:
-                      remove_control_mod();
-                      if (control_flag)
+
+      case KA_DCK:    if (remove_control_mod())
                       {
                         register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
                         tap_code(KC_ESC);
@@ -4761,9 +4793,7 @@ MARCAPAGINAS
                       }
                       return false;
 
-      case KM_TOL:
-                      remove_control_mod();
-                      if (control_flag)
+      case KM_TOL:    if (remove_control_mod())
                       {
                         register_code(KC_LALT); register_code(KC_LGUI);
                         tap_code(KC_ESC);
@@ -4775,13 +4805,11 @@ MARCAPAGINAS
                       }
                       return false;
 
-      case SH_STA:
-                      remove_control_mod();
-                      if (control_flag)
+      case SH_STA:    if (control_flag)
                       {
                         volumeSetToLevel(1);
                     //  keystrokes for shutting down:  (guessed by try and fail method)
-                        register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
+                        register_code(KC_LALT); register_code(KC_LGUI);
                         tap_code(KC_POWER);
                         unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);   
                       }
@@ -4793,12 +4821,10 @@ MARCAPAGINAS
                       }
                       return false;
 
-      case RT_FLO:
-                      remove_control_mod();
-                      if (control_flag) 
+      case RT_FLO:    if (control_flag)
                       {
                       //keystrokes for restarting:  (guessed by try and fail method)
-                        register_code(KC_LCTL); register_code(KC_LGUI);
+                        register_code(KC_LGUI);
                         tap_code(KC_POWER);                      
                         unregister_code(KC_LGUI); unregister_code(KC_LCTL);
                       }
@@ -4824,8 +4850,7 @@ MARCAPAGINAS
       case VOL_8:    volumeSetToLevel(8);         return false; // set volume to middle  (level 8)
 
 
-
-// KEYCODES FOR TRIGGERING APPS
+/*
       case APP_A_SCRPT: callApp("Simplenote.app");            return false; break; // simplenote
       case APP_S_SAFAR: callApp("Safari.app");                return false; break; // S afari
       case APP_D_D_ONE: callApp("Day One Classic.app");       return false; break; // D ay one
@@ -4835,7 +4860,7 @@ MARCAPAGINAS
       case APP_H_SKTCH: callApp("Sketch.app");                return false; break; // sketc H
       case APP_K_KRBNR: callApp("Karabiner-EventViewer.app"); return false; break; // K arabiner Evnt Vwr
       case APP_L_CLNDR: callApp("Calendar.app");              return false; break; // Calendar
-      case APP_SP_SLCK: callApp("");                          return false; break; //
+      case APPSP_EMPTY: callApp("");                          return false; break; //
 
       case APP_Z_STUDI: callApp("Studies.app");               return false; break; // Studies
       case APP_X_XCODE: callApp("Xcode.app");                 return false; break; // Xcode
@@ -4852,118 +4877,152 @@ MARCAPAGINAS
       case APP_ES_KEYN: callApp("Keynote");                   return false; break; // Keynote
       case APP_BS_PAGE: callApp("Pages");                     return false; break; // Pages
       case APP_EN_NUMB: callApp("Numbers");                   return false; break; // Numbers
-// keycodes for triggering apps
+*/
 
       case BRIGHT_1: brightSetToLevel(1);         return false; // set bright to minimum (level 1)
 
 // APPLICATIONS
- // Next 2 lines have been copied & pasted from a command line C program in xcode who run perfectly !
- // Any of them works properly for opening an app from Terminal !  But they don' work under QMK code !
- //   system("open //Applications//Notes.app");
- //   system("osascript -e 'launch application \"Notes\"' -e 'activate application \"Notes\"' -e end");
+// Next 2 lines have been copied & pasted from a command line C program in xcode who run perfectly !
+// Any of them works properly for opening an app from Terminal !  But they don' work under QMK code !
+//   system("open //Applications//Notes.app");
+//   system("osascript -e 'launch application \"Notes\"' -e 'activate application \"Notes\"' -e end");
+//
+//
+//
+// KEYCODES FOR TRIGGERING APPS
+
       case APP_Q_SNOTE: callApp("q");                         return false; // simple note
-      // case APP_W_TWTTR: callApp("w");                         return false; // t W itter
+      case APP_W_TWTTR: callApp("w");                         return false; // t W itter
+      //
+      // [SAVING_SPACE]
+      // 88 bytes free when disable Evernote case and 40 bytes when I enable it  -->  it costs 48 bytes of code
       case APP_E_EVERN: 
-                        if (option_flag)
+                        if (control_flag)
                         {
-                          register_code(KC_LCTL);
-                          // register_code(KC_LALT);
+                          register_code(KC_LALT);
                           tap_code(KC_N);
-                          // unregister_code(KC_LALT);
-                          unregister_code(KC_LCTL);
+                          unregister_code(KC_LALT);
+                          unregister_code(KC_LCTL);                         // quick entry  E vernote
                         }
                         else
                         {
                           callApp("e");                        
                         }
+                        return false;                                       // E vernote
 
-                        return false; // E vernote
-
-      // case APP_R_APSTO: callApp("r");                         return false; // app sto R e
+      case APP_R_APSTO: callApp("r");                         return false; // app sto R e
       case APP_T_TERMI: callApp("t");                         return false; // T erminal
+
+
 
       case APP_Y_TYPIN: callApp("y");                         return false; // t Y pinator
       case APP_U_UROOM: callApp("u");                         return false; // U room
-      case APP_I_TEDIT: callApp("i");                         return false; // textEd I t
-      case APP_O_OMNIF: 
-                        if (option_flag)
+      case APP_I_TEDIT: callApp("i");                         return false; // texted I t
+      case APP_O_OMNIF: if (control_flag)
                         {
-                          register_code(KC_LCTL);
-                          // register_code(KC_LALT);
+                          register_code(KC_LALT);
                           tap_code(KC_SPC);
-                          // unregister_code(KC_LALT);
-                          unregister_code(KC_LCTL);
+                          unregister_code(KC_LALT);
+                          unregister_code(KC_LCTL);                         // quick entry  O mnifocus
                         }
                         else
-                          callApp("o");
-                        
+                        {
+                          callApp("o");                       
+                        }
                         return false;                                       // O mnifocus
-
       case APP_P_SPREF: callApp("p");                         return false; // system P references
 
-      // case APP_A_SCRPT: callApp("a");                         return false; // A pple script
-      case APP_S_SAFAR: 
-                        if (control_flag)
+
+
+      case APP_A_SCRPT: callApp("a");                         return false; // A pple script
+      case APP_S_SAFAR: if (control_flag)
                         {
                           remove_control_mod();
-                          callApp("s");
+                          // if (shift_flag)
+                          // {
+                          //   shift_was_activated = true;
+                          //   remove_shift_mod();
+                          // }
 
+                          if (shift_flag)
+                          {
+                            shift_was_activated = true;
+                            remove_activated_mod(shift_flag);
+                            // del_mods     (shift_flag);
+                            // del_weak_mods(shift_flag);
+                            // send_keyboard_report();
+                          }
+
+                          wait_ms(50);
+                          callApp("s");
+                          wait_ms(50);
                           register_code(KC_LGUI);
-                          tap_code(KC_L);
+                          // wait_ms(50);
+                          tap_code(KC_L);                                   // Opens addre S S    bar for introduce an URL...
                           unregister_code(KC_LGUI);
-                        }
+                          if (shift_was_activated)
+                          {
+                            shift_was_activated = false;
+                            wait_ms(50);                                    // ... or googling something
+                            send_string("http://www.slack.com\n");          // S lack
+                          }
+                        }                          
                         else
-                          callApp("s");
-
-                        return false;                                       // S afari
-
+                        {
+                          callApp("s");                                     // S afari     
+                        }
+                        return false;
       case APP_D_D_ONE: 
                         if (control_flag)
                         {
-                          remove_control_mod();
                           register_code(KC_LSFT);
-                          register_code(KC_LCTL);
                           tap_code(KC_D);
-                          unregister_code(KC_LCTL);
                           unregister_code(KC_LSFT);
+                          unregister_code(KC_LCTL);                         // quick entry  D ay one
                         }
                         else
+                        {
                           callApp("d");
-                        
+                        }
                         return false;                                       // D ay one
-
       case APP_F_FINDE: callApp("f");                         return false; // F inder
       case APP_G_CHRME: callApp("g");                         return false; // G oogle chrome
+
+
 
       case APP_H_SKTCH: callApp("h");                         return false; // sketc H
       case APP_J_SUBLI: callApp("j");                         return false; // sublime text
       case APP_K_KRBNR: callApp("k");                         return false; // K arabiner-elements
       case APP_L_CLNDR: callApp("l");                         return false; // Calendar
-/*
-      case APP_SP_SLCK: callApp(" "); register_code(KC_LGUI); 
-                                      tap_code(KC_L);
-                                      unregister_code(KC_LGUI);
-                                      send_string("http://www.slack.com\n");
-                                                              return false; // slack
-*/
-      // case APP_Z_STUDI: callApp("z");                         return false; // Studies
-/*      case APP_X_XCODE: callApp("x");                         return false; // Xcode
+      case APPSP_EMPTY: callApp(" ");                         return false; // ???? EMPTY EMPTY EMPTY EMPTY 
+
+
+
+      case APP_Z_STUDI: callApp("z");                         return false; // Studies
+      case APP_X_XCODE: callApp("x");                         return false; // Xcode
       case APP_C_CALCU: callApp("c");                         return false; // Calculator
-      case APP_K_KVIEW: callApp("v");                         return false; // karabiner-event Viewer
+      case APP_V_KVIEW: callApp("v");                         return false; // karabiner-event Viewer
       case APP_B_BOOKS: callApp("b");                         return false; // Books
 
+
+
       case APP_N_NOTES: callApp("n");                         return false; // Notes
-      case APP_M_MAIL:  callApp("m");                         return false; // Mail
-*/
-/*      
-      case APP_ES_KEYN: callApp("\e");                        return false; // Keynote
-      case APP_BS_PAGE: callApp("\b");                        return false; // Pages
-      case APP_EN_NUMB: callApp("\n");                        return false; // Numbers
-*/
-      case APP_ES_KEYN: callApp("1");                        return false; // Keynote
-      case APP_BS_PAGE: callApp("2");                        return false; // Pages
-      case APP_EN_NUMB: callApp("3");                        return false; // Numbers
+      case APP_M_MAIL:  callApp("m");                         return false; // Mail      
+      // case APP_ES_KEYN: callApp("\e");                        return false; // Keynote
+      // case APP_BS_PAGE: callApp("\b");                        return false; // Pages
+      // case APP_EN_NUMB: callApp("\n");                        return false; // Numbers
+      case APP_ES_KEYN: callApp("1");                         return false; // Keynote
+      case APP_BS_PAGE: callApp("2");                         return false; // Pages
+      case APP_EN_NUMB: callApp("3");                         return false; // Numbers
+// keycodes for triggering apps
 // applications
+//
+//
+//
+
+
+
+
 
 // _FVIM
    // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
@@ -5107,8 +5166,8 @@ RGB COMMANDS
                     return false;
 
       case GET_HSV: flashing_LEDs(5, RGB_MY_YELLOW, RGB_MY_PURPLE);
-                    SEND_STRING("\n===");
-                    SEND_STRING("\nget_hsv() -> rgblight_get_hue, rgblight_get_sat, rgblight_get_val");
+                    // SEND_STRING("\n===");
+                    SEND_STRING("\nget_hsv() -> ");
                     get_hsv();
                     BEEP_1;
                     return false;
@@ -5120,7 +5179,7 @@ RGB COMMANDS
       case RGB_TOG: rgblight_toggle_noeeprom();
                     set_default_hsv();
                     //wait_ms(50);
-                    _delay_ms(10);
+                    wait_ms(10);
                     show_RGB_LEDs();
                     return false;
 // [whywedothis]                    
@@ -5195,16 +5254,29 @@ ROW 3 COLORS
 
                       return false;
 
-      case THUMB_R5_KAR_APPS:
+      case THUMB_L3_KAR_APPS:
+                      karabiner_apps_working = false;
                       unregister_code(KC_F20);
                       if (apps_working)
                       {
                         if (multi_apps_karabiner)
                         {
                           multi_apps           = true;
-                          multi_apps_karabiner = false;
                         }
                         layer_on(_APPS);
+                      }
+                      else
+                      {
+                        if (multi_apps_karabiner)
+                        {
+                          remove_activated_mod(current_flag);
+                          // del_mods     (current_flag);
+                          // del_weak_mods(current_flag);
+                          // send_keyboard_report();
+
+                          multi_apps_karabiner = false;
+                        }
+                        show_RGB_LEDs();
                       }
                       return false;
 
@@ -5238,22 +5310,18 @@ ROW 3 COLORS
                         layer_off(_FVIM);
                       }
                       else
-                      if (symbols_pressed)
                       {
-                         symbols_pressed = false;
-                         layer_off(_SYMB);
+                        symbols_pressed = false;
+                        if (state_number == _SYMB)
+                        {
+                          layer_off(_SYMB);
+                        }
                       }
-                      else
                       return false;
-  
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-
       // case LAUNCHING_APPS: apps_working = false;
       //                      layer_off(_APPS);
       //                      show_RGB_LEDs();
       //                      return false;
-
       case THUMB_R3_APPS_NUMB: if (state_number == _NUMB)
                                {
                                  layer_off(_NUMB);
@@ -5263,7 +5331,6 @@ ROW 3 COLORS
                                  apps_working = false;
                                  layer_off(_APPS);
                                }
-                               // show_RGB_LEDs();
                                return false;
 
       case THUMB_R4_POWR_RGBL:
@@ -5276,8 +5343,6 @@ ROW 3 COLORS
                       {
                         layer_off(_RGBL);
                       }
-
-                      // show_RGB_LEDs();
                       return false;
                       
       case KC_BSPC:  show_RGB_LEDs();
@@ -5405,12 +5470,12 @@ ROW 3 COLORS
 //       case APP_J_SUBLI:
 //       case APP_K_KRBNR:
 //       case APP_L_CLNDR:
-//       case APP_SP_SLCK:
+//       case APPSP_EMPTY:
 
 //       case APP_Z_STUDI:
 //       case APP_X_XCODE:
 //       case APP_C_CALCU:
-//       case APP_K_KVIEW:
+//       case APP_V_KVIEW:
 //       case APP_B_BOOKS:
 
 //       case APP_N_NOTES:
@@ -5606,44 +5671,58 @@ uint32_t layer_state_set_user(uint32_t state) {
 //        active_layer = 0;
 
 //      remove GUI modifier when coming from _DALY changing apps with CMD+TAB; SHIFT+CMD+TAB
-        triggered_gui();
+  numbers_is_active = false; // #01
 
+  if (changing_apps)
+  {
+    changing_apps = false;
+    // triggered_gui();
+    remove_activated_mod(gui_flag);
+  }
 
-        numbers_is_active = false; // #01
-        if (apps_just_activated)
-        {
-          apps_just_activated = false;
+  if (apps_just_activated)
+  {
+    apps_just_activated = false;
 
-          if (!multi_apps)
-          {
-            HIDEOTH; //Long: SEND_STRING(SS_LALT(SS_LGUI("h"))); //Wrong: register_code(LALT(LGUI(KC_H)));
-          }
-          else
-          {
-            multi_apps = false;
-          }
-        }
-        show_RGB_LEDs();
-        break;     
+    if (!multi_apps)
+    {
+      HIDEOTH; //Long: SEND_STRING(SS_LALT(SS_LGUI("h"))); //Wrong: register_code(LALT(LGUI(KC_H)));
+    }
+    else
+    {
+      multi_apps           = false;
+    }
+  }
+  if (karabiner_apps_working)
+  {
+    rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)
+  }
+  else
+  {
+    show_RGB_LEDs();
+  }
+
+  break;     
+
 //
 // #define _DFLT   0  //  gherkin ALPHAS DEFAULT    layer 
-// #define _NUMB   1  //  gherkin numbers           layer 
-// #define _FVIM   2  //  Fake                  VIM layer
-// #define _DVIM   3  //  Delete                VIM layer
+// #define _ACCN   1  //  gherkin ACCENTS           layer 
+// #define _NUMB   2  //  gherkin numbers           layer 
+// #define _FVIM   3  //  Fake                  VIM layer
 // /*
 // #define _AVIM  X12X  //  select              VIM layer
 // We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, but easier and clearer !
 // */
 // #define _CVIM   4  //  power edition         VIM layer
-// #define _XVIM   5  //  movement              VIM layer
+// // #define _XVIM   5  //  movement              VIM layer
+// #define _DVIM   5  //  Delete                VIM layer
 // #define _MOUS   6  //  mouse                     layer
-// #define _ACCN   7  //  gherkin ACCENTS           layer 
+// #define _DALY   7  //  gherkin DAiLY commands    layer 
 // #define _FUNC   8  //  gherkin functions         layer 
-// #define _DALY   9  //  gherkin DAiLY commands    layer 
-// #define _POWR  10  //  POWER        productivity layer
-// #define _SYMB  11  //  gherkin symbols           layer 
-// #define _APPS  12  //  APPlicationS              layer
-// #define _RGBL  13  //  backlight                 layer
+// #define _SYMB   9  //  gherkin symbols           layer 
+// #define _APPS  10  //  APPlicationS              layer
+// #define _RGBL  11  //  backlight                 layer
+// #define _POWR  12  //  POWER        productivity layer
 //
 
      case _ACCN:   //  1
@@ -5695,11 +5774,6 @@ uint32_t layer_state_set_user(uint32_t state) {
 
     case _APPS:   //  10
 //        active_layer = 10;
-        // shift_flag = get_mods()&SHIFT_MODS;
-        // if (shift_flag)
-        // {
-        //   multi_apps = true;
-        // }
         rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)
         apps_just_activated = true;
         break;

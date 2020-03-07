@@ -13,6 +13,8 @@
 
 #define PREVENT_STUCK_MODIFIERS
 
+#define WAIT_FOR_USB // for wake up computer typing on the keyboard
+
 //Tap Dance Prerequisite
 #define TAPPING_TERM 200
 #define PERMISSIVE_HOLD

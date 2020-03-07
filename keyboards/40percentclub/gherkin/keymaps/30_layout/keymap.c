@@ -84,6 +84,9 @@
 // [REFLEXION]
 // [reflexion]     maybe things can be coded (thinked) different !!!
 //
+// [SAVING_SPACE]
+// [saving_space]   ways of saving space for fitting the whole firmware into the microcontroller
+//
 // [SYSTEM PREFERENCES]
 // [system preferences] sortcut defined in 'System Preferences'
 //
@@ -92,6 +95,9 @@
 //
 // [UNDERSTANDING] 
 // [understanding] for giving explanations about what our code does
+//
+// [WHYWEDOTHIS]
+// [whywedothis]   explanation about why we do this thing
 //
 // [my_own_preprocessing_keywords]
 
@@ -176,26 +182,25 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 #define _DFLT   0  //  gherkin ALPHAS DEFAULT    layer 
 #define _ACCN   1  //  gherkin ACCENTS           layer 
-#define _DIAE   2  //  gherkin RESET & diaereis  layer
-#define _NUMB   3  //  gherkin numbers           layer 
-#define _SYMB   4  //  gherkin symbols           layer 
-#define _FUNC   5  //  gherkin functions         layer 
-#define _DALY   6  //  gherkin DAiLY commands    layer 
-#define _APPS   7  //  APPlicationS              layer
-#define _POWR   8  //  POWER        productivity layer
-#define _FVIM   9  //  Personal              VIM layer
-#define _DVIM  10  //  Delete                VIM layer
+#define _NUMB   2  //  gherkin numbers           layer 
+#define _SYMB   3  //  gherkin symbols           layer 
+#define _FUNC   4  //  gherkin functions         layer 
+#define _DALY   5  //  gherkin DAiLY commands    layer 
+#define _APPS   6  //  APPlicationS              layer
+#define _POWR   7  //  POWER        productivity layer
+#define _FVIM   8  //  Personal              VIM layer
+#define _DVIM   9  //  Delete                VIM layer
 /*
 #define _AVIM  X12X  //  select              VIM layer
 We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, but easier and clearer !
 */
-#define _CVIM  11  //  power edition         VIM layer
-#define _XVIM  12  //  movement              VIM layer
-#define _ZVIM  13  //  alignment             VIM layer
-#define _MOUS  14  //  mouse                     layer
-#define _BLIT  15  //  backlight                 layer
-#define _TEST  16  //  LAYER FOR TESTING               // must be over layer number 15 ...
-#define _LAST  17  //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#define _CVIM  10  //  power edition         VIM layer
+#define _XVIM  11  //  movement              VIM layer
+// #define _ZVIM  12  //  alignment             VIM layer
+#define _MOUS  12  //  mouse                     layer
+#define _BLIT  13  //  backlight                 layer
+#define _TEST  14  //  LAYER FOR TESTING               // must be over layer number 15 ...
+#define _LAST  15  //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //
 // defining layers
 //
@@ -239,14 +244,14 @@ We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, 
 #define ACC_U    4
 
 #define TIL_N    5
-
+#define CAPSL    6
+/*
 #define DIA_A    6
 #define DIA_E    7
 #define DIA_I    8
 #define DIA_O    9
 #define DIA_U   10
-
-#define CAPSL   11
+*/
 //                                                                                      //
 // defining fn_actions                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -267,7 +272,6 @@ We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, 
 
 #define BL_GHKN  0
 #define BL_ACCN 10
-#define BL_DIAE 10
 #define BL_FUNC  5
 #define BL_SYMB 10
 #define BL_NUMB  8
@@ -848,13 +852,14 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 // _xvim layer
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
-
+/*
 // _ZVIM LAYER
     ,ZVIM_Y ,ZVIM_U ,ZVIM_I  ,ZVIM_O  ,ZVIM_P
     ,ZVIM_H ,ZVIM_J ,ZVIM_K  ,ZVIM_L  ,ZVIM_SP
     ,ZVIM_N ,ZVIM_M ,ZVIM_ES ,ZVIM_BS ,ZVIM_EN
 // _zvim layer
-//////////////////////////////////////////////////////////////////////////////////////////////////////###
+*/
+///////////////////////////////////////////////////////////////////////////////////////////////////////###
 // macros for _?vim 9, 10, 11, 12, 13
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
@@ -980,7 +985,7 @@ int cur_dance (qk_tap_dance_state_t *state) {
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [FUNCTIONS] [_FVIM], [_DVIM], [_CVIM],     [_XVIM],     [_ZVIM]     & [_APPS]        //
+// [FUNCTIONS] [_FVIM], [_DVIM], [_CVIM],     [_XVIM],     /*[_ZVIM]*/     & [_APPS]    //
 //               KC_V,    KC_X,  [_FVIM]KC_C, [_FVIM]KC_X, [_FVIM]KC_Z   (KC_Q & KC_P)  //
 //                                                                                      //
 // FUNCTIONS FOR ACCESING KEYBINDINGS MAPPED FUNCTIONS                                  //
@@ -1022,12 +1027,13 @@ void xvim(char *key)
     send_string(key);
 }
 
+/*
 void zvim(char *key)
 {
     HYPR_V;
     SEND_STRING("z");
     send_string(key);
-}
+}*/
 
 void callApp(char *appName)
 {
@@ -1039,7 +1045,7 @@ void callApp(char *appName)
     register_code (KC_ENT); unregister_code (KC_ENT);
 }  
 //                                                                                      //
-// [functions] [_fvim], [_dvim], [_cvim],     [_xvim],     [_zvim]     & [_apps]        //
+// [functions] [_fvim], [_dvim], [_cvim],     [_xvim],   /*[_zvim]*/   & [_apps]        //
 //               kc_v,    kc_x,  [_fvim]kc_c, [_fvim]kc_x, [_fvim]kc_z   (kc_q & kc_p)  //
 //                                                                                      //
 // functions for accesing keybindings mapped functions                                  //
@@ -1116,7 +1122,6 @@ void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTI
 //                                                                                      //
 // [FUNCTIONS] [_DALY] KC_A, KC_E, KC_I, KC_O, KC_U, KC_N                               //
 //                    [F(CIRCU)], [F(GRAVE)], [F(DIAER)]                                //
-//                    [F(DIA_A)], [F(DIA_E)],... [F(DIA_U)]                             // 
 //                    [F(ACC_A)], [F(ACC_E)],... [F(ACC_U)], [F(TIL_N)]                 //
 //                                                                                      //
 // ACCENTS COMPLEMENTARY FUNCTIONS                                                      //
@@ -1145,7 +1150,6 @@ void tilde_accent_function(void) {
 //                                                                                      //
 // [functions] [_daly] kc_a, kc_e, kc_i, kc_o, kc_u, kc_n                               //
 //                    [f(circu)], [f(grave)], [f(diaer)]                                //
-//                    [f(dia_a)], [f(dia_e)],... [f(dia_u)]                             // 
 //                    [f(acc_a)], [f(acc_e)],... [f(acc_u)], [f(til_n)]                 //
 //                                                                                      //
 // accents complementary functions                                                      //
@@ -2600,9 +2604,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,--------------------------------------------------------------------------------------.  ,------------------------------------------------------------------------------------------.
-    LT(_APPS, KC_Q), LT(_POWR, KC_W), LT(_DIAE, KC_E),            KC_R, LT(_SYMB, KC_T),                 KC_Y,            KC_U,              KC_I, LT(_POWR, KC_O),   LT(_APPS, KC_P),
+    LT(_APPS, KC_Q), LT(_POWR, KC_W),            KC_E,            KC_R, LT(_SYMB, KC_T),                 KC_Y, LT(_XVIM, KC_U),              KC_I, LT(_POWR, KC_O),   LT(_APPS, KC_P),
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
-       LSFT_T(KC_A),     CTL_T(KC_S),     ALT_T(KC_D),     GUI_T(KC_F), LT(_ACCN, KC_G),      LT(_ACCN, KC_H),     GUI_T(KC_J),       ALT_T(KC_K),     CTL_T(KC_L),    LSFT_T(KC_SPC),
+       LCTL_T(KC_A),    LALT_T(KC_S),    LGUI_T(KC_D),    LSFT_T(KC_F), LT(_ACCN, KC_G),      LT(_ACCN, KC_H),    LSFT_T(KC_J),      LGUI_T(KC_K),    LALT_T(KC_L),    LCTL_T(KC_SPC),
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
     LT(_DALY, KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_FVIM, KC_V), LT(_NUMB, KC_B),      LT(_SYMB, KC_N), LT(_FVIM, KC_M), LT(_FUNC, KC_ESC),         KC_BSPC, LT(_DALY, KC_ENT) ),
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
@@ -2661,35 +2665,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // END OF _ACCN 1
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
-/* Keymap _DIAE 2: RESET & DIAERESIS layer
- * ,----------------------------------.  ,----------------------------------.
- * |*XXXXX|*XXXXX|      |*XXXXX|*XXXXX|  |*XXXXX|      |      |      |*XXXXX|
- * |      |      |   Ë  |@@@@@@|      |  |      |   Ü  |   Ï  |   Ö  |      |
- * |@RESET|      |      |@@@@@@|      |  |      |      |      |      |      |
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |*XXXXX|      |      |      |  |      |      |      |      |      |
- * |   Ä  |      |KEYPAD|KEYPAD|KEYPAD|  |KEYPAD|KEYPAD|KEYPAD|KEYPAD|KEYPAD|
- * |      |      | EQUAL| COMMA|  DOT |  | SLASH|ASTERK| MINUS| PLUS | ENTER|
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |      |      |  |      |      |      |      |      |
- * |KEYPAD|KEYPAD|KEYPAD|KEYPAD|KEYPAD|  |KEYPAD|KEYPAD|KEYPAD|KEYPAD|KEYPAD|
- * |  ONE |  TWO | THREE| FOUR | FIVE |  |  SIX | SEVEN| EIGHT| NINE | ZERO |
- * '----------------------------------'  '----------------------------------'
-*/
-// _DIAE RESET & diaereis layer 2
-[_DIAE] = LAYOUT_ortho_3x10(  // layer 2 : RESET & diaeresis layer 
-//,--------------------------------------------------.,-------------------------------------------------.
-     TO(_DFLT), F(DIA_E),_______,TD(HRESET),_______,    _______, F(DIA_U), F(DIA_I), F(DIA_O), _______,
-//|-----------+--------+---------+--------+----------||--------+---------+---------+---------+----------|
-      F(DIA_A), _______,  KC_PEQL, KC_PCMM, KC_PDOT,    KC_PSLS,  KC_PAST,  KC_PMNS,  KC_PPLS, KC_PENT,
-//|-----------+--------+---------+--------+----------||--------+---------+---------+---------+----------|
-         KC_P1,   KC_P2,    KC_P3,   KC_P4,   KC_P5,      KC_P6,    KC_P7,    KC_P8,    KC_P9,   KC_P0 ),
-//'--------------------------------------------------''-------------------------------------------------'
-// END OF _DIAE 2
-//////////////////////////////////////////////////////////////////////////////////////////////////////###
 
-
-/* Keymap _NUMB 3: numbers layer
+/* Keymap _NUMB 2: numbers layer
 * ,----------------------------------.  ,----------------------------------.
 * |      |      |      |      |      |  |      |      |      |      |      |
 * |   1  |   2  |   3  |   4  |   5  |  |   6  |   7  |   8  |   9  |   0  |
@@ -2704,21 +2681,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * |      |      |      |      |@@@@@@|  |      |      |      |      |      |
 * '----------------------------------'  '----------------------------------'
 */
-// _NUMB layer 3
-[_NUMB] = LAYOUT_ortho_3x10(  // layer 3 : numbers layer
+// _NUMB layer 2
+[_NUMB] = LAYOUT_ortho_3x10(  // layer 2 : numbers layer
 // LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,--------------------------------------------------------------------------.  ,-------------------------------------------.
              KC_1,          KC_2,           KC_3,          KC_4,       KC_5,            KC_6,  KC_7,  KC_8,  KC_9,    KC_0,
 //|--------------+--------------+---------------+--------------+-------------|  |-----------+------+------+------+----------|
-    SFT_T(KC_SPC), CTL_T(KC_DEL), ALT_T(KC_COMM), GUI_T(KC_DOT), TD(G_DOEU),         KC_MINS,  KC_4,  KC_5,  KC_6, KC_PLUS,
+   LCTL_T(KC_SPC),LALT_T(KC_DEL),LGUI_T(KC_COMM),LSFT_T(KC_DOT), TD(G_DOEU),         KC_MINS,  KC_4,  KC_5,  KC_6, KC_PLUS,
 //|--------------+--------------+---------------+--------------+-------------|  |-----------+------+------+------+----------|
            KC_ENT,       KC_BSPC,         KC_TAB,        KC_EQL, TD(PENUMB),      TD(SLNUMB),  KC_1,  KC_2,  KC_3, KC_ASTR ),
 //'--------------------------------------------------------------------------'  '-------------------------------------------'
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
-// END OF _NUMB 3
+// END OF _NUMB 2
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 /*
@@ -2743,29 +2720,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 */
 
-/* Keymap _SYMB 4: symbols Layer
+/* Keymap _SYMB 3: symbols Layer
  * ,----------------------------------.  ,----------------------------------.
  * |      |      |      |      |@@@@@@|  |      |      |      |      |      |
- * |   +  |   @  |   #  |   =  |   %  |  | &  ^ |   (  |   )  |   _  |   -  |
+ * |   +  |   =  |   #  |   *  |   %  |  | &  ^ |   (  |   )  |   _  |   -  |
  * |      |      |      |      |@@@@@@|  |      |      |      |      |      |
  * |------+------+------+------+------|  |------+------+------+------+------|
  * | LSft | LCtl | LAlt | LGui |      |  |      | LGui | LAlt | LCtl | LSft |
  * |      |      |      |      |      |  |      |      |      |      |      |
- * | `  ~ | '  " |   \  |   /  | $  € |  |   |  |   [  |   ]  |   ,  |   .  |
+ * | `  ~ | '  " |   \  |   /  |   |  |  |   @  |   [  |   ]  |   ,  |   .  |
  * |------+------+------+------+------|  |------+------+------+------+------|
  * |      |      |      |      |      |  |@@@@@@|      |      |      |      |
- * | !  ¡ | ?  ¿ |   <  |   >  |   *  |  |@@@@@@|   {  |   }  |   :  |   ;  |
+ * | !  ¡ | ?  ¿ |   <  |   >  | $  € |  |@@@@@@|   {  |   }  |   ;  |   :  |
  * |      |      |      |      |      |  |@@@@@@|      |      |      |      |
  * '----------------------------------'  '----------------------------------'
 */
-// SYMBOLS layer 4
-[_SYMB] = LAYOUT_ortho_3x10(  // layer 4: symbols layer
+// SYMBOLS layer 3
+[_SYMB] = LAYOUT_ortho_3x10(  // layer 3: symbols layer
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,-----------------------------------------------------------------------------.  ,-----------------------------------------------------------------------------------.
-           KC_PLUS,          KC_AT,        KC_HASH,        KC_ASTR,    KC_PERC,            TD(Y_AMCI),        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,
+           KC_PLUS,         KC_EQL,        KC_HASH,        KC_ASTR,    KC_PERC,            TD(Y_AMCI),        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
-    LSFT_T(KC_GRV), CTL_T(KC_QUOT),  ALT_T(KC_EQL), GUI_T(KC_SLSH), KC_PIPE,                  KC_BSLS, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
+    LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH),    KC_PIPE,                 KC_AT, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
 //  LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
         TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK, TD(G_DOEU),               KC_CIRC,        KC_LCBR,        KC_RCBR,        KC_SCLN,        KC_COLN ),
@@ -2774,7 +2751,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
 // [info] EURO: http://www.fileformat.info/info/unicode/char/search.htm?q=euro&preview=entity
-// END OF _SYMB 4
+// END OF _SYMB 3
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 /*
@@ -2800,7 +2777,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 
 
-/* Keymap _FUNC 5: functions Layer
+/* Keymap _FUNC 4: functions Layer
  * ,------------------------------------.  ,----------------------------------.
  * |      |      |        |      |      |  |      |      |      |      |      |
  * |  F01 |  F02 |   F03  |  F04 |  F05 |  |  F06 |  F07 |  F08 |  F09 |  F10 |
@@ -2815,8 +2792,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |@[_FUNC]|      |      |  |      |      |@@@@@@|      |      |
  * '------------------------------------'  '----------------------------------'
 */
-// _FUNC layer 5
-[_FUNC] = LAYOUT_ortho_3x10(  // layer 5 : multiple apps layer
+// _FUNC layer 4
+[_FUNC] = LAYOUT_ortho_3x10(  // layer 4 : multiple apps layer
 // LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
 //,-----------------------------------------------------.,----------------------------------------------.
      KC_F1,  KC_F2,             KC_F3,  KC_F4,   KC_F5,        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,
@@ -2826,41 +2803,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F21, KC_F22, LT(_FUNC, KC_F23), KC_F24, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX ),
 //'-----------------------------------------------------''----------------------------------------------.
 //KC_F24,         ,             ,        ,        ,         ,          ),  
-// END OF _FUNC 5
+// END OF _FUNC 4
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
-/* Keymap _DALY 6: DAiLY commands layer
+/* Keymap _DALY 5: DAiLY commands layer
  * ,----------------------------------.  ,----------------------------------.
  * |      |      |Captur|Captur|      |  |      |      |      |      |      |
- * |  Tab |Dictat|Window|Selct.|Float.|  | Close| Prev | Next |Mision|Launch|
- * |      |      |^:Copy|^:Copy|window|  |  APP | APP  | APP  |Contrl|  pad |
+ * |  Tab |Dictat|Window|Selct.|Float.|  | Close| Prev | Next |Mision| Desk |
+ * |      |      |^:Copy|^:Copy|window|  |  APP | APP  | APP  |Contrl|      |
  * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |SptLig|      |      |      |  |      |      |      |      |      |
- * | Caps |   &  |  UP  | Speak|Active|  | Close| Prev | Next |Windws| Dash |
- * | Lock | Siri |      |      |window|  |Window|Window|Window| Apps | board|
+ * |      |      |      |      |      |  |      |      |      |      |      |
+ * | Caps | Dash |  UP  | Speak|Active|  | Close| Prev | Next |Windws| Space|
+ * | Lock | board|      |      |window|  |Window|Window|Window| Apps |      |
  * |------+------+------+------+------|  |------+------+------+------+------|
  * |@@@@@@|      |      |      |Reopen|  |      |      |      |      |@@@@@@|
- * |SftTab| LEFT | DOWN | RIGHT|window|  | Close| Prev | Next |DELETE| Desk |
- * |@@@@@@|      |      |      | / tab|  |  tab | tab  | tab  |      |@@@@@@|
+ * |SftTab| LEFT | DOWN | RIGHT|window|  | Close| Prev | Next |DELETE|Launch|
+ * |@@@@@@|      |      |      | / tab|  |  tab | tab  | tab  |      |@ pad@|
  * '------+------+------+------+------'  '------+------+------+------+------'
 */
-// DALY layer 6
-[_DALY] = LAYOUT_ortho_3x10(  // layer 6: DAiLY commands layer
+// DALY layer 5
+[_DALY] = LAYOUT_ortho_3x10(  // layer 5: DAiLY commands layer
 //,--------------------------------------------------.,-------------------------------------------------.
-       KC_TAB,   DICTAD, KC_CAPW, KC_CAPP, FLOA_WIN,    CLOSE_A, PREV_APP, NEXT_APP, MISS_CTL, LANCHPAD,
+       KC_TAB,   DICTAD, KC_CAPW, KC_CAPP, FLOA_WIN,    CLOSE_A, PREV_APP, NEXT_APP, MISS_CTL,     DESK,
 //|----------+---------+--------+--------+-----------||--------+---------+---------+---------+----------|
-     F(CAPSL), SPT_SIRI,   KC_UP,   SPEAK, ACTV_WIN,    CLOSE_W, PREV_WIN, NEXT_WIN, APP_WIND,  DASHBRD,
+     F(CAPSL),  DASHBRD,   KC_UP,   SPEAK, ACTV_WIN,    CLOSE_W, PREV_WIN, NEXT_WIN, APP_WIND, KC_SPACE,
 //|----------+---------+--------+--------+-----------||--------+---------+---------+---------+----------|
-    S(KC_TAB),  KC_LEFT, KC_DOWN, KC_RGHT, REOPEN_L,    CLOSE_T, PREV_TAB, NEXT_TAB,   KC_DEL,     DESK),
+    S(KC_TAB),  KC_LEFT, KC_DOWN, KC_RGHT, REOPEN_L,    CLOSE_T, PREV_TAB, NEXT_TAB,   KC_DEL, LANCHPAD),
 //'--------------------------------------------------''-------------------------------------------------'
 // ^ + KC_CAPW = KC_CPYW
 // ^ + KC_CAPP = KC_CPYP
-// END OF _DALY 6
+// END OF _DALY 5
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/* Keymap _APPS 7: _APPS layer
+/* Keymap _APPS 6: _APPS layer
  * ,----------------------------------.  ,----------------------------------.
  * |*XXXXX|@@@@@@| EVER |*XXXXX| TERMI|  | TYPI | SUBLI| TEXT |@@@@@@|SYSTEM|
  * |      |TWITTR|-NOTE |      |-NAL  |  |-NATOR|-ME   |-EDIT |OMNIFO|PREFE-|
@@ -2875,8 +2852,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |      |      |      |      |  |      |      |      |      |      |
  * '----------------------------------'  '----------------------------------'
 */
-// _APPS layer 7
-[_APPS] = LAYOUT_ortho_3x10(  // layer 7 : apps layer
+// _APPS layer 6
+[_APPS] = LAYOUT_ortho_3x10(  // layer 6 : apps layer
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,-----------------------------------------------------------------.  ,------------------------------------------------------------------.
@@ -2888,7 +2865,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //'-----------------------------------------------------------------'  '------------------------------------------------------------------'
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
-// END OF _APPS 7
+// END OF _APPS 6
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 /*
@@ -2914,16 +2891,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 
 
-/* Keymap _POWR 8: POWeR productivity layer
+/* Keymap _POWR 7: POWeR productivity layer
 * ,----------------------------------.  ,----------------------------------.
-* |*XXXXX|@@@@@@|*XXXXX|*XXXXX|      |  |midVol|minVol|      |@@@@@@|      |
-* |      |LCKSCR|onHold|onHold|      |  | lev.8| lev.1|      |VolDwn| Vol. |
-* |LOGOUT|@@@@@@| _BLIT| RESET|      |  | _TEST| _LAST|Vol.Up|@@@@@@| Mute |
+* |      |@@@@@@|      |      |*XXXXX|  |midVol|minVol|      |@@@@@@|      |
+* |      |LOGOUT|LCKSCR|onHold|      |  | lev.8| lev.1|Vol.Up|VolDwn| Vol. |
+* | _BLIT|@@@@@@|      | RESET|      |  | _TEST| _LAST| _BLIT|@@@@@@| Mute |
 * |------+------+------+------+------|  |------+------+------+------+------|
 * |*XXXXX|Rewind| Play/|Forwrd|Toogle|  |Toogle| Zoom | Zoom | Zoom |Invert|
 * |      |      | Pause|      |Smooth|  |Keybrd|ON/OFF|  IN  |  OUT |Colors|
 * |      |      |      |      |Images|  |follow|      |      |      |      |
-* |RShift|RCntrl| RAlt | RCmnd|      |  | Focus| RCmnd| RAlt |RCntrl|RShift|
+* |RCntrl| RAlt | RCmnd|RShift|      |  | Focus| RCmnd| RAlt |RCntrl|RShift|
 v* |------+------+------+------+------|  |------+------+------+------+------|
 * | Menu | Dock | Tool |Status|Float.|  |Cntrst|Bright|Bright|Bright|Cntrst|
 * | _bar | _bar | _bar | _bar |Window|  |      |  min.|      |      |      |
@@ -2934,14 +2911,14 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 // KC_BRIGHTNESS_UP  (KC_BRIU):->KC_SLCK
 // KC_MRWD:->KC_F7, KC_MPLY:->KC_SPC, KC_MFFD:->KC_F9,
 */
-// _POWR layer 8
-[_POWR] = LAYOUT_ortho_3x10(  // layer 8: POWeR productivity layer
+// _POWR layer 7
+[_POWR] = LAYOUT_ortho_3x10(  // layer 7: POWeR productivity layer
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,-------------------------------------------------------------------------.  ,-----------------------------------------------------------------------------.
-     TD(LOGOUT),       LCK_SCR,      MO(_BLIT),    TD(HRESET),     XXXXXXX,      TD(V8_TEST), TD(V1_LAST), LT(_BLIT,  KC__VOLUP), KC__VOLDOWN,     KC__MUTE,
+      MO(_BLIT),    TD(LOGOUT),        LCK_SCR,    TD(HRESET),     XXXXXXX,      TD(V8_TEST), TD(V1_LAST), LT(_BLIT,  KC__VOLUP), KC__VOLDOWN,     KC__MUTE,
 //|------------+--------------+---------------+--------------+--------------|  |------------+------------+----------------------+------------+---------------|
-        KC_RSFT, RCTL_T(KC_F7), RALT_T(KC_SPC), RGUI_T(KC_F9), ZOOM_SMOOTH,      ZOOM_FOLLOW, TD(RG_ZOOM),           TD(RA_ZOIN), TD(RC_ZOUT),  TD(RS_INCO),
+        KC_RCTL, RALT_T(KC_F7), RGUI_T(KC_SPC), RSFT_T(KC_F9), ZOOM_SMOOTH,      ZOOM_FOLLOW, TD(RG_ZOOM),           TD(RA_ZOIN), TD(RC_ZOUT),  TD(RS_INCO),
 //|------------+--------------+---------------+--------------+--------------|  |------------+------------+----------------------+------------+---------------|
     SLEP_MNUBAR,   KILAPP_DOCK,    KILMNU_TOOL,   SHUTD_STATB, RSTRT_FLOAT,       CONTRST_UP,    BRIGHT_1,               KC_PAUS,     KC_SLCK, CONTRST_DWN ),
 //'-------------------------------------------------------------------------'  '-----------------------------------------------------------------------------'
@@ -2951,7 +2928,7 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 //             SFT+ALT+CMD+ESC,    ALT+CMD+ESC,
 //[bookmark]
 //[fixme]
-// END OF _POWR 8 
+// END OF _POWR 7
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 /*
@@ -2976,7 +2953,7 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 */
 
-/* Keymap _FVIM 9: _FVIM layer
+/* Keymap _FVIM 8: _FVIM layer
  * ,--------------------------------------------.  ,----------------------------------.
  * |        |        |        |        |        |  | Shift| Move | Move | Move | Move |
  * |        |        |        |        |        |  |Prgrph| Begin| Word | Word |End Of|
@@ -2985,31 +2962,31 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
  * |--------+--------+--------+--------+--------|  |------+------+------+------+------|
  * |        |        |        |        |        |  |      |      |      |      |      |
  * |        |        |        |        |        |  |LineIn|      |      |      |      |
- * |        |        |        |        |        |  | View | LEFT |  UP  | DOWN | RIGHT|
+ * |  LCTL  |  LALT  |  LGUI  |  LSFT  |        |  | View | LEFT |  UP  | DOWN | RIGHT|
  * |        |        |        |        |        |  |      |      |      |      |      |
  * |--------+--------+--------+--------+--------|  |------+------+------+------+------|
  * |        |        |        |        |        |  |      |      |      |      |      |
  * |        |        |        |@@@@@@@@|        |  | Shift| Move | Move | Move | Move |
  * |        |        |        |@@@@@@@@|        |  |Prgrph|      | Page | Page |      |
- * |@[_ZVIM]|@[_XVIM]|@[_CVIM]|@@@@@@@@|        |  | Down | HOME |  UP  | DOWN |  END |
+ * |  LSFT  |@[_XVIM]|@[_CVIM]|@@@@@@@@|        |  | Down | HOME |  UP  | DOWN |  END |
  * '--------------------------------------------'  '----------------------------------'
 */
-// _FVIM layer 9
-[_FVIM] = LAYOUT_ortho_3x10(  // layer 9 : _FVIM layer
+// _FVIM layer 8
+[_FVIM] = LAYOUT_ortho_3x10(  // layer 8 : _FVIM layer
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,------------------------------------------------------.  ,-----------------------------------------------------------------------------------.
       XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,        LCTL(LGUI(KC_UP)),   TD(FVIM_uU),   TD(FVIM_iI),     TD(FVIM_oO),  TD(FVIM_pP),
 //|----------+----------|----------+----------+----------|  |--------------------+--------------+--------------+----------------+---------------|
-      _______,   _______,   XXXXXXX,   XXXXXXX, XXXXXXX,                   FVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,      KC_RGHT,
+      KC_LCTL,   KC_LALT,   KC_LGUI,   KC_LSFT, XXXXXXX,                   FVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,      KC_RGHT,
 //|----------+----------|----------+----------+----------|  |--------------------+--------------+--------------+----------------+---------------|
-    MO(_ZVIM), MO(_XVIM), MO(_CVIM), MO(_FVIM), XXXXXXX,      LCTL(LGUI(KC_DOWN)), LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),
+      KC_LSFT, MO(_XVIM), MO(_CVIM), MO(_FVIM), XXXXXXX,      LCTL(LGUI(KC_DOWN)), LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),
 //'------------------------------------------------------'  '-----------------------------------------------------------------------------------'
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
-// MO(_ZVIM),MO(_XVIM),MO(_CVIM),MO(_FVIM) allow us changing from any ?VIM_layer to each other ?VIM_layer
+// MO(_XVIM),MO(_CVIM),MO(_FVIM) allow us changing from any ?VIM_layer to each other ?VIM_layer
 // ... because we put '_______' in this locations in the rest of the ?VIM layers
-// END OF _FVIM 9
+// END OF _FVIM 8
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 /*
@@ -3020,7 +2997,7 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 //|----------+----------|----------+----------+----------|
       _______,   _______,   XXXXXXX,   XXXXXXX, XXXXXXX,  
 //|----------+----------|----------+----------+----------|
-    MO(_ZVIM), MO(_XVIM), MO(_CVIM), MO(_FVIM), XXXXXXX,  
+      KC_LSFT, MO(_XVIM), MO(_CVIM), MO(_FVIM), XXXXXXX,  
 //'------------------------------------------------------'
                                      // RIGHT_HAND
                     ,-----------------------------------------------------------------------------------.
@@ -3034,7 +3011,7 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 */
 
 
-/* Keymap _DVIM 10: _DVIM layer  // delete layer
+/* Keymap _DVIM 9: _DVIM layer  // delete layer
  * ,----------------------------------.  ,----------------------------------.
  * |      |      |      |      |      |  |      |Delete|Delete|Delete|Delete|
  * |      |      |      |      |      |  | Yank | Begin| Word | Word |End Of|
@@ -3049,8 +3026,8 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
  * |      |@@@@@@|      |      |      |  |      | HOME |  UP  |PgDown|  END |
  * '----------------------------------'  '----------------------------------'
  */
-// _DVIM layer 10
-[_DVIM] = LAYOUT_ortho_3x10(  // layer 10 : _DVIM layer  // delete layer
+// _DVIM layer 9
+[_DVIM] = LAYOUT_ortho_3x10(  // layer 9 : _DVIM layer  // delete layer
 //,---------------------------------------------.,------------------------------------------------------.
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    DVIM_Y, TD(DVIM_uU),  DVIM_I,  DVIM_O, TD(DVIM_pP),
 //|--------+--------+--------+--------+---------||--------+------------+--------+--------+--------------|
@@ -3059,11 +3036,11 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
     _______, _______, _______, _______, XXXXXXX,   XXXXXXX,      DVIM_M, DVIM_ES, DVIM_BS,     DVIM_EN ),
 //'---------------------------------------------''------------------------------------------------------'
 // DVIM_H is empty, DVIM_N is empty
-// END OF _DVIM 10
+// END OF _DVIM 9
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
-/* Keymap _AVIM X10X: _AVIM layer  // select VIM layer
+/* Keymap _AVIM X9X: _AVIM layer  // select VIM layer
  * ,----------------------------------.  ,----------------------------------.
  * |      |      |      |      |      |  |Select|Select|Select|Select|Select|
  * |      |      |      |      |      |  |Prgrph| Begin| Word | Word |End Of|
@@ -3078,9 +3055,9 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
  * |      |      |      |@@@@@@|      |  | Below| HOME |  UP  | DOWN |  END |
  * '----------------------------------'  '----------------------------------'
 */
-// _AVIM layer X10X
+// _AVIM layer X9X
 /*
-[_AVIM] = LAYOUT_ortho_3x10(  // layer X10X : _AVIM layer  // select VIM layer
+[_AVIM] = LAYOUT_ortho_3x10(  // layer X9X : _AVIM layer  // select VIM layer
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,----------------------------------------------.  ,----------------------------------------------------------------------------------.
@@ -3092,7 +3069,7 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 //'----------------------------------------------'  '----------------------------------------------------------------------------------'
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
-// END OF _AVIM X10X  // AVIM_H is empty
+// END OF _AVIM X9X  // AVIM_H is empty
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
@@ -3117,7 +3094,7 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 */
 
 
-/* Keymap _CVIM 11: _CVIM layer  // power edition layer
+/* Keymap _CVIM 10: _CVIM layer  // power edition layer
  * ,----------------------------------.  ,----------------------------------.
  * |      |      |      |      |      |  |Duplct|Insert| Copy | Copy |Insert|
  * |      |      |      |      |      |  |currnt| line | prev | next | line |
@@ -3132,8 +3109,8 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
  * |      |      |@@@@@@|@@@@@@|      |  |      |      |      |      |      |
  * '----------------------------------'  '----------------------------------'
 */
-// _CVIM layer 11
-[_CVIM] = LAYOUT_ortho_3x10(  // layer 11 : _CVIM layer  // power edition VIM layer
+// _CVIM layer 10
+[_CVIM] = LAYOUT_ortho_3x10(  // layer 10 : _CVIM layer  // power edition VIM layer
 //,----------------------------------------------.  ,---------------------------------------------.
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       CVIM_Y, CVIM_U,  CVIM_I,  CVIM_O,  CVIM_P,
 //|--------+--------+--------+--------+----------|  |--------+-------+--------+--------+----------|
@@ -3144,11 +3121,11 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 
 // 'OUTDENT = LGUI(KC_LBRC)' implemented because 'outdent:;' in 'DefaultKeyBinding.dict' doesn't work !!!
 // ... it happens the same as in 'transposeWord:;' !!!
-// END OF _CVIM 11
+// END OF _CVIM 10
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
-/* Keymap _XVIM 12: _XVIM layer  // movement VIM layer
+/* Keymap _XVIM 11: _XVIM layer  // movement VIM layer
  * ,----------------------------------.  ,----------------------------------.
  * |      |      |      |      |      |  |   5  |  15  |  25  |  50  |  75  |
  * |      |      |      |      |      |  | lines| lines| lines| lines| lines|
@@ -3163,8 +3140,8 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
  * |      |@@@@@@|      |@@@@@@|      |  | Down | Down | Down | Down | Down |
  * '----------------------------------'  '----------------------------------'
 */
-// _XVIM layer 12
-[_XVIM] = LAYOUT_ortho_3x10(  // layer 12 : _XVIM layer  // movement VIM layer
+// _XVIM layer 11
+[_XVIM] = LAYOUT_ortho_3x10(  // layer 11 : _XVIM layer  // movement VIM layer
 //,----------------------------------------------.  ,--------------------------------------------.
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XVIM_Y, XVIM_U,  XVIM_I,  XVIM_O,  XVIM_P,
 //|--------+--------+--------+--------+----------|  |-------+-------+--------+--------+----------|
@@ -3172,11 +3149,11 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 //|--------+--------+--------+--------+----------|  |-------+-------+--------+--------+----------|
     _______, _______, _______, _______, XXXXXXX,      XVIM_N, XVIM_M, XVIM_ES, XVIM_BS, XVIM_EN ),
 //'----------------------------------------------'  '--------------------------------------------'
-// END OF _XVIM 12
+// END OF _XVIM 11
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
-/* Keymap _ZVIM 13: _ZVIM layer  // alignment VIM layer
+/* Keymap _ZVIM 12: _ZVIM layer  // alignment VIM layer
  * ,----------------------------------.  ,----------------------------------.
  * |      |      |      |      |      |  | Super|      | Move | Move | Paste|
  * |      |      |      |      |      |  |script|      |2Words|2Words|asRich|
@@ -3191,8 +3168,9 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
  * |@@@@@@|      |      |@@@@@@|      |  |      | HOME |  UP  | DOWN |  END |
  * '----------------------------------'  '----------------------------------'
 */
-// _ZVIM layer 13
-[_ZVIM] = LAYOUT_ortho_3x10(  // layer 13 : _ZVIM layer  // alignment VIM layer
+/*
+// _ZVIM layer 12
+[_ZVIM] = LAYOUT_ortho_3x10(  // layer 12 : _ZVIM layer  // alignment VIM layer
 //,----------------------------------------------.  ,---------------------------------------------.
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      ZVIM_Y, _______,  ZVIM_I,  ZVIM_O,  ZVIM_P,
 //|--------+--------+--------+--------+----------|  |-------+--------+--------+--------+----------|
@@ -3200,11 +3178,12 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 //|--------+--------+--------+--------+----------|  |-------+--------+--------+--------+----------|
     _______, _______, _______, _______, XXXXXXX,      ZVIM_N,  ZVIM_M, ZVIM_ES, ZVIM_BS, ZVIM_EN ),
 //'----------------------------------------------'  '---------------------------------------------'
-// END OF _ZVIM 13
+*/
+// END OF _ZVIM 12
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
-/* Keymap _MOUS 14: Mouse layer
+/* Keymap _MOUS 13: Mouse layer
 * ,----------------------------------.  ,----------------------------------.
 * |      |      |      |      |      |  |      |      |      |      |      |
 * |      |      |      |      |      |  |      | wLeft|  wUp | wDown|wRight|
@@ -3219,8 +3198,8 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 * |      |      |@@@@@@|      |      |  |      |      |      |      |      |
 * '------+------+------+------+------'  '------+------+------+------+------'
 */
-// _MOUS layer 14
-[_MOUS] = LAYOUT_ortho_3x10(  // layer 14: mouse layer
+// _MOUS layer 13
+[_MOUS] = LAYOUT_ortho_3x10(  // layer 13: mouse layer
 //,----------------------------------------------.  ,----------------------------------------------.
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R,
 //|--------+--------+--------+--------+----------|  |--------+--------+--------+--------+----------|
@@ -3239,12 +3218,12 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 #define MOUSEKEY_WHEEL_MAX_SPEED   8
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 40
 */
-// END OF _MOUS 14
+// END OF _MOUS 13
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 /*  
-*  Keymap _BLIT 15: BACKLIT - BackLIghT layer
+*  Keymap _BLIT 14: BACKLIT - BackLIghT layer
 * ,--------------------------------------------.  ,---------------------------------------------.
 * |  BL_1  |  BL_2  |  BL_3  |  BL_4  |  BL_5  |  |BREATH_1|BREATH_2|BREATH_3|BREATH_4|BREATH_T |
 * |--------+--------+--------+--------+--------|  |--------+--------+--------+--------+---------|
@@ -3253,8 +3232,8 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 * |  BL_11 |  BL_12 |  BL_13 |  BL_14 |  BL_15 |  |BREATH15|  BL_ON | BL_INC | BL_DEC | BL_OFF  |
 * '--------------------------------------------'  '---------------------------------------------'
 */
-// _BLIT layer 15
-[_BLIT] = LAYOUT_ortho_3x10( // layer 15: _BLIT layer
+// _BLIT layer 14
+[_BLIT] = LAYOUT_ortho_3x10( // layer 14: _BLIT layer
 //,----------------------------------------------.  ,-----------------------------------------------.
     BLIT_01, BLIT_02, BLIT_03, BLIT_04, BLIT_05,      BRTH_01, BRTH_02, BRTH_03, BRTH_04,  BL_BRTG,
 //|--------+--------+--------+--------+----------|  |--------+--------+--------+--------+-----------|
@@ -3270,12 +3249,12 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
  I've made a macro (BLIT_OFF) who call the function backlight_level(BL_OFF) ! ! !
 
 */
-// END OF _BLIT 15
+// END OF _BLIT 14
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 
 /*  
-*  Keymap _LAST 17: _LAST layer for testing changing to a layer over 16th layer
+*  Keymap _LAST 15: _LAST layer for testing changing to a layer over 16th layer
 * .-----------------------------------------------------------------------------------------.
 * |  BL_1  |  BL_2  |  BL_3  |  BL_4  |  BL_5  |BREATH_1|BREATH_2|BREATH_3|BREATH_4|BREATH_T|
 * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
@@ -3284,8 +3263,8 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 * |  BL_11 |  BL_12 |  BL_13 |  BL_14 |  BL_15 |BREATH15|  BL_ON | BL_INC | BL_DEC | BL_OFF |
 * '-----------------------------------------------------------------------------------------'
 */
-// _LAST layer 17
-[_LAST] = LAYOUT_ortho_3x10( // layer 17 : _LAST layer
+// _LAST layer 15
+[_LAST] = LAYOUT_ortho_3x10( // layer 15 : _LAST layer
 //,----------------------------------------------.  ,-----------------------------------------------.
     BLIT_01, BLIT_02, BLIT_03, BLIT_04, BLIT_05,      BRTH_01, BRTH_02, BRTH_03, BRTH_04,  BL_BRTG,
 //|--------+--------+--------+--------+----------|  |--------+--------+--------+--------+-----------|
@@ -3293,7 +3272,7 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 //|--------+--------+--------+--------+----------|  |--------+--------+--------+--------+-----------|
     BLIT_11, BLIT_12, BLIT_13, BLIT_14, BLIT_15,      BRTH_15,   BL_ON,  BL_INC,  BL_DEC, BLIT_OFF ),
 //'----------------------------------------------'  '-----------------------------------------------'
-// END OF _LAST 17
+// END OF _LAST 15
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
 
 /* Keymap _TEST 16: _TEST transparent layer
@@ -3378,13 +3357,13 @@ const uint16_t PROGMEM fn_actions[] = {
   [ACC_U] = ACTION_FUNCTION(ACC_U),
 
   [TIL_N] = ACTION_FUNCTION(TIL_N),
-
+/*
   [DIA_A] = ACTION_FUNCTION(DIA_A),
   [DIA_E] = ACTION_FUNCTION(DIA_E),
   [DIA_I] = ACTION_FUNCTION(DIA_I),
   [DIA_O] = ACTION_FUNCTION(DIA_O),
   [DIA_U] = ACTION_FUNCTION(DIA_U),
-  
+*/  
   [CAPSL] = ACTION_FUNCTION(CAPSL)
 };
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
@@ -3657,162 +3636,162 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
 
 
 
-    case DIA_A:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-        {
-        //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
-        diaeresis_accent_function();
-        enable_capslock_after_accents_function();
-        if (shift_flag)
-        {
-        //  press LSHIFT
-            add_mods(shift_flag);
-            add_weak_mods(shift_flag);
-            send_keyboard_report();
-        };            
-     // [FIXME] [FIX THE FO LINE LOCATION]
-      register_code(KC_A);
-      unregister_code(KC_A);
-    }
-    else
-    {
-//        SEND_STRING("NO record event pressed");
-    }
-    break;
+//     case DIA_A:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+//         {
+//         //  release LSHIFT
+//             del_mods(shift_flag);
+//             del_weak_mods(shift_flag);
+//             send_keyboard_report();
+//         };
+//     //  tap accent
+//         disable_capslock_before_accents_function();
+//         diaeresis_accent_function();
+//         enable_capslock_after_accents_function();
+//         if (shift_flag)
+//         {
+//         //  press LSHIFT
+//             add_mods(shift_flag);
+//             add_weak_mods(shift_flag);
+//             send_keyboard_report();
+//         };            
+//      // [FIXME] [FIX THE FO LINE LOCATION]
+//       register_code(KC_A);
+//       unregister_code(KC_A);
+//     }
+//     else
+//     {
+// //        SEND_STRING("NO record event pressed");
+//     }
+//     break;
 
 
-    case DIA_E:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-        {
-        //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
-        diaeresis_accent_function();
-        enable_capslock_after_accents_function();
-        if (shift_flag)
-        {
-        //  press LSHIFT
-            add_mods(shift_flag);
-            add_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
+//     case DIA_E:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+//         {
+//         //  release LSHIFT
+//             del_mods(shift_flag);
+//             del_weak_mods(shift_flag);
+//             send_keyboard_report();
+//         };
+//     //  tap accent
+//         disable_capslock_before_accents_function();
+//         diaeresis_accent_function();
+//         enable_capslock_after_accents_function();
+//         if (shift_flag)
+//         {
+//         //  press LSHIFT
+//             add_mods(shift_flag);
+//             add_weak_mods(shift_flag);
+//             send_keyboard_report();
+//         };
        
-        register_code(KC_E);
-        unregister_code(KC_E);
-      }
-      else
-      {
-      }
-      break;
+//         register_code(KC_E);
+//         unregister_code(KC_E);
+//       }
+//       else
+//       {
+//       }
+//       break;
 
-    case DIA_I:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-        {
-        //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
-        diaeresis_accent_function();
-        enable_capslock_after_accents_function();
-        if (shift_flag)
-        {
-        //  press LSHIFT
-            add_mods(shift_flag);
-            add_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
+//     case DIA_I:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+//         {
+//         //  release LSHIFT
+//             del_mods(shift_flag);
+//             del_weak_mods(shift_flag);
+//             send_keyboard_report();
+//         };
+//     //  tap accent
+//         disable_capslock_before_accents_function();
+//         diaeresis_accent_function();
+//         enable_capslock_after_accents_function();
+//         if (shift_flag)
+//         {
+//         //  press LSHIFT
+//             add_mods(shift_flag);
+//             add_weak_mods(shift_flag);
+//             send_keyboard_report();
+//         };
         
-        register_code(KC_I);
-        unregister_code(KC_I);
-      }
-      else
-      {
-      }
-      break;
+//         register_code(KC_I);
+//         unregister_code(KC_I);
+//       }
+//       else
+//       {
+//       }
+//       break;
 
-    case DIA_O:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-        {
-        //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
-        diaeresis_accent_function();
-        enable_capslock_after_accents_function();
-        if (shift_flag)
-        {
-        //  press LSHIFT
-            add_mods(shift_flag);
-            add_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
+//     case DIA_O:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+//         {
+//         //  release LSHIFT
+//             del_mods(shift_flag);
+//             del_weak_mods(shift_flag);
+//             send_keyboard_report();
+//         };
+//     //  tap accent
+//         disable_capslock_before_accents_function();
+//         diaeresis_accent_function();
+//         enable_capslock_after_accents_function();
+//         if (shift_flag)
+//         {
+//         //  press LSHIFT
+//             add_mods(shift_flag);
+//             add_weak_mods(shift_flag);
+//             send_keyboard_report();
+//         };
             
-        register_code(KC_O);
-        unregister_code(KC_O);
-      }
-      else
-      {
-      }
-      break;
+//         register_code(KC_O);
+//         unregister_code(KC_O);
+//       }
+//       else
+//       {
+//       }
+//       break;
 
-    case DIA_U:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-        {
-        //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
-        diaeresis_accent_function();
-        enable_capslock_after_accents_function();
-        if (shift_flag)
-        {
-        //  press LSHIFT
-            add_mods(shift_flag);
-            add_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
+//     case DIA_U:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
+//         {
+//         //  release LSHIFT
+//             del_mods(shift_flag);
+//             del_weak_mods(shift_flag);
+//             send_keyboard_report();
+//         };
+//     //  tap accent
+//         disable_capslock_before_accents_function();
+//         diaeresis_accent_function();
+//         enable_capslock_after_accents_function();
+//         if (shift_flag)
+//         {
+//         //  press LSHIFT
+//             add_mods(shift_flag);
+//             add_weak_mods(shift_flag);
+//             send_keyboard_report();
+//         };
             
-        register_code(KC_U);       
-        unregister_code(KC_U);
-      }
-      else
-      {
-      }  
-      break;
+//         register_code(KC_U);       
+//         unregister_code(KC_U);
+//       }
+//       else
+//       {
+//       }  
+//       break;
 
 
 
@@ -4048,7 +4027,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case XVIM_EN: xvim("\n"); return false; break;
 
 
-
+/*
 // _ZVIM
       case ZVIM_Y: zvim("y");  return false; break;
       case ZVIM_U: zvim("u");  return false; break;
@@ -4067,7 +4046,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case ZVIM_ES:zvim("\e"); return false; break;
       case ZVIM_BS:zvim("\b"); return false; break;
       case ZVIM_EN:zvim("\n"); return false; break;
-
+*/
 
       case DICTAD:
         register_code(KC_RGUI); unregister_code(KC_RGUI);
@@ -4169,34 +4148,34 @@ uint32_t layer_state_set_user(uint32_t state) {
         breathing_period_set(BR_ACCN);
         breathing_enable();        
         break;
-
+/*
     case _DIAE:   //  2
         backlight_level(BL_DIAE);
         breathing_period_set(BR_DIAE);
         breathing_enable();        
         break;
-        
-    case _NUMB:   //  3
+*/        
+    case _NUMB:   //  2
         backlight_level(BL_NUMB);
         breathing_period_set(BR_NUMB);
         breathing_enable();
         break;
 
-    case _SYMB:   //  4
+    case _SYMB:   //  3
         backlight_level(BL_SYMB);
         breathing_period_set(BR_SYMB);
         breathing_enable();
         break;
 
-    case _FUNC:   //  5
+    case _FUNC:   //  4
         backlight_level(BL_FUNC);
         break;
 
-    case _DALY:   //  6
+    case _DALY:   //  5
         backlight_level(BL_DALY);
         break;
 
-    case _APPS:   //  7
+    case _APPS:   //  6
       gui_flag = get_mods()&LGUI_MODS;
       if (gui_flag)
       {
@@ -4205,23 +4184,23 @@ uint32_t layer_state_set_user(uint32_t state) {
       backlight_level(BL_APPS);
       break;
 
-    case _POWR:   //  8
+    case _POWR:   //  7
         backlight_level(BL_POWR);
         break;
 
-    case _FVIM:   //  9
+    case _FVIM:   //  8
         backlight_level(BL_FVIM);
         break;
-    case _DVIM:   // 10
+    case _DVIM:   //  9
         backlight_level(BL_DVIM);
         break;
-    case _CVIM:   // 11
-    case _XVIM:   // 12
-    case _ZVIM:   // 13
+    case _CVIM:   // 10
+    case _XVIM:   // 11
+ // case _ZVIM:   // 12
         backlight_level(BL_VIM);
         break;
 
-    case _MOUS:   // 14
+    case _MOUS:   // 12
         backlight_level(BL_MOUS);
         break;
 

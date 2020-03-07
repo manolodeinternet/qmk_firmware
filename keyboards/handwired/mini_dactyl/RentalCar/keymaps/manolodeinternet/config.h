@@ -13,6 +13,8 @@
 // #define USE_I2C
 #define EE_HANDS
 
+#define WAIT_FOR_USB // for wake up computer typing on the keyboard
+
 
 
 
