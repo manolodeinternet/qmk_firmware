@@ -2,7 +2,6 @@
 #define CONFIG_USER_H
 
 #include "../../config.h"
-#endif
 
 /* for QMK DFU bootloader */
 /* not required if using default ProMicro bootloader */
@@ -11,12 +10,12 @@
 #define QMK_ESC_INPUT F7 // usually ROW
 #define QMK_LED B0
 
-#define PREVENT_STUCK_MODIFIERS
+// #define PREVENT_STUCK_MODIFIERS
 
 #define WAIT_FOR_USB // for wake up computer typing on the keyboard
 
 //Tap Dance Prerequisite
-#define TAPPING_TERM 200
+// #define TAPPING_TERM 200
 #define PERMISSIVE_HOLD
 //  this is responsible of getting 'volume minus' (from [SUSR]('W'trigger)) when I type 'word' fast
 // //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -187,3 +186,4 @@ static uint8_t wheel_unit(void)
 */
 
 
+#endif

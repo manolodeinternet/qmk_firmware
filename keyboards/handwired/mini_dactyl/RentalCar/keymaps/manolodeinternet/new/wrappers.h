@@ -12,8 +12,8 @@ expanded before being used as arguments to the LAYOUT_xxx macro.
 // // clang-format off
 // #define LAYOUT_ergodox_wrapper(...)          LAYOUT_ergodox(__VA_ARGS__)
 // #define LAYOUT_ergodox_pretty_wrapper(...)   LAYOUT_ergodox_pretty(__VA_ARGS__)
-// #define KEYMAP_wrapper(...)                  LAYOUT(__VA_ARGS__)
-#define LAYOUT_wrapper(...)                  LAYOUT(__VA_ARGS__)
+#define KEYMAP_wrapper(...)                     KEYMAP(__VA_ARGS__)
+// #define LAYOUT_wrapper(...)                  LAYOUT(__VA_ARGS__)
 // #define LAYOUT_ortho_4x12_wrapper(...)       LAYOUT_ortho_4x12(__VA_ARGS__)
 // #define LAYOUT_ortho_5x12_wrapper(...)       LAYOUT_ortho_5x12(__VA_ARGS__)
 // #define LAYOUT_gergo_wrapper(...)            LAYOUT_gergo(__VA_ARGS__)
@@ -37,11 +37,7 @@ NOTE: These are all the same length.  If you do a search/replace
 #define __QWERTY_ZXCVB____________________         KC_Z,         KC_X,         KC_C,         KC_V,           KC_B
 #define __QWERTY_NM_ESC_BSPC_ENT__________         KC_N,         KC_M,       KC_ESC,      KC_BSPC,         KC_ENT
 //[mine]
-
-
-#define __QWERTY_ASDFG_w_CTL_ALT_GUI_SFT__ 
         
-        __QWERTY_CTL_A_ALT_S_GUI_D_SFT_F_G__
 
 #define _________________QWERTY_L1_________________        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T
 #define _________________QWERTY_L2_________________        KC_A,    KC_S,    KC_D,    KC_F,    KC_G

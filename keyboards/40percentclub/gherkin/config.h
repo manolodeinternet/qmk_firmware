@@ -1,4 +1,8 @@
 #pragma once
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define TAPPING_TERM 150
 
 #include "config_common.h"
 
@@ -24,33 +28,21 @@
 
 /* number of backlight levels */
 #define BACKLIGHT_PIN B5
-#ifdef BACKLIGHT_PIN
+#ifdef  BACKLIGHT_PIN
 #define BACKLIGHT_LEVELS 15
 #endif
 
-
-
-
-
-///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨
-//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
-//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
-#define BACKLIGHT_BREATHING    //MINE I had to write this line because compiling, backlight_toggle() wasn't recognized
+//
+///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨
+//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//
+//MINE I had to write this line because compiling, backlight_toggle() wasn't recognized
+#define BACKLIGHT_BREATHING
+//MINE I had to write this line because compiling, breathing_period wasn't recognized
 #ifndef BREATHING_PERIOD
-#define BREATHING_PERIOD 15     //MINE I had to write this line because compiling, breathing_period wasn't recognized
+#define BREATHING_PERIOD 15     
 #endif
-//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
-//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE//MINE BECAUSE IT DOESN'T COMPILE
-///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨
-
-
-
-
-
-
-
-
-
+///// 🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨🌝✨
+//
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5
@@ -63,12 +55,4 @@
 #define LOCKING_RESYNC_ENABLE
 */
 
-/*
-#ifdef RGB_DI_PIN
-#define RGBLIGHT_ANIMATIONS
-#define RGBLED_NUM 0
-#define RGBLIGHT_HUE_STEP 8
-#define RGBLIGHT_SAT_STEP 8
-#define RGBLIGHT_VAL_STEP 8
 #endif
-*/

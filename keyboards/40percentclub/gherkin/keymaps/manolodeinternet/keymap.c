@@ -140,7 +140,7 @@
 // HEADER
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [_NUMB] KC_B (PENUMB)                                                     //
+// [TAPDANCE] [_NUMB] KC_B (DENUOF)                                                     //
 //                                                                                      //
 //  P E R C E N T  -  N U M B E R S   L A Y E R   O F F                                 //
 //                                                                                      //
@@ -150,7 +150,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 // FOOTER
 //                                                                                      //
-// [tapdance] [_numb] kc_b (penumb)                                                     //
+// [tapdance] [_numb] kc_b (denuof)                                                     //
 //                                                                                      //
 //  p e r c e n t  -  n u m b e r s   l a y e r   o f f                                 //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -164,6 +164,12 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 
 #include QMK_KEYBOARD_H
+// Following file doesn't need full path bc folder 'users/manolodeinternet' is automatically included
+#include "manolodeinternet.h"
+
+// It's included from 'manolodeinternet.h'
+// #include "wrappers.h"
+
 
 // [INSPIRINGCODE]
 // #define GRAVE_MODS  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT)
@@ -180,6 +186,8 @@
 // DEFINING LAYERS                      L A Y E R S                                     //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+
+
 #define _DFLT   0  //  gherkin ALPHAS DEFAULT    layer 
 #define _ACCN   1  //  gherkin ACCENTS           layer 
 #define _NUMB   2  //  gherkin numbers           layer 
@@ -199,6 +207,7 @@ We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, 
 // #define _ZVIM  12  //  alignment             VIM layer
 #define _MOUS  12  //  mouse                     layer
 #define _BLIT  13  //  backlight                 layer
+#define _LGHT  _BLIT
 #define _TEST  14  //  LAYER FOR TESTING               // must be over layer number 15 ...
 #define _LAST  15  //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //
@@ -294,7 +303,6 @@ We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, 
 
 // DEFINING BACKLIGHT BREATHING LELVELS
 #define BR_ACCN  1
-#define BR_DIAE  1
 #define BR_CAPS  2
 #define BR_NUMB  2
 #define BR_SYMB  3
@@ -708,11 +716,11 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 enum tap_dance_keycodes {
 
 // TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB (NUMBERS LAYER) 3
-     PENUMB  //   return to *GHKN layer (gherkin default layer)  // ... percent
+     DENUOF  //   return to *GHKN layer (gherkin default layer)  // ... percent
     ,SLNUMB  //   return to *GHKN layer (gherkin default layer)  // ... slash
 
 // TAP DANCE KEYCODES ACCESSIBLE FROM _SYMB (SYMBOLS LAYER) 4
-    ,Y_AMCI  // ampersand & circumflex accent
+    ,V_RACI  // right angle bracket & circumflex accent
 //  ,A_GRAV  // grave & tilde         //tilde        accessible while holding SHIFT key !
 //  ,S_QUOT  // quote & double quote  //double quote accessible while holding SHIFT key !
     ,G_DOEU  // dolar & euro
@@ -1127,6 +1135,7 @@ void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTI
 // ACCENTS COMPLEMENTARY FUNCTIONS                                                      //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+/*
 void acute_accent_function(void) {
   register_code(KC_LALT); register_code(KC_E);
   unregister_code(KC_E); unregister_code(KC_LALT);
@@ -1147,6 +1156,7 @@ void tilde_accent_function(void) {
     register_code(KC_LALT); register_code(KC_N);
     unregister_code(KC_N);  unregister_code(KC_LALT);
 }
+*/
 //                                                                                      //
 // [functions] [_daly] kc_a, kc_e, kc_i, kc_o, kc_u, kc_n                               //
 //                    [f(circu)], [f(grave)], [f(diaer)]                                //
@@ -1158,8 +1168,7 @@ void tilde_accent_function(void) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [FUNCTIONS] [_DIAE] KC_A (HRESET)                                                    //
-//             [_POWR] KC_R (HRESET)                                                    //
+// [FUNCTIONS] [_POWR] KC_R (HRESET)                                                    //
 //                                                                                      //
 // RESET MY KEYBOARD FUNCTION                                                           //
 //                                                                                      //
@@ -1193,11 +1202,9 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
                       _delay_ms(100);
                    // ends backlight blinking
                       reset_keyboard();
-
 }
 //                                                                                      //
-// [functions] [_diae] kc_a (hreset)                                                    //
-//             [_powr] kc_r (hreset)                                                    //
+// [functions] [_powr] kc_r (hreset)                                                    //
 //                                                                                      //
 // reset my keyboard function                                                           //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1317,50 +1324,62 @@ void brightSetToLevel1(void) {
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [_NUMB] KC_B (PENUMB)                                                     //
+// [TAPDANCE] [_NUMB] KC_B (DENUOF)                                                     //
 //                                                                                      //
-//  P E R C E N T  -  N U M B E R S   L A Y E R   O F F                                 //
+//  D O L L A R  /  E U R O  -  N U M B E R S   L A Y E R   O F F                       //
 //                                                                                      //
-//  KC_B:  *  KC_PERC,                                                                  //
-//        @@ [_NUMB] OFF                                                                //
+//  KC_B:  * @  KC_DOLLAR,                                                              //
+//        **    EURO,                                                                   //
+//           @@ [_NUMB] OFF                                                             //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-// instantalize an instance of 'tap' for the 'PENUMB' tap dance.
-static tap PENUMB_tap_state = {
+// instantalize an instance of 'tap' for the 'DENUOF' tap dance.
+static tap DENUOF_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void PENUMB_finished (qk_tap_dance_state_t *state, void *user_data) {
-  PENUMB_tap_state.state = cur_dance(state);
-  switch (PENUMB_tap_state.state) {
+void DENUOF_finished (qk_tap_dance_state_t *state, void *user_data) {
+  DENUOF_tap_state.state = cur_dance(state);
+  switch (DENUOF_tap_state.state) {
 
     // [UNDERSTANDING]
     //  YOU CAN'T USE ANSI SHIFTED KEYCODES INTO TAP_DANCE CODE LIKE 'KC_PERC' !!!
     //  ANSI SHIFTED KEYCODES ARE VALID FOR KEYMAPS LAYOUTS.
     //  ... TAP_DANCE CODE NEEDS BASIC KEYCODES !!!
-    case SINGLE_TAP:  register_code(KC_LSFT); register_code(KC_5); break;  
     // [understanding]
-    
-    case DOUBLE_HOLD: layer_clear();
-                      break;      
+
+  //DOLAR
+    case SINGLE_TAP:  
+    case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_4);                               break;
+
+  //EURO
+    case DOUBLE_TAP:  register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_2);       break;
+
+  //SWITCH _NUMB OFF
+    case DOUBLE_HOLD: layer_clear();                                                             break;      
   }
 }
 
-void PENUMB_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (PENUMB_tap_state.state) {
+void DENUOF_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (DENUOF_tap_state.state) {
 
-    case SINGLE_TAP:    unregister_code(KC_5); unregister_code(KC_LSFT); break;
+  //DOLAR
+    case SINGLE_TAP:
+    case SINGLE_HOLD: unregister_code(KC_4); unregister_code(KC_LSFT);                           break;
 
-    case DOUBLE_HOLD:   break;
+  //EURO
+    case DOUBLE_TAP:  unregister_code(KC_2); unregister_code(KC_LALT); unregister_code(KC_LSFT); break;
+
+    case DOUBLE_HOLD:                                                                            break;
 
   }
-  PENUMB_tap_state.state = 0;
+  DENUOF_tap_state.state = 0;
 }
 //                                                                                      //
-// [tapdance] [_numb] kc_b (penumb)                                                     //
+// [tapdance] [_numb] kc_b (denuof)                                                     //
 //                                                                                      //
-//  p e r c e n t  -  n u m b e r s   l a y e r   o f f                                 //
+//  d o l l a r  /  e u r o  -  n u m b e r s   l a y e r   o f f                       //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -1393,7 +1412,7 @@ static tap SLNUMB_tap_state = {
 void SLNUMB_finished (qk_tap_dance_state_t *state, void *user_data) {
   SLNUMB_tap_state.state = cur_dance(state);
   switch (SLNUMB_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_PSLS); break;
+    case SINGLE_TAP:    register_code(KC_PSLS); break;
 
     case SINGLE_HOLD:// I left it intentionally empty for allowing 'SET [_NUMB] ON' works properly
                         break;
@@ -2478,7 +2497,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 //
 
 // [_SYMB] LAYER  (TWO IN A KEY)
-  [Y_AMCI] = ACTION_TAP_DANCE_DOUBLE(KC_AMPR, KC_CIRC )                                   // & ^
+  [V_RACI] = ACTION_TAP_DANCE_DOUBLE(KC_RABK, KC_CIRC )                                   // & ^
 //[A_GRAV]  // grave & tilde         //tilde        accessible while holding SHIFT key !  // ` ~
 //[S_QUOT]  // quote & double quote  //double quote accessible while holding SHIFT key !  // ' "
  ,[G_DOEU] = ACTION_TAP_DANCE_DOUBLE(KC_DLR,  SYM_EURO)                                   // $ €
@@ -2488,7 +2507,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 // [_NUMB] LAYER
  ,[SLNUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLNUMB_finished, SLNUMB_reset)
- ,[PENUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, PENUMB_finished, PENUMB_reset)
+ ,[DENUOF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, DENUOF_finished, DENUOF_reset)
 // [_numb] layer
 
 // [_POWR] LAYER
@@ -2526,7 +2545,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // ,[AVIM_uU] = ACTION_TAP_DANCE_FN(AVIM_uU_function)
 // ,[AVIM_pP] = ACTION_TAP_DANCE_FN(AVIM_pP_function)
 // [_avim] layer
-
 };
 //                                                                                      //
 //               t a p    d a n c e    d e c l a r a t i o n s                          //
@@ -2535,29 +2553,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//                                                                                      //
-//                        M A T R I X   I N I T   U S E R                               //
-//                                                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-void matrix_init_user(void) {
-
-  breathing_disable();
-
-  //backlight_level(BL_GHKN);
-
-  // set_unicode_input_mode(UC_OSX);
-  // REPLACE UC_XXXX with UC_OSX - the Unicode Input Mode for your OS. See table below.
-} // end of matrix_init_user
-//                                                                                      //
-//                        m a t r i x   i n i t   u s e r                               //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-
+#define KEYMAP_gherkin_wrapper(...)       KEYMAP_gherkin(__VA_ARGS__)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                     //
@@ -2586,7 +2582,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |        |        |        |        |        |  |        |        |        |        |        |
   * |    Q   |    W   |    E   |    R   |    T   |  |    Y   |    U   |    I   |    O   |    P   |
   * |⌘[_1APP]|        |        |        |        |  |        |        |        |        |⌘[_1APP]|
-  * |@[_APPS]|@[_POWR]|@[_DIAE]|        |@[_SYMB]|  |        |        |        |@[_POWR]|@[_APPS]|
+  * |@[_APPS]|@[_POWR]|        |        |@[_SYMB]|  |        |        |        |@[_POWR]|@[_APPS]|
   * |--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------|
   * |        |        |        |        |        |  |        |        |        |        |        |
   * |    A   |    S   |    D   |    F   |    G   |  |    H   |    J   |    K   |    L   |  Space |
@@ -2599,17 +2595,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * |@[_DALY]|@[_DVIM]|@[_MOUS]|@[_FVIM]|@[_NUMB]|  |@[_SYMB]|@[_FVIM]|@[_FUNC]|        |@[_DALY]|
   * '--------------------------------------------'  '--------------------------------------------'
 */
-[_DFLT] = LAYOUT_ortho_3x10(  // layer 0 : default layer
+// [_DFLT] = KEYMAP_gherkin_wrapper(  // layer 0 : default layer
+[_DFLT] = KEYMAP_gherkin_wrapper(  // layer 0 : default layer
 // [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,--------------------------------------------------------------------------------------.  ,------------------------------------------------------------------------------------------.
-    LT(_APPS, KC_Q), LT(_POWR, KC_W),            KC_E,            KC_R, LT(_SYMB, KC_T),                 KC_Y, LT(_XVIM, KC_U),              KC_I, LT(_POWR, KC_O),   LT(_APPS, KC_P),
+    _F_CORE_DFLT_L1_,    _F_CORE_DFLT_R1_,
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
-       LCTL_T(KC_A),    LALT_T(KC_S),    LGUI_T(KC_D),    LSFT_T(KC_F), LT(_ACCN, KC_G),      LT(_ACCN, KC_H),    LSFT_T(KC_J),      LGUI_T(KC_K),    LALT_T(KC_L),    LCTL_T(KC_SPC),
+    _F_CORE_DFLT_L2_,    _F_CORE_DFLT_R2_,
 //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
-    LT(_DALY, KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_FVIM, KC_V), LT(_NUMB, KC_B),      LT(_SYMB, KC_N), LT(_FVIM, KC_M), LT(_FUNC, KC_ESC),         KC_BSPC, LT(_DALY, KC_ENT) ),
+    _F_CORE_DFLT_L3_,    _F_CORE_DFLT_R3_
 //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
+),
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
 // END OF _DFLT 0
@@ -2653,6 +2651,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |       |      |      |      |  |      |      |      |       |      |
  * '-----------------------------------'  '-----------------------------------'
 */
+/*
 // _ACCN accent layer 1
 [_ACCN] = LAYOUT_ortho_3x10(  // layer 1 : _ACCN layer 
 //,------------------------------------------------. ,--------------------------------------------------.
@@ -2662,8 +2661,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|---------|--------|---------+--------+----------| |---------|---------+---------+---------+----------|
      _______, _______,  _______, _______, _______,     F(TIL_N),  _______,  _______,  _______, _______ ),
 //'------------------------------------------------' '--------------------------------------------------'
+*/
 // END OF _ACCN 1
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
+
+
+//
+/* Keymap _ACCN 01: _ACCN layer
+ * ,--------------------------------------------.        ,--------------------------------------------.
+ * | *XXXXX | *XXXXX |    É   | *XXXXX | *XXXXX |        | *XXXXX |    Ú   |    Í   |    Ó   | *XXXXX |
+ * |        |        | (éëèê) |        |        |        |        | (úüùû) | (íïìî) | (óöòô) |        |
+ * |        |        | (ÉËÈÊ) |        |        |        |        | (ÚÜÙÛ) | (ÍÏÌÎ) | (ÓÖÒÔ) |        |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |    Á   | *XXXXX | *XXXXX | *XXXXX | @@@@@@ |        | @@@@@@ | *XXXXX | *XXXXX | *XXXXX | *XXXXX |
+ * | (áäàâ) | @CIRCUM| @GRAVE | @DIAE- | @@@@@@ |        | @@@@@@ | @DIAE- | @GRAVE | @CIRCUM|        |
+ * | (ÁÄÀÂ) |  -FLEX |        | RESIS  | @@@@@@ |        | @@@@@@ | RESIS  |        |  -FLEX |        |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * | *XXXXX | *XXXXX | *XXXXX | *XXXXX | *XXXXX |        |        | *XXXXX | *XXXXX | *XXXXX | *XXXXX |
+ * |        |        |        |        |        |        |   Ñ ñ  |        |        |        |        |
+ * |  @RSft |  @RCtl |  @RAlt | @RGui  |        |        |        |  @RGui |  @RAli |  @RCtl |  @RSft |
+ * '--------------------------------------------'        '--------------------------------------------'
+*/
+// _ACCN accent layer 01
+// [_ACCN] = KEYMAP_wrapper(  // layer 01 : _ACCN layer
+[_ACCN] = KEYMAP_gherkin_wrapper(  // layer 01 : _ACCN layer
+     ____ACCN_L1____,                                                  ____ACCN_R1____,
+     ____ACCN_L2____,                                                  ____ACCN_R2____,
+     ____ACCN_L3____,                                                  ____ACCN_R3____
+),
+// END OF _ACCN 01
+/////////////////////////////////////////////////////////////////////////////////////////////////////##
+
 
 
 /* Keymap _NUMB 2: numbers layer
@@ -2681,22 +2709,60 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 * |      |      |      |      |@@@@@@|  |      |      |      |      |      |
 * '----------------------------------'  '----------------------------------'
 */
+
 // _NUMB layer 2
-[_NUMB] = LAYOUT_ortho_3x10(  // layer 2 : numbers layer
-// LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
+///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
+[_NUMB] = KEYMAP_gherkin_wrapper(  // layer 02 : numbers layer
+             _F_CORE_NUMB_L1_,                       _F_CORE_NUMB_R1_,
+             _F_CORE_NUMB_L2_,                       _F_CORE_NUMB_R2_,
+             _F_CORE_NUMB_L3_,                       _F_CORE_NUMB_R3_
+),
+//,---------------------------------------------.       ,---------------------------------------------.
+//|---------------------------------------------|       |---------------------------------------------|
+//|---------------------------------------------|       |---------------------------------------------|
+//`---------------------------------------------'       '---------------------------------------------'
+///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
+// ###
+// END OF _NUMB 2
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+/*
+[_NUMB] = KEYMAP_gherkin_wrapper(  // layer 01 : _ACCN layer
+     _F_CORE_NUMB_L1, _F_CORE_NUMB_R1,
+     _F_CORE_NUMB_L2, _F_CORE_NUMB_R2,
+     _F_CORE_NUMB_L3, _F_CORE_NUMB_R3
+),
+*/
+
+
+
+/*
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+// _NUMB layer 2
+//////////////////////////////////////////////////////////////////////////////////////////////////////###
+
+FOLLOWING WORKS PROPERLY !!!¡!!¡!!!!!!!
+
+[_NUMB] = LAYOUT_ortho_3x10( //KEYMAP_gherkin layer 2 : numbers layer
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,--------------------------------------------------------------------------.  ,-------------------------------------------.
              KC_1,          KC_2,           KC_3,          KC_4,       KC_5,            KC_6,  KC_7,  KC_8,  KC_9,    KC_0,
 //|--------------+--------------+---------------+--------------+-------------|  |-----------+------+------+------+----------|
-   LCTL_T(KC_SPC),LALT_T(KC_DEL),LGUI_T(KC_COMM),LSFT_T(KC_DOT), TD(G_DOEU),         KC_MINS,  KC_4,  KC_5,  KC_6, KC_PLUS,
+   LCTL_T(KC_SPC),LALT_T(KC_DEL),LGUI_T(KC_COMM),LSFT_T(KC_DOT),    KC_PERC,         KC_MINS,  KC_4,  KC_5,  KC_6, KC_PLUS,
 //|--------------+--------------+---------------+--------------+-------------|  |-----------+------+------+------+----------|
-           KC_ENT,       KC_BSPC,         KC_TAB,        KC_EQL, TD(PENUMB),      TD(SLNUMB),  KC_1,  KC_2,  KC_3, KC_ASTR ),
+           KC_ENT,       KC_BSPC,         KC_TAB,        KC_EQL, TD(DENUOF),      TD(SLNUMB),  KC_1,  KC_2,  KC_3, KC_ASTR ),
 //'--------------------------------------------------------------------------'  '-------------------------------------------'
+*/
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
 // END OF _NUMB 2
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
+
+
+
+
+
+
 
 /*
 //////////////////////////////////////////////////////////////////////////////////////////////////////###
@@ -2706,7 +2772,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|--------------+--------------+---------------+--------------+-------------|
     SFT_T(KC_SPC), CTL_T(KC_DEL), ALT_T(KC_COMM), GUI_T(KC_DOT), TD(G_DOEU),
 //|--------------+--------------+---------------+--------------+-------------|
-           KC_ENT,       KC_BSPC,         KC_TAB,        KC_EQL, TD(PENUMB),
+           KC_ENT,       KC_BSPC,         KC_TAB,        KC_EQL, TD(PENUOF),
 //'--------------------------------------------------------------------------'
 
                                                             // RIGHT_HAND
@@ -2723,32 +2789,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap _SYMB 3: symbols Layer
  * ,----------------------------------.  ,----------------------------------.
  * |      |      |      |      |@@@@@@|  |      |      |      |      |      |
- * |   +  |   =  |   #  |   *  |   %  |  | &  ^ |   (  |   )  |   _  |   -  |
+ * |   +  |   =  |   #  |   *  |   %  |  |   &  |   (  |   )  |   _  |   -  |
  * |      |      |      |      |@@@@@@|  |      |      |      |      |      |
  * |------+------+------+------+------|  |------+------+------+------+------|
- * | LSft | LCtl | LAlt | LGui |      |  |      | LGui | LAlt | LCtl | LSft |
+ * | LCtl | LAlt | LGui | LSft |      |  |      | LSft | LGui | LAlt | LCtl |
  * |      |      |      |      |      |  |      |      |      |      |      |
  * | `  ~ | '  " |   \  |   /  |   |  |  |   @  |   [  |   ]  |   ,  |   .  |
  * |------+------+------+------+------|  |------+------+------+------+------|
  * |      |      |      |      |      |  |@@@@@@|      |      |      |      |
- * | !  ¡ | ?  ¿ |   <  |   >  | $  € |  |@@@@@@|   {  |   }  |   ;  |   :  |
+ * | !  ¡ | ?  ¿ | <    | >  ^ | $  € |  |   ^  |   {  |   }  |   ;  |   :  |
  * |      |      |      |      |      |  |@@@@@@|      |      |      |      |
  * '----------------------------------'  '----------------------------------'
 */
 // SYMBOLS layer 3
+/*
 [_SYMB] = LAYOUT_ortho_3x10(  // layer 3: symbols layer
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,-----------------------------------------------------------------------------.  ,-----------------------------------------------------------------------------------.
-           KC_PLUS,         KC_EQL,        KC_HASH,        KC_ASTR,    KC_PERC,            TD(Y_AMCI),        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,
+           KC_PLUS,         KC_EQL,        KC_HASH,        KC_ASTR,    KC_PERC,               KC_AMPR,        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
     LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH),    KC_PIPE,                 KC_AT, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
-//  LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
-        TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK, TD(G_DOEU),               KC_CIRC,        KC_LCBR,        KC_RCBR,        KC_SCLN,        KC_COLN ),
-//      TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK,    KC_ASTR,      LT(_SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_SCLN,        KC_COLN,
-//,-----------------------------------------------------------------------------'  '-----------------------------------------------------------------------------------.
-///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
+        TD(Z_EXCL),     TD(X_QUES),        KC_LABK,     TD(V_RACI), TD(G_DOEU),               KC_CIRC,        KC_LCBR,        KC_RCBR,        KC_SCLN,        KC_COLN 
+),
+*/
+[_SYMB] = KEYMAP_gherkin_wrapper(  // layer 02 : numbers layer
+           _F_CORE_SYMB_L1_,                                                          _F_CORE_SYMB_R1_,
+           _F_CORE_SYMB_L2_,                                                          _F_CORE_SYMB_R2_,
+           _F_CORE_SYMB_L3_,                                                          _F_CORE_SYMB_R3_
+),
+//,-----------------------------------------------------------------------------'  '-----------------------------------------------------------------------------------.///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
 // [info] EURO: http://www.fileformat.info/info/unicode/char/search.htm?q=euro&preview=entity
 // END OF _SYMB 3
@@ -3201,7 +3272,7 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 // _MOUS layer 13
 [_MOUS] = LAYOUT_ortho_3x10(  // layer 13: mouse layer
 //,----------------------------------------------.  ,----------------------------------------------.
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R,
 //|--------+--------+--------+--------+----------|  |--------+--------+--------+--------+----------|
     _______, _______, _______, _______, XXXXXXX,      XXXXXXX, KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R,
 //|--------+--------+--------+--------+----------|  |--------+--------+--------+--------+----------|
@@ -3295,11 +3366,11 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 // ###
 ///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
 //,-----------------------------------------------------------------------------.  ,-----------------------------------------------------------------------------------.
-           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,            TD(Y_AMCI),         BEEP_1,         BEEP_2,         BEEP_3,        KC_MINS,
+           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,               KC_AMPR,         BEEP_1,         BEEP_2,         BEEP_3,        KC_MINS,
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
     LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
 //|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
-        TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK,    KC_ASTR,      LT(_SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_COLN,        KC_SCLN )
+        TD(Z_EXCL),     TD(X_QUES),        KC_LABK,     TD(V_RACI),    KC_ASTR,      LT(_SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_COLN,        KC_SCLN )
 //,-----------------------------------------------------------------------------'  '-----------------------------------------------------------------------------------.
 ///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 // ###
@@ -3340,6 +3411,30 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 //                                                                                      //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//                                                                                      //
+//                        M A T R I X   I N I T   U S E R                               //
+//                                                                                      //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+void matrix_init_user(void) {
+
+  breathing_disable();
+
+  //backlight_level(BL_GHKN);
+
+  // set_unicode_input_mode(UC_OSX);
+  // REPLACE UC_XXXX with UC_OSX - the Unicode Input Mode for your OS. See table below.
+} // end of matrix_init_user
+//                                                                                      //
+//                        m a t r i x   i n i t   u s e r                               //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //

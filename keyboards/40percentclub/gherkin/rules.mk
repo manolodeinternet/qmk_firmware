@@ -1,5 +1,4 @@
-# MCU name
-MCU = atmega32u4
+SRC += /Users/navarro/qmk_firmware/users/manolodeinternet/manolodeinternet.c
 
 # Bootloader selection
 #   Teensy       halfkay
@@ -9,24 +8,32 @@ MCU = atmega32u4
 #   QMK DFU      qmk-dfu
 #   ATmega32A    bootloadHID
 #   ATmega328P   USBasp
-BOOTLOADER = caterina
 
-# Build Options
-#   comment out to disable the options.
-#
-BOOTMAGIC_ENABLE = no	# Virtual DIP switch configuration(+1000)
-MOUSEKEY_ENABLE = yes	  # Mouse keys(+4700)
-EXTRAKEY_ENABLE = no	  # Audio control and System control(+450)
-CONSOLE_ENABLE = no	    # Console for debug(+400)
+# MCU name
+MCU                 = atmega32u4
 
-DEBUG_ENABLE = no
+BOOTLOADER          = caterina
 
+#If ProMicro has QMK DFU bootloader instead of Caterina,
+#run "make <keyboard>:<keymap> dfu=qmk" when compiling to ensure it is flagged properly after being flashed
+ifeq ($(strip $(dfu)), qmk)
+    BOOTLOADER = qmk-dfu
+endif
 
-COMMAND_ENABLE = no     # Commands for debug and configuration
-SLEEP_LED_ENABLE = no   # Breathing sleep LED during USB suspend
-NKRO_ENABLE = yes		    # USB Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
-BACKLIGHT_ENABLE = yes  # Enable keyboard backlight functionality
-AUDIO_ENABLE = no
-RGBLIGHT_ENABLE = no
+# if next feature doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
+NKRO_ENABLE         = yes # USB Nkey Rollover
 
-LAYOUTS = ortho_3x10
+BOOTMAGIC_ENABLE    = no  # Virtual DIP switch configuration(+1000)
+EXTRAKEY_ENABLE     = no  # Audio control and System control(+450)
+AUDIO_ENABLE        = no  # Toggles audio mode
+
+DEBUG_ENABLE        = no  # Toggles debug mode
+CONSOLE_ENABLE      = no  # Console for debug(+400)
+COMMAND_ENABLE      = no  # Commands for debug and configuration
+
+BACKLIGHT_ENABLE    = yes # Enable keyboard backlight functionality
+RGBLIGHT_ENABLE     = no  # Enable keyboard RGB       functionality
+BACKLIGHT_BREATHING = yes # Enable keyboard backlight breathing
+SLEEP_LED_ENABLE    = no  # Breathing sleep LED during USB suspend
+
+LAYOUTS             = ortho_3x10

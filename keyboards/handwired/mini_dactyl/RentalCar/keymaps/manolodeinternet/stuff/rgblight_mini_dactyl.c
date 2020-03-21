@@ -16,7 +16,9 @@
 
 //#pragma once
 
-#include "rgblight_mini_dactyl.h"
+// #include "rgblight_mini_dactyl.h"
+#include "/Users/navarro/qmk_firmware/users/manolodeinternet/rgblight_mini_dactyl.h"
+#include "/Users/navarro/qmk_firmware/quantum/rgblight.h"
 
 extern rgblight_config_t rgblight_config;      // without this line, it doesn't recognize rgblight_config
 

@@ -34,7 +34,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROWS 10
 #define MATRIX_COLS 6
 
-
 // wiring of each half
 
 #define MATRIX_COL_PINS { B5,B4,E6,D7,C6}
@@ -69,110 +68,29 @@ Because I didn't need this with my Gherkin:
 /* ws2812 RGB LED */
 #define RGB_DI_PIN F4
 #define RGBLIGHT_TIMER
-#define RGBLED_NUM 5    // Number of LEDs
+// #define RGBLED_NUM 5    // Number of LEDs
 #define ws2812_PORTREG  PORTD
 #define ws2812_DDRREG   DDRD
 
-
 /*
- * Feature disable options
+ * [FEATURE DISABLE OPTIONS]
  *  These options are also useful to firmware size reduction.
  */
-
 /* disable debug print */
-//#define NO_DEBUG
+// #define NO_DEBUG
 
 /* disable print */
-//#define NO_PRINT
+// #define NO_PRINT
 
 /* disable action features */
-//#define NO_ACTION_LAYER
-//#define NO_ACTION_TAPPING
-//#define NO_ACTION_ONESHOT
-//#define NO_ACTION_MACRO
-//#define NO_ACTION_FUNCTION
+// #define NO_ACTION_LAYER
+// #define NO_ACTION_TAPPING
+// #define NO_ACTION_FUNCTION
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////// MINE ###
-// THE REST OF THE FILE IS ABOUT MOUSE CONFIGURATION !!!
-
-//Mousekeys Settings 0 16 7 60 0 ? ?
-#define MOUSEKEY_DELAY 60
-#define MOUSEKEY_INTERVAL 50
-#define MOUSEKEY_MAX_SPEED 8
-#define MOUSEKEY_TIME_TO_MAX 40
-
-// NO SIRVE PARA NADA, NO EXISTE, CREO !    #define MOUSEKEY_WHEEL_DELAY 500
-// NO SIRVE PARA NADA, NO EXISTE, CREO !    #define MOUSEKEY_WHEEL_INTERVAL 220
-#define MOUSEKEY_WHEEL_MAX_SPEED 2
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 200  // max. value: 255
-
+#define NO_ACTION_ONESHOT
+#define NO_ACTION_MACRO
 /*
-I have modified `/Users/navarro/qmk_firmware/tmk_core/common/mousekey.c`, 
-including the next line:
-
-static uint8_t wheel_unit(void)
-{
-    uint16_t unit;
-    if (mousekey_accel & (1<<0)) {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed)/4;
-    } else if (mousekey_accel & (1<<1)) {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed)/2;
-    } else if (mousekey_accel & (1<<2)) {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed);
-    } else if (mousekey_repeat == 0) {
-        unit = MOUSEKEY_WHEEL_DELTA;
-    } else if (mousekey_repeat >= mk_wheel_time_to_max) {
-        unit = MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed;
-    } else {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed * mousekey_repeat) / mk_wheel_time_to_max;
-    }
-
-// [manolodeinternet@gmail.com]
-// NEXT LINE IS MINE !!!
-// THIS IS FOR GETTING WHEEL MOUSE TO MOVE SLOWER (10 TIMES SLOWER),
-
-    unit = (unit == 0 ? unit : unit / 100);
-    //////////////////////////////////////
-
-    return (unit > MOUSEKEY_WHEEL_MAX ? MOUSEKEY_WHEEL_MAX : (unit == 0 ? 1 : unit));
-}
-
-*/
-
-/* confi.h had the following:
-#define MOUSEKEY_DELAY 0
-#define MOUSEKEY_INTERVAL 32
-#define MOUSEKEY_MAX_SPEED 5
-#define MOUSEKEY_TIME_TO_MAX 30
-#define MOUSEKEY_WHEEL_DELAY 50
-#define MOUSEKEY_WHEEL_MAX_SPEED 3
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 200
-*/
-
-/* keymap.c had the following:
-#define MOUSEKEY_DELAY             300
-#define MOUSEKEY_INTERVAL          50
-#define MOUSEKEY_MAX_SPEED         10
-#define MOUSEKEY_TIME_TO_MAX       20
-#define MOUSEKEY_WHEEL_DELAY       50
-#define MOUSEKEY_WHEEL_MAX_SPEED   8
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 40
-*/
-//////////////////////////////////////////////////////////////////////////////////////////////// MINE ###
-
-
+ * [feature disable options]
+ */
 
 #endif

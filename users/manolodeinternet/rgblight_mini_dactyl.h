@@ -88,7 +88,7 @@
 
 
 // [manolodeinternet]
-void setRGB_range(uint8_t r, uint8_t g, uint8_t b, uint8_t start, uint8_t end);
+void setrgb_range(uint8_t r, uint8_t g, uint8_t b, uint8_t start, uint8_t end);
 // [manolodeinternet]
 
 
