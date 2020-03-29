@@ -31,7 +31,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define TAPPING_TERM 150
+#define TAPPING_TERM 150 // 300
+#define TAPPING_TOGGLE 1
 
 #include "config_common.h"
 

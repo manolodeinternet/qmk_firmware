@@ -16,29 +16,16 @@
 //#define MASTER_LEFT
 //#define MASTER_RIGHT
 
-/*
- * `WAKING UP MY COMPUTER`
-     Forces the keyboard to wait for a USB connection to be established before it starts up
-     It must be flashed on master side, but no on slave side for a right wake up !!!
-
- * `NO_USB_STARTUP_CHECK`  We don't need this command !!!
-     Disables usb suspend check after keyboard startup. Usually the keyboard waits for the host to wake it up before any tasks are performed. This is useful for split keyboards as one half will not get a wakeup call but must send commands to the master.
- */
-#define WAIT_FOR_USB         // for wake up computer typing on the keyboard
-                                // -$50 bytes (using it, we save 50 bytes)
-                                // if we don't use it, we have 50 bytes less.
-// #define NO_USB_STARTUP_CHECK // ??? alone or with WAIT_FOR_USB together ???
-
-#define TAPPING_TOGGLE 2
-
-#define PREVENT_STUCK_MODIFIERS
-
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
 //#define RGBLED_SPLIT { 6, 7 } // 2020/02/17
 
 /*(just added, @drashna)*/
 //#define RGBLIGHT_SPLIT
 //#define RGBLED_SPLIT { 0, 12 }
 /*(just added, @drashna)*/
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #undef  RGBLED_NUM
 
@@ -56,75 +43,54 @@
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
 
-//You have to comment one of these two lines:
-//#define ALPHAS_OVERCHARGED
-#define SINGLE_ALPHAS
+//
+// QMK_FIRMWARE/USERS/MANOLODEINTERNET/WRAPPERS.H
+//You have to uncomment one of these two lines:
+// In 'qmk_firmware/Users/manolodeinternet/wrappers.h'...
+// ...we define alpha rows with all modifiers and layer triggers
+//
+// 1:
+//#define OVERCHARGED_ALPHAS
+//
+// In 'qmk_firmware/Users/manolodeinternet/wrappers.h'...
+// ...we define alpha rows as simple as we can, but with modifiers...
+// ...and layer triggers are defined on thumb rows !!!
+//
+// 2:
+#define MODIFIERS_ALPHAS
+//
+// 3:
+#define MINI_DACTYL_THUMBS
+// qmk_firmware/users/manolodeinternet/wrappers.h
+//
 
 //////////////////////////////////////////////////////////////////////////////////////////////// MINE ###
-// THE REST OF THE FILE IS ABOUT MOUSE CONFIGURATION !!!
+//////////////////////////////////////////////////////////////////////////////////////////////// MINE ###
 
-//Mousekeys Settings 0 16 7 60 0 ? ?
-#define MOUSEKEY_DELAY 60
-#define MOUSEKEY_INTERVAL 50
-#define MOUSEKEY_MAX_SPEED 8
-#define MOUSEKEY_TIME_TO_MAX 40
-
-// NO SIRVE PARA NADA, NO EXISTE, CREO !    #define MOUSEKEY_WHEEL_DELAY 500
-// NO SIRVE PARA NADA, NO EXISTE, CREO !    #define MOUSEKEY_WHEEL_INTERVAL 220
-#define MOUSEKEY_WHEEL_MAX_SPEED 2
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 200  // max. value: 255
-
+// #define USER_PRINT
 /*
-I have modified `/Users/navarro/qmk_firmware/tmk_core/common/mousekey.c`, 
-including the next line:
+ * [FEATURE DISABLE OPTIONS]
+ *  These options are also useful to firmware size reduction.
+ */
+/* disable debug print */
+// #define NO_DEBUG
 
-static uint8_t wheel_unit(void)
-{
-    uint16_t unit;
-    if (mousekey_accel & (1<<0)) {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed)/4;
-    } else if (mousekey_accel & (1<<1)) {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed)/2;
-    } else if (mousekey_accel & (1<<2)) {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed);
-    } else if (mousekey_repeat == 0) {
-        unit = MOUSEKEY_WHEEL_DELTA;
-    } else if (mousekey_repeat >= mk_wheel_time_to_max) {
-        unit = MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed;
-    } else {
-        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed * mousekey_repeat) / mk_wheel_time_to_max;
-    }
+/* disable print */
+// #define NO_PRINT
 
-// [manolodeinternet@gmail.com]
-// NEXT LINE IS MINE !!!
-// THIS IS FOR GETTING WHEEL MOUSE TO MOVE SLOWER (10 TIMES SLOWER),
+/* disable action features */
+// #define NO_ACTION_LAYER    // it's necessary for tap_dance
 
-    unit = (unit == 0 ? unit : unit / 100);
-    //////////////////////////////////////
+// #define NO_ACTION_TAPPING  // it's necessary for mod/tap feature !
+//                            // 2492-430= 2062 bytes saved with this single '#define NO_...' line of code
 
-    return (unit > MOUSEKEY_WHEEL_MAX ? MOUSEKEY_WHEEL_MAX : (unit == 0 ? 1 : unit));
-}
-*/
+// #define NO_ACTION_FUNCTION // it's neccesary for action_functions
 
-/* confi.h had the following:
-#define MOUSEKEY_DELAY 0
-#define MOUSEKEY_INTERVAL 32
-#define MOUSEKEY_MAX_SPEED 5
-#define MOUSEKEY_TIME_TO_MAX 30
-#define MOUSEKEY_WHEEL_DELAY 50
-#define MOUSEKEY_WHEEL_MAX_SPEED 3
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 200
-*/
-
-/* keymap.c had the following:
-#define MOUSEKEY_DELAY             300
-#define MOUSEKEY_INTERVAL          50
-#define MOUSEKEY_MAX_SPEED         10
-#define MOUSEKEY_TIME_TO_MAX       20
-#define MOUSEKEY_WHEEL_DELAY       50
-#define MOUSEKEY_WHEEL_MAX_SPEED   8
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 40
-*/
-//////////////////////////////////////////////////////////////////////////////////////////////// MINE ###
+// We need ACTION_ONESHOT activated for running OSL(_ACCN)
+// #define NO_ACTION_ONESHOT
+#define NO_ACTION_MACRO       // apparently it's necessary only for macros !!!
+/*
+ * [feature disable options]
+ */
 
 #endif

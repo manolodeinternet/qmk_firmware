@@ -191,7 +191,6 @@ uint16_t get_tapping_term(uint16_t keycode) {
 // #include QMK_KEYBOARD_H
 // Following 2 files don't need full path bc folder 'users/manolodeinternet' is automatically included
 #include "manolodeinternet.h"
-// #include "wrappers.h"
 #include "rgblight_mini_dactyl.h"
 
 // It's included from 'manolodeinternet.h'
@@ -224,40 +223,9 @@ extern LED_TYPE led[RGBLED_NUM];
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-#define _DFLT   0  //  gherkin ALPHAS DEFAULT    layer 
-#define _ACCN   1  //  gherkin ACCENTS           layer 
-#define _NUMB   2  //  gherkin numbers           layer 
-#define _FVIM   3  //  Fake                  VIM layer
-/*
-#define _AVIM  X12X  //  select              VIM layer
-We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, but easier and clearer !
-*/
-#define _CVIM   4  //  power edition         VIM layer
-// #define _XVIM   5  //  movement              VIM layer
-#define _DVIM   5  //  Delete                VIM layer
-#define _MOUS   6  //  mouse                     layer
-#define _DALY   7  //  gherkin DAiLY commands    layer 
-#define _FUNC   8  //  gherkin functions         layer 
-#define _SYMB   9  //  gherkin symbols           layer 
-#define _APPS  10  //  APPlicationS              layer
-#define _RGBL  11  //  backlight                 layer
-#define _LGHT  _RGBL
-#define _POWR  12  //  POWER        productivity layer
-//
-// defining layers
-//
-// [UNDERSTANDING]
-// FOR ACCESING LAYERS FROM KEYMAP 'LT(LAYER, KC)', NUMBER LAYER MUST BE BETWEEN 0 AND 15
-// I can implement the call to _DVIM,_CVIM & _XVIM from TAP_DANCE functions...
-//...renumbering this layers above 16 or even above 32, ...
-//...this wayl we'll have THREE FREE LAYERS more for using directly from any keymap (0..15)
-     // ... but it works even above 31 & 32 & 33 ...
-     // ... consuming an exaggerated amount of memory, ...
-     // ... the higher the number of the layer, ...
-     // ... the more memory consumed.  
-// IMPORTANT: IN ADDITION TO USING LAYERS AMONG 0...15, YOU CAN USE LAYERS AMONG 16...31, IF... 
-// ...IF YOU AREN'T GOING TO ACCESS THEM FROM KEYMAP, BUT FROM CODE, USING 'layer_on / layer_off(LAYER)'
-// [understanding]
+//miniDactyl
+//layers 0...12 defined at 'qmk_firmware/users/manolodeinternet/wrappers.h'
+#define _RGBL  _LGHT
 //                                                                                      //
 // defining layers                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -623,51 +591,8 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 // DEFINING _DALY COMMANDS 6                                                            //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-#define CAPSCR          LSFT(LGUI(KC_3))  // Capture whole screen
-#define CAPSLC          LSFT(LGUI(KC_4))  // Capture portion of screen (a slice)
-// [UNUSED]
-//      KC_CPYW          LCTL   (CAPSCR)  // Copy whole screen       // LCTL (LSFT(LGUI(KC_3)))
-//      KC_CPYP          LCTL   (CAPSLC)  // Copy portion of screen  // LCTL (LSFT(LGUI(KC_4)))
-// [unused]
-
-// #define PREV_APPL      LSFT(LGUI(KC_TAB))  // previous app
-// #define NEXT_APPL            LGUI(KC_TAB)  //     next app
-#define PREV_W     LSFT(LGUI(KC_GRAVE))  // previous window
-#define NEXT_W           LGUI(KC_GRAVE)  //     next window
-#define PREV_T       LSFT(LCTL(KC_TAB))  // previous tab
-#define NEXT_T             LCTL(KC_TAB)  //     next tab
-
-#define SPOTLT             LGUI(KC_SPC)  // spotlight & siri
-
-
-#define APPS_W            LCTL(KC_DOWN)  // applications windows
-#define MISCTL              LCTL(KC_UP)  // mission control
-#define  SPEAK               LCAG(KC_H)  // start/stop to speak selected text 
-                                                //or all the text if any is selected
-                                                // LCTL = Hold Left Control, Alt and GUI and press kc
-// [SYSTEM PREFERENCES]
-#define   DESK                    KC_F6  // show desktop
-#define LNCHPD                   KC_F17  // F17 (set at 'Sys.Pref./Keyboard/Shortcuts/Launchpad & Doc')
-#define DSHBRD                   KC_F18  // F18 (set at 'Sys.Pref./Keyboard/Shortcuts/Mission Control')
-#define ACTV_W              LCTL(KC_F4)  // active window
-#define FLOA_W              LCTL(KC_F6)  // floating window
-// [system preferences]
-
-#define REOPEN           LSFT(LGUI(KC_T))  // reopen last closed window/tab
-#define CLOS_A               LGUI(KC_Q)  // close application
-#define CLOS_W               LGUI(KC_W)  // close window
-#define CLOS_T               LGUI(KC_W)  // close tab
-
-// [UNUSED]
-#define AUTFIL                    KC_F5  // autocompletion
-#define P_MTCH   LSFT(LALT(LGUI(KC_V)))   //PASTE & MATCH STYLE
-
-// 3ERD PARTY APPLICATIONS
-// SUBLIME COMMANDS
-#define P_HYST          LALT(LGUI(KC_V))   //PASTE (SUBLIME TEXT) FROM HISTORY
-// sublime commands
-// 3erd party applications
-// [unused]
+//
+// defined at users/manolodeinternet/wrappers.h
 //                                                                                      //
 // defining _daly commands 6                                                            //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -776,22 +701,21 @@ enum tap_dance_keycodes {
 //    ,MOUS_Tab
 
 // TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB (NUMBERS LAYER) 3
-    ,SETNMB  // set numbers layer up / switch numbers layer off
+// WE DON'T NEED 'SETNMB' TAPDANCE ANY MORE SINCE WE USE 'TT(_NUMB)' WITH 'MODIFIERS_ALPHAS' LAYOUT
+    // ,SETNMB  // set numbers layer up / switch numbers layer off
 // [GHERKIN]
 //    ,SLNUMB  // return to *GHKN layer (gherkin default layer)  // ... slash
 // [gherkin]
 
 // TAP DANCE KEYCODES ACCESSIBLE FROM _SYMB (SYMBOLS LAYER) 4
 /*
-    ,Y_AMCI  // ampersand & circumflex accent
     ,G_DOEU  // dolar & euro
+    ,Y_AMCI  // ampersand & circumflex accent
     ,Z_EXCL
     ,X_QUES
 */
 
 // TAP DANCE KEYCODES FOR _POWR (POWER LAYER) 8
-    // ,TG_IND   // toggle keyboard as whole indicator for capslock ON/OFF
-    // ,LCKLOG   // logout user session / lock user screen
     // ,SLEP_M   //   menu bar / (on hold) SLEEP
     // ,KILM_T   //   dock bar / (on hold) KILL MENU
     // ,KILA_D   //  tools bar / (on hold) KILL CURRENT APP
@@ -814,7 +738,6 @@ enum tap_dance_keycodes {
 
 // (i.e. KC_U: *'begin of line'/**'begin of paragraph')
     ,FVIM_uU ,FVIM_pP
-
     ,DVIM_uU ,DVIM_pP
 };
 //                                                                                      //
@@ -834,8 +757,9 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,GRAVE
     ,DIAER 
 // macros for _accn layer 1
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
+    ,TT_NUMB
 
 // MACROS FOR DEFAULT LAYER 0
     ,MY_CLEAR
@@ -856,12 +780,12 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,TH_R4_POWR_RGBL
 
 // THIS FUNCTION IS NOT GOING TO BE USED WITH 23 LEDS PER HAND
-//  ,MY_STEP_INDICAT  // it increments step indicator for RGB LEDs
+    ,STP_ID  // it increments step indicator for RGB LEDs
 // this function is not going to be used with 23 leds per hand
 
     ,TOG_ID  // it toggles keyboard as whole indicator for capslock ON/OFF
 // macros for default layer 0
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
 // MACROS FOR _POWR LAYER 8
@@ -874,26 +798,26 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,SH_STA
     ,RT_FLO
 // macros for _powr layer 8
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
 // MACROS FOR _APPS LAYER 7
-    ,APP_Q_SNOTE ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_APSTO,APP_T_TERMI
+    ,APP_Q_SNOTE ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_APSTO ,APP_T_TERMI
                                          ,APP_Y_TYPIN ,APP_U_UROOM ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF
     ,APP_A_SCRPT ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME
                                          ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KRBNR ,APP_L_CLNDR ,APPSP_EMPTY
     ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_KVIEW ,APP_B_BOOKS
                                          ,APP_N_NOTES ,APP_M_MAIL  ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB
 // macros for _apps layer 7
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 // MACROS FOR _DALY LAYR 6
-    ,DICTAD
+    ,DICTATION
     ,SIRI
 // macros for _daly layer 6
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
 // MACROS FOR _?VIM 9, 10, 11, 12, 13
@@ -909,15 +833,14 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,FVIM_EN
 */
 // _fvim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
 // _DVIM LAYER
     ,DVIM_Y         ,DVIM_I  ,DVIM_O            // it's used tap_dance for U,P
     ,DVIM_H ,DVIM_J ,DVIM_K  ,DVIM_L  ,DVIM_SP
             ,DVIM_M ,DVIM_ES ,DVIM_BS ,DVIM_EN
-// _dvim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
 // OMNIFOCUS.APP
@@ -925,27 +848,27 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 //    ,AVIM_Y                     // _AVIM is for select VIM layr
 //    ,AVIM_N                     // it's used SHIFT+key for the rest of the right side of the keyboard
 // _avim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // _CVIM LAYER
     ,CVIM_Y ,CVIM_U ,CVIM_I  ,CVIM_O  ,CVIM_P
             ,CVIM_J ,CVIM_K  ,CVIM_L  ,CVIM_SP
     ,CVIM_N ,CVIM_M ,CVIM_ES ,CVIM_BS ,CVIM_EN
 // _cvim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // _XVIM LAYER
     ,XVIM_Y ,XVIM_U ,XVIM_I  ,XVIM_O  ,XVIM_P
     ,XVIM_H ,XVIM_J ,XVIM_K  ,XVIM_L  ,XVIM_SP
     ,XVIM_N ,XVIM_M ,XVIM_ES ,XVIM_BS ,XVIM_EN
 // _xvim layer       
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 //
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 // macros for _?vim 9, 10, 11, 12, 13
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 // MACROS FOR _RGBL 15
 // RED
     ,CH_RED  ,CH_CORL  ,CH_ORNG  ,CH_GOLR ,CH_GOLD          ,CH_YLLW          ,SAV_COL
@@ -955,7 +878,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
     ,CH_CYAN ,CH_AZUR  ,CH_BLUE  ,CH_PRPL ,CH_MGNT          ,CH_PINK          ,CH_EMPT
 
 // macros for _blit 15
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 }; // enum custom keycodes
 //                                                                                      //
@@ -984,6 +907,8 @@ user_config_t user_config;
   int    state_number;
 //  int    active_layer;
 
+        uint16_t lt12_timer;
+
   static uint8_t   shift_flag;
   static uint8_t control_flag;
   static uint8_t  option_flag;
@@ -1011,12 +936,12 @@ user_config_t user_config;
   static bool whole_keyboard_as_indicator = true;
 
 // THIS VARIABLES ARE NOT GOING TO BE USED WITH 23 LEDS PER HAND
-  // static int  diff = 2;
-  // static int  prev_diff = 2;
+  static int  diff = 1;
+  static int  prev_diff = 1;
 // this variables are not going to be used with 23 leds per hand
 
   static bool numbers_is_active = false; // #01
-  static bool numbers_is_set = false;  
+  
 
   static uint16_t default_hue;
   static uint8_t  default_sat;
@@ -1182,6 +1107,7 @@ void avim(char *key)
     send_string(key);
 }
 */ 
+
 void dvim(char *key)
 {
     HYPR_V;
@@ -1257,7 +1183,7 @@ void remove_activated_mod(uint8_t activated_mod)
 // ... instead of repeating this bunch or code into 'process_record_user' for ...
 // ... SL_MEN, KA_DCK, KM_TOL, SH_STA, RT_FLO, ...
 // ... we call this function into every function !!!
-bool remove_control_mod(void)
+bool triggered_control_mod(void)
 {
   control_flag = get_mods()&CTRL_MODS;
   if (control_flag)
@@ -1267,6 +1193,42 @@ bool remove_control_mod(void)
     // del_weak_mods(control_flag);
     // send_keyboard_report();
     return true;
+  }
+  return false;
+}
+
+// using this function, we pass from 674 to 586 bytes free while compile firmware !!!
+bool triggered_mod(uint8_t mod)
+{
+  switch (mod) {
+    case KC_C: control_flag = get_mods()&CTRL_MODS;
+               if (control_flag)
+               {
+                 remove_activated_mod(control_flag);
+                 return true;
+               }
+               return false;
+    case KC_A: option_flag  = get_mods()&ALT_MODS;
+               if (option_flag)
+               {
+                 remove_activated_mod(option_flag);
+                 return true;
+               }
+               return false;
+    case KC_G: gui_flag     = get_mods()&GUI_MODS;
+               if (gui_flag)
+               {
+                 remove_activated_mod(gui_flag);
+                 return true;
+               }
+               return false;
+    case KC_S: shift_flag   = get_mods()&SHFT_MODS;
+               if (shift_flag)
+               {
+                 remove_activated_mod(shift_flag);
+                 return true;
+               }
+               return false;
   }
   return false;
 }
@@ -1318,6 +1280,7 @@ bool remove_control_mod(void)
 //   return false;
 // }
 
+
 void callApp(char *app_initial)
 {
 // open Spotlight search:
@@ -1334,8 +1297,9 @@ void callApp(char *app_initial)
 // wait_ms(100);
 }
 
-// [CURIOSITY]
 /*
+// [CURIOSITY]
+//  Workin with keycodes instead of chars or strings
 // calling from process_record_user: callApp('a');  callApp('b'); ... instead of callApp("a"); ...
 
 void callApp(char ascii_code)
@@ -1502,26 +1466,26 @@ void show_RGB_LEDs(void)  // MY SWITCH CAPSCLOCK INDICATORS ON FUNCTION
     // }
 
     // right_thumbs = red
-       caps_rght_sta = INNER_RGHT - THUMB_LEDS - 1;
+       caps_rght_sta = INNER_RGHT - diff - 1;
        caps_rght_end = INNER_RGHT              + 1;
 
        if (numbers_is_active)
        {
          // left = blue
          numb_left_sta = INNER_LEFT;
-         numb_left_end = INNER_LEFT + THUMB_LEDS + 1;
+         numb_left_end = INNER_LEFT + diff + 1;
        }               
        else // rgb_num = false
        {
          // left = red
          caps_left_sta = INNER_LEFT;
-         caps_left_end = INNER_LEFT + THUMB_LEDS + 1;
+         caps_left_end = INNER_LEFT + diff + 1;
        }
        // rght = default color
        dflt_rght_sta = OUTER_RGHT;
-       dflt_rght_end = INNER_RGHT - THUMB_LEDS - 1;
+       dflt_rght_end = INNER_RGHT - diff - 1;
        // left = default color
-       dflt_left_sta = INNER_LEFT + THUMB_LEDS + 1;
+       dflt_left_sta = INNER_LEFT + diff + 1;
        dflt_left_end = OUTER_LEFT              + 1;
     }
 
@@ -1571,16 +1535,16 @@ void show_RGB_LEDs(void)  // MY SWITCH CAPSCLOCK INDICATORS ON FUNCTION
         // dflt_left_end = OUTER_LEFT        + 1;
 
         // rght = blue
-        numb_rght_sta = INNER_RGHT - THUMB_LEDS - 1;
+        numb_rght_sta = INNER_RGHT - diff - 1;
         numb_rght_end = INNER_RGHT              + 1;
         // left = blue
         numb_left_sta = INNER_LEFT;
-        numb_left_end = INNER_LEFT + THUMB_LEDS + 1;
+        numb_left_end = INNER_LEFT + diff + 1;
         // rght = default color
         dflt_rght_sta = OUTER_RGHT;
-        dflt_rght_end = INNER_RGHT - THUMB_LEDS - 1;
+        dflt_rght_end = INNER_RGHT - diff - 1;
         // left = default color
-        dflt_left_sta = INNER_LEFT + THUMB_LEDS + 1;
+        dflt_left_sta = INNER_LEFT + diff + 1;
         dflt_left_end = OUTER_LEFT              + 1;
       }
 
@@ -1849,6 +1813,7 @@ void DVIM_Del_finished (qk_tap_dance_state_t *state, void *user_data) {
     case   SINGLE_TAP:  register_code(KC_DEL); break;
 
     case   SINGLE_HOLD: layer_on(_DVIM);
+
 /*
     case ALT_plus_HOLD: if (triggered_gui())
                           multi_apps = true;
@@ -1864,6 +1829,7 @@ void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data) {
     case   SINGLE_TAP:  unregister_code(KC_DEL); break;
 
     case   SINGLE_HOLD: layer_off(_DVIM);
+
 /*
     case ALT_plus_HOLD: layer_off(_APPS);         break;
     case GUI_plus_HOLD:
@@ -1962,6 +1928,10 @@ void SLNUMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 //////////////////////////////////////////////////////////////////////////////////////////
 [gherkin]
 */
+
+
+//
+/* WE DON'T NEED 'SETNMB' TAPDANCE ANY MORE SINCE WE USE 'TT(_NUMB)' WITH 'MODIFIERS_ALPHAS' LAYOUT
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -2032,8 +2002,9 @@ void SETNMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 //             t a p   d a n c e   f o r    [ _ n u m b ]  l a y e r                    //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
+//
+//  we don't need 'setnmb' tapdance any more since we use 'tt(_numb)' with 'modifiers_alphas' layout */
+//
 
 
 
@@ -2274,118 +2245,6 @@ void AVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
 //              t a p   d a n c e   f o r  -  v   i   m  -  l a y e r s                 //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//             T A P   D A N C E   F O R    [ _ P O W R ]    L A Y E R                  //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_POWR] KC_A (TG_IND)                                                     //
-//                                                                                      //
-//  T O G G L E    W H O L E    I N D I C A T O R S   /   R I G H T    S H I F T        //
-//                                                                                      //
-//  TOGGLE 'WHOLE RGB KEYBOARD' / 'THUMBS RGB' AS INDICATOR FOR 'CAPSLOCK', [_NUMB],... //
-//                                                                                      //
-//  KC_A:   *  TOGGLE 'WHOLE RGB KEYBOARD' / 'THUMBS RGB' AS INDICATOR                  //
-//          @  RIGHT SHIFT                                                              //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'TG_IND' tap dance.
-/*
-static tap TG_IND_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void TG_IND_finished (qk_tap_dance_state_t *state, void *user_data) {
-  TG_IND_tap_state.state = cur_dance(state);
-  switch (TG_IND_tap_state.state) {
-
-    case SINGLE_TAP:  if (rgblight_config.enable && (capslock_is_active || numbers_is_active)) // #01
-                      {
-                        if (whole_keyboard_as_indicator)
-                        {
-                          diff = prev_diff;
-                        }
-                        else
-                        {
-                          prev_diff = diff;
-                          diff = 2;
-                        }
-                        whole_keyboard_as_indicator = !whole_keyboard_as_indicator;
-                        show_RGB_LEDs();                        
-                      }
-                      break;
-                            
-    case SINGLE_HOLD: register_code(KC_RSFT); break;
-
-  }
-}
-
-void TG_IND_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (TG_IND_tap_state.state) {
-
-    case SINGLE_TAP:  
-                      break;
-                     
-    case SINGLE_HOLD: unregister_code(KC_RSFT); break;
-                            
-  }
-  TG_IND_tap_state.state = 0;
-}
-*/
-//                                                                                      //
-// [tapdance] [_powr] kc_a (tg_ind)                                                     //
-//                                                                                      //
-//  t o g g l e    w h o l e    i n d i c a t o r s   /   r i g h t    s h i f t        //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_POWR] KC_W (LCKLOG)                                                     //
-//                                                                                      //
-//  L O G O U T    /    L O C K    S C R E E N                                          //
-//                                                                                      //
-//  KC_W: *  LOCK USER SCREEN                                                           //
-//        @  LOGOUT CURRENT USER                                                        //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-/*
-void LCKLOG_function (qk_tap_dance_state_t *state, void *user_data) {
-  switch (cur_dance(state)) {
-    case SINGLE_TAP://LOCK SCREEN (ask for pasword screen)
-                      register_code(KC_LCTL); register_code(KC_LGUI);
-                      tap_code(KC_Q);
-                      unregister_code(KC_LGUI); unregister_code(KC_LCTL);
-                      reset_tap_dance(state); break;
-                      // (guessed by try and fail method)
-                      // if we only keystroke SFT+GUI as described at Apple Menu, it appears a menu
-                      // if we add ALT, we don't have to answer any menu, we logout directly
-    case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
-                      tap_code(KC_Q);
-                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LSFT);
-                      reset_tap_dance(state); break;
-  }
-}
-*/
-//                                                                                      //
-// [tapdance] [_powr] kc_w (LCKLOG)                                                     //
-//                                                                                      //
-//  l o g o u t    /    l o c k    s c r e e n                                          //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//             t a p   d a n c e   f o r    [ _ p o w r ]    l a y e r                  //
-//////////////////////////////////////////////////////////////////////////////////////////
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -2423,11 +2282,12 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 //
 
 // [_DFLT] LAYER
-   [DVIM_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(DVIM_Del_f_always, DVIM_Del_finished, DVIM_Del_reset, 100)
+   [DVIM_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(DVIM_Del_f_always,DVIM_Del_finished,DVIM_Del_reset,100)
 // [_dflt] layer
 
-// [_NUMB] LAYER
-  ,[SETNMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SETNMB_finished, SETNMB_reset)
+// [_NUMB]&[_SYMB]LAYER
+// ,[G_DOEU] = ACTION_TAP_DANCE_DOUBLE(KC_DLR,  SYM_EURO)                                      // $ EURO
+// ,[SETNMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SETNMB_finished, SETNMB_reset)
 //
 // [GHERKIN]
 // ,[SLNUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLNUMB_finished, SLNUMB_reset)
@@ -2439,15 +2299,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // [understanding]
 //
 // [_numb] layer
-
-
-// [_POWR] LAYER
-// ,[TG_IND]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, TG_IND_finished, TG_IND_reset)
-
-// ,[LCKLOG]   = ACTION_TAP_DANCE_FN(LCKLOG_function)
-// [_powr] layer
-
-
 
 // [_FVIM] LAYER
   ,[FVIM_uU] = ACTION_TAP_DANCE_FN(FVIM_uU_function)
@@ -2485,934 +2336,288 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     K01, K02, K03, K04, K05,                                                 K06, K07, K08, K09, K0A, \
     K11, K12, K13, K14, K15,                                                 K16, K17, K18, K19, K1A, \
     K21, K22, K23, K24, K25,                                                 K26, K27, K28, K29, K2A, \
-                                _DFLT_LTHMB_ROW1_,     _DFLT_RTHMB_ROW1_, \
-                                            KC_NO,      KC_NO,            \
-                                _DFLT_LTHMB_ROW2_,     _DFLT_RTHMB_ROW2_  \
+                                 _DFLT_LTHMB_RW1_,     _DFLT_RTHMB_RW1_, \
+                                           KC_NO ,      KC_NO,           \
+                                 _DFLT_LTHMB_RW2_,     _DFLT_RTHMB_RW2_  \
     )
 
 #define LAYOUT_mini_dactyl_base_wrapper(...)       LAYOUT_mini_dactyl_base(__VA_ARGS__)
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                   //
+//                                                                                                   //
+//                                  K    E    Y    M    A    P    S                                  //
+//                                                                                                   //
+//                                                                                                   //
+//                                                                                                   //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
-#define LAYOUT_kyria_base( \
-    K01, K02, K03, K04, K05, K06, K07, K08, K09, K0A, \
-    K11, K12, K13, K14, K15, K16, K17, K18, K19, K1A, \
-    K21, K22, K23, K24, K25, K26, K27, K28, K29, K2A  \
-  ) \
-  LAYOUT_wrapper( \
-      KC_ESC,  K01,     K02,     K03,     K04,     K05,                                             K06,     K07,     K08,     K09,     K0A,     KC_MINS, \
-   LALT_T(KC_TAB), K11, K12,     K13,     K14,     K15,                                             K16,     K17,     K18,     K19,     K1A, RALT_T(KC_QUOT), \
-      OS_LSFT, CTL_T(K21), K22,  K23,     K24,     K25,     KC_NO,   KC_NO,  MEH(KC_MINS), KC_NO,   K26,     K27,     K28,     K29, RCTL_T(K2A), OS_RSFT, \
-                                 KC_MUTE, OS_LALT, KC_GRV,  KC_SPC,  BK_LWER,     DL_RAIS, KC_ENT,  OS_RGUI, UC(0x03A8), UC(0x2E2E) \
-    )
-// Re-pass though to allow templates to be used
-#define LAYOUT_kyria_base_wrapper(...)       LAYOUT_kyria_base(__VA_ARGS__)
-*/  
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//                                                                                      //
-//                           L A Y E R S       L A Y O U T S                            //
-//                                                                                      //
-//                                                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
+// [KEYMAP GRID TEMPLATE]
+//.----------------------------------------.                 .----------------------------------------.
+               ___LYRNAME_L1___,                                          ___LYRNAME_R1___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___LYRNAME_L2___,                                          ___LYRNAME_R2___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___LYRNAME_L3___,                                          ___LYRNAME_R3___,
+//'----------------------------------------'                 '----------------------------------------'
 //
+//                     .------------------------.     .------------------------.
+                            _LAYR_LTHMB_RW1_,              _LAYR_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _LAYR_LTHMB_RW2_,              _LAYR_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
+// [keymap grid template]
+*/
+/*
+// [BLANK KEYMAP GRID]
+//.----------------------------------------.                 .----------------------------------------.
+//|----------------------------------------|                 |----------------------------------------|
+//|----------------------------------------|                 |----------------------------------------|
+//'----------------------------------------'                 '----------------------------------------'
+//                          _____LAYOUT_____               _____WRAPPR_____
+//                     .------------------------.     .------------------------.
+//                     |------------------------|     |------------------------|
+//                     |------------------------|     |------------------------|
+//                     '------------------------'     '------------------------'
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+// [blank keymap grid]
+*/
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-/*
-  *  LEGENDS for all KEYMAPS:
-  *   * get a keystroke through single tap
-  *  ** get a keystroke through double tap
-  *   @ access a layer  through single hold (or modifier)   
-  *  @@ access a layer  through double hold (or clean all layers)
-*/
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
 
-// #if defined(ALPHAS_OVERCHARGED)
-
-/* Keymap _DFLT 0: Default layer = _DFLT layer
-// CMD + Q  =  [SINGLE _APPS LAYER]
-// CMD + P  =  [SINGLE _APPS LAYER]
-  * ,--------------------------------------------.  ,--------------------------------------------.
-  * |        |        |        |        |        |  |        |        |        |        |        |
-  * |    Q   |    W   |    E   |    R   |    T   |  |    Y   |    U   |    I   |    O   |    P   |
-  * |⌘[_1APP]|        |        |        |        |  |        |        |        |        |⌘[_1APP]|
-  * |@[_APPS]|@[_POWR]|@[_RGBL]|@[_FUNC]|@[_SYMB]|  |        |@[_FUNC]|@[_RGBL]|@[_POWR]|@[_APPS]|
-  * |--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------|
-  * |        |        |        |        |        |  |        |        |        |        |        |
-  * |    A   |    S   |    D   |    F   |    G   |  |    H   |    J   |    K   |    L   |  Space |
-  * |        |        |        |        |        |  |        |        |        |        |        |
-  * |  @LSft |  @LCtl |  @LAlt |  @LGui |@[_ACCN]|  |@[_ACCN]|  @LGui |  @LAlt |  @LCtl |  @LSft |
-  * |--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------|
-  * |        |        |        |        |        |  |        |        |        |        |        |
-  * |    Z   |    X   |    C   |    V   |    B   |  |    N   |    M   | Escape |Bckspace|  Enter |
-  * |        |        |        |        |        |  |        |        |        |        |        |
-  * |@[_DALY]|@[_DVIM]|@[_MOUS]|@[_FVIM]|@[_NUMB]|  |@[_SYMB]|@[_FVIM]|        |        |@[_DALY]|
-  * '--------------------------------------------'  '--------------------------------------------'
- *                            ,-----------------.   ,-----------------.
- *                            |        |alt:RGBL|   |alt:RGBL|ONEshoot|
- *                            |        |        |   |        |  layer |
- *                            |        |        |   |        |        |
- *                            |  _MOUS |  _FUNC |   |  _POWR |  _ACCN |
- *                   ,--------+--------+--------|   |--------+--------|--------.
- *                   | Delete |        |        |   |alt:NUMB|alt:FVIM|alt:MOUS|
- *                   |        |        |        |   |        |        |        |
- *                   |        |        |        |   |        |        |        |
- *                   |  _DVIM |  _FVIM |  _NUMB |   |  _APPS |  _SYMB |  _DALY |
- *                   '--------------------------'   '--------------------------'
-  *                            ,-----------------.  ,-----------------.
-  *                            |        |        |  |        |        |
-  *                            |        |        |  |        |        |
-  *                            |        |        |  |        |        |
-  *                            |        |        |  |        |        |
-  *                   ,--------+--------+--------|  |--------+--------|--------.
-  *                   |        |        |        |  |        |        |        |
-  *                   |        |        |        |  |        |        |        |
-  *                   |        |        |        |  |        |        |        |
-  *                   |        |        |        |  |        |        |        |
-  *                   '--------------------------'  '--------------------------' 
-*/
-
-
-
-// [_DFLT] = KEYMAP(  // layer 0 : default layer
-// // [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
-// // ###
-// //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// //,--------------------------------------------------------------------------------------.  ,------------------------------------------------------------------------------------------.
-//     LT(_APPS, KC_Q), LT(_POWR, KC_W), LT(_RGBL, KC_E), LT(_FUNC, KC_R), LT(_SYMB, KC_T),                 KC_Y, LT(_FUNC, KC_U),   LT(_RGBL, KC_I), LT(_POWR, KC_O),   LT(_APPS, KC_P),
-// //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
-//        LSFT_T(KC_A),     CTL_T(KC_S),     ALT_T(KC_D),     GUI_T(KC_F), LT(_ACCN, KC_G),      LT(_ACCN, KC_H),     GUI_T(KC_J),       ALT_T(KC_K),     CTL_T(KC_L),    LSFT_T(KC_SPC),
-// //|----------------+----------------+----------------+----------------+------------------|  |----------------+----------------+------------------+----------------+--------------------|
-//     LT(_DALY, KC_Z), LT(_DVIM, KC_X), LT(_MOUS, KC_C), LT(_FVIM, KC_V), LT(_NUMB, KC_B),      LT(_SYMB, KC_N), LT(_FVIM, KC_M),            KC_ESC,         KC_BSPC, LT(_DALY, KC_ENT),
-// //'--------------------------------------------------------------------------------------'  '------------------------------------------------------------------------------------------'
-
-// //                        ,----------------------------------+---------------------------,   ,------------------+-----------,
-//                                                LAUNCHING_APPS,                  MO(_MOUS),             MO(_POWR), OSL(_ACCN),
-// //                        |----------------------------------+---------------------------|   |------------------+-----------|
-//                                                                                   XXXXXXX,               XXXXXXX,
-// //                                                           |---------------------------|   |------------------|
-//                           TD(DVIM_Del),             MO(_FVIM),                  MO(_NUMB),             MO(_NUMB),  MO(_SYMB),   MO(_DALY)         
-// //                                                                               THUMB_R2_NUMB_DVIM_FVIM_MOUS_SP, LT(_SYMB, KC_ENT)
-// //             '----------+----------------------------------+---------------------------.   .------------------+-----------+--------------'
-// //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// // ###
-// ),
-// END OF _DFLT 0
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-
-
-
-// # elif defined(SINGLE_ALPHAS)
-
-/* Keymap _DFLT 0: Default layer = _DFLT layer
- * ,--------------------------------------------.  ,--------------------------------------------.
- * |        |        |        |        |        |  |        |        |        |        |        |
- * |    Q   |    W   |    E   |    R   |    T   |  |    Y   |    U   |    I   |    O   |    P   |
- * |        |        |        |        |        |  |        |        |        |        |        |
- * |        |        |        |        |        |  |        |        |        |        |        |
- * |--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |  |        |        |        |        |        |
- * |    A   |    S   |    D   |    F   |    G   |  |    H   |    J   |    K   |    L   |  Space |
- * |        |        |        |        |        |  |        |        |        |        |        |
- * |  @LSft |  @LCtl |  @LAlt |  @LGui |        |  |        |  @LGui |  @LAlt |  @LCtl |  @LSft |
- * |--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |  |        |        |        |        |        |
- * |    Z   |    X   |    C   |    V   |    B   |  |    N   |    M   | Escape |Bckspace|  Enter |
- * |        |        |        |        |        |  |        |        |        |        |        |
- * |        |        |        |        |        |  |        |        |        |        |        |
- * '--------------------------------------------'  '--------------------------------------------'
- *                            ,-----------------.  ,-----------------.
- *                            |        |alt:RGBL|  |alt:RGBL|ONEshoot|
- *                            |        |        |  |        |  layer |
- *                            |        |        |  |        |        |
- *                            |  _MOUS |  _FUNC |  |  _POWR |  _ACCN |
- *                   ,--------+--------+--------|  |--------+--------|--------.
- *                   | Delete |        |        |  |alt:NUMB|alt:FVIM|alt:MOUS|
- *                   |        |        |        |  |        |        |        |
- *                   |        |        |        |  |        |        |        |
- *                   |  _DVIM |  _FVIM |  _NUMB |  |  _APPS |  _SYMB |  _DALY |
- *                   '--------------------------'  '--------------------------'
- *
- */
-
-
-[_DFLT] = LAYOUT_mini_dactyl_base_wrapper(  // layer 0 : default layer
-
-
-             KC_1,          KC_2,           KC_3,           KC_4,    KC_5,         KC_6,  KC_7,  KC_8,  KC_9,    KC_0,
-//|--------------+--------------+---------------+---------------+----------|  |--------+------+------+------+----------|
-   LCTL_T(KC_SPC),LALT_T(KC_DEL),LGUI_T(KC_COMM),LSFT_T(KC_PDOT),  KC_DLR,      KC_MINS,  KC_4,  KC_5,  KC_6, KC_PLUS,
-//|--------------+--------------+---------------+---------------+----------|  |--------+------+------+------+----------|
-           KC_ENT,       KC_BSPC,         KC_TAB,        KC_PEQL, KC_PERC,      KC_PSLS,  KC_1,  KC_2,  KC_3, KC_ASTR
-
-
-
-/*
-// [info] LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-//,------------------------------------.  ,------------------------------------.
-          _M_CORE_DFLT_L1_,     _M_CORE_DFLT_R1_,
-//|------------------------------------|  |------------------------------------|
-          _M_CORE_DFLT_L2_,     _M_CORE_DFLT_R2_,
-//|------------------------------------|  |------------------------------------|
-          _M_CORE_DFLT_L3_,     _M_CORE_DFLT_R3_
-//'------------------------------------'  '------------------------------------'
-*/
-
+//[_DFLT] LAYER 00 : DEFAULT LAYER
+  [_DFLT] = LAYOUT_mini_dactyl_base_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ___DEFAULT_L1___,                                          ___DEFAULT_R1___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___DEFAULT_L2___,                                          ___DEFAULT_R2___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___DEFAULT_L3___,                                          ___DEFAULT_R3___
+//'----------------------------------------'                 '----------------------------------------'
+//                          _____LAYOUT_____               _____WRAPPR_____
+//                     .------------------------.     .------------------------.
+//                     |------------------------|     |------------------------|
+//                     |------------------------|     |------------------------|
+//                     '------------------------'     '------------------------'
 ),
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// ###
-// END OF _DFLT 0
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+// END OF _DFLT 00
 
-// #endif
-
-
-
-
+//[_ACCN] LAYER 01 : ACCENTS LAYER
+  [_ACCN] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ___ACCENTS_L1___,                                          ___ACCENTS_R1___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___ACCENTS_L2___,                                          ___ACCENTS_R2___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___ACCENTS_L3___,                                          ___ACCENTS_R3___,
+//'----------------------------------------'                 '----------------------------------------'
 //
-/* Keymap _ACCN 01: _ACCN layer
- * ,--------------------------------------------.        ,--------------------------------------------.
- * | *XXXXX | *XXXXX |    É   | *XXXXX | *XXXXX |        | *XXXXX |    Ú   |    Í   |    Ó   | *XXXXX |
- * |        |        |  (éëèê)|        |        |        |        | (úüùû) | (íïìî) | (óöòô) |        |
- * |        |        | (ÉËÈÊ) |        |        |        |        | (ÚÜÙÛ) | (ÍÏÌÎ) | (ÓÖÒÔ) |        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |    Á   | *XXXXX | *XXXXX | *XXXXX | @@@@@@ |        | @@@@@@ | *XXXXX | *XXXXX | *XXXXX | *XXXXX |
- * | (áäàâ) | @CIRCUM| @GRAVE | @DIAE- | @@@@@@ |        | @@@@@@ | @DIAE- | @GRAVE | @CIRCUM|        |
- * | (ÁÄÀÂ) | -MFLEX |        | RESIS  | @@@@@@ |        | @@@@@@ | RESIS  |        |  -FLEX |        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * | *XXXXX | *XXXXX | *XXXXX | *XXXXX | *XXXXX |        |        | *XXXXX | *XXXXX | *XXXXX | *XXXXX |
- * |        |        |        |        |        |        |   Ñ ñ  |        |        |        |        |
- * |  @RSft |  @RCtl |  @RAlt | @RGui  |        |        |        |  @RGui |  @RAli |  @RCtl |  @RSft |
- * '--------------------------------------------'        '--------------------------------------------'
-*/
-// _ACCN accent layer 01
-[_ACCN] = LAYOUT_wrapper(
-           ____ACCN_L1____,                                                            ____ACCN_R1____,
-           ____ACCN_L2____,                                                            ____ACCN_R2____,
-           ____ACCN_L3____,                                                            ____ACCN_R3____,
-                             _ACCN_LEFT_THUMB_ROW1_,          _ACCN_RGHT_THUMB_ROW1_,
-                                             KC_NO ,           KC_NO,
-                             _ACCN_LEFT_THUMB_ROW2_,          _ACCN_RGHT_THUMB_ROW2_
+//                     .------------------------.     .------------------------.
+                            _ACCN_LTHMB_RW1_,              _ACCN_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                       KC_NO,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _ACCN_LTHMB_RW2_,              _ACCN_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
 ),
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 // END OF _ACCN 01
-/////////////////////////////////////////////////////////////////////////////////////////////////////##
 
-
-
-/* Keymap _NUMB 02: numbers layer
-* ,----------------------------------.  ,----------------------------------.
-* |      |      |      |      |      |  |      |      |      |      |      |
-* |   1  |   2  |   3  |   4  |   5  |  |   6  |   7  |   8  |   9  |   0  |
-* |      |      |      |      |      |  |      |      |      |      |      |
-* |------+------+------+------+------|  |------+------+------+------+------|
-* | SPACE|DELETE|   .  |   ,  |      |  |      |      |      |      |      |
-* |      |      |      |      |   $  |  |   -  |   4  |   5  |   6  |   +  |
-* | LSft | LCtl | LAlt | LGui |      |  |      |      |      |      |      |
-* |------+------+------+------+------|  |------+------+------+------+------|
-* |      |      |      |      |@@@@@@|  |      |      |      |      |      |
-* | ENTER|BCKSPC|  TAB |   =  |   %  |  |   /  |   1  |   2  |   3  |   *  |
-* |      |      |      |      |@@@@@@|  |      |      |      |      |      |
-* '----------------------------------'  '----------------------------------'
-*/
-// ###
-// _NUMB layer 02
-[_NUMB] = LAYOUT_wrapper(  // layer 02 : numbers layer
-           _S_CORE_NUMB_L1_,                                                          _S_CORE_NUMB_R1_,
-           _S_CORE_NUMB_L2_,                                                          _S_CORE_NUMB_R2_,
-           _S_CORE_NUMB_L3_,                                                          _S_CORE_NUMB_R3_,
-                                   _NUMB_LTHMB_ROW1_,        _NUMB_RTHMB_ROW1_, // _ACCN_RGHT_THUMB_ROW1_,
-                                              KC_NO,          KC_NO,
-                                   _NUMB_LTHMB_ROW2_,        _NUMB_RTHMB_ROW2_ // TD(SETNMB), MO(_SYMB),  _______
-),
-
-
-
-/*
-// ###
-// ###Following keymap works properly:
-// ###
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-[_NUMB] = LAYOUT_mini_dactyl_base_wrapper(  // layer 02 : numbers layer
-//,------------------------------------------------------------------------.  ,----------------------------------------.
-             KC_1,          KC_2,           KC_3,           KC_4,    KC_5,         KC_6,  KC_7,  KC_8,  KC_9,    KC_0,
-//|--------------+--------------+---------------+---------------+----------|  |--------+------+------+------+----------|
-   LCTL_T(KC_SPC),LALT_T(KC_DEL),LGUI_T(KC_COMM),LSFT_T(KC_PDOT),  KC_DLR,      KC_MINS,  KC_4,  KC_5,  KC_6, KC_PLUS,
-//|--------------+--------------+---------------+---------------+----------|  |--------+------+------+------+----------|
-           KC_ENT,       KC_BSPC,         KC_TAB,        KC_PEQL, KC_PERC,      KC_PSLS,  KC_1,  KC_2,  KC_3, KC_ASTR,
-//,------------------------------------------------------------------------.  ,----------------------------------------.
-//                               ,---------+----------,  ,-----------+----------,
-                                    _______,   _______,     MO(_POWR),  EURO,
-//                               |---------+----------|  |-----------+----------|
-                                               _______,       _______,
-//                                         |----------|  |-----------|
-                          _______,  _______,   _______,    TD(SETNMB), MO(_SYMB),  _______
-//                      '--------+---------+----------.  .-----------+--------+----------'
-),
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// END OF _NUMB 02
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-// ###
-*/
-
-
-
-/* Keymap _FVIM 03: _FVIM layer
- * ,--------------------------------------------.  ,----------------------------------.
- * |        |        |        |        |        |  |      |      |      |      |      |
- * |        |        |        |        |        |  | Shift| Move | Move | Move | Move |
- * |        |        |        |        |        |  |Prgrph| Begin| Word | Word |End Of|
- * |        |        |        |        |        |  |  Up  |Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
- * |--------+--------+--------+--------+--------|  |------+------+------+------+------|
- * |        |        |        |        |        |  |      |      |      |      |      |
- * |        |        |        |        |        |  |Center|      |      |      |      |
- * |        |        |        |        |        |  |LineIn| LEFT |  UP  | DOWN | RIGHT|
- * |        |        |        |        |        |  | View |      |      |      |      |
- * |--------+--------+--------+--------+--------|  |------+------+------+------+------|
- * |        |        |        |@@@@@@@@|        |  |      |      |      |      |      |
- * |        |        |        |@@@@@@@@|        |  | Shift| Move | Move | Move | Move |
- * |        |        |        |@@@@@@@@|        |  |Prgrph|      | Page | Page |      |
- * |        |@[_XVIM]|@[_CVIM]|@@@@@@@@|        |  | Down | HOME |  UP  | DOWN |  END |
- * '--------------------------------------------'  '----------------------------------'
-*/
-// _FVIM layer 03
-[_FVIM] = KEYMAP(  // layer 03 : _FVIM layer
-// ###
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-//,------------------------------------------------------.  ,------------------------------------------------------------------.
-      KC_RCTL,   KC_RALT,   KC_RGUI,   KC_RSFT, XXXXXXX,        C(G(KC_UP)), TD(FVIM_uU), A(KC_LEFT), A(KC_RGHT), TD(FVIM_pP),
-//|----------+----------|----------+----------+----------|  |--------------+------------+-----------+-----------+--------------|
-      KC_LCTL,   KC_LALT,   KC_LGUI,   KC_LSFT, XXXXXXX,             FVIM_H,     KC_LEFT,      KC_UP,    KC_DOWN,     KC_RGHT,
-//|----------+----------|----------+----------+----------|  |--------------+------------+-----------+-----------+--------------|
-      KC_LEFT,     KC_UP,   KC_DOWN,   KC_RGHT, XXXXXXX,      C(G(KC_DOWN)),  A(KC_HOME), A(KC_PGUP), A(KC_PGDN),   A(KC_END),    
-//'------------------------------------------------------'  '------------------------------------------------------------------'
-//                                    ,--------+---------,  ,--------+----------,
-                                        _______, _______,   MO(_POWR), _______,
-//                                    |--------+---------|  |--------+----------|
-                                                 _______,     _______,
-//                                             |---------|  |---------|
-                               _______, _______, _______,     _______, MO(_CVIM),  _______
-//                           '--------+--------+---------.  .--------+----------+----------'
-),
-/*
-//                               ,---------+----------,  ,-----------+----------,
-                                   _______, _______,         _______, _______,
-//                               |---------+----------|  |-----------+----------|
-                                             _______,         _______,
-//                                         |----------|  |-----------|
-                          _______,  _______, _______,      _______, _______, _______
-//                      '--------+---------+----------.  .-----------+--------+----------'
-),
-//    XXXXXXX, MO(_XVIM), MO(_CVIM), MO(_FVIM), XXXXXXX,      C(G(KC_DOWN)),    FVIM_M,    FVIM_ES,    FVIM_BS,     FVIM_EN,
-*/
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// ###
-// MO(_XVIM),MO(_CVIM),MO(_FVIM) allow us changing from any ?VIM_layer to each other ?VIM_layer
-// ... because we put '_______' in this locations in the rest of the ?VIM layers
-// END OF _FVIM 03
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-
-/*
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-// LEFT_HAND
-//,------------------------------------------------------.
-      XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX,  
-//|----------+----------|----------+----------+----------|
-      _______,   _______,   XXXXXXX,   XXXXXXX, XXXXXXX,  
-//|----------+----------|----------+----------+----------|
-      XXXXXXX, MO(_XVIM), MO(_CVIM), MO(_FVIM), XXXXXXX,  
-//'------------------------------------------------------'
-                  // RIGHT_HAND
-                    ,-----------------------------------------------------------------------------------.
-                        LCTL(LGUI(KC_UP)),   TD(FVIM_uU), LALT(KC_LEFT),   LALT(KC_RGHT),  TD(FVIM_pP),
-                    |--------------------+--------------+--------------+----------------+---------------|
-                                   FVIM_H,       KC_LEFT,         KC_UP,         KC_DOWN,      KC_RGHT,
-                    |--------------------+--------------+--------------+----------------+---------------|
-                      LCTL(LGUI(KC_DOWN)), LALT(KC_HOME), LALT(KC_PGUP), LALT(KC_PGDOWN), LALT(KC_END) ),
-                    '-----------------------------------------------------------------------------------'
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-*/
-
-
-
-/* Keymap _AVIM X04X: _AVIM layer  // select VIM layer
- * ,----------------------------------.  ,----------------------------------.
- * |      |      |      |      |      |  |Select|Select|Select|Select|Select|
- * |      |      |      |      |      |  |Prgrph| Begin| Word | Word |End Of|
- * |      |      |      |      |      |  | Above|Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |      |      |  |      |Select|Select|Select|Select|
- * |@@@@@@|      |      |      |      |  |      | Char | Line | Line | Char |
- * |@@@@@@|      |      |      |      |  |      | LEFT |  UP  | DOWN | RIGHT|
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |@@@@@@|      |  |Select|Select|Select|Select|Select|
- * |      |      |      |@@@@@@|      |  |Prgrph|      | Page | Page |      |
- * |      |      |      |@@@@@@|      |  | Below| HOME |  UP  | DOWN |  END |
- * '----------------------------------'  '----------------------------------'
-*/
-// _AVIM layer X04X
-/*
-[_AVIM] = KEYMAP(  // layer X03X : _AVIM layer  // select VIM layer
-// ###
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-//,----------------------------------------------.  ,----------------------------------------------------------------------------------.
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,       AVIM_Y,   TD(AVIM_uU), LSFT(LALT(KC_LEFT)), LSFT(LALT(KC_RGHT)),   TD(AVIM_pP),
-//|--------+--------+--------+--------+----------|  |--------+--------------+--------------------+--------------------+----------------|
-    _______, _______, _______, _______, XXXXXXX,      XXXXXXX, LSFT(KC_LEFT),         LSFT(KC_UP),       LSFT(KC_DOWN), LSFT(KC_RGHT),
-//|--------+--------+--------+--------+----------|  |--------+--------------+--------------------+--------------------+----------------|
-    _______, _______, _______, _______, XXXXXXX,       AVIM_N, LSFT(KC_HOME),       LSFT(KC_PGUP),     LSFT(KC_PGDOWN),  LSFT(KC_END) ),
-//'----------------------------------------------'  '----------------------------------------------------------------------------------'
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// ###
-// END OF _AVIM X04X  // AVIM_H is empty
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-// LEFT_HAND
-//,----------------------------------------------.
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  
-//|--------+--------+--------+--------+----------|
-    _______, _______, _______, _______, XXXXXXX,  
-//|--------+--------+--------+--------+----------|
-    _______, _______, _______, _______, XXXXXXX,  
-//'----------------------------------------------'
-
-                                     // RIGHT_HAND
-                     ,----------------------------------------------------------------------------------.
-                        AVIM_Y,   TD(AVIM_uU), LSFT(LALT(KC_LEFT)), LSFT(LALT(KC_RGHT)),   TD(AVIM_pP),
-                     |--------+--------------+--------------------+--------------------+----------------|
-                       XXXXXXX, LSFT(KC_LEFT),         LSFT(KC_UP),       LSFT(KC_DOWN), LSFT(KC_RGHT),
-                     |--------+--------------+--------------------+--------------------+----------------|
-                        AVIM_N, LSFT(KC_HOME),       LSFT(KC_PGUP),     LSFT(KC_PGDOWN),  LSFT(KC_END) ),
-                     '----------------------------------------------------------------------------------'
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-*/
-
-/* Keymap _CVIM 04: _CVIM layer  // power edition layer
- * ,----------------------------------.  ,----------------------------------.
- * |      |      |      |      |      |  |Insert| Copy |Duplct| Copy |Insert|
- * |      |      |      |      |      |  | line | prev |currnt| next | line |
- * |      |      |      |      |      |  |abvePr|prgrph|prBelw|prgrph|belwPr|
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |      |      |  |      | Upper| Lower| Capi |      |
- * |      |      |      |      |      |  |Outdnt| case | case |talize|Indent|
- * |      |      |      |      |      |  |      |      |      |      |      |
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |@@@@@@|      |  | Copy | Copy | Copy | Copy | Copy |
- * |      |      |@@@@@@|@@@@@@|      |  |Chrctr| Word | Line |prgrph|  All |
- * |      |      |@@@@@@|@@@@@@|      |  |      |      |      |      |      |
- * '----------------------------------'  '----------------------------------'
-*/
-// // _CVIM layer 04
-// [_CVIM] = KEYMAP(  // layer 04 : _CVIM layer  // power edition VIM layer
-// /////////////////////////////////////////////////////////////////////////////////////////////////////###
-// //,----------------------------------------------.        ,---------------------------------------------.
-//     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             CVIM_Y, CVIM_U,  CVIM_I,  CVIM_O,  CVIM_P,
-// //|--------+--------+--------+--------+----------|        |--------+-------+--------+--------+----------|
-//     _______, _______, _______, _______, XXXXXXX,            OUTDNT, CVIM_J,  CVIM_K,  CVIM_L, CVIM_SP,
-// //|--------+--------+--------+--------+----------|        |--------+-------+--------+--------+----------|
-//     _______, _______, _______, _______, XXXXXXX,             CVIM_N, CVIM_M, CVIM_ES, CVIM_BS, CVIM_EN,
-// //'----------------------------------------------'        '---------------------------------------------'
-// //                            ,--------+---------,        ,--------+----------,
-//                                 _______, _______,           _______, _______,
-// //                            |--------+---------|        |--------+----------|
-//                                          _______,           _______,
-// //                                     |---------|        |---------|
-//                        _______, _______, _______,           _______, _______, _______
-// //                   '--------+--------+---------.        .--------+--------+---------'
-// ),
-
-// _CVIM layer 04
-[_CVIM] = KEYMAP(  // layer 04 : _CVIM layer  // power edition VIM layer
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-//,--------------------------------------------.        ,---------------------------------------------.
-     XVIM_P,  XVIM_O,  XVIM_I, XVIM_U, XVIM_Y,             CVIM_Y, CVIM_U,  CVIM_I,  CVIM_O,  CVIM_P,
-//|--------+--------+--------+-------+---------|        |--------+-------+--------+--------+----------|
-    XVIM_SP,  XVIM_L,  XVIM_K, XVIM_J, XVIM_H,             OUTDNT, CVIM_J,  CVIM_K,  CVIM_L, CVIM_SP,
-//|--------+--------+--------+-------+---------|        |--------+-------+--------+--------+----------|
-    XVIM_EN, XVIM_BS, XVIM_ES, XVIM_M, XVIM_N,             CVIM_N, CVIM_M, CVIM_ES, CVIM_BS, CVIM_EN,
-//'--------------------------------------------'        '---------------------------------------------'
-//                            ,--------+---------,        ,--------+----------,
-                                  KC_UP, _______,           _______, _______,
-//                            |--------+---------|        |--------+----------|
-                                         _______,           _______,
-//                                     |---------|        |---------|
-                       KC_LEFT, KC_DOWN, KC_RGHT,           _______, _______, _______
-//                   '--------+--------+---------.        .--------+--------+---------'
-),
-/*
-//,---------------------------------------------.        ,----------------------------------------------.
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,           _______, _______, _______, _______, _______,
-//|--------+--------+--------+--------+---------|        |--------+--------+--------+--------+----------|
-    _______, _______, _______, _______, XXXXXXX,           _______, _______, _______, _______, _______,
-//|--------+--------+--------+--------+---------|        |--------+--------+--------+--------+----------|
-    _______, _______, _______, _______, XXXXXXX,           _______, _______, _______, _______, _______,
-//'---------------------------------------------'        '----------------------------------------------'
-//                           ,--------+---------,       ,--------+----------,
-                               _______, _______,          _______, _______,
-//                           |--------+---------|       |--------+----------|
-                                        _______,          _______,
-//                                    |---------|       |---------|
-                      _______, _______, _______,          _______, _______, _______
-//                  '--------+--------+---------.       .--------+--------+---------'
-*/
-// 'OUTDNT = LGUI(KC_LBRC)' implemented because 'OUTDNT:;' in 'DefaultKeyBinding.dict' doesn't work !!!
-// ... it happens the same as in 'transposeWord:;' !!!
-// END OF _CVIM 04
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-
-
-/* Keymap _XVIM 05: _XVIM layer  // movement VIM layer
- * ,----------------------------------.  ,----------------------------------.       
- * |      |      |      |      |      |  |Comple| Align| Align| Align| Align|
- * |      |      |      |      |      |  |  te  |to the|in the|Justi-|to the|
- * |      |      |      |      |      |  |      | Left |Center| fied | Right|
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |      |      |  |   5  |  20  |Transp|Transp|  60  |
- * |      |      |      |      |      |  | lines| lines| Words| Chars| lines|
- * |      |      |      |      |      |  |  Up  |  Up  |      |      |  Up  |
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |@@@@@@|      |  |   5  |  20  |Scroll|Scroll|  60  |
- * |      |@@@@@@|      |@@@@@@|      |  | lines| lines| Page | Page | lines|
- * |      |@@@@@@|      |@@@@@@|      |  | Down | Down |  Up  | Down | Down |
- * '----------------------------------'  '----------------------------------'
-*/
-
-// // _XVIM layer 05
-// [_XVIM] = KEYMAP(  // layer 05 : _XVIM layer  // movement VIM layer
-// /////////////////////////////////////////////////////////////////////////////////////////////////////###
-// //,----------------------------------------------.         ,--------------------------------------------.
-//     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             XVIM_Y, XVIM_U,  XVIM_I,  XVIM_O,  XVIM_P,
-// //|--------+--------+--------+--------+----------|         |-------+-------+--------+--------+----------|
-//     _______, _______, _______, _______, XXXXXXX,             XVIM_H, XVIM_J,  XVIM_K,  XVIM_L, XVIM_SP,
-// //|--------+--------+--------+--------+----------|         |-------+-------+--------+--------+----------|
-//     _______, _______, _______, _______, XXXXXXX,             XVIM_N, XVIM_M, XVIM_ES, XVIM_BS, XVIM_EN,
-// //'----------------------------------------------'         '--------------------------------------------'
-// //                            ,--------+---------,         ,--------+----------,
-//                                 _______, _______,            _______, _______,
-// //                            |--------+---------|         |--------+----------|
-//                                          _______,            _______,
-// //                                     |---------|         |---------|
-//                        _______, _______, _______,            _______, _______, _______
-// //                   '--------+--------+---------.         .--------+--------+---------'
-// ),
-/*
-//,---------------------------------------------.        ,----------------------------------------------.
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,           _______, _______, _______, _______, _______,
-//|--------+--------+--------+--------+---------|        |--------+--------+--------+--------+----------|
-    _______, _______, _______, _______, XXXXXXX,           _______, _______, _______, _______, _______,
-//|--------+--------+--------+--------+---------|        |--------+--------+--------+--------+----------|
-    _______, _______, _______, _______, XXXXXXX,           XXXXXXX, _______, _______, _______, _______,
-//'---------------------------------------------'        '----------------------------------------------'
-//                           ,--------+---------,       ,--------+----------,
-                               _______, _______,          _______, _______,
-//                           |--------+---------|       |--------+----------|
-                                        _______,          _______,
-//                                    |---------|       |---------|
-                      _______, _______, _______,          _______, _______, _______
-//                  '--------+--------+---------.       .--------+--------+---------'
-*/
-// END OF _XVIM 05
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-
-
-
-/* Keymap _DVIM 05: _DVIM layer  // delete layer
- * ,----------------------------------.  ,----------------------------------.
- * |      |      |      |      |      |  |      |Delete|Delete|Delete|Delete|
- * |      |      |      |      |      |  | Yank | Begin| Word | Word |End Of|
- * |      |      |      |      |      |  |      |Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |      |      |  |      |Delete|Delete|Delete|Delete|
- * |      |      |      |      |      |  |      | Char | Line | Line | Char |
- * |      |      |      |      |      |  |      | LEFT |  UP  | DOWN | RIGHT|
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |@@@@@@|      |      |      |  |      |Delete|Delete|@@@@@@|Delete|
- * |      |@@@@@@|      |      |      |  |      |      | Page |Delete|      |
- * |      |@@@@@@|      |      |      |  |      | HOME |  UP  |PgDown|  END |
- * '----------------------------------'  '----------------------------------'
- */
-// _DVIM layer 05
-[_DVIM] = KEYMAP(  // layer 05 : _DVIM layer  // delete layer
-//,---------------------------------------------.,------------------------------------------------------.
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    DVIM_Y, TD(DVIM_uU),  DVIM_I,  DVIM_O, TD(DVIM_pP),
-//|--------+--------+--------+--------+---------||--------+------------+--------+--------+--------------|
-    _______, _______, _______,   KC_UP, XXXXXXX,    DVIM_H,      DVIM_J,  DVIM_K,  DVIM_L,     DVIM_SP,
-//|--------+--------+--------+--------+---------||--------+------------+--------+--------+--------------|
-    _______, _______, KC_LEFT, KC_DOWN, KC_RGHT,   XXXXXXX,      DVIM_M, DVIM_ES, DVIM_BS,     DVIM_EN,
-//'---------------------------------------------''------------------------------------------------------'
-/*
-//                           ,--------+---------,,--------+----------,
-                               _______, _______,   _______,   _______,
-//                           |--------+---------||--------+----------|
-                                        _______,   _______,
-//                                    |---------||---------|
-                      _______, _______, _______,   MO(_FUNC), MO(_RGBL), MO(_APPS)
-//                  '--------+--------+---------..--------+--------+---------'
-*/
-//                           ,--------+---------,,--------+----------,
-                               _______, _______,   MO(_POWR),   KC_UP,
-//                           |--------+---------||--------+----------|
-                                        _______,   _______,
-//                                    |---------||---------|
-                      _______, _______, _______,  KC_LEFT, KC_DOWN, KC_RGHT
-//                  '--------+--------+---------..--------+--------+---------'
-),
-/*
-//                           ,--------+---------,,--------+----------,
-                               _______, _______,   _______, _______,
-//                           |--------+---------||--------+----------|
-                                        _______,   _______,
-//                                    |---------||---------|
-                      _______, _______, _______,   _______, _______, _______
-//                  '--------+--------+---------..--------+--------+---------'
-),
-//,---------------------------------------------.,----------------------------------------------.
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   _______, _______, _______, _______, _______,
-//|--------+--------+--------+--------+---------||--------+--------+--------+--------+----------|
-    _______, _______, _______, _______, XXXXXXX,   _______, _______, _______, _______, _______,
-//|--------+--------+--------+--------+---------||--------+--------+--------+--------+----------|
-    _______, _______, _______, _______, _______,   XXXXXXX, _______, _______, _______, _______,
-//'---------------------------------------------''----------------------------------------------'
-*/
-
-// DVIM_H is empty, DVIM_N is empty
-// END OF _DVIM 05
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-
-
-
-/* Keymap _MOUS 06: Mouse layer
-* ,----------------------------------.  ,----------------------------------.
-* |      |      |      |      |      |  |      |      |      |      |      |
-* |      |      |      |      |      |  |      | wLeft|  wUp | wDown|wRight|
-* |      |      |      |      |      |  |      |      |      |      |      |
-* |------+------+------+------+------|  |------+------+------+------+------|
-* |      |      |      |      |      |  |      |      |      |      |      |
-* | @LSft| @LCtl| @LAlt| @LGui|      |  |      | mLeft|  mUp | mDown|mRight|
-* |      |      |      |      |      |  |      |      |      |      |      |
-* |------+------+------+------+------|  |------+------+------+------+------|
-* |      |      |@@@@@@|      |      |  |      |      |      |      |      |
-* |Accel0|Accel2|@@@@@@|Accel1|Accel0|  | mBtn1| mBtn2| mBtn3| mBtn4| mBtn5|
-* |      |      |@@@@@@|      |      |  |      |      |      |      |      |
-* '------+------+------+------+------'  '------+------+------+------+------'
-*/
-// _MOUS layer 06
-
-
-[_MOUS] = KEYMAP(  // layer 06: mouse layer
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-//,----------------------------------------------.       ,----------------------------------------------.
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,           XXXXXXX, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R,
-//|--------+--------+--------+--------+----------|       |--------+--------+--------+--------+----------|
-    _______, _______, _______, _______, XXXXXXX,           XXXXXXX, KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R,
-//|--------+--------+--------+--------+----------|       |--------+--------+--------+--------+----------|
-    KC_ACL0, KC_ACL2, XXXXXXX, KC_ACL1, KC_ACL0,           KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_BTN5,
-//'----------------------------------------------'       '----------------------------------------------'
-//                            ,--------+---------,       ,--------+----------,
-                               _______, _______,         MO(_POWR),   KC_UP,
-//                            |--------+---------|       |--------+----------|
-                                          _______,         _______,
-//                                     |---------|       |---------|
-//                    MO(_DALY), _______, MO(_SYMB),          KC_LEFT, KC_DOWN, KC_RGHT
-                        _______, _______, _______,         KC_LEFT, KC_DOWN, KC_RGHT
-//                   '--------+--------+---------.       .--------+--------+----------'
-),
-
-
-/*    
-//                               ,---------+----------,  ,-----------+----------,
-                                   _______, _______,         _______, _______,
-//                               |---------+----------|  |-----------+----------|
-                                             _______,         _______,
-//                                         |----------|  |-----------|
-                          _______,  _______, _______,      _______, _______, _______
-//                      '--------+---------+----------.  .-----------+--------+----------'
-),
-*/
+//[_NUMB] LAYER 02 : NUMBERS LAYER
+  [_NUMB] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ___NUMBERS_L1___,                                          ___NUMBERS_R1___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___NUMBERS_L2___,                                          ___NUMBERS_R2___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___NUMBERS_L3___,                                          ___NUMBERS_R3___,
+//'----------------------------------------'                 '----------------------------------------'
 //
-// Underlines over ASDF keys allow us using MODs while clickig, (e.g. CTL+click)
-/*    C O N F I G      F I L E
-#define MOUSEKEY_DELAY            300
-#define MOUSEKEY_INTERVAL          50
-#define MOUSEKEY_MAX_SPEED         10
-#define MOUSEKEY_TIME_TO_MAX       20
-#define MOUSEKEY_WHEEL_DELAY       50
-#define MOUSEKEY_WHEEL_MAX_SPEED    8
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 40
-// END OF _MOUS 06
-
-/Mousekeys Settings 0 16 7 60 0 ? ?
-#define MOUSEKEY_DELAY              60
-#define MOUSEKEY_INTERVAL           50
-#define MOUSEKEY_MAX_SPEED           8
-#define MOUSEKEY_TIME_TO_MAX        40
-
-// NO SIRVE PARA NADA, NO EXISTE, CREO !    #define MOUSEKEY_WHEEL_DELAY 500
-// NO SIRVE PARA NADA, NO EXISTE, CREO !    #define MOUSEKEY_WHEEL_INTERVAL 220
-#define MOUSEKEY_WHEEL_MAX_SPEED     2
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 200  // max. value: 255
-*/
-// END OF _MOUS 06
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-
-
-/* Keymap _DALY 07: DAiLY commands layer
- * ,----------------------------------.  ,----------------------------------.
- * |@@@@@@|      |Captur|Captur|      |  |      |      |      |      |@@@@@@|
- * |  Tab |Dictat|Window|Selct.|Float.|  | Close| Prev | Next |Mision|Launch|
- * |@@@@@@|      |^:Copy|^:Copy|window|  |  APP | APP  | APP  |Contrl|@@pad@|
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |      |      |  |      |      |      |      |      |
- * | Caps | Dash |  UP  | Speak|Active|  | Close| Prev | Next |Windws| Space|
- * | Lock | board|      |      |window|  |Window|Window|Window| Apps |      |
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |      |Reopen|  |      |      |      |      |      |
- * |SftTab| LEFT | DOWN | RIGHT|window|  | Close| Prev | Next |DELETE|Launch|
- * |      |      |      |      | / tab|  |  tab | tab  | tab  |      |  pad |
- * '------+------+------+------+------'  '------+------+------+------+------'
-*/
-// DALY layer 07
-[_DALY] = KEYMAP(  // layer 07: DAiLY commands layer
-//,--------------------------------------------------.,-------------------------------------------------.
-       KC_TAB,   DICTAD,  CAPSCR,  CAPSLC,    FLOA_W,    CLOS_A, PREV_APP, NEXT_APP,   MISCTL,     DESK,
-//|----------+---------+--------+--------+-----------||--------+---------+---------+---------+----------|
-     F(CAPSL),   DSHBRD,   KC_UP,   SPEAK,    ACTV_W,    CLOS_W,   PREV_W,   NEXT_W,   APPS_W, KC_SPACE,
-//|----------+---------+--------+--------+-----------||--------+---------+---------+---------+----------|
-    S(KC_TAB),  KC_LEFT, KC_DOWN, KC_RGHT,    REOPEN,    CLOS_T,   PREV_T,   NEXT_T,   KC_DEL,   LNCHPD,
-//'--------------------------------------------------''-------------------------------------------------'
-//                               ,---------+----------,  ,-----------+--------,
-                                    _______,   _______,     MO(_POWR), _______, 
-//                               |---------+----------|  |-----------+--------|
-                                               _______,       _______,
-//                                         |----------|  |-----------|
-                             DESK, F(CAPSL),      SIRI,       _______, _______,  _______
-//                      '--------+---------+----------.  .-----------+--------+----------'
+//                     .------------------------.     .------------------------.
+                            _NUMB_LTHMB_RW1_,              _NUMB_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _NUMB_LTHMB_RW2_,              _NUMB_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
 ),
-/*
-//                              ,---------+----------,,--------+----------,
-                                    KC_TAB, _______,    _______, _______,
-//                              |---------+----------||--------+----------|
-                                            _______,    _______,
-//                                        |----------||----------|
-                         KC_BSPC, F(CAPSL),  KC_DEL,    _______, _______, _______
-//                     '--------+---------+----------..--------+--------+----------'
-),
-*/
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+// END OF _NUMB 02
 
-// ^ + CAPSCR = KC_CPYW
-// ^ + CAPSLC = KC_CPYP
+//[_FVIM] LAYER 03 : FAKE VIM LAYER
+  [_FVIM] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ___FAKEVIM_L1___,                                          ___FAKEVIM_R1___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___FAKEVIM_L2___,                                          ___FAKEVIM_R2___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___FAKEVIM_L3___,                                          ___FAKEVIM_R3___,
+//'----------------------------------------'                 '----------------------------------------'
+//
+//                     .------------------------.     .------------------------.
+                            _FVIM_LTHMB_RW1_,              _FVIM_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _FVIM_LTHMB_RW2_,              _FVIM_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
+),
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+// END OF _FVIM 03
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+
+//[_XVIM] LAYER 04 : EXTENDED EDITION VIM LAYER
+  [_XVIM] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ___EXT_VIM_L1___,                                          ___EXT_VIM_R1___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___EXT_VIM_L2___,                                          ___EXT_VIM_R2___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___EXT_VIM_L3___,                                          ___EXT_VIM_R3___,
+//'----------------------------------------'                 '----------------------------------------'
+//
+//                     .------------------------.     .------------------------.
+                            _XVIM_LTHMB_RW1_,              _XVIM_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _XVIM_LTHMB_RW2_,              _XVIM_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
+),
+// END OF _XVIM 04
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+
+//[_DVIM] LAYER 05 : DELETE VIM LAYER
+  [_DVIM] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ___DEL_VIM_L1___,                                          ___DEL_VIM_R1___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___DEL_VIM_L2___,                                          ___DEL_VIM_R2___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___DEL_VIM_L3___,                                          ___DEL_VIM_R3___,
+//'----------------------------------------'                 '----------------------------------------'
+//
+//                     .------------------------.     .------------------------.
+                            _DVIM_LTHMB_RW1_,              _DVIM_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _DVIM_LTHMB_RW2_,              _DVIM_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
+),
+// END OF _DVIM 05
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+
+//[_MOUS] = LAYER 06 : MOUSE LAYER
+  [_MOUS] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ____MOUSE_L1____,                                          ____MOUSE_R1____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____MOUSE_L2____,                                          ____MOUSE_R2____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____MOUSE_L3____,                                          ____MOUSE_R3____,
+//'----------------------------------------'                 '----------------------------------------'
+//
+//                     .------------------------.     .------------------------.
+                            _MOUS_LTHMB_RW1_,              _MOUS_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _MOUS_LTHMB_RW2_,              _MOUS_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
+),
+// END OF _MOUS 06
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+
+//[_DALY] = LAYER 07 : MOUSE LAYER
+  [_DALY] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ____DAILY_L1____,                                          ____DAILY_R1____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____DAILY_L2____,                                          ____DAILY_R2____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____DAILY_L3____,                                          ____DAILY_R3____,
+//'----------------------------------------'                 '----------------------------------------'
+//
+//                     .------------------------.     .------------------------.
+                            _DALY_LTHMB_RW1_,              _DALY_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _DALY_LTHMB_RW2_,              _DALY_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
+),
 // END OF _DALY 07
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-/* Keymap _FUNC 08: functions Layer
- * ,------------------------------------.  ,----------------------------------.
- * |      |      |        |      |      |  |      |      |      |      |      |
- * |  F01 |  F02 |   F03  |  F04 |  F05 |  |  F06 |  F07 |  F08 |  F09 |  F10 |
- * |      |      |        |      |      |  |      |      |      |      |      |
- * |------+------+--------+------+------|  |------+------+------+------+------|
- * |      |      |        |      |      |  |      |      |      |      |      |
- * |  F11 |  F12 |   F13  |  F14 |  F15 |  |  F16 |  F17 |  F18 |  F19 |  F20 |
- * |      |      |        |      |      |  |      |      |      |      |      |
- * |------+------+--------+------+------|  |------+------+------+------+------|
- * |      |      |        |  fn  |*XXXXX|  |*XXXXX|  fn  |@@@@@@|      |      |
- * |  F21 |  F22 |   F23  |Karab-|      |  |      |Karab-|  UP  | DOWN | RIGHT|
- * |      |      |@[_FUNC]|Elemen|      |  |      |Elemen|@@@@@@|      |      |
- * '------------------------------------'  '----------------------------------'
-*/
-// _FUNC layer 08
-
-[_FUNC] = KEYMAP(  // layer 08 : multiple apps layer
-// LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
-//,------------------------------------------.           ,----------------------------------------------.
-     KC_F1,  KC_F2,  KC_F3,  KC_F4,   KC_F5,                 KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,
-//|-------+-------+-------+-------+----------|           |--------+--------+--------+--------+----------|
-//                                                                          Karabiner-Elements: multiple_apps_mode     
-    KC_F11, KC_F12, KC_F13, KC_F14,  KC_F15,                KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,
-//|-------+-------+-------+-------+----------|           |--------+--------+--------+--------+----------|
-//      Karabiner-Elements: fn                                       fn: Karabiner-Elements
-    KC_F21, KC_F22, KC_F23, KC_F24, XXXXXXX,               XXXXXXX,  KC_F24, XXXXXXX, XXXXXXX, XXXXXXX,
-//'------------------------------------------'           '----------------------------------------------.
-//                       ,--------+----------,           ,--------+----------,
-                           _______, _______,             MO(_POWR),     KC_UP,
-//                       |--------+----------|           |--------+----------|
-                                    _______,               _______,
-//                                |----------|           |----------|
-//             Karabiner-Elements:                      Karabiner-Elements:
-//                              fn                                       fn
-                 _______,  _______, _______,               KC_LEFT,   KC_DOWN,  KC_RGHT
-//   Karabiner-Elements:                                        Karabiner-Elements:
-//    multiple_apps_mode                                         multiple_apps_mode
-//              '--------+--------+----------.           .--------+--------+----------'
+//[_FUNC] = LAYER 08 : FUNCTIONS LAYER
+  [_FUNC] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               __FUNCTIONS_L1__,                                          __FUNCTIONS_R1__,
+//|----------------------------------------|                 |----------------------------------------|
+               __FUNCTIONS_L2__,                                          __FUNCTIONS_R2__,
+//|----------------------------------------|                 |----------------------------------------|
+               __FUNCTIONS_L3__,                                          __FUNCTIONS_R3__,
+//'----------------------------------------'                 '----------------------------------------'
+//
+//                     .------------------------.     .------------------------.
+                            _FUNC_LTHMB_RW1_,              _FUNC_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _FUNC_LTHMB_RW2_,              _FUNC_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
 ),
-
-
-/*
-//                               ,---------+----------,  ,-----------+----------,
-                                    _______, _______,         _______, _______,
-//                               |---------+----------|  |-----------+----------|
-                                             _______,         _______,
-//                                         |----------|  |-----------|
-                          _______,  _______, _______,         _______, _______, _______
-//                      '--------+---------+----------.  .-----------+--------+----------'
-),
-*/
 // END OF _FUNC 08
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-
-/* Keymap _SYMB 09: symbols Layer
- * ,----------------------------------.  ,----------------------------------.
- * |      |      |      |      |      |  |      |      |      |      |      |
- * |   +  |   =  |   #  |   *  |   %  |  |   &  |   (  |   )  |   _  |   -  |
- * |      |      |      |      |      |  |      |      |      |      |      |
- * |------+------+------+------+------|  |------+------+------+------+------|
- * | LCtl | LAlt | LGui | LSft |      |  |      | LSft | LGui | LAlt | LCtl |
- * |      |      |      |      |      |  |      |      |      |      |      |
- * | `  ~ | '  " |   \  |   /  |   |  |  |   @  |   [  |   ]  |   ,  |   .  |
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |      |      |  |@@@@@@|      |      |      |      |
- * | !  ¡ | ?  ¿ |   <  |   >  |   $  |  |   ^  |   {  |   }  |   ;  |   :  |
- * |      |      |      |      |      |  |@@@@@@|      |      |      |      |
- * '----------------------------------'  '----------------------------------'
-*/
-// SYMBOLS layer 09
-/*
-[_SYMB] = KEYMAP(  // layer 09: symbols layer
-//,--------------------------------------------------------------------------.  ,--------------------------------------------------------------------------.
-           KC_PLUS,         KC_EQL,        KC_HASH,        KC_ASTR, KC_PERC,      KC_AMPR,        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,
-//|---------------+---------------+---------------+---------------+----------|  |--------+---------------+---------------+---------------+-----------------|
-    LCTL_T(KC_GRV),LALT_T(KC_QUOT),LGUI_T(KC_BSLS),LSFT_T(KC_SLSH), KC_PIPE,        KC_AT,LSFT_T(KC_LBRC),LGUI_T(KC_RBRC),LALT_T(KC_COMM), LCTL_T(KC_DOT),
-//|---------------+---------------+---------------+---------------+----------|  |--------+---------------+---------------+---------------+-----------------|
-           KC_EXLM,        KC_QUES,        KC_LABK,        KC_RABK,  KC_DLR,      KC_CIRC,        KC_LCBR,        KC_RCBR,        KC_SCLN,        KC_COLN,
-//,--------------------------------------------------------------------------'  '--------------------------------------------------------------------------.
-//                                                        ,---------+-----------,  ,--------+----------,
-                                                              INV_EX,   INV_QU,    MO(_POWR),     EURO,
-//                                                        |---------+-----------|  |--------+----------|
-                                                                       _______,      _______,
-//                                                                  |-----------|  |--------|
-                                     O_COMMENT, C_COMMENT, CHANGE_SYMB_TO_NUMB,     _______, _______, _______ 
-//                                            '---------+----------+------------.  .--------+--------+---------'
+//[_SYMB] LAYER 09 : SYMBOLS LAYER
+  [_SYMB] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ___SYMBOLS_L1___,                                          ___SYMBOLS_R1___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___SYMBOLS_L2___,                                          ___SYMBOLS_R2___,
+//|----------------------------------------|                 |----------------------------------------|
+               ___SYMBOLS_L3___,                                          ___SYMBOLS_R3___,
+//'----------------------------------------'                 '----------------------------------------'
+//                     .------------------------.     .------------------------.
+                            _SYMB_LTHMB_RW1_,              _SYMB_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _SYMB_LTHMB_RW2_,              _SYMB_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
 ),
-*/
-[_SYMB] = LAYOUT_wrapper(  // layer 02 : numbers layer
-           _S_CORE_SYMB_L1_,                                                          _S_CORE_SYMB_R1_,
-           _S_CORE_SYMB_L2_,                                                          _S_CORE_SYMB_R2_,
-           _S_CORE_SYMB_L3_,                                                          _S_CORE_SYMB_R3_,
-                                   _SYMB_LTHMB_ROW1_,        _SYMB_RTHMB_ROW1_, // _ACCN_RGHT_THUMB_ROW1_,
-                                              KC_NO,          KC_NO,
-                                   _SYMB_LTHMB_ROW2_,        _SYMB_RTHMB_ROW2_ // TD(SETNMB), MO(_SYMB),  _______
-),
-
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// ###
-// [info] EURO: http://www.fileformat.info/info/unicode/char/search.htm?q=euro&preview=entity
-/*
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-// LEFT_HAND
-//,-----------------------------------------------------------------------------.
-           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,
-//|---------------+---------------+---------------+---------------+-------------|
-    LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),
-//|---------------+---------------+---------------+---------------+-------------|
-        TD(Z_EXCL),     TD(X_QUES),        KC_LABK,        KC_RABK,    KC_ASTR,
-//,-----------------------------------------------------------------------------'
-
-                    // RIGHT_HAND
-                    ,-----------------------------------------------------------------------------------.
-                            TD(Y_AMCI),        KC_LPRN,        KC_RPRN,        KC_UNDS,        KC_MINS,    
-                    |-----------------+---------------+---------------+---------------+-----------------|
-                               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
-                    |-----------------+---------------+---------------+---------------+-----------------|
-                      LT(_SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_COLN,        KC_SCLN ),
-                    '-----------------------------------------------------------------------------------.
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-*/
 // END OF _SYMB 09
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-
-/* Keymap _APPS 10: _APPS layer
- * ,----------------------------------.  ,----------------------------------.
- * |SIMPLE|      | *QE* |  APP | TERMI|  | TYPI |      | TEXT | *QE* |SYSTEM|
- * | NOTE |TWITTR| EVER | STORE| -NAL |  |-NATOR| UROOM|-EDIT | OMNI |PREFE-|
- * |      |      |-NOTE |      |      |  |      |      |      |-FOCUS|RENCES|
- * |------+------+------+------+------|  |------+------+------+------+------|
- * | APPLE| *⌘L* | *QE* |      |GOOGLE|  |      |SUBLME|KARBNR| CALEN|      |
- * |SCRIPT|SAFARI|  DAY |FINDER|CHROME|  |SKETCH| TEXT |ELMNTS|-DAR  |*XXXXX|
- * |      | SLACK|  ONE |      |      |  |      |      |      |      |      |
- * |------+------+------+------+------|  |------+------+------+------+------|
- * | STU  |      | CALCU|KARBNR|      |  |      |      | KEY- |      | NUM- |
- * |-DIES | XCODE|-LATOR|EVENT | BOOKS|  | NOTES| MAIL | NOTE | PAGES| BERS |
- * |      |      |      |VIEWER|      |  |      |      |      |      |      |
- * '----------------------------------'  '----------------------------------'
- *                  ,-----------------.  ,-----------------.
- *                  |        |        |  |        |        |
- *                  |        |        |  |        |        |
- *                  |        |        |  |        |        |
- *                  |        |        |  | _POWR  |        |
- *         ,--------+--------+--------|  |--------+--------|--------.
- *         |        |        |        |  |        |        |        |
- *         |        |        |        |  |        |        |        |
- *         |        |KARABINR|        |  |        |        |        |
- *         |        |  APPS  |        |  |        |        |        |
- *         '--------------------------'  '--------------------------'
-*/ // *QE*: QUICK ENTRY
-// _APPS layer 10
-[_APPS] = KEYMAP(  // layer 10 : apps layer
-// ###
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// [PENDING]
-// Feedly
-// [pending]
-//,-----------------------------------------------------------------.  ,------------------------------------------------------------------.
-    APP_Q_SNOTE, APP_W_TWTTR, APP_E_EVERN, APP_R_APSTO, APP_T_TERMI,     APP_Y_TYPIN, APP_U_UROOM, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
-//|------------+------------+------------+------------+-------------|  |------------+------------+------------+------------+--------------|
-    APP_A_SCRPT, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,     APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, APPSP_EMPTY,
-//|------------+------------+------------+------------+-------------|  |------------+------------+------------+------------+--------------|
-    APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_KVIEW, APP_B_BOOKS,     APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB,
-//'-----------------------------------------------------------------'  '------------------------------------------------------------------'
-//                               ,---------+----------,  ,-----------+----------,
-                                    _______,   _______,     MO(_POWR), _______,
-//                               |---------+----------|  |-----------+----------|
-                                               _______,       _______,
-//                                         |----------|  |-----------|
-                   _______, _______, TH_L3_KAR_APPS,       _______,   _______, _______
-//               '--------+--------+------------------.  .-----------+----------+----------'
+//[_APPS] = LAYER 10 : APPLICATIONS LAYER
+  [_APPS] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               __APPLICATS_L1__,                                          __APPLICATS_R1__,
+//|----------------------------------------|                 |----------------------------------------|
+               __APPLICATS_L2__,                                          __APPLICATS_R2__,
+//|----------------------------------------|                 |----------------------------------------|
+               __APPLICATS_L3__,                                          __APPLICATS_R3__,
+//'----------------------------------------'                 '----------------------------------------'
+//
+//                     .------------------------.     .------------------------.
+                            _APPS_LTHMB_RW1_,              _APPS_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _APPS_LTHMB_RW2_,              _APPS_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
 ),
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// ###
 // END OF _APPS 10
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-/*
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-// LEFT_HAND
-//,-----------------------------------------------------------------.
-    APP_Q_SNOTE, APP_W_TWTTR, APP_E_EVERN, APP_R_APSTO, APP_T_TERMI,
-//|------------+------------+------------+------------+-------------|
-    APP_A_SCRPT, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,
-//|------------+------------+------------+------------+-------------|
-    APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_KVIEW, APP_B_BOOKS,
-//'-----------------------------------------------------------------'
-
-                                     // RIGHT_HAND
-                                     ,------------------------------------------------------------------.
-                                       APP_Y_TYPIN, APP_U_UROOM, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
-                                     |------------+------------+------------+------------+--------------|
-                                       APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, APPSP_EMPTY,
-                                     |------------+------------+------------+------------+--------------|
-                                       APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB ),
-                                     '------------------------------------------------------------------'
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
-*/
-
-
-
+//[PLACEHOLDER] //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 /*  
 *  Keymap _RGBL 11: RGB Light leds layer
 ,--------------------------------------------------. ,-------------------------------------------------.
@@ -3461,7 +2666,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 // END OF _RGBL 11
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
 /* Keymap _POWR 12: POWeR productivity layer
@@ -3497,9 +2702,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ###
 // ////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
 //,---------------------------------------------------------------.  ,---------------------------------------------------------------.
-       TOG_ID,       LCKSCR,      LOGOUT,    MY_RESET,    XXXXXXX,           VOL_8,KC__VOLUP, KC__VOLDOWN,       VOL_1,     KC__MUTE,
+       TOG_ID,       LCKSCR,      LOGOUT,    MY_RESET,     STP_ID,           VOL_8,KC__VOLUP, KC__VOLDOWN,       VOL_1,     KC__MUTE,
 //|-----------+------------+------------+------------+------------|  |------------+---------+------------+------------+--------------|
-      KC_RCTL,RALT_T(KC_F7),RGUI_T(KC_SPC),RSFT_T(KC_F9), ZOMSMTH,         ZOM_FOL,   ZOM_IN,     ZOM_OUT,     ZOM_TOG,      INV_CLR,
+      KC_RCTL/*RCTL_T(STP_ID)*/,RALT_T(KC_F7),RGUI_T(KC_SPC),RSFT_T(KC_F9), ZOMSMTH,         ZOM_FOL,   ZOM_IN,     ZOM_OUT,     ZOM_TOG,      INV_CLR,
 //      TOG_ID,       KC_RW,      KC_SPC,       KC_FF,    ZOMSMTH,         ZOM_FOL,   ZOM_IN,     ZOM_OUT,     ZOM_TOG,      INV_CLR,
 //|-----------+------------+------------+------------+------------|  |------------+---------+------------+------------+--------------|
         SL_MEN,      KA_DCK,      KM_TOL,      SH_STA,     RT_FLO,         CNTR_UP,  KC_PAUS,     KC_SLCK,    BRIGHT_1,      CNTR_DN,
@@ -3517,13 +2722,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                     '--------+---------+----------.  .--------+--------+---------'
 )
 //////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
 /*
 // LEFT_HAND
 //,-------------------------------------------------------------------------.
-MY_STEP_INDICAT,        LOGOUT,     LCKSCR,      MY_RESET,     XXXXXXX,
+STP_ID,        LOGOUT,     LCKSCR,      MY_RESET,     XXXXXXX,
 //|------------+--------------+---------------+--------------+--------------|
 TOG_ID,         KC_F7,         KC_SPC,         KC_F9, ZOMSMTH,
 //|------------+------------------------------+--------------+--------------|
@@ -3540,11 +2745,11 @@ TOG_ID,         KC_F7,         KC_SPC,         KC_F9, ZOMSMTH,
                                       '----------------------------------------------------------------'
 */
 // END OF _POWR 12
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 };
 //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -3659,7 +2864,7 @@ const uint16_t PROGMEM fn_actions[] = {
 
   [CAPSL] = ACTION_FUNCTION(CAPSL)
 };
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
 /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
@@ -3747,7 +2952,7 @@ void matrix_scan_user(void) {
 }
 */
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 //                                                                                                    //
 //                                                                                                    //
 //                                          M  A  C  R   O  S                                         //
@@ -3757,14 +2962,14 @@ void matrix_scan_user(void) {
 //                                                                                                    //
 //                                                                                                    //
 // BEGINNING OF NEW MACROS WAY                                                                        //
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 //
 // [UNDERSTANDING]
 // We implement MACROS when we need QMK functions, or more than one keystroke in a specific keypress ...
 // ... and we don't have the need to use tap dance cases.  Because tap_dance is annoying to use or ...
 // ... because tap_dance is slow for showing RGB layer color.
 //
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 /*                                                                                                    */
 /*  W A Y   0   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
 /*                                                                                                    */
@@ -3778,13 +2983,13 @@ void matrix_scan_user(void) {
 /*     send_string(key);                                                                              */
 /*   }                                                                                                */
 /*                                                                                                    */
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 /*                                                                                                    */
 /*  W A Y   1   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
 /*                                                                                                    */
 /*   SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"fj");                                       */
 /*                                                                                                    */
-/////////////////////////////////////////////////////////////////////////////////////////////////////###            
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###            
 /*                                                                                                    */
 /*  W A Y   2   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
 /*                                                                                                    */
@@ -3796,7 +3001,7 @@ void matrix_scan_user(void) {
 /*   add_mods(actual_mods);                       send_keyboard_report();                             */
 /*   SEND_STRING("fj");                                                                               */
 /*                                                                                                    */
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 /*                                                                                                    */
 /*  W A Y   3   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
 /*                                                                                                    */
@@ -3807,7 +3012,7 @@ void matrix_scan_user(void) {
 /*   register_code(KC_F);    unregister_code(KC_F);                                                   */
 /*   register_code(KC_J);    unregister_code(KC_J);                                                   */
 /*                                                                                                    */
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 /*                                                                                                    */
 /*  W A Y   4   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
 /*                                                                                                    */
@@ -3818,7 +3023,7 @@ void matrix_scan_user(void) {
 /*   register_code(KC_F);   unregister_code(KC_F);                                                    */                               
 /*   register_code(KC_J);   unregister_code(KC_J);                                                    */
 /*                                                                                                    */
-/////////////////////////////////////////////////////////////////////////////////////////////////////###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
@@ -3856,6 +3061,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     switch(keycode)
     {
+      case TT_NUMB:   lt12_timer = timer_read();
+                      layer_invert(_NUMB);
+                      return false; 
 
       case PREV_APP:  register_code  (KC_LGUI);
                       register_code  (KC_LSFT);
@@ -3869,7 +3077,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       changing_apps = true;
                       return false;
 
+      case MY_CLEAR:  layer_clear(); return false;
 
+      // case MY_RESET:  if (get_mods()&CTRL_MODS)
+      //                 {
+      //                   reset_my_keyboard_function();
+      //                   return false;
+      //                 }
+      case MY_RESET:  if (control_flag)
+                      {
+                        reset_my_keyboard_function();
+                        return false;
+                      }
 
       case O_COMMENT: tap_code       (KC_SLSH);
                       register_code  (KC_LSFT);
@@ -3882,14 +3101,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       unregister_code(KC_LSFT);
                       tap_code       (KC_SLSH);
                       return false;
-
-      case MY_CLEAR:  layer_clear(); return false;
-
-      case MY_RESET:  if (get_mods()&CTRL_MODS)
-                      {
-                        reset_my_keyboard_function();
-                        return false;
-                      }
 
       case CHANGE_SYMB_TO_NUMB:
                       layer_off(_SYMB);
@@ -3912,7 +3123,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       return false;
                       
       case TH_L4_FUNC_RGBL:
-                      if (get_mods()&ALT_MODS)
+                      // if (get_mods()&ALT_MODS)
+                      if (triggered_mod(KC_A))
                       {
                         layer_on(_RGBL);
                       }
@@ -3923,7 +3135,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       return false;
 
       case TH_R1_DALY_MOUS:
-                      if (get_mods()&ALT_MODS)
+                      // if (get_mods()&ALT_MODS)
+                      if (triggered_mod(KC_A))
                       {
                         layer_on(_MOUS);
                       }
@@ -3933,8 +3146,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       }
                       return false;
 
+      // case TH_R2_SYMB_FVIM:
+      //                 if (get_mods()&ALT_MODS)
+      //                 {
+      //                   layer_on(_FVIM);
+      //                 }
+      //                 else
+      //                 {
+      //                   symbols_pressed = true;
+      //                   layer_on(_SYMB);
+      //                 }
+      //                 return false;
       case TH_R2_SYMB_FVIM:
-                      if (get_mods()&ALT_MODS)
+                      if (triggered_mod(KC_A))
                       {
                         layer_on(_FVIM);
                       }
@@ -3945,33 +3169,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       }
                       return false;
 
-      // case LAUNCHING_APPS: rgblight_sethsv_noeeprom(COLOR_APPS);
-      //                      apps_working = true;
-      //                      if (triggered_gui())
-      //                        multi_apps = true;
-
-      //                      layer_on(_APPS);
-      //                      return false;
-
-      case TH_R3_APPS_NUMB: if (option_flag)
-                               {
-                                  layer_on(_NUMB);
-                               }
-                               else
-                               {
-                                 apps_working = true;
-                                 if (gui_flag)
-                                 {
-                                   current_flag = gui_flag;
-                                   multi_apps = true;
-                                   multi_apps_karabiner = true;
-                                 }
-                                 layer_on(_APPS);
-                               }
-                               return false;
+      case TH_R3_APPS_NUMB: //if (option_flag)
+                            if (triggered_mod(KC_A))
+                            {
+                               layer_on(_NUMB);
+                            }
+                            else
+                            {
+                              apps_working = true;
+                              if (gui_flag)
+                              {
+                                current_flag = gui_flag;
+                                multi_apps = true;
+                                multi_apps_karabiner = true;
+                              }
+                              layer_on(_APPS);
+                            }
+                            return false;
 
       case TH_R4_POWR_RGBL:
-                      if (get_mods()&ALT_MODS)
+                      // if (get_mods()&ALT_MODS)
+                      if (triggered_mod(KC_A))
                       {
                         layer_on(_RGBL);
                       }
@@ -3983,15 +3201,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
       case TOG_ID:   if (rgblight_config.enable && (capslock_is_active || numbers_is_active))
                       {
-                        // if (whole_keyboard_as_indicator)
-                        // {
-                        //   diff = prev_diff;
-                        // }
-                        // else
-                        // {
-                        //   prev_diff = diff;
-                        //   diff = 2;
-                        // }
+                        if (whole_keyboard_as_indicator)
+                        {
+                          diff = prev_diff;
+                        }
+                        else
+                        {
+                          prev_diff = diff;
+                          diff = 1;
+                        }
                         whole_keyboard_as_indicator = !whole_keyboard_as_indicator;
                         show_RGB_LEDs();                        
                       }
@@ -4000,10 +3218,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 //
 // THIS FUNCTION IS NOT GOING TO BE USED WITH 23 LEDS PER HAND
-//    case MY_STEP_INDICAT:
       //////////////////////////////////////////////////////////////////////////////////////////
       //                                                                                      //
-      // [PROCESS_RECORD_USER] [_POWR] KC_Q (MY_STEP_INDICAT)                                 //
+      // [PROCESS_RECORD_USER] [_POWR] KC_Q (STP_ID)                                 //
       //                                                                                      //
       //  S T E P S   U P   W I D T H   O F   RGB   W O R K I N G   A S  I N D I C A T O R S  //
       //                                                                                      //
@@ -4013,88 +3230,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       //                                                                                      //
       //////////////////////////////////////////////////////////////////////////////////////////
       //
-          // if ( rgblight_config.enable && !whole_keyboard_as_indicator
-          //    && (capslock_is_active || numbers_is_active) )
-          // {
-          //   diff = (diff < 5 ? diff + 1 : 2 );
-          //   show_RGB_LEDs();
-          // }
-          // return false;
+      case STP_ID:
+          if ( rgblight_config.enable && !whole_keyboard_as_indicator
+             && (capslock_is_active || numbers_is_active) )
+          {
+            diff = (diff < 4 ? diff + 1 : 1 );
+            show_RGB_LEDs();
+          }
+          return false;
 // this function is not going to be used with 23 leds per hand
 //
 
-      case KC_BSPC:  rgblight_sethsv_noeeprom(HSV_MY_RED);
-                     return true;
-
+      case KC_BSPC:
       case KC_DEL:   rgblight_sethsv_noeeprom(HSV_MY_RED);
                      return true;
                      
-// 🔥💀☠️🔥
-
-      // case THUMB_L2_FVIM_SYMB_DALY_POWR_CAPSL:
-      //                 if (get_mods()&GUI_MODS) // if I am pressing LGUI (COMMAND)
-      //                 {
-      //                   layer_on(_SYMB);
-      //                 }
-      //                 else
-      //                 if (get_mods()&ALT_MODS)
-      //                 {
-      //                   layer_on(_DALY);
-      //                 }
-      //                 else
-      //                 if (get_mods()&CTRL_MODS)
-      //                 {
-      //                   layer_on(_POWR);
-      //                 }
-      //                 else
-      //                 if (get_mods()&SHFT_MODS)
-      //                 {
-      //                   capslock_tap();
-      //                   show_RGB_LEDs();
-      //                 }
-      //                 else
-      //                 {
-      //                   layer_on(_FVIM);
-      //                 }
-      //                 return false;
-
-
-      // case THUMB_R2_NUMB_DVIM_FVIM_MOUS_SP:
-      //                 if (get_mods()&GUI_MODS) // if I am pressing LGUI (COMMAND)
-      //                 {
-      //                   layer_on(_NUMB);
-      //                   return false;
-      //                 }
-      //                 else
-      //                 if (get_mods()&ALT_MODS)
-      //                 {
-      //                   layer_on(_DVIM);
-      //                   return false;
-      //                 }
-      //                 else
-      //                 if (get_mods()&CTRL_MODS)
-      //                 {
-      //                   layer_on(_FVIM);
-      //                   return false;
-      //                 }
-      //                 else
-      //                 if (get_mods()&SHFT_MODS)
-      //                 {
-      //                   layer_on(_MOUS);
-      //                   return false;
-      //                 }
-      //                 else
-      //                 {
-      //                   register_code(KC_SPACE);
-      //                   return false;
-      //                 }
-
-      
-// 🔥💀☠️🔥
-      //
       //[SAVING_SPACE]
-      // using remove_control_mod as a bool function, we save from 38 to 66 bytes --> 28 bytes saved
-      case SL_MEN:    if (remove_control_mod())
+      // using triggered_control_mod as a bool function, we save from 38 to 66 bytes --> 28 bytes saved
+      // case SL_MEN:    if (triggered_control_mod())
+      case SL_MEN:    if (triggered_mod(KC_C))
                       {
                          register_code(KC_POWER);
                       // without this delay, POWER doesn't work !!!   
@@ -4108,7 +3262,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       }
                       return false;
 
-      case KA_DCK:    if (remove_control_mod())
+      case KA_DCK:    if (triggered_mod(KC_C))
                       {
                         register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
                         tap_code(KC_ESC);
@@ -4120,7 +3274,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       }
                       return false;
 
-      case KM_TOL:    if (remove_control_mod())
+      case KM_TOL:    if (triggered_mod(KC_C))
                       {
                         register_code(KC_LALT); register_code(KC_LGUI);
                         tap_code(KC_ESC);
@@ -4132,10 +3286,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       }
                       return false;
 
-      case SH_STA:    if (control_flag)
+      case SH_STA:  //we save unregister control and register again
+                    //if (triggered_mod(KC_C)) 
+                      if (control_flag)
                       {
                         volumeSetToLevel(1);
                     //  keystrokes for shutting down:  (guessed by try and fail method)
+                    //  register_code(KC_LCTL);    
                         register_code(KC_LALT); register_code(KC_LGUI);
                         tap_code(KC_POWER);
                         unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);   
@@ -4148,7 +3305,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       }
                       return false;
 
-      case RT_FLO:    if (control_flag)
+      case RT_FLO:    if (control_flag) //same 'saving control' issue as in previous case
                       {
                       //keystrokes for restarting:  (guessed by try and fail method)
                         register_code(KC_LGUI);
@@ -4163,48 +3320,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       }
                       return false;
 
-                     
-
       case CIRCU:    circumflex_requested = true; // requested circumflex accent
                      return false;                // Skip all further processing of this key when pressed
-
 
       case GRAVE:    grave_requested      = true; return false; // requested grave      accent
       case DIAER:    diaeresis_requested  = true; return false; // requested diaeresis  accent
 
-
       case VOL_1:    volumeSetToLevel(1);         return false; // set volume to minimum (level 1)
       case VOL_8:    volumeSetToLevel(8);         return false; // set volume to middle  (level 8)
-
-
-/* OLD APPS CODE
-      case APP_A_SCRPT: callApp("Simplenote.app");            return false; break; // simplenote
-      case APP_S_SAFAR: callApp("Safari.app");                return false; break; // S afari
-      case APP_D_D_ONE: callApp("Day One Classic.app");       return false; break; // D ay one
-      case APP_F_FINDE: callApp("Finder.app");                return false; break; // F inder
-      case APP_G_CHRME: callApp("Google Chrome.app");         return false; break; // G oogle chrome
-
-      case APP_H_SKTCH: callApp("Sketch.app");                return false; break; // sketc H
-      case APP_K_KRBNR: callApp("Karabiner-EventViewer.app"); return false; break; // K arabiner Evnt Vwr
-      case APP_L_CLNDR: callApp("Calendar.app");              return false; break; // Calendar
-      case APPSP_EMPTY: callApp("");                          return false; break; //
-
-      case APP_Z_STUDI: callApp("Studies.app");               return false; break; // Studies
-      case APP_X_XCODE: callApp("Xcode.app");                 return false; break; // Xcode
-      case APP_C_CALCU: callApp("Calculator.app");            return false; break; // Calculator
-      case APP_V_VVVVV: callApp("");                          return false; break; //
-      case APP_B_BOOKS: callApp("Books.app");                 return false; break; // Books
-
-      case APP_N_NOTES: callApp("Notes.app");                 return false; break;  // Notes
-   // Next 2 lines have been copied & pasted from a command line C program in xcode who run perfectly !
-   // Any of them works properly for opening an app from Terminal !  But they don' work under QMK code !
-   //   system("open //Applications//Notes.app");
-   //   system("osascript -e 'launch application \"Notes\"' -e 'activate application \"Notes\"' -e end");
-      case APP_M_MAIL:  callApp("Mail");                      return false; break; // Mail
-      case APP_ES_KEYN: callApp("Keynote");                   return false; break; // Keynote
-      case APP_BS_PAGE: callApp("Pages");                     return false; break; // Pages
-      case APP_EN_NUMB: callApp("Numbers");                   return false; break; // Numbers
-*/
 
       case BRIGHT_1: brightSetToLevel(1);         return false; // set bright to minimum (level 1)
 
@@ -4220,7 +3343,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // LEFT ROW 1 APPS
       case APP_Q_SNOTE: callApp("q");                         return false; // simple note
-      case APP_W_TWTTR: callApp("w");                         return false; // t W itter
+      // case APP_W_TWTTR: callApp("w");                         return false; // t W itter
       //
       // [SAVING_SPACE]
       // 88 bytes free when disable Evernote case and 40 bytes when I enable it  -->  it costs 48 bytes of code
@@ -4238,7 +3361,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         }
                         return false;                                       // E vernote
 
-      case APP_R_APSTO: callApp("r");                         return false; // app sto R e
+      // case APP_R_APSTO: callApp("r");                         return false; // app sto R e
       case APP_T_TERMI: callApp("t");                         return false; // T erminal
 
 
@@ -4262,10 +3385,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 
 // LEFT ROW 2 APPS
-      case APP_A_SCRPT: callApp("a");                         return false; // A pple script
+      // case APP_A_SCRPT: callApp("a");                         return false; // A pple script
       case APP_S_SAFAR: if (control_flag)
                         {
-                          remove_control_mod();
+                          triggered_control_mod();
                           // if (shift_flag)
                           // {
                           //   shift_was_activated = true;
@@ -4314,15 +3437,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         }
                         return false;                                       // D ay one
       case APP_F_FINDE: callApp("f");                         return false; // F inder
-      case APP_G_CHRME: callApp("g");                         return false; // G oogle chrome
+      // case APP_G_CHRME: callApp("g");                         return false; // G oogle chrome
 
 
 // RIGHT ROW 2 APPS
       case APP_H_SKTCH: callApp("h");                         return false; // sketc H
       case APP_J_SUBLI: callApp("j");                         return false; // sublime text
-      case APP_K_KRBNR: callApp("k");                         return false; // K arabiner-elements
-      case APP_L_CLNDR: callApp("l");                         return false; // Calendar
-      case APPSP_EMPTY: callApp(" ");                         return false; // ???? EMPTY EMPTY EMPTY EMPTY 
+      // case APP_K_KRBNR: callApp("k");                         return false; // K arabiner-elements
+      // case APP_L_CLNDR: callApp("l");                         return false; // Calendar
+      // case APPSP_EMPTY: callApp(" ");                         return false; // ???? EMPTY EMPTY EMPTY EMPTY 
 
 
 // LEFT ROW 3 APPS
@@ -4345,47 +3468,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // keycodes for triggering apps
 // applications
 //
-//
-//
-
-
-
+// keycodes for triggering apps
 
 
 // _FVIM
    // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
    // ... except for the 'H' key:
       case FVIM_H: fvim("h");  return false;
-/*
-      case FVIM_M: fvim("m");  return false;
-      case FVIM_ES:fvim("\e"); return false;
-      case FVIM_BS:fvim("\b"); return false;
-      case FVIM_EN:fvim("\n"); return false;
-   // _fvim
-*/
-// [INFO]
-/*
-* [#ref] Escape sequences in C
-* wikipedia link: 
-* https://en.wikipedia.org/wiki/Escape_sequences_in_C        
-
-* \e  \x001B  
-* register_code (KC_ESC); unregister_code (KC_ESC); } break;
-* case FVIM_ES:if (record->event.pressed) { fvim("\e"); } break;
-
-* \b  \x0008
-* register_code(KC_BSPC); unregister_code(KC_BSPC); } break;   
-* case FVIM_BS:if (record->event.pressed) { fvim("\b"); } break;
-
-* \n  \x000A      new line
-* register_code (KC_ENT); unregister_code (KC_ENT); } break; 
-* \r  \x000D      carriage return
-      case FVIM_EN:if (record->event.pressed) { fvim("\n"); } break;
-*/
-// [info]
 
 // _DVIM
-
       case DVIM_Y: dvim("y");  return false;
 //         DVIM_uU is tap_dance
       case DVIM_I: dvim("i");  return false;
@@ -4403,6 +3494,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case DVIM_ES:dvim("\e"); return false;
       case DVIM_BS:dvim("\b"); return false;
       case DVIM_EN:dvim("\n"); return false;
+
+
 /*
 // select _AVIM
 //            case AVIM_Y: avim("y");  return false;
@@ -4447,33 +3540,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case XVIM_ES: xvim("\e"); return false;
       case XVIM_BS: xvim("\b"); return false;
       case XVIM_EN: xvim("\n"); return false;
-
-
-
-/*            HSV COLORS            */
-/*
-#define HSV_MY_EMPTY          0,   0,   0  //   0,   0,   0  //   0°,   0.0%,   0.0%
-#define HSV_MY_WHITE          0,   0, 255  //   0,   0, 255  //   0°,   0.0%, 100.0%
-#define HSV_MY_RED            0, 255, 255  //   0, 255, 255  //   0°, 100.0%, 100.0%
-#define HSV_MY_CORAL         11, 176, 255  //  16, 178, 255  //  16°,  69.8%, 100.0%
-#define HSV_MY_ORANGE        28, 255, 255  //  30, 255, 255  //  30°, 100.0%, 100.0%
-#define HSV_MY_GOLDENROD     30, 218, 218  //  43, 216, 217  //  43°,  84.8%,  85.1%
-#define HSV_MY_GOLD          36, 255, 255  //  51, 255, 255  //  51°, 100.0%, 100.0%
-#define HSV_MY_YELLOW        43, 255, 255  //  60, 255, 255  //  60°, 100.0%, 100.0%
-#define HSV_MY_CHARTREUSE    64, 255, 255  //  90, 255, 255  //  90°, 100.0%, 100.0%
-#define HSV_MY_GREEN         85, 255, 255  // 120, 255, 255  // 120°, 100.0%, 100.0%
-#define HSV_MY_SPRINGGREEN  106, 255, 255  // 150, 255, 255  // 150°, 100.0%, 100.0%  
-#define HSV_MY_TURQUOISE    123,  90, 112  // 174,  90, 110  // 174°,  35.5%,  43.1%
-#define HSV_MY_TEAL         128, 255, 128  // 180, 255, 128  // 180°, 100.0%,  50.2%
-#define HSV_MY_CYAN         128, 255, 255  // 180, 255, 255  // 180°, 100.0%, 100.0%
-#define HSV_MY_AZURE        132, 102, 255  // 186, 102, 255  // 186°,  40.0%, 100.0%
-#define HSV_MY_BLUE         170, 255, 255  // 240, 255, 255  // 240°, 100.0%, 100.0%
-#define HSV_MY_PURPLE       191, 255, 255  // 269, 255, 255  // 269°, 100.0%, 100.0%   300 255 128  300 100.0 50.0
-#define HSV_MY_MAGENTA      213, 255, 255  // 300, 255, 255  // 300°, 100.0%, 100.0%
-#define HSV_MY_PINK         234, 128, 255  // 330, 127, 255  // 330°,  49.8%, 100.0%  wikipedia 330 59.0 100.0
-*/
-
-
 
 // [_RGBL]
 /*
@@ -4554,7 +3620,7 @@ ROW 3 COLORS
 // [_rgbl]
 
 
-      case DICTAD:
+      case DICTATION:
         register_code(KC_RGUI); unregister_code(KC_RGUI);
         register_code(KC_RGUI); unregister_code(KC_RGUI);
         return false;
@@ -4572,6 +3638,23 @@ ROW 3 COLORS
 //  Do something else when release
     switch(keycode)
     {
+      // 746-674= 72 bytes saved using TT(layer) instead of my implementation
+      // ... but RGB layer color changes too slow.  MY way is instantly changed !
+      // if (record->event.pressed) {
+      // case TT_NUMB:   lt12_timer = timer_read();
+                      // layer_invert(_NUMB);
+      //                 return false; 
+      // emulates TT(layer)
+      case TT_NUMB:   if (timer_elapsed(lt12_timer) > TAPPING_TERM)
+                      {  
+                        // if we have had pressed this 'trigger layer key' more time than tapping_term
+                        // is because we have used it for typing some numbers (or letters if came from
+                        // ... numbers layers)
+                        //
+                        // now, when we release this 'trigger layer key', we return to previous layer
+                        layer_invert(_NUMB);
+                      }
+                      return false;
 
       case CHANGE_SYMB_TO_NUMB:
                       layer_off(_NUMB);
@@ -4579,7 +3662,6 @@ ROW 3 COLORS
                       {
                         layer_on(_SYMB);
                       }
-
                       return false;
 
       case TH_L3_KAR_APPS:
@@ -4654,10 +3736,7 @@ ROW 3 COLORS
                         }
                       }
                       return false;
-      // case LAUNCHING_APPS: apps_working = false;
-      //                      layer_off(_APPS);
-      //                      show_RGB_LEDs();
-      //                      return false;
+
       case TH_R3_APPS_NUMB: if (state_number == _NUMB)
                                {
                                  layer_off(_NUMB);
@@ -4684,65 +3763,6 @@ ROW 3 COLORS
       case KC_BSPC:  show_RGB_LEDs();
                      return true;
                     
-
-      // case THUMB_L2_FVIM_SYMB_DALY_POWR_CAPSL:
-      //                 if (state_number == _FVIM)
-      //                 {
-      //                   layer_off(_FVIM);
-      //                   return false;
-      //                 }
-      //                 else
-      //                 if (state_number == _SYMB)
-      //                 {
-      //                   layer_off(_SYMB);
-      //                   return false;
-      //                 }
-      //                 else
-      //                 if (state_number == _DALY)
-      //                 {
-      //                   layer_off(_DALY);
-      //                   return false;
-      //                 }
-      //                 else
-      //                 if (state_number == _POWR)
-      //                 {
-      //                   layer_off(_POWR);
-      //                   return false;
-      //                 }
-
-
-      // case THUMB_R2_NUMB_DVIM_FVIM_MOUS_SP:
-      //                 if (state_number == _NUMB)
-      //                 {
-      //                   layer_off(_NUMB);
-      //                   return false;
-      //                 }
-      //                 else
-      //                 if (state_number == _DVIM)
-      //                 {
-      //                   layer_off(_DVIM);
-      //                   return false;
-      //                 }
-      //                 else
-      //                 if (state_number == _FVIM)
-      //                 {
-      //                   layer_off(_FVIM);
-      //                   return false;
-      //                 }
-      //                 else
-      //                 if (state_number == _MOUS)
-      //                 {
-      //                   layer_off(_MOUS);
-      //                   return false;
-      //                 }
-      //                 else
-      //                 {
-      //                   unregister_code(KC_SPC);
-      //                   return false;
-      //                 }
-
- 
-// 🔥💀☠️🔥
                                   
 
      case KC_DEL:    if (state_number == _DALY)
@@ -4769,8 +3789,7 @@ ROW 3 COLORS
 //       case MY_RESET:
 
 //       case TOG_ID:
-//       case MY_STEP_INDICAT:
-
+//       case STP_ID:
 
 //       case SL_MEN:
 //       case KA_DCK:
@@ -4778,11 +3797,9 @@ ROW 3 COLORS
 //       case SH_STA:
 //       case RT_FLO:
 
-
 //       case VOL_1:
 //       case VOL_8:
 //       case BRIGHT_1:
-
 
 //       case APP_Q_SNOTE:
 //       case APP_W_TWTTR:
@@ -4895,7 +3912,7 @@ ROW 3 COLORS
 //       case XVIM_BS:
 //       case XVIM_EN:
 
-//       case DICTAD:
+//       case DICTATION:
 
 // // [_RGBL]
 //       case SAV_COL:
@@ -4939,7 +3956,6 @@ ROW 3 COLORS
      case SIRI:      unregister_code(KC_SPC);  unregister_code(KC_LGUI);
                      return false;
 
-
    // this line is responsible of the management of the releases for THE REST of the keys.
       default: return true; // Process all other keycodes normally when released
     }
@@ -4964,38 +3980,6 @@ ROW 3 COLORS
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//                                                                                      //
-//                      P R E D E F I N E D      C O L O R S                            //
-//                                                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-/*              RGB COLORS
-#define RGB_MY_EMPTY        0x00, 0x00, 0x00
-#define RGB_MY_WHITE        0xFF, 0xFF, 0xFF
-#define RGB_MY_RED          0xFF, 0x00, 0x00
-#define RGB_MY_CORAL        0xFF, 0x7C, 0x4D
-#define RGB_MY_ORANGE       0xFF, 0x80, 0x00
-#define RGB_MY_GOLDENROD    0xD9, 0xA5, 0x21
-#define RGB_MY_GOLD         0xFF, 0xD9, 0x00
-#define RGB_MY_YELLOW       0xFF, 0xFF, 0x00
-#define RGB_MY_CHARTREUSE   0x80, 0xFF, 0x00
-#define RGB_MY_GREEN        0x00, 0xFF, 0x00
-#define RGB_MY_SPRINGGREEN  0x00, 0xFF, 0x80
-#define RGB_MY_TURQUOISE    0x47, 0x6E, 0x6A
-#define RGB_MY_TEAL         0x00, 0x80, 0x80
-#define RGB_MY_CYAN         0x00, 0xFF, 0xFF
-#define RGB_MY_AZURE        0x99, 0xf5, 0xFF
-#define RGB_MY_BLUE         0x00, 0x00, 0xFF
-#define RGB_MY_PURPLE       0x7A, 0x00, 0xFF
-#define RGB_MY_MAGENTA      0xFF, 0x00, 0xFF
-#define RGB_MY_PINK         0xFF, 0x80, 0xBF
-*/
-//                                                                                      //
-// p r e d e f i n e d      c o l o r s                                                 //
-//////////////////////////////////////////////////////////////////////////////////////////
 
 uint32_t layer_state_set_user(uint32_t state) {
 
@@ -5032,26 +4016,6 @@ uint32_t layer_state_set_user(uint32_t state) {
 
   break;     
 
-//
-// #define _DFLT   0  //  gherkin ALPHAS DEFAULT    layer 
-// #define _ACCN   1  //  gherkin ACCENTS           layer 
-// #define _NUMB   2  //  gherkin numbers           layer 
-// #define _FVIM   3  //  Fake                  VIM layer
-// /*
-// #define _AVIM  X12X  //  select              VIM layer
-// We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, but easier and clearer !
-// */
-// #define _CVIM   4  //  power edition         VIM layer
-// // #define _XVIM   5  //  movement              VIM layer
-// #define _DVIM   5  //  Delete                VIM layer
-// #define _MOUS   6  //  mouse                     layer
-// #define _DALY   7  //  gherkin DAiLY commands    layer 
-// #define _FUNC   8  //  gherkin functions         layer 
-// #define _SYMB   9  // gherkin symbols           layer 
-// #define _APPS  10  //  APPlicationS              layer
-// #define _RGBL  11  //  backlight                 layer
-// #define _POWR  12  //  POWER        productivity layer
-//
 
      case _ACCN:   //  1
 // //        active_layer = 1;
@@ -5071,7 +4035,8 @@ uint32_t layer_state_set_user(uint32_t state) {
 //        active_layer = 3;
         rgblight_sethsv_noeeprom(COLOR_FVIM); // (0x00, 0x80, 0x80)
         break;
-    case _CVIM:   // 4
+
+    case _XVIM:   // 4
 //        active_layer = 4;
         rgblight_sethsv_noeeprom(COLOR_VIM_); // (320, 255, 255)
         break; 
@@ -5079,6 +4044,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 //        active_layer = 5;
         rgblight_sethsv_noeeprom(COLOR_DVIM); // (0xFF, 0x00, 0x00)
         break;
+
 
     case _MOUS:   // 6
 //        active_layer = 6;

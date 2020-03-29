@@ -26,14 +26,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT_ID      0x3060
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    /u/crystalhand
-#define PRODUCT         Rental Car
+#define PRODUCT         Rental Car (Mini Dactyl)
 #define DESCRIPTION     A split ergonomic keyboard for the adventerous makers
 
 /* key matrix size */
 // Rows are doubled-up
 #define MATRIX_ROWS 10
 #define MATRIX_COLS 6
-
 
 // wiring of each half
 
@@ -54,40 +53,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE
+
 /* Locking resynchronize hack */
+/* [MINE]
+Because I didn't need this with my Gherkin:
 #define LOCKING_RESYNC_ENABLE
+*/
 
 /* key combination for command */
-#define IS_COMMAND() ( \
+// #define IS_COMMAND() (get_mods() == MOD_MASK_SHIFT)  //from qmk docs
+   //key combination that allows the use of magic commands (useful for debugging)  //from qmk docs
+/* #define IS_COMMAND() ( \
     keyboard_report->mods == (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT)) \
 )
+ */
 
 /* ws2812 RGB LED */
 #define RGB_DI_PIN F4
 #define RGBLIGHT_TIMER
-#define RGBLED_NUM 5    // Number of LEDs
+// #define RGBLED_NUM 5    // Number of LEDs
 #define ws2812_PORTREG  PORTD
 #define ws2812_DDRREG   DDRD
-
-
-
-/*
- * Feature disable options
- *  These options are also useful to firmware size reduction.
- */
-
-/* disable debug print */
-// #define NO_DEBUG
-
-/* disable print */
-// #define NO_PRINT
-
-/* disable action features */
-//#define NO_ACTION_LAYER
-//#define NO_ACTION_TAPPING
-//#define NO_ACTION_ONESHOT
-//#define NO_ACTION_MACRO
-//#define NO_ACTION_FUNCTION
-
 
 #endif

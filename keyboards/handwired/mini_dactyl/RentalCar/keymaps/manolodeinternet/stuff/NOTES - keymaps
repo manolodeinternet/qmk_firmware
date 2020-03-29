@@ -4,6 +4,8 @@
 // KC_BRIGHTNESS_UP  (KC_BRIU):->KC_PAUS
 // REWIND: KC_MRWD: -> KC_F7, PLAY: KC_MPLY: -> KC_SPC, FORWARD: KC_MFFD: -> KC_F9,
 
+// LSFT_T(KC_A) = MT(MOD_LSFT, KC_A)
+
 
 // ORIGINAL kyria from keymap.c
 // #define LAYOUT_mini_dactyl_base( \
@@ -18,3 +20,6 @@
 //                                  KC_MUTE, OS_LALT, KC_GRV,  KC_SPC,  BK_LWER,     DL_RAIS, KC_ENT,  OS_RGUI, UC(0x03A8), UC(0x2E2E) \
 //     )
 /* Re-pass though to allow templates to be used */
+
+
+

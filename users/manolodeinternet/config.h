@@ -1,5 +1,4 @@
 #pragma once
-#define USER_PRINT
 
 // We define TAPPING_TERM in every keyboard/config.h file
 // #define TAPPING_TERM 150
@@ -9,6 +8,42 @@
 // 2) users/user_name/                            config.h
 // 3) keyboards/keyboard_name/keymaps/keymap_name/config.h
 //
+
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * `WAKING UP MY COMPUTER`
+     Forces the keyboard to wait for a USB connection to be established before it starts up
+     It must be flashed on master side, but no on slave side for a right wake up !!!
+
+ * `NO_USB_STARTUP_CHECK`  We don't need this command !!!
+     Disables usb suspend check after keyboard startup. Usually the keyboard waits for the host to wake it up before any tasks are performed. This is useful for split keyboards as one half will not get a wakeup call but must send commands to the master.
+ */
+#define WAIT_FOR_USB         // for wake up computer typing on the keyboard
+                                // -$50 bytes (using it, we save 50 bytes)
+                                // if we don't use it, we have 50 bytes less.
+// #define NO_USB_STARTUP_CHECK // ??? alone or with WAIT_FOR_USB together ???
+//
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// #define PREVENT_STUCK_MODIFIERS
+
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Enable this in case KC_LCAP were not recognized instead of KC_CAPS
+/*
+#define LOCKING_SUPPORT_ENABLE
+#define LOCKING_RESYNC_ENABLE
+*/
+
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 
 #define PERMISSIVE_HOLD
 /* If PERMISSIVE_HOLD is active:
@@ -71,7 +106,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////              
 */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define TAPPING_FORCE_HOLD
+
+// I comment the following line because it breaks auto repeat !!!
+// #define TAPPING_FORCE_HOLD
 
 /*
 If TAPPING_FORCE_HOLD is enabled:
@@ -96,5 +133,77 @@ Nota:  If you miss having spacebar with autorepeat function (as I do),
        It's very usefull.
 
 https://docs.qmk.fm/#/feature_advanced_keycodes?id=tapping-force-hold
+*/
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+// THE REST OF THE FILE IS ABOUT MOUSE CONFIGURATION !!!
+
+//Mousekeys Settings 0 16 7 60 0 ? ?
+#define MOUSEKEY_DELAY 60
+#define MOUSEKEY_INTERVAL 50
+#define MOUSEKEY_MAX_SPEED 8
+#define MOUSEKEY_TIME_TO_MAX 40
+
+
+// NO SIRVE PARA NADA, NO EXISTE, CREO !    #define MOUSEKEY_WHEEL_DELAY 500
+// NO SIRVE PARA NADA, NO EXISTE, CREO !    #define MOUSEKEY_WHEEL_INTERVAL 220
+#define MOUSEKEY_WHEEL_DELAY 100
+#define MOUSEKEY_WHEEL_INTERVAL 100
+
+#define MOUSEKEY_WHEEL_MAX_SPEED 2
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 200  // max. value: 255
+
+/*
+I have modified `/Users/navarro/qmk_firmware/tmk_core/common/mousekey.c`, 
+including the next line:
+
+static uint8_t wheel_unit(void)
+{
+    uint16_t unit;
+    if (mousekey_accel & (1<<0)) {
+        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed)/4;
+    } else if (mousekey_accel & (1<<1)) {
+        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed)/2;
+    } else if (mousekey_accel & (1<<2)) {
+        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed);
+    } else if (mousekey_repeat == 0) {
+        unit = MOUSEKEY_WHEEL_DELTA;
+    } else if (mousekey_repeat >= mk_wheel_time_to_max) {
+        unit = MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed;
+    } else {
+        unit = (MOUSEKEY_WHEEL_DELTA * mk_wheel_max_speed * mousekey_repeat) / mk_wheel_time_to_max;
+    }
+
+// [manolodeinternet@gmail.com]
+// NEXT LINE IS MINE !!!
+// THIS IS FOR GETTING WHEEL MOUSE TO MOVE SLOWER (10 TIMES SLOWER),
+
+    unit = (unit == 0 ? unit : unit / 100);
+    //////////////////////////////////////
+
+    return (unit > MOUSEKEY_WHEEL_MAX ? MOUSEKEY_WHEEL_MAX : (unit == 0 ? 1 : unit));
+}
+
+*/
+
+/* confi.h had the following:
+#define MOUSEKEY_DELAY 0
+#define MOUSEKEY_INTERVAL 32
+#define MOUSEKEY_MAX_SPEED 5
+#define MOUSEKEY_TIME_TO_MAX 30
+#define MOUSEKEY_WHEEL_DELAY 50
+#define MOUSEKEY_WHEEL_MAX_SPEED 3
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 200
+*/
+
+/* keymap.c had the following:
+#define MOUSEKEY_DELAY             300
+#define MOUSEKEY_INTERVAL          50
+#define MOUSEKEY_MAX_SPEED         10
+#define MOUSEKEY_TIME_TO_MAX       20
+#define MOUSEKEY_WHEEL_DELAY       50
+#define MOUSEKEY_WHEEL_MAX_SPEED   8
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 40
 */
