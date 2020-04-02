@@ -50,14 +50,14 @@
 // ...we define alpha rows with all modifiers and layer triggers
 //
 // 1:
-//#define OVERCHARGED_ALPHAS
+//#define COMPREHENSIVE_30_LAYOUT
 //
 // In 'qmk_firmware/Users/manolodeinternet/wrappers.h'...
 // ...we define alpha rows as simple as we can, but with modifiers...
 // ...and layer triggers are defined on thumb rows !!!
 //
 // 2:
-#define MODIFIERS_ALPHAS
+#define SIMPLE_30_LAYOUT
 //
 // 3:
 #define MINI_DACTYL_THUMBS

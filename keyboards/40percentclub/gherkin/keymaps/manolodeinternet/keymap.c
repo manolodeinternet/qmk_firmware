@@ -22,557 +22,31 @@
   If not, see <http://www.gnu.org/licenses/>.
 */
 
-/////////////////////////////////////////////////////////////////////////////////////// LINE TOO LONG !!!
-
-///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
-
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-/* MAXIMUM LINE WIDTH FOR RIGHT PRINTING  XX 105  CHARACTERS XX  MAXIMUM LINE WIDTH FOR RIGHT PRINTING */
-/*XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XX*/
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-
-// [MY_OWN_PREPROCESSING_KEYWORDS] for editing my code:
-//
-// [ADVICE]
-// [advice]        maybe you can use this advice later, for covering a possible need
-// 
-// [BEAUTIFUL & CLEAN CODE]    you can do a task, just coding or...
-//                             you can do the same thing making an artwork,
-// [beautiful & clean code]    instead of a bunch of lines of code
-//
-// [BOOKMARK] 
-//                 1) for looking for an important point of the code I'm editing,
-// [bookmark]      2) for putting a bookmark into the code.
-//
-// [BUG?]
-// [bug?]          can this code cause a bug ?        
-//
-// [DANGER]
-// [danger]        for indicate that we have touch the code, without checking if the change is reliable
-//
-// [DATA]
-// [data]          some information about any reference relative to our application data
-//
-// [DELETEME]      this bunch of code is no longer useful
-// [deleteme]      we must delete it later
-//
-// [EXAMPLE]
-// [example]
-//
-// [FIXME]
-// [fixme]         there's something I HAVE TO FIX for a right working
-//
-// [IMPROVEME]
-// [improveme]     there is something we could change for a better working or getting a code more elegant
-//
-// [INFO]
-// [info]          some information about any reference relative to our code or application analytics
-//
-// [INSPIRINGCODE]
-// [inspiringcode] cool, clean, powerfull, funny snippet
-//
-// [LAST]
-// [last]          for marking the point where I'm working
-//
-// [OLDWAY]        it works, but smells ...
-//                 the ugly way I did this before that we aren't going to need any more.
-// [oldway]        it still remains in the code as an example of how it don't have to do things again
-//
-// [OPTIONS]
-// [options]       different ways of embracing or facing an algorith or any other issue
-//
-// [REFLEXION]
-// [reflexion]     maybe things can be coded (thinked) different !!!
-//
-// [SAVING_SPACE]
-// [saving_space]   ways of saving space for fitting the whole firmware into the microcontroller
-//
-// [SYSTEM PREFERENCES]
-// [system preferences] sortcut defined in 'System Preferences'
-//
-// [TRANSLATION]
-// [translation]
-//
-// [UNDERSTANDING] 
-// [understanding] for giving explanations about what our code does
-//
-// [WHYWEDOTHIS]
-// [whywedothis]   explanation about why we do this thing
-//
-// [my_own_preprocessing_keywords]
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-////                                                                                  ////
-////  COMMENTS SYNTAX FOR IMPROVING LEGIBILITY OF THE DIFFERENT SECTIONS OF THE CODE  ////
-////                                                                                  ////
-////                        STANDARDIZED HEADERS & FOOTERS                            ////
-////                                                                                  ////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// HEADER
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_layer_NAME] kc_KEYCODE (tapdance_NAME)                                  //
-//                                                                                      //
-//  K E Y C O D E   /   L A Y E R _ X   /   F U N C T I O N   /   . . .                 //
-//                                                                                      //
-//  KC_KEYCODE:  *  KEYCODE_1,                                                          //
-//              **  KEYCODE_2,                                                          //
-//               @ [_LAYER_X],                                                          //
-//              @@ [_LAYER_Y] OFF,                                                      //
-//             @@@ [_LAYER_Z],                                                          //
-//               ?  ETCETERA...                                                         //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// FOOTER
-//                                                                                      //
-// [tapdance] [_layer_name] kc_keycode (tapdance_name)                                  //
-//                                                                                      //
-//  k e y c o d e   /   l a y e r _ x   /   f u n c t i o n   /   . . .                 //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// i.e.:
-// HEADER
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_NUMB] KC_B (DENUOF)                                                     //
-//                                                                                      //
-//  P E R C E N T  -  N U M B E R S   L A Y E R   O F F                                 //
-//                                                                                      //
-//  KC_B:  *  KC_PERC,                                                                  //
-//        @@ [_NUMB] OFF                                                                //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-// FOOTER
-//                                                                                      //
-// [tapdance] [_numb] kc_b (denuof)                                                     //
-//                                                                                      //
-//  p e r c e n t  -  n u m b e r s   l a y e r   o f f                                 //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//    comments syntax for improving legibility of the different sections of the code    //
-//                                                                                      //
-//                          standardized headers & footers                              //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-#include QMK_KEYBOARD_H
+// #include QMK_KEYBOARD_H
 // Following file doesn't need full path bc folder 'users/manolodeinternet' is automatically included
 #include "manolodeinternet.h"
 
 // It's included from 'manolodeinternet.h'
 // #include "wrappers.h"
 
-
-// [INSPIRINGCODE]
-// #define GRAVE_MODS  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT)
-//                     |MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI)
-//                     |MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
-
-// #define ALL_LMODS   (MOD_BIT(KC_LSFT)|MOD_BIT(KC_LCTL)|MOD_BIT(KC_LALT)|MOD_BIT(KC_LGUI))
-// [inspiringcode]
-#define LSHIFT_MODS    (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
-#define LGUI_MODS      (MOD_BIT(KC_LGUI)  |MOD_BIT(KC_RGUI)  )
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING LAYERS                      L A Y E R S                                     //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//gherkin
-//layers 0...12 defined at 'qmk_firmware/users/manolodeinternet/wrappers.h'
-#define _BLIT  _LGHT
-#define _TEST  13  //  LAYER FOR TESTING               // must be over layer number 15 ...
-#define _LAST  17  //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//                                                                                      //
-// defining layers                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING READABILITY CODES                                                           //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define _______ KC_TRNS
-#define XXXXXXX KC_NO
-//                                                                                      //
-// defining readability codes                                                           //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING FN_ACTIONS                                                                  //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define ACC_A    0
-#define ACC_E    1
-#define ACC_I    2
-#define ACC_O    3
-#define ACC_U    4
-
-#define TIL_N    5
-#define CAPSL    6
-//                                                                                      //
-// defining fn_actions                                                                  //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINITIONS FOR BACKLIGHTNING & BREATHING                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-// DEFINING LAYER LEVELS OF BACKLIGHTNING
-#define BL_OFF  0
-#define BL_MIN  1
-#define BL_LOW  3
-#define BL_MED  7
-#define BL_HGH 12
-#define BL_MAX 15
-
-#define BL_GHKN  0
-#define BL_ACCN 10
-#define BL_FUNC  5
-#define BL_SYMB 10
-#define BL_NUMB 15
-#define BL_FVIM  8
-#define BL_DALY 10
-#define BL_APPS 10
-#define BL_VIM  12
-/*
-#define BL_AVIM X12X
-*/
-#define BL_MOUS 13
-#define BL_DVIM 15
-#define BL_POWR 15
-// defining layer levels of backlightning
-
-// DEFINING BACKLIGHTNING SITUATIONS
-#define BL_CAPS 15
-#define BL_RESE 15
-// defining backlightning situations
-
-// DEFINING BACKLIGHT BREATHING LELVELS
-#define BR_ACCN  1
-#define BR_CAPS  2
-#define BR_NUMB  0
-#define BR_SYMB  3
-#define BR_DFLT  6
-// defining backlight breathing lelvels
-//                                                                                      //
-// definitions for backlightning & breathing                                            //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING ?VIM SHORTCUTS 9, 10, 11, 12, 13                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define OUTDNT             LGUI(KC_LBRC)  // outdent a paragraph
-// [UNUSED]
-#define INDENT              LGUI(KC_RBRC)  // indent  a paragraph
-// [UNUSED]
-/*
-HYPR(keycode) does work directly into a keymap only !!!
-HYPR(keycode) doesn't work into a function: register_code(HYPR(KC_V));
-HYPR(keycode) doesn't work into a #define,
-quantum/quantum_keycodes.h:484:18: error: 
-large integer implicitly truncated to unsigned type [-Werror=overflow]
- #define HYPR(kc) (QK_LCTL | QK_LSFT | QK_LALT | QK_LGUI | (kc))
-                  ^
-quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
- #define KC_HYPR HYPR(KC_NO)
-                 ^~~~
-*/
-// We have to define HYPR(KC_V) as follows ...
-#define HYPR_V     SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v")))))
-//                                                                                      //
-// defining ?vim shortcuts 9, 10, 11, 12, 13                                            //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING AUTOMATOR MAC SERVICES SHORTCUTS                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define   BEEP_1               HYPR(KC_R)  // 1 beep
-#define   BEEP_2               HYPR(KC_G)  // 2 beeps
-#define   BEEP_3               HYPR(KC_B)  // 3 beeps
-//                                                                                      //
-// defining system preferences shortcuts                                                //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING MY SYSTEM PREFERENCES SHORTCUTS                                             //
-//                                                                                      //
-// macOS High Sierra                                                                    //
-// Version 10.13.6 (17G7024)                                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-/*
-                                                 MODIFIERS (KEY)
-                                                      Shift
-                                                       Control
-                                                        Alt
-                                                         Gui
-                                                      S
-                                                       C
-                                                        A
-                                                         G
-
- *  KEYBOARD -> SHORTCUTS -> DISPLAY
-      Decrease display brightness                           F14
-      Increase display brightness                           F15
-
- *  KEYBOARD -> SHORTCUTS -> LAUNCHPAD & DOCK
-      Turn Dock Hiding On/Off                           AG (D)
-      Show Launchpad                                        F17
-
- *  KEYBOARD -> SHORTCUTS -> MISSION CONTROL
-      Mission Control                                  C   (up)
-      Show Notification Center                          AG (F15)
-      Turn Do Not Disturb On/Off                      SC   (F15)
-      Applications windows                             C   (down)
-      Show Desktop                                          F6 
-      Show Dashboard                                        F18
-      Mission Control / Move left a space              C   (left)
-      Mission Control / Move right a space             C   (right)
-      Mission Control / Switch to Desktop 1            C   (1)
-
- *  KEYBOARD -> SHORTCUTS -> KEYBOARD
-      Change the way Tab moves focus                   C   (F7)
-      Turn keyboard access on or off                   C   (F1)
-      Move focus to the menu bar                       C   (F2)
-      Move focus to the Dock                           C   (F3)
-      Move focus to active or next window              C   (F4)
-      Move focus to the window toolbar                 C   (F5)
-      Move focus to the floating window                C   (F6)
-      Move focus to next window                          G (grave)
-      Move focus to the window drawer                   AG (grave)
-      Move focus to status menus                       C   (F8)
-
- *  KEYBOARD -> SHORTCUTS -> INPUT SOURCES
-      Select the previous input source                  AG (T)
-      Select next source in Input menu                 CAG (T)
-
- *  KEYBOARD -> SHORTCUTS -> SCREEN SHOTS
-      Save picture of screen as a file                S  G (3)
-      Copy picture of screen to the clipboard         SC G (3)
-      Save picture of selected area as a file         S  G (4)
-      Copy picture of selected area to the clipboard  SC G (4)
-
- *  KEYBOARD -> SHORTCUTS -> SERVICES
-    PICTURES:
-      Capture Full Screen
-      Capture Screen using Timer
-      Capture Selection from Screen
-      Take Screenshot
-      Import Image
-      Make New File in Filed Documents
-      New Day One Entry With Selection
-      Open with Pixelmator
-      Open with Pixelmator Pro
-      Set Desktop Picture
-
-    MESSAGING:
-      New Email To Address
-      New Email With Selection
-
-    DEVELOPMENT:
-      Activity Monitor
-      Allocation & Leaks
-      File Activity
-      System Trace
-      Compare files                                   SCAG (C)
-      Compare To Master
-      Create Service
-      Create Workflow
-      Get result of AppleScript                          G (asterisk)
-      Make New AppleScript
-      Run as AppleScript
-      Time Profile Active Application
-      Time Profile App Under Mouse
-      Time Profile Entire System
-      Toggle Instruments Recording
-
-    FILES AND FOLDERS:
-      Open Selected File in TextEdit
-      New Terminal at Folder
-      New Terminal Tab at Folder
-      Encode Selected Audio Files
-      Encode Selected Video Files
-      Folder Actions Setup...
-      Open as Twitter Username
-      Tweet
-      Open in Sourcetree
-      Run SuperDuper! Settings
-      Send File To Bluetooth Device                   S  G (B)
-
-    SEARCHING:
-      Look Up in Dictionary
-      Search With Google                              S  G (L)
-      Spotlight                                       S  G (F)
-
-    TEXT:
-      Add Contact
-      Call
-      Send Message
-      Send SMS
-      Add to Evernote
-      Add to iTunes as a Spoken Track
-      Convert Text to Full Width
-      Convert Text to Half Width
-      Convert Text to Simplified Chinese              SACG (C)
-      Convert Text to Traditional Chinese             S CG (C)
-      Create Collection From Text
-      Create Font Library From Text
-      Display Font Information
-      Create TextExpander 3 Snippet
-      Find in Xcode
-      Open Quickly in Xcode
-      Make New Sticky Note                            S  G (Y)
-      New Email With Selection
-      New TextEdit Wi...tainig Selection
-      nvALT: New Note from Selection                  S  G (V)
-      OmniFocus 2: Send to Inbox
-      OmniFocus 3: Send to Inbox
-      Open
-      Show in Finder
-      Show Info in Finder
-      Open man Page in Terminal                       S  G (M)
-      Search man Page Index in Terminal               S  G (A)
-      Open URL in RealPlayer
-      Send to LaunchBar
-      Show Map
-      Summarize
-      Translate                                          G (dot)
-
-    INTERNET:
-      Add to Reading List
-      Open URL
-
-    GENERAL:
-    (from Automator/NewFileForServices):
-      Aut_Beep_1                                      SCAG (R)
-      Aut_Beep_2                                      SCAG (G)
-      Aut_Beep_3                                      SCAG (B)
-      Launch T-Terminal                               SCAG (T)
-
- *  KEYBOARD -> SHORTCUTS -> SPOTLIGHT
-      Show Spotlight search                              G (Space)
-      Show Finder search window                        CAG (Space)
-
- *  KEYBOARD -> SHORTCUTS -> ACCESSIBILITY
-    ZOOM:
-      Turn zoom on or off                              CAG (semicolon)
-      Turn image smoothing on or off                   CAG (backslash)
-      Zoom out                                         CAG (minus)
-      Zoom in                                          CAG (equal)
-      Turn focus following on or off                   CAG (slash)
-
-    CONTRAST:
-      Increase contrast                                CAG (dot)
-      Decrease contrast                                CAG (comma)
-
-      Invert colors                                   SC G (8)
-      Turn VoiceOver on or off                           G (F5)
-      Show Accessibility controls                       AG (F5)
-
- *  KEYBOARD -> SHORTCUTS -> APP SHORTCUTS
-    ALL APPLICATIONS:
-      Show Help menu                                  S  G (slash)
-      Send to LaunchBar                               S  G (F1)
-      Window                                          SCAG (W)
-
-    FINDER.APP:
-      Archivo -> Nueva ventana del Finder                G (N)
-
-    CALCULATOR.APP:
-      Visualizacion -> De programacion                SCAG (P)
-      Visualizacion -> Cientifica                     SCAG (C)
-
-    ATOM.APP:
-      Edit -> Lines -> Auto Indent                       G (open square bracket)
-
-    TEXTEDIT.APP:
-      Format -> Allow Hyphenation                      CA  (H)
-      Format -> Do not allow Hyphenation              SCA  (H)
-
-   XCODE.APP:
-     Debug/Step Over Instruction                       C   (F6)
-     Debug/Step Into Instruction                       C   (F7)
-*/
-//                                                                                      //
-// defining my system preferences shortcuts                                             //
-//                                                                                      //
-// macos high sierra                                                                    //
-// version 10.13.6 (17g7024)                                                            //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING SYMBOLS 4 ( FOR USING INTO 'ACTION_TAP_DANCE_DOUBLE(SYMBOL1, SYMBOL2)' )    //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-// #define SYM_EURO         LSFT(LALT(KC_2))  // euro symbol
-// #define SYM_I_QU      LSFT(LALT(KC_SLSH))  // inverted question mark
-// #define SYM_I_EX               LALT(KC_1)  // inverted exclamation mark
-//                                                                                      //
-// defining symbols 4 ( for using into 'action_tap_dance_double(symbol1, symbol2)' )    //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING _DALY COMMANDS 6                                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-// specific gherkin defines
-#define PREV_APP       LSFT(LGUI(KC_TAB))  // previous app
-#define NEXT_APP             LGUI(KC_TAB)  //     next app
-#define SPT_SIRI             LGUI(KC_SPC)  // spotlight & siri
-//                                                                                      //
-// defining _daly commands 6                                                            //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // DEFINING _POWR COMMANDS 8                                                            //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-#define LCK_SCR          LCTL(LGUI(KC_Q))   //LOCK SCREEN (ask for pasword screen)
-#define SLEP_MNUBAR      TD(SLEP_M)
-#define KILMNU_TOOL      TD(KILM_T)
-#define KILAPP_DOCK      TD(KILA_D)
-#define SHUTD_STATB      TD(SHUT_S)
-#define RSTRT_FLOAT      TD(RSTT_F)
+#define LOCK_SCR         LCTL(LGUI(KC_Q))   
 
 // [SYSTEM PREFERENCES]
-#define ZOOM_FOLLOW      LCAG(KC_SLSH)      //QMK: Hold Left Control, Alt and GUI and press kc
-#define ZOOM_ON_OFF      LCAG(KC_SCLN)
+#define ZOOM_FOL         LCAG(KC_SLSH)      //QMK: Hold Left Control, Alt and GUI and press kc
+#define ZOOM_TOG         LCAG(KC_SCLN)
 #define ZOOM_IN          LCAG(KC_EQL)
 #define ZOOM_OUT         LCAG(KC_MINS)
-#define ZOOM_SMOOTH      LCAG(KC_BSLS)
-#define CONTRST_UP       LCAG(KC_DOT)              //Hold Left Control, Alt and GUI and press kc
-#define CONTRST_DWN      LCAG(KC_COMM)
+#define ZOOM_SMH         LCAG(KC_BSLS)
+#define CNTR_UP          LCAG(KC_DOT)              //Hold Left Control, Alt and GUI and press kc
+#define CNTR_DWN         LCAG(KC_COMM)
 //
 // [UNUSED]
-#define INVRT_COLOR      LSFT(LCTL(LGUI(KC_8)))  
+#define INV_COLO      LSFT(LCTL(LGUI(KC_8)))  
 // [INFO]
 // it can't be used into an 'ACTION_TAP_DANCE_DOUBLE()'
 // it can't be used into a statement of tap_dance: 'case SINGLE_TAP: INVRT_COLOR;'  We would get only '8'
@@ -660,10 +134,10 @@ enum tap_dance_keycodes {
     ,RA_PLAY // right alt     / play/pause   // KC_SPC
     ,RG_FRWD // right gui     / forward      // KC_F9
 */
-    ,RG_ZOOM // right gui     / zoom on/off
-    ,RA_ZOIN // right alt     / zoom in
-    ,RC_ZOUT // right control / zoom out
-    ,RS_INCO // right shift   / invert colors
+    ,RS_ZOIN // right shift   / zoom in
+    ,RG_ZOUT // right gui     / zoom out
+    ,RA_ZOOM // right alt     / zoom on/off
+    ,RC_INCO // right control / invert colors
 
 // [ADVICE]
 //  ,BCKLIT   // accessing _BLIT layer from tap dance into _POWR layer
@@ -723,11 +197,11 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
 
 // MACROS FOR _APPS LAYER 7
-    ,APP_Q_QQQQQ ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_RRRRR ,APP_T_TERMI
-                                         ,APP_Y_TYPIN ,APP_U_SUBLI ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF
-    ,APP_A_SNOTE ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME
-                                         ,APP_H_SKTCH ,APP_J_JJJJJ ,APP_K_KVIEW ,APP_L_CLNDR ,APP_SP_SPSP 
-    ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_VVVVV ,APP_B_BOOKS
+    ,APP_Q_SNOTE ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_APSTO ,APP_T_TERMI
+                                         ,APP_Y_TYPIN ,APP_U_UROOM ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF
+    ,APP_A_SCRPT ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME
+                                         ,APP_H_SKTCH ,APP_J_SUBLI,APP_K_KRBNR ,APP_L_CLNDR ,APPSP_EMPTY 
+    ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_KVIEW ,APP_B_BOOKS
                                          ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB
 // macros for _apps layer 7
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
@@ -2175,27 +1649,76 @@ void RSTT_F_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [_POWR] KC_J (RG_ZOOM)                                                    //
+// [TAPDANCE] [_POWR] KC_J (RS_ZOIN)                                                    //
 //                                                                                      //
-//  R I G H T    G U I    /    Z O O M    O N / O F F                                   //
+//  R I G H T    S H I F T    /    Z O O M   I N                                        //
 //                                                                                      //
-//  KC_J:  *  ZOOM ON/OFF,                                                              //
-//         @  RIGHT GUI                                                                 //
+//  KC_J:  *  ZOOM IN,                                                                  //
+//         @  RIGHT SHIFT                                                               //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'RG_ZOOM' tap dance.
-static tap RG_ZOOM_tap_state = {
+//instantalize an instance of 'tap' for the 'RS_ZOIN' tap dance.
+static tap RS_ZOIN_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void RG_ZOOM_finished (qk_tap_dance_state_t *state, void *user_data) {
-  RG_ZOOM_tap_state.state = cur_dance(state);
-  switch (RG_ZOOM_tap_state.state) {
+void RS_ZOIN_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RS_ZOIN_tap_state.state = cur_dance(state);
+  switch (RS_ZOIN_tap_state.state) {
+
+// [SYSTEM PREFERENCES]    
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_EQL);
+                      break;
+// [system preferences]                      
+
+    case SINGLE_HOLD: register_code(KC_RSFT);
+                      break;
+  }
+}
+
+void RS_ZOIN_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RS_ZOIN_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_EQL);
+                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
+                      break;
+                     
+    case SINGLE_HOLD: unregister_code(KC_RSFT);
+                      break;                       
+  }
+  RS_ZOIN_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_powr] kc_j (rs_zoin)                                                    //
+//                                                                                      //
+//  r i g h t    s h i f t    /    z o o m   i n                                        //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_K (RG_ZOUT)                                                    //
+//                                                                                      //
+//  R I G H T    G U I     /     Z O O M    O U T                                       //
+//                                                                                      //
+//  KC_K:  *  ZOOM OUT,                                                                 //
+//         @  RIGHT GUI                                                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'RG_ZOUT' tap dance.
+static tap RG_ZOUT_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RG_ZOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RG_ZOUT_tap_state.state = cur_dance(state);
+  switch (RG_ZOUT_tap_state.state) {
 
 // [SYSTEM PREFERENCES]
     case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
-                      register_code(KC_SCLN);
+                      register_code(KC_MINS);
                       break;
 // [system preferences]
 
@@ -2204,97 +1727,96 @@ void RG_ZOOM_finished (qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-void RG_ZOOM_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (RG_ZOOM_tap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_SCLN);
+void RG_ZOUT_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RG_ZOUT_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_MINS);
                       unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
                       break;
                      
     case SINGLE_HOLD: unregister_code(KC_RGUI);
                       break;                       
   }
-  RG_ZOOM_tap_state.state = 0;
+  RG_ZOUT_tap_state.state = 0;
 }
 //                                                                                      //
-// [tapdance] [_powr] kc_j (rg_zoom)                                                    //
+// [tapdance] [_powr] kc_k (rg_zout)                                                    //
 //                                                                                      //
-//  r i g h t    g u i    /    z o o m    o n / o f f                                   //
+//  r i g h t    g u i     /     z o o m    o u t                                       //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [_POWR] KC_K (RA_ZOIN)                                                    //
+// [TAPDANCE] [_POWR] KC_L (RA_ZOOM)                                                    //
 //                                                                                      //
-//  R I G H T    A L T    /    Z O O M   I N                                            //
+//  R I G H T    A L T    /    Z O O M    O N / O F F                                   //
 //                                                                                      //
-//  KC_K:  *  ZOOM IN,                                                                  //
+//  KC_L:  *  ZOOM ON/OFF,                                                              //
 //         @  RIGHT ALT                                                                 //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-// 『🔵』『🔵』『🔵』   RIGHT ALT   /   ZOOM IN   『🔵』『🔵』『🔵』
-//instantalize an instance of 'tap' for the 'RA_ZOIN' tap dance.
-static tap RA_ZOIN_tap_state = {
+//instantalize an instance of 'tap' for the 'RA_ZOOM' tap dance.
+static tap RA_ZOOM_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void RA_ZOIN_finished (qk_tap_dance_state_t *state, void *user_data) {
-  RA_ZOIN_tap_state.state = cur_dance(state);
-  switch (RA_ZOIN_tap_state.state) {
+void RA_ZOOM_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RA_ZOOM_tap_state.state = cur_dance(state);
+  switch (RA_ZOOM_tap_state.state) {
 
-// [SYSTEM PREFERENCES]    
+// [SYSTEM PREFERENCES]
     case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
-                      register_code(KC_EQL);
+                      register_code(KC_SCLN);
                       break;
-// [system preferences]                      
+// [system preferences]
 
     case SINGLE_HOLD: register_code(KC_RALT);
                       break;
   }
 }
 
-void RA_ZOIN_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (RA_ZOIN_tap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_EQL);
+void RA_ZOOM_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RA_ZOOM_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_SCLN);
                       unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
                       break;
                      
     case SINGLE_HOLD: unregister_code(KC_RALT);
                       break;                       
   }
-  RA_ZOIN_tap_state.state = 0;
+  RA_ZOOM_tap_state.state = 0;
 }
 //                                                                                      //
-// [tapdance] [_powr] kc_k (ra_zoin)                                                    //
+// [tapdance] [_powr] kc_l (ra_zoom)                                                    //
 //                                                                                      //
-//  r i g h t    a l t    /    z o o m   i n                                            //
+//  r i g h t    a l t    /    z o o m    o n / o f f                                   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [_POWR] KC_L (RC_ZOUT)                                                    //
+// [TAPDANCE] [_POWR] KC_SP (RC_INCO)                                                   //
 //                                                                                      //
-//  R I G H T    C T R L     /     Z O O M    O U T                                     //
+//  R I G H T    C O N T R O L     /     I N V E R T    C O L O R S                     //
 //                                                                                      //
-//  KC_L:  *  ZOOM OUT,                                                                 //
-//         @  RIGHT CTRL                                                                //
+//  KC_SP:  *  INVERT COLORS,                                                           //
+//          @  RIGHT CONTROL                                                            //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'RC_ZOUT' tap dance.
-static tap RC_ZOUT_tap_state = {
+//instantalize an instance of 'tap' for the 'RC_INCO' tap dance.
+static tap RC_INCO_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void RC_ZOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
-  RC_ZOUT_tap_state.state = cur_dance(state);
-  switch (RC_ZOUT_tap_state.state) {
+void RC_INCO_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RC_INCO_tap_state.state = cur_dance(state);
+  switch (RC_INCO_tap_state.state) {
 
 // [SYSTEM PREFERENCES]
-    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
-                      register_code(KC_MINS);
+    case SINGLE_TAP:  register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LGUI);
+                      register_code(KC_8);
                       break;
 // [system preferences]
 
@@ -2303,70 +1825,21 @@ void RC_ZOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-void RC_ZOUT_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (RC_ZOUT_tap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_MINS);
-                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
+void RC_INCO_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RC_INCO_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_8);
+                      unregister_code(KC_LGUI); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
                       break;
                      
     case SINGLE_HOLD: unregister_code(KC_RCTL);
                       break;                       
   }
-  RC_ZOUT_tap_state.state = 0;
+  RC_INCO_tap_state.state = 0;
 }
 //                                                                                      //
-// [tapdance] [_powr] kc_l (rc_zout)                                                    //
+// [tapdance] [_powr] kc_sp (rc_inco)                                                   //
 //                                                                                      //
-//  r i g h t    c t r l     /     z o o m    o u t                                     //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_POWR] KC_SP (RS_INCO)                                                   //
-//                                                                                      //
-//  R I G H T    S H I F T     /     I N V E R T    C O L O R S                         //
-//                                                                                      //
-//  KC_SP:  *  INVERT COLORS,                                                           //
-//          @  RIGHT SHIFT                                                              //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'RS_INCO' tap dance.
-static tap RS_INCO_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void RS_INCO_finished (qk_tap_dance_state_t *state, void *user_data) {
-  RS_INCO_tap_state.state = cur_dance(state);
-  switch (RS_INCO_tap_state.state) {
-
-// [SYSTEM PREFERENCES]
-    case SINGLE_TAP:  register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LGUI);
-                      register_code(KC_8);
-                      break;
-// [system preferences]
-
-    case SINGLE_HOLD: register_code(KC_RSFT);
-                      break;
-  }
-}
-
-void RS_INCO_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (RS_INCO_tap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_8);
-                      unregister_code(KC_LGUI); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-                      break;
-                     
-    case SINGLE_HOLD: unregister_code(KC_RSFT);
-                      break;                       
-  }
-  RS_INCO_tap_state.state = 0;
-}
-//                                                                                      //
-// [tapdance] [_powr] kc_sp (rs_inco)                                                   //
-//                                                                                      //
-//  r i g h t    s h i f t     /     i n v e r t    c o l o r s                         //
+//  r i g h t    c o n t r o l     /     i n v e r t    c o l o r s                     //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -2411,9 +1884,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [V_RACI] = ACTION_TAP_DANCE_DOUBLE(KC_RABK, KC_CIRC )                                   // & ^
 //[A_GRAV]  // grave & tilde         //tilde        accessible while holding SHIFT key !  // ` ~
 //[S_QUOT]  // quote & double quote  //double quote accessible while holding SHIFT key !  // ' "
- ,[G_DOEU] = ACTION_TAP_DANCE_DOUBLE(KC_DLR,  SYM_EURO)                                   // $ €
- ,[Z_EXCL] = ACTION_TAP_DANCE_DOUBLE(KC_EXLM, SYM_I_EX)                                   // ! ¡
- ,[X_QUES] = ACTION_TAP_DANCE_DOUBLE(KC_QUES, SYM_I_QU)                                   // ? ¿
+ ,[G_DOEU] = ACTION_TAP_DANCE_DOUBLE(KC_DLR,  EURO)                                       // $ €
+ ,[Z_EXCL] = ACTION_TAP_DANCE_DOUBLE(KC_EXLM, INV_EX)                                     // ! ¡
+ ,[X_QUES] = ACTION_TAP_DANCE_DOUBLE(KC_QUES, INV_QU)                                     // ? ¿
 // [_symb] layer  (two in a key)
 
 // [_NUMB] LAYER
@@ -2434,10 +1907,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  ,[SHUT_S]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SHUT_S_finished, SHUT_S_reset)
  ,[RSTT_F]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RSTT_F_finished, RSTT_F_reset)
 
- ,[RG_ZOOM]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RG_ZOOM_finished, RG_ZOOM_reset) 
- ,[RA_ZOIN]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RA_ZOIN_finished, RA_ZOIN_reset) 
- ,[RC_ZOUT]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RC_ZOUT_finished, RC_ZOUT_reset) 
- ,[RS_INCO]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RS_INCO_finished, RS_INCO_reset) 
+ ,[RS_ZOIN]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RS_ZOIN_finished, RS_ZOIN_reset) 
+ ,[RG_ZOUT]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RG_ZOUT_finished, RG_ZOUT_reset) 
+ ,[RA_ZOOM]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RA_ZOOM_finished, RA_ZOOM_reset) 
+ ,[RC_INCO]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RC_INCO_finished, RC_INCO_reset) 
  // [_powr] layer
 
 // [_FVIM] LAYER
@@ -2651,200 +2124,68 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // END OF _SYMB 9
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[PLACEHOLDER] //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-/* Keymap _APPS 10: _APPS layer
- * ,----------------------------------.  ,----------------------------------.
- * |*XXXXX|@@@@@@| EVER |*XXXXX| TERMI|  | TYPI | SUBLI| TEXT |@@@@@@|SYSTEM|
- * |      |TWITTR|-NOTE |      |-NAL  |  |-NATOR|-ME   |-EDIT |OMNIFO|PREFE-|
- * |      |@@@@@@|      |      |      |  |      |TEXT  |      |@@@@@@|RENCES|
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |SIMPLE|      |  DAY |      |GOOGLE|  |      |*XXXXX|KARBNR| CALEN|*XXXXX|
- * | NOTE |SAFARI|  ONE |FINDER|CHROME|  |SKETCH|      | EVENT|-DAR  |      |
- * |      |      |      |      |      |  |      |      |VIEWER|      |      |
- * |------+------+------+------+------|  |------+------+------+------+------|
- * | STU  |      | CALCU|*XXXXX|      |  |      |      | KEY- |      | NUM- |
- * |-DIES | XCODE|-LATOR|      | BOOKS|  | NOTES| MAIL | NOTE | PAGES| BERS |
- * |      |      |      |      |      |  |      |      |      |      |      |
- * '----------------------------------'  '----------------------------------'
-*/
-// _APPS layer 10
-[_APPS] = LAYOUT_ortho_3x10(  // layer 6 : apps layer
-// ###
-///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
-//,-----------------------------------------------------------------.  ,------------------------------------------------------------------.
-    APP_Q_QQQQQ, APP_W_TWTTR, APP_E_EVERN, APP_R_RRRRR, APP_T_TERMI,     APP_Y_TYPIN, APP_U_SUBLI, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
-//|------------+------------+------------+------------+-------------|  |------------+------------+------------+------------+--------------|
-    APP_A_SNOTE, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,     APP_H_SKTCH, APP_J_JJJJJ, APP_K_KVIEW, APP_L_CLNDR, APP_SP_SPSP,
-//|------------+------------+------------+------------+-------------|  |------------+------------+------------+------------+--------------|
-    APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_VVVVV, APP_B_BOOKS,     APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB ),
-//'-----------------------------------------------------------------'  '------------------------------------------------------------------'
-///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// ###
+//[_APPS] LAYER 10 : APPLICATIONS LAYER
+  [_APPS] = KEYMAP_gherkin_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               __APPLICATS_L1__,                                          __APPLICATS_R1__,
+//|----------------------------------------|                 |----------------------------------------|
+               __APPLICATS_L2__,                                          __APPLICATS_R2__,
+//|----------------------------------------|                 |----------------------------------------|
+               __APPLICATS_L3__,                                          __APPLICATS_R3__
+//'----------------------------------------'                 '----------------------------------------'
+),
 // END OF _APPS 10
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/*
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// LEFT_HAND
-//,-----------------------------------------------------------------.
-    APP_Q_QQQQQ, APP_W_TWTTR, APP_E_EVERN, APP_R_RRRRR, APP_T_TERMI,
-//|------------+------------+------------+------------+-------------|
-    APP_A_SNOTE, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME,
-//|------------+------------+------------+------------+-------------|
-    APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_VVVVV, APP_B_BOOKS,
-//'-----------------------------------------------------------------'
 
-                                     // RIGHT_HAND
-                                     ,------------------------------------------------------------------.
-                                       APP_Y_TYPIN, APP_U_SUBLI, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF,
-                                     |------------+------------+------------+------------+--------------|
-                                       APP_H_SKTCH, APP_J_JJJJJ, APP_K_KVIEW, APP_L_CLNDR, APP_SP_SPSP,
-                                     |------------+------------+------------+------------+--------------|
-                                       APP_N_NOTES,  APP_M_MAIL, APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB ),
-                                     '------------------------------------------------------------------'
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-*/
-
-/*  
-*  Keymap _BLIT 11: BACKLIT - BackLIghT layer
-* ,--------------------------------------------.  ,---------------------------------------------.
-* |  BL_1  |  BL_2  |  BL_3  |  BL_4  |  BL_5  |  |BREATH_1|BREATH_2|BREATH_3|BREATH_4|BREATH_T |
-* |--------+--------+--------+--------+--------|  |--------+--------+--------+--------+---------|
-* |  BL_6  |  BL_7  |  BL_8  |  BL_9  |  BL_10 |  |BREATH_5|BREATH_6|BREATH_7|BREATH12|BL_TOGGL |
-* |--------+--------+--------+--------+--------|  |--------+--------+--------+--------+---------|
-* |  BL_11 |  BL_12 |  BL_13 |  BL_14 |  BL_15 |  |BREATH15|  BL_ON | BL_INC | BL_DEC | BL_OFF  |
-* '--------------------------------------------'  '---------------------------------------------'
-*/
-// _BLIT layer 11
-[_BLIT] = LAYOUT_ortho_3x10( // layer 14: _BLIT layer
-//,----------------------------------------------.  ,-----------------------------------------------.
-    BLIT_01, BLIT_02, BLIT_03, BLIT_04, BLIT_05,      BRTH_01, BRTH_02, BRTH_03, BRTH_04,  BL_BRTG,
-//|--------+--------+--------+--------+----------|  |--------+--------+--------+--------+-----------|
-    BLIT_06, BLIT_07, BLIT_08, BLIT_09, BLIT_10,      BRTH_05, BRTH_06, BRTH_07, BRTH_12,  BL_TOGG,
-//|--------+--------+--------+--------+----------|  |--------+--------+--------+--------+-----------|
-    BLIT_11, BLIT_12, BLIT_13, BLIT_14, BLIT_15,      BRTH_15,   BL_ON,  BL_INC,  BL_DEC, BLIT_OFF ),
-//'----------------------------------------------'  '-----------------------------------------------'
-/*
-
-  ,// BL_OFF
-
- QMK standard keycode BL_OFF doesn't work ! ! !
- I've made a macro (BLIT_OFF) who call the function backlight_level(BL_OFF) ! ! !
-
-*/
-// END OF _BLIT 11
+//[_LEDS] LAYER 11 : SYMBOLS LAYER
+  [_LEDS] = KEYMAP_gherkin_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               _LEDS_LIGHTS_L1_,                                          _LEDS_LIGHTS_R1_,
+//|----------------------------------------|                 |----------------------------------------|
+               _LEDS_LIGHTS_L2_,                                          _LEDS_LIGHTS_R2_,
+//|----------------------------------------|                 |----------------------------------------|
+               _LEDS_LIGHTS_L3_,                                          _LEDS_LIGHTS_R3_
+//'----------------------------------------'                 '----------------------------------------'
+),
+// END OF _LEDS 11
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-/* Keymap _POWR 12: POWeR productivity layer
-* ,----------------------------------.  ,----------------------------------.
-* |      |@@@@@@|      |      |*XXXXX|  |midVol|minVol|      |@@@@@@|      |
-* |      |LOGOUT|LCKSCR|onHold|      |  | lev.8| lev.1|Vol.Up|VolDwn| Vol. |
-* | _BLIT|@@@@@@|      | RESET|      |  | _TEST| _LAST| _BLIT|@@@@@@| Mute |
-* |------+------+------+------+------|  |------+------+------+------+------|
-* |*XXXXX|Rewind| Play/|Forwrd|Toogle|  |Toogle| Zoom | Zoom | Zoom |Invert|
-* |      |      | Pause|      |Smooth|  |Keybrd|ON/OFF|  IN  |  OUT |Colors|
-* |      |      |      |      |Images|  |follow|      |      |      |      |
-* |RCntrl| RAlt | RCmnd|RShift|      |  | Focus| RCmnd| RAlt |RCntrl|RShift|
-v* |------+------+------+------+------|  |------+------+------+------+------|
-* | Menu | Dock | Tool |Status|Float.|  |Cntrst|Bright|Bright|Bright|Cntrst|
-* | _bar | _bar | _bar | _bar |Window|  |      |  min.|      |      |      |
-* |      |      |      |      |      |  |  Up  |lev. 1|  Up  | Down | Down |
-* | SLEEP|KILLAP|K_MENU|SHUT_D|RSTART|  |      |      |      |      |      |
-* '------+------+------+------+------'  '------+------+------+------+------'
-// KC_BRIGHTNESS_DOWN(KC_BRID):->KC_PAUS
-// KC_BRIGHTNESS_UP  (KC_BRIU):->KC_SLCK
-// KC_MRWD:->KC_F7, KC_MPLY:->KC_SPC, KC_MFFD:->KC_F9,
-*/
-// _POWR layer 12
-[_POWR] = LAYOUT_ortho_3x10(  // layer 7: POWeR productivity layer
-// ###
-///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
-//,-------------------------------------------------------------------------.  ,-----------------------------------------------------------------------------.
-      MO(_BLIT),    TD(LOGOUT),        LCK_SCR,    TD(HRESET),     XXXXXXX,      TD(V8_TEST), TD(V1_LAST), LT(_BLIT,  KC__VOLUP), KC__VOLDOWN,     KC__MUTE,
-//|------------+--------------+---------------+--------------+--------------|  |------------+------------+----------------------+------------+---------------|
-        KC_RCTL, RALT_T(KC_F7), RGUI_T(KC_SPC), RSFT_T(KC_F9), ZOOM_SMOOTH,      ZOOM_FOLLOW, TD(RG_ZOOM),           TD(RA_ZOIN), TD(RC_ZOUT),  TD(RS_INCO),
-//|------------+--------------+---------------+--------------+--------------|  |------------+------------+----------------------+------------+---------------|
-    SLEP_MNUBAR,   KILAPP_DOCK,    KILMNU_TOOL,   SHUTD_STATB, RSTRT_FLOAT,       CONTRST_UP,    BRIGHT_1,               KC_PAUS,     KC_SLCK, CONTRST_DWN ),
-//'-------------------------------------------------------------------------'  '-----------------------------------------------------------------------------'
-///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// ###
-// RSFT_T(kc) <--- [BOOKMARK] [FIXME]
-//             SFT+ALT+CMD+ESC,    ALT+CMD+ESC,
-//[bookmark]
-//[fixme]
-// END OF _POWR 12
+//[_POWR] LAYER 12 : POWER COMMANDS LAYER
+  [_POWR] = KEYMAP_gherkin_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ____POWER_L1____,                                          ____POWER_R1____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____POWER_L2____,                                          ____POWER_R2____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____POWER_L3____,                                          ____POWER_R3____
+//'----------------------------------------'                 '----------------------------------------'
+),
+// END OF [_POWR] 12
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/*
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// LEFT_HAND
-//,-------------------------------------------------------------------------.
-     TD(LOGOUT),       LCK_SCR,      MO(_BLIT),    TD(HRESET),     XXXXXXX,
-//|------------+--------------+---------------+--------------+--------------|
-        KC_RSFT, RCTL_T(KC_F7), RALT_T(KC_SPC), RGUI_T(KC_F9), ZOOM_SMOOTH,
-//|------------+--------------+---------------+--------------+--------------|
-    SLEP_MNUBAR,   KILAPP_DOCK,    KILMNU_TOOL,   SHUTD_STATB, RSTRT_FLOAT,
-//'-------------------------------------------------------------------------'
 
-                          // RIGHT_HAND
-                          ,-----------------------------------------------------------------------------.
-                            TD(V8_TEST), TD(V1_LAST), LT(_BLIT,  KC__VOLUP), KC__VOLDOWN,     KC__MUTE,
-                          |------------+------------+----------------------+------------+---------------|
-                            ZOOM_FOLLOW, TD(RG_ZOOM),           TD(RA_ZOIN), TD(RC_ZOUT),  TD(RS_INCO),
-                          |------------+------------+----------------------+------------+---------------|
-                             CONTRST_UP,    BRIGHT_1,               KC_PAUS,     KC_SLCK, CONTRST_DWN ), 
-                          '-----------------------------------------------------------------------------'
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-*/
-
-/* Keymap _TEST 13: _TEST transparent layer
- * ,----------------------------------.  ,----------------------------------.
- * |      |      |      |      |      |  |      |      |      |      |      |
- * |   +  |   @  |   #  |   =  |   %  |  | &  ^ |   (  |   )  |   _  |   -  |
- * |      |      |      |      |      |  |      |      |      |      |      |
- * |------+------+------+------+------|  |------+------+------+------+------|
- * | LSft | LCtl | LAlt | LGui |      |  |      | LGui | LAlt | LCtl | LSft |
- * |      |      |      |      |      |  |      |      |      |      |      |
- * | `  ~ | '  " |   \  |   /  | $  € |  |   |  |   [  |   ]  |   ,  |   .  |
- * |------+------+------+------+------|  |------+------+------+------+------|
- * |      |      |      |      |      |  |@@@@@@|      |      |      |      |
- * | !  ¡ | ?  ¿ |   <  |   >  |   *  |  |@@@@@@|   {  |   }  |   :  |   ;  |
- * |      |      |      |      |      |  |@@@@@@|      |      |      |      |
- * '----------------------------------'  '----------------------------------'
-*/
-// _TEST transparent layer 13
-[_TEST] = LAYOUT_ortho_3x10(  // layer 16 : _TEST layer
-// ###
-///////////////////////////////////////////////////////////////// ### BLOCK ### OF LINES TOO LONG !!! ###
-//,-----------------------------------------------------------------------------.  ,-----------------------------------------------------------------------------------.
-           KC_PLUS,          KC_AT,        KC_HASH,         KC_EQL,    KC_PERC,               KC_AMPR,         BEEP_1,         BEEP_2,         BEEP_3,        KC_MINS,
-//|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
-    LSFT_T(KC_GRV), CTL_T(KC_QUOT), ALT_T(KC_BSLS), GUI_T(KC_SLSH), TD(G_DOEU),               KC_PIPE, GUI_T(KC_LBRC), ALT_T(KC_RBRC), CTL_T(KC_COMM), LSFT_T(KC_DOT),
-//|---------------+---------------+---------------+---------------+-------------|  |-----------------+---------------+---------------+---------------+-----------------|
-        TD(Z_EXCL),     TD(X_QUES),        KC_LABK,     TD(V_RACI),    KC_ASTR,      LT(_SYMB, KC_NO),        KC_LCBR,        KC_RCBR,        KC_COLN,        KC_SCLN ),
-//,-----------------------------------------------------------------------------'  '-----------------------------------------------------------------------------------.
-///////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-// ###
+//[_TEST] LAYER 13 : TEST LAYER
+  [_TEST] = KEYMAP_gherkin_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ____TEST__L1____,                                          ____TEST__R1____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____TEST__L2____,                                          ____TEST__R2____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____TEST__L3____,                                          ____TEST__R3____
+//'----------------------------------------'                 '----------------------------------------'
+),
 // END OF _TEST 13
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-/*  
-*  Keymap _LAST 17: _LAST layer for testing changing to a layer over 16th layer
-* .-----------------------------------------------------------------------------------------.
-* |  BL_1  |  BL_2  |  BL_3  |  BL_4  |  BL_5  |BREATH_1|BREATH_2|BREATH_3|BREATH_4|BREATH_T|
-* |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
-* |  BL_6  |  BL_7  |  BL_8  |  BL_9  |  BL_10 |BREATH_5|BREATH_6|BREATH_7|BREATH12|BL_TOGGL|
-* |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
-* |  BL_11 |  BL_12 |  BL_13 |  BL_14 |  BL_15 |BREATH15|  BL_ON | BL_INC | BL_DEC | BL_OFF |
-* '-----------------------------------------------------------------------------------------'
-*/
-// _LAST layer 17
-[_LAST] = LAYOUT_ortho_3x10( // layer 15 : _LAST layer
-//,----------------------------------------------.  ,-----------------------------------------------.
-    BLIT_01, BLIT_02, BLIT_03, BLIT_04, BLIT_05,      BRTH_01, BRTH_02, BRTH_03, BRTH_04,  BL_BRTG,
-//|--------+--------+--------+--------+----------|  |--------+--------+--------+--------+-----------|
-    BLIT_06, BLIT_07, BLIT_08, BLIT_09, BLIT_10,      BRTH_05, KC_LGUI, BRTH_07, BRTH_12,  BL_TOGG,
-//|--------+--------+--------+--------+----------|  |--------+--------+--------+--------+-----------|
-    BLIT_11, BLIT_12, BLIT_13, BLIT_14, BLIT_15,      BRTH_15,   BL_ON,  BL_INC,  BL_DEC, BLIT_OFF )
-//'----------------------------------------------'  '-----------------------------------------------'
+//[_LAST] LAYER 17 : LAST LAYER //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!
+  [_LAST] = KEYMAP_gherkin_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ____LAST__L1____,                                          ____LAST__R1____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____LAST__L2____,                                          ____LAST__R2____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____LAST__L3____,                                          ____LAST__R3____
+//'----------------------------------------'                 '----------------------------------------'
+)
 // END OF _LAST 17
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 };
@@ -2855,6 +2196,7 @@ v* |------+------+------+------+------|  |------+------+------+------+------|
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+//[PLACEHOLDER] //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -2909,7 +2251,7 @@ const uint16_t PROGMEM fn_actions[] = {
 
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
-  shift_flag = get_mods()&LSHIFT_MODS;
+  shift_flag = get_mods()&SHFT_MODS;
   switch (id) {
     case ACC_A:
       if (record->event.pressed) 
@@ -3436,34 +2778,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case VOL_8:    volumeSetToLevel8();         return false; break; // set volume to middle  (level 8)
       case BRIGHT_1: brightSetToLevel1();         return false; break; // set bright to minimum (level 1)
 
-      case APP_Q_QQQQQ: callApp("");                          return false; break; //
+      case APP_Q_SNOTE: callApp("");                          return false; break; //
       case APP_W_TWTTR: callApp("Twitter.app");               return false; break; // t W itter
       case APP_E_EVERN: callApp("Evernote.app");              return false; break; // E vernote
-      case APP_R_RRRRR: callApp("");                          return false; break; //
+      case APP_R_APSTO: callApp("");                          return false; break; //
       case APP_T_TERMI: callApp("Terminal.app");              return false; break; // T erminal
 
       case APP_Y_TYPIN: callApp("Typinator.app");             return false; break; // t Y pinator
-      case APP_U_SUBLI: callApp("Sublime Text.app");          return false; break; // s U blime Text
+      case APP_U_UROOM: callApp("Sublime Text.app");          return false; break; // s U blime Text
       case APP_I_TEDIT: callApp("TextEdit.app");              return false; break; // textEd I t
       case APP_O_OMNIF: callApp("OmniFocus.app");             return false; break; // O mnifocus
       case APP_P_SPREF: callApp("System Preferences.app");    return false; break; // system P references
 
-      case APP_A_SNOTE: callApp("Simplenote.app");            return false; break; // simplenote
+      case APP_A_SCRPT: callApp("Simplenote.app");            return false; break; // simplenote
       case APP_S_SAFAR: callApp("Safari.app");                return false; break; // S afari _delay_ms50
       case APP_D_D_ONE: callApp("Day One Classic.app");       return false; break; // D ay one
       case APP_F_FINDE: callApp("Finder.app");                return false; break; // F inder
       case APP_G_CHRME: callApp("Google Chrome.app");         return false; break; // G oogle chrome
 
       case APP_H_SKTCH: callApp("Sketch.app");                return false; break; // sketc H
-      case APP_J_JJJJJ: callApp("");                          return false; break; // 
-      case APP_K_KVIEW: callApp("Karabiner-EventViewer.app"); return false; break; // K arabiner Evnt Vwr
+      case APP_J_SUBLI: callApp("");                          return false; break; // 
+      case APP_K_KRBNR: callApp("Karabiner-Elements.app"); return false; break; // K arabiner Elements
       case APP_L_CLNDR: callApp("Calendar.app");              return false; break; // Calendar
-      case APP_SP_SPSP: callApp("");                          return false; break; //
+      case APPSP_EMPTY: callApp("");                          return false; break; //
 
       case APP_Z_STUDI: callApp("Studies.app");               return false; break; // Studies
       case APP_X_XCODE: callApp("Xcode.app");                 return false; break; // Xcode
       case APP_C_CALCU: callApp("Calculator.app");            return false; break; // Calculator
-      case APP_V_VVVVV: callApp("");                          return false; break; //
+      case APP_V_KVIEW: callApp("Karabiner-EventViewer.app"); return false; break; // krbnr eVent Viewr
       case APP_B_BOOKS: callApp("Books.app");                 return false; break; // Books
 
       case APP_N_NOTES: callApp("Notes.app");                 return false; break;  // Notes
@@ -3708,7 +3050,7 @@ uint32_t layer_state_set_user(uint32_t state) {
         break;
 
     case _APPS:   //  10
-      gui_flag = get_mods()&LGUI_MODS;
+      gui_flag = get_mods()&GUI_MODS;
       if (gui_flag)
       {
         hide_other_apps = true;

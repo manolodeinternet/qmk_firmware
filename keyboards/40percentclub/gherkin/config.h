@@ -2,7 +2,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define TAPPING_TERM 180
+#define TAPPING_TERM 200 // 180  // 150 ?
 
 #include "config_common.h"
 

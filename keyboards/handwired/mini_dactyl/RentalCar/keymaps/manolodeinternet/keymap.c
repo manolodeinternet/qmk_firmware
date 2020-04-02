@@ -46,148 +46,8 @@ uint16_t get_tapping_term(uint16_t keycode) {
   If not, see <http://www.gnu.org/licenses/>.
 */
 
-/////////////////////////////////////////////////////////////////////////////////////// LINE TOO LONG !!!
 
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-/* MAXIMUM LINE WIDTH FOR RIGHT PRINTING   ( 105  CHARACTERS)   MAXIMUM LINE WIDTH FOR RIGHT PRINTING */
-/*XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XX*/
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-
-// [MY_OWN_PREPROCESSING_KEYWORDS] for editing my code:
-//
-// [ADVICE]
-// [advice]        maybe you can use this advice later, for covering a possible need
-// 
-// [BEAUTIFUL & CLEAN CODE]    you can do a task, just coding or...
-//                             you can do the same thing making an artwork,
-// [beautiful & clean code]    instead of a bunch of lines of code
-//
-// [BOOKMARK] 
-//                 1) for looking for an important point of the code I'm editing,
-// [bookmark]      2) for putting a bookmark into the code.
-//
-// [BUG?]
-// [bug?]          can this code cause a bug ?        
-//
-// [DANGER]
-// [danger]        for indicate that we have touch the code, without checking if the change is reliable
-//
-// [DATA]
-// [data]          some information about any reference relative to our application data
-//
-// [DELETEME]      this bunch of code is no longer useful
-// [deleteme]      we must delete it later
-//
-// [EXAMPLE]
-// [example]
-//
-// [FIXME]
-// [fixme]         there's something I HAVE TO FIX for a right working
-//
-// [IMPROVEME]
-// [improveme]     there is something we could change for a better working or getting a code more elegant
-//
-// [INFO]
-// [info]          some information about any reference relative to our code or application analytics
-//
-// [INSPIRINGCODE]
-// [inspiringcode] cool, clean, powerfull, funny snippet
-//
-// [LAST]
-// [last]          for marking the point where I'm working
-//
-// [OLDWAY]        it works, but smells ...
-//                 the ugly way I did this before that we aren't going to need any more.
-// [oldway]        it still remains in the code as an example of how it don't have to do things again
-//
-// [OPTIONS]
-// [options]       different ways of embracing or facing an algorith or any other issue
-//
-// [REFLEXION]
-// [reflexion]     maybe things can be coded (thinked) different !!!
-//
-// [SAVING_SPACE]
-// [saving_space]   ways of saving space for fitting the whole firmware into the microcontroller
-//
-// [SYSTEM PREFERENCES]
-// [system preferences] sortcut defined in 'System Preferences'
-//
-// [TRANSLATION]
-// [translation]
-//
-// [UNDERSTANDING] 
-// [understanding] for giving explanations about what our code does
-//
-// [WHYWEDOTHIS]
-// [whywedothis] explanation about why we do this thing
-//
-// [my_own_preprocessing_keywords]
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-////                                                                                  ////
-////  COMMENTS SYNTAX FOR IMPROVING LEGIBILITY OF THE DIFFERENT SECTIONS OF THE CODE  ////
-////                                                                                  ////
-////                        STANDARDIZED HEADERS & FOOTERS                            ////
-////                                                                                  ////
-//////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// HEADER
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_layer_NAME] kc_KEYCODE (tapdance_NAME)                                  //
-//                                                                                      //
-//  K E Y C O D E   /   L A Y E R _ X   /   F U N C T I O N   /   . . .                 //
-//                                                                                      //
-//  KC_KEYCODE:  *  KEYCODE_1,                                                          //
-//              **  KEYCODE_2,                                                          //
-//               @ [_LAYER_X],                                                          //
-//              @@ [_LAYER_Y] OFF,                                                      //
-//             @@@ [_LAYER_Z],                                                          //
-//               ?  ETCETERA...                                                         //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-// FOOTER
-//                                                                                      //
-// [tapdance] [_layer_name] kc_keycode (tapdance_name)                                  //
-//                                                                                      //
-//  k e y c o d e   /   l a y e r _ x   /   f u n c t i o n   /   . . .                 //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-// i.e.:
-// HEADER
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_NUMB] KC_N (SLNUMB)                                                     //
-//                                                                                      //
-//  S L A S H  -  N U M B E R S   L A Y E R   O F F                                     //
-//                                                                                      //
-//  KC_N:  * KC_KP_SLASH = KC_PSLS,                                                     //
-//        @@ [_NUMB] OFF                                                                //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-// FOOTER
-//                                                                                      //
-// [tapdance] [_numb] kc_n (slnumb)                                                     //
-//                                                                                      //
-//  s l a s h  -  n u m b e r s   l a y e r   o f f                                     //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-
-//    comments syntax for improving legibility of the different sections of the code    //
-//                                                                                      //
-//                          standardized headers & footers                              //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-// #pragma once
+//          QMK_KEYBOARD_H is implemented at 'manolodeinternet.h'. Compile process needs this way !
 // #include QMK_KEYBOARD_H
 // Following 2 files don't need full path bc folder 'users/manolodeinternet' is automatically included
 #include "manolodeinternet.h"
@@ -196,445 +56,10 @@ uint16_t get_tapping_term(uint16_t keycode) {
 // It's included from 'manolodeinternet.h'
 // #include "wrappers.h"
 
-// It's not necessary, I think it's included from 'quantum' in 'QMK_KEYBOARD_H'
-// #include "rgblight.h"
-
-
-// [INSPIRINGCODE]
-// #define GRAVE_MODS  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT)
-//                     |MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI)
-//                     |MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
-
-// #define ALL_LMODS   (MOD_BIT(KC_LSFT)|MOD_BIT(KC_LCTL)|MOD_BIT(KC_LALT)|MOD_BIT(KC_LGUI))
-// [inspiringcode]
-#define SHFT_MODS     (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
-#define CTRL_MODS     (MOD_BIT(KC_LCTL)  |MOD_BIT(KC_RCTL)  )
-#define ALT_MODS      (MOD_BIT(KC_LALT)  |MOD_BIT(KC_RALT)  )
-#define GUI_MODS      (MOD_BIT(KC_LGUI)  |MOD_BIT(KC_RGUI)  )
-
 // [MINE]
-extern rgblight_config_t rgblight_config;      // without this line, it doesn't recognize rgblight_config
-extern LED_TYPE led[RGBLED_NUM];
+extern rgblight_config_t rgblight_config;    // without this line, it doesn't recognize rgblight_config
+// extern LED_TYPE led[RGBLED_NUM];
 // [mine]
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING LAYERS                      L A Y E R S                                     //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//miniDactyl
-//layers 0...12 defined at 'qmk_firmware/users/manolodeinternet/wrappers.h'
-#define _RGBL  _LGHT
-//                                                                                      //
-// defining layers                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING COLOR LAYERS                      C O L O R     L A Y E R S                 //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-
-#define COLOR_CAPS HSV_MY_DARK_CORAL // capslock color
-
-// #define COLOR_DFLT HSV_MY_EMPTY  // layer 00      // (   0,    0,    0)  // 00
-
-#define COLOR_ACCN HSV_MY_WHITE     // layer 01  // HSV_MY_GOLDENROD      // (0xD9, 0xA5, 0x21)  // 02
-#define COLOR_NUMB HSV_MY_BLUE      // layer 02
-
-#define COLOR_FVIM HSV_MY_MAGENTA   // layer 03      // (0x00, 0x80, 0x80)  // 09
-//#define COLOR_CVIM HSV_MY_PINK    // layer 04      // ( 320,  255,  255)  // 11
-#define COLOR_VIM_ HSV_MY_PINK
-#define COLOR_DVIM HSV_MY_RED       // layer 05      // (0xFF, 0x00, 0x00)  // 10
-
-
-#define COLOR_MOUS HSV_MY_CYAN      // layer 06      // (0x00, 0xFF, 0x00)  // 14
-#define COLOR_DALY HSV_MY_PURPLE    // layer 07      // (0x7A, 0x00, 0xFF)  // 06
-#define COLOR_FUNC HSV_MY_TURQUOISE // layer 08      // (0x99, 0xF5, 0xFF)  // 05
-
-#define COLOR_SYMB HSV_MY_GREEN     // layer 09      // (0x00, 0xFF, 0x00)  // 04
-#define COLOR_APPS HSV_MY_ORANGE    // layer 10      // (0xFF, 0x80, 0xBF)  // 07
-// #define COLOR_RGBL HSV_MY_EMPTY  // layer 11      // (   0,    0,    0)  // 15
-
-
-#define COLOR_POWR HSV_MY_YELLOW    // layer 12      // (0xFF, 0xFF, 0x00)  // 08
-//
-//                                                                                      //
-// defining color layers                      c o l o r     l a y e r s                 //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING READABILITY CODES                                                           //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define _______ KC_TRNS
-#define XXXXXXX KC_NO
-
-#define KC_FF   KC_MEDIA_FAST_FORWARD // these keycodes skip within the current track when held,
-#define KC_RW   KC_MEDIA_REWIND       // but skip the entire track when tapped.
-//                                                                                      //
-// defining readability codes                                                           //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING FN_ACTIONS                                                                  //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define ACC_A    0
-#define ACC_E    1
-#define ACC_I    2
-#define ACC_O    3
-#define ACC_U    4
-
-#define TIL_N    5
-
-#define CAPSL    6
-//                                                                                      //
-// defining fn_actions                                                                  //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFININING RGB CONSTANTS                                                             //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-// RGHT HAND
-#define OUTER_RGHT  0
-#define INNER_RGHT 6 //6
-
-// LEFT HAND
-#define INNER_LEFT 7 //7
-#define OUTER_LEFT 12 //12
-
-// THUMB LEDs
-#define THUMB_LEDS  2
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-// definining rgb constants                                                             //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING ?VIM SHORTCUTS 9, 10, 11, 12, 13                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define OUTDNT             LGUI(KC_LBRC)  // OUTDNT a paragraph
-// [UNUSED]
-#define INDENT              LGUI(KC_RBRC)  // indent  a paragraph
-// [UNUSED]
-/*
-HYPR(keycode) does work directly into a keymap only !!!
-HYPR(keycode) doesn't work into a function: register_code(HYPR(KC_V));
-HYPR(keycode) doesn't work into a #define,
-quantum/quantum_keycodes.h:484:18: error: 
-large integer implicitly truncated to unsigned type [-Werror=overflow]
- #define HYPR(kc) (QK_LCTL | QK_LSFT | QK_LALT | QK_LGUI | (kc))
-                  ^
-quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
- #define KC_HYPR HYPR(KC_NO)
-                 ^~~~
-*/
-// We have to define HYPR(KC_V) as follows ...
-#define HYPR_V     SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v")))))
-//                                                                                      //
-// defining ?vim shortcuts 9, 10, 11, 12, 13                                            //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING AUTOMATOR MAC SERVICES SHORTCUTS                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define   BEEP_1               SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("r")))))    // 1 beep
-// #define   BEEP_2               SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("g")))))    // 2 beeps
-// #define   BEEP_3               SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("b")))))    // 3 beeps
-//                                                                                      //
-// defining system preferences shortcuts                                                //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING MY SYSTEM PREFERENCES SHORTCUTS                                             //
-//                                                                                      //
-// macOS High Sierra                                                                    //
-// Version 10.13.6 (17G7024)                                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-/*
-                                                 MODIFIERS (KEY)
-                                                      Shift
-                                                       Control
-                                                        Alt
-                                                         Gui
-                                                      S
-                                                       C
-                                                        A
-                                                         G
-
- *  KEYBOARD -> SHORTCUTS -> DISPLAY
-      Decrease display brightness                           F14
-      Increase display brightness                           F15
-
- *  KEYBOARD -> SHORTCUTS -> LAUNCHPAD & DOCK
-      Turn Dock Hiding On/Off                           AG (D)
-      Show Launchpad                                        F17
-
- *  KEYBOARD -> SHORTCUTS -> MISSION CONTROL
-      Mission Control                                  C   (up)
-      Show Notification Center                          AG (F15)
-      Turn Do Not Disturb On/Off                      SC   (F15)
-      Applications windows                             C   (down)
-      Show Desktop                                          F6 
-      Show Dashboard                                        F18
-      Mission Control / Move left a space              C   (left)
-      Mission Control / Move right a space             C   (right)
-      Mission Control / Switch to Desktop 1            C   (1)
-
- *  KEYBOARD -> SHORTCUTS -> KEYBOARD
-      Change the way Tab moves focus                   C   (F7)
-      Turn keyboard access on or off                   C   (F1)
-      Move focus to the menu bar                       C   (F2)
-      Move focus to the Dock                           C   (F3)
-      Move focus to active or next window              C   (F4)
-      Move focus to the window toolbar                 C   (F5)
-      Move focus to the floating window                C   (F6)
-      Move focus to next window                          G (grave)
-      Move focus to the window drawer                   AG (grave)
-      Move focus to status menus                       C   (F8)
-
- *  KEYBOARD -> SHORTCUTS -> INPUT SOURCES
-      Select the previous input source                  AG (T)
-      Select next source in Input menu                 CAG (T)
-
- *  KEYBOARD -> SHORTCUTS -> SCREEN SHOTS
-      Save picture of screen as a file                S  G (3)
-      Copy picture of screen to the clipboard         SC G (3)
-      Save picture of selected area as a file         S  G (4)
-      Copy picture of selected area to the clipboard  SC G (4)
-
- *  KEYBOARD -> SHORTCUTS -> SERVICES
-    PICTURES:
-      Capture Full Screen
-      Capture Screen using Timer
-      Capture Selection from Screen
-      Take Screenshot
-      Import Image
-      Make New File in Filed Documents
-      New Day One Entry With Selection
-      Open with Pixelmator
-      Open with Pixelmator Pro
-      Set Desktop Picture
-
-    MESSAGING:
-      New Email To Address
-      New Email With Selection
-
-    DEVELOPMENT:
-      Activity Monitor
-      Allocation & Leaks
-      File Activity
-      System Trace
-      Compare files                                   SCAG (C)
-      Compare To Master
-      Create Service
-      Create Workflow
-      Get result of AppleScript                          G (asterisk)
-      Make New AppleScript
-      Run as AppleScript
-      Time Profile Active Application
-      Time Profile App Under Mouse
-      Time Profile Entire System
-      Toggle Instruments Recording
-
-    FILES AND FOLDERS:
-      Open Selected File in TextEdit
-      New Terminal at Folder
-      New Terminal Tab at Folder
-      Encode Selected Audio Files
-      Encode Selected Video Files
-      Folder Actions Setup...
-      Open as Twitter Username
-      Tweet
-      Open in Sourcetree
-      Run SuperDuper! Settings
-      Send File To Bluetooth Device                   S  G (B)
-
-    SEARCHING:
-      Look Up in Dictionary
-      Search With Google                              S  G (L)
-      Spotlight                                       S  G (F)
-
-    TEXT:
-      Add Contact
-      Call
-      Send Message
-      Send SMS
-      Add to Evernote
-      Add to iTunes as a Spoken Track
-      Convert Text to Full Width
-      Convert Text to Half Width
-      Convert Text to Simplified Chinese              SACG (C)
-      Convert Text to Traditional Chinese             S CG (C)
-      Create Collection From Text
-      Create Font Library From Text
-      Display Font Information
-      Create TextExpander 3 Snippet
-      Find in Xcode
-      Open Quickly in Xcode
-      Make New Sticky Note                            S  G (Y)
-      New Email With Selection
-      New TextEdit Wi...tainig Selection
-      nvALT: New Note from Selection                  S  G (V)
-      OmniFocus 2: Send to Inbox
-      OmniFocus 3: Send to Inbox
-      Open
-      Show in Finder
-      Show Info in Finder
-      Open man Page in Terminal                       S  G (M)
-      Search man Page Index in Terminal               S  G (A)
-      Open URL in RealPlayer
-      Send to LaunchBar
-      Show Map
-      Summarize
-      Translate                                          G (dot)
-
-    INTERNET:
-      Add to Reading List
-      Open URL
-
-    GENERAL:
-    (from Automator/NewFileForServices):
-      Aut_Beep_1                                      SCAG (R)
-      Aut_Beep_2                                      SCAG (G)
-      Aut_Beep_3                                      SCAG (B)
-      Launch T-Terminal                               SCAG (T)
-
- *  KEYBOARD -> SHORTCUTS -> SPOTLIGHT
-      Show Spotlight search                              G (Space)
-      Show Finder search window                        CAG (Space)
-
- *  KEYBOARD -> SHORTCUTS -> ACCESSIBILITY
-    ZOOM:
-      Turn zoom on or off                              CAG (semicolon)
-      Turn image smoothing on or off                   CAG (backslash)
-      Zoom out                                         CAG (minus)
-      Zoom in                                          CAG (equal)
-      Turn focus following on or off                   CAG (slash)
-
-    CONTRAST:
-      Increase contrast                                CAG (dot)
-      Decrease contrast                                CAG (comma)
-
-      Invert colors                                   SC G (8)
-      Turn VoiceOver on or off                           G (F5)
-      Show Accessibility controls                       AG (F5)
-
- *  KEYBOARD -> SHORTCUTS -> APP SHORTCUTS
-    ALL APPLICATIONS:
-      Show Help menu                                  S  G (slash)
-      Send to LaunchBar                               S  G (F1)
-      Window                                          SCAG (W)
-
-    FINDER.APP:
-      Archivo -> Nueva ventana del Finder                G (N)
-
-    CALCULATOR.APP:
-      Visualizacion -> De programacion                SCAG (P)
-      Visualizacion -> Cientifica                     SCAG (C)
-
-    ATOM.APP:
-      Edit -> Lines -> Auto Indent                       G (open square bracket)
-
-    TEXTEDIT.APP:
-      Format -> Allow Hyphenation                      CA  (H)
-      Format -> Do not allow Hyphenation              SCA  (H)
-
-   XCODE.APP:
-     Debug/Step Over Instruction                       C   (F6)
-     Debug/Step Into Instruction                       C   (F7)
-*/
-//                                                                                      //
-// defining my system preferences shortcuts                                             //
-//                                                                                      //
-// macos high sierra                                                                    //
-// version 10.13.6 (17g7024)                                                            //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING SYMBOLS 4 ( FOR USING INTO 'ACTION_TAP_DANCE_DOUBLE(SYMBOL1, SYMBOL2)' )    //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define EURO         LSFT(LALT(KC_2))  // euro symbol
-#define INV_QU      LSFT(LALT(KC_SLSH))  // inverted question mark
-#define INV_EX               LALT(KC_1)  // inverted exclamation mark
-//                                                                                      //
-// defining symbols 4 ( for using into 'action_tap_dance_double(symbol1, symbol2)' )    //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING _DALY COMMANDS 6                                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-// defined at users/manolodeinternet/wrappers.h
-//                                                                                      //
-// defining _daly commands 6                                                            //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING _POWR COMMANDS 8                                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-/*
-#define SL_MEN           TD(SLEP_M)
-#define KM_TOL           TD(KILM_T)
-#define KA_DCK           TD(KILA_D)
-#define SH_STA           TD(SHUT_S)
-#define RT_FLO           TD(RSTT_F)
-*/
-#define LCKSCR      LCTL(LGUI(KC_Q))
-#define LOGOUT LSFT(LALT(LGUI(KC_Q)))
-
-// [SYSTEM PREFERENCES]
-#define ZOM_FOL      LCAG(KC_SLSH)      //QMK: Hold Left Control, Alt and GUI and press kc
-#define ZOM_TOG      LCAG(KC_SCLN)
-#define ZOM_IN          LCAG(KC_EQL)
-#define ZOM_OUT         LCAG(KC_MINS)
-#define ZOMSMTH      LCAG(KC_BSLS)
-#define CNTR_UP       LCAG(KC_DOT)              //Hold Left Control, Alt and GUI and press kc
-#define CNTR_DN      LCAG(KC_COMM)
-//
-// [UNUSED]
-#define INV_CLR      LSFT(LCTL(LGUI(KC_8)))  
-// [INFO]
-// it can't be used into an 'ACTION_TAP_DANCE_DOUBLE()'
-// it can't be used into a statement of tap_dance: 'case SINGLE_TAP: INV_CLR;'  We would get only '8'
-// it can't be used into a 'RSFT_T(INV_CLR)' neither
-// [info]
-// [unused]
-//
-// [system preferences]
-//                                                                                      //
-// defining _powr commands 8                                                            //
-//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -695,13 +120,14 @@ enum tap_dance_keycodes {
 //    ,PVI_CL  // CapsLock    when tapped or _FVIM layer when holded        on alpha layer
 //    ,APPS_MODE
      DVIM_Del  // Delete when tapping, _DVIM when holding 
+    ,FUNC_LED
 //    ,NUMB_Del
 //    ,SYMB_Ent
 //    ,APPS_Esc
 //    ,MOUS_Tab
 
 // TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB (NUMBERS LAYER) 3
-// WE DON'T NEED 'SETNMB' TAPDANCE ANY MORE SINCE WE USE 'TT(_NUMB)' WITH 'MODIFIERS_ALPHAS' LAYOUT
+// WE DON'T NEED 'SETNMB' TAPDANCE ANY MORE SINCE WE USE 'TT(_NUMB)' WITH 'SIMPLE_30_LAYOUT' LAYOUT
     // ,SETNMB  // set numbers layer up / switch numbers layer off
 // [GHERKIN]
 //    ,SLNUMB  // return to *GHKN layer (gherkin default layer)  // ... slash
@@ -716,7 +142,7 @@ enum tap_dance_keycodes {
 */
 
 // TAP DANCE KEYCODES FOR _POWR (POWER LAYER) 8
-    // ,SLEP_M   //   menu bar / (on hold) SLEEP
+    ,SLEP_M   //   menu bar / (on hold) SLEEP
     // ,KILM_T   //   dock bar / (on hold) KILL MENU
     // ,KILA_D   //  tools bar / (on hold) KILL CURRENT APP
     // ,SHUT_S   // status bar / (on hold) COMPUTER SHUT DOWN
@@ -729,7 +155,7 @@ enum tap_dance_keycodes {
 
 // [ADVICE]
 // [DEPRECATED]
-//  ,BCKLIT   // accessing _RGBL layer from tap dance into _POWR layer
+//  ,BCKLIT   // accessing _LEDS layer from tap dance into _POWR layer
               // ...this way we don't waste a layer from being accesible from Default layer,
               // ...remember that you only can access 16 layer through LT(layer, key) and LM(layer, mod).
 // [deprecated]
@@ -772,12 +198,12 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
     ,CHANGE_SYMB_TO_NUMB
     ,TH_L3_KAR_APPS
-    ,TH_L4_FUNC_RGBL
+    ,TH_L4_FUNC_LEDS
 
     ,TH_R1_DALY_MOUS
     ,TH_R2_SYMB_FVIM
     ,TH_R3_APPS_NUMB
-    ,TH_R4_POWR_RGBL
+    ,TH_R4_POWR_LEDS
 
 // THIS FUNCTION IS NOT GOING TO BE USED WITH 23 LEDS PER HAND
     ,STP_ID  // it increments step indicator for RGB LEDs
@@ -869,7 +295,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// MACROS FOR _RGBL 15
+// MACROS FOR _LEDS 15
 // RED
     ,CH_RED  ,CH_CORL  ,CH_ORNG  ,CH_GOLR ,CH_GOLD          ,CH_YLLW          ,SAV_COL
 // GREEN
@@ -877,7 +303,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 // BLUE
     ,CH_CYAN ,CH_AZUR  ,CH_BLUE  ,CH_PRPL ,CH_MGNT          ,CH_PINK          ,CH_EMPT
 
-// macros for _blit 15
+// macros for _leds 15
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 }; // enum custom keycodes
@@ -1160,7 +586,12 @@ void get_hsv(void)
   send_string   (str_2);
   SEND_STRING(", val: ");
   send_string   (str_3);
+
+  // HYPR(KC_R);
+  
   BEEP_1;
+  
+  // BEEP_2;
 }
 //[fixme]  // make this function smaller, please !!!
 
@@ -1397,7 +828,7 @@ void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTI
 } // my enable_capslock_after_accents_function
 
 
-void show_RGB_LEDs(void)  // MY SWITCH CAPSCLOCK INDICATORS ON FUNCTION
+void show_RGB_LEDs(void)  // MY SWITCH CAPSLOCK INDICATORS ON FUNCTION
 {
   uint8_t caps_rght_sta = 0;
   uint8_t caps_rght_end = 0;
@@ -1661,9 +1092,9 @@ void rgb_bspc_or_del_released(void)
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [FUNCTIONS] [_POWR] KC_R (MY_RESET)process_record_user                               //
-// [FUNCTIONS] [_DFLT] KC_R (TH_R4_POWR_RGBL)process_record_user                        //
-// [FUNCTIONS] [_RGBL] KC_O (SAV_COL)process_record_user                                //
-// [FUNCTIONS] [_RGBL] KC_L (GET_HSV)process_record_user                                //
+// [FUNCTIONS] [_DFLT] KC_R (TH_R4_POWR_LEDS)process_record_user                        //
+// [FUNCTIONS] [_LEDS] KC_O (SAV_COL)process_record_user                                //
+// [FUNCTIONS] [_LEDS] KC_L (GET_HSV)process_record_user                                //
 //                                                                                      //
 // RESET MY KEYBOARD FUNCTION                                                           //
 //                                                                                      //
@@ -1684,7 +1115,7 @@ void flashing_LEDs(uint8_t times, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t r2
 }
 //                                                                                      //
 // [functions] [_powr] kc_r   (my_reset)process_record_user                             //
-// [functions] [_dflt] l_th_4 (th_r4_powr_rgbl)process_record_user                   //
+// [functions] [_dflt] l_th_4 (TH_R4_POWR_LEDS)process_record_user                   //
 //                                                                                      //
 // reset my keyboard function                                                           //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1693,7 +1124,7 @@ void flashing_LEDs(uint8_t times, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t r2
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [FUNCTIONS] [_POWR] KC_R (MY_RESET)process_record_user                               //
-// [FUNCTIONS] [_DFLT] KC_R (TH_R4_POWR_RGBL)process_record_user                     //
+// [FUNCTIONS] [_DFLT] KC_R (TH_R4_POWR_LEDS)process_record_user                     //
 //                                                                                      //
 // RESET MY KEYBOARD FUNCTION                                                           //
 //                                                                                      //
@@ -1711,7 +1142,7 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 }
 //                                                                                      //
 // [functions] [_powr] kc_r (my_reset)                                                  //
-// [functions] [_dflt] l_th_4 (th_r4_powr_rgbl)                                      //
+// [functions] [_dflt] l_th_4 (TH_R4_POWR_LEDS)                                      //
 //                                                                                      //
 // reset my keyboard function                                                           //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1931,7 +1362,7 @@ void SLNUMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 //
-/* WE DON'T NEED 'SETNMB' TAPDANCE ANY MORE SINCE WE USE 'TT(_NUMB)' WITH 'MODIFIERS_ALPHAS' LAYOUT
+/* WE DON'T NEED 'SETNMB' TAPDANCE ANY MORE SINCE WE USE 'TT(_NUMB)' WITH 'SIMPLE_30_LAYOUT' LAYOUT
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -2003,7 +1434,7 @@ void SETNMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-//  we don't need 'setnmb' tapdance any more since we use 'tt(_numb)' with 'modifiers_alphas' layout */
+//  we don't need 'setnmb' tapdance any more since we use 'tt(_numb)' with 'SIMPLE_30_LAYOUT' layout */
 //
 
 
@@ -2245,6 +1676,134 @@ void AVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
 //              t a p   d a n c e   f o r  -  v   i   m  -  l a y e r s                 //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_Y (FUNC_LED)                                                    //
+//                                                                                      //
+//  F U N C   L A Y E R,   L E D S   L A Y E R                                          //
+//                                                                                      //
+//  TH_L4:  @ [_FUNC] LAYER                                                             //
+//         @@ [_LEDS] LAYER                                                             //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'FUNC_LED' tap dance.
+static tap FUNC_LED_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void FUNC_LED_finished (qk_tap_dance_state_t *state, void *user_data) {
+  FUNC_LED_tap_state.state = cur_dance(state);
+  switch (FUNC_LED_tap_state.state) {
+
+    case SINGLE_TAP:        acute_accent_function(); break;
+
+    case SINGLE_HOLD:       layer_on(_FUNC);         break;
+
+    case DOUBLE_HOLD:       layer_on(_LEDS);         break;
+  }
+}
+
+void FUNC_LED_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (FUNC_LED_tap_state.state) {
+    case SINGLE_TAP:        break;
+
+    case SINGLE_HOLD:       layer_off(_FUNC);        break;
+
+    case DOUBLE_HOLD:       layer_off(_LEDS);        break;
+  }
+  FUNC_LED_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_powr] kc_y (func_led)                                                    //
+//                                                                                      //
+//  f u n c   l a y e r,   l e d s   l a y e r                                          //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_Z (SLEP_M)                                                     //
+//                                                                                      //
+//  M E N U   B A R   /    S L E E P   C O M P U T E R                                  //
+//                                                                                      //
+//  KC_Z:   *  MENU BAR                                                                 //
+//          @  SLEEP COMPUTER                                                           //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'SLEP_M' tap dance.
+static tap SLEP_M_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void SLEP_M_finished (qk_tap_dance_state_t *state, void *user_data) {
+  SLEP_M_tap_state.state = cur_dance(state);
+  switch (SLEP_M_tap_state.state) {
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_F2);
+                      //_delay_ms(500);
+                      break;
+
+// [INFO] HOW TO SLEEP COMPUTER THROUGH KEYBOARD                            
+//  keystrokes for sleeping:  (guessed by try and fail method)
+                      
+    case SINGLE_HOLD: register_code(KC_POWER);
+                   // without this delay, POWER doesn't work !!!   
+                      _delay_ms(500); 
+                      unregister_code(KC_POWER);
+                   // SEND_STRING("s");  // 's' for selecting button sleep but it's not necessary
+                      break;
+
+                      /*
+                      // this way doesn't work
+
+                      register_code(KC_LSFT);
+                      register_code(KC_POWER);
+                      _delay_ms(500); 
+                      */
+
+                  /* KC_EJCT keycode doesn't work with QMK, but with KarabinerElements works vey well*/
+                  /*register_code(KC_LSFT);   register_code(KC_LCTL); register_code(KC_EJCT);*/
+
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+/*                                                                                                     */
+/*   KC_POWER works very well.  It makes appear shut down menu (Restart, Sleep, Cancel, Shut down)     */
+/*                                                                                                     */
+/*                          register_code(KC_POWER);                                                   */
+/*                                                                                                     */
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+  }
+}
+
+void SLEP_M_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (SLEP_M_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_F2); unregister_code(KC_LCTL); break;
+                     
+    case SINGLE_HOLD: /* if we unregister_code(KC_POWER) here, at SLEP_M_reset
+                         it will appear the POWER dialog box and 
+                         we have to press the related initial letter
+                         or chosing an option with the mouse.
+
+                         unregister_code(KC_POWER);
+                      */
+
+                      /*
+                      unregister_code(KC_EJCT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
+                      */
+// [info] how to sleep computer through keyboard
+
+                      break;                       
+  }
+  SLEP_M_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_powr] kc_z (slep_m)                                                     //
+//                                                                                      //
+//  m e n u   b a r   /    s l e e p   c o m p u t e r                                  //
+//////////////////////////////////////////////////////////////////////////////////////////
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -2283,6 +1842,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 // [_DFLT] LAYER
    [DVIM_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(DVIM_Del_f_always,DVIM_Del_finished,DVIM_Del_reset,100)
+  ,[FUNC_LED]=ACTION_TAP_DANCE_FN_ADVANCED(NULL, FUNC_LED_finished, FUNC_LED_reset)
 // [_dflt] layer
 
 // [_NUMB]&[_SYMB]LAYER
@@ -2309,6 +1869,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   ,[DVIM_uU] = ACTION_TAP_DANCE_FN(DVIM_uU_function)
   ,[DVIM_pP] = ACTION_TAP_DANCE_FN(DVIM_pP_function)
 // [_dvim] layer
+
+// [_POWR] LAYER
+  ,[SLEP_M]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLEP_M_finished, SLEP_M_reset)// [_powr] layer
 
 /*
 // [_AVIM] LAYER
@@ -2618,138 +2181,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 //[PLACEHOLDER] //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-/*  
-*  Keymap _RGBL 11: RGB Light leds layer
-,--------------------------------------------------. ,-------------------------------------------------.
-|    RED   |  CORAL |   ORANGE  |GOLDENROD|  GOLD  | | YELLOW |    HUE   |    HUE   |        | REVERSE |
-|          |        |           |         |        | |        | DECREMENT| INCREMENT|        | RGB MODE|
-|----------+--------+-----------+---------+--------| |--------+----------+----------+--------+---------|
-|CHARTREUSE|  GREEN |SPRINGGREEN|TURQUOISE|  TEAL  | |  WHITE |SATURATION|SATURATION|        |         |
-|          |        |           |         |        | |        | DECREMENT| INCREMENT|        | RGB MODE|
-|----------+--------+-----------+---------+--------| |--------+----------+----------+--------+---------|
-|   CYAN   |  AZURE |    BLUE   |  PURPLE | MAGENTA| |  PINK  |   VALUE  |   VALUE  | WITHOUT| BL_OFF  |
-|          |        |           |         |        | |        | DECREMENT| INCREMENT|  COLOR |RGBToggle|
-'--------------------------------------------------' '-------------------------------------------------'
-*                  ,-----------------.  ,-----------------.
-*                  |        |        |  |        |        |
-*                  |        |        |  |        |        |
-*                  |        |        |  |        |        |
-*                  |        |        |  |  _POWR |        |
-*         ,--------+--------+--------|  |--------+--------|--------.
-*         |        |        |        |  |        |        |        |
-*         |        |        |        |  |        |        |        |
-*         |        |        |        |  |        |        |        |
-*         |        |        |        |  |        |        |        |
-*         '--------------------------'  '--------------------------'
-*/
-// _RGBL layer 11
-
-[_RGBL] = KEYMAP( // layer 11: _RGBL layer
-//'-----------------------------------------------'    '-----------------------------------------------'
-     CH_RED, CH_CORL, CH_ORNG, CH_GOLR, CH_GOLD,          CH_YLLW, RGB_HUI, RGB_HUD, SAV_COL, RGB_RMOD,
-
-    CH_CHRT, CH_GREN, CH_SPRG, CH_TRQS, CH_TEAL,         CH_WHIT, RGB_SAI, RGB_SAD, GET_HSV,  RGB_MOD,
-
-    RGB_TOG, CH_EMPT, CH_BLUE, CH_PRPL, CH_MGNT,          CH_PINK, RGB_VAI, RGB_VAD, CH_EMPT,  RGB_TOG,
-//'-----------------------------------------------'    '-----------------------------------------------'
-//                           ,---------+----------,    ,---------+----------,
-                                _______, _______,       MO(_POWR), _______,
-//                           |---------+----------|    |---------+----------|
-                                         _______,         _______,
-//                                     |----------|    |---------|
-                      CH_CYAN,  CH_AZUR, _______,        _______, _______, _______
-//                  '--------+---------+----------.    .---------+--------+----------'
+//[_LEDS] LAYER 11 : LEDS LIGHTS LAYER
+  [_LEDS] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               _LEDS_LIGHTS_L1_,                                          _LEDS_LIGHTS_R1_,
+//|----------------------------------------|                 |----------------------------------------|
+               _LEDS_LIGHTS_L2_,                                          _LEDS_LIGHTS_R2_,
+//|----------------------------------------|                 |----------------------------------------|
+               _LEDS_LIGHTS_L3_,                                          _LEDS_LIGHTS_R3_,
+//'----------------------------------------'                 '----------------------------------------'
+//                     .------------------------.     .------------------------.
+                            _LEDS_LTHMB_RW1_,              _LEDS_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _LEDS_LTHMB_RW2_,              _LEDS_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
 ),
-
-
-
-
-
-// END OF _RGBL 11
+// END OF _LEDS 11
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-
-/* Keymap _POWR 12: POWeR productivity layer
-* ,----------------------------------.  ,----------------------------------.
-* |Toggle|@@@@@@|      |      |XXXXXX|  |midVol|Volume|Volume|minVol|Volume|
-* | Whole|LCKSCR|LOGOUT|onCtrl|XXXXXX|  | lev.8|  Up  | Down | lev.1| Mute |
-* |Indctr|@@@@@@|      | RESET|XXXXXX|  |      |      |      |@@@@@@|      |
-* |------+------+------+------+------|  |------+------+------+------+------|
-* |XXXXXX|Rewind| Play/|Forwrd|Toogle|  |Toogle| Zoom | Zoom | Zoom |Invert|
-* |XXXXXX|      | Pause|      |Smooth|  |Keybrd|  IN  |  OUT |ON/OFF|Colors|
-* |XXXXXX|      |      |      |Images|  |follow|      |      |      |      |
-* |RCntrl| RAlt | RCmnd|RShift|      |  | Focus|      |      |      |      |
-* |------+------+------+------+------|  |------+------+------+------+------|
-* | Menu | Dock | Tool |Status|Float.|  |Cntrst|Bright|Bright|Bright|Cntrst|
-* | _bar | _bar | _bar | _bar |Window|  |      |      |      |  min.|      |
-* |      |      |      |      |      |  |  Up  |  Up  | Down |lev. 1| Down |
-* | SLEEP|KILLAP|K_MENU|SHUT_D|RSTART|  |      |      |      |      |      |
-* '----------------------------------'  '----------------------------------'
-*                  ,-----------------.  ,-----------------.
-*                  |  CLEAR |        |  |        |        |
-*                  |   ALL  |        |  |        |        |
-*                  | LAYERS |        |  |        |        |
-*                  |-> _DFLT|  LCTL  |  |        |        |
-*         ,--------+--------+--------|  |--------+--------|--------.
-*         |        |        |        |  |        |        |        |
-*         |        |        |        |  |        |        |        |
-*         |        |   RAW  |        |  |        |        |        |
-*         |        |  RESET |        |  |        |        |        |
-*         '--------------------------'  '--------------------------'
-//NOTES/keymap_POWR_layer*/
-// _POWR layer 12
-[_POWR] = KEYMAP(  // layer 12: POWeR productivity layer
-// ###
-// ////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-//,---------------------------------------------------------------.  ,---------------------------------------------------------------.
-       TOG_ID,       LCKSCR,      LOGOUT,    MY_RESET,     STP_ID,           VOL_8,KC__VOLUP, KC__VOLDOWN,       VOL_1,     KC__MUTE,
-//|-----------+------------+------------+------------+------------|  |------------+---------+------------+------------+--------------|
-      KC_RCTL/*RCTL_T(STP_ID)*/,RALT_T(KC_F7),RGUI_T(KC_SPC),RSFT_T(KC_F9), ZOMSMTH,         ZOM_FOL,   ZOM_IN,     ZOM_OUT,     ZOM_TOG,      INV_CLR,
-//      TOG_ID,       KC_RW,      KC_SPC,       KC_FF,    ZOMSMTH,         ZOM_FOL,   ZOM_IN,     ZOM_OUT,     ZOM_TOG,      INV_CLR,
-//|-----------+------------+------------+------------+------------|  |------------+---------+------------+------------+--------------|
-        SL_MEN,      KA_DCK,      KM_TOL,      SH_STA,     RT_FLO,         CNTR_UP,  KC_PAUS,     KC_SLCK,    BRIGHT_1,      CNTR_DN,
-//'---------------------------------------------------------------'  '---------------------------------------------------------------'
-// You can reach _POWR key anywhere because it's always at the same position: THUMB_R4, but ...
-// ... maybe you're lost into a layer, which you don't know which one it is and ...
-// ... you can't reach a control key for resetting the keyboard.
-// ... that's why we put one control key here, at 'THUMB_L4' position.
-//                                              ,---------+----------,  ,--------+----------,
-                                                  MY_CLEAR,   KC_LCTL,    _______, _______,
-//                                              |---------+----------|  |--------+----------|
-                                                              _______,    _______,
-//                                                        |----------|  |--------|
-                                         _______,    RESET,   _______,    _______, _______, _______
-//                                     '--------+---------+----------.  .--------+--------+---------'
+//[_POWR] = LAYER 12 : POWER COMMANDS LAYER
+  [_POWR] = LAYOUT_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ____POWER_L1____,                                          ____POWER_R1____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____POWER_L2____,                                          ____POWER_R2____,
+//|----------------------------------------|                 |----------------------------------------|
+               ____POWER_L3____,                                          ____POWER_R3____,
+//'----------------------------------------'                 '----------------------------------------'
+//
+//                     .------------------------.     .------------------------.
+                            _POWR_LTHMB_RW1_,              _POWR_RTHMB_RW1_,
+//                     |------------------------|     |------------------------|
+                                      KC_NO ,               KC_NO,
+//                     |------------------------|     |------------------------|
+                            _POWR_LTHMB_RW2_,              _POWR_RTHMB_RW2_
+//                     '------------------------'     '------------------------'
 )
-//////////////////////////////////////////////////////////////// ### block ### of lines too long !!! ###
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-/*
-// LEFT_HAND
-//,-------------------------------------------------------------------------.
-STP_ID,        LOGOUT,     LCKSCR,      MY_RESET,     XXXXXXX,
-//|------------+--------------+---------------+--------------+--------------|
-TOG_ID,         KC_F7,         KC_SPC,         KC_F9, ZOMSMTH,
-//|------------+------------------------------+--------------+--------------|
-    SL_MEN,   KA_DCK,    KM_TOL,   SH_STA, RT_FLO,
-//'-------------------------------------------------------------------------'
-
-                                      // RIGHT_HAND
-                                      ,----------------------------------------------------------------.
-                                              VOL_8, KC__VOLUP, KC__VOLDOWN,       VOL_1,    KC__MUTE,
-                                      |------------+----------+------------+------------+--------------|
-                                        ZOM_FOL,   ZOM_IN,    ZOM_OUT, ZOM_TOG, INV_CLR,
-                                      |------------+----------+------------+------------+--------------|
-                                         CNTR_UP,   KC_PAUS,     KC_SLCK,    BRIGHT_1, CNTR_DN,
-                                      '----------------------------------------------------------------'
-*/
 // END OF _POWR 12
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+// END OF const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -2803,6 +2276,8 @@ void keyboard_post_init_user(void) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
+
+/*
 void keyboard_post_init_rgb(void) {
 #if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_STARTUP_ANIMATION)
     // if (userspace_config.rgb_layer_change) { rgblight_enable_noeeprom(); }
@@ -2820,6 +2295,8 @@ void keyboard_post_init_rgb(void) {
 #endif
     layer_state_set_user(layer_state);
 }
+*/
+
 //
 void keyboard_post_init_user(void) {
 // Call the post init code.
@@ -2828,7 +2305,7 @@ void keyboard_post_init_user(void) {
 
   set_default_hsv();
 
-  keyboard_post_init_rgb();
+  // keyboard_post_init_rgb();
 
 // [UNCOMMENTTHIS]
 // ... we show our default color.
@@ -3024,9 +2501,6 @@ void matrix_scan_user(void) {
 /*   register_code(KC_J);   unregister_code(KC_J);                                                    */
 /*                                                                                                    */
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-
 /*
 // [EXAMPLE]  // look at the comments !!!
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -3049,6 +2523,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 }
 // [example]
+*/
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+/*
+if (numbers_is_active)
+{
+  switch (keycode) // A..Z less E O S D
+  {
+    case KC_A...KC_C:
+    case KC_F...KC_N:
+    case KC_P...KC_R:
+    case KC_T...KC_Z: callAppWithKeycode(keycode);
+                      return false;
+    case KC_D:
+
+
+    case KC_E:
+
+
+    case KC_O:
+
+
+    case KC_S:
+
+
+  }
+}
 */
 
   if (record->event.pressed)
@@ -3122,11 +2624,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       register_code(KC_F20);
                       return false;
                       
-      case TH_L4_FUNC_RGBL:
+      case TH_L4_FUNC_LEDS:
                       // if (get_mods()&ALT_MODS)
                       if (triggered_mod(KC_A))
                       {
-                        layer_on(_RGBL);
+                        layer_on(_LEDS);
                       }
                       else
                       {
@@ -3187,11 +2689,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                             }
                             return false;
 
-      case TH_R4_POWR_RGBL:
+      case TH_R4_POWR_LEDS:
                       // if (get_mods()&ALT_MODS)
                       if (triggered_mod(KC_A))
                       {
-                        layer_on(_RGBL);
+                        layer_on(_LEDS);
                       }
                       else
                       {
@@ -3248,6 +2750,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       //[SAVING_SPACE]
       // using triggered_control_mod as a bool function, we save from 38 to 66 bytes --> 28 bytes saved
       // case SL_MEN:    if (triggered_control_mod())
+/*
       case SL_MEN:    if (triggered_mod(KC_C))
                       {
                          register_code(KC_POWER);
@@ -3261,7 +2764,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                          register_code(KC_LCTL); tap_code(KC_F2); unregister_code(KC_LCTL);
                       }
                       return false;
-
+*/
       case KA_DCK:    if (triggered_mod(KC_C))
                       {
                         register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
@@ -3343,7 +2846,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // LEFT ROW 1 APPS
       case APP_Q_SNOTE: callApp("q");                         return false; // simple note
-      // case APP_W_TWTTR: callApp("w");                         return false; // t W itter
+      //
+      // 10 bytes saved if we don't declare 'APP_W_TWTTR' and don't write the next line
+      case APP_W_TWTTR: callApp("w");                         return false; // t W itter
+      //
       //
       // [SAVING_SPACE]
       // 88 bytes free when disable Evernote case and 40 bytes when I enable it  -->  it costs 48 bytes of code
@@ -3360,7 +2866,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                           callApp("e");                        
                         }
                         return false;                                       // E vernote
-
+      //
       // case APP_R_APSTO: callApp("r");                         return false; // app sto R e
       case APP_T_TERMI: callApp("t");                         return false; // T erminal
 
@@ -3443,13 +2949,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // RIGHT ROW 2 APPS
       case APP_H_SKTCH: callApp("h");                         return false; // sketc H
       case APP_J_SUBLI: callApp("j");                         return false; // sublime text
-      // case APP_K_KRBNR: callApp("k");                         return false; // K arabiner-elements
-      // case APP_L_CLNDR: callApp("l");                         return false; // Calendar
+      case APP_K_KRBNR: callApp("k");                         return false; // K arabiner-elements
+      case APP_L_CLNDR: callApp("l");                         return false; // Calendar
       // case APPSP_EMPTY: callApp(" ");                         return false; // ???? EMPTY EMPTY EMPTY EMPTY 
 
 
 // LEFT ROW 3 APPS
-      case APP_Z_STUDI: callApp("z");                         return false; // Studies
+      // case APP_Z_STUDI: callApp("z");                         return false; // Studies
       case APP_X_XCODE: callApp("x");                         return false; // Xcode
       case APP_C_CALCU: callApp("c");                         return false; // Calculator
       case APP_V_KVIEW: callApp("v");                         return false; // karabiner-event Viewer
@@ -3541,9 +3047,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case XVIM_BS: xvim("\b"); return false;
       case XVIM_EN: xvim("\n"); return false;
 
-// [_RGBL]
+// [_LEDS]
 /*
-RGB COMMANDS
+_LEDS COMMANDS
 */
       case RGB_HUI: rgblight_increase_hue_noeeprom();          return false;
       case RGB_HUD: rgblight_decrease_hue_noeeprom();          return false;
@@ -3617,7 +3123,7 @@ ROW 3 COLORS
 
       case CH_EMPT: rgblight_sethsv_noeeprom(HSV_MY_EMPTY);       return false;
 
-// [_rgbl]
+// [_leds]
 
 
       case DICTATION:
@@ -3690,15 +3196,15 @@ ROW 3 COLORS
                       }
                       return false;
 
-      case TH_L4_FUNC_RGBL:
+      case TH_L4_FUNC_LEDS:
                       if (state_number == _FUNC)
                       {
                          layer_off(_FUNC);
                       }
                       else
-                      if (state_number == _RGBL)
+                      if (state_number == _LEDS)
                       {
-                        layer_off(_RGBL);
+                        layer_off(_LEDS);
                       }
                       return false;
 
@@ -3748,15 +3254,15 @@ ROW 3 COLORS
                                }
                                return false;
 
-      case TH_R4_POWR_RGBL:
+      case TH_R4_POWR_LEDS:
                       if (state_number == _POWR)
                       {
                          layer_off(_POWR);
                       }
                       else
-                      if (state_number == _RGBL)
+                      if (state_number == _LEDS)
                       {
-                        layer_off(_RGBL);
+                        layer_off(_LEDS);
                       }
                       return false;
                       
@@ -3914,7 +3420,7 @@ ROW 3 COLORS
 
 //       case DICTATION:
 
-// // [_RGBL]
+// // [_LEDS]
 //       case SAV_COL:
 //       case GET_HSV:
 //       case RGB_TOG: return false; // Skip all further processing of ALL these keys when released
@@ -3951,7 +3457,7 @@ ROW 3 COLORS
       case CH_PINK:
 
       case CH_EMPT: set_default_hsv(); return false;
-// [_rgbl]
+// [_leds]
                                      
      case SIRI:      unregister_code(KC_SPC);  unregister_code(KC_LGUI);
                      return false;
@@ -4072,7 +3578,7 @@ uint32_t layer_state_set_user(uint32_t state) {
         apps_just_activated = true;
         break;
 
-    case _RGBL:   // 11
+    case _LEDS:   // 11
 //      active_layer = 11;
         BEEP_1;
         break;
@@ -4087,117 +3593,6 @@ uint32_t layer_state_set_user(uint32_t state) {
   };
   return state;
 };
-
-
-
-
-/*
-uint32_t layer_state_set_user(uint32_t state) {
-// I have changed this variable to global   // int  state_number; //= 321; //biton32(state);
-    state_number = biton32(state);
-
-    char string_state_number[4]; // = "ok.";
-// [INFO]           //  convert an integer to string (for showing number layer)
-// [STACKOVERFLOW]  //  first answer from Alexander Galkin
-//  https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
-    itoa(state_number, string_state_number, 10);
-// [stackoverflow]
-// [info]
-
-  switch (state_number) {
-    case _DFLT:   //  0
-        active_layer = 0;
-        numbers_is_active = false; // #01
-//        rgblight_setrgb      (0x00, 0x00, 0x00);
-//        rgblight_setrgb_range(0x00, 0x00, 0x00, INNER_RGHT - 2, INNER_LEFT_ANIMATION_START + 2);        
-//        send_string(string_state_number);
-//        SEND_STRING("[_DFLT]");
-        if (hide_other_apps == true)
-        {
-          HIDEOTH; //Long: SEND_STRING(SS_LALT(SS_LGUI("h"))); //Wrong: register_code(LALT(LGUI(KC_H)));
-          hide_other_apps = false;
-        }
-        show_RGB_LEDs();
-        break; 
-
-    case _ACCN:   //  1
-        active_layer = 1;
-        rgblight_sethsv_noeeprom(HSV_MY_GOLDENROD); // (0xD9, 0xA5, 0x21)
-        break;
-    
-    case _NUMB:   //  3
-        active_layer = 3;
-        numbers_is_active = true; // #01
-//        send_string(string_state_number);
-//        SEND_STRING("[_NUMB]");
-//        rgblight_setrgb   (0x00,  0x00, 0xFF); // blue
-        show_RGB_LEDs();
-        break;
-
-    case _SYMB:   //  4
-        active_layer = 4;
-        rgblight_sethsv_noeeprom(HSV_MY_GREEN); // (0x00,  0xFF, 0x00)
-        break;
-
-    case _FUNC:   //  5
-        active_layer = 5;
-        rgblight_sethsv_noeeprom(HSV_MY_TURQUOISE); // (0x99, 0xF5, 0xFF)
-        break;
-
-    case _DALY:   //  6
-        active_layer = 6;
-        rgblight_sethsv_noeeprom(HSV_MY_PURPLE); // (0x7A, 0x00, 0xFF)
-        break;
-
-    case _APPS:   //  7
-        active_layer = 7;
-      rgblight_sethsv_noeeprom(HSV_MY_ORANGE); // (0xFF, 0x80, 0xBF)
-      gui_flag = get_mods()&GUI_MODS;
-      if (gui_flag)
-      {
-        hide_other_apps = true;
-      }
-      break;
-
-    case _POWR:   //  8
-        active_layer = 8;
-        rgblight_sethsv_noeeprom(HSV_MY_YELLOW); // (0xFF, 0xFF, 0x00)
-        break;
-
-    case _FVIM:   //  9
-        active_layer = 9;
-        rgblight_sethsv_noeeprom(HSV_MY_MAGENTA); // (0x00, 0x80, 0x80)
-        break;
-    case _DVIM:   // 10
-        active_layer = 10;
-        rgblight_sethsv_noeeprom(HSV_MY_RED); // (0xFF, 0x00, 0x00)
-        break;
-
-    case _CVIM:   // 11
-        active_layer = 11;
-        rgblight_sethsv_noeeprom(HSV_MY_PINK); // (320, 255, 255)
-        break;
-    case _XVIM:   // 12
-        active_layer = 12;
-        rgblight_sethsv_noeeprom(HSV_MY_PINK); // (320, 255, 255)
-        break; 
-
-    case _MOUS:   // 14
-        active_layer = 14;
-        rgblight_sethsv_noeeprom(HSV_MY_CYAN); // (0x00,  0xFF, 0x00)
-        break;
-
-    case _RGBL:   // 15
-        active_layer = 15;
-        break;
-
-    default: //  for any other layers
-        active_layer = 16;
-        break;
-  };
-  return state;
-}; 
-*/
 //                                                                                      //
 //                                                                                      //
 //                      l a y e r _s t a t e _ s e t _ u s e r                          //

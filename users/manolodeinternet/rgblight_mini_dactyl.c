@@ -29,7 +29,8 @@
 // ======================================================
 //
 
-#include "rgblight_mini_dactyl.h"
+// It's included in the keymap.c file
+// #include "rgblight_mini_dactyl.h"
 // It's not necesary full path:
 // #include "/Users/navarro/qmk_firmware/users/manolodeinternet/rgblight_mini_dactyl.h"
 //
