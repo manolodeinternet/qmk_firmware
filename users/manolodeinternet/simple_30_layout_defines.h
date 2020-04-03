@@ -1,18 +1,4 @@
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                                                                               //
-    // DEFINING MACRO SHORTCUTS                                                                      //
-    //                                                                                               //
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-    // #define   BEEP_1               HYPR(KC_R)  // 1 beep
-    #define   BEEP_1               SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("r")))))    // 1 beep
-    // #define   BEEP_2             SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("g")))))    // 2 beeps
-    // #define   BEEP_3             SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("b")))))    // 3 beeps
-    //                                                                                               //
-    // defining system preferences shortcuts                                                         //
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                                   //
     // DEFINING COLOR LAYERS                      C O L O R     L A Y E R S                              //

@@ -1,5 +1,7 @@
-/*  
-  PROJECT NAME: 30_layout
+/*
+  KEYBOARD:     Gherkin 2019/09/01 ... 2020
+
+  PROJECT NAME: 30_layout (minimal comprehensive layout)
   VERSION NAME: cleaning the code
 */
 
@@ -22,251 +24,20 @@
   If not, see <http://www.gnu.org/licenses/>.
 */
 
+
+//          QMK_KEYBOARD_H is implemented at 'manolodeinternet.h'. Compile process needs this way !
 // #include QMK_KEYBOARD_H
 // Following file doesn't need full path bc folder 'users/manolodeinternet' is automatically included
 #include "manolodeinternet.h"
 
+
 // It's included from 'manolodeinternet.h'
 // #include "wrappers.h"
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// DEFINING _POWR COMMANDS 8                                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define LOCK_SCR         LCTL(LGUI(KC_Q))   
-
-// [SYSTEM PREFERENCES]
-#define ZOOM_FOL         LCAG(KC_SLSH)      //QMK: Hold Left Control, Alt and GUI and press kc
-#define ZOOM_TOG         LCAG(KC_SCLN)
-#define ZOOM_IN          LCAG(KC_EQL)
-#define ZOOM_OUT         LCAG(KC_MINS)
-#define ZOOM_SMH         LCAG(KC_BSLS)
-#define CNTR_UP          LCAG(KC_DOT)              //Hold Left Control, Alt and GUI and press kc
-#define CNTR_DWN         LCAG(KC_COMM)
-//
-// [UNUSED]
-#define INV_COLO      LSFT(LCTL(LGUI(KC_8)))  
-// [INFO]
-// it can't be used into an 'ACTION_TAP_DANCE_DOUBLE()'
-// it can't be used into a statement of tap_dance: 'case SINGLE_TAP: INVRT_COLOR;'  We would get only '8'
-// it can't be used into a 'RSFT_T(INVRT_COLOR)' neither
-// [info]
-// [unused]
-//
-// [system preferences]
-//                                                                                      //
-// defining _powr commands 8                                                            //
-//////////////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// _APPS COMMANDS 7                                                                     //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define HIDEOTH          SEND_STRING(SS_LALT(SS_LGUI("h"))) //LALT(LGUI(KC_H)) //HIDE OTHER _APPS
-//                                                                                      //
-// _apps commands 7                                                                     //
-//////////////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// TAP DANCE STATES DECLARATIONS                                                        //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-  enum tap_dance_states { // EACH ONE RECEIVE ITS VALUE...
-    SINGLE_TAP           = 1
-   ,SINGLE_HOLD          = 2
-   ,DOUBLE_TAP           = 3
-   ,DOUBLE_HOLD          = 4
-   ,DOUBLE_SINGLE_TAP    = 5 //send SINGLE_TAP twice - NOT DOUBLE_TAP
-/* ,TRIPLE_TAP           = 6
-   ,TRIPLE_HOLD          = 7
-   ,TRIPLE_SINGLE_TAP    = 8
-   ,QUADRUPLE_TAP        = 9
-   ,QUADRUPLE_HOLD       = 10
-   ,QUADRUPLE_SINGLE_TAP = 11
-   ,QUINTUPLE_TAP        = 12
-   ,QUINTUPLE_HOLD       = 13
-   ,QUINTUPLE_SINGLE_TAP = 14
-   ,SEXTUPLE_TAP         = 15
-   ,SEXTUPLE_HOLD        = 16
-   ,SEXTUPLE_SINGLE_TAP  = 17
- * Add more enums here if you want for sevenfold, eightfold], etc.
- */
- };
-//                                                                                      //
-// tap dance states declarations                                                        //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// TAP DANCE DECLARATIONS (LIST OF MY TAP DANCE CONFIGURATIONS)                         //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-enum tap_dance_keycodes {
-
-// TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB (NUMBERS LAYER) 3
-     DENUOF  //   return to *GHKN layer (gherkin default layer)  // ... percent
-    ,SLNUMB  //   return to *GHKN layer (gherkin default layer)  // ... slash
-
-// TAP DANCE KEYCODES ACCESSIBLE FROM _SYMB (SYMBOLS LAYER) 4
-    ,V_RACI  // right angle bracket & circumflex accent
-//  ,A_GRAV  // grave & tilde         //tilde        accessible while holding SHIFT key !
-//  ,S_QUOT  // quote & double quote  //double quote accessible while holding SHIFT key !
-    ,G_DOEU  // dolar & euro
-    ,Z_EXCL
-    ,X_QUES
-
-// TAP DANCE KEYCODES FOR _POWR (POWER LAYER) 8
-    ,LOGOUT   // logout user session
-    ,HRESET   // on hold RESET keyboard
-    ,SLEP_M   //   menu bar / (on hold) SLEEP
-    ,KILM_T   //   dock bar / (on hold) KILL MENU
-    ,KILA_D   //  tools bar / (on hold) KILL CURRENT APP
-    ,SHUT_S   // status bar / (on hold) COMPUTER SHUT DOWN
-    ,RSTT_F   // floating w / (on hold) COMPUTER   RESTART
-/*
-    ,RC_RWND // right control / rewind       // KC_F7
-    ,RA_PLAY // right alt     / play/pause   // KC_SPC
-    ,RG_FRWD // right gui     / forward      // KC_F9
-*/
-    ,RS_ZOIN // right shift   / zoom in
-    ,RG_ZOUT // right gui     / zoom out
-    ,RA_ZOOM // right alt     / zoom on/off
-    ,RC_INCO // right control / invert colors
-
-// [ADVICE]
-//  ,BCKLIT   // accessing _BLIT layer from tap dance into _POWR layer
-              // ...this way we don't waste a layer from being accesible from Default layer,
-              // ...remember that you only can access 16 layer through LT(layer, key) and LM(layer, mod).
-// [advice]    
-
-    ,V8_TEST  // accessing _TEST layer from tap dance into _POWR layer
-    ,V1_LAST  // accessing _LAST layer from tap dance into _POWR layer
-// tap dance keycodes for _powr (power layer) 8
-
-// (i.e. KC_U: *'begin of line'/**'begin of paragraph')
-    ,FVIM_uU ,FVIM_iI ,FVIM_oO ,FVIM_pP
-
-    ,DVIM_uU ,DVIM_pP
-};
-//                                                                                      //
-// tap dance declarations (list of my tap dance configurations)                         //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// MACROS FOR PROCESS_RECORD_USER()                                                     //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
-
-
-// MACROS FOR _BLIT 15
-     BLIT_OFF = SAFE_RANGE
-
-    ,BLIT_01 ,BLIT_02  ,BLIT_03  ,BLIT_04 ,BLIT_05
-    ,BLIT_06 ,BLIT_07  ,BLIT_08  ,BLIT_09 ,BLIT_10
-    ,BLIT_11 ,BLIT_12  ,BLIT_13  ,BLIT_14 ,BLIT_15
-
-                                          ,BRTH_00
-    ,BRTH_01 ,BRTH_02  ,BRTH_03  ,BRTH_04 ,BRTH_05
-    ,BRTH_06 ,BRTH_07  ,BRTH_08  ,BRTH_09 ,BRTH_10
-             ,BRTH_12                     ,BRTH_15
-// macros for _blit 15
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-// MACROS FOR _ACCN LAYER 1
-    ,CIRCU ,GRAVE ,DIAER 
-// macros for _accn layer 1
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-// MACROS FOR _POWR LAYER 8
-    ,VOL_1
-    ,VOL_8
-    ,BRIGHT_1
-// macros for _powr layer 8
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-// MACROS FOR _APPS LAYER 7
-    ,APP_Q_SNOTE ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_APSTO ,APP_T_TERMI
-                                         ,APP_Y_TYPIN ,APP_U_UROOM ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF
-    ,APP_A_SCRPT ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME
-                                         ,APP_H_SKTCH ,APP_J_SUBLI,APP_K_KRBNR ,APP_L_CLNDR ,APPSP_EMPTY 
-    ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_KVIEW ,APP_B_BOOKS
-                                         ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB
-// macros for _apps layer 7
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// MACROS FOR _DALY LAYR 6
-    ,DICTATION
-// macros for _daly layer 6
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-// MACROS FOR _?VIM 9, 10, 11, 12, 13
-
-// _FVIM LAYER
-// this layer is all implemented without using '/Users/myUser/Library/KeyBindings/DefaultKeyBinding.dict'
-// except for the 'H' key:
-    ,FVIM_H
-// _fvim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-// _DVIM LAYER
-    ,DVIM_Y         ,DVIM_I  ,DVIM_O            // it's used tap_dance for U,P
-    ,DVIM_H ,DVIM_J ,DVIM_K  ,DVIM_L  ,DVIM_SP
-            ,DVIM_M ,DVIM_ES ,DVIM_BS ,DVIM_EN
-// _dvim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-// _AVIM LAYER
-//    ,AVIM_Y                     // _AVIM is for select VIM layr
-//    ,AVIM_N                     // it's used SHIFT+key for the rest of the right side of the keyboard
-// _avim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-//
-// _XVIM LAYER
-//
-// Initially _CVIM and _XVIM were two different layers...
-// ... Now we have _CVIM on the right hand and _XVIM on the left hand. Both of them under _XVIM layer #
-// _CVIM LAYER
-    ,CVIM_Y ,CVIM_U ,CVIM_I  ,CVIM_O  ,CVIM_P
-    ,CVIM_H ,CVIM_J ,CVIM_K  ,CVIM_L  ,CVIM_SP
-    ,CVIM_N ,CVIM_M ,CVIM_ES ,CVIM_BS ,CVIM_EN
-// _cvim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// _XVIM LAYER
-    ,XVIM_Y ,XVIM_U ,XVIM_I  ,XVIM_O  ,XVIM_P
-    ,XVIM_H ,XVIM_J ,XVIM_K  ,XVIM_L  ,XVIM_SP
-    ,XVIM_N ,XVIM_M ,XVIM_ES ,XVIM_BS ,XVIM_EN
-// _xvim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-//
-// _XVIM LAYER
-//
-
-//////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// macros for _?vim 3, 4, 5
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-}; // enum custom keycodes
-//                                                                                      //
-// macros for process_record_user()                                                     //
-//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -274,105 +45,77 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 // GLOBAL VARIABLES                                                                     //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-  static uint8_t shift_flag;
-  static uint8_t gui_flag;
-  static bool    hide_other_apps = false;
-
-// [REFLEXION]
+//
+// [REFLECTION]
 // Is it necessary that the 5 following vars were static ? Maybe I can remove 'static'
+// [REFLECTION]
+
+// COMMON VARIABLES FOR ALL KEYBOARDS
   static bool diaeresis_requested  = false;
   static bool circumflex_requested = false;
   static bool grave_requested      = false;
 
   static bool disabled_caps_before_accent = false;
-  static bool backlight_caps = false;
-// [reflexion]
+  static bool capslock_is_active = false;
+
+  static uint8_t shift_flag;
+  static uint8_t   gui_flag;
+// common variables for all keyboards
+
+  static bool    hide_other_apps = false;
 
   static uint8_t gherkinBacklightLevel = 0;
   static uint8_t gherkinBacklightLevelBeforeCapsLock = 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //                                                                                      //
 // global variables                                                                     //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//                                                                                      //
-// TAP DANCE GENERAL SETUP SECTION START                                                //
-//                                                                                      //
-//  * SINGLE_TAP                                                                        //
-// ** DOUBLE_TAP                                                                        //
-//  @ SINGLE_HOLD                                                                       //
-// @@ DOUBLE_HOLD                                                                       //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-typedef struct {
-	bool is_press_action;
-	int  state;
-} tap;
-
-int cur_dance (qk_tap_dance_state_t *state) {
-  if (state->count == 1) 
-  {
-   if (state->interrupted || !state->pressed) 
-   // IF the key has been pressed only once 
-   // AND  (the key has been interrupted by pressing another key after it
-   //       OR   the key is not pressed at present)
-     return SINGLE_TAP;
-     else 
-     // IF  the key has been pressed only once
-     // AND the key has not been interrupted
-     // AND the key is still pressed  
-       return SINGLE_HOLD;
-    }
-    else 
-    { 
-      if (state->count == 2)
-        { 
-          if (state->interrupted)
-          // IF   the key has been pressed twice
-          // AND  the key has been interrupted by pressing another key after it
-          return DOUBLE_SINGLE_TAP;
-          else
-            if (state->pressed) 
-            // IF  the key has been pressed twice
-            // AND the key has not been interrupted by pressing another key
-            // AND the key is still pressed
-              return DOUBLE_HOLD;
-            else
-            // IF  the key has been pressed twice
-            // AND the key has not being interrupted by pressing another key
-            // AND the key is not pressed at present
-              return DOUBLE_TAP;
-        }
-/*
-      else if (state->count == 3) {
-      if (state->interrupted) return TRIPLE_SINGLE_TAP;
-      else if (state->pressed) return TRIPLE_HOLD;
-      else return TRIPLE_TAP;
-      }
-      else if (state->count == 4) {
-        if (state->interrupted) return QUADRUPLE_SINGLE_TAP;
-        else if (state->pressed) return QUADRUPLE_HOLD;
-        else return QUADRUPLE_TAP;
-      }
-      else if (state->count == 5) {
-        if (state->interrupted) return QUINTUPLE_SINGLE_TAP;
-        else if (state->pressed) return QUINTUPLE_HOLD;
-        else return QUINTUPLE_TAP;
-      }
-      else if (state->count == 6) {
-        if (state->interrupted) return SEXTUPLE_SINGLE_TAP;
-        else if (state->pressed) return SEXTUPLE_HOLD;
-        else return SEXTUPLE_TAP;
-      }
-      else return 18; //magic number. At some point this method will expand to work for more presses
-*/
-      else return 6;
-    }
-}
-//                                                                                      //
-// tap dance general setup section end                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -458,9 +201,9 @@ void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
   register_code(KC_LCAP);
 
 // LIGHTS AND BREATH
-  if (backlight_caps == false)
+  if (capslock_is_active == false)
   {
-    backlight_caps  = true;
+    capslock_is_active  = true;
     gherkinBacklightLevelBeforeCapsLock = gherkinBacklightLevel;
     gherkinBacklightLevel = BL_CAPS;
 
@@ -469,7 +212,7 @@ void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
   }
   else
   {
-    backlight_caps  = false;
+    capslock_is_active  = false;
     gherkinBacklightLevel = gherkinBacklightLevelBeforeCapsLock;
 
     breathing_period_set(BR_DFLT);
@@ -490,7 +233,7 @@ void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
 
 void disable_capslock_before_accents_function(void) { // MY CAPSLOCK FINISHED FUNCTION
 
-  if (backlight_caps == true)
+  if (capslock_is_active == true)
     {
       capslock_tap();
       disabled_caps_before_accent = true;
@@ -510,45 +253,6 @@ void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTI
 // capslock complementary functions                                                     //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [FUNCTIONS] [_DALY] KC_A, KC_E, KC_I, KC_O, KC_U, KC_N                               //
-//                    [F(CIRCU)], [F(GRAVE)], [F(DIAER)]                                //
-//                    [F(ACC_A)], [F(ACC_E)],... [F(ACC_U)], [F(TIL_N)]                 //
-//                                                                                      //
-// ACCENTS COMPLEMENTARY FUNCTIONS                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-/*
-void acute_accent_function(void) {
-  register_code(KC_LALT); register_code(KC_E);
-  unregister_code(KC_E); unregister_code(KC_LALT);
-}
-void diaeresis_accent_function(void) {
-    register_code(KC_LALT); register_code(KC_U);
-    unregister_code(KC_U);  unregister_code(KC_LALT);
-}
-void circumflex_accent_function(void) {
-    register_code(KC_LALT); register_code(KC_I);
-    unregister_code(KC_I);  unregister_code(KC_LALT);
-}
-void grave_accent_function(void) {
-    register_code(KC_LALT); register_code(KC_GRAVE);
-    unregister_code(KC_GRAVE);  unregister_code(KC_LALT);
-}
-void tilde_accent_function(void) {
-    register_code(KC_LALT); register_code(KC_N);
-    unregister_code(KC_N);  unregister_code(KC_LALT);
-}
-*/
-//                                                                                      //
-// [functions] [_daly] kc_a, kc_e, kc_i, kc_o, kc_u, kc_n                               //
-//                    [f(circu)], [f(grave)], [f(diaer)]                                //
-//                    [f(acc_a)], [f(acc_e)],... [f(acc_u)], [f(til_n)]                 //
-//                                                                                      //
-// accents complementary functions                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -689,6 +393,480 @@ void brightSetToLevel1(void) {
 //  m y    f u n c t i o n s                                                            //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//                                                                                      //
+// TAP DANCE GENERAL SETUP SECTION START                                                //
+//                                                                                      //
+//  * SINGLE_TAP                                                                        //
+// ** DOUBLE_TAP                                                                        //
+//  @ SINGLE_HOLD                                                                       //
+// @@ DOUBLE_HOLD                                                                       //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+typedef struct {
+  bool is_press_action;
+  int  state;
+} tap;
+/* Return an integer that corresponds to what kind of tap dance should be executed.
+ *
+ * How to figure out tap dance state: interrupted and pressed.
+ *
+ * Interrupted: If the state of a dance dance is "interrupted", that means that another key has been hit
+ *  under the tapping term. This is typically indicitive that you are trying to "tap" the key.
+ *
+ * Pressed: Whether or not the key is still being pressed. If this value is true, that means the tapping term
+ *  has ended, but the key is still being pressed down. This generally means the key is being "held".
+ *
+ * One thing that is currenlty not possible with qmk software in regards to tap dance is to mimic the "permissive hold"
+ *  feature. In general, advanced tap dances do not work well if they are used with commonly typed letters.
+ *  For example "A". Tap dances are best used on non-letter keys that are not hit while typing letters.
+ *
+ * Good places to put an advanced tap dance:
+ *  z,q,x,j,k,v,b, any function key, home/end, comma, semi-colon
+ *
+ * Criteria for "good placement" of a tap dance key:
+ *  Not a key that is hit frequently in a sentence
+ *  Not a key that is used frequently to double tap, for example 'tab' is often double tapped in a terminal, or
+ *    in a web form. So 'tab' would be a poor choice for a tap dance.
+ *  Letters used in common words as a double. For example 'p' in 'pepper'. If a tap dance function existed on the
+ *    letter 'p', the word 'pepper' would be quite frustating to type.
+ *
+ * For the third point, there does exist the 'DOUBLE_SINGLE_TAP', however this is not fully tested
+ *
+ */
+int cur_dance (qk_tap_dance_state_t *state) {
+  if (state->count == 1) 
+  {
+   if (state->interrupted || !state->pressed) 
+   // IF the key has been pressed only once 
+   // AND  (the key has been interrupted by pressing another key after it
+   //       OR   the key is not pressed at present)
+     return SINGLE_TAP;
+     else 
+     // IF  the key has been pressed only once
+     // AND the key has not been interrupted
+     // AND the key is still pressed  
+       return SINGLE_HOLD;
+    }
+    else 
+    { 
+      if (state->count == 2)
+        { 
+          if (state->interrupted)
+          // IF   the key has been pressed twice
+          // AND  the key has been interrupted by pressing another key after it
+          return DOUBLE_SINGLE_TAP;
+          else
+            if (state->pressed) 
+            // IF  the key has been pressed twice
+            // AND the key has not been interrupted by pressing another key
+            // AND the key is still pressed
+              return DOUBLE_HOLD;
+            else
+            // IF  the key has been pressed twice
+            // AND the key has not being interrupted by pressing another key
+            // AND the key is not pressed at present
+              return DOUBLE_TAP;
+        }
+/*
+      else if (state->count == 3) {
+      if (state->interrupted) return TRIPLE_SINGLE_TAP;
+      else if (state->pressed) return TRIPLE_HOLD;
+      else return TRIPLE_TAP;
+      }
+      else if (state->count == 4) {
+        if (state->interrupted) return QUADRUPLE_SINGLE_TAP;
+        else if (state->pressed) return QUADRUPLE_HOLD;
+        else return QUADRUPLE_TAP;
+      }
+      else if (state->count == 5) {
+        if (state->interrupted) return QUINTUPLE_SINGLE_TAP;
+        else if (state->pressed) return QUINTUPLE_HOLD;
+        else return QUINTUPLE_TAP;
+      }
+      else if (state->count == 6) {
+        if (state->interrupted) return SEXTUPLE_SINGLE_TAP;
+        else if (state->pressed) return SEXTUPLE_HOLD;
+        else return SEXTUPLE_TAP;
+      }
+      else return 18; //magic number. At some point this method will expand to work for more presses
+*/
+      else return 6;
+    }
+}
+//                                                                                      //
+// tap dance general setup section end                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1035,98 +1213,6 @@ void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
 //  d e l e t e   t o   e n d   o f   l i n e   /   e n d   o f   p a r a g r a p h     //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [ _AVIM ] KC_U (AVIM_uU)                                                  //
-//                                                                                      //
-//  S E L E C T   T O   B E G I N N I N G   O F   L I N E    /    P A R A G R A P H     //
-//                                                                                      //
-//  KC_U:  * SELECT TO BEGINING OF LINE                                                 //
-//        ** SELECT TO BEGINING OF PARAGRAPH                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'AVIM_uU' tap dance.
-/*
-static tap AVIM_uU_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void AVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
-  AVIM_uU_tap_state.state = cur_dance(state);
-  switch (AVIM_uU_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_LSFT);
-                            register_code(KC_LGUI);   register_code(KC_LEFT);
-                          
-                          unregister_code(KC_LEFT); unregister_code(KC_LGUI);
-                          unregister_code(KC_LSFT);
-                            break;
-
-    case DOUBLE_TAP:        register_code(KC_LSFT);
-                            register_code(KC_LALT);   register_code(KC_UP);
-                         
-                         unregister_code(KC_UP); unregister_code(KC_LALT);
-                         unregister_code(KC_LSFT);
-                            break;
-  }
-  AVIM_uU_tap_state.state = 0;
-}
-*/
-//                                                                                      //
-// [tapdance] [ _avim ] kc_u (avim_uu)                                                  //
-//                                                                                      //
-//  s e l e c t   t o   b e g i n n i n g   o f   l i n e    /    p a r a g r a p h     //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [ _AVIM ] KC_P (AVIM_pP)                                                  //
-//                                                                                      //
-//  S E L E C T   T O   E N D   O F   L I N E    /    E N D   O F   P A R A G R A P H   //
-//                                                                                      //
-//  KC_P:  * SELECT TO END OF LINE                                                      //
-//        ** SELECT TO END OF PARAGRAPH                                                 //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'AVIM_pP' tap dance.
-/*
-static tap AVIM_pP_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void AVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
-  AVIM_pP_tap_state.state = cur_dance(state);
-  switch (AVIM_pP_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_LSFT);
-                            register_code(KC_LGUI);   register_code(KC_RGHT);
-
-                          unregister_code(KC_RGHT); unregister_code(KC_LGUI); 
-                          unregister_code(KC_LSFT);
-                            break;
-
-    case DOUBLE_TAP:        register_code(KC_LSFT);
-                            register_code(KC_LALT);   register_code(KC_DOWN);
-                          
-                          unregister_code(KC_DOWN); unregister_code(KC_LALT);
-                          unregister_code(KC_LSFT);
-                            break;
-  }
-  AVIM_pP_tap_state.state = 0;
-}
-*/
-//                                                                                      //
-// [tapdance] [ _avim ] kc_p (avim_pp)                                                  //
-//                                                                                      //
-//  s e l e c t   t o   e n d   o f   l i n e    /    e n d   o f   p a r a g r a p h   //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//                                                                                      //
-//              t a p   d a n c e   f o r  -  v   i   m  -  l a y e r s                 //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1855,6 +1941,8 @@ void RC_INCO_reset (qk_tap_dance_state_t *state, void *user_data) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 //                                                                                      //
@@ -1925,10 +2013,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  ,[DVIM_pP] = ACTION_TAP_DANCE_FN(DVIM_pP_function)
 // [_dvim] layer
 
-// [_AVIM] LAYER
-// ,[AVIM_uU] = ACTION_TAP_DANCE_FN(AVIM_uU_function)
-// ,[AVIM_pP] = ACTION_TAP_DANCE_FN(AVIM_pP_function)
-// [_avim] layer
 };
 //                                                                                      //
 //               t a p    d a n c e    d e c l a r a t i o n s                          //
@@ -1937,7 +2021,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-#define KEYMAP_gherkin_wrapper(...)       LAYOUT_ortho_3x10(__VA_ARGS__)
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                   //
@@ -2198,6 +2282,109 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 //[PLACEHOLDER] //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 //                                                                                      //
@@ -2221,6 +2408,35 @@ void matrix_init_user(void) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 //                                                                                      //
@@ -2237,13 +2453,7 @@ const uint16_t PROGMEM fn_actions[] = {
   [ACC_U] = ACTION_FUNCTION(ACC_U),
 
   [TIL_N] = ACTION_FUNCTION(TIL_N),
-/*
-  [DIA_A] = ACTION_FUNCTION(DIA_A),
-  [DIA_E] = ACTION_FUNCTION(DIA_E),
-  [DIA_I] = ACTION_FUNCTION(DIA_I),
-  [DIA_O] = ACTION_FUNCTION(DIA_O),
-  [DIA_U] = ACTION_FUNCTION(DIA_U),
-*/  
+
   [CAPSL] = ACTION_FUNCTION(CAPSL)
 };
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
@@ -2253,14 +2463,11 @@ const uint16_t PROGMEM fn_actions[] = {
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
   shift_flag = get_mods()&SHFT_MODS;
   switch (id) {
+
     case ACC_A:
       if (record->event.pressed) 
       {
       /*The key is being pressed.*/
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-/* MAXIMUM LINE WIDTH FOR RIGHT PRINTING  XX 105  CHARACTERS XX  MAXIMUM LINE WIDTH FOR RIGHT PRINTING */
-/*XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XX*/
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
         {
         //  release LSHIFT
@@ -2319,10 +2526,6 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
       if (record->event.pressed) 
       {
       /*The key is being pressed.*/
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-/* MAXIMUM LINE WIDTH FOR RIGHT PRINTING  XX 105  CHARACTERS XX  MAXIMUM LINE WIDTH FOR RIGHT PRINTING */
-/*XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XX*/
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
         {
         //  release LSHIFT
@@ -2516,162 +2719,6 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
 
 
 
-//     case DIA_A:
-//       if (record->event.pressed) 
-//       {
-//       /*The key is being pressed.*/
-//         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-//         {
-//         //  release LSHIFT
-//             del_mods(shift_flag);
-//             del_weak_mods(shift_flag);
-//             send_keyboard_report();
-//         };
-//     //  tap accent
-//         disable_capslock_before_accents_function();
-//         diaeresis_accent_function();
-//         enable_capslock_after_accents_function();
-//         if (shift_flag)
-//         {
-//         //  press LSHIFT
-//             add_mods(shift_flag);
-//             add_weak_mods(shift_flag);
-//             send_keyboard_report();
-//         };            
-//      // [FIXME] [FIX THE FO LINE LOCATION]
-//       register_code(KC_A);
-//       unregister_code(KC_A);
-//     }
-//     else
-//     {
-// //        SEND_STRING("NO record event pressed");
-//     }
-//     break;
-
-
-//     case DIA_E:
-//       if (record->event.pressed) 
-//       {
-//       /*The key is being pressed.*/
-//         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-//         {
-//         //  release LSHIFT
-//             del_mods(shift_flag);
-//             del_weak_mods(shift_flag);
-//             send_keyboard_report();
-//         };
-//     //  tap accent
-//         disable_capslock_before_accents_function();
-//         diaeresis_accent_function();
-//         enable_capslock_after_accents_function();
-//         if (shift_flag)
-//         {
-//         //  press LSHIFT
-//             add_mods(shift_flag);
-//             add_weak_mods(shift_flag);
-//             send_keyboard_report();
-//         };
-       
-//         register_code(KC_E);
-//         unregister_code(KC_E);
-//       }
-//       else
-//       {
-//       }
-//       break;
-
-//     case DIA_I:
-//       if (record->event.pressed) 
-//       {
-//       /*The key is being pressed.*/
-//         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-//         {
-//         //  release LSHIFT
-//             del_mods(shift_flag);
-//             del_weak_mods(shift_flag);
-//             send_keyboard_report();
-//         };
-//     //  tap accent
-//         disable_capslock_before_accents_function();
-//         diaeresis_accent_function();
-//         enable_capslock_after_accents_function();
-//         if (shift_flag)
-//         {
-//         //  press LSHIFT
-//             add_mods(shift_flag);
-//             add_weak_mods(shift_flag);
-//             send_keyboard_report();
-//         };
-        
-//         register_code(KC_I);
-//         unregister_code(KC_I);
-//       }
-//       else
-//       {
-//       }
-//       break;
-
-//     case DIA_O:
-//       if (record->event.pressed) 
-//       {
-//       /*The key is being pressed.*/
-//         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-//         {
-//         //  release LSHIFT
-//             del_mods(shift_flag);
-//             del_weak_mods(shift_flag);
-//             send_keyboard_report();
-//         };
-//     //  tap accent
-//         disable_capslock_before_accents_function();
-//         diaeresis_accent_function();
-//         enable_capslock_after_accents_function();
-//         if (shift_flag)
-//         {
-//         //  press LSHIFT
-//             add_mods(shift_flag);
-//             add_weak_mods(shift_flag);
-//             send_keyboard_report();
-//         };
-            
-//         register_code(KC_O);
-//         unregister_code(KC_O);
-//       }
-//       else
-//       {
-//       }
-//       break;
-
-//     case DIA_U:
-//       if (record->event.pressed) 
-//       {
-//       /*The key is being pressed.*/
-//         if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-//         {
-//         //  release LSHIFT
-//             del_mods(shift_flag);
-//             del_weak_mods(shift_flag);
-//             send_keyboard_report();
-//         };
-//     //  tap accent
-//         disable_capslock_before_accents_function();
-//         diaeresis_accent_function();
-//         enable_capslock_after_accents_function();
-//         if (shift_flag)
-//         {
-//         //  press LSHIFT
-//             add_mods(shift_flag);
-//             add_weak_mods(shift_flag);
-//             send_keyboard_report();
-//         };
-            
-//         register_code(KC_U);       
-//         unregister_code(KC_U);
-//       }
-//       else
-//       {
-//       }  
-//       break;
 
 
 
@@ -2778,27 +2825,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case VOL_8:    volumeSetToLevel8();         return false; break; // set volume to middle  (level 8)
       case BRIGHT_1: brightSetToLevel1();         return false; break; // set bright to minimum (level 1)
 
-      case APP_Q_SNOTE: callApp("");                          return false; break; //
+      case APP_Q_SNOTE: callApp("Simplenote.app");            return false; break; // simple note
       case APP_W_TWTTR: callApp("Twitter.app");               return false; break; // t W itter
       case APP_E_EVERN: callApp("Evernote.app");              return false; break; // E vernote
-      case APP_R_APSTO: callApp("");                          return false; break; //
+      case APP_R_APSTO: callApp("App Store.app");             return false; break; // app sto R e
       case APP_T_TERMI: callApp("Terminal.app");              return false; break; // T erminal
 
       case APP_Y_TYPIN: callApp("Typinator.app");             return false; break; // t Y pinator
-      case APP_U_UROOM: callApp("Sublime Text.app");          return false; break; // s U blime Text
+      case APP_U_UROOM: callApp("URoom.app");                 return false; break; // U room
       case APP_I_TEDIT: callApp("TextEdit.app");              return false; break; // textEd I t
       case APP_O_OMNIF: callApp("OmniFocus.app");             return false; break; // O mnifocus
       case APP_P_SPREF: callApp("System Preferences.app");    return false; break; // system P references
 
-      case APP_A_SCRPT: callApp("Simplenote.app");            return false; break; // simplenote
+      case APP_A_SCRPT: callApp("Script Editor.app");         return false; break; // A pple script
       case APP_S_SAFAR: callApp("Safari.app");                return false; break; // S afari _delay_ms50
-      case APP_D_D_ONE: callApp("Day One Classic.app");       return false; break; // D ay one
+      case APP_D_D_ONE: callApp("Day One Classic.app");       return false; break; // D ay one Classic
       case APP_F_FINDE: callApp("Finder.app");                return false; break; // F inder
       case APP_G_CHRME: callApp("Google Chrome.app");         return false; break; // G oogle chrome
 
       case APP_H_SKTCH: callApp("Sketch.app");                return false; break; // sketc H
-      case APP_J_SUBLI: callApp("");                          return false; break; // 
-      case APP_K_KRBNR: callApp("Karabiner-Elements.app"); return false; break; // K arabiner Elements
+      case APP_J_SUBLI: callApp("Sublime Text.app");          return false; break; // s U blime Text
+      case APP_K_KRBNR: callApp("Karabiner-Elements.app");    return false; break; // K arabiner Elements
       case APP_L_CLNDR: callApp("Calendar.app");              return false; break; // Calendar
       case APPSP_EMPTY: callApp("");                          return false; break; //
 
@@ -2973,6 +3020,779 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 //                                                                                      //
@@ -2993,7 +3813,7 @@ uint32_t layer_state_set_user(uint32_t state) {
         }
         backlight_level(gherkinBacklightLevel);
 
-          if (backlight_caps)
+          if (capslock_is_active)
           {
             breathing_period_set(BR_CAPS);
             breathing_enable();

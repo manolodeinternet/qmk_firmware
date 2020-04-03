@@ -5,33 +5,98 @@
     #include "simple_30_layout_defines.h"
 #endif
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                   //
-// DEFINING SYMBOLS 09 ( FOR USING INTO 'ACTION_TAP_DANCE_DOUBLE(SYMBOL1, SYMBOL2)' )                //
-//                                                                                                   //
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-// [INFO] EURO: http://www.fileformat.info/info/unicode/char/search.htm?q=euro&preview=entity
-#define EURO           LSFT(LALT(KC_2))  // euro symbol
-// [info]
-#define INV_QU      LSFT(LALT(KC_SLSH))  // inverted question mark
-#define INV_EX               LALT(KC_1)  // inverted exclamation mark
-//                                                                                                   //
-// defining symbols 4 ( for using into 'action_tap_dance_double(symbol1, symbol2)' )                 //
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                               //
+// DEFINING AUTOMATOR MAC SERVICES SHORTCUTS                                                     //
+//                                                                                               //
+//////////////////////////////////////////////////////////////////////////////////////////
+#define   BEEP_1               HYPR(KC_R)  // 1 beep
+#define   BEEP_2               HYPR(KC_G)  // 2 beeps
+#define   BEEP_3               HYPR(KC_B)  // 3 beeps
+//                                                                                               //
+// defining system preferences shortcuts                                                         //
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                               //
+// DEFINING MACRO SHORTCUTS                                                                      //
+//                                                                                               //
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// #define   BEEP_1               HYPR(KC_R)  // 1 beep
+#define   SS_BEEP_1             SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("r")))))    // 1 beep
+#define   SS_BEEP_2             SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("g")))))    // 2 beeps
+#define   SS_BEEP_3             SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("b")))))    // 3 beeps
+//                                                                                               //
+// defining system preferences shortcuts                                                         //
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// LAYER_STATE_SET_USER                                                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+#define HIDEOTH          SEND_STRING(SS_LALT(SS_LGUI("h"))) //LALT(LGUI(KC_H)) //HIDE OTHER _APPS
+//                                                                                      //
+// layer_state_set_user
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                               //
+// DEFINING MACRO SHORTCUTS FOR GLOBAL FUNCTIONS                                                 //
+//                                                                                               //
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+HYPR(keycode) does work directly into a keymap only !!!
+HYPR(keycode) doesn't work into a function: register_code(HYPR(KC_V));
+HYPR(keycode) doesn't work into a #define,
+quantum/quantum_keycodes.h:484:18: error: 
+large integer implicitly truncated to unsigned type [-Werror=overflow]
+ #define HYPR(kc) (QK_LCTL | QK_LSFT | QK_LALT | QK_LGUI | (kc))
+                  ^
+quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
+ #define KC_HYPR HYPR(KC_NO)
+                 ^~~~
+*/
+// We have to define HYPR(KC_V) as follows ...
+#define HYPR_V     SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v")))))
+// #define MY_HYPER(kc)     SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI(kc)))))
+// #define MY_HYPER(kc)  (LSFT|LCTL|LALT|LGUI(kc))
+//
+//                                                                                               //
+// defining macro shortcuts for global functions                                                 //
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                               //
+// DEFINING VIM SHORTCUTS 03                                                                     //
+//                                                                                               //
+///////////////////////////////////////////////////////////////////////////////////////////////////
+#define OUTDNT             LGUI(KC_LBRC)  // outdent a paragraph
+// [UNUSED]
+#define INDENT              LGUI(KC_RBRC)  // indent  a paragraph
+// [UNUSED]
+//                                                                                      //
+// defining vim shortcuts 03                                                               //
+//////////////////////////////////////////////////////////////////////////////////////////
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                   //
-// DEFINING _DALY COMMANDS 6                                                                         //
+// DEFINING _DALY COMMANDS 07                                                                        //
 //                                                                                                   //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //
+// SPECIFIC DAILY COMMANDS FOR 'COMPREHENSIVE_30_LAYOUT'
 #if defined(COMPREHENSIVE_30_LAYOUT)
   #define PREV_APP       LSFT(LGUI(KC_TAB))  // previous app
   #define NEXT_APP             LGUI(KC_TAB)  //     next app
   #define SPT_SIRI             LGUI(KC_SPC)  // spotlight & siri
 #endif
 
-// COMMON FOR ALL KEYMAPS
+// COMMON DAILY COMMANDS FOR ALL KEYMAPS
 #define CAP_SCRN          LSFT(LGUI(KC_3))  // Capture whole screen
 #define CAP_SLDE          LSFT(LGUI(KC_4))  // Capture portion of screen
 // [UNUSED]
@@ -71,23 +136,38 @@
 // 3erd party applications // sublime commands
 // [unused]
 //                                                                                                   //
-// defining _daly commands 6                                                                         //
+// defining _daly commands 07                                                                        //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                   //
-// DEFINING _POWR COMMANDS 8                                                                         //
+// DEFINING SYMBOLS 09 ( FOR USING INTO 'ACTION_TAP_DANCE_DOUBLE(SYMBOL1, SYMBOL2)' )                //
+//                                                                                                   //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// [INFO] EURO: http://www.fileformat.info/info/unicode/char/search.htm?q=euro&preview=entity
+#define EURO           LSFT(LALT(KC_2))  // euro symbol
+// [info]
+#define INV_QU      LSFT(LALT(KC_SLSH))  // inverted question mark
+#define INV_EX               LALT(KC_1)  // inverted exclamation mark
+//                                                                                                   //
+// defining symbols 4 ( for using into 'action_tap_dance_double(symbol1, symbol2)' )                 //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                   //
+// DEFINING _POWR COMMANDS 12                                                                        //
 //                                                                                                   //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 #define SLEP_MNUBAR      TD(SLEP_M)
 
 #if defined(COMPREHENSIVE_30_LAYOUT)
 
-#define KILMNU_TOOL      TD(KILM_T)
-#define KILAPP_DOCK      TD(KILA_D)
-#define SHUTD_STATB      TD(SHUT_S)
-#define RSTRT_FLOAT      TD(RSTT_F)
+  #define KILMNU_TOOL      TD(KILM_T)
+  #define KILAPP_DOCK      TD(KILA_D)
+  #define SHUTD_STATB      TD(SHUT_S)
+  #define RSTRT_FLOAT      TD(RSTT_F)
 
 #elif defined(SIMPLE_30_LAYOUT)
 
@@ -125,47 +205,6 @@
 //                                                                                                   //
 // defining _powr commands 12                                                                        //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                               //
-// DEFINING ?VIM SHORTCUTS 9, 10, 11, 12, 13                                                     //
-//                                                                                               //
-///////////////////////////////////////////////////////////////////////////////////////////////////
-#define OUTDNT             LGUI(KC_LBRC)  // outdent a paragraph
-// [UNUSED]
-#define INDENT              LGUI(KC_RBRC)  // indent  a paragraph
-// [UNUSED]
-/*
-HYPR(keycode) does work directly into a keymap only !!!
-HYPR(keycode) doesn't work into a function: register_code(HYPR(KC_V));
-HYPR(keycode) doesn't work into a #define,
-quantum/quantum_keycodes.h:484:18: error: 
-large integer implicitly truncated to unsigned type [-Werror=overflow]
- #define HYPR(kc) (QK_LCTL | QK_LSFT | QK_LALT | QK_LGUI | (kc))
-                  ^
-quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
- #define KC_HYPR HYPR(KC_NO)
-                 ^~~~
-*/
-// We have to define HYPR(KC_V) as follows ...
-#define HYPR_V     SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v")))))
-//                                                                                      //
-// defining ?vim shortcuts 9, 10, 11, 12, 13                                            //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -2,6 +2,8 @@
 #include QMK_KEYBOARD_H
 
 #include "wrappers.h"
+#include "enum_custom_keycodes.h"
+#include "tap_dance_setup.h"
 
 // [INSPIRINGCODE]
 // #define GRAVE_MODS  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT)

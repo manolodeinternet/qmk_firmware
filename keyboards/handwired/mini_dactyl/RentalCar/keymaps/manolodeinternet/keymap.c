@@ -1,29 +1,7 @@
 /*
-MiniDactyl 2019/11/04
+  KEYBOARD:     MiniDactyl 2019/11/04
 
-Custom Tapping Term
-
-By default, the tapping term is defined globally, and is not configurable by key. For most users, this is perfectly fine. But in come cases, dual function keys would be greatly improved by different timeouts than LT keys, or because some keys may be easier to hold than others. Instead of using custom key codes for each, this allows for per key configurable TAPPING_TERM.
-
-To enable this functionality, you need to add #define TAPPING_TERM_PER_KEY to your config.h, first.
-
-Example get_tapping_term Implementation
-To change the TAPPING TERM based on the keycode, you'd want to add something like the following to your keymap.c file:
-
-uint16_t get_tapping_term(uint16_t keycode) {
-  switch (keycode) {
-    case SFT_T(KC_SPC):
-      return TAPPING_TERM + 1250;
-    case LT(1, KC_GRV):
-      return 130;
-    default:
-      return TAPPING_TERM;
-  }
-}
-*/
-
-/*  
-  PROJECT NAME: 30_layout
+  PROJECT NAME: 40_layout (extended - minimal 30 fingers layout + 10 thumbs)
   VERSION NAME: cleaning the code
 */
 
@@ -64,260 +42,31 @@ extern rgblight_config_t rgblight_config;    // without this line, it doesn't re
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// _APPS COMMANDS 7                                                                     //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-#define HIDEOTH          SEND_STRING(SS_LALT(SS_LGUI("h"))) //LALT(LGUI(KC_H)) //HIDE OTHER _APPS
-//                                                                                      //
-// _apps commands 7                                                                     //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// TAP DANCE STATES DECLARATIONS                                                        //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-  enum tap_dance_states { // EACH ONE RECEIVE ITS VALUE...
-    SINGLE_TAP           = 1
-   ,SINGLE_HOLD          = 2
-   ,DOUBLE_TAP           = 3
-   ,DOUBLE_HOLD          = 4
-   ,DOUBLE_SINGLE_TAP    = 5 //send SINGLE_TAP twice - NOT DOUBLE_TAP
-/*
-   ,GUI_plus_HOLD        = 6
-   ,ALT_plus_HOLD        = 7
-   ,GUI_plus_DOUBLE_HOLD = 8
-*/
-/* ,TRIPLE_TAP           = 6
-   ,TRIPLE_HOLD          = 7
-   ,TRIPLE_SINGLE_TAP    = 8
-   ,QUADRUPLE_TAP        = 9
-   ,QUADRUPLE_HOLD       = 10
-   ,QUADRUPLE_SINGLE_TAP = 11
-   ,QUINTUPLE_TAP        = 12
-   ,QUINTUPLE_HOLD       = 13
-   ,QUINTUPLE_SINGLE_TAP = 14
-   ,SEXTUPLE_TAP         = 15
-   ,SEXTUPLE_HOLD        = 16
-   ,SEXTUPLE_SINGLE_TAP  = 17
- * Add more enums here if you want for sevenfold, eightfold], etc.
- */
- };
-//                                                                                      //
-// tap dance states declarations                                                        //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// TAP DANCE DECLARATIONS (LIST OF MY TAP DANCE CONFIGURATIONS)                         //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-enum tap_dance_keycodes {
-
-// TAP DANCE KEYCODES ACCESSIBLE FROM DEFAULT LAYER (ALPH LAYER) 1
-//     FN_PVI  // _FUNC layer when holded or _FVIM layer when double holded on alpha layer
-//    ,PVI_CL  // CapsLock    when tapped or _FVIM layer when holded        on alpha layer
-//    ,APPS_MODE
-     DVIM_Del  // Delete when tapping, _DVIM when holding 
-    ,FUNC_LED
-//    ,NUMB_Del
-//    ,SYMB_Ent
-//    ,APPS_Esc
-//    ,MOUS_Tab
-
-// TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB (NUMBERS LAYER) 3
-// WE DON'T NEED 'SETNMB' TAPDANCE ANY MORE SINCE WE USE 'TT(_NUMB)' WITH 'SIMPLE_30_LAYOUT' LAYOUT
-    // ,SETNMB  // set numbers layer up / switch numbers layer off
-// [GHERKIN]
-//    ,SLNUMB  // return to *GHKN layer (gherkin default layer)  // ... slash
-// [gherkin]
-
-// TAP DANCE KEYCODES ACCESSIBLE FROM _SYMB (SYMBOLS LAYER) 4
-/*
-    ,G_DOEU  // dolar & euro
-    ,Y_AMCI  // ampersand & circumflex accent
-    ,Z_EXCL
-    ,X_QUES
-*/
-
-// TAP DANCE KEYCODES FOR _POWR (POWER LAYER) 8
-    ,SLEP_M   //   menu bar / (on hold) SLEEP
-    // ,KILM_T   //   dock bar / (on hold) KILL MENU
-    // ,KILA_D   //  tools bar / (on hold) KILL CURRENT APP
-    // ,SHUT_S   // status bar / (on hold) COMPUTER SHUT DOWN
-    // ,RSTT_F   // floating w / (on hold) COMPUTER   RESTART
-/*
-    ,RC_RWND // right control / rewind       // KC_F7
-    ,RA_PLAY // right alt     / play/pause   // KC_SPC
-    ,RG_FRWD // right gui     / forward      // KC_F9
-*/
-
-// [ADVICE]
-// [DEPRECATED]
-//  ,BCKLIT   // accessing _LEDS layer from tap dance into _POWR layer
-              // ...this way we don't waste a layer from being accesible from Default layer,
-              // ...remember that you only can access 16 layer through LT(layer, key) and LM(layer, mod).
-// [deprecated]
-// [advice]    
-// tap dance keycodes for _powr (power layer) 8
-
-// (i.e. KC_U: *'begin of line'/**'begin of paragraph')
-    ,FVIM_uU ,FVIM_pP
-    ,DVIM_uU ,DVIM_pP
-};
-//                                                                                      //
-// tap dance declarations (list of my tap dance configurations)                         //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// MACROS FOR PROCESS_RECORD_USER()                                                     //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
-
-// MACROS FOR _ACCN LAYER 1
-     CIRCU = SAFE_RANGE
-    ,GRAVE
-    ,DIAER 
-// macros for _accn layer 1
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-    ,TT_NUMB
-
-// MACROS FOR DEFAULT LAYER 0
-    ,MY_CLEAR
-    ,MY_RESET
-
-    ,O_COMMENT
-    ,C_COMMENT
-    ,PREV_APP
-    ,NEXT_APP
-
-    ,CHANGE_SYMB_TO_NUMB
-    ,TH_L3_KAR_APPS
-    ,TH_L4_FUNC_LEDS
-
-    ,TH_R1_DALY_MOUS
-    ,TH_R2_SYMB_FVIM
-    ,TH_R3_APPS_NUMB
-    ,TH_R4_POWR_LEDS
-
-// THIS FUNCTION IS NOT GOING TO BE USED WITH 23 LEDS PER HAND
-    ,STP_ID  // it increments step indicator for RGB LEDs
-// this function is not going to be used with 23 leds per hand
-
-    ,TOG_ID  // it toggles keyboard as whole indicator for capslock ON/OFF
-// macros for default layer 0
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-// MACROS FOR _POWR LAYER 8
-    ,VOL_1
-    ,VOL_8
-    ,BRIGHT_1
-    ,SL_MEN
-    ,KM_TOL
-    ,KA_DCK
-    ,SH_STA
-    ,RT_FLO
-// macros for _powr layer 8
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-// MACROS FOR _APPS LAYER 7
-    ,APP_Q_SNOTE ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_APSTO ,APP_T_TERMI
-                                         ,APP_Y_TYPIN ,APP_U_UROOM ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF
-    ,APP_A_SCRPT ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME
-                                         ,APP_H_SKTCH ,APP_J_SUBLI ,APP_K_KRBNR ,APP_L_CLNDR ,APPSP_EMPTY
-    ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_KVIEW ,APP_B_BOOKS
-                                         ,APP_N_NOTES ,APP_M_MAIL  ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB
-// macros for _apps layer 7
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// MACROS FOR _DALY LAYR 6
-    ,DICTATION
-    ,SIRI
-// macros for _daly layer 6
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-// MACROS FOR _?VIM 9, 10, 11, 12, 13
-
-// _FVIM LAYER
-// this layer is all implemented without using '/Users/myUser/Library/KeyBindings/DefaultKeyBinding.dict'
-// except for the 'H' key:
-    ,FVIM_H
-/*
-    ,FVIM_M
-    ,FVIM_ES
-    ,FVIM_BS
-    ,FVIM_EN
-*/
-// _fvim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-// _DVIM LAYER
-    ,DVIM_Y         ,DVIM_I  ,DVIM_O            // it's used tap_dance for U,P
-    ,DVIM_H ,DVIM_J ,DVIM_K  ,DVIM_L  ,DVIM_SP
-            ,DVIM_M ,DVIM_ES ,DVIM_BS ,DVIM_EN
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-// OMNIFOCUS.APP
-// _AVIM LAYER
-//    ,AVIM_Y                     // _AVIM is for select VIM layr
-//    ,AVIM_N                     // it's used SHIFT+key for the rest of the right side of the keyboard
-// _avim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-// _CVIM LAYER
-    ,CVIM_Y ,CVIM_U ,CVIM_I  ,CVIM_O  ,CVIM_P
-            ,CVIM_J ,CVIM_K  ,CVIM_L  ,CVIM_SP
-    ,CVIM_N ,CVIM_M ,CVIM_ES ,CVIM_BS ,CVIM_EN
-// _cvim layer
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-// _XVIM LAYER
-    ,XVIM_Y ,XVIM_U ,XVIM_I  ,XVIM_O  ,XVIM_P
-    ,XVIM_H ,XVIM_J ,XVIM_K  ,XVIM_L  ,XVIM_SP
-    ,XVIM_N ,XVIM_M ,XVIM_ES ,XVIM_BS ,XVIM_EN
-// _xvim layer       
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// macros for _?vim 9, 10, 11, 12, 13
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// MACROS FOR _LEDS 15
-// RED
-    ,CH_RED  ,CH_CORL  ,CH_ORNG  ,CH_GOLR ,CH_GOLD          ,CH_YLLW          ,SAV_COL
-// GREEN
-    ,CH_CHRT ,CH_GREN  ,CH_SPRG  ,CH_TRQS ,CH_TEAL          ,CH_WHIT          ,GET_HSV
-// BLUE
-    ,CH_CYAN ,CH_AZUR  ,CH_BLUE  ,CH_PRPL ,CH_MGNT          ,CH_PINK          ,CH_EMPT
-
-// macros for _leds 15
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-}; // enum custom keycodes
-//                                                                                      //
-// macros for process_record_user()                                                     //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
 // GLOBAL VARIABLES                                                                     //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+//
+// [REFLECTION]
+// Is it necessary that the 5 following vars were static ? Maybe I can remove 'static'
+// [REFLECTION]
 
+// COMMON VARIABLES FOR ALL KEYBOARDS
+  static bool diaeresis_requested  = false;
+  static bool circumflex_requested = false;
+  static bool grave_requested      = false;
+
+  static bool disabled_caps_before_accent = false;
+  static bool capslock_is_active = false;
+  
+  static uint8_t   shift_flag;
+  static uint8_t     gui_flag;
+// common variables for all keyboards  
+
+
+
+
+
+/*
 typedef union {
   uint32_t raw;
   struct {
@@ -326,6 +75,7 @@ typedef union {
 } user_config_t;
 
 user_config_t user_config;
+*/
 
 // default_hsv = default_hue, default_sat, default_val;
 
@@ -335,10 +85,9 @@ user_config_t user_config;
 
         uint16_t lt12_timer;
 
-  static uint8_t   shift_flag;
+  
   static uint8_t control_flag;
   static uint8_t  option_flag;
-  static uint8_t     gui_flag;
   static uint8_t current_flag;
 
   bool             shift_was_activated     = false;
@@ -351,14 +100,6 @@ user_config_t user_config;
   static bool changing_apps                = false;           
 
   static bool          symbols_pressed     = false;
-// [REFLEXION]
-// Is it necessary that the 5 following vars were static ? Maybe I can remove 'static'
-  static bool diaeresis_requested  = false;
-  static bool circumflex_requested = false;
-  static bool grave_requested      = false;
-
-  static bool disabled_caps_before_accent = false;
-  static bool capslock_is_active = false;
   static bool whole_keyboard_as_indicator = true;
 
 // THIS VARIABLES ARE NOT GOING TO BE USED WITH 23 LEDS PER HAND
@@ -373,134 +114,10 @@ user_config_t user_config;
   static uint8_t  default_sat;
   static uint8_t  default_val;
 
-// [reflexion]
 //                                                                                      //
 // global variables                                                                     //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//                                                                                      //
-// TAP DANCE GENERAL SETUP SECTION START                                                //
-//                                                                                      //
-//  * SINGLE_TAP                                                                        //
-// ** DOUBLE_TAP                                                                        //
-//  @ SINGLE_HOLD                                                                       //
-// @@ DOUBLE_HOLD                                                                       //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-typedef struct {
-    bool is_press_action;
-    int  state;
-} tap;
-/* Return an integer that corresponds to what kind of tap dance should be executed.
- *
- * How to figure out tap dance state: interrupted and pressed.
- *
- * Interrupted: If the state of a dance dance is "interrupted", that means that another key has been hit
- *  under the tapping term. This is typically indicitive that you are trying to "tap" the key.
- *
- * Pressed: Whether or not the key is still being pressed. If this value is true, that means the tapping term
- *  has ended, but the key is still being pressed down. This generally means the key is being "held".
- *
- * One thing that is currenlty not possible with qmk software in regards to tap dance is to mimic the "permissive hold"
- *  feature. In general, advanced tap dances do not work well if they are used with commonly typed letters.
- *  For example "A". Tap dances are best used on non-letter keys that are not hit while typing letters.
- *
- * Good places to put an advanced tap dance:
- *  z,q,x,j,k,v,b, any function key, home/end, comma, semi-colon
- *
- * Criteria for "good placement" of a tap dance key:
- *  Not a key that is hit frequently in a sentence
- *  Not a key that is used frequently to double tap, for example 'tab' is often double tapped in a terminal, or
- *    in a web form. So 'tab' would be a poor choice for a tap dance.
- *  Letters used in common words as a double. For example 'p' in 'pepper'. If a tap dance function existed on the
- *    letter 'p', the word 'pepper' would be quite frustating to type.
- *
- * For the third point, there does exist the 'DOUBLE_SINGLE_TAP', however this is not fully tested
- *
- */
-int cur_dance (qk_tap_dance_state_t *state) {
-  if (state->count == 1) 
-        if (state->interrupted || !state->pressed) 
-        // IF the key has been pressed only once 
-        // AND  (the key has been interrupted by pressing another key after it
-        //       OR   the key is not pressed at present)
-          return SINGLE_TAP;
-        else    
-          //key has not been interrupted, but they key is still held. Means you want to send a 'HOLD'.
-          // [MINE]
-          // IF  the key has been pressed only once
-          // AND the key has not been interrupted
-          // AND the key is still pressed  (the key is still held)
-          // [mine]
-        // {    option_flag = get_mods()&ALT_MODS;
-        //      gui_flag = get_mods()&GUI_MODS;
-
-        //      if (option_flag)
-        //        return ALT_plus_HOLD;
-        //      else
-        //        if (gui_flag)
-        //          return GUI_plus_HOLD;          
-        //        else
-                 return SINGLE_HOLD;
-         // }
-//if (state->count == 1) 
-  else
-  if (state->count == 2)
-    { 
-      if (state->interrupted)
-      // IF   the key has been pressed twice
-      // AND  the key has been interrupted by pressing another key after it
-      return DOUBLE_SINGLE_TAP;
-      else
-        if (state->pressed) 
-        // IF  the key has been pressed twice
-        // AND the key has not been interrupted by pressing another key
-        // AND the key is still pressed
-        // {
-        //   gui_flag = get_mods()&GUI_MODS;
-        //   if (gui_flag)
-        //     return GUI_plus_DOUBLE_HOLD;          
-        //   else
-            return DOUBLE_HOLD;
-        // }
-        else
-        // IF  the key has been pressed twice
-        // AND the key has not being interrupted by pressing another key
-        // AND the key is not pressed at present
-          return DOUBLE_TAP;
-    } //    if (state->count == 2)
-    else
-      return 6/*9*/;
-}
-//                                                                                      //
-// tap dance general setup section end                                                  //
-//////////////////////////////////////////////////////////////////////////////////////////
-    /*
-        else if (state->count == 3) {
-        if (state->interrupted) return TRIPLE_SINGLE_TAP;
-        else if (state->pressed) return TRIPLE_HOLD;
-        else return TRIPLE_TAP;
-        }
-        else if (state->count == 4) {
-          if (state->interrupted) return QUADRUPLE_SINGLE_TAP;
-          else if (state->pressed) return QUADRUPLE_HOLD;
-          else return QUADRUPLE_TAP;
-        }
-        else if (state->count == 5) {
-          if (state->interrupted) return QUINTUPLE_SINGLE_TAP;
-          else if (state->pressed) return QUINTUPLE_HOLD;
-          else return QUINTUPLE_TAP;
-        }
-        else if (state->count == 6) {
-          if (state->interrupted) return SEXTUPLE_SINGLE_TAP;
-          else if (state->pressed) return SEXTUPLE_HOLD;
-          else return SEXTUPLE_TAP;
-        }
-        else return 18; //magic number. At some point this method will expand to work for more presses
-    */
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -589,9 +206,8 @@ void get_hsv(void)
 
   // HYPR(KC_R);
   
-  BEEP_1;
+  SS_BEEP_1;
   
-  // BEEP_2;
 }
 //[fixme]  // make this function smaller, please !!!
 
@@ -1015,78 +631,6 @@ void show_RGB_LEDs(void)  // MY SWITCH CAPSLOCK INDICATORS ON FUNCTION
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-// //////////////////////////////////////////////////////////////////////////////////////////
-// //                                                                                      //
-// // [FUNCTIONS] [_DALY] KC_A, KC_E, KC_I, KC_O, KC_U, KC_N                               //
-// //                    [F(CIRCU)], [F(GRAVE)], [F(DIAER)]                                //
-// //                    [F(ACC_A)], [F(ACC_E)],... [F(ACC_U)], [F(TIL_N)]                 //
-// //                                                                                      //
-// // ACCENTS COMPLEMENTARY FUNCTIONS                                                      //
-// //                                                                                      //
-// //////////////////////////////////////////////////////////////////////////////////////////
-// void acute_accent_function(void) {
-//   register_code(KC_LALT); register_code(KC_E);
-//   unregister_code(KC_E); unregister_code(KC_LALT);
-// }
-// void diaeresis_accent_function(void) {
-//     register_code(KC_LALT); register_code(KC_U);
-//     unregister_code(KC_U);  unregister_code(KC_LALT);
-// }
-// void circumflex_accent_function(void) {
-//     register_code(KC_LALT); register_code(KC_I);
-//     unregister_code(KC_I);  unregister_code(KC_LALT);
-// }
-// void grave_accent_function(void) {
-//     register_code(KC_LALT); register_code(KC_GRAVE);
-//     unregister_code(KC_GRAVE);  unregister_code(KC_LALT);
-// }
-// void tilde_accent_function(void) {
-//     register_code(KC_LALT); register_code(KC_N);
-//     unregister_code(KC_N);  unregister_code(KC_LALT);
-// }
-// //                                                                                      //
-// // [functions] [_daly] kc_a, kc_e, kc_i, kc_o, kc_u, kc_n                               //
-// //                    [f(circu)], [f(grave)], [f(diaer)]                                //
-// //                    [f(acc_a)], [f(acc_e)],... [f(acc_u)], [f(til_n)]                 //
-// //                                                                                      //
-// // accents complementary functions                                                      //
-// //////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [FUNCTIONS] [_DFLT], [_NUMB]                                                         //
-//             [_DFLT]KC_L_THUMB3,  [_DFLT]KC_L_THUMB5, [_NUMB]KC_S                     //
-//                                                                                      //
-// FUNCTIONS FOR ACTIVATING RGB RED LIGHTS ...                                          //
-// ... WHEN BACKSPACE OR DELETE IS PRESSED IN A COMBO ( LT(), CTL_T() )                 //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-// [DELETE]
-/*
-void rgb_bspc_or_del_pressed(void)
-{
-  rgblight_sethsv_noeeprom(HSV_MY_RED);
-  set_default_hsv();
-}
-//
-void rgb_bspc_or_del_released(void)
-{
-  show_RGB_LEDs();
-}
-*/
-// [delete]
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [functions] [_dflt], [_numb]                                                         //
-//             [_dflt]kc_l_thumb3,  [_dflt]kc_l_thumb5, [_numb]kc_s                     //
-//                                                                                      //
-// functions for activating rgb red lights ...                                          //
-// ... when backspace or delete is pressed in a combo ( lt(), ctl_t() )                 //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1131,7 +675,7 @@ void flashing_LEDs(uint8_t times, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t r2
 //////////////////////////////////////////////////////////////////////////////////////////
 void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 
-  BEEP_1;
+  SS_BEEP_1;
   // _delay_ms (1);
   wait_ms(1);
   rgblight_enable_noeeprom();
@@ -1197,6 +741,131 @@ void brightSetToLevel(uint8_t max_bright) {
 //                                                                                      //
 //  m y    f u n c t i o n s                                                            //
 //                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//                                                                                      //
+// TAP DANCE GENERAL SETUP SECTION START                                                //
+//                                                                                      //
+//  * SINGLE_TAP                                                                        //
+// ** DOUBLE_TAP                                                                        //
+//  @ SINGLE_HOLD                                                                       //
+// @@ DOUBLE_HOLD                                                                       //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+typedef struct {
+    bool is_press_action;
+    int  state;
+} tap;
+/* Return an integer that corresponds to what kind of tap dance should be executed.
+ *
+ * How to figure out tap dance state: interrupted and pressed.
+ *
+ * Interrupted: If the state of a dance dance is "interrupted", that means that another key has been hit
+ *  under the tapping term. This is typically indicitive that you are trying to "tap" the key.
+ *
+ * Pressed: Whether or not the key is still being pressed. If this value is true, that means the tapping term
+ *  has ended, but the key is still being pressed down. This generally means the key is being "held".
+ *
+ * One thing that is currenlty not possible with qmk software in regards to tap dance is to mimic the "permissive hold"
+ *  feature. In general, advanced tap dances do not work well if they are used with commonly typed letters.
+ *  For example "A". Tap dances are best used on non-letter keys that are not hit while typing letters.
+ *
+ * Good places to put an advanced tap dance:
+ *  z,q,x,j,k,v,b, any function key, home/end, comma, semi-colon
+ *
+ * Criteria for "good placement" of a tap dance key:
+ *  Not a key that is hit frequently in a sentence
+ *  Not a key that is used frequently to double tap, for example 'tab' is often double tapped in a terminal, or
+ *    in a web form. So 'tab' would be a poor choice for a tap dance.
+ *  Letters used in common words as a double. For example 'p' in 'pepper'. If a tap dance function existed on the
+ *    letter 'p', the word 'pepper' would be quite frustating to type.
+ *
+ * For the third point, there does exist the 'DOUBLE_SINGLE_TAP', however this is not fully tested
+ *
+ */
+int cur_dance (qk_tap_dance_state_t *state) {
+  if (state->count == 1) 
+        if (state->interrupted || !state->pressed) 
+        // IF the key has been pressed only once 
+        // AND  (the key has been interrupted by pressing another key after it
+        //       OR   the key is not pressed at present)
+          return SINGLE_TAP;
+        else    
+          //key has not been interrupted, but they key is still held. Means you want to send a 'HOLD'.
+          // [MINE]
+          // IF  the key has been pressed only once
+          // AND the key has not been interrupted
+          // AND the key is still pressed  (the key is still held)
+          // [mine]
+        // {    option_flag = get_mods()&ALT_MODS;
+        //      gui_flag = get_mods()&GUI_MODS;
+
+        //      if (option_flag)
+        //        return ALT_plus_HOLD;
+        //      else
+        //        if (gui_flag)
+        //          return GUI_plus_HOLD;          
+        //        else
+                 return SINGLE_HOLD;
+         // }
+//if (state->count == 1) 
+  else
+  if (state->count == 2)
+    { 
+      if (state->interrupted)
+      // IF   the key has been pressed twice
+      // AND  the key has been interrupted by pressing another key after it
+      return DOUBLE_SINGLE_TAP;
+      else
+        if (state->pressed) 
+        // IF  the key has been pressed twice
+        // AND the key has not been interrupted by pressing another key
+        // AND the key is still pressed
+        // {
+        //   gui_flag = get_mods()&GUI_MODS;
+        //   if (gui_flag)
+        //     return GUI_plus_DOUBLE_HOLD;          
+        //   else
+            return DOUBLE_HOLD;
+        // }
+        else
+        // IF  the key has been pressed twice
+        // AND the key has not being interrupted by pressing another key
+        // AND the key is not pressed at present
+          return DOUBLE_TAP;
+    } //    if (state->count == 2)
+/*
+        else if (state->count == 3) {
+        if (state->interrupted) return TRIPLE_SINGLE_TAP;
+        else if (state->pressed) return TRIPLE_HOLD;
+        else return TRIPLE_TAP;
+        }
+        else if (state->count == 4) {
+          if (state->interrupted) return QUADRUPLE_SINGLE_TAP;
+          else if (state->pressed) return QUADRUPLE_HOLD;
+          else return QUADRUPLE_TAP;
+        }
+        else if (state->count == 5) {
+          if (state->interrupted) return QUINTUPLE_SINGLE_TAP;
+          else if (state->pressed) return QUINTUPLE_HOLD;
+          else return QUINTUPLE_TAP;
+        }
+        else if (state->count == 6) {
+          if (state->interrupted) return SEXTUPLE_SINGLE_TAP;
+          else if (state->pressed) return SEXTUPLE_HOLD;
+          else return SEXTUPLE_TAP;
+        }
+        else return 18; //magic number. At some point this method will expand to work for more presses
+*/
+    else
+      return 6/*9*/;
+}
+//                                                                                      //
+// tap dance general setup section end                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -1277,176 +946,6 @@ void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data) {
 //
 //
 //
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//             T A P   D A N C E   F O R    [ _ N U M B ]  L A Y E R                    //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-/*
-// [GHERKIN]
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_NUMB] KC_N (SLNUMB)                                                     //
-//                                                                                      //
-//  S L A S H  -  N U M B E R S   L A Y E R   O F F                                     //
-//                                                                                      //
-//  KC_N:  * KC_KP_SLASH = KC_PSLS,                                                     //
-//        @@ [_NUMB] OFF                                                                //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-// [UNDERSTANDING]
-// When we are holding 'B' key under [_NUMB] layer, ('B' is the [_NUMB] trigger)...
-// ... if we hold down 'N' key and then release 'B' key first ...
-// ... when we release 'N' key, what we have just done is setting [_NUMB] ON !!!
-// 
-// Until we set off again, by ...
-// ... double holding 'B' or 'N' key !!!
-// [understanding]
-//
-//instantalize an instance of 'tap' for the 'SLNUMB' tap dance.
-static tap SLNUMB_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void SLNUMB_finished (qk_tap_dance_state_t *state, void *user_data) {
-  SLNUMB_tap_state.state = cur_dance(state);
-  switch (SLNUMB_tap_state.state) {
-
-    case SINGLE_TAP:    register_code(KC_PSLS); break;
-
-    case SINGLE_HOLD:// I left it intentionally empty for allowing 'SET [_NUMB] ON' works properly
-                        break;
-
-    case DOUBLE_HOLD:// SET [_NUMB] OFF
-                        numbers_is_set = false;
-
-// next line is automatically executed when layer_clear() is done and _DFLT is activated
-//                      numbers_is_active = false;
-                        layer_clear();
-                        break;      
-  }
-}
-
-void SLNUMB_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (SLNUMB_tap_state.state) {
-
-    case SINGLE_TAP:    unregister_code(KC_PSLS); break;
-
-    case SINGLE_HOLD:// SET [_NUMB] ON
-                        numbers_is_set = true;
-                        layer_on(_NUMB);
-                        break;
-
-    case DOUBLE_HOLD:   break;
-  }
-  SLNUMB_tap_state.state = 0;
-}
-//                                                                                      //
-// [tapdance] [_numb] kc_n (slnumb)                                                     //
-//                                                                                      //
-//  s l a s h  -  n u m b e r s   l a y e r   o f f                                     //
-//////////////////////////////////////////////////////////////////////////////////////////
-[gherkin]
-*/
-
-
-//
-/* WE DON'T NEED 'SETNMB' TAPDANCE ANY MORE SINCE WE USE 'TT(_NUMB)' WITH 'SIMPLE_30_LAYOUT' LAYOUT
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_NUMB] TH_R3 (SETNMB)                                                    //
-//                                                                                      //
-//  S E T   N U M B E R S   L A Y E R   U P    -    N U M B E R S   L A Y E R   O F F   //
-//                                                                                      //
-//  TH_R1: * NUMBERS LAYER OFF,                                                         //
-//         @ SET NUMBERS LAYER UP                                                       //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-// [UNDERSTANDING]
-// When we are holding 'TH_R3' key under [_NUMB] layer, ('TH_L3' is the [_NUMB] trigger)...
-// ... if we hold down 'TH_R3' key and then release 'TH_L3' key first ...
-// ... when we release 'TH_R3' key, what we have just done is setting [_NUMB] ON !!!
-// 
-// Until we set off again, by ...
-// ... simple tapping 'TH_R3' key !!!
-// [understanding]
-//
-//instantalize an instance of 'tap' for the 'SETNMB' tap dance.
-static tap SETNMB_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void SETNMB_finished (qk_tap_dance_state_t *state, void *user_data) {
-  SETNMB_tap_state.state = cur_dance(state);
-  switch (SETNMB_tap_state.state) {
-
-    case SINGLE_TAP:// SET [_NUMB] OFF
-                        numbers_is_set = false;
-
-// next line is automatically executed when layer_clear() is done and _DFLT is activated
-//                      numbers_is_active = false;
-                        layer_clear();
-                        break;      
-
-//  We don't consider ...  
-//  case GUI_plus_HOLD:
-    case SINGLE_HOLD:// I left it intentionally empty for allowing 'SET [_NUMB] ON' works properly
-                        break;
-  }
-}
-
-void SETNMB_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (SETNMB_tap_state.state) {
-
-    case SINGLE_TAP:    break;
-
-//  We don't consider ...  
-//  case GUI_plus_HOLD:
-    case SINGLE_HOLD:// SET [_NUMB] ON
-                        numbers_is_set = true;
-                        layer_on(_NUMB);
-                        break;
-  }
-  SETNMB_tap_state.state = 0;
-}
-//                                                                                      //
-// [tapdance] [_numb] th_r3 (setnmb)                                                    //
-//                                                                                      //
-//  s e t   n u m b e r s   l a y e r   u p    -    n u m b e r s   l a y e r   o f f   //
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//                                                                                      //
-//             t a p   d a n c e   f o r    [ _ n u m b ]  l a y e r                    //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//  we don't need 'setnmb' tapdance any more since we use 'tt(_numb)' with 'SIMPLE_30_LAYOUT' layout */
-//
-
-
-
-
-
-
-
-
-
-
-
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1585,98 +1084,6 @@ void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [ _AVIM ] KC_U (AVIM_uU)                                                  //
-//                                                                                      //
-//  S E L E C T   T O   B E G I N N I N G   O F   L I N E    /    P A R A G R A P H     //
-//                                                                                      //
-//  KC_U:  * SELECT TO BEGINING OF LINE                                                 //
-//        ** SELECT TO BEGINING OF PARAGRAPH                                            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'AVIM_uU' tap dance.
-/*
-static tap AVIM_uU_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void AVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
-  AVIM_uU_tap_state.state = cur_dance(state);
-  switch (AVIM_uU_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_LSFT);
-                            register_code(KC_LGUI);   register_code(KC_LEFT);
-                          
-                          unregister_code(KC_LEFT); unregister_code(KC_LGUI);
-                          unregister_code(KC_LSFT);
-                            break;
-
-    case DOUBLE_TAP:        register_code(KC_LSFT);
-                            register_code(KC_LALT);   register_code(KC_UP);
-                         
-                         unregister_code(KC_UP); unregister_code(KC_LALT);
-                         unregister_code(KC_LSFT);
-                            break;
-  }
-  AVIM_uU_tap_state.state = 0;
-}
-*/
-//                                                                                      //
-// [tapdance] [ _avim ] kc_u (avim_uu)                                                  //
-//                                                                                      //
-//  s e l e c t   t o   b e g i n n i n g   o f   l i n e    /    p a r a g r a p h     //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [ _AVIM ] KC_P (AVIM_pP)                                                  //
-//                                                                                      //
-//  S E L E C T   T O   E N D   O F   L I N E    /    E N D   O F   P A R A G R A P H   //
-//                                                                                      //
-//  KC_P:  * SELECT TO END OF LINE                                                      //
-//        ** SELECT TO END OF PARAGRAPH                                                 //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'AVIM_pP' tap dance.
-/*
-static tap AVIM_pP_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void AVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
-  AVIM_pP_tap_state.state = cur_dance(state);
-  switch (AVIM_pP_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_LSFT);
-                            register_code(KC_LGUI);   register_code(KC_RGHT);
-
-                          unregister_code(KC_RGHT); unregister_code(KC_LGUI); 
-                          unregister_code(KC_LSFT);
-                            break;
-
-    case DOUBLE_TAP:        register_code(KC_LSFT);
-                            register_code(KC_LALT);   register_code(KC_DOWN);
-                          
-                          unregister_code(KC_DOWN); unregister_code(KC_LALT);
-                          unregister_code(KC_LSFT);
-                            break;
-  }
-  AVIM_pP_tap_state.state = 0;
-}
-*/
-//                                                                                      //
-// [tapdance] [ _avim ] kc_p (avim_pp)                                                  //
-//                                                                                      //
-//  s e l e c t   t o   e n d   o f   l i n e    /    e n d   o f   p a r a g r a p h   //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//                                                                                      //
-//              t a p   d a n c e   f o r  -  v   i   m  -  l a y e r s                 //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -1813,6 +1220,738 @@ void SLEP_M_reset (qk_tap_dance_state_t *state, void *user_data) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_Q (LOGOUT)                                                     //
+//                                                                                      //
+//  L O G O U T                                                                         //
+//                                                                                      //
+//  KC_Q:  @  LOGOUT CURRENT USER                                                       //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'LOGOUT' tap dance.
+//
+/*
+static tap LOGOUT_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void LOGOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
+  LOGOUT_tap_state.state = cur_dance(state);
+  switch (LOGOUT_tap_state.state) {
+    case SINGLE_TAP:  //LOCK_SCR
+                      //#define LOCK_SCR      LCTL(LGUI(KC_Q))  //LOCK SCREEN (ask for pasword screen)
+
+                      //LOCK SCREEN (ask for pasword screen)
+                      register_code(KC_LCTL); register_code(KC_LGUI);
+                      tap_code(KC_Q);
+                      unregister_code(KC_LGUI); unregister_code(KC_LCTL);
+                      break;
+
+
+                      // (guessed by try and fail method)
+                      // if we only keystroke SFT+GUI as described at Apple Menu, it appears a menu
+                      // if we add ALT, we don't have to answer any menu, we logout directly
+    case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_Q);
+
+                      unregister_code(KC_Q);
+                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LSFT);
+                      break;
+  }
+}
+
+void LOGOUT_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (LOGOUT_tap_state.state) {
+                     
+    case SINGLE_HOLD: break;
+  }
+  LOGOUT_tap_state.state = 0;
+}
+*/
+//                                                                                      //
+// [tapdance] [_powr] kc_q (logout)                                                     //
+//                                                                                      //
+//  l o g o u t                                                                         //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//             T A P   D A N C E   F O R    [ _ P O W R ]    L A Y E R                  //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_W (LCKLOG)                                                     //
+//                                                                                      //
+//  L O G O U T    /    L O C K    S C R E E N                                          //
+//                                                                                      //
+//  KC_W: *  LOCK USER SCREEN                                                           //
+//        @  LOGOUT CURRENT USER                                                        //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+/*
+void LCKLOG_function (qk_tap_dance_state_t *state, void *user_data) {
+  switch (cur_dance(state)) {
+    case SINGLE_TAP://LOCK SCREEN (ask for pasword screen)
+                      register_code(KC_LCTL); register_code(KC_LGUI);
+                      tap_code(KC_Q);
+                      unregister_code(KC_LGUI); unregister_code(KC_LCTL);
+                      reset_tap_dance(state); break;
+
+                      // (guessed by try and fail method)
+                      // if we only keystroke SFT+GUI as described at Apple Menu, it appears a menu
+                      // if we add ALT, we don't have to answer any menu, we logout directly
+    case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
+                      tap_code(KC_Q);
+                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LSFT);
+                      reset_tap_dance(state); break;
+  }
+}
+*/
+//                                                                                      //
+// [tapdance] [_powr] kc_w (LCKLOG)                                                     //
+//                                                                                      //
+//  l o g o u t    /    l o c k    s c r e e n                                          //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//             t a p   d a n c e   f o r    [ _ p o w r ]    l a y e r                  //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// my own tap_dance harvest                                                             //
+//                                                                                      //
+// DOUBLE FUNCTION TAP DANCE PERSONALIZATION SECTION END                                //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 //                                                                                      //
@@ -1823,8 +1962,6 @@ void SLEP_M_reset (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-
-
 qk_tap_dance_action_t tap_dance_actions[] = {
 // [INFO]
 // ACTION_TAP_DANCE_DUAL_ROLE(kc, layer): Sends the kc keycode when tapped once, ...
@@ -1842,23 +1979,12 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 // [_DFLT] LAYER
    [DVIM_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(DVIM_Del_f_always,DVIM_Del_finished,DVIM_Del_reset,100)
+   // [UNDERSTANDING]
+   // TIME  50: is too dificult to typing   so fast !!!
+   // TIME 100 is a right time for typing very fast !!!
+   // [understanding]
   ,[FUNC_LED]=ACTION_TAP_DANCE_FN_ADVANCED(NULL, FUNC_LED_finished, FUNC_LED_reset)
 // [_dflt] layer
-
-// [_NUMB]&[_SYMB]LAYER
-// ,[G_DOEU] = ACTION_TAP_DANCE_DOUBLE(KC_DLR,  SYM_EURO)                                      // $ EURO
-// ,[SETNMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SETNMB_finished, SETNMB_reset)
-//
-// [GHERKIN]
-// ,[SLNUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLNUMB_finished, SLNUMB_reset)
-// [gherkin]
-//
-// [UNDERSTANDING]
-// TIME  50: is too dificult to typing   so fast !!!
-// TIME 100 is a right time for typing very fast !!!
-// [understanding]
-//
-// [_numb] layer
 
 // [_FVIM] LAYER
   ,[FVIM_uU] = ACTION_TAP_DANCE_FN(FVIM_uU_function)
@@ -1873,12 +1999,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // [_POWR] LAYER
   ,[SLEP_M]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLEP_M_finished, SLEP_M_reset)// [_powr] layer
 
-/*
-// [_AVIM] LAYER
-// ,[AVIM_uU] = ACTION_TAP_DANCE_FN(AVIM_uU_function)
-// ,[AVIM_pP] = ACTION_TAP_DANCE_FN(AVIM_pP_function)
-// [_avim] layer
-*/
 };
 //                                                                                      //
 //               t a p    d a n c e    d e c l a r a t i o n s                          //
@@ -1886,6 +2006,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 //  this section has to be at the end of the tap dance section                          //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 
 
 // CUSTOMIZED MINI DACTTYL from  
@@ -2221,7 +2346,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 )
 // END OF _POWR 12
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
 // END OF const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 //
@@ -2344,10 +2468,6 @@ const uint16_t PROGMEM fn_actions[] = {
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-/* MAXIMUM LINE WIDTH FOR RIGHT PRINTING   ( 105  CHARACTERS)   MAXIMUM LINE WIDTH FOR RIGHT PRINTING */
-/*XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XX*/
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
   shift_flag = get_mods()&SHFT_MODS;
@@ -2428,6 +2548,210 @@ void matrix_scan_user(void) {
                 
 }
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 //                                                                                                    //
@@ -2624,17 +2948,17 @@ if (numbers_is_active)
                       register_code(KC_F20);
                       return false;
                       
-      case TH_L4_FUNC_LEDS:
-                      // if (get_mods()&ALT_MODS)
-                      if (triggered_mod(KC_A))
-                      {
-                        layer_on(_LEDS);
-                      }
-                      else
-                      {
-                        layer_on(_FUNC);
-                      }
-                      return false;
+      // case TH_L4_FUNC_LEDS:
+      //                 // if (get_mods()&ALT_MODS)
+      //                 if (triggered_mod(KC_A))
+      //                 {
+      //                   layer_on(_LEDS);
+      //                 }
+      //                 else
+      //                 {
+      //                   layer_on(_FUNC);
+      //                 }
+      //                 return false;
 
       case TH_R1_DALY_MOUS:
                       // if (get_mods()&ALT_MODS)
@@ -3069,7 +3393,7 @@ _LEDS COMMANDS
                     // SEND_STRING("\n===");
                     SEND_STRING("\nget_hsv() -> ");
                     get_hsv();
-                    BEEP_1;
+                    SS_BEEP_1;
                     return false;
 
 // [WHYWEDOTHIS]
@@ -3196,17 +3520,17 @@ ROW 3 COLORS
                       }
                       return false;
 
-      case TH_L4_FUNC_LEDS:
-                      if (state_number == _FUNC)
-                      {
-                         layer_off(_FUNC);
-                      }
-                      else
-                      if (state_number == _LEDS)
-                      {
-                        layer_off(_LEDS);
-                      }
-                      return false;
+      // case TH_L4_FUNC_LEDS:
+      //                 if (state_number == _FUNC)
+      //                 {
+      //                    layer_off(_FUNC);
+      //                 }
+      //                 else
+      //                 if (state_number == _LEDS)
+      //                 {
+      //                   layer_off(_LEDS);
+      //                 }
+      //                 return false;
 
       case TH_R1_DALY_MOUS:
                       if (state_number == _MOUS)
@@ -3580,7 +3904,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 
     case _LEDS:   // 11
 //      active_layer = 11;
-        BEEP_1;
+        SS_BEEP_1;
         break;
 
     case _POWR:   //  12

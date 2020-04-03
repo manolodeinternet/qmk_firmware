@@ -70,8 +70,11 @@ expanded before being used as arguments to the LAYOUT_xxx macro.
 #endif
 
 // // clang-format off
-// This code line is essential (needed) for Mini Dactyl keyboard firmware compilation
+// This code line is essential (needed) for compile Mini Dactyl keyboard firmware
 #define LAYOUT_wrapper(...)                     KEYMAP(__VA_ARGS__)
+
+// This code line is essential (needed) for compile Gherkin keyboard firmware
+#define KEYMAP_gherkin_wrapper(...)             LAYOUT_ortho_3x10(__VA_ARGS__)
 
 // IT'S NOT NECESSARY !!! Z- next line is a must for gherkin
 // #define KEYMAP_wrapper(...)                     LAYOUT(__VA_ARGS__) // good line of code
