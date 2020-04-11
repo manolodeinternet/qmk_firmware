@@ -19,6 +19,7 @@ bool shift_was_activated; // it allows using shift+control+S for  opening Slack 
   
 // bool numbers_is_active;   // flag for _NUMB layer
 
+
 bool symbols_pressed;     // it allows changing from _SYMB to _NUMB and come back without LEDs issues
 
 bool multi_apps;

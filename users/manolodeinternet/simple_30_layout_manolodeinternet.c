@@ -18,6 +18,7 @@ bool shift_was_activated    = false;
   
 // bool numbers_is_active      = false; // #01
 
+
 bool symbols_pressed        = false;
 
 bool multi_apps             = false;

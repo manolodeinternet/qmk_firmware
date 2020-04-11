@@ -1,6 +1,7 @@
 // #include "/Users/navarro/qmk_firmware/users/manolodeinternet/comprehensive_30_layout_manolodeinternet.h"
 #include "comprehensive_30_layout_manolodeinternet.h"
 
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [FUNCTIONS] [_POWR] KC_R (HRESET)                                                    //
