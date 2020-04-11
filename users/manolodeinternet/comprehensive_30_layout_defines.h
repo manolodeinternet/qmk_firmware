@@ -1,4 +1,5 @@
-
+#pragma once
+#include QMK_KEYBOARD_H
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                   //
 // DEFINING COLOR LAYERS                      C O L O R     L A Y E R S                              //

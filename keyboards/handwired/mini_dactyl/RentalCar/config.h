@@ -28,8 +28,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define ONESHOT_TAP_TOGGLE        2
 // #define ONESHOT_TIMEOUT           3000
 
+
+
+
+
+
+
+// #define SIMPLE_30_LAYOUT
+
+
+
+
+
+
+
 #ifndef CONFIG_H
 #define CONFIG_H
+
+
+
+
 
 #define TAPPING_TERM 150 // 300
 #define TAPPING_TOGGLE 1

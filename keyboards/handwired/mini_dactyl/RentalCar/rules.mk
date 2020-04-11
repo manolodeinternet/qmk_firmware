@@ -77,3 +77,11 @@ CUSTOM_MATRIX    = yes
 
 LAYOUTS          = ortho_6x12
 
+
+SIMPLE_30 = yes
+
+
+
+
+
+

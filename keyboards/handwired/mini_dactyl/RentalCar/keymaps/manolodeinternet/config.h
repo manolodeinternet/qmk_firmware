@@ -2,6 +2,11 @@
 // =================================================================
 // CONFIG.H
 
+
+// #define SIMPLE_30_LAYOUT
+
+
+
 #ifndef CONFIG_USER_H
 #define CONFIG_USER_H
 
@@ -56,9 +61,20 @@
 // ...we define alpha rows as simple as we can, but with modifiers...
 // ...and layer triggers are defined on thumb rows !!!
 //
+
+
+
+
+
+
 // 2:
 #define SIMPLE_30_LAYOUT
 //
+
+
+
+
+
 // 3:
 #define MINI_DACTYL_THUMBS
 // qmk_firmware/users/manolodeinternet/wrappers.h

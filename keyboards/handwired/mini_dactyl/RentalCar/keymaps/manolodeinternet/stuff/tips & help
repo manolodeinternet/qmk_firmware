@@ -10,6 +10,28 @@
 /*XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT  XX  USING SUBLIMEPRINT  XXX  USING SUBLIMEPRINT XX*/
 /*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+My 'Makefile' at 
+/Users/navarro/qmk_firmware/keyboards/handwired/mini_dactyl/RentalCar/keymaps/manolodeinternet/Makefile
+is included at '.gitignore', but it is like this:
+"
+RGBLIGHT_ENABLE = yes
+TAP_DANCE_ENABLE = yes
+
+# Next options that we are creating right now is for checking it later at rules.mk and ...
+# ... include the right files while compiling this firmware
+SIMPLE_30 = yes  #for making a simple core alpha, without layer triggers, only modifiers
+COMPREHENSIVE_30 = no #for making comprehensive core alpha, with layer triggers, modifiers, everything
+
+ifndef QUANTUM_DIR
+    include ../../../../Makefile
+endif
+"
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 // [MY_OWN_PREPROCESSING_KEYWORDS] for editing my code:
 //
 // [ADVICE]
@@ -63,8 +85,8 @@
 // [REFLECTION]
 // [reflection]     maybe things can be coded (thinked) different !!!
 //
-// [SAVING_SPACE]
-// [saving_space]   ways of saving space for fitting the whole firmware into the microcontroller
+// [FIRMWARE_SIZE]
+// [firmware_size]   ways of saving space for fitting the whole firmware into the microcontroller
 //
 // [SYSTEM PREFERENCES]
 // [system preferences] sortcut defined in 'System Preferences'

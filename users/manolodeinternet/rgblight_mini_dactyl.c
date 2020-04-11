@@ -23,7 +23,19 @@
 
 // ...if we omit next line:
 // ------------------------------------------------------
+
+
+
+
+
+#include "rgblight_mini_dactyl.h"
 #include "rgblight.h"
+
+
+
+
+
+
 // It's not necesary full path:
 // #include "/Users/navarro/qmk_firmware/quantum/rgblight.h"
 // ======================================================

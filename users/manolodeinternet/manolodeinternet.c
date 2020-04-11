@@ -15,8 +15,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// #include QMK_KEYBOARD_H
 #include "manolodeinternet.h"
 
+            bool grave_requested = false;
+        bool diaeresis_requested = false;
+       bool circumflex_requested = false;
+
+         bool capslock_is_active = false;
+bool disabled_caps_before_accent = false;
 //
 // ======================================================
 // Following line is not necesary.  Its place is in 'rgblight_mini_datyl.c':
@@ -24,6 +31,62 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #include "/Users/navarro/qmk_firmware/users/manolodeinternet/rgblight_mini_dactyl.h"
 // ======================================================
 //
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [FUNCTIONS] [_DALY] KC_A [F(CAPSL)]                                                  //
+//                                                                                      //
+// CAPSLOCK COMPLEMENTARY FUNCTIONS                                                     //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
+
+  SEND_STRING(SS_DOWN(X_CAPSLOCK));
+  register_code(KC_LCAP);
+
+  capslock_is_active = !capslock_is_active;
+
+// [INFO]
+// Note, that instead of unregister_code (KC_LCAP), ...
+// ... we write unregister_code (KC_CAPS).
+// This is the way it works that I found by the trial and error method.
+  unregister_code(KC_CAPS); 
+// [info] 
+
+  SEND_STRING(SS_UP(X_CAPSLOCK));
+
+} //  my capslock function  -  [f(capsl)] - my capslock finished function
+
+
+void disable_capslock_before_accents_function(void) { // MY CAPSLOCK FINISHED FUNCTION
+
+  if (capslock_is_active)
+    {
+      capslock_tap();
+      disabled_caps_before_accent = true;
+    }
+} // my disable_capslock_before_accents_function
+
+void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTION
+  if (disabled_caps_before_accent == true)
+    {
+      capslock_tap();
+      disabled_caps_before_accent = false;
+  }
+} // my enable_capslock_after_accents_function
+//                                                                                      //
+// capslock complementary functions                                                     //
+//                                                                                      //
+// [functions] [_daly] kc_a [f(capsl)]                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -34,31 +97,42 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // ACCENTS COMPLEMENTARY FUNCTIONS                                                      //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-__attribute__ ((weak))
+
 void acute_accent_function(void) {
   register_code(KC_LALT); register_code(KC_E);
   unregister_code(KC_E); unregister_code(KC_LALT);
 }
 
-__attribute__ ((weak))
+// void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
+//   // _delay_ms (1);
+//   // wait_ms(1);
+//   // rgblight_enable_noeeprom(); // switch on LEDs to allow us seeing the reset LEDs flashing
+//   // wait_ms(1);
+
+//   // SS_BEEP_1; SS_BEEP_2; SS_BEEP_1; SS_BEEP_2;
+
+//   // flashing_LEDs(5, RGB_MY_GREEN, RGB_MY_YELLOW);
+//   reset_keyboard();
+// }
+
+
 void diaeresis_accent_function(void) {
     register_code(KC_LALT); register_code(KC_U);
     unregister_code(KC_U);  unregister_code(KC_LALT);
 }
 
-__attribute__ ((weak))
+
 void circumflex_accent_function(void) {
     register_code(KC_LALT); register_code(KC_I);
     unregister_code(KC_I);  unregister_code(KC_LALT);
 }
 
-__attribute__ ((weak))
+
 void grave_accent_function(void) {
     register_code(KC_LALT); register_code(KC_GRAVE);
     unregister_code(KC_GRAVE);  unregister_code(KC_LALT);
 }
 
-__attribute__ ((weak))
 void tilde_accent_function(void) {
     register_code(KC_LALT); register_code(KC_N);
     unregister_code(KC_N);  unregister_code(KC_LALT);
@@ -74,6 +148,49 @@ void tilde_accent_function(void) {
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//                                                                                      //
+//  GLOBAL  FUNCTIONS                                                                   //
+//                                                                                      //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [FUNCTIONS] [_DFLT] [_FVIM], [_DVIM], [_CVIM],     [_XVIM       & [_APPS]            //
+//               KC_V,    KC_X,  [_FVIM]KC_C, [_FVIM]KC_X,   [_FVIM]KC_Z   (KC_Q & KC_P)//
+//                                                                                      //
+// FUNCTIONS FOR ACCESING KEYBINDINGS MAPPED FUNCTIONS                                  //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void fvim(char *key)
+{
+//  SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v")))));
+    HYPR_V;
+    SEND_STRING("f");
+    send_string(key);
+}
+
+void dvim(char *key)
+{
+    HYPR_V;
+    SEND_STRING("d");
+    send_string(key);
+}
+
+void cvim(char *key)
+{
+    HYPR_V;
+    SEND_STRING("c");
+    send_string(key);
+}
+
+void xvim(char *key)
+{
+    HYPR_V;
+    SEND_STRING("x");
+    send_string(key);
+}
 
 
 
@@ -85,8 +202,17 @@ void tilde_accent_function(void) {
 
 
 
+// void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 
+//   SS_BEEP_1;
+//   // _delay_ms (1);
+//   wait_ms(1);
+//   rgblight_enable_noeeprom();
+//   wait_ms(1);
 
+//   // flashing_LEDs(5, RGB_MY_WHITE, RGB_MY_RED);
+//   reset_keyboard();
+// }
 
 
 

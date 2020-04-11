@@ -1,3 +1,5 @@
+#pragma once
+#include QMK_KEYBOARD_H
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -44,16 +46,22 @@
 enum tap_dance_keycodes {
 
   // COMMON TAPDANCE KEYCODES ACCESSIBLE FROM ALL KEYBOARDS
+  
   // TAP DANCE KEYCODES ACCESSIBLE FROM _FVIM LAYER 03
   // (i.e. KC_U: *'begin of line'/**'begin of paragraph')
    FVIM_uU ,FVIM_pP
   ,DVIM_uU ,DVIM_pP
   // tap dance keycodes accessible from _fvim layer 03
 
+
   // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
   ,SLEP_M   //   menu bar / (on hold) SLEEP
+  ,HRESET   // on hold RESET keyboard
   // tap dance keycodes accessible from _powr layer 12
+
   // common tapdance keycodes accessible from all keyboards
+
+
 
   #if defined(COMPREHENSIVE_30_LAYOUT)
     // TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB LAYER 02
@@ -70,7 +78,6 @@ enum tap_dance_keycodes {
 
     // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
     ,LOGOUT   // logout user session
-    ,HRESET   // on hold RESET keyboard
     ,KILM_T   //   dock bar / (on hold) KILL MENU
     ,KILA_D   //  tools bar / (on hold) KILL CURRENT APP
     ,SHUT_S   // status bar / (on hold) COMPUTER SHUT DOWN

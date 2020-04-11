@@ -1,5 +1,7 @@
 #pragma once
 
+// #define SIMPLE_30_LAYOUT
+
 // We define TAPPING_TERM in every keyboard/config.h file
 // #define TAPPING_TERM 150
 //

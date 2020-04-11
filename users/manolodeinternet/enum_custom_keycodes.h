@@ -1,3 +1,5 @@
+#pragma once
+#include QMK_KEYBOARD_H
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // MACROS FOR PROCESS_RECORD_USER()                                                     //

@@ -29,7 +29,7 @@
 // #include QMK_KEYBOARD_H
 // Following file doesn't need full path bc folder 'users/manolodeinternet' is automatically included
 #include "manolodeinternet.h"
-
+#include "backlight_manolodeinternet.h"
 
 // It's included from 'manolodeinternet.h'
 // #include "wrappers.h"
@@ -59,13 +59,13 @@
   static bool capslock_is_active = false;
 
   static uint8_t shift_flag;
-  static uint8_t   gui_flag;
+  static uint8_t gui_flag;
 // common variables for all keyboards
 
-  static bool    hide_other_apps = false;
+  // static bool    hide_other_apps = false;
 
-  static uint8_t gherkinBacklightLevel = 0;
-  static uint8_t gherkinBacklightLevelBeforeCapsLock = 0;
+  // static uint8_t gherkinBacklightLevel = 0;
+  // static uint8_t gherkinBacklightLevelBeforeCapsLock = 0;
 
 
 

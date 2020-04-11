@@ -1,4 +1,6 @@
 #pragma once
+#include QMK_KEYBOARD_H
+
 // #include "manolodeinternet.h"
 #include "wrappers_defines.h"
 
@@ -179,11 +181,12 @@ ACRONYM DICTIONARY
 
   *  LEGENDS for all KEYMAPS:
 
+  *  ######## key pressed previously for accesing current layer via mirrored trigger
   *  @@@@@@@@ key pressed previously for accesing current layer
-  *  ( #### ) key pressed previously for accesing the layer where the trigger for current layer is.
+  *  ( @@@@ ) key pressed previously for accesing the layer where the trigger for current layer is.
               * i.e.: for accesing _XVIM we press 'V' and 'C'
-                'V' is represented with '( #### )' and 'C' is represented with '@@@@@@@@'
-  *  (( ## )) it's not necessary, you can access this layer directly, but maybe this is the ...
+                'V' is represented with '( @@@@ )' and 'C' is represented with '@@@@@@@@'
+  *  (( @@ )) it's not necessary, you can access this layer directly, but maybe this is the ...
               key pressed previously for accesing the layer where the trigger for current layer is. 
 
   *   * get a keystroke through single tap
@@ -210,8 +213,8 @@ acronym dictionary
 
 [MANAGING MACROS]
 #if defined(COMPREHENSIVE_30_LAYOUT)
-# elif defined(SIMPLE_30_LAYOUT) //#if defined(COMPREHENSIVE_30_LAYOUT)
-#endif //# elif defined(SIMPLE_30_LAYOUT)
+#elif defined(SIMPLE_30_LAYOUT) //#if defined(COMPREHENSIVE_30_LAYOUT)
+#endif //#elif defined(SIMPLE_30_LAYOUT)
 
 #if defined(MINI_DACTYL_THUMBS)
 #endif //#if defined(MINI_DACTYL_THUMBS)
@@ -288,7 +291,7 @@ acronym dictionary
  *                            |        |*AcAccnt|        |alt:LEDS|ONEshoot|
  *                            |        |        |        |        |  layer |
  *                            |        |@@[_LED]|        |        |        |
- *                            |@[_MOUS]|@[_FUNC]|        | [_POWR]| [_ACCN]|
+ *                            |@[_MOUS]|@[_FUNC]|        |@[_POWR]|@[_ACCN]|
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   | Delete |        |        |        |alt:NUMB|alt:FVIM|alt:MOUS|
  *                   |        |        |        |        |        |        |        |
@@ -296,7 +299,7 @@ acronym dictionary
  *                   |@[_DVIM]|@[_FVIM]|@[_NUMB]|        |@[_APPS]|@[_SYMB]|@[_DALY]|
  *                   '--------------------------'        '--------------------------'
  */
-#define _DFLT_LTHMB_RW1_               LT(_MOUS,KC_TAB), TD(FUNC_LED) /*TH_L4_FUNC_LEDS*/
+#define _DFLT_LTHMB_RW1_               LT(_MOUS,KC_TAB), MO(_LEDS) // TD(FUNC_LED) /*TH_L4_FUNC_LEDS*/
 #define _DFLT_LTHMB_RW2_ TD(DVIM_Del),        MO(_FVIM),      TT_NUMB       /*TT(_NUMB)*/
 
 #define      _DFLT_RTHMB_RW1_                        TH_R4_POWR_LEDS, OSL(_ACCN)
@@ -337,10 +340,10 @@ acronym dictionary
 #if defined(MINI_DACTYL_THUMBS)
 /* [_ACCN] = LAYER 01 : ACCENTS LAYER
  *                            .-----------------.        .-----------------.
- *                            |        |        |        |        |        |
+ *                            |        |        |        |        |@@@@@@@@|
  *                            |        |        |        |        |  DIAE- |
  *                            |        |        |        |        | RESIS  |
- *                            |        | [_LEDS]|        | [_POWR]|        |
+ *                            |        |@[_LEDS]|        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
@@ -352,7 +355,7 @@ acronym dictionary
 #define _ACCN_LTHMB_RW2_             _______, KC_LSFT,   _______
 
 #define      _ACCN_RTHMB_RW1_                                         MO(_POWR), DIAER
-#define      _ACCN_RTHMB_RW2_                                         _______,   KC_LSFT, _______
+#define      _ACCN_RTHMB_RW2_                                         GRAVE,     KC_LSFT, CIRCU
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
@@ -415,7 +418,7 @@ acronym dictionary
 #define      ___NUMBERS_R2___                                        KC_PMNS, KC_4, KC_5, KC_6, KC_PPLS
 #define      ___NUMBERS_R3___                                        KC_PSLS, KC_1, KC_2, KC_3, KC_PAST
 
-//# elif defined(SIMPLE_30_LAYOUT)
+//#elif defined(SIMPLE_30_LAYOUT)
 #endif
 
 #if defined(MINI_DACTYL_THUMBS)
@@ -424,12 +427,12 @@ acronym dictionary
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |  EURO  |
  *                            |        |        |        |        |        |
- *                            |        |        |        |  _POWR |        |
+ *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
+ *                   |        |        |@@@@@@@@|        |        |        |        |
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
- *                   |        |        |        |        |        |        |        |
- *                   |        |        |        |        |        |  _SYMB |        |
+ *                   |        |        |        |        |        |@[_SYMB]|        |
  *                   '--------------------------'        '--------------------------'
  */
 #define _NUMB_LTHMB_RW1_                    _______, _______
@@ -459,7 +462,7 @@ acronym dictionary
  * |        |        |        |@@@@@@@@|        |        |        |@@@@@@@@|        |        |        |
  * |        |        |        |        |        |        |  Shift |  Move  |  Move  |  Move  |  Move  |
  * |        |        |        | TOOGLE |        |        |paragrph|        |  Page  |  Page  |        |
- * |  LSft  |@[_DVIM]|@[_XVIM]|[_FVIM] |  LSft  |        |  Down  |  HOME  |   UP   |  DOWN  |   END  |
+ * |  LSft  |@[_DVIM]|@[_XVIM]|@[_FVIM]|  LSft  |        |  Down  |  HOME  |   UP   |  DOWN  |   END  |
  * '--------------------------------------------'        '--------------------------------------------'
 */
 #define ___FAKEVIM_L1___ KC_LEFT,     KC_UP,   KC_DOWN,   KC_RGHT, XXXXXXX
@@ -476,12 +479,12 @@ acronym dictionary
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |        |
- *                            |        |        |        | [_POWR]|        |
+ *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
+ *                   |        |@@@@@@@@|        |        |        |########|        |
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
- *                   |        |        |        |        |        |        |        |
- *                   |        |        |        |        |        | [_XVIM]|        |
+ *                   |        |        |        |        |        |@[_XVIM]|        |
  *                   '--------------------------'        '--------------------------'
  */
 #define _FVIM_LTHMB_RW1_                      _______, _______
@@ -510,7 +513,7 @@ acronym dictionary
  * |   up   |  chars |  words |   up   |   up   |        |        |  -case |  -case | -talize|        |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |@@@@@@@@|( #### )|        |        |        |(( ## ))|@@@@@@@@|        |        |
+ * |        |        |@@@@@@@@|( @@@@ )|        |        |        |(( @@ ))|@@@@@@@@|        |        |
  * |   60   | Scroll | Scroll |   20   |    5   |        |        |        |        |        |        |
  * |  lines |  page  |  page  |  lines |  lines |        |  Copy  |  Copy  |  Copy  |  Copy  |  Copy  |
  * |   down |  down  |   up   |   down |   down |        |charactr|  word  |  line  |paragrph|   ALL  |
@@ -530,9 +533,9 @@ acronym dictionary
  *                            |        |        |        |        |        |
  *                            |   UP   |        |        |        |        |
  *                            |        |        |        |        |        |
- *                            |        |        |        | [_POWR]|        |
+ *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
- *                   |        |        |        |        |        |        |        |
+ *                   |        |( @@@@ )|        |        |        |@@@@@@@@|        |
  *                   |  LEFT  |  DOWN  |  RIGHT |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
@@ -566,7 +569,7 @@ acronym dictionary
  * |        |        |        |        |        |        |        |  LEFT  |   UP   |  DOWN  |  RIGHT |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|        
- * |        |@@@@@@@@|        |(( ## ))|        |        |        | Delete | Delete | Delete | Delete |
+ * |        |@@@@@@@@|        |(( @@ ))|        |        |        | Delete | Delete | Delete | Delete |
  * |        |        |        |        |        |        |        |        |  Page  |  Page  |  until |
  * |        |        |  LEFT  |  DOWN  |  RIGHT |        |        |  HOME  |   Up  |   Down  |   END  |
  * |        |        |        |        |        |        |        |        |        |        |        |
@@ -586,7 +589,7 @@ acronym dictionary
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |        |
- *                            |        |        |        | [_POWR]|        |
+ *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
@@ -641,7 +644,7 @@ acronym dictionary
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |   UP   |
  *                            |        |        |        |        |        |
- *                            |        |        |        | [_POWR]|        |
+ *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |  LEFT  |  DOWN  |  RIGHT |
@@ -691,21 +694,21 @@ acronym dictionary
 /* [_DALY] = LAYER 07 : DAILY COMMANDS LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |        |
- *                            |        |        |        |        |   UP   |
+ *                            |   Tab  |        |        |        |        |
  *                            |        |        |        |        |        |
- *                            |        |        |        | [_POWR]|        |
+ *                            |        |@[_LEDS]|        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
- *                   |        |        |        |        |        |        |        |
- *                   |        |CAPSLOCK|  SIRI  |        |  LEFT  |  DOWN  |  RIGHT |
+ *                   |########|        |        |        |        |        |@@@@@@@@|
+ *                   |        |CAPSLOCK|  SIRI  |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
  */
-#define _DALY_LTHMB_RW1_                        KC_TAB, _______
-#define _DALY_LTHMB_RW2_             _______, F(CAPSL),    SIRI
+#define _DALY_LTHMB_RW1_                        KC_TAB, MO(_LEDS)
+#define _DALY_LTHMB_RW2_             _______, F(CAPSL),      SIRI
 
-#define      _DALY_RTHMB_RW1_                                               MO(_POWR), KC_UP
-#define      _DALY_RTHMB_RW2_                                               KC_LEFT,   KC_DOWN, KC_RGHT
+#define      _DALY_RTHMB_RW1_                                               MO(_POWR), _______
+#define      _DALY_RTHMB_RW2_                                               _______,   _______, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
@@ -744,10 +747,10 @@ acronym dictionary
 #if defined(MINI_DACTYL_THUMBS)
 /* [_FUNC] = LAYER 08 : FUNCTIONS LAYER
  *                            .-----------------.        .-----------------.
- *                            |        |        |        |        |        |
+ *                            |        |@@@@@@@@|        |        |        |
  *                            |        |        |        |        |   fn   |
  *                            |        |        |        |        | (Krbnr)|
- *                            |        |        |        | [_POWR]|        |
+ *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |KAR-APPS|        |
@@ -795,7 +798,7 @@ acronym dictionary
 #define      ___SYMBOLS_R3___                               KC_CIRC, KC_LCBR, KC_RCBR, KC_SCLN, KC_COLN
 
 //#if defined(COMPREHENSIVE_30_LAYOUT)
-# elif defined(SIMPLE_30_LAYOUT)
+#elif defined(SIMPLE_30_LAYOUT)
 /* [_SYMB] = LAYER 09 : SYMBOLS LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |        |        |        |        |        |        |        |        |
@@ -822,7 +825,7 @@ acronym dictionary
 #define      ___SYMBOLS_R2___ KC_AMPR,LSFT_T(KC_LBRC), LGUI_T(KC_RBRC), LALT_T(KC_COMM), LCTL_T(KC_DOT)
 #define      ___SYMBOLS_R3___                               KC_CIRC, KC_LCBR, KC_RCBR, KC_SCLN, KC_COLN
 
-//# elif defined(SIMPLE_30_LAYOUT)
+//#elif defined(SIMPLE_30_LAYOUT)
 #endif
 
 #if defined(MINI_DACTYL_THUMBS)
@@ -831,19 +834,19 @@ acronym dictionary
  *                            |inverted|inverted|        |        |        |
  *                            | exclam.|question|        |        |  EURO  |
  *                            |  mark  |  mark  |        |        |        |
- *                            |        |        |        | [_POWR]|        |
+ *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
- *                   |        |        |        |        |        |        |        |
+ *                   |        |        |        |        |        |@@@@@@@@|        |
  *                   |  / *   |   * /  |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
- *                   |        |        | [_NUMB]|        |        |        |        |
+ *                   |        |        |@[_NUMB]|        |        |        |        |
  *                   '--------------------------'        '--------------------------'
  */
 #define _SYMB_LTHMB_RW1_                               INV_EX,   INV_QU
 #define _SYMB_LTHMB_RW2_      O_COMMENT, C_COMMENT, CHANGE_SYMB_TO_NUMB
 
-#define      _SYMB_RTHMB_RW1_                                                MO(_POWR),  EURO
-#define      _SYMB_RTHMB_RW2_                                                _______, _______, _______
+#define      _SYMB_RTHMB_RW1_                                               MO(_POWR), EURO
+#define      _SYMB_RTHMB_RW2_                                               _______,   _______, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
@@ -906,9 +909,9 @@ acronym dictionary
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |        |
- *                            |        |        |        | [_POWR]|        |
+ *                            |        |        |        |@[_POWR]|        |
  *                   ,--------+--------+--------|        |--------+--------|--------.
- *                   |        |        |        |        |        |        |        |
+ *                   |        |        |        |        |@@@@@@@@|        |        |
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |KARABINR|        |        |        |        |
  *                   |        |        |  APPS  |        |        |        |        |
@@ -987,10 +990,10 @@ acronym dictionary
   #if defined(MINI_DACTYL_THUMBS)
     /* [_LEDS] = LAYER 11 : LEDS LIGHTS LAYER
      *                          .-----------------.      .-----------------.
+     *                          |        |@@@@@@@@|      |        |        |
      *                          |        |        |      |        |        |
      *                          |        |        |      |        |        |
-     *                          |        |        |      |        |        |
-     *                          |        |        |      | [_POWR]|        |
+     *                          |        |        |      |@[_POWR]|        |
      *                 .--------+--------+--------|      |--------+--------|--------.
      *                 |        |        |        |      |        |        |        |
      *                 |  Cyan  |  Azure |        |      |        |        |        |
@@ -1047,7 +1050,7 @@ acronym dictionary
 #define      ____POWER_R3____           CNTRST_U,    KC_PAUS,     KC_SLCK,     BRIGHT_1,    CNTRST_D
 
 //#if defined(COMPREHENSIVE_30_LAYOUT)
-# elif defined(SIMPLE_30_LAYOUT)
+#elif defined(SIMPLE_30_LAYOUT)
 /* [_POWR] = LAYER 12 : POWER COMMANDS LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |        |        |        |        |        |        |        |        |
@@ -1066,7 +1069,7 @@ acronym dictionary
  * | @SLEEP |^KIL_APP|^KIL_MEN|^SHUTDWN|^RESTART|        |        |        |        |(Bght.1)|        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-#define ____POWER_L1____      TOG_ID,      LOCK_SCR,        KC_LOGO,      MY_RESET,   STP_ID
+#define ____POWER_L1____      TOG_ID,      LOCK_SCR,        KC_LOGO,    TD(HRESET),   STP_ID
 #define ____POWER_L2____     KC_RCTL, RALT_T(KC_F7), RGUI_T(KC_SPC), RSFT_T(KC_F9), ZOOMSMTH
 #define ____POWER_L3____ SLEP_MNUBAR,        KA_DCK,         KM_TOL,        SH_STA,   RT_FLO
 
@@ -1074,29 +1077,60 @@ acronym dictionary
 #define      ____POWER_R2____                      ZOOM_FOL, ZOOM_IN,   ZOOM_OUT,    ZOOM_TOG, INV_COLO
 #define      ____POWER_R3____                      CNTRST_U, KC_PAUS,   KC_SLCK,     BRIGHT_1, CNTRST_D
 
-//# elif defined(SIMPLE_30_LAYOUT)
+
+
+
+// ALIGN TO RIGHT AND LEFT OR ONLY LEFT ???
+
+// #define ____POWER_L1____      TOG_ID,      LOCK_SCR,        KC_LOGO,      MY_RESET,   STP_ID
+// #define ____POWER_L2____     KC_RCTL, RALT_T(KC_F7), RGUI_T(KC_SPC), RSFT_T(KC_F9), ZOOMSMTH
+// #define ____POWER_L3____ SLEP_MNUBAR,        KA_DCK,         KM_TOL,        SH_STA,   RT_FLO
+
+// #define      ____POWER_R1____                         VOL_8, KC__VOLUP, KC__VOLDOWN,    VOL_1, KC__MUTE
+// #define      ____POWER_R2____                      ZOOM_FOL,   ZOOM_IN,    ZOOM_OUT, ZOOM_TOG, INV_COLO
+// #define      ____POWER_R3____                      CNTRST_U,   KC_PAUS,     KC_SLCK, BRIGHT_1, CNTRST_D
+
+
+
+
+
+
+// #define ____POWER_L1____ TOG_ID,      LOCK_SCR,      KC_LOGO,        MY_RESET,      STP_ID
+// #define ____POWER_L2____ KC_RCTL,     RALT_T(KC_F7), RGUI_T(KC_SPC), RSFT_T(KC_F9), ZOOMSMTH
+// #define ____POWER_L3____ SLEP_MNUBAR, KA_DCK,        KM_TOL,         SH_STA,        RT_FLO
+
+// #define      ____POWER_R1____                      VOL_8,    KC__VOLUP, KC__VOLDOWN, VOL_1,    KC__MUTE
+// #define      ____POWER_R2____                      ZOOM_FOL, ZOOM_IN,   ZOOM_OUT,    ZOOM_TOG, INV_COLO
+// #define      ____POWER_R3____                      CNTRST_U, KC_PAUS,   KC_SLCK,     BRIGHT_1, CNTRST_D
+// Align to right and left or only left ???
+
+
+
+
+
+//#elif defined(SIMPLE_30_LAYOUT)
 #endif
 
 #if defined(MINI_DACTYL_THUMBS)
 /* [_POWR] = LAYER 12 : POWER COMMANDS LAYER
  *                            .-----------------.        .-----------------.
- *                            |  Clear |        |        |        |        |
- *                            |   ALL  |        |        |        |        |
- *                            |Layers->|  Left  |        |        |        |
- *                            |>[_DFLT]| Contol |        |        |        |
+ *                            |        |        |        |@@@@@@@@|        |
+ *                            |        |        |        |        |        |
+ *                            |        |        |        |        |        |
+ *                            |KC_RESET| @HRESET|        |        |        |
  *                   .--------+--------+--------|        |--------+--------|--------.
- *                   |        |        |        |        |        |        |        |
- *                   |        |        |        |        |        |        |        |
- *                   |        |        |        |        |        |        |        |
- *                   |        |KC_RESET|        |        |        |        |        |
+ *                   |        |  Clear |        |        |        |        |        |
+ *                   |        |   ALL  |        |        |        |        |        |
+ *                   |  Left  |Layers->|        |        |        |        |        |
+ *                   |Control |>[_DFLT]|MY_RESET|        |        |        |        |
  *                   '--------------------------'        '--------------------------'
  * You can reach _POWR key anywhere because it's always at the same position: THUMB_R4, but ...
  * ... maybe you're lost into a layer, which you don't know which one it is and ...
  * ... you can't reach a control key for resetting the keyboard.
  * ... that's why we put one control key here, at 'THUMB_L4' position.
  */
-#define _POWR_LTHMB_RW1_               MY_CLEAR, KC_LCTL
-#define _POWR_LTHMB_RW2_      _______,    RESET, _______
+#define _POWR_LTHMB_RW1_                  RESET, TD(HRESET)
+#define _POWR_LTHMB_RW2_      KC_LCTL, MY_CLEAR,  MY_RESET
 
 #define      _POWR_RTHMB_RW1_                                                _______, _______
 #define      _POWR_RTHMB_RW2_                                                _______, _______, _______

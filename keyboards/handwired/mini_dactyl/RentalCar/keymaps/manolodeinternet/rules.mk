@@ -11,8 +11,7 @@
 # SPLIT_KEYBOARD = yes // 2020/02/17
 
 
-
-
+# SIMPLE_30_LAYOUT
 
 
 

@@ -1,4 +1,6 @@
 #pragma once
+#include QMK_KEYBOARD_H
+
 #if defined(COMPREHENSIVE_30_LAYOUT)
     #include "comprehensive_30_layout_defines.h"
 #elif defined(SIMPLE_30_LAYOUT)

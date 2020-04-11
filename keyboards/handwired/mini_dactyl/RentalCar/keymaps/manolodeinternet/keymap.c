@@ -29,15 +29,45 @@
 // #include QMK_KEYBOARD_H
 // Following 2 files don't need full path bc folder 'users/manolodeinternet' is automatically included
 #include "manolodeinternet.h"
-#include "rgblight_mini_dactyl.h"
 
-// It's included from 'manolodeinternet.h'
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+// This is defined at 'manolodeinternet.h'
+// #if defined(SIMPLE_30_LAYOUT)
+//   #include "simple_30_layout_manolodeinternet.h"
+// #elif defined(COMPREHENSIVE_30_LAYOUT)
+//   #include "comprehensive_30_layout_manolodeinternet.h"
+// #endif
+// #if defined(RGBLIGHT_ENABLE)
+//   #include "rgblight_mini_dactyl.h"
+//   #include "rgblight_manolodeinternet.h"
+// #elif defined(BACKLIGHT_ENABLE)
+//   #include "backlight_manolodeinternet.h"
+// #endif
+// Next '#include' it is included from 'manolodeinternet.h'
 // #include "wrappers.h"
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
 
 // [MINE]
 extern rgblight_config_t rgblight_config;    // without this line, it doesn't recognize rgblight_config
 // extern LED_TYPE led[RGBLED_NUM];
 // [mine]
+
+// bool capslock_is_active = false;
+
+
+// extern void reset_my_keyboard_function(void);
+__attribute__((weak)) void reset_my_keyboard_function(void);
+
+// __attribute__((weak)) void flashing_LEDs(uint8_t times, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t r2, uint8_t g2, uint8_t b2);
+
+
+
+
+
+
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -46,27 +76,8 @@ extern rgblight_config_t rgblight_config;    // without this line, it doesn't re
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-// [REFLECTION]
-// Is it necessary that the 5 following vars were static ? Maybe I can remove 'static'
-// [REFLECTION]
 
-// COMMON VARIABLES FOR ALL KEYBOARDS
-  static bool diaeresis_requested  = false;
-  static bool circumflex_requested = false;
-  static bool grave_requested      = false;
-
-  static bool disabled_caps_before_accent = false;
-  static bool capslock_is_active = false;
-  
-  static uint8_t   shift_flag;
-  static uint8_t     gui_flag;
-// common variables for all keyboards  
-
-
-
-
-
-/*
+/*  for using with the function 'void keyboard_post_init_rgb(void) {' 
 typedef union {
   uint32_t raw;
   struct {
@@ -76,43 +87,6 @@ typedef union {
 
 user_config_t user_config;
 */
-
-// default_hsv = default_hue, default_sat, default_val;
-
-  LED_TYPE tmp_led;
-  int    state_number;
-//  int    active_layer;
-
-        uint16_t lt12_timer;
-
-  
-  static uint8_t control_flag;
-  static uint8_t  option_flag;
-  static uint8_t current_flag;
-
-  bool             shift_was_activated     = false;
-
-  static bool    multi_apps                = false;
-  static bool    multi_apps_karabiner      = false;  
-  static bool          apps_just_activated = false;
-  static bool          apps_working        = false;
-  static bool karabiner_apps_working       = false;
-  static bool changing_apps                = false;           
-
-  static bool          symbols_pressed     = false;
-  static bool whole_keyboard_as_indicator = true;
-
-// THIS VARIABLES ARE NOT GOING TO BE USED WITH 23 LEDS PER HAND
-  static int  diff = 1;
-  static int  prev_diff = 1;
-// this variables are not going to be used with 23 leds per hand
-
-  static bool numbers_is_active = false; // #01
-  
-
-  static uint16_t default_hue;
-  static uint8_t  default_sat;
-  static uint8_t  default_val;
 
 //                                                                                      //
 // global variables                                                                     //
@@ -135,6 +109,8 @@ user_config_t user_config;
 // FUNCTIONS FOR ACCESING KEYBINDINGS MAPPED FUNCTIONS                                  //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+
+/*
 void fvim(char *key)
 {
 //  SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v")))));
@@ -142,14 +118,14 @@ void fvim(char *key)
     SEND_STRING("f");
     send_string(key);
 }
-/* select
-void avim(char *key)
-{
-    HYPR_V;
-    SEND_STRING("a");
-    send_string(key);
-}
-*/ 
+
+// select
+// void avim(char *key)
+// {
+//     HYPR_V;
+//     SEND_STRING("a");
+//     send_string(key);
+// }
 
 void dvim(char *key)
 {
@@ -171,45 +147,7 @@ void xvim(char *key)
     SEND_STRING("x");
     send_string(key);
 }
-
-void set_default_hsv(void)
-{
-  default_hue = rgblight_get_hue();
-  default_sat = rgblight_get_sat();
-  default_val = rgblight_get_val();   
-}
-
-//[FIXME]  // MAKE THIS FUNCTION SMALLER, PLEASE !!!
-void get_hsv(void)
-{
-  uint16_t int_1 = 0;
-  uint8_t  int_2 = 0, int_3 = 0;
-
-  char str_1[4];
-  char str_2[4];
-  char str_3[4];
-
-  int_1 = rgblight_get_hue();
-  int_2 = rgblight_get_sat();
-  int_3 = rgblight_get_val();
-
-  itoa(int_1, str_1, 10);
-  itoa(int_2, str_2, 10);
-  itoa(int_3, str_3, 10);
-
-  SEND_STRING("rgblight_get_hue(): ");
-  send_string   (str_1);
-  SEND_STRING(", sat: ");
-  send_string   (str_2);
-  SEND_STRING(", val: ");
-  send_string   (str_3);
-
-  // HYPR(KC_R);
-  
-  SS_BEEP_1;
-  
-}
-//[fixme]  // make this function smaller, please !!!
+*/
 
 void add_desired_mod(uint8_t desired_mod)
 {
@@ -225,11 +163,12 @@ void remove_activated_mod(uint8_t activated_mod)
   send_keyboard_report();
 }
 //
-// [SAVING_SPACE]
-// this function saves from 158 to 216 (58 bytes)
-// ... instead of repeating this bunch or code into 'process_record_user' for ...
-// ... SL_MEN, KA_DCK, KM_TOL, SH_STA, RT_FLO, ...
-// ... we call this function into every function !!!
+// [FIRMWARE_SIZE]
+  // next function saves from 158 to 216 (58 bytes)
+  // ... instead of repeating this bunch or code into 'process_record_user' for ...
+  // ... SL_MEN, KA_DCK, KM_TOL, SH_STA, RT_FLO, ...
+  // ... we call this function into every function !!!
+// [firmware_size]
 bool triggered_control_mod(void)
 {
   control_flag = get_mods()&CTRL_MODS;
@@ -280,9 +219,10 @@ bool triggered_mod(uint8_t mod)
   return false;
 }
 //
-// [SAVING_SPACE]
-// as this function is used only once, for triggering slack app,
-// ... it saves from 66 to 86 (20 bytes) using it directly instead of calling a function
+// [FIRMWARE_SIZE]
+  // as this function is used only once, for triggering slack app,
+  // ... it saves from 66 to 86 (20 bytes) using it directly instead of calling a function
+// [firmware_size]
 // void remove_shift_mod(void)
 // {
 //   shift_flag = get_mods()&SHFT_MODS;
@@ -400,295 +340,8 @@ void send_char(char ascii_code) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [FUNCTIONS] [_DALY] KC_A [F(CAPSL)]                                                  //
-//                                                                                      //
-// CAPSLOCK COMPLEMENTARY FUNCTIONS                                                     //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
-
-  SEND_STRING(SS_DOWN(X_CAPSLOCK));
-  register_code(KC_LCAP);
-
-  capslock_is_active = !capslock_is_active;
-
-// [INFO]
-// Note, that instead of unregister_code (KC_LCAP), ...
-// ... we write unregister_code (KC_CAPS).
-// This is the way it works that I found by the trial and error method.
-  unregister_code(KC_CAPS); 
-// [info] 
-
-  SEND_STRING(SS_UP(X_CAPSLOCK));
-
-} //  my capslock function  -  [f(capsl)] - my capslock finished function
 
 
-void disable_capslock_before_accents_function(void) { // MY CAPSLOCK FINISHED FUNCTION
-
-  if (capslock_is_active)
-    {
-      capslock_tap();
-      disabled_caps_before_accent = true;
-    }
-} // my disable_capslock_before_accents_function
-
-void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTION
-  if (disabled_caps_before_accent == true)
-    {
-      capslock_tap();
-      disabled_caps_before_accent = false;
-  }
-} // my enable_capslock_after_accents_function
-
-
-void show_RGB_LEDs(void)  // MY SWITCH CAPSLOCK INDICATORS ON FUNCTION
-{
-  uint8_t caps_rght_sta = 0;
-  uint8_t caps_rght_end = 0;
-  uint8_t caps_left_sta = 0;
-  uint8_t caps_left_end = 0;
-
-  uint8_t numb_rght_sta = 0;
-  uint8_t numb_rght_end = 0;
-  uint8_t numb_left_sta = 0;
-  uint8_t numb_left_end = 0;
-
-  uint8_t dflt_rght_sta = 0;
-  uint8_t dflt_rght_end = 0;
-  uint8_t dflt_left_sta = 0;
-  uint8_t dflt_left_end = 0;
-
-  if (!rgblight_config.enable) { return; }
-
-  if (capslock_is_active)
-  {
-    if (whole_keyboard_as_indicator)
-    {
-      // RGHT = red
-      caps_rght_sta = OUTER_RGHT;
-      caps_rght_end = INNER_RGHT + 1;
-
-      if (numbers_is_active) // #01
-      {
-        // LEFT = blue
-
-        numb_left_sta = INNER_LEFT;
-        numb_left_end = OUTER_LEFT + 1;
-
-      }
-      else // rgb_num = false 
-      {
-        // LEFT = red
-        caps_left_sta = INNER_LEFT;
-        caps_left_end = OUTER_LEFT + 1;
-      }
-    }
-    else // whole_keyboard_as_indicator = false
-    {
-    //   // rght = red
-    //   caps_rght_sta = INNER_RGHT - diff - 1;
-    //   caps_rght_end = INNER_RGHT + 1;
-
-    //   if (numbers_is_active) // #01
-    //   {
-    //     // left = blue
-    //     numb_left_sta = INNER_LEFT;
-    //     numb_left_end = INNER_LEFT + diff + 1; // 1;
-    //   }
-    //   else // rgb_num = false 
-    //   {
-    //     // left = red
-    //     caps_left_sta = INNER_LEFT;
-    //     caps_left_end = INNER_LEFT + diff + 1; // 1;
-    //   }
-    //   // rght = default color
-    //   dflt_rght_sta = OUTER_RGHT;
-    //   dflt_rght_end = INNER_RGHT - diff - 1;  // /* 1 LED more separated from CapsLock indicator          */ - 2;
-    //   // left = default color
-    //   dflt_left_sta = INNER_LEFT + diff + 1;  // /* 1 LED more separated from CapsLock or _NUMB indicator */ + 2;
-    //   dflt_left_end = OUTER_LEFT        + 1;
-    // }
-
-    // right_thumbs = red
-       caps_rght_sta = INNER_RGHT - diff - 1;
-       caps_rght_end = INNER_RGHT              + 1;
-
-       if (numbers_is_active)
-       {
-         // left = blue
-         numb_left_sta = INNER_LEFT;
-         numb_left_end = INNER_LEFT + diff + 1;
-       }               
-       else // rgb_num = false
-       {
-         // left = red
-         caps_left_sta = INNER_LEFT;
-         caps_left_end = INNER_LEFT + diff + 1;
-       }
-       // rght = default color
-       dflt_rght_sta = OUTER_RGHT;
-       dflt_rght_end = INNER_RGHT - diff - 1;
-       // left = default color
-       dflt_left_sta = INNER_LEFT + diff + 1;
-       dflt_left_end = OUTER_LEFT              + 1;
-    }
-
-  }
-  else // capslock_is_active = false  
-  {
-    if (numbers_is_active) // #01
-    {
-      if (whole_keyboard_as_indicator)
-      {
-        // RGHT = blue
-        numb_rght_sta = OUTER_RGHT;
-        numb_rght_end = INNER_RGHT + 1;
-        // LEFT = blue
-        numb_left_sta = INNER_LEFT;
-        numb_left_end = OUTER_LEFT + 1;
-
-/*
-        numb_rght_sta = INNER_RGHT - diff - 1;
-        numb_rght_end = INNER_RGHT + 1;
-
-        // rght = default color
-        dflt_rght_sta = OUTER_RGHT;
-        dflt_rght_end = INNER_RGHT - diff - 1;  
-*/ /* 1 LED more separated from CapsLock indicator          */ /* - 2; */
-
-/*
-        // left = default color
-        dflt_left_sta = INNER_LEFT + diff + 1;  */ /* 1 LED more separated from CapsLock or _NUMB indicator */ /* + 2;
-        dflt_left_end = OUTER_LEFT        + 1;
-*/
-      }
-      else // whole_keyboard_as_indicator = false
-      {
-        // // rght = blue
-        // numb_rght_sta = INNER_RGHT - diff - 1;
-        // numb_rght_end = INNER_RGHT + 1;
-        // // left = blue
-        // numb_left_sta = INNER_LEFT;
-        // numb_left_end = INNER_LEFT + diff + 1; // 1;
-
-        // // rght = default color
-        // dflt_rght_sta = OUTER_RGHT;
-        // dflt_rght_end = INNER_RGHT - diff - 1;  // /* 1 LED more separated from CapsLock indicator          */ - 2;
-        // // left = default color
-        // dflt_left_sta = INNER_LEFT + diff + 1;  // /* 1 LED more separated from CapsLock or _NUMB indicator */ + 2;
-        // dflt_left_end = OUTER_LEFT        + 1;
-
-        // rght = blue
-        numb_rght_sta = INNER_RGHT - diff - 1;
-        numb_rght_end = INNER_RGHT              + 1;
-        // left = blue
-        numb_left_sta = INNER_LEFT;
-        numb_left_end = INNER_LEFT + diff + 1;
-        // rght = default color
-        dflt_rght_sta = OUTER_RGHT;
-        dflt_rght_end = INNER_RGHT - diff - 1;
-        // left = default color
-        dflt_left_sta = INNER_LEFT + diff + 1;
-        dflt_left_end = OUTER_LEFT              + 1;
-      }
-
-    }
-    else // numbers_is_active = false & capslock_is_active = false as well !!!
-    {
-      // LEFT = default color
-      dflt_rght_sta = OUTER_RGHT;
-      dflt_rght_end = INNER_RGHT + 1;
-
-      
-      // RGHT = default color
-      dflt_left_sta = INNER_LEFT;
-      dflt_left_end = OUTER_LEFT + 1;
-    }
-  }
-      LED_TYPE tmp_led_range;
-      sethsv(COLOR_CAPS, &tmp_led_range);
-      setrgb_range(tmp_led_range.r, tmp_led_range.g, tmp_led_range.b, caps_rght_sta, caps_rght_end);
-      setrgb_range(tmp_led_range.r, tmp_led_range.g, tmp_led_range.b, caps_left_sta, caps_left_end);
-
-      sethsv(COLOR_NUMB, &tmp_led_range);
-      setrgb_range(tmp_led_range.r, tmp_led_range.g, tmp_led_range.b, numb_rght_sta, numb_rght_end);
-      setrgb_range(tmp_led_range.r, tmp_led_range.g, tmp_led_range.b, numb_left_sta, numb_left_end);
-
-      sethsv(default_hue, default_sat, default_val, &tmp_led_range);
-      setrgb_range(tmp_led_range.r, tmp_led_range.g, tmp_led_range.b, dflt_rght_sta, dflt_rght_end);
-      setrgb_range(tmp_led_range.r, tmp_led_range.g, tmp_led_range.b, dflt_left_sta, dflt_left_end);
-
-  rgblight_set();
-
-} // my switch capslock indicators on function
-//                                                                                      //
-// [functions] [_daly] kc_a [f(capsl)]                                                  //
-//                                                                                      //
-// capslock complementary functions                                                     //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [FUNCTIONS] [_POWR] KC_R (MY_RESET)process_record_user                               //
-// [FUNCTIONS] [_DFLT] KC_R (TH_R4_POWR_LEDS)process_record_user                        //
-// [FUNCTIONS] [_LEDS] KC_O (SAV_COL)process_record_user                                //
-// [FUNCTIONS] [_LEDS] KC_L (GET_HSV)process_record_user                                //
-//                                                                                      //
-// RESET MY KEYBOARD FUNCTION                                                           //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-void flashing_LEDs(uint8_t times, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t r2, uint8_t g2, uint8_t b2)
-//RGB_MY_WHITE
-//RGB_MY_RED
-{
-  for (uint8_t i = 0; i < times; i++)
-  {
-    rgblight_setrgb(r1, g1, b1);
-    // _delay_ms (50);
-    wait_ms(50);
-
-    rgblight_setrgb(r2, g2, b2);
-    wait_ms(100);
-  }
-}
-//                                                                                      //
-// [functions] [_powr] kc_r   (my_reset)process_record_user                             //
-// [functions] [_dflt] l_th_4 (TH_R4_POWR_LEDS)process_record_user                   //
-//                                                                                      //
-// reset my keyboard function                                                           //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [FUNCTIONS] [_POWR] KC_R (MY_RESET)process_record_user                               //
-// [FUNCTIONS] [_DFLT] KC_R (TH_R4_POWR_LEDS)process_record_user                     //
-//                                                                                      //
-// RESET MY KEYBOARD FUNCTION                                                           //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
-
-  SS_BEEP_1;
-  // _delay_ms (1);
-  wait_ms(1);
-  rgblight_enable_noeeprom();
-  wait_ms(1);
-
-  flashing_LEDs(5, RGB_MY_WHITE, RGB_MY_RED);
-  reset_keyboard();
-}
-//                                                                                      //
-// [functions] [_powr] kc_r (my_reset)                                                  //
-// [functions] [_dflt] l_th_4 (TH_R4_POWR_LEDS)                                      //
-//                                                                                      //
-// reset my keyboard function                                                           //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 //                                                                                      //
@@ -1220,6 +873,64 @@ void SLEP_M_reset (qk_tap_dance_state_t *state, void *user_data) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_R (HRESET)                                                     //
+//                                                                                      //
+//  R E S E T                                                                           //
+//                                                                                      //
+//  KC_R:   @   R E S E T                                                               //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'HRESET' tap dance.
+static tap HRESET_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void HRESET_finished (qk_tap_dance_state_t *state, void *user_data) {
+  HRESET_tap_state.state = cur_dance(state);
+  switch (HRESET_tap_state.state) {
+
+    case SINGLE_HOLD: // starts backlight blinking and then reset the keyboard for about 7 seconds
+                      reset_my_keyboard_function();
+                      break;
+  }
+}
+
+void HRESET_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (HRESET_tap_state.state) {
+    case SINGLE_HOLD:        break;
+  }
+  HRESET_tap_state.state = 0;
+}
+
+//
+// [FIRMWARE_SIZE]
+  // Next way, we save only 2 bytes (it doesn't matter, I prefer classic way:
+// [firmware_size]
+//
+    /*
+    void HRESET_finished (qk_tap_dance_state_t *state, void *user_data) {
+      switch (cur_dance(state)) {
+
+        case SINGLE_HOLD: // starts backlight blinking and then reset the keyboard for about 7 seconds
+                          reset_my_keyboard_function();
+                          break;
+      }
+      // reset_tap_dance(state);
+    }
+    */
+
+//                                                                                      //
+// [tapdance] [_powr] kc_r (hreset)                                                     //
+//                                                                                      //
+//  r e s e t                                                                           //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1999,6 +1710,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // [_POWR] LAYER
   ,[SLEP_M]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLEP_M_finished, SLEP_M_reset)// [_powr] layer
 
+  ,[HRESET]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, HRESET_finished, HRESET_reset, 1000)
+  // ,[HRESET]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, HRESET_finished, NULL, 1000)
+
 };
 //                                                                                      //
 //               t a p    d a n c e    d e c l a r a t i o n s                          //
@@ -2426,6 +2140,9 @@ void keyboard_post_init_user(void) {
 // Call the post init code.
 
 // Wenset default color variables from the initial color of the keyboard and ...
+  
+  // whole_keyboard_as_indicator = true;
+  // diff = prev_diff = 4;
 
   set_default_hsv();
 
@@ -3034,7 +2751,7 @@ if (numbers_is_active)
                         else
                         {
                           prev_diff = diff;
-                          diff = 1;
+                  //[BUG] // diff = 4;  //[bug]
                         }
                         whole_keyboard_as_indicator = !whole_keyboard_as_indicator;
                         show_RGB_LEDs();                        
@@ -3071,10 +2788,12 @@ if (numbers_is_active)
       case KC_DEL:   rgblight_sethsv_noeeprom(HSV_MY_RED);
                      return true;
                      
-      //[SAVING_SPACE]
+    // [FIRMWARE_SIZE]
       // using triggered_control_mod as a bool function, we save from 38 to 66 bytes --> 28 bytes saved
+    // [firmware_size]
       // case SL_MEN:    if (triggered_control_mod())
-/*
+/* Now 'SLEEP_FILEMENU' is implemented with tap_dance(SINGLE_HOLD),
+...which is much more comfortable to press than 'Control+_POWR+z' !!! 
       case SL_MEN:    if (triggered_mod(KC_C))
                       {
                          register_code(KC_POWER);
@@ -3113,8 +2832,10 @@ if (numbers_is_active)
                       }
                       return false;
 
-      case SH_STA:  //we save unregister control and register again
-                    //if (triggered_mod(KC_C)) 
+      case SH_STA:  // [FIRMWARE_SIZE]
+                      //we save unregister control and register again
+                      //if (triggered_mod(KC_C)) 
+                    // [firmware_size]
                       if (control_flag)
                       {
                         volumeSetToLevel(1);
@@ -3132,7 +2853,11 @@ if (numbers_is_active)
                       }
                       return false;
 
-      case RT_FLO:    if (control_flag) //same 'saving control' issue as in previous case
+      case RT_FLO:  // [FIRMWARE_SIZE]
+                      //we save unregister control and register again
+                      //if (triggered_mod(KC_C)) 
+                    // [firmware_size]
+                      if (control_flag) //same 'saving control' issue as in previous case
                       {
                       //keystrokes for restarting:  (guessed by try and fail method)
                         register_code(KC_LGUI);
@@ -3168,15 +2893,24 @@ if (numbers_is_active)
 //
 // KEYCODES FOR TRIGGERING APPS
 
+
+
+
+
+// [FIRMWARE_SIZE]
+//  From APP_Q_SNOTE to APP_EN_NUMB we save 676 bytes !!!
+// [firmware_size]
 // LEFT ROW 1 APPS
       case APP_Q_SNOTE: callApp("q");                         return false; // simple note
       //
+    // [FIRMWARE_SIZE]
       // 10 bytes saved if we don't declare 'APP_W_TWTTR' and don't write the next line
       case APP_W_TWTTR: callApp("w");                         return false; // t W itter
+    // [firmware_size]
       //
-      //
-      // [SAVING_SPACE]
+    // [FIRMWARE_SIZE]
       // 88 bytes free when disable Evernote case and 40 bytes when I enable it  -->  it costs 48 bytes of code
+    // [firmware_size]
       case APP_E_EVERN: 
                         if (control_flag)
                         {
@@ -3191,7 +2925,7 @@ if (numbers_is_active)
                         }
                         return false;                                       // E vernote
       //
-      // case APP_R_APSTO: callApp("r");                         return false; // app sto R e
+      case APP_R_APSTO: callApp("r");                         return false; // app sto R e
       case APP_T_TERMI: callApp("t");                         return false; // T erminal
 
 
@@ -3215,8 +2949,12 @@ if (numbers_is_active)
 
 
 // LEFT ROW 2 APPS
-      // case APP_A_SCRPT: callApp("a");                         return false; // A pple script
-      case APP_S_SAFAR: if (control_flag)
+      case APP_A_SCRPT: callApp("a");                         return false; // A pple script
+      case APP_S_SAFAR: //               S: opens Safari
+                        //       control+S: opens Safari with address bar focused 
+                        // shift+control+S: opens Slack webpage in Safari 
+
+                        if (control_flag)
                         {
                           triggered_control_mod();
                           // if (shift_flag)
@@ -3267,7 +3005,7 @@ if (numbers_is_active)
                         }
                         return false;                                       // D ay one
       case APP_F_FINDE: callApp("f");                         return false; // F inder
-      // case APP_G_CHRME: callApp("g");                         return false; // G oogle chrome
+      case APP_G_CHRME: callApp("g");                         return false; // G oogle chrome
 
 
 // RIGHT ROW 2 APPS
@@ -3275,11 +3013,11 @@ if (numbers_is_active)
       case APP_J_SUBLI: callApp("j");                         return false; // sublime text
       case APP_K_KRBNR: callApp("k");                         return false; // K arabiner-elements
       case APP_L_CLNDR: callApp("l");                         return false; // Calendar
-      // case APPSP_EMPTY: callApp(" ");                         return false; // ???? EMPTY EMPTY EMPTY EMPTY 
+      case APPSP_EMPTY: callApp(" ");                         return false; // ???? EMPTY EMPTY EMPTY EMPTY 
 
 
 // LEFT ROW 3 APPS
-      // case APP_Z_STUDI: callApp("z");                         return false; // Studies
+      case APP_Z_STUDI: callApp("z");                         return false; // Studies
       case APP_X_XCODE: callApp("x");                         return false; // Xcode
       case APP_C_CALCU: callApp("c");                         return false; // Calculator
       case APP_V_KVIEW: callApp("v");                         return false; // karabiner-event Viewer
@@ -3299,6 +3037,14 @@ if (numbers_is_active)
 // applications
 //
 // keycodes for triggering apps
+
+// [firmware_size]
+
+
+
+
+
+
 
 
 // _FVIM
@@ -3389,11 +3135,22 @@ _LEDS COMMANDS
                     flashing_LEDs(10, RGB_MY_AZURE, RGB_MY_PURPLE);
                     return false;
 
-      case GET_HSV: flashing_LEDs(5, RGB_MY_YELLOW, RGB_MY_PURPLE);
-                    // SEND_STRING("\n===");
+      case GET_HSV: /*wait_ms(1500); SS_BEEP_2; wait_ms(1500);*/
+                    flashing_LEDs(5, RGB_MY_YELLOW, RGB_MY_PURPLE);
+
+
+
+
+
+                    SEND_STRING("\n===");
                     SEND_STRING("\nget_hsv() -> ");
                     get_hsv();
-                    SS_BEEP_1;
+
+
+
+
+
+                    // SS_BEEP_1; SS_BEEP_2;
                     return false;
 
 // [WHYWEDOTHIS]
@@ -3468,13 +3225,15 @@ ROW 3 COLORS
 //  Do something else when release
     switch(keycode)
     {
-      // 746-674= 72 bytes saved using TT(layer) instead of my implementation
-      // ... but RGB layer color changes too slow.  MY way is instantly changed !
-      // if (record->event.pressed) {
-      // case TT_NUMB:   lt12_timer = timer_read();
-                      // layer_invert(_NUMB);
-      //                 return false; 
-      // emulates TT(layer)
+    // [FIRMWARE_SIZE]
+        // 746-674= 72 bytes saved using TT(layer) instead of my implementation
+        // ... but RGB layer color changes too slow.  MY way is instantly changed !
+        // if (record->event.pressed) {
+        // case TT_NUMB:   lt12_timer = timer_read();
+                        // layer_invert(_NUMB);
+        //                 return false; 
+        // Emulating TT(layer), but better:
+    // [firmware_size]
       case TT_NUMB:   if (timer_elapsed(lt12_timer) > TAPPING_TERM)
                       {  
                         // if we have had pressed this 'trigger layer key' more time than tapping_term
