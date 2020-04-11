@@ -18,12 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #include QMK_KEYBOARD_H
 #include "manolodeinternet.h"
 
-            bool grave_requested = false;
         bool diaeresis_requested = false;
+            bool grave_requested = false;
        bool circumflex_requested = false;
 
-         bool capslock_is_active = false;
 bool disabled_caps_before_accent = false;
+         bool capslock_is_active = false;
+
+          bool numbers_is_active = false;   // flag for _NUMB layer
+
 //
 // ======================================================
 // Following line is not necesary.  Its place is in 'rgblight_mini_datyl.c':

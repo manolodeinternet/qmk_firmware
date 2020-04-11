@@ -103,12 +103,14 @@
 // __attribute__((weak)) 
 // COMMON VARIABLES FOR ALL KEYBOARDS
 bool diaeresis_requested;
-bool circumflex_requested;
 bool grave_requested;
+bool circumflex_requested;
 
 bool disabled_caps_before_accent;
 bool capslock_is_active;
-  
+
+bool numbers_is_active;   // flag for _NUMB layer
+
 uint8_t shift_flag;
 uint8_t gui_flag;
 // common variables for all keyboards  

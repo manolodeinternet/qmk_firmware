@@ -3013,11 +3013,11 @@ if (numbers_is_active)
       case APP_J_SUBLI: callApp("j");                         return false; // sublime text
       case APP_K_KRBNR: callApp("k");                         return false; // K arabiner-elements
       case APP_L_CLNDR: callApp("l");                         return false; // Calendar
-      case APPSP_EMPTY: callApp(" ");                         return false; // ???? EMPTY EMPTY EMPTY EMPTY 
+      // case APPSP_EMPTY: callApp(" ");                         return false; // ???? EMPTY EMPTY EMPTY EMPTY 
 
 
 // LEFT ROW 3 APPS
-      case APP_Z_STUDI: callApp("z");                         return false; // Studies
+      // case APP_Z_STUDI: callApp("z");                         return false; // Studies
       case APP_X_XCODE: callApp("x");                         return false; // Xcode
       case APP_C_CALCU: callApp("c");                         return false; // Calculator
       case APP_V_KVIEW: callApp("v");                         return false; // karabiner-event Viewer
@@ -3030,7 +3030,7 @@ if (numbers_is_active)
       // case APP_ES_KEYN: callApp("\e");                        return false; // Keynote
       // case APP_BS_PAGE: callApp("\b");                        return false; // Pages
       // case APP_EN_NUMB: callApp("\n");                        return false; // Numbers
-      case APP_ES_KEYN: callApp("1");                         return false; // Keynote
+      // case APP_ES_KEYN: callApp("1");                         return false; // Keynote
       case APP_BS_PAGE: callApp("2");                         return false; // Pages
       case APP_EN_NUMB: callApp("3");                         return false; // Numbers
 // keycodes for triggering apps

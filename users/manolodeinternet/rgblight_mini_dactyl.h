@@ -17,8 +17,7 @@
 
 #pragma once
 #include QMK_KEYBOARD_H
-
-// #include "rgblight.h"
+#include "rgblight.h"
 
 /*              RGB MY COLORS             */
 

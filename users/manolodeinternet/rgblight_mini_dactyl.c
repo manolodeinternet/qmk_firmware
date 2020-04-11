@@ -29,7 +29,6 @@
 
 
 #include "rgblight_mini_dactyl.h"
-#include "rgblight.h"
 
 
 
