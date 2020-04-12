@@ -49,7 +49,7 @@
 
 
 // [MINE]
-extern rgblight_config_t rgblight_config;    // without this line, it doesn't recognize rgblight_config
+// extern rgblight_config_t rgblight_config;    // without this line, it doesn't recognize rgblight_config
 // extern LED_TYPE led[RGBLED_NUM];
 // [mine]
 
@@ -2116,6 +2116,7 @@ void keyboard_post_init_user(void) {
 //
 
 /*
+// [MASTER_DRASHNA]
 void keyboard_post_init_rgb(void) {
 #if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_STARTUP_ANIMATION)
     // if (userspace_config.rgb_layer_change) { rgblight_enable_noeeprom(); }
@@ -2133,6 +2134,7 @@ void keyboard_post_init_rgb(void) {
 #endif
     layer_state_set_user(layer_state);
 }
+// [master_drashna]
 */
 
 //

@@ -63,6 +63,9 @@ endif
 // [FIXME]
 // [fixme]         there's something I HAVE TO FIX for a right working
 //
+// [GHERKIN_SCOPE]
+// [gherkin_scope]  GHERKIN scope only
+//
 // [IMPROVEME]
 // [improveme]     there is something we could change for a smoothter working or a more elegant code
 //
@@ -74,6 +77,12 @@ endif
 //
 // [LAST]
 // [last]          for marking the point where I'm working
+//
+// [MASTER_DRASHNA]from https://github.com/qmk/qmk_firmware/tree/master/users/drashna
+// [master_drashna]  or https://github.com/qmk/qmk_firmware/tree/master/keyboards/kyria/keymaps/drashna
+//
+// [MINI_DACTYL_SCOPE]
+// [mini_dactyl_scope]  MINI DACTYL scope only
 //
 // [OLDWAY]        it works, but smells ...
 //                 the ugly way I did this before that we aren't going to need any more.

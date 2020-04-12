@@ -2,7 +2,7 @@
 #include QMK_KEYBOARD_H
 
 #include "manolodeinternet.h"
-#include "rgblight_mini_dactyl.h"
+// #include "rgblight_mini_dactyl.h"
 
 // SPECIFIC VARIABLES FOR MINI DACTYL
     uint8_t control_flag;

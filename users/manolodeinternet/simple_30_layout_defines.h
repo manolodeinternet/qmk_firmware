@@ -1,7 +1,7 @@
 #pragma once
 #include QMK_KEYBOARD_H
 
-#include "rgblight_mini_dactyl.h"
+// #include "rgblight_mini_dactyl.h"
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                                   //

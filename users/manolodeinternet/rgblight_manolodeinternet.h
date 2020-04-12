@@ -13,10 +13,14 @@
 
 
 extern rgblight_config_t rgblight_config;    // without this line, it doesn't recognize rgblight_config
-extern LED_TYPE tmp_led;
+//... we use it for checking if RGB LEDs are enabled along the program, trough 'process_record user' in
+//... 'TOG_ID', 'STP_ID', 'SAV_COL'; in 'show_RGB_LEDs'; in drashna code 'keyboard_post_init_rgb';or in
+//... 'rgblight_mini_dactyl.c' with 'setrgb_range' function.
 
-extern bool capslock_is_active;
-// extern bool numbers_is_active;   // flag for _NUMB layer
+// LED_TYPE tmp_led;  //[DELETEME]
+
+// extern bool capslock_is_active;
+// extern bool numbers_is_active;  //[only_GHERKIN]  // flag for _NUMB layer
 
 
 

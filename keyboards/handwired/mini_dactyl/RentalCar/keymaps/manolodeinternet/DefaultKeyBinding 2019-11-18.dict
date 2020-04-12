@@ -1,0 +1,340 @@
+{
+ "^~@V" = { 
+           "f" = {
+                        "y" = (selectParagraph:, setMark:, deleteToMark:, moveLeft:,
+                               moveToBeginningOfParagraph:, yank:, moveToBeginningOfParagraph:, moveLeft:);
+                        "u" =  moveToBeginningOfLine:;
+                        "U" = (moveBackward:, moveToBeginningOfParagraph:);
+                        "i" =  moveWordBackward:;    
+                        "o" =  moveWordForward:;     
+                        "p" =  moveToEndOfLine:;                                
+                        "P" = (moveForward:, moveToEndOfParagraph:);
+
+                        "h" =  centerSelectionInVisibleArea:;
+                        "j" =  moveBackward:;
+                        "k" =  moveUp:;
+                        "l" =  moveDown:;
+                   "\U0020" =  moveForward:;
+
+                        "n" = (selectParagraph:, setMark:, deleteToMark:, moveToEndOfParagraph:,
+                               moveRight:,    setMark:,    yank:,    moveLeft:,   selectToMark:, moveToEndOfParagraph:);
+                        "m" =  moveToBeginningOfDocument:;
+                   "\U001B" =  pageUp:;
+                   "\U007F" =  pageDown:;
+                   "\U000D" =  moveToEndOfDocument:;
+           };
+           
+           "d" = {
+                        "y" =  yank:;
+                        "u" =  deleteToBeginningOfLine:;
+                        "U" = (moveBackward:, 
+                               moveToBeginningOfParagraphAndModifySelection:, 
+                               delete:, deleteForward:);
+                        "i" =  deleteWordBackward:;
+                        "o" =  deleteWordForward:;
+                        "p" =  deleteToEndOfLine:;
+                        "P" = (setMark:,
+                               moveToEndOfParagraphAndModifySelection:,
+                               deleteToMark:,
+                               moveForward:);
+                               
+
+                        "h" = (setMark:,
+                               
+                               selectLine:,
+
+                               deleteToMark:);
+
+                        "j" =  deleteBackward:;
+                        "k" = (setMark:,
+                               moveUpAndModifySelection:,
+                               deleteToMark:);
+                        "l" = (setMark:,
+                               moveDownAndModifySelection:,
+                               deleteToMark:);
+                   "\U0020" =  deleteForward:;
+       
+                        "m" = (setMark:,
+                               moveToBeginningOfDocumentAndModifySelection:,
+                               deleteToMark:);
+                   "\U001B" = (setMark:,
+                               pageUpAndModifySelection:,
+                               deleteToMark:);
+                   "\U007F" = (setMark:,
+                               pageDownAndModifySelection:,
+                               deleteToMark:);
+                   "\U000D" = (setMark:,
+                               moveToEndOfDocumentAndModifySelection:,
+                               deleteToMark:);
+           };
+           
+           "c" = {
+                        "y" = (setMark:,
+                               moveToBeginningOfParagraph:,
+                               insertNewlineIgnoringFieldEditor:,
+                               swapWithMark:,
+                               moveForward:);
+                        "u" = (setMark:,
+                               moveBackward:,
+                               moveToBeginningOfParagraph:,
+                               moveBackward:,
+                               moveToBeginningOfParagraphAndModifySelection:,
+                               copy:,
+                               swapWithMark:);
+                        "i" = (setMark:,
+                               moveToBeginningOfParagraphAndModifySelection:,
+                               moveToEndOfParagraphAndModifySelection:,
+                               delete:,
+                               yank:,
+                               insertNewlineIgnoringFieldEditor:,
+                               yank:,
+                               swapWithMark:);
+                        "o" = (setMark:,
+                               moveToEndOfParagraph:,
+                               moveForward:,
+                               moveToEndOfParagraph:,
+                               moveToBeginningOfParagraphAndModifySelection:,
+                               copy:,
+                               swapWithMark:);
+                        "p" = (setMark:,
+                               moveToEndOfParagraph:,
+                               insertNewlineIgnoringFieldEditor:,
+                               swapWithMark:);
+
+                        "h" =  outdent:;
+                        "j" =  uppercaseWord:;
+                        "k" =  lowercaseWord:;
+                        "l" =  capitalizeWord:;
+                   "\U0020" =  indent:;
+
+                        "n" = (setMark:,
+                               moveBackwardAndModifySelection:,
+                               copy:,
+                               swapWithMark:);
+                        "m" = (setMark:,
+                               selectWord:,
+                               copy:,
+                               swapWithMark:);
+                   "\U001B" = (setMark:,
+                               moveToBeginningOfLine:,
+                               moveToEndOfLineAndModifySelection:,
+                               copy:,
+                               swapWithMark:);
+                   "\U007F" = (setMark:,
+                               selectParagraph:,
+                               copy:,
+                               swapWithMark:);
+                   "\U000D" = (setMark:,
+                               moveToBeginningOfDocument:,
+                               moveToEndOfDocumentAndModifySelection:,
+                               copy:,
+                               swapWithMark:);
+           };
+           
+           "x" = {
+                        "y" =  complete:;
+                        "u" = alignLeft:;
+                        "i" = alignCenter:;
+                        "o" = alignJustified:;
+                        "p" = alignRight:;
+
+
+
+                        "h" = (moveUp:, moveUp:, moveUp:, moveUp:, moveUp:);
+                        "j" = (moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:);
+
+/* [MY OWN COMMAND] for        transposeWord:; */
+
+                        "k" = (moveBackward:,
+                               moveForward:,
+                               setMark:,
+
+                               moveWordForward:,
+                               moveWordBackwardAndModifySelection:,
+                               moveBackwardAndModifySelection:,
+
+                               deleteToMark:,
+                               moveWordBackward:,
+                               setMark:,
+
+                               yank:,
+
+                               moveWordBackwardAndModifySelection:,
+                               deleteToMark:,
+
+                               moveBackward:,
+                               yank:,
+
+                               moveWordForward:,
+                               setMark:);
+
+/* [my own command] for        transposeWord:; */
+
+                        "l" =  transpose:;
+
+                   "\U0020" = (moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:,
+                               moveUp:, moveUp:, moveUp:, moveUp:, moveUp:);
+
+
+
+                        "n" = (moveDown:, moveDown:, moveDown:, moveDown:, moveDown:);
+                        "m" = (moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:);
+                   "\U001B" = scrollPageUp:;
+                   "\U007F" = scrollPageDown:;
+                   "\U000D" = (moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:,
+                               moveDown:, moveDown:, moveDown:, moveDown:, moveDown:);
+           }; 
+ }; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* (pageUp/pageDown/home/end) to go through the document WITHOUT moving insertion point, caret */
+/* 🐞🐞🐞 I've removed the next line:  "~]" = (selectParagraph:); 🐞🐞🐞                      */
+/* "a" = ("insertText:", "some fun text", "moveWordBackward:");                                */
+
+"\Uf72c" = scrollPageUp:;
+"\Uf72d" = scrollPageDown:;
+"\Uf729" = scrollToBeginningOfDocument:;
+"\Uf72b" = scrollToEndOfDocument:;
+
+/* OPTION+(pageUp/pageDown/home/end) to go through the document, while MOVING insertion point, caret */
+
+"~\Uf72c" = pageUp:;
+"~\Uf72d" = pageDown:;
+
+/* you can put the keywords directly -how we are doing so far- or in quotation marks -as in the following instruction-. */
+
+"~\Uf729" = "moveToBeginningOfDocument:";
+"~\Uf72b" =  moveToEndOfDocument:;
+
+"@$\Uf702" = (moveLeftAndModifySelection:,  moveToLeftEndOfLineAndModifySelection:);
+"@\Uf702"  = (moveLeft:,                    moveToLeftEndOfLine:);
+"@$\Uf703" = (moveRightAndModifySelection:, moveToEndOfLineAndModifySelection:);
+"@\Uf703"  = (moveRight:,                   moveToEndOfLine:);
+
+
+/* duplicate current paragraph below without moving the cursor
+     ~3 = (setMark:, moveToBeginningOfParagraphAndModifySelection:, moveToEndOfParagraphAndModifySelection:, delete:, yank:, insertNewlineIgnoringFieldEditor:, yank:, swapWithMark:);
+     It's similar to "~d" that you can see below
+ */
+
+/* ~4 ♦️delete line*/
+
+  "~4" = (moveToBeginningOfLine:, moveToEndOfLineAndModifySelection:, delete:);
+
+/* ~5 ♦️delete to the beginning of line */
+
+  "~5" = (moveToBeginningOfLineAndModifySelection:, delete:);      /* (deleteToBeginningOfLine:); */
+
+/* ~6 ♦️delete to the end of line */
+
+  "~6" = (deleteToEndOfLine:);
+
+/* ~7 ♦️delete to the beginning of paragraph */
+
+  "~7" = (deleteToBeginningOfParagraph:);
+
+/* ~8 ♦️delete to the end of paragraph */
+
+  "~8" = (deleteToEndOfParagraph:);
+
+
+/* The following keybindings are from: http://osxnotes.net/keybindings.html */
+  "~w" = selectWord:;
+  "~j" = (selectWord:, cut:);
+  "~g" = (selectWord:, copy:);
+  "~h" = (selectWord:, paste:);
+
+  "~l" = selectParagraph:;
+
+/* ~z ♦️delete current paragraph */
+
+  "~z" = (selectParagraph:, deleteBackward:);
+  "~x" = (selectParagraph:, cut:);
+  "~c" = (selectParagraph:, copy:);
+
+  "~s" = (moveToBeginningOfParagraphAndModifySelection:, moveToEndOfParagraphAndModifySelection:);
+  "~y" = (moveToBeginningOfParagraphAndModifySelection:, moveToEndOfParagraphAndModifySelection:, deleteBackward:);
+  "~q" = (moveToBeginningOfParagraphAndModifySelection:, moveToEndOfParagraphAndModifySelection:, cut:);
+  "~m" = (moveToBeginningOfParagraphAndModifySelection:, moveToEndOfParagraphAndModifySelection:, copy:);
+
+  "~a" = (moveToBeginningOfParagraphAndModifySelection:, copy:);
+  "~r" = (moveToEndOfParagraphAndModifySelection:, copy:);
+  "~t" = (moveToBeginningOfParagraphAndModifySelection:, cut:);
+  "~k" = (moveToEndOfParagraphAndModifySelection:, cut:);
+
+  "~v" = (delete:, setMark:, paste:, selectToMark:);
+
+  "~3" = (setMark:, moveToBeginningOfParagraphAndModifySelection:, moveToEndOfParagraphAndModifySelection:, delete:, yank:, insertNewlineIgnoringFieldEditor:, yank:, swapWithMark:);
+  "~d" = (setMark:, moveToBeginningOfParagraphAndModifySelection:, moveToEndOfParagraphAndModifySelection:, delete:, yank:, insertNewlineIgnoringFieldEditor:, yank:);
+
+  "~-" = lowercaseWord:;
+  "~=" = uppercaseWord:;
+  "~." = capitalizeWord:;
+
+  "~l" = (lowercaseWord:, moveForward:, moveForward:);
+  "~p" = (uppercaseWord:, moveForward:, moveForward:);
+  "~o" = (capitalizeWord:, moveForward:, moveForward:);
+  "~[" = (selectWord:);
+
+
+/*insert a line below the current paragraph*/
+  "@\r" = (moveToEndOfParagraph:, insertNewlineIgnoringFieldEditor:, deleteToBeginningOfParagraph:);
+/*insert a line above the current paragraph*/
+  "$\r" = (moveToBeginningOfParagraph:, insertNewlineIgnoringFieldEditor:, moveBackward:);
+
+/*move paragraph to one paragraph up*/
+  "@^\Uf700" = (selectParagraph:, setMark:, deleteToMark:, moveBackward:, moveToBeginningOfParagraph:, setMark:, yank:, moveBackward:, selectToMark:);
+/*move paragraph to one paragraph down*/
+  "@^\Uf701" = (selectParagraph:, setMark:, deleteToMark:, moveToEndOfParagraph:, moveForward:, setMark:, yank:, moveBackward:, selectToMark:);
+
+  "@\Uf728" = deleteToEndOfParagraph:;
+
+  "^,"  = moveToBeginningOfDocument:;
+  "^."  = moveToEndOfDocument:;
+  "^$," = moveToBeginningOfDocumentAndModifySelection:;
+  "^$." = moveToEndOfDocumentAndModifySelection:;
+  "^~," = (moveToBeginningOfDocumentAndModifySelection:, deleteBackward);
+  "^~." = (moveToEndOfDocumentAndModifySelection:, deleteBackward);
+
+}
