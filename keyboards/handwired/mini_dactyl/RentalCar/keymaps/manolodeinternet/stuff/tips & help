@@ -1,4 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+What is #include QMK_KEYBOARD_H for ?
+        =======================
+Tips for Making Layouts Keyboard-Agnostic
+https://github.com/qmk/qmk_firmware/blob/master/docs/feature_layouts.md#tips-for-making-layouts-keyboard-agnostic
+
+
+Includes
+
+Instead of using #include "planck.h", you can use this line to include whatever <keyboard>.h (<folder>.h should not be included here) file that is being compiled:
+
+#include QMK_KEYBOARD_H
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////// LINE TOO LONG !!!

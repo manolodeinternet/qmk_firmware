@@ -1,5 +1,6 @@
 #pragma once
-#include QMK_KEYBOARD_H
+// #include QMK_KEYBOARD_H
+#include "manolodeinternet.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -37,6 +38,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -55,8 +59,10 @@ enum tap_dance_keycodes {
 
 
   // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
-  ,SLEP_M   //   menu bar / (on hold) SLEEP
   ,HRESET   // on hold RESET keyboard
+
+  ,LCKLOG   // lock screen / (on hold) logout user session
+  ,SLEP_M   // menu bar / (on hold) SLEEP
   // tap dance keycodes accessible from _powr layer 12
 
   // common tapdance keycodes accessible from all keyboards
@@ -77,7 +83,6 @@ enum tap_dance_keycodes {
     ,X_QUES
 
     // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
-    ,LOGOUT   // logout user session
     ,KILM_T   //   dock bar / (on hold) KILL MENU
     ,KILA_D   //  tools bar / (on hold) KILL CURRENT APP
     ,SHUT_S   // status bar / (on hold) COMPUTER SHUT DOWN
@@ -116,4 +121,167 @@ enum tap_dance_keycodes {
 // tap dance declarations (list of my tap dance configurations)                         //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//                                                                                      //
+// TAP DANCE GENERAL SETUP SECTION START                                                //
+//                                                                                      //
+//  * SINGLE_TAP                                                                        //
+// ** DOUBLE_TAP                                                                        //
+//  @ SINGLE_HOLD                                                                       //
+// @@ DOUBLE_HOLD                                                                       //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+typedef struct {
+    bool is_press_action;
+    int  state;
+} tap;
+
+
+
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+
+
+int cur_dance (qk_tap_dance_state_t *state);//                                                                                      //
+// tap dance general setup section end                                                  //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//               T A P   D A N C E   F O R  -  V   I   M  -  L A Y E R S                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [ _FVIM ] KC_U (FVIM_uU)                                                  //
+//                                                                                      //
+//  B E G I N N I N G   O F   L I N E    /    P A R A G R A P H                         //
+//                                                                                      //
+//  KC_U:  * BEGINING OF LINE                                                           //
+//        ** BEGINING OF PARAGRAPH                                                      //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
+//                                                                                      //
+//  b e g i n n i n g   o f   l i n e    /    p a r a g r a p h                         //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [ _FVIM ] KC_P (FVIM_pP)                                                  //
+//                                                                                      //
+//  E N D   O F   L I N E  /  P A R A G R A P H                                         //
+//                                                                                      //
+//  KC_P:  * END OF LINE                                                                //
+//        ** END OF PARAGRAPH                                                           //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void FVIM_pP_function (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [ _fvim ] kc_p (fvim_pp)                                                  //
+//                                                                                      //
+//  e n d   o f   l i n e  /  p a r a g r a p h                                         //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [ _DVIM ] KC_U (DVIM_uU)                                                  //
+//                                                                                      //
+//  D E L E T E   T O   B E G I N N I N G   O F   L I N E   /   P A R A G R A P H       //
+//                                                                                      //
+//  KC_U:  * DELETE TO BEGINNING OF LINE                                                //
+//        ** DELETE TO BEGINNING OF PARAGRAPH                                           //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void DVIM_uU_function (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [ _dvim ] kc_u (dvim_uu)                                                  //
+//                                                                                      //
+//  d e l e t e   t o   b e g i n n i n g   o f   l i n e   /   p a r a g r a p h       //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [ _DVIM ] KC_P (DVIM_pP)                                                  //
+//                                                                                      //
+//  D E L E T E   T O   E N D   O F   L I N E   /   E N D   O F   P A R A G R A P H     //
+//                                                                                      //
+//  KC_U:  * DELETE TO END OF LINE                                                      //
+//        ** DELETE TO END OF PARAGRAPH                                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [ _dvim ] kc_p (dvim_pp)                                                  //
+//                                                                                      //
+//  d e l e t e   t o   e n d   o f   l i n e   /   e n d   o f   p a r a g r a p h     //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//             T A P   D A N C E   F O R    [ _ A L P H ]  L A Y E R                    //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_DFLT] THUMB_L1 (DVIM_Del)                                               //
+//                                                                                      //
+//  D V I M    L A Y E R    /    D E L E T E                                            //
+//                                                                                      //
+//  THUMB_L1:  @ [_DVIM] LAYER                                                          //
+//             *  DELETE,                                                               //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+void DVIM_Del_f_always(qk_tap_dance_state_t *state, void *user_data);
+void DVIM_Del_finished (qk_tap_dance_state_t *state, void *user_data);
+void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_dflt] thumb_l1 (dvim_del)                                               //
+//                                                                                      //
+//  d v i m    l a y e r    /    b a c k s p a c e                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/*tap LCKLOG_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};*/
+void LCKLOG_finished (qk_tap_dance_state_t *state, void *user_data);
+void LCKLOG_reset (qk_tap_dance_state_t *state, void *user_data);
+
+
+/*tap SLEP_M_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};*/
+void SLEP_M_finished (qk_tap_dance_state_t *state, void *user_data);
+void SLEP_M_reset (qk_tap_dance_state_t *state, void *user_data);
+
+
+
+
+void HRESET_finished (qk_tap_dance_state_t *state, void *user_data);
+void HRESET_reset (qk_tap_dance_state_t *state, void *user_data);
 

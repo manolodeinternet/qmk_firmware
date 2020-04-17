@@ -1,10 +1,10 @@
 #pragma once
 #include QMK_KEYBOARD_H
 
-#include "wrappers.h"
-#include "enum_custom_keycodes.h"
 #include "tap_dance_setup.h"
 
+#include "wrappers.h"
+#include "enum_custom_keycodes.h"
 
 
 #if defined(RGBLIGHT_ENABLE)
@@ -16,33 +16,13 @@
 #endif
 
 
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 #if defined(SIMPLE_30_LAYOUT)
     #include "simple_30_layout_manolodeinternet.h"
 #elif defined(COMPREHENSIVE_30_LAYOUT)
     #include "comprehensive_30_layout_manolodeinternet.h"
 #endif
-// #if defined(SIMPLE_30_LAYOUT)
-//     __attribute__((weak)) uint8_t control_flag;
-//     __attribute__((weak)) uint8_t  option_flag;
-//     __attribute__((weak)) uint8_t current_flag;
-//     __attribute__((weak)) int    state_number;
-//     __attribute__((weak)) uint16_t lt12_timer;
-//     __attribute__((weak)) bool flip_layer_triggers;
-//     __attribute__((weak)) bool         shift_was_activated;
-//     __attribute__((weak)) bool numbers_is_active; // #01
-//     __attribute__((weak)) bool          symbols_pressed;
-//     __attribute__((weak)) bool    multi_apps;
-//     __attribute__((weak)) bool    multi_apps_karabiner;  
-//     __attribute__((weak)) bool          apps_just_activated;
-//     __attribute__((weak)) bool          apps_working;
-//     __attribute__((weak)) bool karabiner_apps_working;
-//     __attribute__((weak)) bool changing_apps;
-//     // __attribute__((weak)) bool triggered_control_mod(void);
-//     // __attribute__((weak)) bool triggered_mod(uint8_t mod);
-// extern __attribute__((weak)) void flashing_LEDs(uint8_t times, uint8_t r1, uint8_t g1, uint8_t b1, uint8_t r2, uint8_t g2, uint8_t b2);
-// // extern __attribute__((weak)) void reset_my_keyboard_function(void);
-// #endif
+
+
 //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
 
@@ -231,6 +211,83 @@ void xvim(char *key);
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-extern void reset_my_keyboard_function(void);
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//                                                                                      //
+//  GLOBAL  FUNCTIONS                                                                   //
+//                                                                                      //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [FUNCTIONS] [_DFLT] [_FVIM], [_DVIM], [_CVIM],     [_XVIM       & [_APPS]            //
+//               KC_V,    KC_X,  [_FVIM]KC_C, [_FVIM]KC_X,   [_FVIM]KC_Z   (KC_Q & KC_P)//
+//                                                                                      //
+// FUNCTIONS FOR ACCESING KEYBINDINGS MAPPED FUNCTIONS                                  //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void add_desired_mod(uint8_t desired_mod);
+void remove_activated_mod(uint8_t activated_mod);
+bool triggered_control_mod(void);
+bool triggered_mod(uint8_t mod);
+
+void call_app_with_keycode(uint16_t keycode);
 
 
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//                                                                                      //
+// [FUNCTIONS] [_POWR] KC_Y (VOL_8)                                                     //
+//             [_POWR] KC_O (VOL_1)                                                     //
+//             [_POWR] KC_V (SHUT_S)                                                    //
+//                                                                                      //
+//             [_POWR] KC_M (BRIGHT_1)                                                  //
+//                                                                                      //
+// VOLUME SET TO LEVEL x FUNCTION (USED AS A _POWR KEYCODE AND INTO SHUT DOWN AS WELL)  //
+// BRIGHT SET TO LEVEL y FUNCTION                                                       //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+void volumeSetToLevel(uint8_t max_volume);
+void brightSetToLevel(uint8_t max_bright);
+//
+// [functions] [_powr] kc_y (vol_8)                                                     //
+//             [_powr] kc_o (vol_1)                                                     //
+//             [_powr] kc_v (shut_s)                                                    //
+//                                                                                      //
+//             [_powr] kc_m (bright_1)                                                  //
+//                                                                                      //
+// volume set to level x function (used as a _powr keycode and into shut down as well)  //
+// bright set to level y function                                                       //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //                                                                                      //
+// // [FUNCTIONS] [_POWR] KC_R (MY_RESET)process_record_user                               //
+// // [FUNCTIONS] [_DFLT] L_TH_4 /*(TH_R4_POWR_LEDS)*/ process_record_user                 //
+// //                                                                                      //
+// // RESET MY KEYBOARD FUNCTION                                                           //
+// //                                                                                      //
+// //////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+void reset_my_keyboard_function(void);
+
+                                                                                        //
+// [functions] [_powr] kc_r (my_reset)                                                  //
+// [functions] [_dflt] l_th_4 /*(TH_R4_POWR_LEDS)*/                                     //
+//                                                                                      //
+// reset my keyboard function                                                           //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//                                                                                      //
+//  m y    f u n c t i o n s                                                            //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////

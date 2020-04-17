@@ -34,7 +34,21 @@
 
 #undef  RGBLED_NUM
 
-#define RGBLIGHT_STARTUP_ANIMATION  // $126 bytes (firmare cost)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        #define RGBLIGHT_STARTUP_ANIMATION  // $126 bytes (firmare cost)
 //#define RGBLIGHT_ANIMATIONS
 //#define RGBLIGHT_EFFECT_KNIGHT
 //#define RGBLIGHT_EFFECT_BREATHING

@@ -1,5 +1,5 @@
-#pragma once
-#include QMK_KEYBOARD_H
+// #pragma once
+// #include QMK_KEYBOARD_H
 
 // [GHERKIN_SCOPE]
 uint8_t gherkinBacklightLevel;

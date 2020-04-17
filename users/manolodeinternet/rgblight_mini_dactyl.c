@@ -1,3 +1,5 @@
+#include "rgblight_mini_dactyl.h"
+
 /* Copyright 2018 Jack Humbert
  *
  * This program is free software: you can redistribute it and/or modify
@@ -27,8 +29,6 @@
 
 
 
-
-#include "rgblight_mini_dactyl.h"
 
 
 

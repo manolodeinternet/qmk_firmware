@@ -1,10 +1,10 @@
-#pragma once
-#include QMK_KEYBOARD_H
+// #pragma once
+// #include QMK_KEYBOARD_H
 
-#if defined(COMPREHENSIVE_30_LAYOUT)
-    #include "comprehensive_30_layout_defines.h"
-#elif defined(SIMPLE_30_LAYOUT)
+#if defined(SIMPLE_30_LAYOUT)
     #include "simple_30_layout_defines.h"
+#elif defined(COMPREHENSIVE_30_LAYOUT)
+    #include "comprehensive_30_layout_defines.h"
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -162,7 +162,7 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 // DEFINING _POWR COMMANDS 12                                                                        //
 //                                                                                                   //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-#define SLEP_MNUBAR      TD(SLEP_M)
+// #define SLEP_MNUBAR      TD(SLEP_M)
 
 #if defined(COMPREHENSIVE_30_LAYOUT)
 
@@ -183,7 +183,10 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 #define SH_STA           TD(SHUT_S)
 #define RT_FLO           TD(RSTT_F)
 */
-#define KC_LOGO  LSFT(LALT(LGUI(KC_Q)))
+
+// implemented as tap_dance function for lock_screen and logout in: TD(LOGOUT)
+// #define KC_LOGO  LSFT(LALT(LGUI(KC_Q))) 
+
 #define LOCK_SCR      LCTL(LGUI(KC_Q))  //LOCK SCREEN (ask for pasword screen)
 // [SYSTEM PREFERENCES]
 #define ZOOM_FOL      LCAG(KC_SLSH)      //QMK: Hold Left Control, Alt and GUI and press kc

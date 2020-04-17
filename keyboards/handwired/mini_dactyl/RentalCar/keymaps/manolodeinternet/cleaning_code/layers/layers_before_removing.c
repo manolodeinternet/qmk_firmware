@@ -1,3 +1,51 @@
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+uint32_t layer_state_set_user(uint32_t state) {
+
+// I have changed this variable to global   // int  state_number; //= 321; //biton32(state);
+    state_number = biton32(state);
+
+  switch (state_number) {
+    case _DFLT:   //  0
+//        active_layer = 0;
+
+  numbers_is_active = false; // #01
+
+  
+
+//   if (apps_just_activated && !apps_trigger && !karabiner_apps_working)
+// // because I can get out from _APPS but I'm under karabiner_apps mode
+//   {
+//     apps_just_activated = false;
+
+//     if (multi_apps)
+//     {
+//       multi_apps = false;
+//     }
+//     else
+//     {
+//       HIDEOTH;
+//     }
+//   }
+
+
+
+  if (karabiner_apps_working)
+  {
+    rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)
+  }
+  else
+  {
+    show_RGB_LEDs();
+  }
+
+  break;     
+
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+
+
+
 /* Keymap _AVIM X04X: _AVIM layer  // select VIM layer
  * ,----------------------------------.  ,----------------------------------.
  * |      |      |      |      |      |  |Select|Select|Select|Select|Select|

@@ -1,3 +1,7 @@
+
+      HIDEOTH; //Long: SEND_STRING(SS_LALT(SS_LGUI("h"))); //Wrong: register_code(LALT(LGUI(KC_H)));
+      
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // MACROS FOR PROCESS_RECORD_USER()                                                     //

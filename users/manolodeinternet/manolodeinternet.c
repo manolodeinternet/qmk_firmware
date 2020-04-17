@@ -1,3 +1,6 @@
+// #include QMK_KEYBOARD_H
+#include "manolodeinternet.h"
+
 /*
 Copyright 2020 manolodeinternet <manolodeinternet@gmail.com> @manolodeinternet
 
@@ -14,9 +17,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-// #include QMK_KEYBOARD_H
-#include "manolodeinternet.h"
 
         bool diaeresis_requested = false;
             bool grave_requested = false;
@@ -196,94 +196,201 @@ void xvim(char *key)
 }
 
 
-
-
-
-
-
-
-
-
-
-// void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
-
-//   SS_BEEP_1;
-//   // _delay_ms (1);
-//   wait_ms(1);
-//   rgblight_enable_noeeprom();
-//   wait_ms(1);
-
-//   // flashing_LEDs(5, RGB_MY_WHITE, RGB_MY_RED);
-//   reset_keyboard();
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-//             T A P   D A N C E   F O R    [ _ P O W R ]    L A Y E R                  //
+//                                                                                      //
+//  GLOBAL  FUNCTIONS                                                                   //
+//                                                                                      //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-//
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [_POWR] KC_W (LCKLOG)                                                     //
+// [FUNCTIONS] [_DFLT] [_FVIM], [_DVIM], [_CVIM],     [_XVIM       & [_APPS]            //
+//               KC_V,    KC_X,  [_FVIM]KC_C, [_FVIM]KC_X,   [_FVIM]KC_Z   (KC_Q & KC_P)//
 //                                                                                      //
-//  L O G O U T    /    L O C K    S C R E E N                                          //
-//                                                                                      //
-//  KC_W: *  LOCK USER SCREEN                                                           //
-//        @  LOGOUT CURRENT USER                                                        //
+// FUNCTIONS FOR ACCESING KEYBINDINGS MAPPED FUNCTIONS                                  //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-//
-/*
-void LCKLOG_function (qk_tap_dance_state_t *state, void *user_data) {
-  switch (cur_dance(state)) {
-    case SINGLE_TAP://LOCK SCREEN (ask for pasword screen)
-                      register_code(KC_LCTL); register_code(KC_LGUI);
-                      tap_code(KC_Q);
-                      unregister_code(KC_LGUI); unregister_code(KC_LCTL);
-                      reset_tap_dance(state); break;
-                      // (guessed by try and fail method)
-                      // if we only keystroke SFT+GUI as described at Apple Menu, it appears a menu
-                      // if we add ALT, we don't have to answer any menu, we logout directly
-    case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
-                      tap_code(KC_Q);
-                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LSFT);
-                      reset_tap_dance(state); break;
-  }
+void add_desired_mod(uint8_t desired_mod)
+{
+  add_mods     (desired_mod);
+  add_weak_mods(desired_mod);
+  send_keyboard_report();
 }
-*/
-//                                                                                      //
-// [tapdance] [_powr] kc_w (LCKLOG)                                                     //
-//                                                                                      //
-//  l o g o u t    /    l o c k    s c r e e n                                          //
+
+void remove_activated_mod(uint8_t activated_mod)
+{
+  del_mods     (activated_mod);
+  del_weak_mods(activated_mod);
+  send_keyboard_report();
+}
+//
+// [FIRMWARE_SIZE]
+  // next function saves from 158 to 216 (58 bytes)
+  // ... instead of repeating this bunch or code into 'process_record_user' for ...
+  // ... SL_MEN, KA_DCK, KM_TOL, SH_STA, RT_FLO, ...
+  // ... we call this function into every function !!!
+// [firmware_size]
+bool triggered_control_mod(void)
+{
+  control_flag = get_mods()&CTRL_MODS;
+  if (control_flag)
+  {
+    remove_activated_mod(control_flag);
+    // del_mods     (control_flag);
+    // del_weak_mods(control_flag);
+    // send_keyboard_report();
+    return true;
+  }
+  return false;
+}
+
+// using this function, we pass from 674 to 586 bytes free while compile firmware !!!
+bool triggered_mod(uint8_t mod)
+{
+  switch (mod) {
+    case KC_C: control_flag = get_mods()&CTRL_MODS;
+               if (control_flag)
+               {
+                 current_flag = control_flag;
+                 remove_activated_mod(control_flag);
+                 return true;
+               }
+               return false;
+    case KC_A: option_flag  = get_mods()&ALT_MODS;
+               if (option_flag)
+               {
+                 current_flag = option_flag;
+                 remove_activated_mod(option_flag);
+                 return true;
+               }
+               return false;
+    case KC_G: gui_flag     = get_mods()&GUI_MODS;
+               if (gui_flag)
+               {
+                 current_flag = gui_flag;
+                 remove_activated_mod(gui_flag);
+                 return true;
+               }
+               return false;
+    case KC_S: shift_flag   = get_mods()&SHFT_MODS;
+               if (shift_flag)
+               {
+                 current_flag = shift_flag;
+                 remove_activated_mod(shift_flag);
+                 return true;
+               }
+               return false;
+  }
+  return false;
+}
+
+
+
+void call_app_with_keycode(uint16_t keycode)
+{
+// open Spotlight search:
+      register_code (KC_LGUI);
+           tap_code (KC_SPC);
+    unregister_code (KC_LGUI);
+
+// type Typinator Abbreviation for Typinator Expansion (/a/?):
+    tap_code(KC_SLSH); tap_code(KC_A); tap_code(KC_SLSH);
+    tap_code(keycode);
+
+// in Typinator expansion, there is a 0.01 seconds delay 
+}
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
+//
+//                                                                                      //
+// [FUNCTIONS] [_POWR] KC_Y (VOL_8)                                                     //
+//             [_POWR] KC_O (VOL_1)                                                     //
+//             [_POWR] KC_V (SHUT_S)                                                    //
+//                                                                                      //
+//             [_POWR] KC_M (BRIGHT_1)                                                  //
+//                                                                                      //
+// VOLUME SET TO LEVEL x FUNCTION (USED AS A _POWR KEYCODE AND INTO SHUT DOWN AS WELL)  //
+// BRIGHT SET TO LEVEL y FUNCTION                                                       //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+void volumeSetToLevel(uint8_t max_volume) {
+  for (uint8_t i = 0; i < 16; i++)
+    {
+      tap_code(KC__VOLDOWN);
+    }
+  for (uint8_t i = 0; i < max_volume; i++)
+    {
+      tap_code(KC__VOLUP);
+    }
+}
 
-
+void brightSetToLevel(uint8_t max_bright) {
+  for (uint8_t i = 0; i < 16; i++)
+    {
+      tap_code(KC_SLCK);
+    }
+  for (uint8_t i = 0; i < max_bright; i++)
+    {
+      tap_code(KC_PAUS);
+    }
+}
+//
+// [functions] [_powr] kc_y (vol_8)                                                     //
+//             [_powr] kc_o (vol_1)                                                     //
+//             [_powr] kc_v (shut_s)                                                    //
+//                                                                                      //
+//             [_powr] kc_m (bright_1)                                                  //
+//                                                                                      //
+// volume set to level x function (used as a _powr keycode and into shut down as well)  //
+// bright set to level y function                                                       //
+//////////////////////////////////////////////////////////////////////////////////////////
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-//             t a p   d a n c e   f o r    [ _ p o w r ]    l a y e r                  //
+//                                                                                      //
+//  m y    f u n c t i o n s                                                            //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [FUNCTIONS] [_POWR] KC_R (MY_RESET)process_record_user                               //
+// [FUNCTIONS] [_DFLT] L_TH_4 /*(TH_R4_POWR_LEDS)*/ process_record_user                 //
+//                                                                                      //
+// RESET MY KEYBOARD FUNCTION                                                           //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-//////////////////////////////////////////////////////////////////////////////////////////
+void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
+
+  wait_ms(1);
+#if defined(RGBLIGHT_ENABLE)
+  rgblight_enable_noeeprom(); // switch on LEDs to allow us seeing the reset LEDs flashing
+#elif defined(BACKLIGHT_ENABLE)
+  backlight_enable();
+#endif
+  wait_ms(1);
+
+#if defined(RGBLIGHT_ENABLE)
+  flashing_RGB_LEDs(6, RGB_MY_WHITE, RGB_MY_RED);
+#elif defined(BACKLIGHT_ENABLE)
+  flashing_BCK_LEDs(5, BL_RESE, BL_MIN);
+#endif
+
+  reset_keyboard();
+}
+//
 //                                                                                      //
-// my own tap_dance harvest                                                             //
+// [functions] [_powr] kc_r (my_reset)                                                  //
+// [functions] [_dflt] l_th_4 /*(TH_R4_POWR_LEDS)*/                                     //
 //                                                                                      //
-// DOUBLE FUNCTION TAP DANCE PERSONALIZATION SECTION END                                //
+// reset my keyboard function                                                           //
 //////////////////////////////////////////////////////////////////////////////////////////
+

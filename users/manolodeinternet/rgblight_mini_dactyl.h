@@ -1,3 +1,7 @@
+// #pragma once
+// #include QMK_KEYBOARD_H
+#include "rgblight.h"
+
 /* Copyright 2018 Jack Humbert
  *
  * This program is free software: you can redistribute it and/or modify
@@ -14,10 +18,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-#pragma once
-#include QMK_KEYBOARD_H
-#include "rgblight.h"
 
 /*              RGB MY COLORS             */
 

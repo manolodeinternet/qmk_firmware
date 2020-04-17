@@ -5,7 +5,8 @@
 #
 # [understanding]
 
-SRC += manolodeinternet.c
+SRC += manolodeinternet.c \
+       tap_dance_setup.c
 
 ifeq ($(strip $(SIMPLE_30)), yes)
 	SRC += simple_30_layout_manolodeinternet.c

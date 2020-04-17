@@ -1301,49 +1301,55 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 //  v o l _ 0 1,   l a s t   l a y e r                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_POWR] KC_Q (LOGOUT)                                                     //
-//                                                                                      //
-//  L O G O U T                                                                         //
-//                                                                                      //
-//  KC_Q:  @  LOGOUT CURRENT USER                                                       //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'LOGOUT' tap dance.
-static tap LOGOUT_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //                                                                                      //
+// // [TAPDANCE] [_POWR] KC_Q (LOGOUT)                                                     //
+// //                                                                                      //
+// //  L O G O U T                                                                         //
+// //                                                                                      //
+// //  KC_Q:  @  LOGOUT CURRENT USER                                                       //
+// //                                                                                      //
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //instantalize an instance of 'tap' for the 'LOGOUT' tap dance.
+// static tap LOGOUT_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
 
-void LOGOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
-  LOGOUT_tap_state.state = cur_dance(state);
-  switch (LOGOUT_tap_state.state) {
+// void LOGOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   LOGOUT_tap_state.state = cur_dance(state);
+//   switch (LOGOUT_tap_state.state) {
 
-                      // (guessed by try and fail method)
-                      // if we only keystroke SFT+GUI as described at Apple Menu, it appears a menu
-                      // if we add ALT, we don't have to answer any menu, we logout directly
-    case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
-                      register_code(KC_Q);
+//     case SINGLE_TAP://user lock screen
+//                       register_code(KC_LCTL); register_code(KC_LGUI);
+//                       tap_code(KC_Q);
+//                       unregister_code(KC_LGUI); unregister_code(KC_LCTL);
 
-                      unregister_code(KC_Q);
-                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LSFT);
-                      break;
-  }
-}
+//                     //user log out
+//                       // (guessed by try and fail method)
+//                       // if we only keystroke SFT+GUI as described at Apple Menu, it appears a menu
+//                       // if we add ALT, we don't have to answer any menu, we logout directly
+//     case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
+//                       register_code(KC_Q);
 
-void LOGOUT_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (LOGOUT_tap_state.state) {
+//                       unregister_code(KC_Q);
+//                       unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LSFT);
+//                       break;
+//   }
+// }
+
+// void LOGOUT_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (LOGOUT_tap_state.state) {
                      
-    case SINGLE_HOLD: break;
-  }
-  LOGOUT_tap_state.state = 0;
-}
-//                                                                                      //
-// [tapdance] [_powr] kc_q (logout)                                                     //
-//                                                                                      //
-//  l o g o u t                                                                         //
-//////////////////////////////////////////////////////////////////////////////////////////
+//     case SINGLE_HOLD: break;
+//   }
+//   LOGOUT_tap_state.state = 0;
+// }
+// //                                                                                      //
+// // [tapdance] [_powr] kc_q (logout)                                                     //
+// //                                                                                      //
+// //  l o g o u t                                                                         //
+// //////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1384,86 +1390,86 @@ void HRESET_reset (qk_tap_dance_state_t *state, void *user_data) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_POWR] KC_Z (SLEP_M)                                                     //
-//                                                                                      //
-//  M E N U   B A R   /    S L E E P   C O M P U T E R                                  //
-//                                                                                      //
-//  KC_Z:   *  MENU BAR                                                                 //
-//          @  SLEEP COMPUTER                                                           //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'SLEP_M' tap dance.
-static tap SLEP_M_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //                                                                                      //
+// // [TAPDANCE] [_POWR] KC_Z (SLEP_M)                                                     //
+// //                                                                                      //
+// //  M E N U   B A R   /    S L E E P   C O M P U T E R                                  //
+// //                                                                                      //
+// //  KC_Z:   *  MENU BAR                                                                 //
+// //          @  SLEEP COMPUTER                                                           //
+// //                                                                                      //
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //instantalize an instance of 'tap' for the 'SLEP_M' tap dance.
+// static tap SLEP_M_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
 
-void SLEP_M_finished (qk_tap_dance_state_t *state, void *user_data) {
-  SLEP_M_tap_state.state = cur_dance(state);
-  switch (SLEP_M_tap_state.state) {
-    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_F2);
-                      //_delay_ms(500);
-                      break;
+// void SLEP_M_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   SLEP_M_tap_state.state = cur_dance(state);
+//   switch (SLEP_M_tap_state.state) {
+//     case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_F2);
+//                       //_delay_ms(500);
+//                       break;
 
-// [INFO] HOW TO SLEEP COMPUTER THROUGH KEYBOARD                            
-//  keystrokes for sleeping:  (guessed by try and fail method)
+// // [INFO] HOW TO SLEEP COMPUTER THROUGH KEYBOARD                            
+// //  keystrokes for sleeping:  (guessed by try and fail method)
                       
-    case SINGLE_HOLD: register_code(KC_POWER);
-                   // without this delay, POWER doesn't work !!!   
-                      _delay_ms(500); 
-                      unregister_code(KC_POWER);
-                   // SEND_STRING("s");  // 's' for selecting button sleep but it's not necessary
-                      break;
+//     case SINGLE_HOLD: register_code(KC_POWER);
+//                    // without this delay, POWER doesn't work !!!   
+//                       _delay_ms(500); 
+//                       unregister_code(KC_POWER);
+//                    // SEND_STRING("s");  // 's' for selecting button sleep but it's not necessary
+//                       break;
 
-                      /*
-                      // this way doesn't work
+//                       /*
+//                       // this way doesn't work
 
-                      register_code(KC_LSFT);
-                      register_code(KC_POWER);
-                      _delay_ms(500); 
-                      */
+//                       register_code(KC_LSFT);
+//                       register_code(KC_POWER);
+//                       _delay_ms(500); 
+//                       */
 
-                  /* KC_EJCT keycode doesn't work with QMK, but with KarabinerElements works vey well*/
-                  /*register_code(KC_LSFT);   register_code(KC_LCTL); register_code(KC_EJCT);*/
+//                    KC_EJCT keycode doesn't work with QMK, but with KarabinerElements works vey well
+//                   /*register_code(KC_LSFT);   register_code(KC_LCTL); register_code(KC_EJCT);*/
 
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/*                                                                                                     */
-/*   KC_POWER works very well.  It makes appear shut down menu (Restart, Sleep, Cancel, Shut down)     */
-/*                                                                                                     */
-/*                          register_code(KC_POWER);                                                   */
-/*                                                                                                     */
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-  }
-}
+// /////////////////////////////////////////////////////////////////////////////////////////////////// ###
+// /*                                                                                                     */
+// /*   KC_POWER works very well.  It makes appear shut down menu (Restart, Sleep, Cancel, Shut down)     */
+// /*                                                                                                     */
+// /*                          register_code(KC_POWER);                                                   */
+// /*                                                                                                     */
+// /////////////////////////////////////////////////////////////////////////////////////////////////// ###
+//   }
+// }
 
-void SLEP_M_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (SLEP_M_tap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_F2); unregister_code(KC_LCTL); break;
+// void SLEP_M_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (SLEP_M_tap_state.state) {
+//     case SINGLE_TAP:  unregister_code(KC_F2); unregister_code(KC_LCTL); break;
                      
-    case SINGLE_HOLD: /* if we unregister_code(KC_POWER) here, at SLEP_M_reset
-                         it will appear the POWER dialog box and 
-                         we have to press the related initial letter
-                         or chosing an option with the mouse.
+//     case SINGLE_HOLD: /* if we unregister_code(KC_POWER) here, at SLEP_M_reset
+//                          it will appear the POWER dialog box and 
+//                          we have to press the related initial letter
+//                          or chosing an option with the mouse.
 
-                         unregister_code(KC_POWER);
-                      */
+//                          unregister_code(KC_POWER);
+//                       */
 
-                      /*
-                      unregister_code(KC_EJCT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
-                      */
-// [info] how to sleep computer through keyboard
+//                       /*
+//                       unregister_code(KC_EJCT); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
+//                       */
+// // [info] how to sleep computer through keyboard
 
-                      break;                       
-  }
-  SLEP_M_tap_state.state = 0;
-}
-//                                                                                      //
-// [tapdance] [_powr] kc_z (slep_m)                                                     //
-//                                                                                      //
-//  m e n u   b a r   /    s l e e p   c o m p u t e r                                  //
-//////////////////////////////////////////////////////////////////////////////////////////
+//                       break;                       
+//   }
+//   SLEP_M_tap_state.state = 0;
+// }
+// //                                                                                      //
+// // [tapdance] [_powr] kc_z (slep_m)                                                     //
+// //                                                                                      //
+// //  m e n u   b a r   /    s l e e p   c o m p u t e r                                  //
+// //////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////

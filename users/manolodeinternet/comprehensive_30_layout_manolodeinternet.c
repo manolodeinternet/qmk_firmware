@@ -10,7 +10,7 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void flashing_LEDs(uint8_t times, uint8_t bl_level_1, uint8_t bl_level_2)
+void flashing_BCK_LEDs(uint8_t times, uint8_t bl_level_1, uint8_t bl_level_2)
 {
   for (uint8_t i = 0; i < times; i++)
   {
@@ -21,18 +21,18 @@ void flashing_LEDs(uint8_t times, uint8_t bl_level_1, uint8_t bl_level_2)
   }
 }
 
-void reset_my_keyboard_function(void)
-{
-  // _delay_ms(1);
-  wait_ms(1);
-  backlight_enable();
-  wait_ms(1);
+// void reset_my_keyboard_function(void)
+// {
+//   // _delay_ms(1);
+//   wait_ms(1);
+//   backlight_enable();
+//   wait_ms(1);
 
-  SS_BEEP_1;
+//   SS_BEEP_1;
 
-  flashing_LEDs(5, BL_RESE, BL_MIN);
-  reset_keyboard();
-}
+//   flashing_LEDs(5, BL_RESE, BL_MIN);
+//   reset_keyboard();
+// }
 //                                                                                      //
 // [functions] [_powr] kc_r (hreset)                                                    //
 //                                                                                      //

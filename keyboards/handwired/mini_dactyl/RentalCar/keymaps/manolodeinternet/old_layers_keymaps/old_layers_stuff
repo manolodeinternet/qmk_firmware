@@ -1,0 +1,82 @@
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// DEFINING LAYERS                      L A Y E R S                                     //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+// _CVIM is included at the right side of _XVIM
+// #define _CVIM   5  //  movement              VIM layer
+
+// We don't use _AVIM because we use instead: 'SHIFT' for getting the same result, but more simple !
+// #define _AVIM  X12X  //  select              VIM layer
+
+// defining layers
+//
+// [UNDERSTANDING]
+// FOR ACCESING LAYERS FROM KEYMAP 'LT(LAYER, KC)', NUMBER LAYER MUST BE BETWEEN 0 AND 15
+// I can implement the call to _DVIM,_CVIM & _XVIM from TAP_DANCE functions...
+//...renumbering this layers above 16 or even above 32, ...
+//...this wayl we'll have THREE FREE LAYERS more for using directly from any keymap (0..15)
+     // ... but it works even above 31 & 32 & 33 ...
+     // ... consuming an exaggerated amount of memory, ...
+     // ... the higher the number of the layer, ...
+     // ... the more memory consumed.  
+// IMPORTANT: IN ADDITION TO USING LAYERS AMONG 0...15, YOU CAN USE LAYERS AMONG 16...31, IF... 
+// ...IF YOU AREN'T GOING TO ACCESS THEM FROM KEYMAP, BUT FROM CODE, USING 'layer_on / layer_off(_lyr)'
+// [understanding]
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// defining layers                      l a y e r s                                     //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+  if (apps_trigger && !karabiner_apps_working)
+  // {
+  //   return process_record_apps(keycode, record);
+  // }
+  {
+    switch(keycode & 0xFF)
+    {
+      //30 KEYS: 26 ALPHA KEYS + SPACE + ESCAPE + BACKSPACE + ENTER
+      // case LCTL_T(KC_A): call_app_with_keycode(KC_A);     return false; break;
+      // case LALT_T(KC_S): call_app_with_keycode(KC_S);     return false; break;
+      // case LGUI_T(KC_D): call_app_with_keycode(KC_D);     return false; break;
+      // case LSFT_T(KC_F): call_app_with_keycode(KC_F);     return false; break;
+
+      // case LSFT_T(KC_J): call_app_with_keycode(KC_J);     return false; break;
+      // case LGUI_T(KC_K): call_app_with_keycode(KC_K);     return false; break;
+      // case LALT_T(KC_L): call_app_with_keycode(KC_L);     return false; break;
+      // case LCTL_T(KC_SPC): call_app_with_keycode(KC_SPC); return false; break;
+      
+      // case KC_B ... KC_C:
+      // case KC_E:
+      // case KC_G ... KC_I:
+      // case KC_M ... KC_R:
+      // case KC_T ... KC_Z:
+      // case KC_ESC:    call_app_with_keycode(KC_1);        return false; break;
+      // case KC_BSPC:   call_app_with_keycode(KC_2);        return false; break;
+      // case KC_ENT:    call_app_with_keycode(KC_3);        return false; break;
+
+      case KC_A ... KC_Z: call_app_with_keycode(keycode); return false; break;
+      case KC_SPC:        call_app_with_keycode(keycode); return false; break;
+      case KC_ESC:        call_app_with_keycode(KC_1);    return false; break;
+      case KC_BSPC:       call_app_with_keycode(KC_2);    return false; break;
+      case KC_ENT:        call_app_with_keycode(KC_3);    return false; break;
+      //30 keys: 26 alpha keys + space + escape + backspace + enterV
+    } // switch (keycode & 0xFF)
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+

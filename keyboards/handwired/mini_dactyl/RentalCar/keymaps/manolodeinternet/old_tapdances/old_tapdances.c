@@ -6,6 +6,22 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
+
+// [INFO]
+// ACTION_TAP_DANCE_DUAL_ROLE(kc, layer): Sends the kc keycode when tapped once, ...
+//   ... or moves to layer. (this is similar to the keycode: 'TO' layer)
+// [info]
+//
+// [EXAMPLES]
+// [TD_ESC_CAPS]  = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS)
+//
+// [A_CAPS]       = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS)
+// [examples]
+//
+// Other declarations would go here, separated by commas, if you have them
+//
+
+
 /*
 // [GHERKIN]
 //////////////////////////////////////////////////////////////////////////////////////////

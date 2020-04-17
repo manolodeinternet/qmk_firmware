@@ -1,5 +1,5 @@
-#pragma once
-#include QMK_KEYBOARD_H
+// #pragma once
+// #include QMK_KEYBOARD_H
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // MACROS FOR PROCESS_RECORD_USER()                                                     //
@@ -20,7 +20,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 // macros for _powr layer 12
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-
+/*
 // MACROS FOR _APPS LAYER 10
     ,APP_Q_SNOTE ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_APSTO ,APP_T_TERMI
                                          ,APP_Y_TYPIN ,APP_U_UROOM ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF
@@ -30,7 +30,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
                                          ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB
 // macros for _apps layer 10
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
+*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 // MACROS FOR _DALY LAYR 7
@@ -100,7 +100,8 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
   //  ,TH_L4_FUNC_LEDS
       ,TH_R1_DALY_MOUS
       ,TH_R2_SYMB_FVIM
-      ,TH_R3_APPS_NUMB
+  //  ,TH_R3_APPS_NUMB
+      ,TH_R3_APPS_TRIGGER
       ,TH_R4_POWR_LEDS
   // macros for _DFLT layer 00
   /////////////////////////////////////////////////////////////////////////////////////////////////// ###
@@ -109,6 +110,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
       ,O_COMMENT
       ,C_COMMENT
       ,CHANGE_SYMB_TO_NUMB
+      ,CHANGE_DALY_TO_LEDS
   // macros for _symb layer 09
   /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
