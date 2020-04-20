@@ -65,10 +65,6 @@
 #define HSV_MY_GREEN         85, 255, 128 //(120°, 100%,  50%)✔︎
 #define HSV_MY_OLIVE         43, 255, 128 //( 60°, 100%,  50%)✔︎
 
-
-
-
-
 #define HSV_MY_SPRINGGREEN  106, 255, 255
 #define HSV_MY_TURQUOISE    123,  90, 112
 #define HSV_MY_TEAL         128, 255, 128 //(180°, 100%,  50%)✔︎
@@ -83,6 +79,28 @@
 #define HSV_MY_LIGHT_PINK   234, 128, 255//(330°,  50%, 100%)✔︎
 #define HSV_MY_PINK         234, 255, 255//(330°, 100%, 100%)✔︎
 
+// ROW 1 COLORS
+//       case CH_RED:  rgblight_sethsv_noeeprom(HSV_MY_RED);           return false;
+//       case CH_CORL: rgblight_sethsv_noeeprom(HSV_MY_DARK_CORAL);    return false;
+//       case CH_ORNG: rgblight_sethsv_noeeprom(HSV_MY_ORANGE_RED);    return false;
+//       case CH_GOLR: rgblight_sethsv_noeeprom(HSV_MY_LIGHT_CORAL_2); return false;
+//       case CH_GOLD: rgblight_sethsv_noeeprom(HSV_MY_GOLD);          return false;
+//       case CH_YLLW: rgblight_sethsv         (HSV_MY_YELLOW);                 return false;
+// ROW 2 COLORS
+//       case CH_CHRT: rgblight_sethsv_noeeprom(HSV_MY_CHARTREUSE);  return false;
+//       case CH_GREN: rgblight_sethsv_noeeprom(HSV_MY_GREEN);       return false;
+//       case CH_SPRG: rgblight_sethsv_noeeprom(HSV_MY_SPRINGGREEN); return false;
+//       case CH_TRQS: rgblight_sethsv_noeeprom(HSV_MY_TURQUOISE);   return false;
+//       case CH_TEAL: rgblight_sethsv_noeeprom(HSV_MY_TEAL);        return false;
+//       case CH_WHIT: rgblight_sethsv_noeeprom(HSV_MY_WHITE);       return false;
+// ROW 3 COLORS
+//       case CH_CYAN: rgblight_sethsv_noeeprom(HSV_MY_CYAN);        return false;
+//       case CH_AZUR: rgblight_sethsv_noeeprom(HSV_MY_AZURE);       return false;
+//       case CH_BLUE: rgblight_sethsv_noeeprom(HSV_MY_BLUE);        return false;
+//       case CH_PRPL: rgblight_sethsv_noeeprom(HSV_MY_PURPLE);      return false;
+//       case CH_MGNT: rgblight_setrgb         (RGB_MY_MAGENTA); return false; // #define RGB_MY_MAGENTA      0xFF, 0x00, 0xAA  // 0xFF, 0x00, 0xFF
+//       case CH_PINK: rgblight_sethsv_noeeprom(HSV_MY_PINK);        return false;
+//       case CH_EMPT: rgblight_sethsv_noeeprom(HSV_MY_EMPTY);       return false;
  
 
 

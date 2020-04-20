@@ -35,6 +35,39 @@ bool disabled_caps_before_accent = false;
 // ======================================================
 //
 
+// const uint16_t apps_keycodes[APPS_DICT_SIZE] =
+// {
+//   KC_Q, KC_W, KC_E, KC_R, KC_T,
+//   KC_A, KC_S, KC_D, KC_F, KC_G,
+//   KC_Z, KC_X, KC_C, KC_V, KC_B,
+  
+//                                                                   KC_Y, KC_U, KC_I,   KC_O,    KC_P,
+//                                                                   KC_H, KC_J, KC_K,   KC_L,    KC_SPC,
+//                                                                   KC_N, KC_M, KC_ESC, KC_BSPC, KC_ENT 
+// };
+
+// const char *apps_names[APPS_DICT_SIZE] =
+// {
+// // "Simplenote",    "Twitter",      "Evernote",           "App Store",             "Terminal",
+// "Sim",    "Twi",      "Ev",           "Ap St",             "Ter",
+// // "Script Editor", "Safari",       "Day One",            "Finder",                "Google Chrome",
+// "Sc Ed", "S",       "Da",            "F",                "Chr",
+// // "Studies",       "Xcode",        "Calculator",         "Karabiner-EventViewer", "Books"
+// "Stu",       "X",        "Calc",         "Ka Ev", "Bo"
+
+
+
+// // "Typinator",     "URoom",        "TextEdit",           "Omnifocus",             "System Preferences",
+// "Ty",     "UR",        "T E",           "Om",             "Sy Pr",
+
+// // [FIRMWARE_SIZE]
+// // with only next 5 apps, we get saving 352 bytes over + 364 bytes free = 716 bytes free
+// // "Sketch",        "Sublime Text", "Karabiner-Elements", "Calendar",              "Safari",
+// "Sk",        "Sub", "Kar El", "Ca",              "S",
+// // [firmware_size]
+
+// "N",         "M",         "Key",            "P",                 "Nup"
+// };
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -44,6 +77,7 @@ bool disabled_caps_before_accent = false;
 // CAPSLOCK COMPLEMENTARY FUNCTIONS                                                     //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+//
 void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
 
   SEND_STRING(SS_DOWN(X_CAPSLOCK));
@@ -250,6 +284,7 @@ bool triggered_control_mod(void)
 // using this function, we pass from 674 to 586 bytes free while compile firmware !!!
 bool triggered_mod(uint8_t mod)
 {
+
   switch (mod) {
     case KC_C: control_flag = get_mods()&CTRL_MODS;
                if (control_flag)
@@ -288,23 +323,169 @@ bool triggered_mod(uint8_t mod)
 }
 
 
-
-void call_app_with_keycode(uint16_t keycode)
+void write_app_name(uint16_t keycode)
 {
-// open Spotlight search:
-      register_code (KC_LGUI);
-           tap_code (KC_SPC);
-    unregister_code (KC_LGUI);
-
+          register_code (KC_LGUI);
+               tap_code (KC_SPC);
+        unregister_code (KC_LGUI);
 // type Typinator Abbreviation for Typinator Expansion (/a/?):
     tap_code(KC_SLSH); tap_code(KC_A); tap_code(KC_SLSH);
     tap_code(keycode);
-
-// in Typinator expansion, there is a 0.01 seconds delay 
+// in Typinator expansion, there is a 0.01 seconds delay
 }
 
 
 
+void call_app_with_keycode(uint16_t keycode) //keycode is already filtered with '& 0xFF' in the calling
+{
+  switch(keycode)
+  {
+    case KC_ESC:  keycode = KC_1; break;  // We change these three commands with numbers 1...3
+    case KC_BSPC: keycode = KC_2; break;  // ...because I can't intercept those commands in Typinator
+    case KC_ENT:  keycode = KC_3; break;
+  }
+  
+switch(keycode)
+{
+      case KC_E: 
+                        if (control_flag)
+                        {
+                          register_code(KC_LALT);
+                          tap_code(KC_N);
+                          unregister_code(KC_LALT);
+                          unregister_code(KC_LCTL);                         // quick entry  E vernote
+                        }
+                        else
+                        {
+                          write_app_name(keycode);                          // E vernote
+                        }
+                        // return false;
+                        break;
+
+      case KC_O:
+                        if (control_flag)
+                        {
+                          register_code(KC_LALT);
+                          tap_code(KC_SPC);
+                          unregister_code(KC_LALT);
+                          unregister_code(KC_LCTL);                         // quick entry  O mnifocus
+                        }
+                        else
+                        {
+                          write_app_name(keycode);                          // O mnifocus
+                        }
+                        // return false;
+                        break;
+
+
+      case KC_S:        //               S: opens Safari
+                        //       control+S: opens Safari with address bar focused 
+                        // shift+control+S: opens Slack webpage in Safari 
+
+                        if (control_flag)
+                        {
+                          triggered_control_mod();
+                          // if (shift_flag)
+                          // {
+                          //   shift_was_activated = true;
+                          //   remove_shift_mod();
+                          // }
+
+                          if (shift_flag)
+                          {
+                            shift_was_activated = true;
+                            remove_activated_mod(shift_flag);
+                            // del_mods     (shift_flag);
+                            // del_weak_mods(shift_flag);
+                            // send_keyboard_report();
+                          }
+                          // wait_ms(50);
+                          write_app_name(keycode);
+
+                          wait_ms(50);
+                          register_code(KC_LGUI);
+                          tap_code(KC_L);                                   // Opens addre S S    bar for introduce an URL...
+                          unregister_code(KC_LGUI);
+                          if (shift_was_activated)
+                          {
+                            shift_was_activated = false;
+
+ //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+                           wait_ms(50);                                    // ... or googling something
+                           send_string("http://www.slack.com\n");          // S lack
+                          }
+                        }                          
+                        else
+                        {
+                          write_app_name(keycode);                          // S afari     
+                        }
+                        // return false;
+                        break;
+
+
+      case KC_D: 
+                        if (control_flag)
+                        {
+                          register_code(KC_LSFT);
+                          tap_code(KC_D);
+                          unregister_code(KC_LSFT);
+                          unregister_code(KC_LCTL);                         // quick entry  D ay one
+                        }
+                        else
+                        {
+                          write_app_name(keycode);                          // D ay one
+                        }
+                        // return false;
+                        break;
+
+
+      //30 KEYS: 26 ALPHA KEYS + SPACE + ESCAPE + BACKSPACE + ENTER      
+      // case KC_A ... KC_C:
+      // // case KC_D:
+      // // case KC_E:
+      // case KC_F ... KC_N:
+      // // case KC_O:
+      // case KC_P ... KC_R:
+      // // case KC_S:
+      // case KC_T ... KC_Z:
+      // case KC_SPC:
+      // case KC_ESC:
+      // case KC_BSPC:
+      // case KC_ENT:
+
+// // Left Row 1:
+//       case KC_Q:
+//       case KC_W:
+//     //case KC_E:
+//       case KC_R:
+//       case KC_T:
+
+// // Right Row 2:
+//       case KC_H ... KC_L:
+//       case KC_SPC:
+
+// // Right Row 3:
+//       case KC_N:
+//       case KC_M:
+
+      case KC_A ... KC_C:
+// case KC_D:
+// case KC_E:
+      case KC_F ... KC_N:
+// case KC_O:
+      case KC_P ... KC_R:
+// case KC_S:
+      case KC_T ... KC_Z:
+      case KC_SPC:
+      case KC_1:
+      case KC_2:
+      case KC_3:          write_app_name(keycode); 
+                          // return false;
+
+  } // switch(keycode)
+
+} // void call_app_with_keycode(uint16_t keycode)
+  
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 //                                                                                      //
@@ -371,6 +552,7 @@ void brightSetToLevel(uint8_t max_bright) {
 void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 
   wait_ms(1);
+
 #if defined(RGBLIGHT_ENABLE)
   rgblight_enable_noeeprom(); // switch on LEDs to allow us seeing the reset LEDs flashing
 #elif defined(BACKLIGHT_ENABLE)

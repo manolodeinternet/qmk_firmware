@@ -254,11 +254,11 @@ void flashing_RGB_LEDs(uint8_t times, uint8_t r1, uint8_t g1, uint8_t b1, uint8_
 //RGB_MY_RED
 {
   wait_ms(1);
-#if defined(RGBLIGHT_ENABLE)
+// #if defined(RGBLIGHT_ENABLE)
   rgblight_enable_noeeprom(); // switch on LEDs to allow us seeing the reset LEDs flashing
-#elif defined(BACKLIGHT_ENABLE)
-  backlight_enable();
-#endif
+// #elif defined(BACKLIGHT_ENABLE)
+//   backlight_enable();
+// #endif
   wait_ms(1);
 
   // SS_BEEP_2;

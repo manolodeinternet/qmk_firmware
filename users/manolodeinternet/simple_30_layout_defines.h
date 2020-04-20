@@ -3,6 +3,8 @@
 
 // #include "rgblight_mini_dactyl.h"
 
+// #define APPS_DICT_SIZE  2  DEFINED IN 'MANOLODEINTERNET.H' !!!
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                                   //
     // DEFINING COLOR LAYERS                      C O L O R     L A Y E R S                              //

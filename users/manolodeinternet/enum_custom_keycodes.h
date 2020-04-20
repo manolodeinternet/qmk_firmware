@@ -97,10 +97,8 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
   // MACROS FOR _DFLT LAYER 00
       ,TT_NUMB
       ,TH_L3_KAR_APPS
-  //  ,TH_L4_FUNC_LEDS
       ,TH_R1_DALY_MOUS
       ,TH_R2_SYMB_FVIM
-  //  ,TH_R3_APPS_NUMB
       ,TH_R3_APPS_TRIGGER
       ,TH_R4_POWR_LEDS
   // macros for _DFLT layer 00

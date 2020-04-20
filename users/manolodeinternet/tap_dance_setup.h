@@ -112,7 +112,6 @@ enum tap_dance_keycodes {
 //#if defined(COMPREHENSIVE_30_LAYOUT)
 #elif defined(SIMPLE_30_LAYOUT)
     ,DVIM_Del  // Delete when tapping, _DVIM when holding 
-    ,FUNC_LED
 
 //#elif defined(SIMPLE_30_LAYOUT)
 #endif

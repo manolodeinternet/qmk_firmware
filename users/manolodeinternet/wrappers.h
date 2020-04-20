@@ -225,8 +225,8 @@ acronym dictionary
 #define ___DEFAULT_L3___         KC_Z,         KC_X,         KC_C,         KC_V,         KC_B
 
 #define      ___DEFAULT_R1___             KC_Y,         KC_U,         KC_I,         KC_O,          KC_P
-#define      ___DEFAULT_R2___             KC_H, LSFT_T(KC_J), LGUI_T(KC_K), LALT_T(KC_L),LCTL_T(KC_SPC)
-#define      ___DEFAULT_R3___             KC_N,         KC_M,       KC_ESC,      KC_BSPC,        KC_ENT
+#define      ___DEFAULT_R2___             KC_H, LSFT_T(KC_J), LGUI_T(KC_K), LALT_T(KC_L),LCTL_T(KC_SPC) // [BUG] KC_SPC instead of KC_J
+#define      ___DEFAULT_R3___             KC_N,         KC_M,       KC_ESC,      KC_BSPC,        KC_ENT   // [bug]
 
 //#elif defined(SIMPLE_30_LAYOUT)
 #endif
@@ -245,12 +245,12 @@ acronym dictionary
  *                   |@[_DVIM]|@[_FVIM]|@[_NUMB]|        |@[_APPS]|@[_SYMB]|@[_DALY]|
  *                   '--------------------------'        '--------------------------'
  */
-#define _DFLT_LTHMB_RW1_               LT(_MOUS,KC_TAB), MO(_FUNC) // TD(FUNC_LED) /*TH_L4_FUNC_LEDS*/
-#define _DFLT_LTHMB_RW2_ TD(DVIM_Del),        MO(_FVIM),   TT_NUMB       /*TT(_NUMB)*/
+#define _DFLT_LTHMB_RW1_               LT(_MOUS,KC_TAB), MO(_FUNC)
+#define _DFLT_LTHMB_RW2_ TD(DVIM_Del),        MO(_FVIM),   TT_NUMB/*TT(_NUMB) is slower*/
 
 #define      _DFLT_RTHMB_RW1_                      MO(_POWR),          OSL(_ACCN)
 #define      _DFLT_RTHMB_RW2_                      TH_R3_APPS_TRIGGER, TH_R2_SYMB_FVIM, TH_R1_DALY_MOUS
-                                                                      /*TH_R3_APPS_TRIGGER*/
+
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
 // END OF [_DFLT] 00
@@ -289,16 +289,16 @@ acronym dictionary
  *                            |        |        |        |        |@@@@@@@@|
  *                            |        |        |        |        |  DIAE- |
  *                            |        |        |        |        | RESIS  |
- *                            |        |@[_LEDS]|        |@[_POWR]|        |
+ *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   |        |        |        |        |        |        |        |
- *                   |        |        |        |        |        |        |        |
- *                   |        |        |        |        |        |        |        |
- *                   |        |   LSft |        |        |        |   LSft |        |
+ *                   |        |        |        |        |  GRAVE |        |   CIR  |
+ *                   |        |        |        |        |        |        |-CUMFLEX|
+ *                   |        |  LSft  |        |        |        |  LSft  |        |
  *                   '--------------------------'        '--------------------------'
  */
-#define _ACCN_LTHMB_RW1_                      _______, MO(_LEDS)
-#define _ACCN_LTHMB_RW2_             _______, KC_LSFT,   _______
+#define _ACCN_LTHMB_RW1_                      _______, _______
+#define _ACCN_LTHMB_RW2_             _______, KC_LSFT, _______
 
 #define      _ACCN_RTHMB_RW1_                                         MO(_POWR), DIAER
 #define      _ACCN_RTHMB_RW2_                                         GRAVE,     KC_LSFT, CIRCU
@@ -371,7 +371,7 @@ acronym dictionary
 /* [_NUMB] = LAYER 02 : NUMBERS LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |        |
- *                            |        |        |        |        |  EURO  |
+ *                            |  EURO  |        |        |        |  EURO  |
  *                            |        |        |        |        |        |
  *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
@@ -381,7 +381,7 @@ acronym dictionary
  *                   |        |        |        |        |        |@[_SYMB]|        |
  *                   '--------------------------'        '--------------------------'
  */
-#define _NUMB_LTHMB_RW1_                    _______, _______
+#define _NUMB_LTHMB_RW1_                       EURO, _______
 #define _NUMB_LTHMB_RW2_           _______, _______, _______
 
 #define      _NUMB_RTHMB_RW1_                                            MO(_POWR),  EURO
@@ -520,10 +520,10 @@ acronym dictionary
  * |        |        |  LEFT  |  DOWN  |  RIGHT |        |        |  HOME  |   Up   |  Down  |   END  |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
- */
-#define ___DEL_VIM_L1___ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-#define ___DEL_VIM_L2___ XXXXXXX, XXXXXXX, XXXXXXX,   KC_UP, XXXXXXX
-#define ___DEL_VIM_L3___ XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT
+ */                                                                  // [DELETEME]
+#define ___DEL_VIM_L1___ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX // delete arrows from _DVIM ...
+#define ___DEL_VIM_L2___ XXXXXXX, XXXXXXX, XXXXXXX,   KC_UP, XXXXXXX //...because _DALY has it yet in D XCV !
+#define ___DEL_VIM_L3___ XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT // [deleteme]
 
 #define      ___DEL_VIM_R1___                        DVIM_Y,  TD(DVIM_uU), DVIM_I,  DVIM_O, TD(DVIM_pP)
 #define      ___DEL_VIM_R2___                        DVIM_H,  DVIM_J,      DVIM_K,  DVIM_L,    DVIM_SP
@@ -533,12 +533,12 @@ acronym dictionary
 /* [_DVIM] = LAYER 05 : DELETE VIM LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |        |
- *                            |        |        |        |        |        |
+ *                            |        |        |        |        |   UP   |
  *                            |        |        |        |        |        |
  *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   |@@@@@@@@|        |        |        |        |        |        |
- *                   |        |        |        |        |        |        |        |
+ *                   |        |        |        |        |  LEFT  |  DOWN  |  RIGHT |
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
@@ -546,8 +546,8 @@ acronym dictionary
 #define _DVIM_LTHMB_RW1_                      _______, _______
 #define _DVIM_LTHMB_RW2_             _______, _______, _______
 
-#define      _DVIM_RTHMB_RW1_                                               MO(_POWR), _______
-#define      _DVIM_RTHMB_RW2_                                               _______,   _______, _______
+#define      _DVIM_RTHMB_RW1_                                               MO(_POWR), KC_UP
+#define      _DVIM_RTHMB_RW2_                                               KC_LEFT,   KC_DOWN, KC_RGHT
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
@@ -642,19 +642,19 @@ acronym dictionary
  *                            |        |        |        |        |        |
  *                            |   Tab  |        |        |        |        |
  *                            |        |        |        |        |        |
- *                            |        |@[_LEDS]|        |@[_POWR]|        |
+ *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   |        |        |        |        |        |        |@@@@@@@@|
- *                   |  SIRI  |CAPSLOCK|        |        |        |        |        |
+ *                   |        |CAPSLOCK|  SIRI  |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
- *                   |        |        |@[_LEDS]|        |@[_LEDS]|        |        |
+ *                   |@[_LEDS]|        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
  */
-#define _DALY_LTHMB_RW1_                        KC_TAB, CHANGE_DALY_TO_LEDS
-#define _DALY_LTHMB_RW2_                SIRI, F(CAPSL), CHANGE_DALY_TO_LEDS
+#define _DALY_LTHMB_RW1_                               KC_TAB, _______
+#define _DALY_LTHMB_RW2_        CHANGE_DALY_TO_LEDS, F(CAPSL),    SIRI
 
-#define      _DALY_RTHMB_RW1_                                     MO(_POWR),           _______
-#define      _DALY_RTHMB_RW2_                                     CHANGE_DALY_TO_LEDS, _______, _______
+#define      _DALY_RTHMB_RW1_                                               MO(_POWR), _______
+#define      _DALY_RTHMB_RW2_                                               _______,   _______, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
@@ -693,16 +693,20 @@ acronym dictionary
 #if defined(MINI_DACTYL_THUMBS)
 /* [_FUNC] = LAYER 08 : FUNCTIONS LAYER
  *                            .-----------------.        .-----------------.
- *                            |        |@@@@@@@@|        |        |        |
- *                            |        |        |        |        |   fn   |
- *                            |        |        |        |        | (Krbnr)|
- *                            |        |        |        |@[_POWR]|        |
+ *                            |        |@@@@@@@@|        |        |        |//[FUTURE_IMPROVEMENT]
+ *                            |        |        |        |        |   fn   |  fn+shift+downarrow: select page down
+ *                            |        |        |        |        | (Krbnr)|  fn+shift+uparrow:   select page up
+ *                            |        |        |        |@[_POWR]|        |//[future_improvement]
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |KAR-APPS|        |KAR-APPS|        |        |
  *                   |        |        | trigger|        | trigger|        |        |
  *                   |        |        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
+ * [FUTURE_IMPROVEMENT]
+ *   fn+shift+downarrow: select page down
+ *   fn+shift+uparrow:   select page up
+ * [future_improvement]
  */
 #define _FUNC_LTHMB_RW1_                       _______, _______
 #define _FUNC_LTHMB_RW2_             _______,  _______,  KC_F20
@@ -847,11 +851,15 @@ acronym dictionary
  *                            |        |        |        |        |        |
  *                            |        |        |        |@[_POWR]|        |
  *                   ,--------+--------+--------|        |--------+--------|--------.
- *                   |        |        |        |        |@@@@@@@@|        |        |
- *                   |        |        |KAR-APPS|        |        |        |        |
- *                   |        |        | trigger|        |        |        |        |
- *                   |        |        |        |        |        |        |        |
+ *                   | Toggle |        |        |        |@@@@@@@@|        |        |
+ *                   | current|        |KAR-APPS|        |        |        |        |
+ *                   |    &   |        | trigger|        |        |        |        |
+ *                   |last app|        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
+ * [FUTURE_IMPROVEMENT]
+ *    direct prev app as in gherkin in LEFT_THUMB_1
+ *    direct next app as in gherkin in LEFT_THUMB_2
+ * [future_improvement]
  */
 // #define _APPS_LTHMB_RW1_                      _______,        _______
 // #define _APPS_LTHMB_RW2_             _______, _______, TH_L3_KAR_APPS
@@ -926,22 +934,22 @@ acronym dictionary
   #if defined(MINI_DACTYL_THUMBS)
     /* [_LEDS] = LAYER 11 : LEDS LIGHTS LAYER
      *                          .-----------------.      .-----------------.
-     *                          |        |@@@@@@@@|      |        |        |
+     *                          |        |        |      |        |        |
      *                          |        |        |      |        |        |
      *                          |        |        |      |        |        |
      *                          |        |        |      |@[_POWR]|        |
      *                 .--------+--------+--------|      |--------+--------|--------.
-     *                 |        |        |@@@@@@@@|      |@@@@@@@@|        |( @@@@ )|
-     *                 |  Cyan  |  Azure |        |      |        |        |        |
+     *                 |@@@@@@@@|        |        |      |        |        |( @@@@ )|
+     *                 |        |  Cyan  |  Azure |      |        |        |        |
      *                 |        |        |        |      |        |        |        |
      *                 |        |        |        |      |        |        |        |
      *                 '--------------------------'      '--------------------------'
      */
-    #define _LEDS_LTHMB_RW1_           _______, _______
-    #define _LEDS_LTHMB_RW2_ CH_CYAN,  CH_AZUR, _______
+    #define _LEDS_LTHMB_RW1_                  _______, _______
+    #define _LEDS_LTHMB_RW2_         _______, CH_CYAN, CH_AZUR
 
-    #define      _LEDS_RTHMB_RW1_                              MO(_POWR), _______
-    #define      _LEDS_RTHMB_RW2_                              _______,   _______, _______
+    #define      _LEDS_RTHMB_RW1_                                           MO(_POWR), _______
+    #define      _LEDS_RTHMB_RW2_                                           _______,   _______, _______
      
   //#if defined(MINI_DACTYL_THUMBS)
   #endif

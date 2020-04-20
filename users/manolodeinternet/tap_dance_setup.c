@@ -302,7 +302,8 @@ void DVIM_Del_finished (qk_tap_dance_state_t *state, void *user_data) {
   DVIM_Del_tap_state.state = cur_dance(state);
   switch (DVIM_Del_tap_state.state) {
 
-    case   SINGLE_TAP:  register_code(KC_DEL); break;
+    case   SINGLE_TAP:  register_code(KC_DEL);
+                        break;
 
     case   SINGLE_HOLD: layer_on(_DVIM);
 
@@ -325,9 +326,6 @@ void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //  d v i m    l a y e r    /    b a c k s p a c e                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [TAPDANCE] [_POWR] KC_E (LCKLOG)                                                     //

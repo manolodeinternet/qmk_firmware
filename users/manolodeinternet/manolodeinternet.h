@@ -78,6 +78,7 @@
 #define CAPSL    6
 //                                                                                      //
 // defining fn_actions                                                                  //
+#define APPS_DICT_SIZE 30
 //////////////////////////////////////////////////////////////////////////////////////////
 
 // __attribute__((weak)) 
@@ -94,6 +95,7 @@ bool numbers_is_active;   // flag for _NUMB layer
 uint8_t shift_flag;
 uint8_t gui_flag;
 // common variables for all keyboards  
+
 
 
 // #   if defined(RGBLIGHT_ENABLE) || defined(RGB_MATRIX_ENABLE)
@@ -233,6 +235,7 @@ void remove_activated_mod(uint8_t activated_mod);
 bool triggered_control_mod(void);
 bool triggered_mod(uint8_t mod);
 
+void write_app_name(uint16_t keycode);
 void call_app_with_keycode(uint16_t keycode);
 
 
