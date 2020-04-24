@@ -1,7 +1,7 @@
 #pragma once
 #include QMK_KEYBOARD_H
 
-#include "tap_dance_setup.h"
+#include "tapdance_setup.h"
 
 #include "wrappers.h"
 #include "enum_custom_keycodes.h"
@@ -49,6 +49,8 @@
 // defining readability codes                                                                        //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#define MAX_VOLUME 16
+#define MAX_BRIGHT 16
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                   //

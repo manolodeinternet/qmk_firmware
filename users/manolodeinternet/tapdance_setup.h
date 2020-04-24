@@ -62,7 +62,8 @@ enum tap_dance_keycodes {
   ,HRESET   // on hold RESET keyboard
 
   ,LCKLOG   // lock screen / (on hold) logout user session
-  ,SLEP_M   // menu bar / (on hold) SLEEP
+  ,SLEP_M   //    menu bar / (on hold) SLEEP
+  ,SHUT_S   //  status bar / (on hold) SHUT DOWN
   // tap dance keycodes accessible from _powr layer 12
 
   // common tapdance keycodes accessible from all keyboards
@@ -262,24 +263,68 @@ void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data);
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_E (LCKLOG)                                                     //
+//                                                                                      //
+//  L O G O U T    /    L O C K    S C R E E N                                          //
+//                                                                                      //
+//  KC_E: *  LOCK USER SCREEN                                                           //
+//        @  LOGOUT CURRENT USER                                                        //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
 /*tap LCKLOG_tap_state = {
   .is_press_action = true,
   .state = 0
 };*/
 void LCKLOG_finished (qk_tap_dance_state_t *state, void *user_data);
 void LCKLOG_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_powr] kc_e (LCKLOG)                                                     //
+//                                                                                      //
+//  l o g o u t    /    l o c k    s c r e e n                                          //
+//////////////////////////////////////////////////////////////////////////////////////////
 
-
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_Z (SLEP_M)                                                     //
+//                                                                                      //
+//  M E N U   B A R   /    S L E E P   C O M P U T E R                                  //
+//                                                                                      //
+//  KC_Z:   *  MENU BAR                                                                 //
+//          @  SLEEP COMPUTER                                                           //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
 /*tap SLEP_M_tap_state = {
   .is_press_action = true,
   .state = 0
 };*/
 void SLEP_M_finished (qk_tap_dance_state_t *state, void *user_data);
 void SLEP_M_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_powr] kc_z (slep_m)                                                     //
+//                                                                                      //
+//  m e n u   b a r   /    s l e e p   c o m p u t e r                                  //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_V (SHUT_S)                                                     //
+//                                                                                      //
+//  S T A T U S   B A R    /    S H U T   D O W N                                       //
+//                                                                                      //
+//  KC_V:   *  STATUS BAR                                                               //
+//          @  SHUT DOWN (SET VOL TO 1 AND SHUT DOWN)                                   //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void SHUT_S_finished (qk_tap_dance_state_t *state, void *user_data);
+void SHUT_S_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_powr] kc_v (shut_s)                                                     //
+//                                                                                      //
+//  s t a t u s   b a r    /    s h u t   d o w n                                       //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 void HRESET_finished (qk_tap_dance_state_t *state, void *user_data);
 void HRESET_reset (qk_tap_dance_state_t *state, void *user_data);

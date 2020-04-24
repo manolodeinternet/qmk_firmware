@@ -27,49 +27,6 @@ bool disabled_caps_before_accent = false;
 
           bool numbers_is_active = false;   // flag for _NUMB layer
 
-//
-// ======================================================
-// Following line is not necesary.  Its place is in 'rgblight_mini_datyl.c':
-// ------------------------------------------------------
-// #include "/Users/navarro/qmk_firmware/users/manolodeinternet/rgblight_mini_dactyl.h"
-// ======================================================
-//
-
-// const uint16_t apps_keycodes[APPS_DICT_SIZE] =
-// {
-//   KC_Q, KC_W, KC_E, KC_R, KC_T,
-//   KC_A, KC_S, KC_D, KC_F, KC_G,
-//   KC_Z, KC_X, KC_C, KC_V, KC_B,
-  
-//                                                                   KC_Y, KC_U, KC_I,   KC_O,    KC_P,
-//                                                                   KC_H, KC_J, KC_K,   KC_L,    KC_SPC,
-//                                                                   KC_N, KC_M, KC_ESC, KC_BSPC, KC_ENT 
-// };
-
-// const char *apps_names[APPS_DICT_SIZE] =
-// {
-// // "Simplenote",    "Twitter",      "Evernote",           "App Store",             "Terminal",
-// "Sim",    "Twi",      "Ev",           "Ap St",             "Ter",
-// // "Script Editor", "Safari",       "Day One",            "Finder",                "Google Chrome",
-// "Sc Ed", "S",       "Da",            "F",                "Chr",
-// // "Studies",       "Xcode",        "Calculator",         "Karabiner-EventViewer", "Books"
-// "Stu",       "X",        "Calc",         "Ka Ev", "Bo"
-
-
-
-// // "Typinator",     "URoom",        "TextEdit",           "Omnifocus",             "System Preferences",
-// "Ty",     "UR",        "T E",           "Om",             "Sy Pr",
-
-// // [FIRMWARE_SIZE]
-// // with only next 5 apps, we get saving 352 bytes over + 364 bytes free = 716 bytes free
-// // "Sketch",        "Sublime Text", "Karabiner-Elements", "Calendar",              "Safari",
-// "Sk",        "Sub", "Kar El", "Ca",              "S",
-// // [firmware_size]
-
-// "N",         "M",         "Key",            "P",                 "Nup"
-// };
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [FUNCTIONS] [_DALY] KC_A [F(CAPSL)]                                                  //
@@ -120,11 +77,6 @@ void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTI
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [FUNCTIONS] [_DALY] KC_A, KC_E, KC_I, KC_O, KC_U, KC_N                               //
@@ -139,19 +91,6 @@ void acute_accent_function(void) {
   register_code(KC_LALT); register_code(KC_E);
   unregister_code(KC_E); unregister_code(KC_LALT);
 }
-
-// void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
-//   // _delay_ms (1);
-//   // wait_ms(1);
-//   // rgblight_enable_noeeprom(); // switch on LEDs to allow us seeing the reset LEDs flashing
-//   // wait_ms(1);
-
-//   // SS_BEEP_1; SS_BEEP_2; SS_BEEP_1; SS_BEEP_2;
-
-//   // flashing_LEDs(5, RGB_MY_GREEN, RGB_MY_YELLOW);
-//   reset_keyboard();
-// }
-
 
 void diaeresis_accent_function(void) {
     register_code(KC_LALT); register_code(KC_U);
@@ -181,8 +120,6 @@ void tilde_accent_function(void) {
 //                                                                                      //
 // accents complementary functions                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -228,17 +165,8 @@ void xvim(char *key)
     SEND_STRING("x");
     send_string(key);
 }
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//                                                                                      //
-//  GLOBAL  FUNCTIONS                                                                   //
-//                                                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [FUNCTIONS] [_DFLT] [_FVIM], [_DVIM], [_CVIM],     [_XVIM       & [_APPS]            //
@@ -328,10 +256,11 @@ void write_app_name(uint16_t keycode)
           register_code (KC_LGUI);
                tap_code (KC_SPC);
         unregister_code (KC_LGUI);
-// type Typinator Abbreviation for Typinator Expansion (/a/?):
+
+ // type Typinator Abbreviation for Typinator Expansion (/a/?):
     tap_code(KC_SLSH); tap_code(KC_A); tap_code(KC_SLSH);
     tap_code(keycode);
-// in Typinator expansion, there is a 0.01 seconds delay
+ // in Typinator expansion, there is a 0.01 seconds delay for keeping enough time for expansion
 }
 
 
@@ -347,37 +276,37 @@ void call_app_with_keycode(uint16_t keycode) //keycode is already filtered with 
   
 switch(keycode)
 {
-      case KC_E: 
+      case KC_E:        //               O: opens Evernote
+                        //       control+S: opens quick entry of Evernote
                         if (control_flag)
                         {
                           register_code(KC_LALT);
                           tap_code(KC_N);
                           unregister_code(KC_LALT);
-                          unregister_code(KC_LCTL);                         // quick entry  E vernote
+                          unregister_code(KC_LCTL);                           // quick entry  E vernote
                         }
                         else
                         {
-                          write_app_name(keycode);                          // E vernote
+                          write_app_name(keycode);                            // E vernote
                         }
                         // return false;
                         break;
 
-      case KC_O:
+      case KC_O:        //               O: opens OmniFocus
+                        //       control+S: opens quick entry of OmniFocus     
                         if (control_flag)
                         {
                           register_code(KC_LALT);
                           tap_code(KC_SPC);
                           unregister_code(KC_LALT);
-                          unregister_code(KC_LCTL);                         // quick entry  O mnifocus
+                          unregister_code(KC_LCTL);                           // quick entry O mnifocus
                         }
                         else
                         {
-                          write_app_name(keycode);                          // O mnifocus
+                          write_app_name(keycode);                            // O mnifocus
                         }
                         // return false;
                         break;
-
-
       case KC_S:        //               S: opens Safari
                         //       control+S: opens Safari with address bar focused 
                         // shift+control+S: opens Slack webpage in Safari 
@@ -403,85 +332,54 @@ switch(keycode)
                           write_app_name(keycode);
 
                           wait_ms(50);
-                          register_code(KC_LGUI);
-                          tap_code(KC_L);                                   // Opens addre S S    bar for introduce an URL...
-                          unregister_code(KC_LGUI);
+                          register_code(KC_LGUI);                             // Opens addre SS bar for
+                          tap_code(KC_L);                                     //...introduce an URL or
+                          unregister_code(KC_LGUI);                           //...googling something
                           if (shift_was_activated)
                           {
                             shift_was_activated = false;
 
- //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-                           wait_ms(50);                                    // ... or googling something
-                           send_string("http://www.slack.com\n");          // S lack
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+                           wait_ms(50);
+                           send_string("http://www.slack.com\n");             // S lack
                           }
                         }                          
                         else
                         {
-                          write_app_name(keycode);                          // S afari     
+                          write_app_name(keycode);                            // S afari     
                         }
                         // return false;
                         break;
 
-
-      case KC_D: 
+      case KC_D:        //               O: opens Day One
+                        //       control+S: opens quick entry of Day One
                         if (control_flag)
                         {
                           register_code(KC_LSFT);
                           tap_code(KC_D);
                           unregister_code(KC_LSFT);
-                          unregister_code(KC_LCTL);                         // quick entry  D ay one
+                          unregister_code(KC_LCTL);                           // quick entry  D ay one
                         }
                         else
                         {
-                          write_app_name(keycode);                          // D ay one
+                          write_app_name(keycode);                            // D ay one
                         }
                         // return false;
                         break;
 
-
-      //30 KEYS: 26 ALPHA KEYS + SPACE + ESCAPE + BACKSPACE + ENTER      
-      // case KC_A ... KC_C:
-      // // case KC_D:
-      // // case KC_E:
-      // case KC_F ... KC_N:
-      // // case KC_O:
-      // case KC_P ... KC_R:
-      // // case KC_S:
-      // case KC_T ... KC_Z:
-      // case KC_SPC:
-      // case KC_ESC:
-      // case KC_BSPC:
-      // case KC_ENT:
-
-// // Left Row 1:
-//       case KC_Q:
-//       case KC_W:
-//     //case KC_E:
-//       case KC_R:
-//       case KC_T:
-
-// // Right Row 2:
-//       case KC_H ... KC_L:
-//       case KC_SPC:
-
-// // Right Row 3:
-//       case KC_N:
-//       case KC_M:
-
       case KC_A ... KC_C:
-// case KC_D:
-// case KC_E:
+// case KC_D:  // computed just above
+// case KC_E:  // computed just above
       case KC_F ... KC_N:
-// case KC_O:
+// case KC_O:  // computed just above
       case KC_P ... KC_R:
-// case KC_S:
+// case KC_S:  // computed just above
       case KC_T ... KC_Z:
       case KC_SPC:
       case KC_1:
       case KC_2:
       case KC_3:          write_app_name(keycode); 
                           // return false;
-
   } // switch(keycode)
 
 } // void call_app_with_keycode(uint16_t keycode)
@@ -500,23 +398,23 @@ switch(keycode)
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-void volumeSetToLevel(uint8_t max_volume) {
-  for (uint8_t i = 0; i < 16; i++)
+void volumeSetToLevel(uint8_t volume) {
+  for (uint8_t i = 0; i < MAX_VOLUME ; i++)
     {
       tap_code(KC__VOLDOWN);
     }
-  for (uint8_t i = 0; i < max_volume; i++)
+  for (uint8_t i = 0; (i < MAX_VOLUME) & (i < volume ); i++)
     {
       tap_code(KC__VOLUP);
     }
 }
 
-void brightSetToLevel(uint8_t max_bright) {
-  for (uint8_t i = 0; i < 16; i++)
+void brightSetToLevel(uint8_t bright) {
+  for (uint8_t i = 0; i < MAX_BRIGHT; i++)
     {
       tap_code(KC_SLCK);
     }
-  for (uint8_t i = 0; i < max_bright; i++)
+  for (uint8_t i = 0; (i < MAX_BRIGHT) & (i < bright); i++)
     {
       tap_code(KC_PAUS);
     }

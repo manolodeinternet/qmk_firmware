@@ -1,3 +1,88 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// [UNDERSTANDING]
+// We implement MACROS when we need QMK functions, or more than one keystroke in a specific keypress ...
+// ... and we don't have the need to use tap dance cases.  Because tap_dance is annoying to use or ...
+// ... because tap_dance is slow for showing RGB layer color.
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+/*                                                                                                    */
+/*  W A Y   0   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
+/*                                                                                                    */
+/*   fvim(j);                                                                                         */
+/*                                                                                                    */
+/*   this is the best one and it's posible because of the following function definition:              */
+/*                                                                                                    */
+/*   void fvim(char *key)                                                                             */
+/*   {                                                                                                */
+/*     SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"f");                                      */
+/*     send_string(key);                                                                              */
+/*   }                                                                                                */
+/*                                                                                                    */
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+/*                                                                                                    */
+/*  W A Y   1   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
+/*                                                                                                    */
+/*   SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"fj");                                       */
+/*                                                                                                    */
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###            
+/*                                                                                                    */
+/*  W A Y   2   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
+/*                                                                                                    */
+/*   actual_mods = get_mods();                                                                        */
+/*   add_mods(ALL_MODS); add_weak_mods(ALL_MODS); send_keyboard_report();                             */
+/*   SEND_STRING("v");                                                                                */
+/*   del_mods(ALL_MODS); add_weak_mods(ALL_MODS);                                                     */
+/*                                                                                                    */
+/*   add_mods(actual_mods);                       send_keyboard_report();                             */
+/*   SEND_STRING("fj");                                                                               */
+/*                                                                                                    */
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+/*                                                                                                    */
+/*  W A Y   3   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
+/*                                                                                                    */
+/*   register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);  */
+/*   register_code(KC_V);    unregister_code(KC_V);                                                   */
+/* unregister_code(KC_LGUI); unregister_code(KC_LALT);                                                */
+/* unregister_code(KC_LCTL); unregister_code(KC_LSFT);                                                */
+/*   register_code(KC_F);    unregister_code(KC_F);                                                   */
+/*   register_code(KC_J);    unregister_code(KC_J);                                                   */
+/*                                                                                                    */
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+/*                                                                                                    */
+/*  W A Y   4   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
+/*                                                                                                    */
+/*           T H I S    W A Y     D O E S N ' T      W O R K  ! ! !                                   */
+/*   register_code(MOD_HYPR); register_code(KC_V); unregister_code(KC_V); unregister_code(MOD_HYPR);  */
+/*   register_code(KC_HYPR);  register_code(KC_V); unregister_code(KC_V); unregister_code(KC_HYPR);   */
+/*   register_code(HYPR);     register_code(KC_V); unregister_code(KC_V); unregister_code(HYPR);      */
+/*   register_code(KC_F);   unregister_code(KC_F);                                                    */                               
+/*   register_code(KC_J);   unregister_code(KC_J);                                                    */
+/*                                                                                                    */
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+/*
+// [EXAMPLE]  // look at the comments !!!
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case FOO:
+      if (record->event.pressed) {
+        // Do something when pressed
+      } else {
+        // Do something else when release
+      }
+      return false; // Skip all further processing of this key
+    case KC_ENTER:
+      // Play a tone when enter is pressed
+      if (record->event.pressed) {
+        PLAY_NOTE_ARRAY(tone_qwerty);
+      }
+      return true; // Let QMK send the enter press/release events
+    default:
+      return true; // Process all other keycodes normally
+  }
+}
+// [example]
+*/
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
       // case THUMB_L2_FVIM_SYMB_DALY_POWR_CAPSL:

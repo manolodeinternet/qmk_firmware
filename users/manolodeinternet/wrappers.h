@@ -989,7 +989,7 @@ acronym dictionary
 #define ____POWER_L2____    KC_RCTL, RALT_T(KC_F7), RGUI_T(KC_SPC), RSFT_T(KC_F9),    ZOOMSMTH
 #define ____POWER_L3____ TD(SLEP_M),   KILAPP_DOCK,    KILMNU_TOOL,   SHUTD_STATB, RSTRT_FLOAT
 
-#define      ____POWER_R1____           TD(V8_TEST), KC__VOLUP,   KC__VOLDOWN, TD(V1_LAST), KC__MUTE
+#define      ____POWER_R1____           TD(V8_TEST), S(A(KC__VOLUP)),   S(A(KC__VOLDOWN)), TD(V1_LAST), KC__MUTE
 #define      ____POWER_R2____           ZOOM_FOL,    TD(RS_ZOIN), TD(RG_ZOUT), TD(RA_ZOOM), TD(RC_INCO)
 #define      ____POWER_R3____           CNTRST_U,    KC_PAUS,     KC_SLCK,     BRIGHT_1,    CNTRST_D
 
@@ -1013,44 +1013,13 @@ acronym dictionary
  * | @SLEEP |^KIL_APP|^KIL_MEN|^SHUTDWN|^RESTART|        |        |        |        |(Bght.1)|        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-#define ____POWER_L1____     TOG_ID,        STP_ID,     TD(LCKLOG),    TD(HRESET),   _______
-#define ____POWER_L2____    KC_RCTL, RALT_T(KC_F7), RGUI_T(KC_SPC), RSFT_T(KC_F9), ZOOMSMTH
-#define ____POWER_L3____ TD(SLEP_M),        KA_DCK,         KM_TOL,        SH_STA,   RT_FLO
+#define ____POWER_L1____     TOG_ID,        STP_ID,     TD(LCKLOG),          TD(HRESET),  _______
+#define ____POWER_L2____    KC_RCTL, RALT_T(KC_F7), RGUI_T(KC_SPC),       RSFT_T(KC_F9), ZOOMSMTH
+#define ____POWER_L3____ TD(SLEP_M),        KA_DCK,         KM_TOL,/*SH_STA*/TD(SHUT_S),   RT_FLO
 
-#define      ____POWER_R1____                      VOL_8,    KC__VOLUP, KC__VOLDOWN, VOL_1,    KC__MUTE
+#define      ____POWER_R1____                      VOL_8,    S(A(KC__VOLUP)), S(A(KC__VOLDOWN)), VOL_1,    KC__MUTE
 #define      ____POWER_R2____                      ZOOM_FOL, ZOOM_IN,   ZOOM_OUT,    ZOOM_TOG, INV_COLO
 #define      ____POWER_R3____                      CNTRST_U, KC_PAUS,   KC_SLCK,     BRIGHT_1, CNTRST_D
-
-
-
-
-// ALIGN TO RIGHT AND LEFT OR ONLY LEFT ???
-
-// #define ____POWER_L1____      TOG_ID,      LOCK_SCR,        KC_LOGO,      MY_RESET,   STP_ID
-// #define ____POWER_L2____     KC_RCTL, RALT_T(KC_F7), RGUI_T(KC_SPC), RSFT_T(KC_F9), ZOOMSMTH
-// #define ____POWER_L3____ SLEP_MNUBAR,        KA_DCK,         KM_TOL,        SH_STA,   RT_FLO
-
-// #define      ____POWER_R1____                         VOL_8, KC__VOLUP, KC__VOLDOWN,    VOL_1, KC__MUTE
-// #define      ____POWER_R2____                      ZOOM_FOL,   ZOOM_IN,    ZOOM_OUT, ZOOM_TOG, INV_COLO
-// #define      ____POWER_R3____                      CNTRST_U,   KC_PAUS,     KC_SLCK, BRIGHT_1, CNTRST_D
-
-
-
-
-
-
-// #define ____POWER_L1____ TOG_ID,      LOCK_SCR,      KC_LOGO,        MY_RESET,      STP_ID
-// #define ____POWER_L2____ KC_RCTL,     RALT_T(KC_F7), RGUI_T(KC_SPC), RSFT_T(KC_F9), ZOOMSMTH
-// #define ____POWER_L3____ SLEP_MNUBAR, KA_DCK,        KM_TOL,         SH_STA,        RT_FLO
-
-// #define      ____POWER_R1____                      VOL_8,    KC__VOLUP, KC__VOLDOWN, VOL_1,    KC__MUTE
-// #define      ____POWER_R2____                      ZOOM_FOL, ZOOM_IN,   ZOOM_OUT,    ZOOM_TOG, INV_COLO
-// #define      ____POWER_R3____                      CNTRST_U, KC_PAUS,   KC_SLCK,     BRIGHT_1, CNTRST_D
-// Align to right and left or only left ???
-
-
-
-
 
 //#elif defined(SIMPLE_30_LAYOUT)
 #endif

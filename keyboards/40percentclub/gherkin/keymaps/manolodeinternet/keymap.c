@@ -1583,8 +1583,7 @@ void KILM_T_reset (qk_tap_dance_state_t *state, void *user_data) {
                      
     case SINGLE_HOLD: 
                       unregister_code(KC_ESC); unregister_code(KC_LGUI); unregister_code(KC_LALT); 
-                      break;
-                            
+                      break;      
   }
   KILM_T_tap_state.state = 0;
 }
@@ -1595,78 +1594,78 @@ void KILM_T_reset (qk_tap_dance_state_t *state, void *user_data) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_POWR] KC_V (SHUT_S)                                                     //
-//                                                                                      //
-//  S T A T U S   B A R    /    S H U T   D O W N                                       //
-//                                                                                      //
-//  KC_V:   *  STATUS BAR                                                               //
-//          @  SHUT DOWN (SET VOL TO 1 AND SHUT DOWN)                                   //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'SHUT_S' tap dance.
-static tap SHUT_S_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //                                                                                      //
+// // [TAPDANCE] [_POWR] KC_V (SHUT_S)                                                     //
+// //                                                                                      //
+// //  S T A T U S   B A R    /    S H U T   D O W N                                       //
+// //                                                                                      //
+// //  KC_V:   *  STATUS BAR                                                               //
+// //          @  SHUT DOWN (SET VOL TO 1 AND SHUT DOWN)                                   //
+// //                                                                                      //
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //instantalize an instance of 'tap' for the 'SHUT_S' tap dance.
+// static tap SHUT_S_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
 
-void SHUT_S_finished (qk_tap_dance_state_t *state, void *user_data) {
-  SHUT_S_tap_state.state = cur_dance(state);
-  switch (SHUT_S_tap_state.state) {
+// void SHUT_S_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   SHUT_S_tap_state.state = cur_dance(state);
+//   switch (SHUT_S_tap_state.state) {
 
-// [SYSTEM PREFERENCES]
-    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_F8);  // STATUS BAR 
-                      break;
-// [system preferences]
+// // [SYSTEM PREFERENCES]
+//     case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_F8);  // STATUS BAR 
+//                       break;
+// // [system preferences]
 
-    case SINGLE_HOLD:                        
-    case DOUBLE_TAP:  volumeSetToLevel1();
+//     case SINGLE_HOLD:                        
+//     case DOUBLE_TAP:  volumeSetToLevel1();
 
-                  //  keystrokes for shutting down:  (guessed by try and fail method)
-                      register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
+//                   //  keystrokes for shutting down:  (guessed by try and fail method)
+//                       register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
 
-                      register_code(KC_POWER); unregister_code(KC_POWER);
+//                       register_code(KC_POWER); unregister_code(KC_POWER);
 
-                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);   
+//                       unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);   
 
-                      break;
+//                       break;
 
-// [OLDWAY]
-                   // Another way for shutting down, but much less elegant:
-                   // register_code(KC_POWER); _delay_ms(2000); unregister_code(KC_POWER);
-                   // register_code(KC_ENT); unregister_code(KC_ENT);
-// [oldway]
+// // [OLDWAY]
+//                    // Another way for shutting down, but much less elegant:
+//                    // register_code(KC_POWER); _delay_ms(2000); unregister_code(KC_POWER);
+//                    // register_code(KC_ENT); unregister_code(KC_ENT);
+// // [oldway]
 
-// [INFO]
-                   /* The KC_EJCT keycode doesn't work */
-                      /*
-                      register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
-                      register_code(KC_EJCT);
-                      _delay_ms(2000);
-                      unregister_code(KC_EJCT);
-                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
-                      */
-// [info]
-  }
-}
+// // [INFO]
+//                    /* The KC_EJCT keycode doesn't work */
+//                       /*
+//                       register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
+//                       register_code(KC_EJCT);
+//                       _delay_ms(2000);
+//                       unregister_code(KC_EJCT);
+//                       unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
+//                       */
+// // [info]
+//   }
+// }
 
-void SHUT_S_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (SHUT_S_tap_state.state) {
-    case SINGLE_TAP:  unregister_code(KC_F8); unregister_code(KC_LCTL);
-                      break;
+// void SHUT_S_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (SHUT_S_tap_state.state) {
+//     case SINGLE_TAP:  unregister_code(KC_F8); unregister_code(KC_LCTL);
+//                       break;
                      
-    case SINGLE_HOLD: 
-    case DOUBLE_TAP:  break;
+//     case SINGLE_HOLD: 
+//     case DOUBLE_TAP:  break;
                             
-  }
-  SHUT_S_tap_state.state = 0;
-}
-//                                                                                      //
-// [tapdance] [_powr] kc_v (shut_s)                                                     //
-//                                                                                      //
-//  s t a t u s   b a r    /    s h u t   d o w n                                       //
-//////////////////////////////////////////////////////////////////////////////////////////
+//   }
+//   SHUT_S_tap_state.state = 0;
+// }
+// //                                                                                      //
+// // [tapdance] [_powr] kc_v (shut_s)                                                     //
+// //                                                                                      //
+// //  s t a t u s   b a r    /    s h u t   d o w n                                       //
+// //////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////

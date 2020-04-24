@@ -74,6 +74,9 @@ endif
 // [FIXME]
 // [fixme]         there's something I HAVE TO FIX for a right working
 //
+// [FUTURE_IMPROVEMENT]
+// [future_improvement] This is a must !
+//
 // [GHERKIN_SCOPE]
 // [gherkin_scope]  GHERKIN scope only
 //

@@ -223,6 +223,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // [_POWR] LAYER
   ,[LCKLOG]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, LCKLOG_finished, LCKLOG_reset, 800)
   ,[SLEP_M]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLEP_M_finished, SLEP_M_reset)
+  ,[SHUT_S]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SHUT_S_finished, SHUT_S_reset)
 
   ,[HRESET]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, HRESET_finished, HRESET_reset, 1000)
 // [_powr] layer
@@ -729,101 +730,17 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
 // BEGINNING OF NEW MACROS WAY                                                                        //
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 //
-// [UNDERSTANDING]
-// We implement MACROS when we need QMK functions, or more than one keystroke in a specific keypress ...
-// ... and we don't have the need to use tap dance cases.  Because tap_dance is annoying to use or ...
-// ... because tap_dance is slow for showing RGB layer color.
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/*                                                                                                    */
-/*  W A Y   0   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
-/*                                                                                                    */
-/*   fvim(j);                                                                                         */
-/*                                                                                                    */
-/*   this is the best one and it's posible because of the following function definition:              */
-/*                                                                                                    */
-/*   void fvim(char *key)                                                                             */
-/*   {                                                                                                */
-/*     SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"f");                                      */
-/*     send_string(key);                                                                              */
-/*   }                                                                                                */
-/*                                                                                                    */
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/*                                                                                                    */
-/*  W A Y   1   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
-/*                                                                                                    */
-/*   SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v"))))"fj");                                       */
-/*                                                                                                    */
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###            
-/*                                                                                                    */
-/*  W A Y   2   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
-/*                                                                                                    */
-/*   actual_mods = get_mods();                                                                        */
-/*   add_mods(ALL_MODS); add_weak_mods(ALL_MODS); send_keyboard_report();                             */
-/*   SEND_STRING("v");                                                                                */
-/*   del_mods(ALL_MODS); add_weak_mods(ALL_MODS);                                                     */
-/*                                                                                                    */
-/*   add_mods(actual_mods);                       send_keyboard_report();                             */
-/*   SEND_STRING("fj");                                                                               */
-/*                                                                                                    */
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/*                                                                                                    */
-/*  W A Y   3   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
-/*                                                                                                    */
-/*   register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);  */
-/*   register_code(KC_V);    unregister_code(KC_V);                                                   */
-/* unregister_code(KC_LGUI); unregister_code(KC_LALT);                                                */
-/* unregister_code(KC_LCTL); unregister_code(KC_LSFT);                                                */
-/*   register_code(KC_F);    unregister_code(KC_F);                                                   */
-/*   register_code(KC_J);    unregister_code(KC_J);                                                   */
-/*                                                                                                    */
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/*                                                                                                    */
-/*  W A Y   4   T O   A C C E S I N G   K E Y  "J"   F R O M   MAC OSX SYSTEM   K E Y B I N D I N G S */
-/*                                                                                                    */
-/*           T H I S    W A Y     D O E S N ' T      W O R K  ! ! !                                   */
-/*   register_code(MOD_HYPR); register_code(KC_V); unregister_code(KC_V); unregister_code(MOD_HYPR);  */
-/*   register_code(KC_HYPR);  register_code(KC_V); unregister_code(KC_V); unregister_code(KC_HYPR);   */
-/*   register_code(HYPR);     register_code(KC_V); unregister_code(KC_V); unregister_code(HYPR);      */
-/*   register_code(KC_F);   unregister_code(KC_F);                                                    */                               
-/*   register_code(KC_J);   unregister_code(KC_J);                                                    */
-/*                                                                                                    */
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/*
-// [EXAMPLE]  // look at the comments !!!
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case FOO:
-      if (record->event.pressed) {
-        // Do something when pressed
-      } else {
-        // Do something else when release
-      }
-      return false; // Skip all further processing of this key
-    case KC_ENTER:
-      // Play a tone when enter is pressed
-      if (record->event.pressed) {
-        PLAY_NOTE_ARRAY(tone_qwerty);
-      }
-      return true; // Let QMK send the enter press/release events
-    default:
-      return true; // Process all other keycodes normally
-  }
-}
-// [example]
-*/
-
 // APPS - PROCESS_RECORD_APPS
 bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed)
   {
     switch(keycode)
     {
-    //NEXT_APP, (IT CHANGES QUICKLY, WITHOUT APPS BAR IN THE MIDDLE OF THE SCREEN !!!)
+    
       case TD(DVIM_Del):// Left Thumb 1 // Toggle between current and last app
+                        // IT CHANGES QUICKLY, WITHOUT APPS BAR IN THE MIDDLE OF THE SCREEN !!!
                         // If you want to change from one app to another app in multi_apps mode,
                         //...uncomment next line.
-
                         // multi_apps = true;
                           register_code(KC_LGUI);
                                tap_code(KC_TAB);
@@ -842,8 +759,8 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                           return false;
 
       // Next line call one app for every 3x10 alpha keys
-      default:          call_app_with_keycode(keycode & 0xFF);      // for avoiding modifiers on home row
-                        return false;                     // i.e. pressing J is no KC_J, but LSFT_T(KC_J)
+      default:          call_app_with_keycode(keycode & 0xFF);//the filter avoids modifiers on home row
+                        return false;                   // i.e. pressing J is no KC_J, but LSFT_T(KC_J)
 
     } // switch (keycode)
   } // if (record->event.pressed)
@@ -852,12 +769,8 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
 //  Do something else when release
     switch(keycode)
     {
-      case TH_R3_APPS_TRIGGER: // Right Thumb 3 // Apps mode with 'apps_trigger' variable without layer
+      case TH_R3_APPS_TRIGGER:// Right Thumb 3 // Switch off 'apps_trigger' variable mode without layer
                                apps_trigger = false;
-
-   // if we are in this function it's because we checked that karabiner_apps_trigger is false
-                               // if (!karabiner_apps_trigger)
-                               // {
                                show_RGB_LEDs();
                                if (multi_apps)
                                {
@@ -868,7 +781,6 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                                   // wait_ms(1000);
                                   HIDEOTH;
                                }
-                               // }
                                return false;
 
       default:                 return false;
@@ -903,26 +815,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch(keycode)
     {
       case TT_NUMB: // Left Thumb 3
-// //////////////////////////////////////////////////////////////////////////////////////////////// ###
-// NEXT NEVER HAPPENS because TT_NUMB is the same key that the one for activate karabiner_apps_trigger!
-// //////////////////////////////////////////////////////////////////////////////////////////////// ###
-                    // if (apps_trigger)
-                    // {
-                    //   karabiner_apps_trigger = true;  
-                    //   if (multi_apps)
-                    //   {
-                    //     // [bug] current_flag or gui_flag ???
-                    //     add_desired_mod(current_flag);
-                    //     // [bug]
-
-                    //     // add_mods(current_flag);
-                    //     // add_weak_mods(current_flag);
-                    //     // send_keyboard_report();
-                    //   }
-                    //   register_code(KC_F20);                      
-                    // }
-                    // else
-// //////////////////////////////////////////////////////////////////////////////////////////////// ###
                       lt12_timer = timer_read();
                       layer_invert(_NUMB);
                     return false;
@@ -939,7 +831,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       changing_apps = true;
                       return false;
 
-      case MY_CLEAR:  layer_clear(); return false;
+      case MY_CLEAR:  remove_activated_mod(SHFT_MODS);
+                      remove_activated_mod(CTRL_MODS);
+                      remove_activated_mod(ALT_MODS);
+                      remove_activated_mod(GUI_MODS);
+                      // triggered_mod(KC_C);
+                      // triggered_mod(KC_A);
+                      // triggered_mod(KC_G);
+                      // triggered_mod(KC_S);
+                      layer_clear();
+                      return false;
 
       // case MY_RESET:  if (get_mods()&CTRL_MODS)
       //                 {
@@ -1008,25 +909,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         layer_on(_SYMB);
                       }
                       return false;
-
-/*// 'case TH_L3_KAR_APPS' statement moved from 'process_record_user()' to 'process_record_apps()'
-      case TH_L3_KAR_APPS:  
-                      // layer_off(_APPS);
-                      karabiner_apps_trigger = true;
-                      
-                      if (multi_apps)
-                      {
-                        // [BUG] current_flag or gui_flag ???
-                        add_desired_mod(current_flag);
-                        // [bug]
-
-                        // add_mods(current_flag);
-                        // add_weak_mods(current_flag);
-                        // send_keyboard_report();
-                      }
-                      register_code(KC_F20);
-                      
-                      return false;*/
 
       case TH_R3_APPS_TRIGGER://if (option_flag)
                                 if (triggered_mod(KC_A))
@@ -1146,26 +1028,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       }
                       return false;
 
-      case SH_STA:  // [FIRMWARE_SIZE]
-                      //we save unregister control and register again
-                      //if (triggered_mod(KC_C)) 
-                    // [firmware_size]
-                      if (control_flag)
-                      {
-                        volumeSetToLevel(1);
-                    //  keystrokes for shutting down:  (guessed by try and fail method)
-                    //  register_code(KC_LCTL);    
-                        register_code(KC_LALT); register_code(KC_LGUI);
-                        tap_code(KC_POWER);
-                        unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);   
-                      }
-                      else
-                      {
-                    // [SYSTEM PREFERENCES]
-                        register_code(KC_LCTL); tap_code(KC_F8); unregister_code(KC_LCTL);  // STATUS BAR
-                    // [system preferences]
-                      }
-                      return false;
+      // case SH_STA:  // [FIRMWARE_SIZE]
+      //                 //we save unregister control and register again
+      //                 //if (triggered_mod(KC_C)) 
+      //               // [firmware_size]
+      //                 if (control_flag)
+      //                 {
+      //                   volumeSetToLevel(1);
+      //               //  keystrokes for shutting down:  (guessed by try and fail method)
+      //               //  register_code(KC_LCTL);    
+      //                   register_code(KC_LALT); register_code(KC_LGUI);
+      //                   tap_code(KC_POWER);
+      //                   unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);   
+      //                 }
+      //                 else
+      //                 {
+      //               // [SYSTEM PREFERENCES]
+      //                   register_code(KC_LCTL); tap_code(KC_F8); unregister_code(KC_LCTL);  // STATUS BAR
+      //               // [system preferences]
+      //                 }
+      //                 return false;
 
       case RT_FLO:  // [FIRMWARE_SIZE]
                       //we save unregister control and register again
@@ -1173,6 +1055,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     // [firmware_size]
                       if (control_flag) //same 'saving control' issue as in previous case
                       {
+                        volumeSetToLevel(1);
                       //keystrokes for restarting:  (guessed by try and fail method)
                         register_code(KC_LGUI);
                         tap_code(KC_POWER);                      
@@ -1196,165 +1079,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case VOL_8:    volumeSetToLevel(8);         return false; // set volume to middle  (level 8)
 
       case BRIGHT_1: brightSetToLevel(1);         return false; // set bright to minimum (level 1)
-
-// APPLICATIONS
-// Next 2 lines have been copied & pasted from a command line C program in xcode who run perfectly !
-// Any of them works properly for opening an app from Terminal !  But they don' work under QMK code !
-//   system("open //Applications//Notes.app");
-//   system("osascript -e 'launch application \"Notes\"' -e 'activate application \"Notes\"' -e end");
-//
-//
-//
-// KEYCODES FOR TRIGGERING APPS
-
-
-
-
-
-// // [FIRMWARE_SIZE]
-// //  From APP_Q_SNOTE to APP_EN_NUMB we save 676 bytes !!!
-// // [firmware_size]
-// // LEFT ROW 1 APPS
-//       case APP_Q_SNOTE: callApp("q");                         return false; // simple note
-//       //
-//     // [FIRMWARE_SIZE]
-//       // 10 bytes saved if we don't declare 'APP_W_TWTTR' and don't write the next line
-//       case APP_W_TWTTR: callApp("w");                         return false; // t W itter
-//     // [firmware_size]
-//       //
-//     // [FIRMWARE_SIZE]
-//       // 88 bytes free when disable Evernote case and 40 bytes when I enable it  -->  it costs 48 bytes of code
-//     // [firmware_size]
-//       case APP_E_EVERN: 
-//                         if (control_flag)
-//                         {
-//                           register_code(KC_LALT);
-//                           tap_code(KC_N);
-//                           unregister_code(KC_LALT);
-//                           unregister_code(KC_LCTL);                         // quick entry  E vernote
-//                         }
-//                         else
-//                         {
-//                           callApp("e");                        
-//                         }
-//                         return false;                                       // E vernote
-//       //
-//       case APP_R_APSTO: callApp("r");                         return false; // app sto R e
-//       case APP_T_TERMI: callApp("t");                         return false; // T erminal
-
-
-// // RIGHT ROW 1 APPS
-//       case APP_Y_TYPIN: callApp("y");                         return false; // t Y pinator
-//       case APP_U_UROOM: callApp("u");                         return false; // U room
-//       case APP_I_TEDIT: callApp("i");                         return false; // texted I t
-//       case APP_O_OMNIF: if (control_flag)
-//                         {
-//                           register_code(KC_LALT);
-//                           tap_code(KC_SPC);
-//                           unregister_code(KC_LALT);
-//                           unregister_code(KC_LCTL);                         // quick entry  O mnifocus
-//                         }
-//                         else
-//                         {
-//                           callApp("o");                       
-//                         }
-//                         return false;                                       // O mnifocus
-//       case APP_P_SPREF: callApp("p");                         return false; // system P references
-
-
-// // LEFT ROW 2 APPS
-//       case APP_A_SCRPT: callApp("a");                         return false; // A pple script
-//       case APP_S_SAFAR: //               S: opens Safari
-//                         //       control+S: opens Safari with address bar focused 
-//                         // shift+control+S: opens Slack webpage in Safari 
-
-//                         if (control_flag)
-//                         {
-//                           triggered_control_mod();
-//                           // if (shift_flag)
-//                           // {
-//                           //   shift_was_activated = true;
-//                           //   remove_shift_mod();
-//                           // }
-
-//                           if (shift_flag)
-//                           {
-//                             shift_was_activated = true;
-//                             remove_activated_mod(shift_flag);
-//                             // del_mods     (shift_flag);
-//                             // del_weak_mods(shift_flag);
-//                             // send_keyboard_report();
-//                           }
-
-//                           wait_ms(50);
-//                           callApp("s");
-//                           wait_ms(50);
-//                           register_code(KC_LGUI);
-//                           // wait_ms(50);
-//                           tap_code(KC_L);                                   // Opens addre S S    bar for introduce an URL...
-//                           unregister_code(KC_LGUI);
-//                           if (shift_was_activated)
-//                           {
-//                             shift_was_activated = false;
-//                             wait_ms(50);                                    // ... or googling something
-//                             send_string("http://www.slack.com\n");          // S lack
-//                           }
-//                         }                          
-//                         else
-//                         {
-//                           callApp("s");                                     // S afari     
-//                         }
-//                         return false;
-//       case APP_D_D_ONE: 
-//                         if (control_flag)
-//                         {
-//                           register_code(KC_LSFT);
-//                           tap_code(KC_D);
-//                           unregister_code(KC_LSFT);
-//                           unregister_code(KC_LCTL);                         // quick entry  D ay one
-//                         }
-//                         else
-//                         {
-//                           callApp("d");
-//                         }
-//                         return false;                                       // D ay one
-//       case APP_F_FINDE: callApp("f");                         return false; // F inder
-//       case APP_G_CHRME: callApp("g");                         return false; // G oogle chrome
-
-
-// // RIGHT ROW 2 APPS
-//       case APP_H_SKTCH: callApp("h");                         return false; // sketc H
-//       case APP_J_SUBLI: callApp("j");                         return false; // sublime text
-//       case APP_K_KRBNR: callApp("k");                         return false; // K arabiner-elements
-//       case APP_L_CLNDR: callApp("l");                         return false; // Calendar
-//       // case APPSP_EMPTY: callApp(" ");                         return false; // ???? EMPTY EMPTY EMPTY EMPTY 
-
-
-// // LEFT ROW 3 APPS
-//       // case APP_Z_STUDI: callApp("z");                         return false; // Studies
-//       case APP_X_XCODE: callApp("x");                         return false; // Xcode
-//       case APP_C_CALCU: callApp("c");                         return false; // Calculator
-//       case APP_V_KVIEW: callApp("v");                         return false; // karabiner-event Viewer
-//       case APP_B_BOOKS: callApp("b");                         return false; // Books
-
-
-// // RIGHT ROW 3 APPS
-//       case APP_N_NOTES: callApp("n");                         return false; // Notes
-//       case APP_M_MAIL:  callApp("m");                         return false; // Mail      
-//       // case APP_ES_KEYN: callApp("\e");                        return false; // Keynote
-//       // case APP_BS_PAGE: callApp("\b");                        return false; // Pages
-//       // case APP_EN_NUMB: callApp("\n");                        return false; // Numbers
-//       // case APP_ES_KEYN: callApp("1");                         return false; // Keynote
-//       case APP_BS_PAGE: callApp("2");                         return false; // Pages
-//       case APP_EN_NUMB: callApp("3");                         return false; // Numbers
-// // keycodes for triggering apps
-// // applications
-// //
-// // keycodes for triggering apps
-//
-// [firmware_size]
-
-
 
 // _FVIM
    // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
@@ -1444,22 +1168,10 @@ _LEDS COMMANDS
                     flashing_RGB_LEDs(10, RGB_MY_AZURE, RGB_MY_PURPLE);
                     return false;
 
-      case GET_HSV: /*wait_ms(1500); SS_BEEP_2; wait_ms(1500);*/
-                    flashing_RGB_LEDs(5, RGB_MY_YELLOW, RGB_MY_PURPLE);
-
-
-
-
-
+      case GET_HSV: flashing_RGB_LEDs(5, RGB_MY_YELLOW, RGB_MY_PURPLE);
                     SEND_STRING("\n===");
                     SEND_STRING("\nget_hsv() -> ");
                     get_hsv();
-
-
-
-
-
-                    // SS_BEEP_1; SS_BEEP_2;
                     return false;
 
 // [WHYWEDOTHIS]
@@ -1482,10 +1194,6 @@ ROW 1 COLORS
       case CH_ORNG: rgblight_sethsv_noeeprom(HSV_MY_ORANGE_RED);    return false;
       case CH_GOLR: rgblight_sethsv_noeeprom(HSV_MY_LIGHT_CORAL_2); return false;
       case CH_GOLD: rgblight_sethsv_noeeprom(HSV_MY_GOLD);          return false;
-      // case CH_CORL: rgblight_sethsv_noeeprom(HSV_MY_LIGHT_CORAL_2); return false;
-      // case CH_ORNG: rgblight_sethsv_noeeprom(HSV_MY_ORANGE);      return false;
-      // case CH_GOLR: rgblight_sethsv_noeeprom(HSV_MY_GOLDENROD);   return false;
-      // case CH_GOLD: rgblight_sethsv_noeeprom(HSV_MY_GOLD);        return false;
 
       case CH_YLLW: rgblight_sethsv(HSV_MY_YELLOW);                 return false;
 
@@ -1512,11 +1220,6 @@ ROW 3 COLORS
       case CH_MGNT: rgblight_sethsv(HSV_MY_MAGENTA);              return false;
                          // #define RGB_MY_MAGENTA      0xFF, 0x00, 0xAA  // 0xFF, 0x00, 0xFF
 
-
-
-
-
-
       case CH_PINK: rgblight_sethsv_noeeprom(HSV_MY_PINK);        return false;
 
       case CH_EMPT: rgblight_sethsv_noeeprom(HSV_MY_EMPTY);       return false;
@@ -1540,15 +1243,10 @@ ROW 3 COLORS
   {
 //  Do something else when release
 
-
-
   if (apps_trigger && !karabiner_apps_trigger)
   {
     return process_record_apps(keycode, record);
   } // if (apps_trigger && !karabiner_apps_trigger)
-
-
-
 
     switch(keycode)
     {
@@ -1562,8 +1260,8 @@ ROW 3 COLORS
         // Emulating TT(layer), but better:
     // [firmware_size]
 
-      case TT_NUMB:
-//    case TH_L3_KAR_APPS:
+      case TT_NUMB: // Left Thumb 3 // if Karabiner_apps_trigger ---> Karabiner_apps off
+                                    // else Invert _NUMB if it was a hold, no a quick tap
                       if (karabiner_apps_trigger)
                       {
                             karabiner_apps_trigger = false;
@@ -1658,55 +1356,6 @@ ROW 3 COLORS
                       }
                       return false;
 
-
-      // case TH_L3_KAR_APPS:
-      //                 karabiner_apps_trigger = false;
-      //                 unregister_code(KC_F20);
-
-      //              // REMOVE 'gui mod'
-      //                 if (multi_apps)
-      //                 // remove 'gui modifier'
-      //                 {
-      //                   // [BUG] current_flag or gui_flag ???
-      //                   remove_activated_mod(current_flag);
-      //                   // [bug]
-
-      //                   // del_mods     (current_flag);
-      //                   // del_weak_mods(current_flag);
-      //                   // send_keyboard_report();
-      //              // remove 'multi_apps' mode
-      //                 }
-
-      //                 if (!apps_trigger)
-      //                 {
-      //                   show_RGB_LEDs();
-      //                   if (multi_apps)
-      //                   {
-      //           // only if neither 'karabiner_apps_trigger' nor 'apps_trigger' are no longer working !
-      //                     multi_apps = false;
-      //                   }
-      //                 }
-      //                 return false;
-
-
-
-// 'case TH_R3_APPS_TRIGGER' statement moved from 'process_record_user()' to 'process_record_apps()' ...
-//... for covering the case when we are in 'apps_trigger' and !'karabiner_apps_trigger'
-
-// //... This case is for when we have held 'apps_trigger' and 'karabiner_apps_trigger' at the same time
-//     case TH_R3_APPS_TRIGGER: apps_trigger = false;
-//                              apps_working = false;
-
-//                              if (!karabiner_apps_trigger)
-//                              {
-//                                show_RGB_LEDs();
-//                                if (multi_apps)
-//                                {
-//                                  multi_apps = false;
-//                                }
-//                              }
-//                              return false;
-
       case TH_R3_APPS_TRIGGER: if (state_number == _NUMB)
                                {
                                  layer_off(_NUMB);
@@ -1730,18 +1379,6 @@ ROW 3 COLORS
                                  }
                                }
                                return false; break;
-
-/*      case TH_R3_APPS_NUMB: if (state_number == _NUMB)
-                               {
-                                 layer_off(_NUMB);
-                               }
-                               else
-                               {
-                                 apps_working = false;
-                                 layer_off(_APPS);
-                               }
-                               return false;
-    */
 
       case TH_R4_POWR_LEDS:
                       if (state_number == _POWR)
@@ -1796,8 +1433,6 @@ ROW 3 COLORS
 //       case VOL_8:
 //       case BRIGHT_1:
 
-
-
 // // _FVIM
 //    // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
 //    // ... except for the 'H' key:
@@ -1808,7 +1443,6 @@ ROW 3 COLORS
 //       case FVIM_BS:
 //       case FVIM_EN:
 //    // _fvim
-
 
 // // _DVIM
 //       case DVIM_Y:
@@ -1828,12 +1462,12 @@ ROW 3 COLORS
 //       case DVIM_BS:
 //       case DVIM_EN: 
 
-// /*
-// // select _AVIM
-// //            case AVIM_Y:
-// //            case AVIM_N:
-// // the rest of the keys are combination of _FVIM + SHIFT key            
-// */
+// 
+// select _AVIM
+//            case AVIM_Y:
+//            case AVIM_N:
+// the rest of the keys are combination of _FVIM + SHIFT key            
+//
 
 // // _CVIM
 //       case CVIM_Y:
@@ -1970,19 +1604,10 @@ uint32_t layer_state_set_user(uint32_t state) {
 
     case _FVIM:   //  3
 //      active_layer = 3;
-
-
-
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        // rgblight_sethsv_noeeprom(COLOR_FVIM); // (0x00, 0x80, 0x80)
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+     // rgblight_sethsv_noeeprom(COLOR_FVIM); // (0x00, 0x80, 0x80)
         rgblight_setrgb(RGB_MY_MAGENTA); //#define RGB_MY_MAGENTA      0xFF, 0x00, 0xAA  // 0xFF, 0x00, 0xFF
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-    
-
-
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
         break;
 
     case _XVIM:   // 4
