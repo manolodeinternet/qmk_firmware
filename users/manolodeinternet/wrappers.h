@@ -851,9 +851,9 @@ acronym dictionary
  *                            |        |        |        |        |        |
  *                            |        |        |        |@[_POWR]|        |
  *                   ,--------+--------+--------|        |--------+--------|--------.
- *                   | Toggle |        |        |        |@@@@@@@@|        |        |
- *                   | current|        |KAR-APPS|        |        |        |        |
- *                   |    &   |        | trigger|        |        |        |        |
+ *                   | Toggle |  Quit  |        |        |@@@@@@@@|        |        |
+ *                   | current| current|KAR-APPS|        |        |        |        |
+ *                   |    &   |  app   | trigger|        |        |        |        |
  *                   |last app|        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
  * [FUTURE_IMPROVEMENT]

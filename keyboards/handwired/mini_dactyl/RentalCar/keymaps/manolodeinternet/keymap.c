@@ -736,8 +736,15 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
   {
     switch(keycode)
     {
-    
-      case TD(DVIM_Del):// Left Thumb 1 // Toggle between current and last app
+      case TD(DVIM_Del):// Left Thumb 1 // Quit app
+                        register_code(KC_LGUI);
+                             tap_code(KC_Q);
+                      unregister_code(KC_LGUI);
+                        return false;
+
+      // [DUPLICATED]
+      // I's the same as KC_Y in [_DALY]
+      case MO(_FVIM):   // Left Thumb 2 // Toggle between current and last app
                         // IT CHANGES QUICKLY, WITHOUT APPS BAR IN THE MIDDLE OF THE SCREEN !!!
                         // If you want to change from one app to another app in multi_apps mode,
                         //...uncomment next line.
@@ -746,6 +753,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                                tap_code(KC_TAB);
                         unregister_code(KC_LGUI);
                         return false;
+      // [duplicated]
 
       case TT_NUMB:     // Left Thumb 3 // Karabiner-apps mode
                         karabiner_apps_trigger = true;  
@@ -814,11 +822,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   {
     switch(keycode)
     {
+//[_DFLT]
       case TT_NUMB: // Left Thumb 3
                       lt12_timer = timer_read();
                       layer_invert(_NUMB);
                     return false;
+//[_dflt]
 
+//[_DALY]
       case PREV_APP:  register_code  (KC_LGUI);
                       register_code  (KC_LSFT);
                       tap_code       (KC_TAB);
@@ -830,7 +841,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       tap_code       (KC_TAB);
                       changing_apps = true;
                       return false;
+//[_daly]
 
+//[_POWR]
       case MY_CLEAR:  remove_activated_mod(SHFT_MODS);
                       remove_activated_mod(CTRL_MODS);
                       remove_activated_mod(ALT_MODS);
@@ -847,12 +860,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       //                   reset_my_keyboard_function();
       //                   return false;
       //                 }
-      case MY_RESET:  if (control_flag)
-                      {
-                        reset_my_keyboard_function();
-                        return false;
-                      }
 
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+      case MY_RESET:  /*if (control_flag)
+                      {
+                        reset_my_keyboard_function();*/
+                        return false;
+                      // }
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+//[_powr]
+
+//[_SYMB]
       case O_COMMENT: tap_code       (KC_SLSH);
                       register_code  (KC_LSFT);
                       tap_code       (KC_8);
@@ -869,15 +887,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       layer_off(_SYMB);
                       layer_on(_NUMB);
                       return false;
-                      
+//[_symb]
+
+//[_DALY]
       case CHANGE_DALY_TO_LEDS: 
                            layer_off(_DALY);
                            layer_on(_LEDS);
                            return false;
+//[_daly]
 
+//[_DFLT]
       case TH_R1_DALY_MOUS:
                       // if (get_mods()&ALT_MODS)
-                      if (triggered_mod(KC_A))
+                      if (check_mod_and_remove_it(ALT_MODS, true))
                       {
                         layer_on(_MOUS);
                       }
@@ -899,7 +921,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       //                 }
       //                 return false;
       case TH_R2_SYMB_FVIM:
-                      if (triggered_mod(KC_A))
+                      if (check_mod_and_remove_it(ALT_MODS, true))
                       {
                         layer_on(_FVIM);
                       }
@@ -911,33 +933,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       return false;
 
       case TH_R3_APPS_TRIGGER://if (option_flag)
-                                if (triggered_mod(KC_A))
+                                if (check_mod_and_remove_it(ALT_MODS, true))
                                 {
                                    layer_on(_NUMB);
                                 }
                                 else
                                 {
                                   apps_trigger = true;
-                                  if (triggered_mod(KC_G))
+                                  if (check_mod_and_remove_it(GUI_MODS, true))
                                   {
                                     multi_apps = true;
                                   }
+                                  if (check_mod_and_remove_it(CTRL_MODS, true))
+                                  {
+                                    control_apps = true;
+                                  }
+                                  if (check_mod_and_remove_it(SHFT_MODS, true))
+                                  {
+                                    shift_apps = true;
+                                  }
                                   rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)
                                 }
-                                  return false; 
-                               
-      case TH_R4_POWR_LEDS:
-                      // if (get_mods()&ALT_MODS)
-                      if (triggered_mod(KC_A))
-                      {
-                        layer_on(_LEDS);
-                      }
-                      else
-                      {
-                        layer_on(_POWR);
-                      }
-                      return false;
+                                return false; 
+//[_dflt]
 
+//[_POWR]
       case TOG_ID:   if (rgblight_config.enable && (capslock_is_active || numbers_is_active))
                       {
                         if (whole_keyboard_as_indicator)
@@ -978,33 +998,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
 // this function is not going to be used with 23 leds per hand
-//
+//[_powr]
 
+//[_DFLT]
       case KC_BSPC:
       case KC_DEL:   rgblight_sethsv_noeeprom(HSV_MY_RED);
                      return true;
-                     
-    // [FIRMWARE_SIZE]
-      // using triggered_control_mod as a bool function, we save from 38 to 66 bytes --> 28 bytes saved
-    // [firmware_size]
-      // case SL_MEN:    if (triggered_control_mod())
-/* Now 'SLEEP_FILEMENU' is implemented with tap_dance(SINGLE_HOLD),
-...which is much more comfortable to press than 'Control+_POWR+z' !!! 
-      case SL_MEN:    if (triggered_mod(KC_C))
-                      {
-                         register_code(KC_POWER);
-                      // without this delay, POWER doesn't work !!!   
-                         wait_ms(500);
-                         unregister_code(KC_POWER);
-                      // SEND_STRING("s");  // 's' for selecting button sleep but it's not necessary
-                      }
-                      else
-                      {
-                         register_code(KC_LCTL); tap_code(KC_F2); unregister_code(KC_LCTL);
-                      }
-                      return false;
-*/
-      case KA_DCK:    if (triggered_mod(KC_C))
+//[_dflt]
+
+//[_POWR]
+
+// [FIRMWARE_SIZE]
+//   using triggered_control_mod as a bool function, we save from 38 to 66 bytes --> 28 bytes saved
+// [firmware_size]
+
+// 'case SL_MEN' now is implemented with tap_dance
+//...which is much more comfortable to press than 'Control+[_POWR]+Z' !!! 
+
+      case KA_DCK:    if (check_mod_and_remove_it(CTRL_MODS, true))
                       {
                         register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
                         tap_code(KC_ESC);
@@ -1016,7 +1027,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       }
                       return false;
 
-      case KM_TOL:    if (triggered_mod(KC_C))
+      case KM_TOL:    if (check_mod_and_remove_it(CTRL_MODS, true))
                       {
                         register_code(KC_LALT); register_code(KC_LGUI);
                         tap_code(KC_ESC);
@@ -1028,32 +1039,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       }
                       return false;
 
-      // case SH_STA:  // [FIRMWARE_SIZE]
-      //                 //we save unregister control and register again
-      //                 //if (triggered_mod(KC_C)) 
-      //               // [firmware_size]
-      //                 if (control_flag)
-      //                 {
-      //                   volumeSetToLevel(1);
-      //               //  keystrokes for shutting down:  (guessed by try and fail method)
-      //               //  register_code(KC_LCTL);    
-      //                   register_code(KC_LALT); register_code(KC_LGUI);
-      //                   tap_code(KC_POWER);
-      //                   unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);   
-      //                 }
-      //                 else
-      //                 {
-      //               // [SYSTEM PREFERENCES]
-      //                   register_code(KC_LCTL); tap_code(KC_F8); unregister_code(KC_LCTL);  // STATUS BAR
-      //               // [system preferences]
-      //                 }
-      //                 return false;
+// case 'SH_STA' now is implemented with tap_dance
+//...which is much more comfortable to press than 'Control+[_POWR]+V' !!! 
 
       case RT_FLO:  // [FIRMWARE_SIZE]
                       //we save unregister control and register again
                       //if (triggered_mod(KC_C)) 
                     // [firmware_size]
-                      if (control_flag) //same 'saving control' issue as in previous case
+
+                      //same 'saving control' issue as in previous case
+                      if (check_mod_and_remove_it(CTRL_MODS, false))
                       {
                         volumeSetToLevel(1);
                       //keystrokes for restarting:  (guessed by try and fail method)
@@ -1068,22 +1063,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                       // [system preferences]
                       }
                       return false;
+//[_POWR]
 
+//[_ACCN]
       case CIRCU:    circumflex_requested = true; // requested circumflex accent
                      return false;                // Skip all further processing of this key when pressed
 
       case GRAVE:    grave_requested      = true; return false; // requested grave      accent
       case DIAER:    diaeresis_requested  = true; return false; // requested diaeresis  accent
+//[_accn]
 
+//[_DALY]
       case VOL_1:    volumeSetToLevel(1);         return false; // set volume to minimum (level 1)
       case VOL_8:    volumeSetToLevel(8);         return false; // set volume to middle  (level 8)
 
       case BRIGHT_1: brightSetToLevel(1);         return false; // set bright to minimum (level 1)
+//[_daly]
 
-// _FVIM
+//[_FVIM]
    // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
    // ... except for the 'H' key:
       case FVIM_H: fvim("h");  return false;
+//[_fvim]
 
 // _DVIM
       case DVIM_Y: dvim("y");  return false;
@@ -1103,7 +1104,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case DVIM_ES:dvim("\e"); return false;
       case DVIM_BS:dvim("\b"); return false;
       case DVIM_EN:dvim("\n"); return false;
-
+//[_dvim]
 
 /*
 // select _AVIM
@@ -1112,6 +1113,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // the rest of the keys are combination of _FVIM + SHIFT key            
 */
 
+//[_XVIM]
 // _CVIM
       case CVIM_Y: cvim("y");  return false;
       case CVIM_U: cvim("u");  return false;
@@ -1130,7 +1132,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case CVIM_ES:cvim("\e"); return false;
       case CVIM_BS:cvim("\b"); return false;
       case CVIM_EN:cvim("\n"); return false;
-
 // _XVIM
       case XVIM_Y: xvim("y");  return false;
       case XVIM_U: xvim("u");  return false;
@@ -1150,10 +1151,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case XVIM_BS: xvim("\b"); return false;
       case XVIM_EN: xvim("\n"); return false;
 
-// [_LEDS]
-/*
-_LEDS COMMANDS
-*/
+//[_LEDS]
       case RGB_HUI: rgblight_increase_hue_noeeprom();          return false;
       case RGB_HUD: rgblight_decrease_hue_noeeprom();          return false;
       case RGB_SAI: rgblight_increase_sat_noeeprom();          return false;
@@ -1223,10 +1221,9 @@ ROW 3 COLORS
       case CH_PINK: rgblight_sethsv_noeeprom(HSV_MY_PINK);        return false;
 
       case CH_EMPT: rgblight_sethsv_noeeprom(HSV_MY_EMPTY);       return false;
+//[_leds]
 
-// [_leds]
-
-
+//[_DALY]
       case DICTATION:
         register_code(KC_RGUI); unregister_code(KC_RGUI);
         register_code(KC_RGUI); unregister_code(KC_RGUI);
@@ -1234,6 +1231,7 @@ ROW 3 COLORS
       case SIRI:
         register_code(KC_LGUI); register_code(KC_SPC);
         return false;
+//[_daly]
 
    // this line is responsible of the management of the presses for THE REST of the keys.
       default: return true; // Process all other keycodes normally when pressed

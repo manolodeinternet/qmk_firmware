@@ -68,6 +68,9 @@ endif
 // [DELETEME]      this bunch of code is no longer useful
 // [deleteme]      we must delete it later
 //
+// [DUPLICATED]
+// [duplicated]    a function or feature duplicated in different layers
+//
 // [EXAMPLE]
 // [example]
 //

@@ -310,72 +310,72 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 // BRIGHT SET TO LEVEL 1 FUNCTION                                                       //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void volumeSetToLevel1(void) {
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
-}
+// void volumeSetToLevel1(void) {
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+// }
 
-void volumeSetToLevel8(void) {
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
-  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
-  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
-  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
-  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
-  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
-  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
-  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
-  register_code(KC__VOLUP); unregister_code(KC__VOLUP);
-}
+// void volumeSetToLevel8(void) {
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLDOWN); unregister_code(KC__VOLDOWN);
+//   register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+//   register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+//   register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+//   register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+//   register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+//   register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+//   register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+//   register_code(KC__VOLUP); unregister_code(KC__VOLUP);
+// }
 
-void brightSetToLevel1(void) {
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_SLCK); unregister_code(KC_SLCK);
-  register_code(KC_PAUS); unregister_code(KC_PAUS);
-}
+// void brightSetToLevel1(void) {
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_SLCK); unregister_code(KC_SLCK);
+//   register_code(KC_PAUS); unregister_code(KC_PAUS);
+// }
 // [functions] [_powr] kc_v (shut_s)                                                    //
 //             [_powr] kc_u (vol_1)                                                     //
 //                                                                                      //
@@ -1240,7 +1240,7 @@ static tap V8_TEST_tap_state = {
 void V8_TEST_finished (qk_tap_dance_state_t *state, void *user_data) {
   V8_TEST_tap_state.state = cur_dance(state);
   switch (V8_TEST_tap_state.state) {
-    case SINGLE_TAP:        volumeSetToLevel8();
+    case SINGLE_TAP:        volumeSetToLevel(8);
                             break;
 
     case SINGLE_HOLD:       layer_on(_TEST); break;
@@ -1280,7 +1280,7 @@ static tap V1_LAST_tap_state = {
 void V1_LAST_finished (qk_tap_dance_state_t *state, void *user_data) {
   V1_LAST_tap_state.state = cur_dance(state);
   switch (V1_LAST_tap_state.state) {
-    case SINGLE_TAP:        volumeSetToLevel1();
+    case SINGLE_TAP:        volumeSetToLevel(1);
                             break;
 
     case SINGLE_HOLD:       layer_on(_LAST); break;
@@ -1620,7 +1620,7 @@ void KILM_T_reset (qk_tap_dance_state_t *state, void *user_data) {
 // // [system preferences]
 
 //     case SINGLE_HOLD:                        
-//     case DOUBLE_TAP:  volumeSetToLevel1();
+//     case DOUBLE_TAP:  volumeSetToLevel(1);
 
 //                   //  keystrokes for shutting down:  (guessed by try and fail method)
 //                       register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
@@ -2826,9 +2826,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case CIRCU:    circumflex_requested = true; return false; break; // requested circumflex accent
       case GRAVE:    grave_requested      = true; return false; break; // requested grave      accent
       case DIAER:    diaeresis_requested  = true; return false; break; // requested diaeresis  accent
-      case VOL_1:    volumeSetToLevel1();         return false; break; // set volume to minimum (level 1)
-      case VOL_8:    volumeSetToLevel8();         return false; break; // set volume to middle  (level 8)
-      case BRIGHT_1: brightSetToLevel1();         return false; break; // set bright to minimum (level 1)
+      case VOL_1:    volumeSetToLevel(1);         return false; break; // set volume to minimum (level 1)
+      case VOL_8:    volumeSetToLevel(8);         return false; break; // set volume to middle  (level 8)
+      case BRIGHT_1: brightSetToLevel(1);         return false; break; // set bright to minimum (level 1)
 
       case APP_Q_SNOTE: callApp("Simplenote.app");            return false; break; // simple note
       case APP_W_TWTTR: callApp("Twitter.app");               return false; break; // t W itter

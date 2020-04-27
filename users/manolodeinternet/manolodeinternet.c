@@ -195,61 +195,115 @@ void remove_activated_mod(uint8_t activated_mod)
   // ... SL_MEN, KA_DCK, KM_TOL, SH_STA, RT_FLO, ...
   // ... we call this function into every function !!!
 // [firmware_size]
-bool triggered_control_mod(void)
-{
-  control_flag = get_mods()&CTRL_MODS;
-  if (control_flag)
-  {
-    remove_activated_mod(control_flag);
-    // del_mods     (control_flag);
-    // del_weak_mods(control_flag);
-    // send_keyboard_report();
-    return true;
-  }
-  return false;
-}
 
+// bool triggered_control_mod(void)
+// {
+//   control_flag = get_mods()&CTRL_MODS;
+//   if (control_flag)
+//   {
+//     remove_activated_mod(control_flag);
+//     // del_mods     (control_flag);
+//     // del_weak_mods(control_flag);
+//     // send_keyboard_report();
+//     return true;
+//   }
+//   return false;
+// }
+
+/*****************************************************************************************************/
 // using this function, we pass from 674 to 586 bytes free while compile firmware !!!
-bool triggered_mod(uint8_t mod)
+// bool triggered_mod(uint8_t mod)
+// {
+
+//   switch (mod) {
+//     case KC_C: control_flag = get_mods()&CTRL_MODS;
+//                if (control_flag)
+//                {
+//                  current_flag = control_flag;
+//                  remove_activated_mod(control_flag);
+//                  return true;
+//                }
+//                return false;
+//     case KC_A: option_flag  = get_mods()&ALT_MODS;
+//                if (option_flag)
+//                {
+//                  current_flag = option_flag;
+//                  remove_activated_mod(option_flag);
+//                  return true;
+//                }
+//                return false;
+//     case KC_G: gui_flag     = get_mods()&GUI_MODS;
+//                if (gui_flag)
+//                {
+//                  current_flag = gui_flag;
+//                  remove_activated_mod(gui_flag);
+//                  return true;
+//                }
+//                return false;
+//     case KC_S: shift_flag   = get_mods()&SHFT_MODS;
+//                if (shift_flag)
+//                {
+//                  current_flag = shift_flag;
+//                  remove_activated_mod(shift_flag);
+//                  return true;
+//                }
+//                return false;
+//   }
+//   return false;
+// }
+/*****************************************************************************************************/
+// using this function, we pass from 674 to 586 bytes free while compile firmware !!!
+bool /*triggered_mod*/ check_mod_and_remove_it(uint16_t mod, bool remove_it)
 {
-
   switch (mod) {
-    case KC_C: control_flag = get_mods()&CTRL_MODS;
-               if (control_flag)
-               {
-                 current_flag = control_flag;
-                 remove_activated_mod(control_flag);
-                 return true;
-               }
-               return false;
-    case KC_A: option_flag  = get_mods()&ALT_MODS;
-               if (option_flag)
-               {
-                 current_flag = option_flag;
-                 remove_activated_mod(option_flag);
-                 return true;
-               }
-               return false;
-    case KC_G: gui_flag     = get_mods()&GUI_MODS;
-               if (gui_flag)
-               {
-                 current_flag = gui_flag;
-                 remove_activated_mod(gui_flag);
-                 return true;
-               }
-               return false;
-    case KC_S: shift_flag   = get_mods()&SHFT_MODS;
-               if (shift_flag)
-               {
-                 current_flag = shift_flag;
-                 remove_activated_mod(shift_flag);
-                 return true;
-               }
-               return false;
-  }
+    case CTRL_MODS: control_flag = get_mods()&CTRL_MODS;
+                    if (control_flag)
+                    {
+                      if (remove_it)
+                      {
+                        remove_activated_mod(control_flag);
+                      }
+                      // current_flag = control_flag;
+                      return true;
+                    }
+                    return false;
+    case ALT_MODS: option_flag  = get_mods()&ALT_MODS;
+                   if (option_flag)
+                   {
+                    if (remove_it)
+                    {
+                     remove_activated_mod(option_flag);
+                    }
+                     // current_flag = option_flag;
+                     return true;
+                   }
+                   return false;
+    case GUI_MODS: gui_flag     = get_mods()&GUI_MODS;
+                   if (gui_flag)
+                   {
+                    if (remove_it)
+                    {
+                     remove_activated_mod(gui_flag);
+                    }
+                     // current_flag = gui_flag;
+                     return true;
+                   }
+                   return false;
+    case SHFT_MODS: shift_flag   = get_mods()&SHFT_MODS;
+                    if (shift_flag)
+                    {
+                      if (remove_it)
+                      {
+                      remove_activated_mod(shift_flag);
+                      }
+                      // current_flag = shift_flag;
+                      return true;
+                    }
+                    return false;
+  } // switch (mod)
   return false;
-}
-
+} // bool check_mod_and_remove_it(uint16_t mod, bool remove_it)
+/*****************************************************************************************************/
 
 void write_app_name(uint16_t keycode)
 {
@@ -274,112 +328,119 @@ void call_app_with_keycode(uint16_t keycode) //keycode is already filtered with 
     case KC_ENT:  keycode = KC_3; break;
   }
   
-switch(keycode)
-{
-      case KC_E:        //               O: opens Evernote
-                        //       control+S: opens quick entry of Evernote
-                        if (control_flag)
-                        {
-                          register_code(KC_LALT);
-                          tap_code(KC_N);
-                          unregister_code(KC_LALT);
-                          unregister_code(KC_LCTL);                           // quick entry  E vernote
-                        }
-                        else
-                        {
-                          write_app_name(keycode);                            // E vernote
-                        }
-                        // return false;
-                        break;
+  switch(keycode)
+  {
+    case KC_D:        //               O: opens Day One
+                      //       control+S: opens quick entry of Day One
+                      if (control_apps)
+                      {
+                        control_apps = false;
+                        register_code(KC_LCTL);
+                        register_code(KC_LSFT);
+                        tap_code(KC_D);
+                        unregister_code(KC_LSFT);
+                        unregister_code(KC_LCTL);                             // quick entry  D ay one
+                      }
+                      else
+                      {
+                        write_app_name(keycode);                              // D ay one
+                      }
+                      // return false;
+                      break;
 
-      case KC_O:        //               O: opens OmniFocus
-                        //       control+S: opens quick entry of OmniFocus     
-                        if (control_flag)
-                        {
-                          register_code(KC_LALT);
-                          tap_code(KC_SPC);
-                          unregister_code(KC_LALT);
-                          unregister_code(KC_LCTL);                           // quick entry O mnifocus
+    case KC_E:        //               O: opens Evernote
+                      //       control+S: opens quick entry of Evernote
+                      if (control_apps)      // check if CTL is pressed
+                      {                                                   //...but it doesn't remove it
+                        control_apps = false;
+                        register_code(KC_LCTL);
+                        register_code(KC_LALT);
+                        tap_code(KC_N);
+                        unregister_code(KC_LALT);
+                        unregister_code(KC_LCTL);                             // quick entry  E vernote
+                      }
+                      else
+                      {
+                        write_app_name(keycode);                              // E vernote
+                      }
+                      break;
+
+    case KC_O:        //               O: opens OmniFocus
+                      //       control+S: opens quick entry of OmniFocus
+                      if (control_apps)                                   // check if CTL is pressed
+                      {                                                   //...but it doesn't remove it
+                        control_apps = false;
+                        register_code(KC_LCTL);
+                        register_code(KC_LALT);
+                        // wait_ms(50);
+                        register_code(KC_SPC);
+                        
+
+
+
+
+
+                        // wait_ms(50);
+
+
+
+
+
+
+                        unregister_code(KC_SPC);
+                        // wait_ms(50);
+                        unregister_code(KC_LALT);
+                        unregister_code(KC_LCTL);                             // quick entry O mnifocus
+                      }
+                      else
+                      {
+                        write_app_name(keycode);                              // O mnifocus
+                      }
+                      break;
+
+    case KC_S:        //               S: opens Safari
+                      //       control+S: opens Safari with address bar focused 
+                      // shift+control+S: opens Slack webpage in Safari 
+
+
+                      if (control_apps)       // check if CTL is pressed
+                      {                                                   //...but it doesn't remove it
+                        control_apps = false;
+                        write_app_name(keycode);
+                        wait_ms(1100);  // it's necessary !!!
+                        register_code(KC_LGUI);                               // Opens addre SS bar for
+                        register_code(KC_L);
+                        wait_ms(100);    // it's necessary !!!
+                        unregister_code(KC_L);                                       //...introduce an URL or
+                        unregister_code(KC_LGUI);                             //...googling something
+
+                        if (shift_apps)
+                        { 
+                          shift_apps = false;
+                          // waiting_for_success();
+                          send_string("http://www.slack.com\n");              // S lack
                         }
-                        else
-                        {
-                          write_app_name(keycode);                            // O mnifocus
-                        }
-                        // return false;
-                        break;
-      case KC_S:        //               S: opens Safari
-                        //       control+S: opens Safari with address bar focused 
-                        // shift+control+S: opens Slack webpage in Safari 
-
-                        if (control_flag)
-                        {
-                          triggered_control_mod();
-                          // if (shift_flag)
-                          // {
-                          //   shift_was_activated = true;
-                          //   remove_shift_mod();
-                          // }
-
-                          if (shift_flag)
-                          {
-                            shift_was_activated = true;
-                            remove_activated_mod(shift_flag);
-                            // del_mods     (shift_flag);
-                            // del_weak_mods(shift_flag);
-                            // send_keyboard_report();
-                          }
-                          // wait_ms(50);
-                          write_app_name(keycode);
-
-                          wait_ms(50);
-                          register_code(KC_LGUI);                             // Opens addre SS bar for
-                          tap_code(KC_L);                                     //...introduce an URL or
-                          unregister_code(KC_LGUI);                           //...googling something
-                          if (shift_was_activated)
-                          {
-                            shift_was_activated = false;
+                      }
+                      else
+                      {
+                        write_app_name(keycode);                              // S afari
+                      }    
+                      break;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-                           wait_ms(50);
-                           send_string("http://www.slack.com\n");             // S lack
-                          }
-                        }                          
-                        else
-                        {
-                          write_app_name(keycode);                            // S afari     
-                        }
-                        // return false;
-                        break;
 
-      case KC_D:        //               O: opens Day One
-                        //       control+S: opens quick entry of Day One
-                        if (control_flag)
-                        {
-                          register_code(KC_LSFT);
-                          tap_code(KC_D);
-                          unregister_code(KC_LSFT);
-                          unregister_code(KC_LCTL);                           // quick entry  D ay one
-                        }
-                        else
-                        {
-                          write_app_name(keycode);                            // D ay one
-                        }
-                        // return false;
-                        break;
-
-      case KC_A ... KC_C:
+    case KC_A ... KC_C:
 // case KC_D:  // computed just above
 // case KC_E:  // computed just above
-      case KC_F ... KC_N:
+    case KC_F ... KC_N:
 // case KC_O:  // computed just above
-      case KC_P ... KC_R:
+    case KC_P ... KC_R:
 // case KC_S:  // computed just above
-      case KC_T ... KC_Z:
-      case KC_SPC:
-      case KC_1:
-      case KC_2:
-      case KC_3:          write_app_name(keycode); 
-                          // return false;
+    case KC_T ... KC_Z:
+    case KC_SPC:
+    case KC_1:
+    case KC_2:
+    case KC_3:          write_app_name(keycode);
   } // switch(keycode)
 
 } // void call_app_with_keycode(uint16_t keycode)
@@ -449,14 +510,14 @@ void brightSetToLevel(uint8_t bright) {
 //
 void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 
-  wait_ms(1);
+  // waiting_for_success();
 
 #if defined(RGBLIGHT_ENABLE)
   rgblight_enable_noeeprom(); // switch on LEDs to allow us seeing the reset LEDs flashing
 #elif defined(BACKLIGHT_ENABLE)
   backlight_enable();
 #endif
-  wait_ms(1);
+  // waiting_for_success();
 
 #if defined(RGBLIGHT_ENABLE)
   flashing_RGB_LEDs(6, RGB_MY_WHITE, RGB_MY_RED);

@@ -234,8 +234,9 @@ void xvim(char *key);
 
 void add_desired_mod(uint8_t desired_mod);
 void remove_activated_mod(uint8_t activated_mod);
-bool triggered_control_mod(void);
-bool triggered_mod(uint8_t mod);
+// bool triggered_control_mod(void);
+// bool triggered_mod(uint8_t mod);
+bool check_mod_and_remove_it(uint16_t mod, bool remove_it);
 
 void write_app_name(uint16_t keycode);
 void call_app_with_keycode(uint16_t keycode);
