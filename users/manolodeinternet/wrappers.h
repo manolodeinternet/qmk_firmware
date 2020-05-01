@@ -167,6 +167,23 @@ acronym dictionary
 [managing macros]
 */
 
+//[INFO]
+/* Several cursors are availale at:
+
+ * [_DVIM]   F
+           C V B
+
+ * [_FVIM] Q W E R
+           J K L SP
+                                   L5
+ * [_XVIM] LEFT  THUMB CLUSTER: L1 L2 L3
+
+                                             R5
+ * [_MOUS] RIGHT THUMB CLUSTER:           R3 R2 R1  
+
+ */
+//[info]
+
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
@@ -401,9 +418,9 @@ acronym dictionary
  * |        |        |        |        |        |        |   Up   | Ln/Prg | Bckwrd | Forwrd | Ln/Prg |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        | Center |        |        |        |        |
- * |        |        |        |        | XXXXXXX|        |  Line  |        |        |        |        |
- * |        |        |        |        |        |        |   In   |  LEFT  |   UP   |  DOWN  |  RIGHT |
- * |  LCtl  |  LAlt  |  LGui  |  LSft  |        |        |  View  |        |        |        |        |
+ * |        |        |        |        | XXXXXXX|        |  Line  |  LEFT  |   UP   |  DOWN  |  RIGHT |
+ * |        |        |        |        |        |        |   In   |        |        |        |        |
+ * |  LCtl  |  LAlt  |  LGui  |  LSft  |        |        |  View  |  RSft  |  RGui  |  RAlt  |  RCtl  |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |@@@@@@@@|        |        |        |@@@@@@@@|        |        |        |
  * |        |        |        |        |        |        |  Shift |  Move  |  Move  |  Move  |  Move  |
@@ -412,11 +429,11 @@ acronym dictionary
  * '--------------------------------------------'        '--------------------------------------------'
 */
 #define ___FAKEVIM_L1___ KC_LEFT,     KC_UP,   KC_DOWN,   KC_RGHT, XXXXXXX
-#define ___FAKEVIM_L2___ _______,   _______,   _______,   _______, XXXXXXX
+#define ___FAKEVIM_L2___ KC_LCTL,   KC_LALT,   KC_LGUI,   KC_LSFT, XXXXXXX
 #define ___FAKEVIM_L3___ KC_LSFT, MO(_DVIM), MO(_XVIM), TT(_FVIM), KC_LSFT
 
 #define      ___FAKEVIM_R1___             C(G(KC_UP)), TD(FVIM_uU), A(KC_LEFT), A(KC_RGHT), TD(FVIM_pP)
-#define      ___FAKEVIM_R2___                  FVIM_H,     KC_LEFT,      KC_UP,    KC_DOWN,     KC_RGHT
+#define      ___FAKEVIM_R2___   FVIM_H, RSFT_T(KC_LEFT), RGUI_T(KC_UP), RALT_T(KC_DOWN),RCTL_T(KC_RGHT)
 #define      ___FAKEVIM_R3___           C(G(KC_DOWN)),  A(KC_HOME), A(KC_PGUP), A(KC_PGDN),   A(KC_END)
 
 #if defined(MINI_DACTYL_THUMBS)
@@ -469,9 +486,9 @@ acronym dictionary
 #define ___EXT_VIM_L2___ XVIM_SP,  XVIM_L,  XVIM_K, XVIM_J, XVIM_H
 #define ___EXT_VIM_L3___ XVIM_EN, XVIM_BS, XVIM_ES, XVIM_M, XVIM_N
 
-#define      ___EXT_VIM_R1___                                 CVIM_Y, CVIM_U, CVIM_I,  CVIM_O,  CVIM_P
-#define      ___EXT_VIM_R2___                                 OUTDNT, CVIM_J, CVIM_K,  CVIM_L,  CVIM_SP
-#define      ___EXT_VIM_R3___                                 CVIM_N, CVIM_M, CVIM_ES, CVIM_BS, CVIM_EN
+#define      ___EXT_VIM_R1___ /* OUTDNT & INDENT must exist */CVIM_Y, CVIM_U, CVIM_I,  CVIM_O,  CVIM_P
+#define      ___EXT_VIM_R2___ /* CVIM_H doesn't work */       OUTDNT, CVIM_J, CVIM_K,  CVIM_L,  INDENT
+#define      ___EXT_VIM_R3___ /*and CVIM_SP neither in Xcode*/CVIM_N, CVIM_M, CVIM_ES, CVIM_BS, CVIM_EN
 
 #if defined(MINI_DACTYL_THUMBS)
 /* [_XVIM] = LAYER 04 : EXTENDED EDITION VIM LAYER
@@ -533,12 +550,12 @@ acronym dictionary
 /* [_DVIM] = LAYER 05 : DELETE VIM LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |        |
- *                            |        |        |        |        |   UP   |
+ *                            |        |        |        |        |        |
  *                            |        |        |        |        |        |
  *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   |@@@@@@@@|        |        |        |        |        |        |
- *                   |        |        |        |        |  LEFT  |  DOWN  |  RIGHT |
+ *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
@@ -546,8 +563,8 @@ acronym dictionary
 #define _DVIM_LTHMB_RW1_                      _______, _______
 #define _DVIM_LTHMB_RW2_             _______, _______, _______
 
-#define      _DVIM_RTHMB_RW1_                                               MO(_POWR), KC_UP
-#define      _DVIM_RTHMB_RW2_                                               KC_LEFT,   KC_DOWN, KC_RGHT
+#define      _DVIM_RTHMB_RW1_                                               MO(_POWR), _______
+#define      _DVIM_RTHMB_RW2_                                               _______,   _______, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
@@ -618,19 +635,19 @@ acronym dictionary
  * |        |        |^:cpySCR|^:cpySLD|        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
- * | Caps   |  Dash- |   Up   |  Speak | Active |        |  Close |  Prev  |  Next  | Windows| Space  |
+ * | Caps   |  Dash- |XXXXXXXX|  Speak | Active |        |  Close |  Prev  |  Next  | Windows| Space  |
  * |   lock |  board |        |        | Window |        | Window | Window | Window |  Apps  |    bar |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |@@@@@@@@|        |        |        | Reopen |        |        |        |        |        |@@@@@@@@|
- * | Reverse|  Left  |  Down  |  Right |        |        |  Close |  Prev  |  Next  | Delete | Launch |
- * |   Tab  |        |        |        | Window |        |   Tab  |   Tab  |   Tab  |        |   -pad |
+ * |@@@@@@@@|        |  Play  |        | Reopen |        |        |        |        |        |@@@@@@@@|
+ * | Reverse| Rewind |  ...   | Forward|        |        |  Close |  Prev  |  Next  | Delete | Launch |
+ * |   Tab  |        |  Pause |        | Window |        |   Tab  |   Tab  |   Tab  |        |   -pad |
  * |        |        |        |        |  / Tab |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
 #define ____DAILY_L1____ KC_TAB,   DICTATION, CAP_SCRN, CAP_SLDE, FLOA_WIN
-#define ____DAILY_L2____ F(CAPSL),  DSHBOARD,    KC_UP,    SPEAK, ACTV_WIN
-#define ____DAILY_L3____ S(KC_TAB),  KC_LEFT,  KC_DOWN,  KC_RGHT, REOPEN_L
+#define ____DAILY_L2____ F(CAPSL),  DSHBOARD,  XXXXXXX,    SPEAK, ACTV_WIN
+#define ____DAILY_L3____ S(KC_TAB),  REWIND, PLAY_PAUSE, FORWARD, REOPEN_L
 
 #define      ____DAILY_R1____                        CLOSE_AP, PREV_APP, NEXT_APP, MISS_CTL,     DESK
 #define      ____DAILY_R2____                        CLOSE_WI, PREV_WIN, NEXT_WIN, APP_WIND, KC_SPACE

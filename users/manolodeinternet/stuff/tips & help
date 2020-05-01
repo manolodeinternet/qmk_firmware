@@ -74,8 +74,14 @@ endif
 // [EXAMPLE]
 // [example]
 //
+// [FIRMWARE_SIZE]
+// [firmware_size]   ways of saving space for fitting the whole firmware into the microcontroller
+//
 // [FIXME]
 // [fixme]         there's something I HAVE TO FIX for a right working
+//
+// [FREEING UP SPACE] 
+// [freeing up space] removing funcionalities to get more temporary space to compile
 //
 // [FUTURE_IMPROVEMENT]
 // [future_improvement] This is a must !
@@ -110,9 +116,6 @@ endif
 //
 // [REFLECTION]
 // [reflection]     maybe things can be coded (thinked) different !!!
-//
-// [FIRMWARE_SIZE]
-// [firmware_size]   ways of saving space for fitting the whole firmware into the microcontroller
 //
 // [SYSTEM PREFERENCES]
 // [system preferences] sortcut defined in 'System Preferences'

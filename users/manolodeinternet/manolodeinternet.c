@@ -175,14 +175,14 @@ void xvim(char *key)
 // FUNCTIONS FOR ACCESING KEYBINDINGS MAPPED FUNCTIONS                                  //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void add_desired_mod(uint8_t desired_mod)
+void add_mod(uint8_t desired_mod)
 {
   add_mods     (desired_mod);
   add_weak_mods(desired_mod);
   send_keyboard_report();
 }
 
-void remove_activated_mod(uint8_t activated_mod)
+void remove_mod(uint8_t activated_mod)
 {
   del_mods     (activated_mod);
   del_weak_mods(activated_mod);
@@ -201,7 +201,7 @@ void remove_activated_mod(uint8_t activated_mod)
 //   control_flag = get_mods()&CTRL_MODS;
 //   if (control_flag)
 //   {
-//     remove_activated_mod(control_flag);
+//     remove_mod(control_flag);
 //     // del_mods     (control_flag);
 //     // del_weak_mods(control_flag);
 //     // send_keyboard_report();
@@ -220,7 +220,7 @@ void remove_activated_mod(uint8_t activated_mod)
 //                if (control_flag)
 //                {
 //                  current_flag = control_flag;
-//                  remove_activated_mod(control_flag);
+//                  remove_mod(control_flag);
 //                  return true;
 //                }
 //                return false;
@@ -228,7 +228,7 @@ void remove_activated_mod(uint8_t activated_mod)
 //                if (option_flag)
 //                {
 //                  current_flag = option_flag;
-//                  remove_activated_mod(option_flag);
+//                  remove_mod(option_flag);
 //                  return true;
 //                }
 //                return false;
@@ -236,7 +236,7 @@ void remove_activated_mod(uint8_t activated_mod)
 //                if (gui_flag)
 //                {
 //                  current_flag = gui_flag;
-//                  remove_activated_mod(gui_flag);
+//                  remove_mod(gui_flag);
 //                  return true;
 //                }
 //                return false;
@@ -244,7 +244,7 @@ void remove_activated_mod(uint8_t activated_mod)
 //                if (shift_flag)
 //                {
 //                  current_flag = shift_flag;
-//                  remove_activated_mod(shift_flag);
+//                  remove_mod(shift_flag);
 //                  return true;
 //                }
 //                return false;
@@ -252,8 +252,15 @@ void remove_activated_mod(uint8_t activated_mod)
 //   return false;
 // }
 /*****************************************************************************************************/
+
+// [FIRMWARE_SIZE]
 // using this function, we pass from 674 to 586 bytes free while compile firmware !!!
-bool /*triggered_mod*/ check_mod_and_remove_it(uint16_t mod, bool remove_it)
+// [firmware_size]
+
+// [FIRMWARE_SIZE]
+// declaring 'mod' as 'uint8_t' instead of 'uint16_t', we pass from 4 to 28 bytes free -> 24 bytes free
+// [firmware_size]
+bool /*triggered_mod*/ check_mod_and_remove_it(uint8_t mod, bool remove_it)
 {
   switch (mod) {
     case CTRL_MODS: control_flag = get_mods()&CTRL_MODS;
@@ -261,7 +268,7 @@ bool /*triggered_mod*/ check_mod_and_remove_it(uint16_t mod, bool remove_it)
                     {
                       if (remove_it)
                       {
-                        remove_activated_mod(control_flag);
+                        remove_mod(control_flag);
                       }
                       // current_flag = control_flag;
                       return true;
@@ -272,7 +279,7 @@ bool /*triggered_mod*/ check_mod_and_remove_it(uint16_t mod, bool remove_it)
                    {
                     if (remove_it)
                     {
-                     remove_activated_mod(option_flag);
+                     remove_mod(option_flag);
                     }
                      // current_flag = option_flag;
                      return true;
@@ -283,7 +290,7 @@ bool /*triggered_mod*/ check_mod_and_remove_it(uint16_t mod, bool remove_it)
                    {
                     if (remove_it)
                     {
-                     remove_activated_mod(gui_flag);
+                     remove_mod(gui_flag);
                     }
                      // current_flag = gui_flag;
                      return true;
@@ -294,7 +301,7 @@ bool /*triggered_mod*/ check_mod_and_remove_it(uint16_t mod, bool remove_it)
                     {
                       if (remove_it)
                       {
-                      remove_activated_mod(shift_flag);
+                      remove_mod(shift_flag);
                       }
                       // current_flag = shift_flag;
                       return true;
@@ -340,12 +347,11 @@ void call_app_with_keycode(uint16_t keycode) //keycode is already filtered with 
                         tap_code(KC_D);
                         unregister_code(KC_LSFT);
                         unregister_code(KC_LCTL);                             // quick entry  D ay one
-                      }
+                      }// if (control_apps)
                       else
                       {
                         write_app_name(keycode);                              // D ay one
-                      }
-                      // return false;
+                      }// else (control_apps)
                       break;
 
     case KC_E:        //               O: opens Evernote
@@ -358,11 +364,11 @@ void call_app_with_keycode(uint16_t keycode) //keycode is already filtered with 
                         tap_code(KC_N);
                         unregister_code(KC_LALT);
                         unregister_code(KC_LCTL);                             // quick entry  E vernote
-                      }
+                      }// if (control_apps)
                       else
                       {
                         write_app_name(keycode);                              // E vernote
-                      }
+                      }// else (control_apps)
                       break;
 
     case KC_O:        //               O: opens OmniFocus
@@ -372,45 +378,27 @@ void call_app_with_keycode(uint16_t keycode) //keycode is already filtered with 
                         control_apps = false;
                         register_code(KC_LCTL);
                         register_code(KC_LALT);
-                        // wait_ms(50);
-                        register_code(KC_SPC);
-                        
-
-
-
-
-
-                        // wait_ms(50);
-
-
-
-
-
-
-                        unregister_code(KC_SPC);
-                        // wait_ms(50);
-                        unregister_code(KC_LALT);
-                        unregister_code(KC_LCTL);                             // quick entry O mnifocus
-                      }
+                             tap_code(KC_SPC);
+                      unregister_code(KC_LALT);
+                      unregister_code(KC_LCTL);                             // quick entry O mnifocus
+                      }// if (control_apps)
                       else
                       {
                         write_app_name(keycode);                              // O mnifocus
-                      }
+                      }// else (control_apps)
                       break;
 
     case KC_S:        //               S: opens Safari
                       //       control+S: opens Safari with address bar focused 
                       // shift+control+S: opens Slack webpage in Safari 
-
-
                       if (control_apps)       // check if CTL is pressed
                       {                                                   //...but it doesn't remove it
                         control_apps = false;
                         write_app_name(keycode);
-                        wait_ms(1100);  // it's necessary !!!
+                        wait_ms(3000);  // it's necessary !!!
                         register_code(KC_LGUI);                               // Opens addre SS bar for
                         register_code(KC_L);
-                        wait_ms(100);    // it's necessary !!!
+                        // wait_ms(100);    // it's necessary !!!
                         unregister_code(KC_L);                                       //...introduce an URL or
                         unregister_code(KC_LGUI);                             //...googling something
 
@@ -419,12 +407,13 @@ void call_app_with_keycode(uint16_t keycode) //keycode is already filtered with 
                           shift_apps = false;
                           // waiting_for_success();
                           send_string("http://www.slack.com\n");              // S lack
-                        }
-                      }
+                        }// if (shift_apps)
+
+                      }// if (control_apps)
                       else
                       {
                         write_app_name(keycode);                              // S afari
-                      }    
+                      }// else (control_apps)   
                       break;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -438,9 +427,7 @@ void call_app_with_keycode(uint16_t keycode) //keycode is already filtered with 
 // case KC_S:  // computed just above
     case KC_T ... KC_Z:
     case KC_SPC:
-    case KC_1:
-    case KC_2:
-    case KC_3:          write_app_name(keycode);
+    case KC_1 ... KC_3: write_app_name(keycode); break;
   } // switch(keycode)
 
 } // void call_app_with_keycode(uint16_t keycode)

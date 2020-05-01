@@ -1,0 +1,1960 @@
+{
+  "title": "manolodeinternet - DACTYL - 🔥 Launch apps keys (⇪/'quote')",
+  "rules": [
+    {
+      "description": "manolodeinternet - DACTYL - 🔥 Launch apps keys from Caps_lock/'quote' (⇪/'quote')",
+      "manipulators": [
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 Q: Simplenote  🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (MULTIPLE)Launch Q: Simplenote" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "q",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Simplenote\"' -e 'activate application \"Simplenote\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Simplenote. A minimalist notes system!\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch Q: Simplenote" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "q",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Simplenote\"' -e 'activate application \"Simplenote\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of Q: Simplenote 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 W: tWitter 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch W: tWitter" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "w",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Twitter.app'"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Twitter\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch W: tWitter" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "w",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Twitter.app'"
+            },
+            {
+              "key_code": "h",
+              "modifiers": [
+                "left_option",
+                "left_command"
+              ]
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of W: tWitter 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 E: Evernote 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (QUICK ENTRY)Launch E: Evernote" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "e",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ],
+              "mandatory": [
+                "left_control"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'beep 1'"
+            },
+            {
+              "key_code": "n",
+              "modifiers": [
+                "left_control",
+                "left_option"
+              ]
+            },
+            {
+              "shell_command": "osascript -e 'say \"Quick entry of Evernote\" using \"Zarvox\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'beep 1'"
+            }
+          ]
+        },
+
+        { "description": "🔵 (MULTIPLE)Launch E: Evernote" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "e",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Evernote\"' -e 'activate application \"Evernote\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Evernote\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch E: Evernote" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "e",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Evernote\"' -e 'activate application \"Evernote\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of E: Evernote 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 R: app stoRe 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch R: app stoRe" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "r",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"App Store\"' -e 'activate application \"App Store\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"App Store\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch R: app stoRe" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "r",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"App Store\"' -e 'activate application \"App Store\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of R: app stoRe 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 T: Utilidades/Terminal 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (MULTIPLE)Launch T: Utilidades/Terminal" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "t",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"/Applications/Utilities/Terminal.app/\"' -e 'activate application \"/Applications/Utilities/Terminal.app/\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"using Terminal, like Neo\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch T: Utilidades/Terminal" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "t",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"/Applications/Utilities/Terminal.app/\"' -e 'activate application \"/Applications/Utilities/Terminal.app/\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of T: Utilidades/Terminal 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 Y: tYpinator 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch Y: tYpinator" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "y",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Typinator\"' -e 'activate application \"Typinator\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Typinator\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+
+        { "description": "🔵 (ALONE)Launch Y: tYpinator" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "y",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Typinator\"' -e 'activate application \"Typinator\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of Y: tYpinator 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 U: Uroom (Udemy) 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch U: Uroom (Udemy)" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "u",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"URoom\"' -e 'activate application \"URoom\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"learning with Udemy\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch U: Uroom (Udemy)" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "u",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"URoom\"' -e 'activate application \"URoom\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of U: Uroom (Udemy) 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 I: textedIt 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (MULTIPLE)Launch I: textedIt" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"TextEdit\"' -e 'activate application \"TextEdit\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"editing text with TextEdit\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch I: textedIt" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"TextEdit\"' -e 'activate application \"TextEdit\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of I: textedIt 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 O: Omnifocus 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+{ "description": "🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵(QUICK ENTRY)O: Omnifocus 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (QUICK ENTRY)Launch O: OmniFocus" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "e",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ],
+              "mandatory": [
+                "left_control"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'beep 1'"
+            },
+            {
+              "key_code": "spacebar",
+              "modifiers": [
+                "left_control",
+                "left_option"
+              ]
+            },
+            {
+              "shell_command": "osascript -e 'say \"Quick entry of OmniFocus\" using \"Zarvox\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'beep 1'"
+            }
+          ]
+        },
+
+        { "description": "🔵 (MULTIPLE)Launch O: Omnifocus" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "o",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'launch application \"OmniFocus\"' -e 'activate application \"OmniFocus\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"organize yourself with OmniFocus\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch O: OmniFocus" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "o",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'launch application \"OmniFocus\"' -e 'activate application \"OmniFocus\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of O: Omnifocus 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 P: system Preferences 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (MULTIPLE)Launch P: system Preferences" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "p",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"System Preferences\"' -e 'activate application \"System Preferences\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"System Preferences\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch P: system Preferences" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "p",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"System Preferences\"' -e 'activate application \"System Preferences\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of P: system Preferences 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 A: utilidades/Applescript 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (MULTIPLE)Launch A: utilidades/Applescript" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "a",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"/Applications/Utilities/Script Editor.app\"' -e 'activate application \"/Applications/Utilities/Script Editor.app\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"coding with AppleScript\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch A: utilidades/Applescript" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "a",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"/Applications/Utilities/Script Editor.app/\"' -e 'activate application \"/Applications/Utilities/Script Editor.app/\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of A: utilidades/Applescript 🔴🔴🔴" },
+
+
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 S: Safari 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 CTRL+SHFT: slack 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (MULTIPLE)Launch S: slack" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ],
+              "mandatory": [
+                "left_shift",
+                "left_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Safari\"' -e 'activate application \"Safari\"' -e 'tell application \"Safari\" to open location \"http://www.slack.com\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Wellcome, my friends of Slack!\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch S: slack" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ],
+              "mandatory": [
+                "left_shift",
+                "left_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Safari\"' -e 'activate application \"Safari\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' -e 'tell application \"Safari\" to open location \"http://www.slack.com\"' -e end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of spacebar: slack 🔴🔴🔴" },
+
+
+        { "description": "🔵 (QUICK ENTRY)(MULTIPLE)Launch S: address bar Safari" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ],
+              "mandatory": [
+                "left_control"
+              ]
+            }
+          },
+
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'beep 1'"
+            },
+            {
+              "shell_command": "osascript -e 'launch application \"Safari\"' -e 'activate application \"Safari\"' -e 'delay 1.0' -e 'tell application \"System Events\" to keystroke \"l\" using {command down}' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"introduce the url address for surfing\" using \"Zarvox\"' -e end"
+            },
+
+            {
+              "shell_command": "osascript -e 'beep 1'"
+            }
+          ]
+        },
+
+        { "description": "🔵 (QUICK ENTRY)(ALONE)Launch S: address bar Safari" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ],
+              "mandatory": [
+                "left_control"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'launch application \"Safari\"' -e 'activate application \"Safari\"' -e 'delay 1.0' -e 'tell application \"System Events\" to keystroke \"l\" using {command down}' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (MULTIPLE)Launch S: Safari" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'launch application \"Safari\"' -e 'activate application \"Safari\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"surfing with Safari\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch S: Safari" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'launch application \"Safari\"' -e 'activate application \"Safari\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' -e end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of S: Safari 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 D: Day one classic 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+
+        { "description": "🔵 (QUICK ENTRY)Launch D: Day one classic" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "d",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ],
+              "mandatory": [
+                "left_control"
+              ]
+            }
+          },
+
+          "to_if_alone": [
+            {
+              "key_code": "d",
+              "modifiers": [
+                "left_shift",
+                "left_control"
+              ]
+            },
+            {
+              "shell_command": "osascript -e 'beep 1'"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Quick entry in your Day One diary\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (MULTIPLE)Launch D: Day one classic" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "d",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'launch application \"Day One Classic\"' -e 'activate application \"Day One Classic\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Day One diary\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch D: Day one classic" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "d",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'launch application \"Day One Classic\"' -e 'activate application \"Day One Classic\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' -e end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of D: Day one classic 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 F: Finder 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch F: Finder" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Finder\"' -e 'activate application \"Finder\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"this is Finder.  Who are you?\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch F: Finder" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Finder\"' -e 'activate application \"Finder\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of F: Finder 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 G: google chrome 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch G: google chrome" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "g",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Google Chrome\"' -e 'activate application \"Google Chrome\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Google Chrome.  Get used to it!\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch G: Google Chrome" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "g",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Google Chrome\"' -e 'activate application \"Google Chrome\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of G: Feedly 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 H: sketcH 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (MULTIPLE)Launch H: sketcH" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Sketch\"' -e 'activate application \"Sketch\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Ohhh, Sketch!  Perfect!\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch H: sketcH" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Sketch\"' -e 'activate application \"Sketch\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of H: sketcH 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 J: sublime text 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (MULTIPLE)Launch J: sublime text" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Sublime Text\"' -e 'activate application \"Sublime Text\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Ohhh perfect!, my sublime code editor!\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch J: sublime text" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Sublime Text\"' -e 'activate application \"Sublime Text\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of J: sublime text 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 K: Karabiner-elements 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch K: Karabiner-elements" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Karabiner-Elements\"' -e 'activate application \"Karabiner-Elements\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Karabiner-Elements.  Where keyboarding began\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch V: Karabiner-elements" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Karabiner-Elements\"' -e 'activate application \"Karabiner-Elements\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of K: Karabiner-elements 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 L: caLendar 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch L: caLendar" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Calendar\"' -e 'activate application \"Calendar\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"let me take a look at the calendar\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch L: caLendar" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Calendar\"' -e 'activate application \"Calendar\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of L: caLendar 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 Z: studies 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch Z: studies" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "z",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Studies\"' -e 'activate application \"Studies\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Train your brain with Studies, come on!\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch Z: studies" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "z",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Studies\"' -e 'activate application \"Studies\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of Z: studies 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 X: Xcode 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch X: Xcode" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "x",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"/Volumes/1)SYSTEM SSD)/Applications/Xcode.app/\"' -e 'activate application \"/Volumes/1)SYSTEM SSD)/Applications/Xcode.app/\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Let's program seriously, Xcode !\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch X: Xcode" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "x",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"/Volumes/1)SYSTEM SSD)/Applications/Xcode.app/\"' -e 'activate application \"/Volumes/1)SYSTEM SSD)/Applications/Xcode.app/\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of X: Xcode 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 C: Calculator 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch C: Calculator" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Calculator\"' -e 'activate application \"Calculator\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Let's calculate it !\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch C: Calculator" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "c",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Calculator\"' -e 'activate application \"Calculator\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of C: Calculator 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 V: karabiner-eventViewer 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch V: karabiner-eventViewer" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "v",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Karabiner-EventViewer\"' -e 'activate application \"Karabiner-EventViewer\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Karabiner-EventViewer.  Where keyboarding began\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch V: karabiner-eventViewer" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "v",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Karabiner-EventViewer\"' -e 'activate application \"Karabiner-EventViewer\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of V: Karabiner-EventViewer 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 B: Books 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (MULTIPLE)Launch B: Books" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "b",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Books\"' -e 'activate application \"Books\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Let's read it and study it!\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch B: Books" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "b",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Books\"' -e 'activate application \"Books\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of B: Books 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 N: Notes 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (MULTIPLE)Launch N: Notes" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "n",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Notes\"' -e 'activate application \"Notes\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Notes\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch N: Notes" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "n",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Notes\"' -e 'activate application \"Notes\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of N: Notes 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 M: Mail 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴" },
+        { "description": "🔵 (MULTIPLE)Launch M: Mail" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "m",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Mail\"' -e 'activate application \"Mail\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"has email arrived?\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch M: Mail" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "m",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Mail\"' -e 'activate application \"Mail\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of M: Mail 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 escape: keynote 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch escape: keynote" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "escape",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Keynote\"' -e 'activate application \"Keynote\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Keynote\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch escape: keynote" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "escape",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Keynote\"' -e 'activate application \"Keynote\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of escape: keynote 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 delete_or_backspace: pages 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch delete_or_backspace: pages" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "delete_or_backspace",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Pages\"' -e 'activate application \"Pages\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Pages\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch delete_or_backspace: pages" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "delete_or_backspace",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Pages\"' -e 'activate application \"Pages\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of delete_or_backspace: pages 🔴🔴🔴" },
+
+
+
+{ "description": "🔴🔴🔴🔵🔵🔵🔵🔵🔵🔵🔵🔵 return_or_enter: numbers 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔴🔴🔴 " },
+        { "description": "🔵 (MULTIPLE)Launch return_or_enter: numbers" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "multiple_apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "return_or_enter",
+            "modifiers": {
+              "optional": [
+                "left_command",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Numbers\"' -e 'activate application \"Numbers\"' -e end"
+            },
+            {
+              "shell_command": "osascript -e 'say \"Numbers\" using \"Zarvox\"' -e end"
+            }
+          ]
+        },
+
+        { "description": "🔵 (ALONE)Launch return_or_enter: numbers" },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "apps_mode",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "return_or_enter",
+            "modifiers": {
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'launch application \"Numbers\"' -e 'activate application \"Numbers\"' -e 'tell application \"System Events\" to keystroke \"h\" using {command down, option down}' end"
+            }
+          ]
+        },
+{ "description": "🔴🔴🔴 end of return_or_enter: numbers 🔴🔴🔴" }
+
+
+      ]
+    }
+  ]
+}

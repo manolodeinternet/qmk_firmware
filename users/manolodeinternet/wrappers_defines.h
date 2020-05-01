@@ -75,6 +75,7 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #define OUTDNT             LGUI(KC_LBRC)  // outdent a paragraph
 // [UNUSED]
+// CVIM_SP doesn't work in Xcode, but INDENT does.
 #define INDENT              LGUI(KC_RBRC)  // indent  a paragraph
 // [UNUSED]
 //                                                                                      //

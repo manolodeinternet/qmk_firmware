@@ -1,0 +1,120 @@
+{
+  "title": "manolodeinternet - DACTYL - 💀 SKELETON PROFILE - LEFT SIDE OF THE KEYBOARD !!!",
+  "rules": [
+    {
+      "description": "manolodeinternet - DACTYL - //🔵 💀SKELETON PROFILE - LEFT SIDE OF THE KEYBOARD !!!",
+      "manipulators": [
+
+
+        { "description": "//🔵L5 ✅💀SKELETON PROFILE - Left_control(old Left_shift) to layer_05_preparing_to / APPS_mode" },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f20",
+            "modifiers": {
+              "optional": [
+                "left_shift",
+                "left_control",
+                "caps_lock"
+              ],
+              "mandatory": [
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "multiple_apps_mode",
+                "value": 1
+              }
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "set_variable": {
+                "name": "multiple_apps_mode",
+                "value": 0
+              }
+            }
+          ]
+        },
+        { "description": "//🔵 END layer_05_preparing_to / APPS_mode - L5" },
+
+
+
+
+        { "description": "//🔵L5 ✅💀SKELETON PROFILE - Left_control(old Left_shift) to layer_05_preparing_to / APPS_mode" },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f20",
+            "modifiers": {
+              "optional": [
+                "left_shift",
+                "left_control",
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "apps_mode",
+                "value": 1
+              }
+            }
+          ],
+          "to_after_key_up": [
+            {
+              "set_variable": {
+                "name": "apps_mode",
+                "value": 0
+              }
+            }
+          ]
+        },
+        { "description": "//🔵 END layer_05_preparing_to / APPS_mode - L5" },
+
+
+
+
+
+        { "description": "//🔵L5 ✅💀SKELETON PROFILE - APPS_MODE: Left_control(old left_shift) to begin_comment / APPS_MODE" },
+
+        { "description": "// 👻⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️👻 " },
+        { "description": "// 👻⚠️ Because IBM Model M isn't NKRO (rollover), it doesn't recognise the 4 character group '⇧ ⌃ ⌥ ⌘' from '⎋ `~ ⇥ ⇪' keys pressed together. There's a conflict with '⇥ ⇪' pressed simultaneously.  Only recognise one of them at a time.  What a pitty!" },
+        { "description": "With the right side of modifiers, there's no problem.  The 4 character group 'f12 ⌫ (slash Vertical bar) ⏎' is compatible at the same time and whatever combination of them.  And is compatible with one more key from the left side of the keyboard as well.(what we need) for making a command: modifier+character_key" },
+
+
+        { "description": "//🔵L5bis ✅💀SKELETON PROFILE In APP_MODE: left_control(old left_shift) to emoji_panel / ƒn" },
+
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f24",
+            "modifiers": {
+              "optional": [
+                "caps_lock",
+                "left_shift",
+                "left_control",
+                "left_option",
+                "left_command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "fn"
+            }
+          ]
+        },
+        { "description": "//🔵 END emoji_panel / ƒn - L5bis" },
+
+
+{ "description":
+"//🔴 END of 💀SKELETON PROFILE - LEFT SIDE OF THE KEYBOARD" }
+      ]
+    }
+  ]
+}

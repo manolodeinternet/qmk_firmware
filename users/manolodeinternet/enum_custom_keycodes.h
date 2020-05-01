@@ -127,6 +127,9 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
   // MACROS FOR _DALY LAYER 07
       ,PREV_APP
       ,NEXT_APP
+      ,REWIND
+      ,PLAY_PAUSE
+      ,FORWARD
       ,SIRI
   // macros for _daly layer 07
 
