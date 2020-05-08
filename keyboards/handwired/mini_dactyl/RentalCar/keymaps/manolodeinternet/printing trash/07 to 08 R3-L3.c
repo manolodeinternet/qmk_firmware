@@ -45,7 +45,7 @@
                         // remove 'multi_apps' mode
                         if (multi_apps)
                         {
-                          remove_mod(gui_flag);
+                          remove_mod(gui_mod);
                         }
 
                         if (!apps_trigger) // if our right thumb doesn't continue holding R3
@@ -72,7 +72,7 @@
 
                         if (multi_apps && karabiner_apps_trigger)
                         {
-                          add_mod(gui_flag);
+                          add_mod(gui_mod);
                         }
 
                         if (!karabiner_apps_trigger)
@@ -141,7 +141,7 @@
                                    if (multi_apps)
                                    {
                                      multi_apps = false;
-                                     remove_mod(gui_flag);
+                                     remove_mod(gui_mod);
                                    }
                                    else
                                    {
@@ -210,7 +210,7 @@
                         // remove 'multi_apps' mode
                         if (multi_apps)
                         {
-                          remove_mod(gui_flag);
+                          remove_mod(gui_mod);
                         }
 
                         if (!apps_trigger) // if our right thumb doesn't continue holding R3
@@ -237,7 +237,7 @@
 
                         if (multi_apps && karabiner_apps_trigger)
                         {
-                          add_mod(gui_flag);
+                          add_mod(gui_mod);
                         }
 
                         if (!karabiner_apps_trigger)
@@ -306,7 +306,7 @@
                                    if (multi_apps)
                                    {
                                      multi_apps = false;
-                                     remove_mod(gui_flag);
+                                     remove_mod(gui_mod);
                                    }
                                    else
                                    {

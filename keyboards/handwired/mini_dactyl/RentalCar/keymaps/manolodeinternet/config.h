@@ -37,6 +37,53 @@
 
 
 
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//
+// DEFINE LAYOUT
+//
+//////////////////////////////////////////////////////////////////////////////////////////////// MINE ###
+// 1:
+// QMK_FIRMWARE/USERS/MANOLODEINTERNET/WRAPPERS.H
+// You have to uncomment one of these two lines:
+// In 'qmk_firmware/Users/manolodeinternet/wrappers.h'...
+// ...we define alpha rows with all modifiers and layer triggers
+//
+// 2:
+// In 'qmk_firmware/Users/manolodeinternet/wrappers.h'...
+// ...we define alpha rows as simple as we can, but with modifiers...
+//
+// 3:
+// ...and layer triggers are defined on thumb rows !!!
+//
+/* 1: */
+// #define COMPREHENSIVE_30_LAYOUT
+/* 2: */
+         #define SIMPLE_30_LAYOUT
+/* 3: */
+         #define MINI_DACTYL_THUMBS
+//
+// qmk_firmware/users/manolodeinternet/wrappers.h
+//
+//////////////////////////////////////////////////////////////////////////////////////////////// MINE ###
+//
+// define layout
+//
+
+//
+// DEFINE APPS_TRIGGERS
+//
+// You have to uncomment one of these two lines:
+//
+/* 1: */ 
+// #define DEFAULT_TYPINATOR_APPS
+/* 2: */
+#define DEFAULT_KARABINER_APPS
+//
+// define apps_triggers
+//
 
 
 
@@ -62,49 +109,7 @@
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
 
-//
-// DEFINE LAYOUT
-//
-//////////////////////////////////////////////////////////////////////////////////////////////// MINE ###
-// 1:
-// QMK_FIRMWARE/USERS/MANOLODEINTERNET/WRAPPERS.H
-// You have to uncomment one of these two lines:
-// In 'qmk_firmware/Users/manolodeinternet/wrappers.h'...
-// ...we define alpha rows with all modifiers and layer triggers
-//
-// 2:
-// In 'qmk_firmware/Users/manolodeinternet/wrappers.h'...
-// ...we define alpha rows as simple as we can, but with modifiers...
-//
-// 3:
-// ...and layer triggers are defined on thumb rows !!!
-//
-/* 1: */
-//       #define COMPREHENSIVE_30_LAYOUT
-/* 2: */
-         #define SIMPLE_30_LAYOUT
-/* 3: */
-         #define MINI_DACTYL_THUMBS
-//
-// qmk_firmware/users/manolodeinternet/wrappers.h
-//
-//////////////////////////////////////////////////////////////////////////////////////////////// MINE ###
-//
-// define layout
-//
 
-//
-// DEFINE APPS_TRIGGERS
-//
-// You have to uncomment one of these two lines:
-//
-/* 1: */ 
-// #define DEFAULT_TYPINATOR_APPS
-/* 2: */
-   #define DEFAULT_KARABINER_APPS
-//
-// define apps_triggers
-//
 
 // #define USER_PRINT
 /*

@@ -1,3 +1,4 @@
+#pragma once
 #include "wrappers_defines.h"
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -22,6 +23,9 @@
 #if defined(COMPREHENSIVE_30_LAYOUT)
 
     #define _TEST  12  //  LAYER FOR TESTING               // must be over layer number 15 ...
+
+    #define _APPS  13  //  applications shortcut layer
+
     #define _LAST  17  //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!!!!!!!!!!
 
 #elif defined(SIMPLE_30_LAYOUT)
@@ -821,7 +825,8 @@ acronym dictionary
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // [_APPS]
-/* [_APPS] = LAYER 10 : APPLICATIONS LAYER
+#if defined(COMPREHENSIVE_30_LAYOUT)
+/* [_APPS] = LAYER 13 : APPLICATIONS LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |@@@@@@@@|        |        |        |        |        |        |        |        |        |@@@@@@@@|
  * | Simple | Twitter|Evernote|   App  |Terminal|        |  Typi  |  Uroom |Textedit|  Omni  | System |
@@ -844,13 +849,13 @@ acronym dictionary
 // [pending]
 */
 
-// #define __APPLICATS_L1__ APP_Q_SNOTE, APP_W_TWTTR, APP_E_EVERN, APP_R_APSTO, APP_T_TERMI
-// #define __APPLICATS_L2__ APP_A_SCRPT, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME
-// #define __APPLICATS_L3__ APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_KVIEW, APP_B_BOOKS
+#define __APPLICATS_L1__ APP_Q_SNOTE, APP_W_TWTTR, APP_E_EVERN, APP_R_APSTO, APP_T_TERMI
+#define __APPLICATS_L2__ APP_A_SCRPT, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME
+#define __APPLICATS_L3__ APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_KVIEW, APP_B_BOOKS
 
-// #define      __APPLICATS_R1__           APP_Y_TYPIN, APP_U_UROOM, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF
-// #define      __APPLICATS_R2__           APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, APPSP_EMPTY
-// #define      __APPLICATS_R3__           APP_N_NOTES, APP_M_MAIL,  APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB
+#define      __APPLICATS_R1__           APP_Y_TYPIN, APP_U_UROOM, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF
+#define      __APPLICATS_R2__           APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, APPSP_EMPTY
+#define      __APPLICATS_R3__           APP_N_NOTES, APP_M_MAIL,  APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB
 
 // #define __APPLICATS_L1__ _______, _______, _______, _______, _______
 // #define __APPLICATS_L2__ _______, _______, _______, _______, _______
@@ -873,10 +878,6 @@ acronym dictionary
  *                   |    &   |  app   | trigger|        |        |        |        |
  *                   |last app|        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
- * [FUTURE_IMPROVEMENT]
- *    direct prev app as in gherkin in LEFT_THUMB_1
- *    direct next app as in gherkin in LEFT_THUMB_2
- * [future_improvement]
  */
 // #define _APPS_LTHMB_RW1_                      _______,        _______
 // #define _APPS_LTHMB_RW2_             _______, _______, TH_L3_KAR_APPS
@@ -885,7 +886,7 @@ acronym dictionary
 // #define      _APPS_RTHMB_RW2_                                               _______,   _______, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
-// #endif
+#endif
 // END OF [_APPS] 10
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 

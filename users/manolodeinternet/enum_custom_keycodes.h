@@ -20,7 +20,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 // macros for _powr layer 12
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-/*
+#if defined(COMPREHENSIVE_30_LAYOUT)
 // MACROS FOR _APPS LAYER 10
     ,APP_Q_SNOTE ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_APSTO ,APP_T_TERMI
                                          ,APP_Y_TYPIN ,APP_U_UROOM ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF
@@ -30,7 +30,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
                                          ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB
 // macros for _apps layer 10
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-*/
+#endif
 
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 // MACROS FOR _DALY LAYR 7
@@ -88,6 +88,10 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 // macros for _?vim 3, 4, 5
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
+      ,REWIND
+      ,PLAY_PAUSE
+      ,FORWARD
+
 #if defined(COMPREHENSIVE_30_LAYOUT)
 
   // empty !¡
@@ -127,9 +131,6 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
   // MACROS FOR _DALY LAYER 07
       ,PREV_APP
       ,NEXT_APP
-      ,REWIND
-      ,PLAY_PAUSE
-      ,FORWARD
       ,SIRI
   // macros for _daly layer 07
 

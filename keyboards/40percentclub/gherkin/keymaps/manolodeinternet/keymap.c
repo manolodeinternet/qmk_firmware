@@ -28,7 +28,15 @@
 //          QMK_KEYBOARD_H is implemented at 'manolodeinternet.h'. Compile process needs this way !
 // #include QMK_KEYBOARD_H
 // Following file doesn't need full path bc folder 'users/manolodeinternet' is automatically included
+// #include QMK_KEYBOARD_H
+
+
+
 #include "manolodeinternet.h"
+  // #include "tapdance_setup.h"
+
+
+
 
 // #include "backlight_manolodeinternet.h"
 // It's included from 'manolodeinternet.h'
@@ -51,15 +59,15 @@
 // [REFLECTION]
 
 // COMMON VARIABLES FOR ALL KEYBOARDS
-  static bool diaeresis_requested  = false;
-  static bool circumflex_requested = false;
-  static bool grave_requested      = false;
+  // bool diaeresis_requested  = false;
+  // bool circumflex_requested = false;
+  // static bool grave_requested      = false;
 
-  static bool disabled_caps_before_accent = false;
-  static bool capslock_is_active = false;
+  // static bool disabled_caps_before_accent = false;
+  // static bool capslock_is_active = false;
 
-  static uint8_t shift_flag;
-  static uint8_t gui_flag;
+  // static uint8_t sft_mod;
+  // static uint8_t gui_mod;
 // common variables for all keyboards
 
   // static bool    hide_other_apps = false;
@@ -134,13 +142,13 @@
 // FUNCTIONS FOR ACCESING KEYBINDINGS MAPPED FUNCTIONS                                  //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void fvim(char *key)
-{
-//  SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v")))));
-    HYPR_V;
-    SEND_STRING("f");
-    send_string(key);
-}
+// void fvim(char *key)
+// {
+// //  SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("v")))));
+//     HYPR_V;
+//     SEND_STRING("f");
+//     send_string(key);
+// }
 /* select
 void avim(char *key)
 {
@@ -150,26 +158,26 @@ void avim(char *key)
 }
 */ 
 // right hand of _XVIM
-void cvim(char *key)
-{
-    HYPR_V;
-    SEND_STRING("c");
-    send_string(key);
-}
-// left hand of _XVIM
-void xvim(char *key)
-{
-    HYPR_V;
-    SEND_STRING("x");
-    send_string(key);
-}
+// void cvim(char *key)
+// {
+//     HYPR_V;
+//     SEND_STRING("c");
+//     send_string(key);
+// }
+// // left hand of _XVIM
+// void xvim(char *key)
+// {
+//     HYPR_V;
+//     SEND_STRING("x");
+//     send_string(key);
+// }
 
-void dvim(char *key)
-{
-    HYPR_V;
-    SEND_STRING("d");
-    send_string(key);
-}
+// void dvim(char *key)
+// {
+//     HYPR_V;
+//     SEND_STRING("d");
+//     send_string(key);
+// }
 
 void callApp(char *appName)
 {
@@ -195,58 +203,61 @@ void callApp(char *appName)
 // CAPSLOCK COMPLEMENTARY FUNCTIONS                                                     //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
+// void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
 
-  SEND_STRING(SS_DOWN(X_CAPSLOCK));
-  register_code(KC_LCAP);
-
-// LIGHTS AND BREATH
-  if (capslock_is_active == false)
-  {
-    capslock_is_active  = true;
-    gherkinBacklightLevelBeforeCapsLock = gherkinBacklightLevel;
-    gherkinBacklightLevel = BL_CAPS;
-
-    breathing_period_set(BR_CAPS);
-    breathing_enable();
-  }
-  else
-  {
-    capslock_is_active  = false;
-    gherkinBacklightLevel = gherkinBacklightLevelBeforeCapsLock;
-
-    breathing_period_set(BR_DFLT);
-    breathing_disable();
-  }
-// lights and breath
-
-// [INFO]
-// Note, that instead of unregister_code (KC_LCAP), ...
-// ... we write unregister_code (KC_CAPS).
-// This is the way it works that I found by the trial and error method.
-  unregister_code(KC_CAPS); 
-// [info] 
-  SEND_STRING(SS_UP(X_CAPSLOCK));
-
-} //  my capslock function  -  [f(capsl)] - my capslock finished function
+//   SEND_STRING(SS_DOWN(X_CAPSLOCK));
+//   register_code(KC_LCAP);
 
 
-void disable_capslock_before_accents_function(void) { // MY CAPSLOCK FINISHED FUNCTION
+// // LIGHTS AND BREATH
+// #if defined(BACKLIGHT_ENABLE)
+//   if (capslock_is_active == false)
+//   {
+//     // capslock_is_active  = true;
+//     gherkinBacklightLevelBeforeCapsLock = gherkinBacklightLevel;
+//     gherkinBacklightLevel = BL_CAPS;
 
-  if (capslock_is_active == true)
-    {
-      capslock_tap();
-      disabled_caps_before_accent = true;
-    }
-} // my disable_capslock_before_accents_function
+//     breathing_period_set(BR_CAPS);
+//     breathing_enable();
+//   }
+//   else
+//   {
+//     // capslock_is_active  = false;
+//     gherkinBacklightLevel = gherkinBacklightLevelBeforeCapsLock;
 
-void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTION
-  if (disabled_caps_before_accent == true)
-    {
-      capslock_tap();
-      disabled_caps_before_accent = false;
-  }
-} // my enable_capslock_after_accents_function
+//     breathing_period_set(BR_DFLT);
+//     breathing_disable();
+//   }
+// #endif
+// // lights and breath
+
+// // [INFO]
+// // Note, that instead of unregister_code (KC_LCAP), ...
+// // ... we write unregister_code (KC_CAPS).
+// // This is the way it works that I found by the trial and error method.
+//   unregister_code(KC_CAPS); 
+// // [info] 
+//   SEND_STRING(SS_UP(X_CAPSLOCK));
+
+// } //  my capslock function  -  [f(capsl)] - my capslock finished function
+
+
+// void disable_capslock_before_accents_function(void) { // MY CAPSLOCK FINISHED FUNCTION
+
+//   if (capslock_is_active == true)
+//     {
+//       capslock_tap();
+//       disabled_caps_before_accent = true;
+//     }
+// } // my disable_capslock_before_accents_function
+
+// void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTION
+//   if (disabled_caps_before_accent == true)
+//     {
+//       capslock_tap();
+//       disabled_caps_before_accent = false;
+//   }
+// } // my enable_capslock_after_accents_function
 //                                                                                      //
 // [functions] [_daly] kc_a [f(capsl)]                                                  //
 //                                                                                      //
@@ -262,36 +273,36 @@ void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTI
 // RESET MY KEYBOARD FUNCTION                                                           //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
+// void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 
-                   // BACKLIGHT BLINKING
-                      backlight_level(BL_RESE);
-                      _delay_ms(50);
-                      backlight_level(BL_MIN);
-                      _delay_ms(100);
-                      backlight_level(BL_RESE);
-                      _delay_ms(50);
-                      backlight_level(BL_MIN);
-                      _delay_ms(100);
-                      backlight_level(BL_RESE);
-                      _delay_ms(50);
-                      backlight_level(BL_MIN);
-                      _delay_ms(100);
-                      backlight_level(BL_RESE);
-                      _delay_ms(50);
-                      backlight_level(BL_MIN);
-                      _delay_ms(100);
-                      backlight_level(BL_RESE);
-                      _delay_ms(50);
-                      backlight_level(BL_MIN);
-                      _delay_ms(100);
-                      backlight_level(BL_RESE);
-                      _delay_ms(50);
-                      backlight_level(BL_MIN);
-                      _delay_ms(100);
-                   // ends backlight blinking
-                      reset_keyboard();
-}
+//                    // BACKLIGHT BLINKING
+//                       backlight_level(BL_RESE);
+//                       _delay_ms(50);
+//                       backlight_level(BL_MIN);
+//                       _delay_ms(100);
+//                       backlight_level(BL_RESE);
+//                       _delay_ms(50);
+//                       backlight_level(BL_MIN);
+//                       _delay_ms(100);
+//                       backlight_level(BL_RESE);
+//                       _delay_ms(50);
+//                       backlight_level(BL_MIN);
+//                       _delay_ms(100);
+//                       backlight_level(BL_RESE);
+//                       _delay_ms(50);
+//                       backlight_level(BL_MIN);
+//                       _delay_ms(100);
+//                       backlight_level(BL_RESE);
+//                       _delay_ms(50);
+//                       backlight_level(BL_MIN);
+//                       _delay_ms(100);
+//                       backlight_level(BL_RESE);
+//                       _delay_ms(50);
+//                       backlight_level(BL_MIN);
+//                       _delay_ms(100);
+//                    // ends backlight blinking
+//                       reset_keyboard();
+// }
 //                                                                                      //
 // [functions] [_powr] kc_r (hreset)                                                    //
 //                                                                                      //
@@ -756,18 +767,19 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 // @@ DOUBLE_HOLD                                                                       //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-typedef struct {
-  bool is_press_action;
-  int  state;
-} tap;
+// typedef struct {
+//   bool is_press_action;
+//   int  state;
+// } tap;
 /* Return an integer that corresponds to what kind of tap dance should be executed.
  *
  * How to figure out tap dance state: interrupted and pressed.
  *
- * Interrupted: If the state of a dance dance is "interrupted", that means that another key has been hit
+ * Interrupted: If the state of a tapdance is "interrupted", that means that another key has been hit
  *  under the tapping term. This is typically indicitive that you are trying to "tap" the key.
  *
- * Pressed: Whether or not the key is still being pressed. If this value is true, that means the tapping term
+ * Pressed: Whether or not the key is still being pressed.
+ *  If this value is true, that means the tapping term
  *  has ended, but the key is still being pressed down. This generally means the key is being "held".
  *
  * One thing that is currenlty not possible with qmk software in regards to tap dance is to mimic the "permissive hold"
@@ -787,40 +799,40 @@ typedef struct {
  * For the third point, there does exist the 'DOUBLE_SINGLE_TAP', however this is not fully tested
  *
  */
-int cur_dance (qk_tap_dance_state_t *state) {
-  if (state->count == 1) 
-  {
-   if (state->interrupted || !state->pressed) 
-   // IF the key has been pressed only once 
-   // AND  (the key has been interrupted by pressing another key after it
-   //       OR   the key is not pressed at present)
-     return SINGLE_TAP;
-     else 
-     // IF  the key has been pressed only once
-     // AND the key has not been interrupted
-     // AND the key is still pressed  
-       return SINGLE_HOLD;
-    }
-    else 
-    { 
-      if (state->count == 2)
-        { 
-          if (state->interrupted)
-          // IF   the key has been pressed twice
-          // AND  the key has been interrupted by pressing another key after it
-          return DOUBLE_SINGLE_TAP;
-          else
-            if (state->pressed) 
-            // IF  the key has been pressed twice
-            // AND the key has not been interrupted by pressing another key
-            // AND the key is still pressed
-              return DOUBLE_HOLD;
-            else
-            // IF  the key has been pressed twice
-            // AND the key has not being interrupted by pressing another key
-            // AND the key is not pressed at present
-              return DOUBLE_TAP;
-        }
+// int cur_dance (qk_tap_dance_state_t *state) {
+//   if (state->count == 1) 
+//   {
+//    if (state->interrupted || !state->pressed) 
+//    // IF the key has been pressed only once 
+//    // AND  (the key has been interrupted by pressing another key after it
+//    //       OR   the key is not pressed at present)
+//      return SINGLE_TAP;
+//      else 
+//      // IF  the key has been pressed only once
+//      // AND the key has not been interrupted
+//      // AND the key is still pressed  
+//        return SINGLE_HOLD;
+//     }
+//     else 
+//     { 
+//       if (state->count == 2)
+//         { 
+//           if (state->interrupted)
+//           // IF   the key has been pressed twice
+//           // AND  the key has been interrupted by pressing another key after it
+//           return DOUBLE_SINGLE_TAP;
+//           else
+//             if (state->pressed) 
+//             // IF  the key has been pressed twice
+//             // AND the key has not been interrupted by pressing another key
+//             // AND the key is still pressed
+//               return DOUBLE_HOLD;
+//             else
+//             // IF  the key has been pressed twice
+//             // AND the key has not being interrupted by pressing another key
+//             // AND the key is not pressed at present
+//               return DOUBLE_TAP;
+//         }
 /*
       else if (state->count == 3) {
       if (state->interrupted) return TRIPLE_SINGLE_TAP;
@@ -844,9 +856,9 @@ int cur_dance (qk_tap_dance_state_t *state) {
       }
       else return 18; //magic number. At some point this method will expand to work for more presses
 */
-      else return 6;
-    }
-}
+//       else return 6;
+//     }
+// }
 //                                                                                      //
 // tap dance general setup section end                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1027,22 +1039,22 @@ void SLNUMB_reset (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'FVIM_uU' tap dance.
-static tap FVIM_uU_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+// static tap FVIM_uU_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
 
-void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
-  FVIM_uU_tap_state.state = cur_dance(state);
-  switch (FVIM_uU_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_LEFT);
-                          unregister_code(KC_LEFT); unregister_code(KC_LGUI); break;
+// void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
+//   FVIM_uU_tap_state.state = cur_dance(state);
+//   switch (FVIM_uU_tap_state.state) {
+//     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_LEFT);
+//                           unregister_code(KC_LEFT); unregister_code(KC_LGUI); break;
 
-    case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_UP);
-                          unregister_code(KC_UP);   unregister_code(KC_LALT); break;
-  }
-  FVIM_uU_tap_state.state = 0;
-}
+//     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_UP);
+//                           unregister_code(KC_UP);   unregister_code(KC_LALT); break;
+//   }
+//   FVIM_uU_tap_state.state = 0;
+// }
 //                                                                                      //
 // [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
 //                                                                                      //
@@ -1061,22 +1073,22 @@ void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'FVIM_pP' tap dance.
-static tap FVIM_pP_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+// static tap FVIM_pP_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
 
-void FVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
-  FVIM_pP_tap_state.state = cur_dance(state);
-  switch (FVIM_pP_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_RGHT);
-                          unregister_code(KC_RGHT); unregister_code(KC_LGUI); break;
+// void FVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
+//   FVIM_pP_tap_state.state = cur_dance(state);
+//   switch (FVIM_pP_tap_state.state) {
+//     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_RGHT);
+//                           unregister_code(KC_RGHT); unregister_code(KC_LGUI); break;
 
-    case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_DOWN);
-                          unregister_code(KC_DOWN); unregister_code(KC_LALT); break;
-  }
-  FVIM_pP_tap_state.state = 0;
-}
+//     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_DOWN);
+//                           unregister_code(KC_DOWN); unregister_code(KC_LALT); break;
+//   }
+//   FVIM_pP_tap_state.state = 0;
+// }
 //                                                                                      //
 // [tapdance] [ _fvim ] kc_p (fvim_pp)                                                  //
 //                                                                                      //
@@ -1163,19 +1175,19 @@ void FVIM_oO_function (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'DVIM_uU' tap dance.
-static tap DVIM_uU_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+// static tap DVIM_uU_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
 
-void DVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
-  DVIM_uU_tap_state.state = cur_dance(state);
-  switch (DVIM_uU_tap_state.state) {
-    case SINGLE_TAP:        dvim("u"); break;
-    case DOUBLE_TAP:        dvim("U"); break;
-  }
-  DVIM_uU_tap_state.state = 0;
-}
+// void DVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
+//   DVIM_uU_tap_state.state = cur_dance(state);
+//   switch (DVIM_uU_tap_state.state) {
+//     case SINGLE_TAP:        dvim("u"); break;
+//     case DOUBLE_TAP:        dvim("U"); break;
+//   }
+//   DVIM_uU_tap_state.state = 0;
+// }
 //                                                                                      //
 // [tapdance] [ _dvim ] kc_u (dvim_uu)                                                  //
 //                                                                                      //
@@ -1194,19 +1206,19 @@ void DVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'DVIM_pP' tap dance.
-static tap DVIM_pP_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+// static tap DVIM_pP_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
 
-void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
-  DVIM_pP_tap_state.state = cur_dance(state);
-  switch (DVIM_pP_tap_state.state) {
-    case SINGLE_TAP:        dvim("p"); break;
-    case DOUBLE_TAP:        dvim("P"); break;
-  }
-  DVIM_pP_tap_state.state = 0;
-}
+// void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
+//   DVIM_pP_tap_state.state = cur_dance(state);
+//   switch (DVIM_pP_tap_state.state) {
+//     case SINGLE_TAP:        dvim("p"); break;
+//     case DOUBLE_TAP:        dvim("P"); break;
+//   }
+//   DVIM_pP_tap_state.state = 0;
+// }
 //                                                                                      //
 // [tapdance] [ _dvim ] kc_p (dvim_pp)                                                  //
 //                                                                                      //
@@ -1362,27 +1374,27 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'HRESET' tap dance.
-static tap HRESET_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+// static tap HRESET_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
 
-void HRESET_finished (qk_tap_dance_state_t *state, void *user_data) {
-  HRESET_tap_state.state = cur_dance(state);
-  switch (HRESET_tap_state.state) {
+// void HRESET_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   HRESET_tap_state.state = cur_dance(state);
+//   switch (HRESET_tap_state.state) {
 
-    case SINGLE_HOLD: // starts backlight blinking and then reset the keyboard for about 7 seconds
-                      reset_my_keyboard_function();
-                      break;
-  }
-}
+//     case SINGLE_HOLD: // starts backlight blinking and then reset the keyboard for about 7 seconds
+//                       reset_my_keyboard_function();
+//                       break;
+//   }
+// }
 
-void HRESET_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (HRESET_tap_state.state) {
-    case SINGLE_HOLD:        break;
-  }
-  HRESET_tap_state.state = 0;
-}
+// void HRESET_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (HRESET_tap_state.state) {
+//     case SINGLE_HOLD:        break;
+//   }
+//   HRESET_tap_state.state = 0;
+// }
 //                                                                                      //
 // [tapdance] [_powr] kc_r (hreset)                                                     //
 //                                                                                      //
@@ -1988,7 +2000,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // [_numb] layer
 
 // [_POWR] LAYER
- ,[LOGOUT]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, LOGOUT_finished, LOGOUT_reset)
+ ,[LCKLOG]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, LCKLOG_finished, LCKLOG_reset)
  ,[HRESET]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, HRESET_finished, HRESET_reset, 1000)
 
  ,[V8_TEST]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, V8_TEST_finished, V8_TEST_reset)
@@ -2450,296 +2462,296 @@ void matrix_init_user(void) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-const uint16_t PROGMEM fn_actions[] = {
-  [ACC_A] = ACTION_FUNCTION(ACC_A),
-  [ACC_E] = ACTION_FUNCTION(ACC_E),
-  [ACC_I] = ACTION_FUNCTION(ACC_I),
-  [ACC_O] = ACTION_FUNCTION(ACC_O),
-  [ACC_U] = ACTION_FUNCTION(ACC_U),
+// const uint16_t PROGMEM fn_actions[] = {
+//   [ACC_A] = ACTION_FUNCTION(ACC_A),
+//   [ACC_E] = ACTION_FUNCTION(ACC_E),
+//   [ACC_I] = ACTION_FUNCTION(ACC_I),
+//   [ACC_O] = ACTION_FUNCTION(ACC_O),
+//   [ACC_U] = ACTION_FUNCTION(ACC_U),
 
-  [TIL_N] = ACTION_FUNCTION(TIL_N),
+//   [TIL_N] = ACTION_FUNCTION(TIL_N),
 
-  [CAPSL] = ACTION_FUNCTION(CAPSL)
-};
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-
-void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
-  shift_flag = get_mods()&SHFT_MODS;
-  switch (id) {
-
-    case ACC_A:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-        {
-        //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
-
-        if (circumflex_requested)
-        {
-            circumflex_accent_function();
-        }
-        else 
-        { 
-            if (grave_requested)       
-            {
-                grave_accent_function();
-            }
-            else
-            { 
-                if (diaeresis_requested)
-                {
-                    diaeresis_accent_function();
-                } 
-                else // neither circumflex_requested, nor grave_requested, nor diaeresis_requested
-                {
-                    acute_accent_function();
-                } // if (diaeresis_requested)
-
-            } // if (grave_requested)
-
-          } // if (circumflex_requested)
-
-          enable_capslock_after_accents_function();
-          if (shift_flag)
-          {
-          //  press LSHIFT
-              add_mods(shift_flag);
-              add_weak_mods(shift_flag);
-              send_keyboard_report();
-          };            
-       // [FIXME] [FIX THE FO LINE LOCATION]
-        register_code(KC_A);
-        unregister_code(KC_A);
-      }
-      else
-      {
-  //        SEND_STRING("NO record event pressed");
-      }
-    break;
+//   [CAPSL] = ACTION_FUNCTION(CAPSL)
+// };
+// /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
-    case ACC_E:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-        {
-        //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
+
+// void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
+//   sft_mod = get_mods()&SHFT_MODS;
+//   switch (id) {
+
+//     case ACC_A:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//         if (sft_mod)  // sft_mod is grabbed at the very beginning of this function (action_function)
+//         {
+//         //  release LSHIFT
+//             del_mods(sft_mod);
+//             del_weak_mods(sft_mod);
+//             send_keyboard_report();
+//         };
+//     //  tap accent
+//         disable_capslock_before_accents_function();
+
+//         if (circumflex_requested)
+//         {
+//             circumflex_accent_function();
+//         }
+//         else 
+//         { 
+//             if (grave_requested)       
+//             {
+//                 grave_accent_function();
+//             }
+//             else
+//             { 
+//                 if (diaeresis_requested)
+//                 {
+//                     diaeresis_accent_function();
+//                 } 
+//                 else // neither circumflex_requested, nor grave_requested, nor diaeresis_requested
+//                 {
+//                     acute_accent_function();
+//                 } // if (diaeresis_requested)
+
+//             } // if (grave_requested)
+
+//           } // if (circumflex_requested)
+
+//           enable_capslock_after_accents_function();
+//           if (sft_mod)
+//           {
+//           //  press LSHIFT
+//               add_mods(sft_mod);
+//               add_weak_mods(sft_mod);
+//               send_keyboard_report();
+//           };            
+//        // [FIXME] [FIX THE FO LINE LOCATION]
+//         register_code(KC_A);
+//         unregister_code(KC_A);
+//       }
+//       else
+//       {
+//   //        SEND_STRING("NO record event pressed");
+//       }
+//     break;
+
+
+//     case ACC_E:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//         if (sft_mod)  // sft_mod is grabbed at the very beginning of this function (action_function)
+//         {
+//         //  release LSHIFT
+//             del_mods(sft_mod);
+//             del_weak_mods(sft_mod);
+//             send_keyboard_report();
+//         };
+//     //  tap accent
+//         disable_capslock_before_accents_function();
         
-        if (circumflex_requested)           { circumflex_accent_function(); }
+//         if (circumflex_requested)           { circumflex_accent_function(); }
 
-          else { if (grave_requested)            { grave_accent_function(); }
+//           else { if (grave_requested)            { grave_accent_function(); }
 
-             else { if (diaeresis_requested) { diaeresis_accent_function(); } 
+//              else { if (diaeresis_requested) { diaeresis_accent_function(); } 
 
-                else                             { acute_accent_function(); } 
-        } }
+//                 else                             { acute_accent_function(); } 
+//         } }
 
-        enable_capslock_after_accents_function();
-        if (shift_flag)
-        {
-        //  press LSHIFT
-            add_mods(shift_flag);
-            add_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
+//         enable_capslock_after_accents_function();
+//         if (sft_mod)
+//         {
+//         //  press LSHIFT
+//             add_mods(sft_mod);
+//             add_weak_mods(sft_mod);
+//             send_keyboard_report();
+//         };
            
-        register_code(KC_E);
-        unregister_code(KC_E);
-      }
-      else
-      {
-      }
-    break;
+//         register_code(KC_E);
+//         unregister_code(KC_E);
+//       }
+//       else
+//       {
+//       }
+//     break;
 
-    case ACC_I:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-        {
-        //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
+//     case ACC_I:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//         if (sft_mod)  // sft_mod is grabbed at the very beginning of this function (action_function)
+//         {
+//         //  release LSHIFT
+//             del_mods(sft_mod);
+//             del_weak_mods(sft_mod);
+//             send_keyboard_report();
+//         };
+//     //  tap accent
+//         disable_capslock_before_accents_function();
         
-        if (circumflex_requested)    { circumflex_accent_function(); }
+//         if (circumflex_requested)    { circumflex_accent_function(); }
 
-          else { if (grave_requested)         { grave_accent_function(); }
+//           else { if (grave_requested)         { grave_accent_function(); }
 
-             else { if (diaeresis_requested)  { diaeresis_accent_function(); } 
+//              else { if (diaeresis_requested)  { diaeresis_accent_function(); } 
 
-                else                                  { acute_accent_function(); } 
-        } }
+//                 else                                  { acute_accent_function(); } 
+//         } }
 
-        enable_capslock_after_accents_function();
-        if (shift_flag)
-        {
-        //  press LSHIFT
-            add_mods(shift_flag);
-            add_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
+//         enable_capslock_after_accents_function();
+//         if (sft_mod)
+//         {
+//         //  press LSHIFT
+//             add_mods(sft_mod);
+//             add_weak_mods(sft_mod);
+//             send_keyboard_report();
+//         };
             
-        register_code(KC_I);
-        unregister_code(KC_I);
-      }
-      else
-      {
-      }
-    break;
+//         register_code(KC_I);
+//         unregister_code(KC_I);
+//       }
+//       else
+//       {
+//       }
+//     break;
 
-    case ACC_O:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-        {
-        //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
+//     case ACC_O:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//         if (sft_mod)  // sft_mod is grabbed at the very beginning of this function (action_function)
+//         {
+//         //  release LSHIFT
+//             del_mods(sft_mod);
+//             del_weak_mods(sft_mod);
+//             send_keyboard_report();
+//         };
+//     //  tap accent
+//         disable_capslock_before_accents_function();
         
-        if (circumflex_requested)           { circumflex_accent_function(); }
+//         if (circumflex_requested)           { circumflex_accent_function(); }
 
-          else { if (grave_requested)            { grave_accent_function(); }
+//           else { if (grave_requested)            { grave_accent_function(); }
 
-             else { if (diaeresis_requested) { diaeresis_accent_function(); } 
+//              else { if (diaeresis_requested) { diaeresis_accent_function(); } 
 
-                else                             { acute_accent_function(); } 
-        } }
+//                 else                             { acute_accent_function(); } 
+//         } }
 
-        enable_capslock_after_accents_function();
-        if (shift_flag)
-        {
-        //  press LSHIFT
-            add_mods(shift_flag);
-            add_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
+//         enable_capslock_after_accents_function();
+//         if (sft_mod)
+//         {
+//         //  press LSHIFT
+//             add_mods(sft_mod);
+//             add_weak_mods(sft_mod);
+//             send_keyboard_report();
+//         };
             
-        register_code(KC_O);
-        unregister_code(KC_O);
-      }
-      else
-      {
-      }
-    break;
+//         register_code(KC_O);
+//         unregister_code(KC_O);
+//       }
+//       else
+//       {
+//       }
+//     break;
 
-    case ACC_U:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-        {
-        //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
+//     case ACC_U:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//         if (sft_mod)  // sft_mod is grabbed at the very beginning of this function (action_function)
+//         {
+//         //  release LSHIFT
+//             del_mods(sft_mod);
+//             del_weak_mods(sft_mod);
+//             send_keyboard_report();
+//         };
+//     //  tap accent
+//         disable_capslock_before_accents_function();
         
-        if (circumflex_requested)           { circumflex_accent_function(); }
+//         if (circumflex_requested)           { circumflex_accent_function(); }
 
-          else { if (grave_requested)            { grave_accent_function(); }
+//           else { if (grave_requested)            { grave_accent_function(); }
 
-             else { if (diaeresis_requested) { diaeresis_accent_function(); } 
+//              else { if (diaeresis_requested) { diaeresis_accent_function(); } 
 
-                else                             { acute_accent_function(); } 
-        } }
+//                 else                             { acute_accent_function(); } 
+//         } }
 
-        enable_capslock_after_accents_function();
-        if (shift_flag)
-        {
-        //  press LSHIFT
-            add_mods(shift_flag);
-            add_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
+//         enable_capslock_after_accents_function();
+//         if (sft_mod)
+//         {
+//         //  press LSHIFT
+//             add_mods(sft_mod);
+//             add_weak_mods(sft_mod);
+//             send_keyboard_report();
+//         };
             
-        register_code(KC_U);       
-        unregister_code(KC_U);
-      }
-      else
-      {
-      }  
-    break;
+//         register_code(KC_U);       
+//         unregister_code(KC_U);
+//       }
+//       else
+//       {
+//       }  
+//     break;
 
 
 
-    case TIL_N:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of this function (action_function)
-        {
-        //  release LSHIFT
-            del_mods(shift_flag);
-            del_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
+//     case TIL_N:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//         if (sft_mod)  // sft_mod is grabbed at the very beginning of this function (action_function)
+//         {
+//         //  release LSHIFT
+//             del_mods(sft_mod);
+//             del_weak_mods(sft_mod);
+//             send_keyboard_report();
+//         };
+//     //  tap accent
+//         disable_capslock_before_accents_function();
 
-        tilde_accent_function();
+//         tilde_accent_function();
         
-        enable_capslock_after_accents_function();
-        if (shift_flag)
-        {
-        //  press LSHIFT
-            add_mods(shift_flag);
-            add_weak_mods(shift_flag);
-            send_keyboard_report();
-        };
+//         enable_capslock_after_accents_function();
+//         if (sft_mod)
+//         {
+//         //  press LSHIFT
+//             add_mods(sft_mod);
+//             add_weak_mods(sft_mod);
+//             send_keyboard_report();
+//         };
             
-        register_code(KC_N);
-        unregister_code(KC_N);
-      }
-      else 
-      {
-      }
-    break;
+//         register_code(KC_N);
+//         unregister_code(KC_N);
+//       }
+//       else 
+//       {
+//       }
+//     break;
 
 
 
 
 
 
-    case CAPSL:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-         capslock_tap();
-      }
-      else 
-      {
-      }
-      break;
+//     case CAPSL:
+//       if (record->event.pressed) 
+//       {
+//       /*The key is being pressed.*/
+//          capslock_tap();
+//       }
+//       else 
+//       {
+//       }
+//       break;
       
- }
-}
+//  }
+// }
 //                                                                                      //
 //                                                                                      //
 //                       f n _ a c t i o n s     f u n c t i o n s                      //
@@ -3875,8 +3887,8 @@ uint32_t layer_state_set_user(uint32_t state) {
         break;
 
     case _APPS:   //  10
-      gui_flag = get_mods()&GUI_MODS;
-      if (gui_flag)
+      gui_mod = get_mods()&GUI_MODS;
+      if (gui_mod)
       {
         hide_other_apps = true;
       }

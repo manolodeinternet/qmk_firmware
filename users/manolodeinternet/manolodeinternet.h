@@ -1,8 +1,6 @@
 #pragma once
 #include QMK_KEYBOARD_H
 
-#include "tapdance_setup.h"
-
 #include "wrappers.h"
 #include "enum_custom_keycodes.h"
 
@@ -22,6 +20,23 @@
     #include "comprehensive_30_layout_manolodeinternet.h"
 #endif
 
+
+#include "tapdance_setup.h"
+
+// this previous line doesn't allow compile, because it appears the error: 
+/* Compiling: users/manolodeinternet/tapdance_setup.c                                                 In file included from users/manolodeinternet/tapdance_setup.c:2:
+users/manolodeinternet/tapdance_setup.h:9:8: error: nested redefinition of 'enum tap_dance_states'
+   enum tap_dance_states { // EACH ONE RECEIVE ITS VALUE...
+        ^~~~~~~~~~~~~~~~
+users/manolodeinternet/tapdance_setup.h:9:8: error: redeclaration of 'enum tap_dance_states'
+In file included from users/manolodeinternet/manolodeinternet.h:23,
+                 from users/manolodeinternet/tapdance_setup.h:2,
+                 from users/manolodeinternet/tapdance_setup.c:2:
+users/manolodeinternet/tapdance_setup.h:9:8: note: originally defined here
+   enum tap_dance_states { // EACH ONE RECEIVE ITS VALUE...
+        ^~~~~~~~~~~~~~~~ */
+
+#include "fn_actions.h"
 
 //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
@@ -94,10 +109,14 @@ bool capslock_is_active;
 
 bool numbers_is_active;   // flag for _NUMB layer
 
-uint8_t shift_flag;
-uint8_t gui_flag;
-// common variables for all keyboards  
+uint8_t ctl_mod;
+uint8_t alt_mod;
+uint8_t gui_mod;
+uint8_t sft_mod;
 
+bool control_apps;
+bool shift_apps;
+// common variables for all keyboards  
 
 
 // #   if defined(RGBLIGHT_ENABLE) || defined(RGB_MATRIX_ENABLE)

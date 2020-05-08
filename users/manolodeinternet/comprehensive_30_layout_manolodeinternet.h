@@ -1,8 +1,11 @@
 // #pragma once
 // #include QMK_KEYBOARD_H
 
+#include "manolodeinternet.h"
+
+
 // __attribute__((weak)) 
-bool    hide_other_apps = false;
+bool hide_other_apps;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////

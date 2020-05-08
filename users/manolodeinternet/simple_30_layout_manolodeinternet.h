@@ -1,8 +1,5 @@
 #include "manolodeinternet.h"
 // SPECIFIC VARIABLES FOR MINI DACTYL
-    uint8_t control_flag;
-    uint8_t  option_flag;
-    uint8_t current_flag;
 
     int    state_number;
 
@@ -16,8 +13,6 @@ bool apps_trigger;        // with no apps layer
 bool karabiner_apps_trigger;
 
 bool multi_apps;
-bool control_apps;
-bool shift_apps;
 bool apps_just_activated;
 bool changing_apps;
       

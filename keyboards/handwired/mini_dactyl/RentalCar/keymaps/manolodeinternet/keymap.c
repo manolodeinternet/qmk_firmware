@@ -168,17 +168,51 @@
 //             *  DELETE,                                                               //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+//
+//instantalize an instance of 'tap' for the 'DVIM_Del' tap dance.
+static tap DVIM_Del_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
 
+void DVIM_Del_f_always(qk_tap_dance_state_t *state, void *user_data) {
+  rgblight_sethsv_noeeprom(COLOR_DVIM);
+}
+
+void DVIM_Del_finished (qk_tap_dance_state_t *state, void *user_data) {
+  DVIM_Del_tap_state.state = cur_dance(state);
+  switch (DVIM_Del_tap_state.state) {
+
+    case   SINGLE_TAP:  register_code(KC_DEL);
+                        break;
+
+    case   SINGLE_HOLD: layer_on(_DVIM);
+
+  }
+}
+
+void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (DVIM_Del_tap_state.state) {
+
+    case   SINGLE_TAP:  unregister_code(KC_DEL); break;
+
+    case   SINGLE_HOLD: layer_off(_DVIM);
+
+  }
+  show_RGB_LEDs();
+  DVIM_Del_tap_state.state = 0;
+}
 //                                                                                      //
 // [tapdance] [_dflt] thumb_l1 (dvim_del)                                               //
 //                                                                                      //
 //  d v i m    l a y e r    /    b a c k s p a c e                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-//
-//
-
-
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//             t a p   d a n c e   f o r    [ _ a l p h ]  l a y e r                    //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -617,102 +651,28 @@ void matrix_scan_user(void) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//                                                                                      //
-//                       F N _ A C T I O N S     F U N C T I O N S                      //
-//                                                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //                                                                                      //
+// //                                                                                      //
+// //                       F N _ A C T I O N S     F U N C T I O N S                      //
+// //                                                                                      //
+// //                                                                                      //
+// //////////////////////////////////////////////////////////////////////////////////////////
 //
-const uint16_t PROGMEM fn_actions[] = {
-  [ACC_A] = ACTION_FUNCTION(ACC_A),
-  [ACC_E] = ACTION_FUNCTION(ACC_E),
-  [ACC_I] = ACTION_FUNCTION(ACC_I),
-  [ACC_O] = ACTION_FUNCTION(ACC_O),
-  [ACC_U] = ACTION_FUNCTION(ACC_U),
-
-  [TIL_N] = ACTION_FUNCTION(TIL_N),
-
-  [CAPSL] = ACTION_FUNCTION(CAPSL)
-};
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
-
-void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
-  shift_flag = get_mods()&SHFT_MODS;
-  switch (id) {
-
-    case ACC_A ... TIL_N:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-        if (shift_flag)  // shift_flag is grabbed at the very beginning of action_function()
-        {
-        //  release LSHIFT
-            // old way who worked fine
-            // del_mods(shift_flag);
-            // del_weak_mods(shift_flag);
-            // send_keyboard_report();
-          remove_mod(shift_flag);
-        };
-    //  tap accent
-        disable_capslock_before_accents_function();
-        
-        if (circumflex_requested)           { circumflex_accent_function(); }
-
-          else { if (grave_requested)            { grave_accent_function(); }
-
-             else { if (diaeresis_requested) { diaeresis_accent_function(); } 
-
-                else { if (id == TIL_N)           {tilde_accent_function(); } 
-
-                  else                           { acute_accent_function(); } 
-                     }
-                  }
-               }
-
-        enable_capslock_after_accents_function();
-        if (shift_flag)
-        {
-        //  press LSHIFT
-          add_mod(shift_flag);
-          // add_mods(shift_flag);
-          // add_weak_mods(shift_flag);
-          // send_keyboard_report();
-        };
-      }
-    break;
-
-    case CAPSL:
-      if (record->event.pressed) 
-      {
-      /*The key is being pressed.*/
-         capslock_tap();
-         show_RGB_LEDs();
-      }
-      break;
-  }
-
-  if (record->event.pressed) 
-  {
-    switch (id) 
-    {   case ACC_A: tap_code(KC_A); break;
-        case ACC_E: tap_code(KC_E); break;
-        case ACC_I: tap_code(KC_I); break;
-        case ACC_O: tap_code(KC_O); break;
-        case ACC_U: tap_code(KC_U); break;
-        case TIL_N: tap_code(KC_N); break;
-    }
-  }
-};
-//                                                                                      //
-//                                                                                      //
-//                       f n _ a c t i o n s     f u n c t i o n s                      //
-//                                                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
+// const uint16_t PROGMEM fn_actions[] = {
+// };
+//
+// /////////////////////////////////////////////////////////////////////////////////////////////////// ###
+//
+// void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
+// };
+//
+// //                                                                                      //
+// //                                                                                      //
+// //                       f n _ a c t i o n s     f u n c t i o n s                      //
+// //                                                                                      //
+// //                                                                                      //
+// //////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -738,18 +698,18 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
   {
     switch(keycode)
     {
-      case TD(DVIM_Del):// Left Thumb 1
-                        // Quit app
-                        register_code(KC_LGUI);
+  //  Left Thumb 1
+  //  Quit app
+      case TD(DVIM_Del):register_code(KC_LGUI);
                              tap_code(KC_Q);
                       unregister_code(KC_LGUI);
                         return false;
 
-      case MO(_FVIM):   // Left Thumb 2
-                        // Toggle between current and last app
-                        // It's similar to KC_Y in [_DALY], but ...
-                        // IT CHANGES QUICKLY, WITHOUT APPS BAR IN THE MIDDLE OF THE SCREEN !!!
-                        // If you want to change from one app to another app in multi_apps mode,
+  //   Left Thumb 2
+  //   Toggle between current and last app
+  //   It's similar to KC_Y in [_DALY], but ...
+  //   IT CHANGES QUICKLY, WITHOUT APPS BAR IN THE MIDDLE OF THE SCREEN !!!
+      case MO(_FVIM):   // If you want to change from one app to another app in multi_apps mode,
                         //...uncomment next line.
                         // multi_apps = true;
                           register_code(KC_LGUI);
@@ -758,26 +718,29 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                         return false;
 
 
-//#01 #R3-L3
-      case TT_NUMB:     // Left Thumb 3
-                        // Karabiner-apps mode
+//[# #KARABINER & TYPINATOR STUFF]
+//[# #R3-L3 #01]
 
-#if defined(DEFAULT_TYPINATOR_APPS) // ------------------------------------------------------------ ###
+  //  Left Thumb 3
+  //  Karabiner-apps mode
+      case TT_NUMB:
+
+#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
 
                         if (multi_apps)
                         {
-                          add_mod(gui_flag);
+                          add_mod(gui_mod);
                         }
                         karabiner_apps_trigger = true;  
                         register_code(KC_F20);                      
 
-#elif defined(DEFAULT_KARABINER_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
+#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
 
                         unregister_code(KC_F20);
                         apps_trigger = true;
                         if (multi_apps)
                         {
-                          remove_mod(gui_flag);
+                          remove_mod(gui_mod);
                         }
 
 #endif // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ###
@@ -787,7 +750,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
 //#02 #R3-L3
       default:
    // default case will call one app for every 3x10 alpha keys
-#if defined(DEFAULT_TYPINATOR_APPS) // ------------------------------------------------------------ ###
+#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
 
                 if (karabiner_apps_trigger)
                 {
@@ -804,7 +767,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                 //   }
                 // }
 
-#elif defined(DEFAULT_KARABINER_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
+#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
 
                 if (apps_trigger)
                 { // calling appps at 'typinator style'
@@ -837,7 +800,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                               // Switch off 'apps_trigger' variable mode without layer
                               // first_apps_trigger_pressed = false;
 
-#if defined(DEFAULT_TYPINATOR_APPS) // ------------------------------------------------------------ ###
+#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
 
                                apps_trigger = false;
 
@@ -856,13 +819,13 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                                  }
                                }
 
-#elif defined(DEFAULT_KARABINER_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
+#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
 
                                unregister_code(KC_F20);
                                karabiner_apps_trigger = false;
                                if (multi_apps)
                                {
-                                 remove_mod(gui_flag);
+                                 remove_mod(gui_mod);
                                }
 
                                if (!apps_trigger)
@@ -885,14 +848,14 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                                // Karabiner-apps mode
                                // second_apps_trigger_pressed = false;
 
-#if defined(DEFAULT_TYPINATOR_APPS) // ------------------------------------------------------------ ###
+#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
 
                                unregister_code(KC_F20);
                                karabiner_apps_trigger = false;
 
                                if (multi_apps)
                                {
-                                remove_mod(gui_flag);
+                                remove_mod(gui_mod);
                                }
 
                                if (!apps_trigger)
@@ -906,7 +869,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                                  }
                                }
 
-#elif defined(DEFAULT_KARABINER_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
+#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
 
                                apps_trigger = false;
 
@@ -928,7 +891,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                                {
                                 if (multi_apps)
                                 {
-                                  add_mod(gui_flag);
+                                  add_mod(gui_mod);
                                 }
                                 else
                                 {
@@ -943,7 +906,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
 
       default:
 
-#if defined(DEFAULT_TYPINATOR_APPS) // ------------------------------------------------------------ ###
+#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
 
                if (karabiner_apps_trigger)
                {
@@ -957,7 +920,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                  // }
                // }
 
-#elif defined(DEFAULT_KARABINER_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
+#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
 
                if (apps_trigger)
                {
@@ -978,6 +941,9 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
   } // else ( if (record->event.pressed) )
 }; // bool process_record_apps(uint16_t keycode, keyrecord_t *record)
 
+//[# #karabiner & typinator stuff]
+//[# #r3-l3 #01]
+
 
 // USER - PROCESS_RECORD_USER
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -985,10 +951,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // [DELETEME]
   // if (record->event.pressed)
   // {
-  //   shift_flag   = get_mods()&SHFT_MODS;
-  //   control_flag = get_mods()&CTRL_MODS;
-  //   option_flag  = get_mods()&ALT_MODS;
-  //   gui_flag     = get_mods()&GUI_MODS;
+  //   sft_mod   = get_mods()&SHFT_MODS;
+  //   ctl_mod = get_mods()&CTRL_MODS;
+  //   alt_mod  = get_mods()&ALT_MODS;
+  //   gui_mod     = get_mods()&GUI_MODS;
   // }
   // [deleteme]
 
@@ -1013,10 +979,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     return false;
 //[_dflt]
 
+
+//[# #KARABINER & TYPINATOR STUFF]
+//[# #R3-L3 #01]
+
 //#06 #R3-L3
 // //////////////////////////////////////////////////////////////////////////////////////////////// ###
 // //////////////////////////////////////////////////////////////////////////////////////////////// ###
-      case TH_R3_APPS_TRIGGER://if (option_flag)
+      case TH_R3_APPS_TRIGGER://if (alt_mod)
 
                                 if (check_mod_and_remove_it(ALT_MODS, true))
                                 {
@@ -1025,14 +995,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                                 else
                                 {
 
-#if defined(DEFAULT_TYPINATOR_APPS) // ------------------------------------------------------------ ###
+#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
                                   apps_trigger = true;
 
                                   if (check_mod_and_remove_it (GUI_MODS, true)) { multi_apps = true;  }
                                   if (check_mod_and_remove_it(CTRL_MODS, true)) { control_apps = true;}
                                   if (check_mod_and_remove_it(SHFT_MODS, true)) { shift_apps = true;  }
 
-#elif defined(DEFAULT_KARABINER_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
+#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
 
                                   register_code(KC_F20);
                                   karabiner_apps_trigger = true;
@@ -1048,6 +1018,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                                 }
                                 return false; 
 // //////////////////////////////////////////////////////////////////////////////////////////////// ###
+
+//[# #karabiner & typinator stuff]
+//[# #r3-l3 #01]
+
 
       case REWIND:    register_code(KC_F24); // asigned to 'fn' in karabiner-elements
                       tap_code(KC_F7);       // apple rewind default key in 'magic keyboard'
@@ -1093,7 +1067,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // [FREEING UP SPACE]
 // //////////////////////////////////////////////////////////////////////////////////////////////// ###
-      // case MY_RESET:  if (control_flag)
+      // case MY_RESET:  if (ctl_mod)
       //                 {
       //                   reset_my_keyboard_function();
       //                   return false;
@@ -1571,7 +1545,7 @@ ROW 3 COLORS
 //                                    if (multi_apps)
 //                                    {
 //                                      multi_apps = false;
-//                                      remove_mod(gui_flag);
+//                                      remove_mod(gui_mod);
 //                                    }
 //                                    else
 //                                    {
@@ -1598,7 +1572,7 @@ ROW 3 COLORS
 //                         // remove 'multi_apps' mode
 //                         if (multi_apps)
 //                         {
-//                           remove_mod(gui_flag);
+//                           remove_mod(gui_mod);
 //                         }
 
 //                         if (!apps_trigger) // if our right thumb doesn't continue holding R3
@@ -1625,7 +1599,7 @@ ROW 3 COLORS
 
 //                         if (multi_apps && karabiner_apps_trigger)
 //                         {
-//                           add_mod(gui_flag);
+//                           add_mod(gui_mod);
 //                         }
 
 //                         if (!karabiner_apps_trigger)
@@ -1675,7 +1649,7 @@ ROW 3 COLORS
                           changing_apps = false;
                           unregister_code(KC_LGUI);
                           // triggered_gui();
-                          // remove_mod(gui_flag);
+                          // remove_mod(gui_mod);
                         }
                         layer_off(_DALY);
                       }

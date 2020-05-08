@@ -31,9 +31,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                         karabiner_apps_trigger = true;  
                         if (multi_apps)
                         {
-                          // [bug] current_flag or gui_flag ???
-                          add_mod(gui_flag);
-                          // [bug]
+                          add_mod(gui_mod);
                         }
                         register_code(KC_F20);                      
 #elif defined(DEFAULT_KARABINER_APPS)
@@ -47,7 +45,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                         apps_trigger = true;
                         if (multi_apps)
                         {
-                          remove_mod(gui_flag);
+                          remove_mod(gui_mod);
                         }
 #endif
                         return false;
@@ -169,10 +167,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // [DELETEME]
   // if (record->event.pressed)
   // {
-  //   shift_flag   = get_mods()&SHFT_MODS;
-  //   control_flag = get_mods()&CTRL_MODS;
-  //   option_flag  = get_mods()&ALT_MODS;
-  //   gui_flag     = get_mods()&GUI_MODS;
+  //   sft_mod   = get_mods()&SHFT_MODS;
+  //   ctl_mod = get_mods()&CTRL_MODS;
+  //   alt_mod  = get_mods()&ALT_MODS;
+  //   gui_mod     = get_mods()&GUI_MODS;
   // }
   // [deleteme]
 
@@ -200,7 +198,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //#06 #R3-L3
 // //////////////////////////////////////////////////////////////////////////////////////////////// ###
 // //////////////////////////////////////////////////////////////////////////////////////////////// ###
-      case TH_R3_APPS_TRIGGER://if (option_flag)
+      case TH_R3_APPS_TRIGGER://if (alt_mod)
                                 if (check_mod_and_remove_it(ALT_MODS, true))
                                 {
                                    layer_on(_NUMB);
