@@ -1,5 +1,5 @@
-// #include "manolodeinternet.h"
 #include "tapdance_setup.h"
+// #include QMK_KEYBOARD_H
 
 // //////////////////////////////////////////////////////////////////////////////////////////
 // //                                                                                      //
@@ -57,13 +57,13 @@ int cur_dance (qk_tap_dance_state_t *state) {
           // AND the key has not been interrupted
           // AND the key is still pressed  (the key is still held)
           // [mine]
-        // {    option_flag = get_mods()&ALT_MODS;
-        //      gui_flag = get_mods()&GUI_MODS;
+        // {    alt_mod = get_mods()&ALT_MODS;
+        //      gui_mod = get_mods()&GUI_MODS;
 
-        //      if (option_flag)
+        //      if (alt_mod)
         //        return ALT_plus_HOLD;
         //      else
-        //        if (gui_flag)
+        //        if (gui_mod)
         //          return GUI_plus_HOLD;          
         //        else
                  return SINGLE_HOLD;
@@ -82,8 +82,8 @@ int cur_dance (qk_tap_dance_state_t *state) {
         // AND the key has not been interrupted by pressing another key
         // AND the key is still pressed
         // {
-        //   gui_flag = get_mods()&GUI_MODS;
-        //   if (gui_flag)
+        //   gui_mod = get_mods()&GUI_MODS;
+        //   if (gui_mod)
         //     return GUI_plus_DOUBLE_HOLD;          
         //   else
             return DOUBLE_HOLD;
@@ -273,68 +273,6 @@ void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
 //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-//             T A P   D A N C E   F O R    [ _ A L P H ]  L A Y E R                    //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_DFLT] THUMB_L1 (DVIM_Del)                                               //
-//                                                                                      //
-//  D V I M    L A Y E R    /    D E L E T E                                            //
-//                                                                                      //
-//  THUMB_L1:  @ [_DVIM] LAYER                                                          //
-//             *  DELETE,                                                               //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//instantalize an instance of 'tap' for the 'DVIM_Del' tap dance.
-static tap DVIM_Del_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void DVIM_Del_f_always(qk_tap_dance_state_t *state, void *user_data) {
-  rgblight_sethsv_noeeprom(COLOR_DVIM);
-}
-
-void DVIM_Del_finished (qk_tap_dance_state_t *state, void *user_data) {
-  DVIM_Del_tap_state.state = cur_dance(state);
-  switch (DVIM_Del_tap_state.state) {
-
-    case   SINGLE_TAP:  register_code(KC_DEL);
-                        break;
-
-    case   SINGLE_HOLD: layer_on(_DVIM);
-
-  }
-}
-
-void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (DVIM_Del_tap_state.state) {
-
-    case   SINGLE_TAP:  unregister_code(KC_DEL); break;
-
-    case   SINGLE_HOLD: layer_off(_DVIM);
-
-  }
-  show_RGB_LEDs();
-  DVIM_Del_tap_state.state = 0;
-}
-//                                                                                      //
-// [tapdance] [_dflt] thumb_l1 (dvim_del)                                               //
-//                                                                                      //
-//  d v i m    l a y e r    /    b a c k s p a c e                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//             t a p   d a n c e   f o r    [ _ a l p h ]  l a y e r                    //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
 //             T A P   D A N C E   F O R    [ _ P O W R ]  L A Y E R                    //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -375,7 +313,7 @@ void LCKLOG_finished (qk_tap_dance_state_t *state, void *user_data) {
 #if defined(RGBLIGHT_ENABLE)
                       flashing_RGB_LEDs(6, RGB_MY_MAGENTA, RGB_MY_BLUE);
 #elif defined(BACKLIGHT_ENABLE)
-
+                      flashing_BCK_LEDs(6, BL_MED, BL_MAX);
 #endif
                       register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
                       register_code(KC_Q);

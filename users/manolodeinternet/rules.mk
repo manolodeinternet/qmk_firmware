@@ -1,19 +1,29 @@
 # [UNDERSTANDING] 
 #
-# SIMPLE_30 and COMPREHENSIVE_30 constant parameters(directives) are defined at: '/Users/...'
-#'.../navarro/qmk_firmware/keyboards/handwired/mini_dactyl/RentalCar/keymaps/manolodeinternet/Makefile'
+# SIMPLE_30 and COMPREHENSIVE_30 constant parameters(directives) are defined at:
+#    /Users/navarro/qmk_firmware/keyboards/handwired/mini_dactyl/RentalCar/keymaps/...
+# .../manolodeinternet/Makefile
 #
 # [understanding]
 
-SRC += manolodeinternet.c \
-       tapdance_setup.c
+
+# with the file manolodeinternet.c into 'SRC +=', QMK compiles mini_dactyl but doesn't compile Gerkins
+# omiting the file manolodeinternet.c in 'SRC +=' it compiles gherkins but doesn't compile mini_dactyl!
+SRC += tapdance_setup.c \
+       fn_actions.c \
+       process_record_user_common_keyboards.c
+#      /Users/navarro/qmk_firmware/keyboards/handwired/mini_dactyl/RentalCar/keymaps/manolodeinternet/process_record_keymap.c
+#      /Users/navarro/qmk_firmware/users/manolodeinternet/process_record_user_common_keyboards.c
 
 ifeq ($(strip $(SIMPLE_30)), yes)
-	SRC += simple_30_layout_manolodeinternet.c
+    SRC += manolodeinternet.c \
+           simple_30_layout_manolodeinternet.c \
+           process_record_keymap.c
 endif
 
 ifeq ($(strip $(COMPREHENSIVE_30)), yes)
-	SRC += comprehensive_30_layout_manolodeinternet.c
+    SRC += manolodeinternet.c \
+           comprehensive_30_layout_manolodeinternet.c
 endif
 
 ifeq ($(strip $(RGBLIGHT_ENABLE)), yes)

@@ -1,3 +1,4 @@
+#pragma once
 #include "wrappers_defines.h"
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -22,6 +23,9 @@
 #if defined(COMPREHENSIVE_30_LAYOUT)
 
     #define _TEST  12  //  LAYER FOR TESTING               // must be over layer number 15 ...
+
+    #define _APPS  13  //  applications shortcut layer
+
     #define _LAST  17  //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!!!!!!!!!!
 
 #elif defined(SIMPLE_30_LAYOUT)
@@ -388,7 +392,7 @@ acronym dictionary
 /* [_NUMB] = LAYER 02 : NUMBERS LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |        |
- *                            |  EURO  |        |        |        |  EURO  |
+ *                            |   TAB  |        |        |        |  EURO  |
  *                            |        |        |        |        |        |
  *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
@@ -398,7 +402,7 @@ acronym dictionary
  *                   |        |        |        |        |        |@[_SYMB]|        |
  *                   '--------------------------'        '--------------------------'
  */
-#define _NUMB_LTHMB_RW1_                       EURO, _______
+#define _NUMB_LTHMB_RW1_                     KC_TAB, _______
 #define _NUMB_LTHMB_RW2_           _______, _______, _______
 
 #define      _NUMB_RTHMB_RW1_                                            MO(_POWR),  EURO
@@ -577,9 +581,9 @@ acronym dictionary
 // [_MOUS]
 /* [_MOUS] = LAYER 06 : MOUSE LAYER
  * .--------------------------------------------.        .--------------------------------------------.
- * |        |        |        |        |        |        |        |        |        |        |        |
- * | XXXXXXX| XXXXXXX| XXXXXXX| XXXXXXX| XXXXXXX|        |        |  Wheel |  Wheel |  Wheel |  Wheel |
- * |        |        |        |        |        |        |        |  Left  |   Up   |  Down  |  Right |
+ * |  Mouse |  Mouse |  Mouse |  Mouse |  Mouse |        |        |        |        |        |        |
+ * | Button | Button | Button | Button | Button |        |        |  Wheel |  Wheel |  Wheel |  Wheel |
+ * |    4   |    3   |    2   |    1   |    5   |        |        |  Left  |   Up   |  Down  |  Right |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
@@ -593,9 +597,9 @@ acronym dictionary
  * |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-#define ____MOUSE_L1____ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+#define ____MOUSE_L1____ KC_BTN5, KC_BTN4, KC_BTN3, KC_BTN2, KC_BTN1
 #define ____MOUSE_L2____ _______, _______, _______, _______, KC_LGUI
-#define ____MOUSE_L3____ KC_ACL1, KC_ACL2, XXXXXXX, KC_ACL0, KC_BTN1
+#define ____MOUSE_L3____ KC_ACL2, KC_ACL1, XXXXXXX, KC_ACL0, KC_BTN1
 
 #define      ____MOUSE_R1____                        XXXXXXX, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R
 #define      ____MOUSE_R2____                        XXXXXXX, KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R
@@ -645,9 +649,9 @@ acronym dictionary
  * |        |        |        |        |  / Tab |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-#define ____DAILY_L1____ KC_TAB,   DICTATION, CAP_SCRN, CAP_SLDE, FLOA_WIN
-#define ____DAILY_L2____ F(CAPSL),  DSHBOARD,  XXXXXXX,    SPEAK, ACTV_WIN
-#define ____DAILY_L3____ S(KC_TAB),  REWIND, PLAY_PAUSE, FORWARD, REOPEN_L
+#define ____DAILY_L1____ KC_TAB,   DICTATION,   CAP_SCRN, CAP_SLDE, FLOA_WIN
+#define ____DAILY_L2____ F(CAPSL),  DSHBOARD,       SIRI,    SPEAK, ACTV_WIN
+#define ____DAILY_L3____ S(KC_TAB),   REWIND, PLAY_PAUSE,  FORWARD, REOPEN_L
 
 #define      ____DAILY_R1____                        CLOSE_AP, PREV_APP, NEXT_APP, MISS_CTL,     DESK
 #define      ____DAILY_R2____                        CLOSE_WI, PREV_WIN, NEXT_WIN, APP_WIND, KC_SPACE
@@ -798,19 +802,19 @@ acronym dictionary
 #if defined(MINI_DACTYL_THUMBS)
 /* [_SYMB] = LAYER 09 : SYMBOLS LAYER
  *                            .-----------------.        .-----------------.
- *                            |inverted|inverted|        |        |        |
- *                            | exclam.|question|        |        |  EURO  |
- *                            |  mark  |  mark  |        |        |        |
+ *                            |        |        |        |        |        |
+ *                            |  / *   |   * /  |        |        |  EURO  |
+ *                            |        |        |        |        |        |
  *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
- *                   |        |        |        |        |        |@@@@@@@@|        |
- *                   |  / *   |   * /  |        |        |        |        |        |
- *                   |        |        |        |        |        |        |        |
- *                   |        |        |@[_NUMB]|        |        |        |        |
+ *                   |inverted|inverted|        |        |        |@@@@@@@@|        |
+ *                   | exclam.|question|        |        |        |        |        |
+ *                   |  mark  |  mark  |        |        |        |        |        |
+ *                   |    ¡   |    ¿   |@[_NUMB]|        |        |        |        |
  *                   '--------------------------'        '--------------------------'
  */
-#define _SYMB_LTHMB_RW1_                               INV_EX,   INV_QU
-#define _SYMB_LTHMB_RW2_      O_COMMENT, C_COMMENT, CHANGE_SYMB_TO_NUMB
+#define _SYMB_LTHMB_RW1_              O_COMMENT,           C_COMMENT
+#define _SYMB_LTHMB_RW2_      INV_EX,    INV_QU, CHANGE_SYMB_TO_NUMB
 
 #define      _SYMB_RTHMB_RW1_                                               MO(_POWR), EURO
 #define      _SYMB_RTHMB_RW2_                                               _______,   _______, _______
@@ -821,7 +825,8 @@ acronym dictionary
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // [_APPS]
-/* [_APPS] = LAYER 10 : APPLICATIONS LAYER
+#if defined(COMPREHENSIVE_30_LAYOUT)
+/* [_APPS] = LAYER 13 : APPLICATIONS LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |@@@@@@@@|        |        |        |        |        |        |        |        |        |@@@@@@@@|
  * | Simple | Twitter|Evernote|   App  |Terminal|        |  Typi  |  Uroom |Textedit|  Omni  | System |
@@ -844,13 +849,13 @@ acronym dictionary
 // [pending]
 */
 
-// #define __APPLICATS_L1__ APP_Q_SNOTE, APP_W_TWTTR, APP_E_EVERN, APP_R_APSTO, APP_T_TERMI
-// #define __APPLICATS_L2__ APP_A_SCRPT, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME
-// #define __APPLICATS_L3__ APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_KVIEW, APP_B_BOOKS
+#define __APPLICATS_L1__ APP_Q_SNOTE, APP_W_TWTTR, APP_E_EVERN, APP_R_APSTO, APP_T_TERMI
+#define __APPLICATS_L2__ APP_A_SCRPT, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME
+#define __APPLICATS_L3__ APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_KVIEW, APP_B_BOOKS
 
-// #define      __APPLICATS_R1__           APP_Y_TYPIN, APP_U_UROOM, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF
-// #define      __APPLICATS_R2__           APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, APPSP_EMPTY
-// #define      __APPLICATS_R3__           APP_N_NOTES, APP_M_MAIL,  APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB
+#define      __APPLICATS_R1__           APP_Y_TYPIN, APP_U_UROOM, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF
+#define      __APPLICATS_R2__           APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, APPSP_EMPTY
+#define      __APPLICATS_R3__           APP_N_NOTES, APP_M_MAIL,  APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB
 
 // #define __APPLICATS_L1__ _______, _______, _______, _______, _______
 // #define __APPLICATS_L2__ _______, _______, _______, _______, _______
@@ -873,10 +878,6 @@ acronym dictionary
  *                   |    &   |  app   | trigger|        |        |        |        |
  *                   |last app|        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
- * [FUTURE_IMPROVEMENT]
- *    direct prev app as in gherkin in LEFT_THUMB_1
- *    direct next app as in gherkin in LEFT_THUMB_2
- * [future_improvement]
  */
 // #define _APPS_LTHMB_RW1_                      _______,        _______
 // #define _APPS_LTHMB_RW2_             _______, _______, TH_L3_KAR_APPS
@@ -885,7 +886,7 @@ acronym dictionary
 // #define      _APPS_RTHMB_RW2_                                               _______,   _______, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
-// #endif
+#endif
 // END OF [_APPS] 10
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
@@ -1002,7 +1003,7 @@ acronym dictionary
 // RSFT_T(kc) <--- [BOOKMARK] [FIXME]
 //             SFT+ALT+CMD+ESC,    ALT+CMD+ESC,
 */
-#define ____POWER_L1____    XXXXXXX,       XXXXXXX,     TD(LCKLOG),    TD(HRESET),     XXXXXXX
+#define ____POWER_L1____    XXXXXXX,       XXXXXXX,     TD(LCKLOG),    TD(HRESET),    MY_CLEAR
 #define ____POWER_L2____    KC_RCTL, RALT_T(KC_F7), RGUI_T(KC_SPC), RSFT_T(KC_F9),    ZOOMSMTH
 #define ____POWER_L3____ TD(SLEP_M),   KILAPP_DOCK,    KILMNU_TOOL,   SHUTD_STATB, RSTRT_FLOAT
 
@@ -1030,7 +1031,7 @@ acronym dictionary
  * | @SLEEP |^KIL_APP|^KIL_MEN|^SHUTDWN|^RESTART|        |        |        |        |(Bght.1)|        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-#define ____POWER_L1____     TOG_ID,        STP_ID,     TD(LCKLOG),          TD(HRESET),  _______
+#define ____POWER_L1____     TOG_ID,        STP_ID,     TD(LCKLOG),          TD(HRESET), MY_CLEAR
 #define ____POWER_L2____    KC_RCTL, RALT_T(KC_F7), RGUI_T(KC_SPC),       RSFT_T(KC_F9), ZOOMSMTH
 #define ____POWER_L3____ TD(SLEP_M),        KA_DCK,         KM_TOL,/*SH_STA*/TD(SHUT_S),   RT_FLO
 

@@ -35,10 +35,53 @@ bool disabled_caps_before_accent = false;
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
+// void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
+
+//   SEND_STRING(SS_DOWN(X_CAPSLOCK));
+//   register_code(KC_LCAP);
+
+//   capslock_is_active = !capslock_is_active;
+
+// // [INFO]
+// // Note, that instead of unregister_code (KC_LCAP), ...
+// // ... we write unregister_code (KC_CAPS).
+// // This is the way it works that I found by the trial and error method.
+//   unregister_code(KC_CAPS); 
+// // [info] 
+
+//   SEND_STRING(SS_UP(X_CAPSLOCK));
+
+// } //  my capslock function  -  [f(capsl)] - my capslock finished function
+
+
+
+
 void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
 
   SEND_STRING(SS_DOWN(X_CAPSLOCK));
   register_code(KC_LCAP);
+
+// LIGHTS AND BREATH
+#if defined(BACKLIGHT_ENABLE)
+  if (capslock_is_active == false)
+  {
+    // capslock_is_active  = true;
+    gherkinBacklightLevelBeforeCapsLock = gherkinBacklightLevel;
+    gherkinBacklightLevel = BL_CAPS;
+
+    breathing_period_set(BR_CAPS);
+    breathing_enable();
+  }
+  else
+  {
+    // capslock_is_active  = false;
+    gherkinBacklightLevel = gherkinBacklightLevelBeforeCapsLock;
+
+    breathing_period_set(BR_DFLT);
+    breathing_disable();
+  }
+#endif //#if defined(BACKLIGHT_ENABLE)
+// lights and breath
 
   capslock_is_active = !capslock_is_active;
 
@@ -48,10 +91,10 @@ void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
 // This is the way it works that I found by the trial and error method.
   unregister_code(KC_CAPS); 
 // [info] 
-
   SEND_STRING(SS_UP(X_CAPSLOCK));
 
 } //  my capslock function  -  [f(capsl)] - my capslock finished function
+
 
 
 void disable_capslock_before_accents_function(void) { // MY CAPSLOCK FINISHED FUNCTION
@@ -64,7 +107,7 @@ void disable_capslock_before_accents_function(void) { // MY CAPSLOCK FINISHED FU
 } // my disable_capslock_before_accents_function
 
 void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTION
-  if (disabled_caps_before_accent == true)
+  if (disabled_caps_before_accent)
     {
       capslock_tap();
       disabled_caps_before_accent = false;
@@ -165,6 +208,18 @@ void xvim(char *key)
     SEND_STRING("x");
     send_string(key);
 }
+
+#if defined(COMPREHENSIVE_30_LAYOUT)
+void callApp(char *appName)
+{
+    register_code(KC_LGUI);   register_code (KC_SPC);
+    unregister_code (KC_SPC); unregister_code(KC_LGUI);
+    send_string  (appName); 
+    // next delay is for avoiding that SpotLight remains on screen without calling our app
+    _delay_ms(40); 
+    register_code (KC_ENT); unregister_code (KC_ENT);
+}
+#endif
 //////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -198,12 +253,12 @@ void remove_mod(uint8_t activated_mod)
 
 // bool triggered_control_mod(void)
 // {
-//   control_flag = get_mods()&CTRL_MODS;
-//   if (control_flag)
+//   ctl_mod = get_mods()&CTRL_MODS;
+//   if (ctl_mod)
 //   {
-//     remove_mod(control_flag);
-//     // del_mods     (control_flag);
-//     // del_weak_mods(control_flag);
+//     remove_mod(ctl_mod);
+//     // del_mods     (ctl_mod);
+//     // del_weak_mods(ctl_mod);
 //     // send_keyboard_report();
 //     return true;
 //   }
@@ -216,35 +271,31 @@ void remove_mod(uint8_t activated_mod)
 // {
 
 //   switch (mod) {
-//     case KC_C: control_flag = get_mods()&CTRL_MODS;
-//                if (control_flag)
+//     case KC_C: ctl_mod = get_mods()&CTRL_MODS;
+//                if (ctl_mod)
 //                {
-//                  current_flag = control_flag;
-//                  remove_mod(control_flag);
+//                  remove_mod(ctl_mod);
 //                  return true;
 //                }
 //                return false;
-//     case KC_A: option_flag  = get_mods()&ALT_MODS;
-//                if (option_flag)
+//     case KC_A: alt_mod  = get_mods()&ALT_MODS;
+//                if (alt_mod)
 //                {
-//                  current_flag = option_flag;
-//                  remove_mod(option_flag);
+//                  remove_mod(alt_mod);
 //                  return true;
 //                }
 //                return false;
-//     case KC_G: gui_flag     = get_mods()&GUI_MODS;
-//                if (gui_flag)
+//     case KC_G: gui_mod     = get_mods()&GUI_MODS;
+//                if (gui_mod)
 //                {
-//                  current_flag = gui_flag;
-//                  remove_mod(gui_flag);
+//                  remove_mod(gui_mod);
 //                  return true;
 //                }
 //                return false;
-//     case KC_S: shift_flag   = get_mods()&SHFT_MODS;
-//                if (shift_flag)
+//     case KC_S: sft_mod   = get_mods()&SHFT_MODS;
+//                if (sft_mod)
 //                {
-//                  current_flag = shift_flag;
-//                  remove_mod(shift_flag);
+//                  remove_mod(sft_mod);
 //                  return true;
 //                }
 //                return false;
@@ -263,47 +314,43 @@ void remove_mod(uint8_t activated_mod)
 bool /*triggered_mod*/ check_mod_and_remove_it(uint8_t mod, bool remove_it)
 {
   switch (mod) {
-    case CTRL_MODS: control_flag = get_mods()&CTRL_MODS;
-                    if (control_flag)
+    case CTRL_MODS: ctl_mod = get_mods()&CTRL_MODS;
+                    if (ctl_mod)
                     {
                       if (remove_it)
                       {
-                        remove_mod(control_flag);
+                        remove_mod(ctl_mod);
                       }
-                      // current_flag = control_flag;
                       return true;
                     }
                     return false;
-    case ALT_MODS: option_flag  = get_mods()&ALT_MODS;
-                   if (option_flag)
+    case ALT_MODS: alt_mod  = get_mods()&ALT_MODS;
+                   if (alt_mod)
                    {
                     if (remove_it)
                     {
-                     remove_mod(option_flag);
+                     remove_mod(alt_mod);
                     }
-                     // current_flag = option_flag;
                      return true;
                    }
                    return false;
-    case GUI_MODS: gui_flag     = get_mods()&GUI_MODS;
-                   if (gui_flag)
+    case GUI_MODS: gui_mod     = get_mods()&GUI_MODS;
+                   if (gui_mod)
                    {
                     if (remove_it)
                     {
-                     remove_mod(gui_flag);
+                     remove_mod(gui_mod);
                     }
-                     // current_flag = gui_flag;
                      return true;
                    }
                    return false;
-    case SHFT_MODS: shift_flag   = get_mods()&SHFT_MODS;
-                    if (shift_flag)
+    case SHFT_MODS: sft_mod   = get_mods()&SHFT_MODS;
+                    if (sft_mod)
                     {
                       if (remove_it)
                       {
-                      remove_mod(shift_flag);
+                      remove_mod(sft_mod);
                       }
-                      // current_flag = shift_flag;
                       return true;
                     }
                     return false;
@@ -312,7 +359,7 @@ bool /*triggered_mod*/ check_mod_and_remove_it(uint8_t mod, bool remove_it)
 } // bool check_mod_and_remove_it(uint16_t mod, bool remove_it)
 /*****************************************************************************************************/
 
-void write_app_name(uint16_t keycode)
+void write_app_name(uint8_t keycode)
 {
           register_code (KC_LGUI);
                tap_code (KC_SPC);
@@ -326,7 +373,7 @@ void write_app_name(uint16_t keycode)
 
 
 
-void call_app_with_keycode(uint16_t keycode) //keycode is already filtered with '& 0xFF' in the calling
+void call_app_with_keycode(uint8_t keycode) //keycode is already filtered with '& 0xFF' in the calling
 {
   switch(keycode)
   {
@@ -499,6 +546,7 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 
   // waiting_for_success();
 
+
 #if defined(RGBLIGHT_ENABLE)
   rgblight_enable_noeeprom(); // switch on LEDs to allow us seeing the reset LEDs flashing
 #elif defined(BACKLIGHT_ENABLE)
@@ -506,11 +554,14 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 #endif
   // waiting_for_success();
 
+
 #if defined(RGBLIGHT_ENABLE)
-  flashing_RGB_LEDs(6, RGB_MY_WHITE, RGB_MY_RED);
+  flashing_RGB_LEDs(5, RGB_MY_WHITE, RGB_MY_RED);
 #elif defined(BACKLIGHT_ENABLE)
   flashing_BCK_LEDs(5, BL_RESE, BL_MIN);
 #endif
+
+
 
   reset_keyboard();
 }
@@ -521,4 +572,28 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 //                                                                                      //
 // reset my keyboard function                                                           //
 //////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

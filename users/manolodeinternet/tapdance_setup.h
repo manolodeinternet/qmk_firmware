@@ -1,6 +1,7 @@
 #pragma once
-// #include QMK_KEYBOARD_H
 #include "manolodeinternet.h"
+#include "comprehensive_30_layout_manolodeinternet.h"
+#include "backlight_manolodeinternet.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -86,7 +87,6 @@ enum tap_dance_keycodes {
     // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
     ,KILM_T   //   dock bar / (on hold) KILL MENU
     ,KILA_D   //  tools bar / (on hold) KILL CURRENT APP
-    ,SHUT_S   // status bar / (on hold) COMPUTER SHUT DOWN
     ,RSTT_F   // floating w / (on hold) COMPUTER   RESTART
     /*
     ,RC_RWND // right control / rewind       // KC_F7

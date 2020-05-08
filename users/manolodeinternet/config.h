@@ -11,38 +11,37 @@
 // 3) keyboards/keyboard_name/keymaps/keymap_name/config.h
 //
 
-// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
- * `WAKING UP MY COMPUTER`
+WAKING UP MY COMPUTER
      Forces the keyboard to wait for a USB connection to be established before it starts up
      It must be flashed on master side, but no on slave side for a right wake up !!!
 
- * `NO_USB_STARTUP_CHECK`  We don't need this command !!!
-     Disables usb suspend check after keyboard startup. Usually the keyboard waits for the host to wake it up before any tasks are performed. This is useful for split keyboards as one half will not get a wakeup call but must send commands to the master.
+ * #define SPLIT_USB_DETECT
+ 
+ * #define NO_USB_STARTUP_CHECK // ??? alone or with WAIT_FOR_USB together ???
+     We don't need this command !!!
+     Disables usb suspend check after keyboard startup. Usually the keyboard waits for the host to wake
+     it up before any tasks are performed. This is useful for split keyboards as one half will not get 
+     a wakeup call but must send commands to the master.
  */
 #define WAIT_FOR_USB         // for wake up computer typing on the keyboard
                                 // -$50 bytes (using it, we save 50 bytes)
                                 // if we don't use it, we have 50 bytes less.
-// #define NO_USB_STARTUP_CHECK // ??? alone or with WAIT_FOR_USB together ???
 //
-// //////////////////////////////////////////////////////////////////////////////////////////////////////
-// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // #define PREVENT_STUCK_MODIFIERS
 
-// //////////////////////////////////////////////////////////////////////////////////////////////////////
-// //////////////////////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Enable this in case KC_LCAP were not recognized instead of KC_CAPS
 /*
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE
 */
-
-// //////////////////////////////////////////////////////////////////////////////////////////////////////
-// //////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 
@@ -92,7 +91,7 @@
 
     If this whole process consumes more time than the full TAPPING_TERM,
     it will outputs the second key, already modded
-
+  
     If you finish typing all keys within the TAPPING_TERM,
     it will returns the two keys, but unmodified
 
@@ -143,19 +142,62 @@ https://docs.qmk.fm/#/feature_advanced_keycodes?id=tapping-force-hold
 // THE REST OF THE FILE IS ABOUT MOUSE CONFIGURATION !!!
 
 //Mousekeys Settings 0 16 7 60 0 ? ?
-#define MOUSEKEY_DELAY 60
+/*
 #define MOUSEKEY_INTERVAL 50
-#define MOUSEKEY_MAX_SPEED 8
 #define MOUSEKEY_TIME_TO_MAX 40
+#define MOUSEKEY_DELAY 60
 
-
-// NO SIRVE PARA NADA, NO EXISTE, CREO !    #define MOUSEKEY_WHEEL_DELAY 500
-// NO SIRVE PARA NADA, NO EXISTE, CREO !    #define MOUSEKEY_WHEEL_INTERVAL 220
 #define MOUSEKEY_WHEEL_DELAY 100
 #define MOUSEKEY_WHEEL_INTERVAL 100
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 200  // max. value: 255
+
+#define       MOUSEKEY_MAX_SPEED 8
+#define MOUSEKEY_WHEEL_MAX_SPEED 2
+*/
+
+/*
+[@PIERRECHEVALIER83]
+
+// @pierrechevalier83 from Discord/splitkb.com
+// Set the mouse settings to a comfortable speed/accuracy trade-off
+// Assume the screen refresh rate is 60 Htz or higher
+// The default is 50. This makes the mouse ~3 times faster and more accurate
+#define MOUSEKEY_INTERVAL 16
+// The default is 20. Since we made the mouse about 3 times faster with the previous setting,
+// give it more time to accelerate to max speed to retain precise control over short distances.
+#define MOUSEKEY_TIME_TO_MAX 40
+// The default is 300. Let's try and make this as low as possible while keeping the cursor responsive
+#define MOUSEKEY_DELAY 100
+// It makes sense to use the same delay for the mouseweel
+#define MOUSEKEY_WHEEL_DELAY 100
+// The default is 100
+#define MOUSEKEY_WHEEL_INTERVAL 50
+// The default is 40
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 100
+
+[@pierrechevalier83]
+*/
+
+// @pierrechevalier83 from Discord/splitkb.com
+// Set the mouse settings to a comfortable speed/accuracy trade-off
+// Assume the screen refresh rate is 60 Htz or higher
+// The default is 50. This makes the mouse ~3 times faster and more accurate
+#define MOUSEKEY_INTERVAL 16
+// The default is 20. Since we made the mouse about 3 times faster with the previous setting,
+// give it more time to accelerate to max speed to retain precise control over short distances.
+#define MOUSEKEY_TIME_TO_MAX 140
+// The default is 300. Let's try and make this as low as possible while keeping the cursor responsive
+#define MOUSEKEY_DELAY 100
+// It makes sense to use the same delay for the mouseweel
+#define MOUSEKEY_WHEEL_DELAY 100
+// The default is 100
+#define MOUSEKEY_WHEEL_INTERVAL 100
+// The default is 40
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 200
 
 #define MOUSEKEY_WHEEL_MAX_SPEED 2
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 200  // max. value: 255
+#define       MOUSEKEY_MAX_SPEED 8
+
 
 /*
 I have modified `/Users/navarro/qmk_firmware/tmk_core/common/mousekey.c`, 
