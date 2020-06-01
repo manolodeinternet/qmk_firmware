@@ -77,8 +77,9 @@ CUSTOM_MATRIX    = yes
 
 LAYOUTS          = ortho_6x12
 
+# LINK_TIME_OPTIMIZATION_ENABLE = yes
 
-SIMPLE_30 = yes
+SIMPLE_30 = yes  # This is necessary for compiling MINI_DACTYL
 
 
 

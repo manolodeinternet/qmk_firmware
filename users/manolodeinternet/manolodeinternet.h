@@ -20,6 +20,27 @@
     #include "comprehensive_30_layout_manolodeinternet.h"
 #endif
 
+#if defined(MINI_DACTYL_THUMBS)
+    #include "process_record_keymap.h"
+#endif
+
+
+#include "tapdance_setup.h"
+
+// this previous line doesn't allow compile, because it appears the error: 
+/* Compiling: users/manolodeinternet/tapdance_setup.c                                                 In file included from users/manolodeinternet/tapdance_setup.c:2:
+users/manolodeinternet/tapdance_setup.h:9:8: error: nested redefinition of 'enum tap_dance_states'
+   enum tap_dance_states { // EACH ONE RECEIVE ITS VALUE...
+        ^~~~~~~~~~~~~~~~
+users/manolodeinternet/tapdance_setup.h:9:8: error: redeclaration of 'enum tap_dance_states'
+In file included from users/manolodeinternet/manolodeinternet.h:23,
+                 from users/manolodeinternet/tapdance_setup.h:2,
+                 from users/manolodeinternet/tapdance_setup.c:2:
+users/manolodeinternet/tapdance_setup.h:9:8: note: originally defined here
+   enum tap_dance_states { // EACH ONE RECEIVE ITS VALUE...
+        ^~~~~~~~~~~~~~~~ */
+
+#include "fn_actions.h"
 
 #include "tapdance_setup.h"
 
@@ -225,6 +246,9 @@ void fvim(char *key);
 void dvim(char *key);
 void cvim(char *key);
 void xvim(char *key);
+#if defined(COMPREHENSIVE_30_LAYOUT)
+void callApp(char *appName);
+#endif
 //
 //                                                                                      //
 // [functions] [_fvim], [_dvim], [_cvim],     [_xvim],     [_zvim]     & [_apps]        //
@@ -257,8 +281,8 @@ void remove_mod(uint8_t activated_mod);
 // bool triggered_mod(uint8_t mod);
 bool check_mod_and_remove_it(uint8_t mod, bool remove_it);
 
-void write_app_name(uint16_t keycode);
-void call_app_with_keycode(uint16_t keycode);
+void write_app_name(uint8_t keycode);
+void call_app_with_keycode(uint8_t keycode);
 
 
 //////////////////////////////////////////////////////////////////////////////////////////

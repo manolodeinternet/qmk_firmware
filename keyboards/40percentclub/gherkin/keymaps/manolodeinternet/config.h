@@ -11,7 +11,7 @@
 #define QMK_LED B0
 
 //Tap Dance Prerequisite
-// #define TAPPING_TERM 200
+// #define TAPPING_TERM 150 //200
 
 // //////////////////////////////////////////////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,9 +66,9 @@
 // You have to uncomment one of these two lines:
 //
 /* 1: */ 
-// #define DEFAULT_TYPINATOR_APPS
+#define DEFAULT_TYPINATOR_APPS
 /* 2: */
-#define DEFAULT_KARABINER_APPS
+// #define DEFAULT_KARABINER_APPS
 //
 // define apps_triggers
 //

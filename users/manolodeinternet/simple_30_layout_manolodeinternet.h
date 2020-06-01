@@ -16,6 +16,8 @@ bool multi_apps;
 bool apps_just_activated;
 bool changing_apps;
       
+   bool keymap_bool;
+    bool case_found;
 
 // specific variables for mini dactyl
 

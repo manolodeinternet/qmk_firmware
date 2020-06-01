@@ -8,6 +8,7 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
+// __attribute__((weak))
 
 const uint16_t PROGMEM fn_actions[] = {
   [ACC_A] = ACTION_FUNCTION(ACC_A),
@@ -21,8 +22,6 @@ const uint16_t PROGMEM fn_actions[] = {
   [CAPSL] = ACTION_FUNCTION(CAPSL)
 };
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
   sft_mod = get_mods()&SHFT_MODS;

@@ -179,15 +179,15 @@ void avim(char *key)
 //     send_string(key);
 // }
 
-void callApp(char *appName)
-{
-    register_code(KC_LGUI);   register_code (KC_SPC);
-    unregister_code (KC_SPC); unregister_code(KC_LGUI);
-    send_string  (appName); 
-    // next delay is for avoiding that SpotLight remains on screen without calling our app
-    _delay_ms(40); 
-    register_code (KC_ENT); unregister_code (KC_ENT);
-}  
+// void callApp(char *appName)
+// {
+//     register_code(KC_LGUI);   register_code (KC_SPC);
+//     unregister_code (KC_SPC); unregister_code(KC_LGUI);
+//     send_string  (appName); 
+//     // next delay is for avoiding that SpotLight remains on screen without calling our app
+//     _delay_ms(40); 
+//     register_code (KC_ENT); unregister_code (KC_ENT);
+// }  
 //                                                                                      //
 // [functions] [_fvim],     [_xvim], [_dvim] &      [_apps]                             //
 //           kc_v,kc_m; kc_c,kc_esc;   kc_x;   kc_q & kc_p;                             //
@@ -2476,7 +2476,6 @@ void matrix_init_user(void) {
 // /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 
-
 // void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
 //   sft_mod = get_mods()&SHFT_MODS;
 //   switch (id) {
@@ -2830,202 +2829,202 @@ void matrix_init_user(void) {
 /*                                                                                                     */
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed)
-  {
-    switch(keycode)
-    {
-      case CIRCU:    circumflex_requested = true; return false; break; // requested circumflex accent
-      case GRAVE:    grave_requested      = true; return false; break; // requested grave      accent
-      case DIAER:    diaeresis_requested  = true; return false; break; // requested diaeresis  accent
-      case VOL_1:    volumeSetToLevel(1);         return false; break; // set volume to minimum (level 1)
-      case VOL_8:    volumeSetToLevel(8);         return false; break; // set volume to middle  (level 8)
-      case BRIGHT_1: brightSetToLevel(1);         return false; break; // set bright to minimum (level 1)
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//   if (record->event.pressed)
+//   {
+//     switch(keycode)
+//     {
+//       case CIRCU:    circumflex_requested = true; return false; break; // requested circumflex accent
+//       case GRAVE:    grave_requested      = true; return false; break; // requested grave      accent
+//       case DIAER:    diaeresis_requested  = true; return false; break; // requested diaeresis  accent
+//       case VOL_1:    volumeSetToLevel(1);         return false; break; // set volume to minimum (level 1)
+//       case VOL_8:    volumeSetToLevel(8);         return false; break; // set volume to middle  (level 8)
+//       case BRIGHT_1: brightSetToLevel(1);         return false; break; // set bright to minimum (level 1)
 
-      case APP_Q_SNOTE: callApp("Simplenote.app");            return false; break; // simple note
-      case APP_W_TWTTR: callApp("Twitter.app");               return false; break; // t W itter
-      case APP_E_EVERN: callApp("Evernote.app");              return false; break; // E vernote
-      case APP_R_APSTO: callApp("App Store.app");             return false; break; // app sto R e
-      case APP_T_TERMI: callApp("Terminal.app");              return false; break; // T erminal
+//       case APP_Q_SNOTE: callApp("Simplenote.app");            return false; break; // simple note
+//       case APP_W_TWTTR: callApp("Twitter.app");               return false; break; // t W itter
+//       case APP_E_EVERN: callApp("Evernote.app");              return false; break; // E vernote
+//       case APP_R_APSTO: callApp("App Store.app");             return false; break; // app sto R e
+//       case APP_T_TERMI: callApp("Terminal.app");              return false; break; // T erminal
 
-      case APP_Y_TYPIN: callApp("Typinator.app");             return false; break; // t Y pinator
-      case APP_U_UROOM: callApp("URoom.app");                 return false; break; // U room
-      case APP_I_TEDIT: callApp("TextEdit.app");              return false; break; // textEd I t
-      case APP_O_OMNIF: callApp("OmniFocus.app");             return false; break; // O mnifocus
-      case APP_P_SPREF: callApp("System Preferences.app");    return false; break; // system P references
+//       case APP_Y_TYPIN: callApp("Typinator.app");             return false; break; // t Y pinator
+//       case APP_U_UROOM: callApp("URoom.app");                 return false; break; // U room
+//       case APP_I_TEDIT: callApp("TextEdit.app");              return false; break; // textEd I t
+//       case APP_O_OMNIF: callApp("OmniFocus.app");             return false; break; // O mnifocus
+//       case APP_P_SPREF: callApp("System Preferences.app");    return false; break; // system P references
 
-      case APP_A_SCRPT: callApp("Script Editor.app");         return false; break; // A pple script
-      case APP_S_SAFAR: callApp("Safari.app");                return false; break; // S afari _delay_ms50
-      case APP_D_D_ONE: callApp("Day One Classic.app");       return false; break; // D ay one Classic
-      case APP_F_FINDE: callApp("Finder.app");                return false; break; // F inder
-      case APP_G_CHRME: callApp("Google Chrome.app");         return false; break; // G oogle chrome
+//       case APP_A_SCRPT: callApp("Script Editor.app");         return false; break; // A pple script
+//       case APP_S_SAFAR: callApp("Safari.app");                return false; break; // S afari _delay_ms50
+//       case APP_D_D_ONE: callApp("Day One Classic.app");       return false; break; // D ay one Classic
+//       case APP_F_FINDE: callApp("Finder.app");                return false; break; // F inder
+//       case APP_G_CHRME: callApp("Google Chrome.app");         return false; break; // G oogle chrome
 
-      case APP_H_SKTCH: callApp("Sketch.app");                return false; break; // sketc H
-      case APP_J_SUBLI: callApp("Sublime Text.app");          return false; break; // s U blime Text
-      case APP_K_KRBNR: callApp("Karabiner-Elements.app");    return false; break; // K arabiner Elements
-      case APP_L_CLNDR: callApp("Calendar.app");              return false; break; // Calendar
-      case APPSP_EMPTY: callApp("");                          return false; break; //
+//       case APP_H_SKTCH: callApp("Sketch.app");                return false; break; // sketc H
+//       case APP_J_SUBLI: callApp("Sublime Text.app");          return false; break; // s U blime Text
+//       case APP_K_KRBNR: callApp("Karabiner-Elements.app");    return false; break; // K arabiner Elements
+//       case APP_L_CLNDR: callApp("Calendar.app");              return false; break; // Calendar
+//       case APPSP_EMPTY: callApp("");                          return false; break; //
 
-      case APP_Z_STUDI: callApp("Studies.app");               return false; break; // Studies
-      case APP_X_XCODE: callApp("Xcode.app");                 return false; break; // Xcode
-      case APP_C_CALCU: callApp("Calculator.app");            return false; break; // Calculator
-      case APP_V_KVIEW: callApp("Karabiner-EventViewer.app"); return false; break; // krbnr eVent Viewr
-      case APP_B_BOOKS: callApp("Books.app");                 return false; break; // Books
+//       case APP_Z_STUDI: callApp("Studies.app");               return false; break; // Studies
+//       case APP_X_XCODE: callApp("Xcode.app");                 return false; break; // Xcode
+//       case APP_C_CALCU: callApp("Calculator.app");            return false; break; // Calculator
+//       case APP_V_KVIEW: callApp("Karabiner-EventViewer.app"); return false; break; // krbnr eVent Viewr
+//       case APP_B_BOOKS: callApp("Books.app");                 return false; break; // Books
 
-      case APP_N_NOTES: callApp("Notes.app");                 return false; break;  // Notes
-   // Next 2 lines have been copied & pasted from a command line C program in xcode who run perfectly !
-   // Any of them works properly for opening an app from Terminal !  But they don' work under QMK code !
-   //   system("open //Applications//Notes.app");
-   //   system("osascript -e 'launch application \"Notes\"' -e 'activate application \"Notes\"' -e end");
-      case APP_M_MAIL:  callApp("Mail");                      return false; break; // Mail
-      case APP_ES_KEYN: callApp("Keynote");                   return false; break; // Keynote
-      case APP_BS_PAGE: callApp("Pages");                     return false; break; // Pages
-      case APP_EN_NUMB: callApp("Numbers");                   return false; break; // Numbers
+//       case APP_N_NOTES: callApp("Notes.app");                 return false; break;  // Notes
+//    // Next 2 lines have been copied & pasted from a command line C program in xcode who run perfectly !
+//    // Any of them works properly for opening an app from Terminal !  But they don' work under QMK code !
+//    //   system("open //Applications//Notes.app");
+//    //   system("osascript -e 'launch application \"Notes\"' -e 'activate application \"Notes\"' -e end");
+//       case APP_M_MAIL:  callApp("Mail");                      return false; break; // Mail
+//       case APP_ES_KEYN: callApp("Keynote");                   return false; break; // Keynote
+//       case APP_BS_PAGE: callApp("Pages");                     return false; break; // Pages
+//       case APP_EN_NUMB: callApp("Numbers");                   return false; break; // Numbers
 
-   // _FVIM
-   // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
-   // ... except for the 'H' key:
-      case FVIM_H: fvim("h");  return false; break;
-   // _fvim
+//    // _FVIM
+//    // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
+//    // ... except for the 'H' key:
+//       case FVIM_H: fvim("h");  return false; break;
+//    // _fvim
 
-// [INFO]
-/*
-* [#ref] Escape sequences in C
-* wikipedia link: 
-* https://en.wikipedia.org/wiki/Escape_sequences_in_C        
+// // [INFO]
+// /*
+// * [#ref] Escape sequences in C
+// * wikipedia link: 
+// * https://en.wikipedia.org/wiki/Escape_sequences_in_C        
 
-* \e  \x001B  
-* register_code (KC_ESC); unregister_code (KC_ESC); } break;
-* case FVIM_ES:if (record->event.pressed) { fvim("\e"); } break;
+// * \e  \x001B  
+// * register_code (KC_ESC); unregister_code (KC_ESC); } break;
+// * case FVIM_ES:if (record->event.pressed) { fvim("\e"); } break;
 
-* \b  \x0008
-* register_code(KC_BSPC); unregister_code(KC_BSPC); } break;   
-* case FVIM_BS:if (record->event.pressed) { fvim("\b"); } break;
+// * \b  \x0008
+// * register_code(KC_BSPC); unregister_code(KC_BSPC); } break;   
+// * case FVIM_BS:if (record->event.pressed) { fvim("\b"); } break;
 
-* \n  \x000A      new line
-* register_code (KC_ENT); unregister_code (KC_ENT); } break; 
-* \r  \x000D      carriage return
-      case FVIM_EN:if (record->event.pressed) { fvim("\n"); } break;
-*/
-// [info]
+// * \n  \x000A      new line
+// * register_code (KC_ENT); unregister_code (KC_ENT); } break; 
+// * \r  \x000D      carriage return
+//       case FVIM_EN:if (record->event.pressed) { fvim("\n"); } break;
+// */
+// // [info]
 
-// _DVIM
-      case DVIM_Y: dvim("y");  return false; break;
-      //   DVIM_uU is tap_dance
-      case DVIM_I: dvim("i");  return false; break;
-      case DVIM_O: dvim("o");  return false; break;
-      //   DVIM_pP is tap_dance
+// // _DVIM
+//       case DVIM_Y: dvim("y");  return false; break;
+//       //   DVIM_uU is tap_dance
+//       case DVIM_I: dvim("i");  return false; break;
+//       case DVIM_O: dvim("o");  return false; break;
+//       //   DVIM_pP is tap_dance
 
-      case DVIM_H: dvim("h");  return false; break;
-      case DVIM_J: dvim("j");  return false; break;
-      case DVIM_K: dvim("k");  return false; break;
-      case DVIM_L: dvim("l");  return false; break;
-      case DVIM_SP:dvim(" ");  return false; break;
+//       case DVIM_H: dvim("h");  return false; break;
+//       case DVIM_J: dvim("j");  return false; break;
+//       case DVIM_K: dvim("k");  return false; break;
+//       case DVIM_L: dvim("l");  return false; break;
+//       case DVIM_SP:dvim(" ");  return false; break;
 
-      case DVIM_M: dvim("m");  return false; break;
-      case DVIM_ES:dvim("\e"); return false; break;
-      case DVIM_BS:dvim("\b"); return false; break;
-      case DVIM_EN:dvim("\n"); return false; break;
+//       case DVIM_M: dvim("m");  return false; break;
+//       case DVIM_ES:dvim("\e"); return false; break;
+//       case DVIM_BS:dvim("\b"); return false; break;
+//       case DVIM_EN:dvim("\n"); return false; break;
 
-// select _AVIM
-//            case AVIM_Y: avim("y");  return false; break;
-//            case AVIM_N: avim("n");  return false; break;
-// the rest of the keys are combination of _FVIM + SHIFT key            
+// // select _AVIM
+// //            case AVIM_Y: avim("y");  return false; break;
+// //            case AVIM_N: avim("n");  return false; break;
+// // the rest of the keys are combination of _FVIM + SHIFT key            
 
-//
-// _XVIM LAYER
-//
-// Initially _CVIM and _XVIM were two different layers...
-// ... Now we have _CVIM on the right hand and _XVIM on the left hand. Both of them under _XVIM layer.
-// _CVIM
-      case CVIM_Y: cvim("y");  return false; break;
-      case CVIM_U: cvim("u");  return false; break;
-      case CVIM_I: cvim("i");  return false; break;
-      case CVIM_O: cvim("o");  return false; break;
-      case CVIM_P: cvim("p");  return false; break;
+// //
+// // _XVIM LAYER
+// //
+// // Initially _CVIM and _XVIM were two different layers...
+// // ... Now we have _CVIM on the right hand and _XVIM on the left hand. Both of them under _XVIM layer.
+// // _CVIM
+//       case CVIM_Y: cvim("y");  return false; break;
+//       case CVIM_U: cvim("u");  return false; break;
+//       case CVIM_I: cvim("i");  return false; break;
+//       case CVIM_O: cvim("o");  return false; break;
+//       case CVIM_P: cvim("p");  return false; break;
 
-      case CVIM_H: cvim("h");  return false; break;
-      case CVIM_J: cvim("j");  return false; break;
-      case CVIM_K: cvim("k");  return false; break;
-      case CVIM_L: cvim("l");  return false; break;
-      case CVIM_SP:cvim(" ");  return false; break;
+//       case CVIM_H: cvim("h");  return false; break;
+//       case CVIM_J: cvim("j");  return false; break;
+//       case CVIM_K: cvim("k");  return false; break;
+//       case CVIM_L: cvim("l");  return false; break;
+//       case CVIM_SP:cvim(" ");  return false; break;
 
-      case CVIM_N: cvim("n");  return false; break;
-      case CVIM_M: cvim("m");  return false; break;
-      case CVIM_ES:cvim("\e"); return false; break;
-      case CVIM_BS:cvim("\b"); return false; break;
-      case CVIM_EN:cvim("\n"); return false; break;                        
-// _XVIM
-      case XVIM_Y: xvim("y");  return false; break;
-      case XVIM_U: xvim("u");  return false; break;
-      case XVIM_I: xvim("i");  return false; break;
-      case XVIM_O: xvim("o");  return false; break;
-      case XVIM_P: xvim("p");  return false; break;
+//       case CVIM_N: cvim("n");  return false; break;
+//       case CVIM_M: cvim("m");  return false; break;
+//       case CVIM_ES:cvim("\e"); return false; break;
+//       case CVIM_BS:cvim("\b"); return false; break;
+//       case CVIM_EN:cvim("\n"); return false; break;                        
+// // _XVIM
+//       case XVIM_Y: xvim("y");  return false; break;
+//       case XVIM_U: xvim("u");  return false; break;
+//       case XVIM_I: xvim("i");  return false; break;
+//       case XVIM_O: xvim("o");  return false; break;
+//       case XVIM_P: xvim("p");  return false; break;
 
-      case XVIM_H: xvim("h");  return false; break;
-      case XVIM_J: xvim("j");  return false; break;
-      case XVIM_K: xvim("k");  return false; break;
-      case XVIM_L: xvim("l");  return false; break;
-      case XVIM_SP:xvim(" ");  return false; break;
+//       case XVIM_H: xvim("h");  return false; break;
+//       case XVIM_J: xvim("j");  return false; break;
+//       case XVIM_K: xvim("k");  return false; break;
+//       case XVIM_L: xvim("l");  return false; break;
+//       case XVIM_SP:xvim(" ");  return false; break;
 
-      case XVIM_N:  xvim("n");  return false; break;
-      case XVIM_M:  xvim("m");  return false; break;
-      case XVIM_ES: xvim("\e"); return false; break;
-      case XVIM_BS: xvim("\b"); return false; break;
-      case XVIM_EN: xvim("\n"); return false; break;
+//       case XVIM_N:  xvim("n");  return false; break;
+//       case XVIM_M:  xvim("m");  return false; break;
+//       case XVIM_ES: xvim("\e"); return false; break;
+//       case XVIM_BS: xvim("\b"); return false; break;
+//       case XVIM_EN: xvim("\n"); return false; break;
 
-      case DICTATION:
-        register_code(KC_RGUI); unregister_code(KC_RGUI);
-        register_code(KC_RGUI); unregister_code(KC_RGUI);
-        return false; break;
+//       case DICTATION:
+//         register_code(KC_RGUI); unregister_code(KC_RGUI);
+//         register_code(KC_RGUI); unregister_code(KC_RGUI);
+//         return false; break;
 
-      case BLIT_OFF: gherkinBacklightLevel =  0; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_01:  gherkinBacklightLevel =  1; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_02:  gherkinBacklightLevel =  2; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_03:  gherkinBacklightLevel =  3; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_04:  gherkinBacklightLevel =  4; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_05:  gherkinBacklightLevel =  5; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_OFF: gherkinBacklightLevel =  0; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_01:  gherkinBacklightLevel =  1; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_02:  gherkinBacklightLevel =  2; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_03:  gherkinBacklightLevel =  3; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_04:  gherkinBacklightLevel =  4; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_05:  gherkinBacklightLevel =  5; backlight_level(gherkinBacklightLevel); return false;
 
-      case BLIT_06:  gherkinBacklightLevel =  6; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_07:  gherkinBacklightLevel =  7; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_08:  gherkinBacklightLevel =  8; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_09:  gherkinBacklightLevel =  9; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_10:  gherkinBacklightLevel = 10; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_06:  gherkinBacklightLevel =  6; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_07:  gherkinBacklightLevel =  7; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_08:  gherkinBacklightLevel =  8; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_09:  gherkinBacklightLevel =  9; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_10:  gherkinBacklightLevel = 10; backlight_level(gherkinBacklightLevel); return false;
 
-      case BLIT_11:  gherkinBacklightLevel = 11; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_12:  gherkinBacklightLevel = 12; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_13:  gherkinBacklightLevel = 13; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_14:  gherkinBacklightLevel = 14; backlight_level(gherkinBacklightLevel); return false;
-      case BLIT_15:  gherkinBacklightLevel = 15; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_11:  gherkinBacklightLevel = 11; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_12:  gherkinBacklightLevel = 12; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_13:  gherkinBacklightLevel = 13; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_14:  gherkinBacklightLevel = 14; backlight_level(gherkinBacklightLevel); return false;
+//       case BLIT_15:  gherkinBacklightLevel = 15; backlight_level(gherkinBacklightLevel); return false;
 
-      case BRTH_01:  breathing_period_set(1); breathing_enable();  return false;
-      case BRTH_02:  breathing_period_set(2); breathing_enable();  return false;
-      case BRTH_03:  breathing_period_set(3); breathing_enable();  return false;
-      case BRTH_04:  breathing_period_set(4); breathing_enable();  return false;
-      case BRTH_05:  breathing_period_set(5); breathing_enable();  return false;
-      case BRTH_06:  breathing_period_set(6); breathing_enable();  return false;
-      case BRTH_07:  breathing_period_set(7); breathing_enable();  return false;
+//       case BRTH_01:  breathing_period_set(1); breathing_enable();  return false;
+//       case BRTH_02:  breathing_period_set(2); breathing_enable();  return false;
+//       case BRTH_03:  breathing_period_set(3); breathing_enable();  return false;
+//       case BRTH_04:  breathing_period_set(4); breathing_enable();  return false;
+//       case BRTH_05:  breathing_period_set(5); breathing_enable();  return false;
+//       case BRTH_06:  breathing_period_set(6); breathing_enable();  return false;
+//       case BRTH_07:  breathing_period_set(7); breathing_enable();  return false;
 
-      case BRTH_12:  breathing_period_set(12); breathing_enable(); return false;
-      case BRTH_15:  breathing_period_set(15); breathing_enable(); return false;
+//       case BRTH_12:  breathing_period_set(12); breathing_enable(); return false;
+//       case BRTH_15:  breathing_period_set(15); breathing_enable(); return false;
 
-      default: return true; 
-    }
-  }
-//^^if (record->event.pressed)^^
-  else 
-  {
-    switch(keycode)
-    {
-      case CIRCU: circumflex_requested = false; return false; break; // non-requested circumflex accent
-      case GRAVE: grave_requested      = false; return false; break; // non-requested grave      accent
-      case DIAER: diaeresis_requested  = false; return false; break; // non-requested diaeresis  accent
+//       default: return true; 
+//     }
+//   }
+// //^^if (record->event.pressed)^^
+//   else 
+//   {
+//     switch(keycode)
+//     {
+//       case CIRCU: circumflex_requested = false; return false; break; // non-requested circumflex accent
+//       case GRAVE: grave_requested      = false; return false; break; // non-requested grave      accent
+//       case DIAER: diaeresis_requested  = false; return false; break; // non-requested diaeresis  accent
 
-   // this line is responsible of the management of the releases for THE REST of the keys.
-      default:                                  return true;  break;
-    }
-  }
-}
+//    // this line is responsible of the management of the releases for THE REST of the keys.
+//       default:                                  return true;  break;
+//     }
+//   }
+// }
 //                                                                                      //
 //                                                                                      //
 //                                  m  a  c  r   o  s                                   //
