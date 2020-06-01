@@ -1,5 +1,7 @@
 #pragma once
 #include "manolodeinternet.h"
+#include "comprehensive_30_layout_manolodeinternet.h"
+#include "backlight_manolodeinternet.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //

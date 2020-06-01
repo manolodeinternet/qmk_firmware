@@ -132,7 +132,19 @@
 
 // We need ACTION_ONESHOT activated for running OSL(_ACCN)
 // #define NO_ACTION_ONESHOT
+
+
+
+
+
+
 #define NO_ACTION_MACRO       // apparently it's necessary only for macros !!!
+
+
+
+
+
+
 /*
  * [feature disable options]
  */

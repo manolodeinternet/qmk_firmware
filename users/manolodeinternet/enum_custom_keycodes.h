@@ -14,27 +14,16 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // MACROS FOR _POWR LAYER 12
+    ,MY_CLEAR
     ,VOL_1
     ,VOL_8
     ,BRIGHT_1
 // macros for _powr layer 12
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-#if defined(COMPREHENSIVE_30_LAYOUT)
-// MACROS FOR _APPS LAYER 10
-    ,APP_Q_SNOTE ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_APSTO ,APP_T_TERMI
-                                         ,APP_Y_TYPIN ,APP_U_UROOM ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF
-    ,APP_A_SCRPT ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME
-                                         ,APP_H_SKTCH ,APP_J_SUBLI,APP_K_KRBNR ,APP_L_CLNDR ,APPSP_EMPTY 
-    ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_KVIEW ,APP_B_BOOKS
-                                         ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB
-// macros for _apps layer 10
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-#endif
-
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 // MACROS FOR _DALY LAYR 7
     ,DICTATION
+    ,SIRI
 // macros for _daly layer 7
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
@@ -93,8 +82,15 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
       ,FORWARD
 
 #if defined(COMPREHENSIVE_30_LAYOUT)
-
-  // empty !¡
+// MACROS FOR _APPS LAYER 10
+    ,APP_Q_SNOTE ,APP_W_TWTTR ,APP_E_EVERN ,APP_R_APSTO ,APP_T_TERMI
+                                         ,APP_Y_TYPIN ,APP_U_UROOM ,APP_I_TEDIT ,APP_O_OMNIF ,APP_P_SPREF
+    ,APP_A_SCRPT ,APP_S_SAFAR ,APP_D_D_ONE ,APP_F_FINDE ,APP_G_CHRME
+                                         ,APP_H_SKTCH ,APP_J_SUBLI,APP_K_KRBNR ,APP_L_CLNDR ,APPSP_EMPTY 
+    ,APP_Z_STUDI ,APP_X_XCODE ,APP_C_CALCU ,APP_V_KVIEW ,APP_B_BOOKS
+                                         ,APP_N_NOTES ,APP_M_MAIL ,APP_ES_KEYN ,APP_BS_PAGE ,APP_EN_NUMB
+// macros for _apps layer 10
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 //#if defined(COMPREHENSIVE_30_LAYOUT)
 #elif defined(SIMPLE_30_LAYOUT)
@@ -117,7 +113,6 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
   /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
   // MACROS FOR _POWR LAYER 12
-      ,MY_CLEAR
       ,MY_RESET
   //  ,SL_MEN
       ,KM_TOL
@@ -131,7 +126,6 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
   // MACROS FOR _DALY LAYER 07
       ,PREV_APP
       ,NEXT_APP
-      ,SIRI
   // macros for _daly layer 07
 
 //#elif defined(SIMPLE_30_LAYOUT)

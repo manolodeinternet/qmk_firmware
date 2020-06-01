@@ -80,7 +80,7 @@ void capslock_tap(void) { // [F(CAPSL)] - MY CAPSLOCK FINISHED FUNCTION
     breathing_period_set(BR_DFLT);
     breathing_disable();
   }
-#endif
+#endif //#if defined(BACKLIGHT_ENABLE)
 // lights and breath
 
   capslock_is_active = !capslock_is_active;
@@ -208,6 +208,18 @@ void xvim(char *key)
     SEND_STRING("x");
     send_string(key);
 }
+
+#if defined(COMPREHENSIVE_30_LAYOUT)
+void callApp(char *appName)
+{
+    register_code(KC_LGUI);   register_code (KC_SPC);
+    unregister_code (KC_SPC); unregister_code(KC_LGUI);
+    send_string  (appName); 
+    // next delay is for avoiding that SpotLight remains on screen without calling our app
+    _delay_ms(40); 
+    register_code (KC_ENT); unregister_code (KC_ENT);
+}
+#endif
 //////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -347,7 +359,7 @@ bool /*triggered_mod*/ check_mod_and_remove_it(uint8_t mod, bool remove_it)
 } // bool check_mod_and_remove_it(uint16_t mod, bool remove_it)
 /*****************************************************************************************************/
 
-void write_app_name(uint16_t keycode)
+void write_app_name(uint8_t keycode)
 {
           register_code (KC_LGUI);
                tap_code (KC_SPC);
@@ -361,7 +373,7 @@ void write_app_name(uint16_t keycode)
 
 
 
-void call_app_with_keycode(uint16_t keycode) //keycode is already filtered with '& 0xFF' in the calling
+void call_app_with_keycode(uint8_t keycode) //keycode is already filtered with '& 0xFF' in the calling
 {
   switch(keycode)
   {
@@ -534,6 +546,7 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 
   // waiting_for_success();
 
+
 #if defined(RGBLIGHT_ENABLE)
   rgblight_enable_noeeprom(); // switch on LEDs to allow us seeing the reset LEDs flashing
 #elif defined(BACKLIGHT_ENABLE)
@@ -541,11 +554,14 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 #endif
   // waiting_for_success();
 
+
 #if defined(RGBLIGHT_ENABLE)
   flashing_RGB_LEDs(5, RGB_MY_WHITE, RGB_MY_RED);
 #elif defined(BACKLIGHT_ENABLE)
   flashing_BCK_LEDs(5, BL_RESE, BL_MIN);
 #endif
+
+
 
   reset_keyboard();
 }
@@ -556,4 +572,28 @@ void reset_my_keyboard_function(void) {  // MY RESET FUNCTION
 //                                                                                      //
 // reset my keyboard function                                                           //
 //////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
