@@ -899,7 +899,7 @@ void avim(char *key)
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [_NUMB] KC_B (DENUOF)                                                     //
+// [TAPDANCE] [_NUMB] KC_B (NUMBOF)                                                     //
 //                                                                                      //
 //  D O L L A R  /  E U R O  -  N U M B E R S   L A Y E R   O F F                       //
 //                                                                                      //
@@ -908,15 +908,15 @@ void avim(char *key)
 //           @@ [_NUMB] OFF                                                             //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-// instantalize an instance of 'tap' for the 'DENUOF' tap dance.
-static tap DENUOF_tap_state = {
+// instantalize an instance of 'tap' for the 'NUMBOF' tap dance.
+static tap NUMBOF_tap_state = {
   .is_press_action = true,
   .state = 0
 };
 
-void DENUOF_finished (qk_tap_dance_state_t *state, void *user_data) {
-  DENUOF_tap_state.state = cur_dance(state);
-  switch (DENUOF_tap_state.state) {
+void NUMBOF_finished (qk_tap_dance_state_t *state, void *user_data) {
+  NUMBOF_tap_state.state = cur_dance(state);
+  switch (NUMBOF_tap_state.state) {
 
     // [UNDERSTANDING]
     //  YOU CAN'T USE ANSI SHIFTED KEYCODES INTO TAP_DANCE CODE LIKE 'KC_PERC' !!!
@@ -924,35 +924,35 @@ void DENUOF_finished (qk_tap_dance_state_t *state, void *user_data) {
     //  ... TAP_DANCE CODE NEEDS BASIC KEYCODES !!!
     // [understanding]
 
-  //DOLAR
-    case SINGLE_TAP:  
-    case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_4);                               break;
+  //DOLAR            LSFT(LALT(KC_2))
+    case SINGLE_TAP:
+    case SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_2); break; // €
 
   //EURO
-    case DOUBLE_TAP:  register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_2);       break;
+    case DOUBLE_TAP:  break;
 
   //SWITCH _NUMB OFF
-    case DOUBLE_HOLD: layer_clear();                                                             break;      
+    case DOUBLE_HOLD: layer_clear();                                                       break; //OFF
   }
 }
 
-void DENUOF_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (DENUOF_tap_state.state) {
+void NUMBOF_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (NUMBOF_tap_state.state) {
 
   //DOLAR
     case SINGLE_TAP:
-    case SINGLE_HOLD: unregister_code(KC_4); unregister_code(KC_LSFT);                           break;
+    case SINGLE_HOLD: unregister_code(KC_2); unregister_code(KC_LALT); unregister_code(KC_LSFT); break;
 
   //EURO
-    case DOUBLE_TAP:  unregister_code(KC_2); unregister_code(KC_LALT); unregister_code(KC_LSFT); break;
+    case DOUBLE_TAP:
 
     case DOUBLE_HOLD:                                                                            break;
 
   }
-  DENUOF_tap_state.state = 0;
+  NUMBOF_tap_state.state = 0;
 }
 //                                                                                      //
-// [tapdance] [_numb] kc_b (denuof)                                                     //
+// [tapdance] [_numb] kc_b (NUMBOF)                                                     //
 //                                                                                      //
 //  d o l l a r  /  e u r o  -  n u m b e r s   l a y e r   o f f                       //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1987,6 +1987,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 // [_SYMB] LAYER  (TWO IN A KEY)
   [V_RACI] = ACTION_TAP_DANCE_DOUBLE(KC_RABK, KC_CIRC )                                   // & ^
+  [B_EQPE] = ACTION_TAP_DANCE_DOUBLE(KC_EQL,  KC_PERC )                                   // = %
 //[A_GRAV]  // grave & tilde         //tilde        accessible while holding SHIFT key !  // ` ~
 //[S_QUOT]  // quote & double quote  //double quote accessible while holding SHIFT key !  // ' "
  ,[G_DOEU] = ACTION_TAP_DANCE_DOUBLE(KC_DLR,  EURO)                                       // $ €
@@ -1996,7 +1997,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 // [_NUMB] LAYER
  ,[SLNUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLNUMB_finished, SLNUMB_reset)
- ,[DENUOF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, DENUOF_finished, DENUOF_reset)
+ ,[NUMBOF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, NUMBOF_finished, NUMBOF_reset)
 // [_numb] layer
 
 // [_POWR] LAYER
@@ -2381,26 +2382,122 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
+// uint16_t get_tapping_term(uint16_t keycode) {
+//   switch (keycode) {
+
+// // // row 2: modifiers
+// //     case LCTL_T(KC_A):
+//     case LCTL_T(KC_SPC):     return 400; break;
+
+// //     case LALT_T(KC_S):
+//     case LALT_T(KC_L):       return 400; break; //300
+
+// //     case LGUI_T(KC_D):
+// //     case LGUI_T(KC_K):
+
+// //     case LSFT_T(KC_F):
+// //     case LSFT_T(KC_J):  return TAPPING_TERM - 50; break;
+
+// // // row 2: layers
+// //  // case LT(_ACCN, KC_G):
+// //  // case LT(_ACCN, KC_H):
+
+// // // row 1: layers
+// //     case LT(_APPS, KC_Q):
+// //     case LT(_APPS, KC_P):     return TAPPING_TERM - 50; break;
+
+// //     case LT(_POWR, KC_W):
+// //     case LT(_POWR, KC_O):
+
+// //     case LT(_LEDS, KC_E):
+// //     case LT(_LEDS, KC_I):
+
+// //     case LT(_FUNC, KC_R):
+// //     case LT(_FUNC, KC_U):
+
+// // // row 3: layers
+// //     case LT(_DALY, KC_Z):
+// //     case LT(_DALY, KC_ENT):
+
+// //     case LT(_DVIM, KC_X):
+
+// //     case LT(_MOUS, KC_C):
+
+// //     case LT(_FVIM, KC_V):
+// //     case LT(_FVIM, KC_M):
+
+// //     case LT(_NUMB, KC_B):
+// //     case LT(_NUMB, KC_Y):
+
+// //     case LT(_XVIM, KC_ESC):   return TAPPING_TERM + 50; break;
+
+//     // case LT(_SYMB, KC_N):
+//     // case LT(_SYMB, KC_T):     return 140; break;
+ 
+// // //   default
+//     default:
+//       return TAPPING_TERM;
+//   }
+// }
 
 
+// bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+//     switch (keycode) {
+//         // case LT(1, KC_BSPC):
+//         //     return true;
 
+//     case LCTL_T(KC_A):
+//     case LCTL_T(KC_SPC):
 
+//     case LALT_T(KC_S):
+//     case LALT_T(KC_L):
 
+//     case LGUI_T(KC_D):
+//     case LGUI_T(KC_K):
 
+//     case LSFT_T(KC_F):
+//     case LSFT_T(KC_J):        return false;  break;
 
+// // row 2: layers
+//  // case LT(_ACCN, KC_G):
+//  // case LT(_ACCN, KC_H):
 
+// // row 1: layers
+//     case LT(_APPS, KC_Q):
+//     case LT(_APPS, KC_P):     return true;  break;
 
+//     case LT(_POWR, KC_W):     
+//     case LT(_POWR, KC_O):
 
+//     case LT(_LEDS, KC_E):
+//     case LT(_LEDS, KC_I):
 
+//     case LT(_FUNC, KC_R):
+//     case LT(_FUNC, KC_U):     return false; break;
 
+// // row 3: layers
+//     case LT(_DALY, KC_Z):
+//     case LT(_DALY, KC_ENT):
 
+//     case LT(_DVIM, KC_X):     return true;  break;
 
+//     case LT(_MOUS, KC_C):     return false; break;
 
+//     case LT(_FVIM, KC_V):
+//     case LT(_FVIM, KC_M):
 
+//     case LT(_NUMB, KC_B):
+//     case LT(_NUMB, KC_Y):     return true;  break;
 
+//     case LT(_XVIM, KC_ESC):   return false; break;
 
+//     case LT(_SYMB, KC_N):
+//     case LT(_SYMB, KC_T):     return true; break; 
 
+//     default:                  return false;
 
+//     }
+// };
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //

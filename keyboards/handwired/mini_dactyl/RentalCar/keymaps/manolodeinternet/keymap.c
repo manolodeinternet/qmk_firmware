@@ -1115,25 +1115,25 @@ void matrix_scan_user(void) {
 //                       }
 //                       return false;
 
-//       // case TH_R2_SYMB_FVIM:
+//       // case TH_R2_FVIM_SYMB:
 //       //                 if (get_mods()&ALT_MODS)
 //       //                 {
 //       //                   layer_on(_FVIM);
 //       //                 }
 //       //                 else
 //       //                 {
-//       //                   symbols_pressed = true;
+//       //                   fvim_pressed = true;
 //       //                   layer_on(_SYMB);
 //       //                 }
 //       //                 return false;
-//       case TH_R2_SYMB_FVIM:
+//       case TH_R2_FVIM_SYMB:
 //                       if (check_mod_and_remove_it(ALT_MODS, true))
 //                       {
 //                         layer_on(_FVIM);
 //                       }
 //                       else
 //                       {
-//                         symbols_pressed = true;
+//                         fvim_pressed = true;
 //                         layer_on(_SYMB);
 //                       }
 //                       return false;
@@ -1617,7 +1617,7 @@ void matrix_scan_user(void) {
 
 //       case CHANGE_SYMB_TO_NUMB:
 //                       layer_off(_NUMB);
-//                       if (symbols_pressed)
+//                       if (fvim_pressed)
 //                       {
 //                         layer_on(_SYMB);
 //                       }
@@ -1646,14 +1646,14 @@ void matrix_scan_user(void) {
 //                       }
 //                       return false;
 
-//         case TH_R2_SYMB_FVIM:
+//         case TH_R2_FVIM_SYMB:
 //                       if (state_number == _FVIM)
 //                       {
 //                         layer_off(_FVIM);
 //                       }
 //                       else
 //                       {
-//                         symbols_pressed = false;
+//                         fvim_pressed = false;
 //                         if (state_number == _SYMB)
 //                         {
 //                           layer_off(_SYMB);

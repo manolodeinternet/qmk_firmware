@@ -45,8 +45,8 @@ WAKING UP MY COMPUTER
 
 
 
-
 #define PERMISSIVE_HOLD
+// #define PERMISSIVE_HOLD_PER_KEY
 /* If PERMISSIVE_HOLD is active:
  * FOR MOD/TAP KEYS
 
@@ -70,6 +70,9 @@ WAKING UP MY COMPUTER
 
  */
 //https://docs.qmk.fm/#/feature_advanced_keycodes?id=permissive-hold
+
+
+
 
 #define IGNORE_MOD_TAP_INTERRUPT
 /* If IGNORE_MOD_TAP_INTERRUPT is active:
@@ -107,6 +110,9 @@ WAKING UP MY COMPUTER
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////              
 */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 // I comment the following line because it breaks auto repeat !!!
 // #define TAPPING_FORCE_HOLD

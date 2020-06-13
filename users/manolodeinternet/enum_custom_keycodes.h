@@ -95,12 +95,25 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 //#if defined(COMPREHENSIVE_30_LAYOUT)
 #elif defined(SIMPLE_30_LAYOUT)
   // MACROS FOR _DFLT LAYER 00
+      // ,OSL_DALY
+      // ,OSL_FVIM
+      // ,OSL_POWR
+      // ,OSL_ACCN
+
+      ,OSL_APPS
+
+      ,OSL_DVIM
+
+      // ,OSL_SYMB
+      // ,OSL_NUMB
+      // ,OSL_MOUS
+
       ,TT_NUMB
-      ,TH_L3_KAR_APPS
-      ,TH_R1_DALY_MOUS
-      ,TH_R2_SYMB_FVIM
+      // ,TH_L3_KAR_APPS
+      // ,TH_R1_DALY_MOUS
+      // ,TH_R2_FVIM_SYMB
       ,TH_R3_APPS_TRIGGER
-      ,TH_R4_POWR_LEDS
+      // ,TH_R4_POWR_LEDS
   // macros for _DFLT layer 00
   /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 

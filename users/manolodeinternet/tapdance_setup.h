@@ -52,9 +52,14 @@ enum tap_dance_keycodes {
 
   // COMMON TAPDANCE KEYCODES ACCESSIBLE FROM ALL KEYBOARDS
   
+  // TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB LAYER 02
+   G_DOEU  // dolar & euro
+  ,B_EQPE  // equal & percent
+  // tap dance keycodes accessible from _numb layer 02
+
   // TAP DANCE KEYCODES ACCESSIBLE FROM _FVIM LAYER 03
   // (i.e. KC_U: *'begin of line'/**'begin of paragraph')
-   FVIM_uU ,FVIM_pP
+  ,FVIM_uU ,FVIM_pP
   ,DVIM_uU ,DVIM_pP
   // tap dance keycodes accessible from _fvim layer 03
 
@@ -73,16 +78,15 @@ enum tap_dance_keycodes {
 
   #if defined(COMPREHENSIVE_30_LAYOUT)
     // TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB LAYER 02
-    ,DENUOF  //   return to *GHKN layer (gherkin default layer)  // ... percent
+    ,NUMBOF  //   return to *GHKN layer (gherkin default layer)  // ... percent
     ,SLNUMB  //   return to *GHKN layer (gherkin default layer)  // ... slash
 
     // TAP DANCE KEYCODES ACCESSIBLE FROM _SYMB  LAYER 09
     ,V_RACI  // right angle bracket & circumflex accent
     //  ,A_GRAV  // grave & tilde         //tilde        accessible while holding SHIFT key !
     //  ,S_QUOT  // quote & double quote  //double quote accessible while holding SHIFT key !
-    ,G_DOEU  // dolar & euro
-    ,Z_EXCL
-    ,X_QUES
+    ,Z_EXCL  // exclamation mark: open & close  
+    ,X_QUES  // question    mark: open & close
 
     // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
     ,KILM_T   //   dock bar / (on hold) KILL MENU

@@ -10,7 +10,7 @@
 
 bool flip_layer_triggers    = false;
 
-bool symbols_pressed        = false;
+bool fvim_pressed        = false;
 
 bool apps_trigger           = false;  // with no apps layer
 bool karabiner_apps_trigger = false;

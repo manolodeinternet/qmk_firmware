@@ -7,7 +7,7 @@
 
 bool flip_layer_triggers; //for changing layers thumb triggers to the opposite hand
 
-bool symbols_pressed;     // it allows changing from _SYMB to _NUMB and come back without LEDs issues
+bool fvim_pressed;     // it allows changing from _SYMB to _NUMB and come back without LEDs issues
 
 bool apps_trigger;        // with no apps layer
 bool karabiner_apps_trigger;

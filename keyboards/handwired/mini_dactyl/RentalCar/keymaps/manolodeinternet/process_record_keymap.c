@@ -18,7 +18,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
   //   Toggle between current and last app
   //   It's similar to KC_Y in [_DALY], but ...
   //   IT CHANGES QUICKLY, WITHOUT APPS BAR IN THE MIDDLE OF THE SCREEN !!!
-      case MO(_FVIM):   // If you want to change from one app to another app in multi_apps mode,
+      case MO(_SYMB):   // If you want to change from one app to another app in multi_apps mode,
                         //...uncomment next line.
                         // multi_apps = true;
                           register_code(KC_LGUI);
@@ -120,7 +120,9 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
     switch(keycode)
     {
 
+
 //#03 #R3-L3
+      case OSL_APPS:
       case TH_R3_APPS_TRIGGER:// Right Thumb 3
                               // Switch off 'apps_trigger' variable mode without layer
                               // first_apps_trigger_pressed = false;
@@ -179,9 +181,10 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
 //#04 #R3-L3
       case TT_NUMB:            // Left Thumb 3
                                // Karabiner-apps mode
-                               // second_apps_trigger_pressed = false;
 
 #if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
+// leave karabiner_apps mode and return to default compiled mode: typinator_apps mode ...
+// ... if its trigger is still active, switching app modifiers OFF in this case
 
                                unregister_code(KC_F20);
                                karabiner_apps_trigger = false;
@@ -215,6 +218,8 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                                }
 
 #elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
+// leave typinator_apps mode and return to default compiled mode: karabiner_apps mode ...
+// ... if its trigger is still active, switching app modifiers ON in this case
 
                                apps_trigger = false;
 
@@ -246,14 +251,14 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                                 }
                                 register_code(KC_F20);
 
-                        if (control_apps)
-                        {
-                          add_mod(ctl_mod);
-                        }
-                        if (shift_apps)
-                        {
-                          add_mod(sft_mod);
-                        }
+                                if (control_apps)
+                                {
+                                  add_mod(ctl_mod);
+                                }
+                                if (shift_apps)
+                                {
+                                  add_mod(sft_mod);
+                                }
 
                                }
 
@@ -265,6 +270,11 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
 
 #if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
 
+
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+// I have added next 1 line of code while reviewing.  Maybe it's not necessary.
+               if (karabiner_apps_trigger)
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
                {
                  return true; break;
                }
@@ -343,7 +353,6 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
     {
 //[_DFLT]
 
-
 //#05 #R3-L3
       //   Left Thumb 3
       case TT_NUMB: // BEEP_1;
@@ -351,6 +360,55 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
                     lt12_timer = timer_read();
                     layer_invert(_NUMB);
                     case_found = true; return false; break;
+
+// left thumbs
+      // case OSL_DALY:
+      //             // MANAGEMENT OF OSL as part of a macro or tap dance routine:
+      //             // set_oneshot_layer(LAYER, ONESHOT_START)              on key down
+      //             // clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED) on key up
+      //             // reset_oneshot_layer() if you want to cancel the oneshot
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_DALY, ONESHOT_START);
+      //                return false; break;
+      // case OSL_FVIM:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_FVIM, ONESHOT_START);
+      //                return false; break;
+      // case OSL_POWR:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_POWR, ONESHOT_START);
+      //                return false; break;
+      // case OSL_ACCN:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_ACCN, ONESHOT_START);
+      //                return false; break;
+
+// right thumbs
+      //  case OSL_SYMB:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_SYMB, ONESHOT_START);
+      //                return false; break;
+      // case OSL_NUMB:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_NUMB, ONESHOT_START);
+      //                return false; break;
+      // case OSL_MOUS:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_MOUS, ONESHOT_START);
+      //                return false; break;
+                     
+       case OSL_DVIM:
+                     // reset_oneshot_layer();
+                     set_oneshot_layer(_DVIM, ONESHOT_START);
+                     return false; break;
+      case OSL_APPS:
+                     // clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
+                     // reset_oneshot_layer();
+                     layer_clear();
+                  // return false; break;
+// case OSL_APPS continues in ...
+//...case TH_R3_APPS_TRIGGER
+
 //[_dflt]
 
 
@@ -363,12 +421,22 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 //    Right Thumb 3
       case TH_R3_APPS_TRIGGER://if (alt_mod)
 
-                                if (check_mod_and_remove_it(ALT_MODS, true))
-                                {
-                                   layer_on(_NUMB);
-                                }
-                                else
-                                {
+                  // MANAGEMENT OF OSL as part of a macro or tap dance routine:
+                  // set_oneshot_layer(LAYER, ONESHOT_START)              on key down
+                  // clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED) on key up
+                  // reset_oneshot_layer() if you want to cancel the oneshot
+                     // reset_oneshot_layer();
+
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥  remove next 6 lines of code 
+
+// next if statement is not necessary because mirrored layer triggers are now accesed holding master_keys.
+// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
+                                // if (check_mod_and_remove_it(ALT_MODS, true))
+                                // {
+                                //    layer_on(_NUMB);
+                                // }
+                                // else
+                                // {
 
 #if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
                                   apps_trigger = true;
@@ -390,8 +458,8 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 #endif // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ###
 
                                   rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)
-                                }
-                                case_found = true; return false; break;
+                                // }
+                                  case_found = true; return false; break;
 // //////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 //[# #karabiner & typinator stuff]
@@ -430,10 +498,10 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
                       tap_code       (KC_SLSH);
                       case_found = true; return false; break;
 
-      case CHANGE_SYMB_TO_NUMB:
-                      layer_off(_SYMB);
-                      layer_on(_NUMB);
-                      case_found = true; return false; break;
+      // case CHANGE_SYMB_TO_NUMB:
+      //                 layer_off(_SYMB);
+      //                 layer_on(_NUMB);
+      //                 case_found = true; return false; break;
 //[_symb]
 
 
@@ -447,19 +515,25 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 //[_daly]
 
 //[_DFLT]
-      case TH_R1_DALY_MOUS:
-                      // if (get_mods()&ALT_MODS)
-                      if (check_mod_and_remove_it(ALT_MODS, true))
-                      {
-                        layer_on(_MOUS);
-                      }
-                      else
-                      {
-                        layer_on(_DALY);
-                      }
-                      case_found = true; return false; break;
+// next case is not necessary because mirrored layer triggers are now accesed holding master_keys.
+// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
+      // case TH_R1_DALY_MOUS:
+      //                 // if (get_mods()&ALT_MODS)
+      //                 if (check_mod_and_remove_it(ALT_MODS, true))
+      //                 {
+      //                   layer_on(_MOUS);
+      //                 }
+      //                 else
+      //                 {
+      //                   layer_on(_DALY);
+      //                 }
+      //                 case_found = true; return false; break;
+      case MO(_DALY):  case_found = true;
 
-      // case TH_R2_SYMB_FVIM:
+                       return true; //this line switch on [_DALY] layer automatically.
+                       break; 
+
+      // case TH_R2_FVIM_SYMB:
       //                 if (get_mods()&ALT_MODS)
       //                 {
       //                   layer_on(_FVIM);
@@ -470,19 +544,35 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
       //                   layer_on(_SYMB);
       //                 }
       //                 return false;
-      case TH_R2_SYMB_FVIM: // SS_BEEP_1;
-                      // SS_BEEP_1;
-                      if (check_mod_and_remove_it(ALT_MODS, true))
-                      {
-                        layer_on(_FVIM);
-                      }
-                      else
-                      {
-                        symbols_pressed = true;
-                        layer_on(_SYMB);
-                      }
-                      case_found = true; return false; break;
 
+
+// next two cases are not necessary because mirrored layer triggers are now accesed holding master_keys.
+// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
+      // case TH_R2_FVIM_SYMB: // SS_BEEP_1;
+      //                 // SS_BEEP_1;
+      //                 if (check_mod_and_remove_it(ALT_MODS, true))
+      //                 {
+      //                   layer_on(_SYMB);
+      //                // symbols_pressed = true;
+      //                 }
+      //                 else
+      //                 {
+      //                   layer_on(_FVIM);
+      //                 }
+      //                 case_found = true; return false; break;
+
+      // case TH_L2_SYMB_FVIM: // SS_BEEP_1;
+      //                 // SS_BEEP_1;
+      //                 if (check_mod_and_remove_it(ALT_MODS, true))
+      //                 {
+      //                   layer_on(_FVIM);
+      //                // symbols_pressed = true;
+      //                 }
+      //                 else
+      //                 {
+      //                   layer_on(_SYMB);
+      //                 }
+      //                 case_found = true; return false; break;
 
 
 
@@ -583,9 +673,10 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 //   using triggered_control_mod as a bool function, we save from 38 to 66 bytes --> 28 bytes saved
 // [firmware_size]
 
-// 'case SL_MEN' now is implemented with tap_dance
+// case (holding)sleep computer / (tapping)apple menu bar: 'SL_MEN' now is implemented with tap_dance
 //...which is much more comfortable to press than 'Control+[_POWR]+Z' !!! 
 
+// (holding control)kill current app / (tapping)dock
       case KA_DCK:    if (check_mod_and_remove_it(CTRL_MODS, true))
                       {
                         register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
@@ -598,6 +689,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
                       }
                       case_found = true; return false; break;
 
+// (holding control)call kill app menu / (tapping)tool bar
       case KM_TOL:    if (check_mod_and_remove_it(CTRL_MODS, true))
                       {
                         register_code(KC_LALT); register_code(KC_LGUI);
@@ -610,9 +702,10 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
                       }
                       case_found = true; return false; break;
 
-// case 'SH_STA' now is implemented with tap_dance
+// case (holding)shut down / (tapping)status bar: 'SH_STA' now is implemented through tap_dance
 //...which is much more comfortable to press than 'Control+[_POWR]+V' !!! 
 
+// (holding control)restart computer / (tapping)floating window
       case RT_FLO:  // [FIRMWARE_SIZE]
                       //we save unregister control and register again
                       //if (triggered_mod(KC_C)) 
@@ -742,6 +835,28 @@ ROW 3 COLORS
         // Emulating TT(layer), but better:
     // [firmware_size]
 
+
+      // case OSL_DALY:
+      //             // MANAGEMENT OF OSL as part of a macro or tap dance routine:
+      //             // set_oneshot_layer(LAYER, ONESHOT_START)              on key down
+      //             // clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED) on key up
+      //             // reset_oneshot_layer() if you want to cancel the oneshot
+      // case OSL_FVIM:
+      // case OSL_POWR:
+      // case OSL_ACCN:
+
+      // case OSL_SYMB:
+      // case OSL_NUMB:
+      // case OSL_MOUS:
+
+      case OSL_DVIM: 
+                     // clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
+                     // reset_oneshot_layer();
+                     layer_clear();
+                     return false; break;
+
+
+
 //#07 #R3-L3
       case TT_NUMB:   // Left Thumb 3
                       // if Karabiner_apps_trigger ---> Karabiner_apps off
@@ -761,11 +876,17 @@ ROW 3 COLORS
 
 
 //#08 #R3-L3
-      case TH_R3_APPS_TRIGGER: if (state_number == _NUMB)
-                               {
-                                 layer_off(_NUMB);
-                               }
-                               case_found = true; return false; break;
+      case TH_R3_APPS_TRIGGER: 
+// next if statement is not necessary cause mirrored layer triggers are now accesed holding master_keys
+// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
+                               // if (state_number == _NUMB)
+                               // {
+                               //   layer_off(_NUMB);
+                               // }
+                               case_found = true;
+
+                               return true;
+                               break;
 
 // case 'R3 release' never happens because at the beginning of process_record_user we send the focus to
 //... process_record_apps.
@@ -882,25 +1003,28 @@ ROW 3 COLORS
 
 
 
-      case CHANGE_SYMB_TO_NUMB:
-                      layer_off(_NUMB);
-                      if (symbols_pressed)
-                      {
-                        layer_on(_SYMB);
-                      }
-                      case_found = true; return false; break;
+      // case CHANGE_SYMB_TO_NUMB:
+      //                 layer_off(_NUMB);
+      //                 if (symbols_pressed)
+      //                 {
+      //                   layer_on(_SYMB);
+      //                 }
+      //                 case_found = true; return false; break;
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
       case CHANGE_DALY_TO_LEDS: layer_off(_LEDS);
                                 case_found = true; return false; break;
 
-      case TH_R1_DALY_MOUS:
-                      if (state_number == _MOUS)
-                      {
-                         layer_off(_MOUS);
-                      }
-                      else
-                      if (state_number == _DALY)
-                      {
+      case MO(_DALY): // TH_R1_DALY_MOUS:
+                      // if (state_number == _MOUS)
+                      // {
+                      //    layer_off(_MOUS);
+                      // }
+                      // else
+                      // if (state_number == _DALY)
+                      // {
                         // remove GUI modifier when coming from _DALY changing apps with CMD+TAB; SHIFT+CMD+TAB
                         if (changing_apps)
                         {
@@ -909,37 +1033,40 @@ ROW 3 COLORS
                           // triggered_gui();
                           // remove_mod(gui_mod);
                         }
-                        layer_off(_DALY);
-                      }
-                      case_found = true; return false; break;
+                        // layer_off(_DALY);
+                      // }
+                      case_found = true; 
 
-        case TH_R2_SYMB_FVIM:
-                      if (state_number == _FVIM)
-                      {
-                        layer_off(_FVIM);
-                      }
-                      else
-                      {
-                        symbols_pressed = false;
-                        if (state_number == _SYMB)
-                        {
-                          layer_off(_SYMB);
-                        }
-                      }
-                      case_found = true; return false; break;
+                      return true; // this 'return true' switch [_DALY] off automatically
+                      break;
 
 
-      case TH_R4_POWR_LEDS:
-                      if (state_number == _POWR)
-                      {
-                         layer_off(_POWR);
-                      }
-                      else
-                      if (state_number == _LEDS)
-                      {
-                        layer_off(_LEDS);
-                      }
-                      case_found = true; return false; break;
+// next two cases are not necessary because mirrored layer triggers are now accesed holding master_keys.
+// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
+        // case TH_R2_FVIM_SYMB: 
+        // case TH_L2_SYMB_FVIM: // if else without parenthesis
+        //                       if (state_number == _FVIM)
+        //                         layer_off(_FVIM);
+        //                       else
+        //                    // symbols_pressed = false;
+        //                       if (state_number == _SYMB)
+        //                         layer_off(_SYMB);
+
+        //                       case_found = true; return false; break;
+
+// next case is not necessary because mirrored layer triggers are now accesed holding master_keys.
+// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
+      // case TH_R4_POWR_LEDS:
+      //                 if (state_number == _POWR)
+      //                 {
+      //                    layer_off(_POWR);
+      //                 }
+      //                 else
+      //                 if (state_number == _LEDS)
+      //                 {
+      //                   layer_off(_LEDS);
+      //                 }
+      //                 case_found = true; return false; break;
 
 
       default: case_found = false; return true; break; // Process all other keycodes normally when pressed

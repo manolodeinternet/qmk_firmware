@@ -161,11 +161,11 @@
 
  *  KEYBOARD -> SHORTCUTS -> ACCESSIBILITY
     ZOOM:
-      Turn zoom on or off                              CAG (semicolon)
-      Turn image smoothing on or off                   CAG (backslash)
-      Zoom out                                         CAG (minus)
-      Zoom in                                          CAG (equal)
-      Turn focus following on or off                   CAG (slash)
+      Turn zoom on or off                              CAG (semicolon) default was AG
+      Turn image smoothing on or off                   CAG (backslash) default was AG
+      Zoom out                                         CAG (minus)     default was AG
+      Zoom in                                          CAG (equal)     default was AG
+      Turn focus following on or off                   CAG (slash)     default was AG
 
     CONTRAST:
       Increase contrast                                CAG (dot)
