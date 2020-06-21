@@ -164,10 +164,10 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 
 #if defined(COMPREHENSIVE_30_LAYOUT)
 
-  #define KILMNU_TOOL      TD(KILM_T)
-  #define KILAPP_DOCK      TD(KILA_D)
-  #define SHUTD_STATB      TD(SHUT_S)
-  #define RSTRT_FLOAT      TD(RSTT_F)
+  // #define KILMNU_TOOL      TD(KILM_T)
+  // #define KILAPP_DOCK      TD(KILA_D)
+  // #define SHUTD_STATB      TD(SHUT_S)
+  // #define RSTRT_FLOAT      TD(RSTT_F)
 
 #elif defined(SIMPLE_30_LAYOUT)
 

@@ -257,12 +257,17 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // [_POWR] LAYER
   ,[LCKLOG]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, LCKLOG_finished, LCKLOG_reset, 800)
   ,[SLEP_M]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLEP_M_finished, SLEP_M_reset)
-  ,[SHUT_S]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SHUT_S_finished, SHUT_S_reset)
-
+  ,[KILA_D]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, KILA_D_finished, KILA_D_reset, 800)
+  ,[KILM_T]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, KILM_T_finished, KILM_T_reset)
+  ,[SHUT_S]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, SHUT_S_finished, SHUT_S_reset, 1000)
+  ,[RSTT_F]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, RSTT_F_finished, RSTT_F_reset, 1000)
   ,[HRESET]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, HRESET_finished, HRESET_reset, 1000)
 // [_powr] layer
 // [mini_dactyl] specific tap_dance features
 
+// [_SYMB] LAYER
+  ,[R_DOEU] = ACTION_TAP_DANCE_DOUBLE(KC_DLR,  EURO)
+// [_symb] layer
 
 // [ALL_KEYBOARDS] TAP_DANCE FEATURES
 // [_FVIM] LAYER

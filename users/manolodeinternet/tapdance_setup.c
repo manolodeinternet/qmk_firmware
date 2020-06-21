@@ -419,6 +419,126 @@ void SLEP_M_reset (qk_tap_dance_state_t *state, void *user_data) {
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
+// [TAPDANCE] [_POWR] KC_X (KILA_D)                                                     //
+//                                                                                      //
+//  D O C K   B A R    /    F O R C E   T O   K I L L   C U R R E N T   A P P           //
+//                                                                                      //
+//  KC_X:   *  DOCK BAR                                                                 //
+//          @  KILL CURRENT APP                                                         //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'KILA_D' tap dance.
+static tap KILA_D_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void KILA_D_finished (qk_tap_dance_state_t *state, void *user_data) {
+  KILA_D_tap_state.state = cur_dance(state);
+  switch (KILA_D_tap_state.state) {
+
+    case SINGLE_TAP:  register_code(KC_LCTL);   register_code  (KC_F3); // DOCK BAR
+                      break;
+                      // SEND_STRING(SS_LALT(SS_LGUI("d")));
+                            
+    case SINGLE_HOLD: 
+    case DOUBLE_TAP: 
+                      register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_ESC);
+                      break;
+
+// [INFO] HOW TO KILL CURRNT APP THROUGH KEYBOARD              
+//  keystrokes for kill current app:  (guessed by try and fail method)
+                      /* The KC_EJCT keycode doesn't work */
+                      /*
+                      register_code(KC_LCTL); register_code(KC_LGUI); register_code(KC_EJCT);
+                      _delay_ms(2000);
+                      unregister_code(KC_EJCT); unregister_code(KC_LGUI); unregister_code(KC_LCTL);
+                      */
+  }
+}
+
+void KILA_D_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (KILA_D_tap_state.state) {
+    case SINGLE_TAP:  unregister_code  (KC_F3); unregister_code(KC_LCTL);
+                      //unregister_code(KC_D); unregister_code(KC_LGUI); unregister_code(KC_LALT);
+// [info] how to kill currnt app through keyboard
+
+                      break;
+                     
+    case SINGLE_HOLD: 
+    case DOUBLE_TAP: 
+                      unregister_code(KC_ESC); unregister_code(KC_LGUI); unregister_code(KC_LALT);
+                      unregister_code(KC_LSFT); 
+                      break;
+          
+  }
+  KILA_D_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_powr] kc_x (kila_d)                                                     //
+//                                                                                      //
+//  d o c k   b a r    /    f o r c e   t o   k i l l   c u r r e n t   a p p           //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_C (KILM_T)                                                     //
+//                                                                                      //
+//  T O O L S   B A R   /   K I L L   M E N U                                           //
+//                                                                                      //
+//  KC_C:   *  TOOLS BAR                                                                //
+//          @  KILL MENU                                                                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'KILM_T' tap dance.
+static tap KILM_T_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void KILM_T_finished (qk_tap_dance_state_t *state, void *user_data) {
+  KILM_T_tap_state.state = cur_dance(state);
+  switch (KILM_T_tap_state.state) {
+
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_F5); // TOOLS BAR
+                      break;
+                            
+    case SINGLE_HOLD: register_code(KC_LALT); register_code(KC_LGUI); register_code(KC_ESC);
+                      break;
+
+// [INFO] HOW TO ACCESS KILL MENU THROUGH KEYBOARD
+//  keystrokes for kill menu:  (guessed by try and fail method)
+                      /* The KC_EJCT keycode doesn't work */
+                      /*
+                      register_code(KC_LCTL); register_code(KC_LGUI); register_code(KC_EJCT);
+                      _delay_ms(2000);
+                      unregister_code(KC_EJCT); unregister_code(KC_LGUI); unregister_code(KC_LCTL);
+                      */
+// [info] how to access kill menu through keyboard
+  }
+}
+
+void KILM_T_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (KILM_T_tap_state.state) {
+
+    case SINGLE_TAP:  unregister_code(KC_F5); unregister_code(KC_LCTL);
+                      break;
+                     
+    case SINGLE_HOLD: 
+                      unregister_code(KC_ESC); unregister_code(KC_LGUI); unregister_code(KC_LALT); 
+                      break;      
+  }
+  KILM_T_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_powr] kc_c (kilm_t)                                                     //
+//                                                                                      //
+//  t o o l s   b a r   /   k i l l   m e n u                                           //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
 // [TAPDANCE] [_POWR] KC_V (SHUT_S)                                                     //
 //                                                                                      //
 //  S T A T U S   B A R    /    S H U T   D O W N                                       //
@@ -495,6 +615,75 @@ void SHUT_S_reset (qk_tap_dance_state_t *state, void *user_data) {
 //  s t a t u s   b a r    /    s h u t   d o w n                                       //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_B (RSTT_F)                                                     //
+//                                                                                      //
+//  F L O A T I N G   W I N D O W   /   R E S T A R T                                   //
+//                                                                                      //
+//  KC_B:  *  FLOATING WINDOW,                                                          //
+//         @  RESTART                                                                   //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'RSTT_F' tap dance.
+static tap RSTT_F_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RSTT_F_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RSTT_F_tap_state.state = cur_dance(state);
+  switch (RSTT_F_tap_state.state) {
+
+// [SYSTEM PREFERENCES]
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_F6);
+// [system preferences]
+                      break;
+                            
+    case SINGLE_HOLD: 
+    case DOUBLE_TAP:  
+                  //  keystrokes for restarting:  (guessed by try and fail method)
+                      register_code(KC_LCTL); register_code(KC_LGUI);
+
+                      register_code(KC_POWER); unregister_code(KC_POWER);
+                      
+                      unregister_code(KC_LGUI); unregister_code(KC_LCTL);
+
+                      break;
+
+// [OLDWAY]
+                   // Another way for restarting, but much less elegant:
+                   // register_code(KC_POWER); _delay_ms(2000); unregister_code(KC_POWER);
+                   // register_code(KC_R); unregister_code(KC_R);
+// [oldway]                      
+
+                   /* The KC_EJCT keycode doesn't work */
+                      /*
+                      register_code(KC_LCTL); register_code(KC_LGUI); register_code(KC_EJCT);
+                      _delay_ms(2000);
+                      unregister_code(KC_EJCT); unregister_code(KC_LGUI); unregister_code(KC_LCTL);
+                      */
+
+  }
+}
+
+void RSTT_F_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RSTT_F_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_F6); unregister_code(KC_LCTL);
+                      break;
+                     
+    case SINGLE_HOLD: 
+    case DOUBLE_TAP:  break;
+                            
+  }
+  RSTT_F_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_powr] kc_b (rstt_f)                                                     //
+//                                                                                      //
+//  f l o a t i n g   w i n d o w   /   r e s t a r t                                   //
+//////////////////////////////////////////////////////////////////////////////////////////
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [TAPDANCE] [_POWR] KC_R (HRESET)                                                     //

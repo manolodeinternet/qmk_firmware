@@ -53,7 +53,7 @@ enum tap_dance_keycodes {
   // COMMON TAPDANCE KEYCODES ACCESSIBLE FROM ALL KEYBOARDS
   
   // TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB LAYER 02
-   G_DOEU  // dolar & euro
+   R_DOEU  // dolar & euro
   ,B_EQPE  // equal & percent
   // tap dance keycodes accessible from _numb layer 02
 
@@ -69,7 +69,10 @@ enum tap_dance_keycodes {
 
   ,LCKLOG   // lock screen / (on hold) logout user session
   ,SLEP_M   //    menu bar / (on hold) SLEEP
+  ,KILA_D   //  tools bar / (on hold) KILL CURRENT APP
+  ,KILM_T   //   dock bar / (on hold) KILL MENU
   ,SHUT_S   //  status bar / (on hold) SHUT DOWN
+  ,RSTT_F   // floating w / (on hold) COMPUTER   RESTART
   // tap dance keycodes accessible from _powr layer 12
 
   // common tapdance keycodes accessible from all keyboards
@@ -89,18 +92,15 @@ enum tap_dance_keycodes {
     ,X_QUES  // question    mark: open & close
 
     // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
-    ,KILM_T   //   dock bar / (on hold) KILL MENU
-    ,KILA_D   //  tools bar / (on hold) KILL CURRENT APP
-    ,RSTT_F   // floating w / (on hold) COMPUTER   RESTART
     /*
     ,RC_RWND // right control / rewind       // KC_F7
     ,RA_PLAY // right alt     / play/pause   // KC_SPC
     ,RG_FRWD // right gui     / forward      // KC_F9
     */
-    ,RS_ZOIN // right shift   / zoom in
-    ,RG_ZOUT // right gui     / zoom out
-    ,RA_ZOOM // right alt     / zoom on/off
-    ,RC_INCO // right control / invert colors
+    // ,RS_ZOIN // right shift   / zoom in
+    // ,RG_ZOUT // right gui     / zoom out
+    // ,RA_ZOOM // right alt     / zoom on/off
+    // ,RC_INCO // right control / invert colors
     // [ADVICE]
     // ,BCKLIT // accessing _BLIT layer from tap dance into _POWR layer
                // ...this way we don't waste a layer from being accesible from Default layer,
@@ -311,6 +311,41 @@ void SLEP_M_reset (qk_tap_dance_state_t *state, void *user_data);
 //  m e n u   b a r   /    s l e e p   c o m p u t e r                                  //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_X (KILA_D)                                                     //
+//                                                                                      //
+//  D O C K   B A R    /    F O R C E   T O   K I L L   C U R R E N T   A P P           //
+//                                                                                      //
+//  KC_X:   *  DOCK BAR                                                                 //
+//          @  KILL CURRENT APP                                                         //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void KILA_D_finished (qk_tap_dance_state_t *state, void *user_data);
+void KILA_D_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_powr] kc_x (kila_d)                                                     //
+//                                                                                      //
+//  d o c k   b a r    /    f o r c e   t o   k i l l   c u r r e n t   a p p           //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_C (KILM_T)                                                     //
+//                                                                                      //
+//  T O O L S   B A R   /   K I L L   M E N U                                           //
+//                                                                                      //
+//  KC_C:   *  TOOLS BAR                                                                //
+//          @  KILL MENU                                                                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void KILM_T_finished (qk_tap_dance_state_t *state, void *user_data);
+void KILM_T_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_powr] kc_c (kilm_t)                                                     //
+//                                                                                      //
+//  t o o l s   b a r   /   k i l l   m e n u                                           //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -328,6 +363,24 @@ void SHUT_S_reset (qk_tap_dance_state_t *state, void *user_data);
 // [tapdance] [_powr] kc_v (shut_s)                                                     //
 //                                                                                      //
 //  s t a t u s   b a r    /    s h u t   d o w n                                       //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_B (RSTT_F)                                                     //
+//                                                                                      //
+//  F L O A T I N G   W I N D O W   /   R E S T A R T                                   //
+//                                                                                      //
+//  KC_B:  *  FLOATING WINDOW,                                                          //
+//         @  RESTART                                                                   //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void RSTT_F_finished (qk_tap_dance_state_t *state, void *user_data);
+void RSTT_F_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_powr] kc_b (rstt_f)                                                     //
+//                                                                                      //
+//  f l o a t i n g   w i n d o w   /   r e s t a r t                                   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void HRESET_finished (qk_tap_dance_state_t *state, void *user_data);
