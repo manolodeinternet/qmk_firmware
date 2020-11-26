@@ -1,0 +1,370 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+// BEGINING OF COMMON LAYERS 01...12
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+//
+// COMMON THUMB CLUSTER FOR BOTH DEFAULT LAYERS: _IAEOU & _QWERT
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// [_IAEOU]
+#if defined(COMPREHENSIVE_30_LAYOUT)
+/* [_IAEOU] = LAYER 00 : IAEOU DEFAULT LAYER
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Q   |    G   |    N   |    L   |    W   |        |    Y   |    F   |    H   |    B   |    P   |
+ * |G[_1APP]|        |        |        |        |        |        |        |        |        |G[_1APP]|
+ * | [_APPS]| [_POWR]| [_LEDS]| [_FUNC]| [_NUMB]|        | [_SYMB]| [_FUNC]| [_LEDS]| [_POWR]| [_APPS]|
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    D   |    S   |    T   |SPACEBAR|    R   |        |    I   |    A   |    E   |    O   |    U   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |   LCtl |   LAlt |  LSft  |  LGui  | [_ACCN]|        | [_ACCN]|  LGui  |  LSft  |   LAlt |   LCtl |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Z   |    X   |    C   |    V   |    J   |        |    K   |    M   |  ENTER |  BACK  | ESCAPE |
+ * |        |        |        |        |        |        |        |        |        |  SPACE |        |
+ * | [_DALY]| [_DVIM]| [_MOUS]| [_SYMB]| [_NUMB]|        | [_FVIM]| [_XVIM]| [_DVIM]|        | [_DALY]|
+ * '--------------------------------------------'        '--------------------------------------------'
+ */
+// #define ____IAEOU__L1___      TD(APPS_Q),LT(_POWR, KC_G),LT(_LEDS, KC_N),LT(_FUNC, KC_L),LT(_NUMB,KC_W)
+// #define ____IAEOU__L2___    LCTL_T(KC_D),   LALT_T(KC_S),   LSFT_T(KC_T), LGUI_T(KC_SPC),LT(_ACCN,KC_R)
+// #define ____IAEOU__L3___ LT(_DALY, KC_Z),LT(_DVIM, KC_X),LT(_MOUS, KC_C),LT(_SYMB, KC_V),LT(_NUMB,KC_J)
+
+// #define ____IAEOU__R1___ LT(_SYMB,KC_Y),LT(_FUNC,KC_F),LT(_LEDS, KC_H), LT(_POWR,KC_B),TD(APPS_P)
+// #define ____IAEOU__R2___ LT(_ACCN,KC_I),LGUI_T(KC_A),  LSFT_T(KC_E),    LALT_T(KC_O),  LCTL_T(KC_U)
+// #define ____IAEOU__R3___ LT(_FVIM,KC_K),LT(_XVIM,KC_M),LT(_DVIM,KC_ENT),KC_BSPC,       LT(_DALY,KC_ESC)
+
+
+/* [_IAEOU] = LAYER 00 : IAEOU DEFAULT LAYER
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Q   |    R   |    N   |    L   |    W   |        |    Y   |    H   |    F   |    B   |    P   |
+ * |G[_1APP]|        |        |        |        |        |        |        |        |        |G[_1APP]|
+ * | [_APPS]| [_POWR]| [_LEDS]| [_FUNC]| [_NUMB]|        | [_SYMB]| [_FUNC]| [_LEDS]| [_POWR]| [_APPS]|
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    D   |    S   |    T   |SPACEBAR|    G   |        |    I   |    A   |    E   |    O   |    U   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |   LCtl |   LAlt |  LSft  |  LGui  | [_ACCN]|        | [_ACCN]|  LGui  |  LSft  |   LAlt |   LCtl |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Z   |    X   |    C   |    V   |    J   |        |    K   |    M   |  ENTER |  BACK  | ESCAPE |
+ * |        |        |        |        |        |        |        |        |        |  SPACE |        |
+ * | [_DALY]| [_DVIM]| [_MOUS]| [_SYMB]| [_NUMB]|        | [_FVIM]| [_XVIM]| [_DVIM]|        | [_DALY]|
+ * '--------------------------------------------'        '--------------------------------------------'
+ */
+// #define ____IAEOU__L1___      TD(APPS_Q),LT(_POWR, KC_R),LT(_LEDS, KC_N),LT(_FUNC, KC_L),LT(_NUMB,KC_W)
+// #define ____IAEOU__L2___    LCTL_T(KC_D),   LALT_T(KC_S),   LSFT_T(KC_T), LGUI_T(KC_SPC),LT(_ACCN,KC_G)
+// #define ____IAEOU__L3___ LT(_DALY, KC_Z),LT(_DVIM, KC_X),LT(_MOUS, KC_C),LT(_SYMB, KC_V),LT(_NUMB,KC_J)
+
+// #define ____IAEOU__R1___ LT(_SYMB,KC_Y),LT(_FUNC,KC_H),LT(_LEDS, KC_F), LT(_POWR,KC_B),TD(APPS_P)
+// #define ____IAEOU__R2___ LT(_ACCN,KC_I),LGUI_T(KC_A),  LSFT_T(KC_E),    LALT_T(KC_O),  LCTL_T(KC_U)
+// #define ____IAEOU__R3___ LT(_FVIM,KC_K),LT(_XVIM,KC_M),LT(_DVIM,KC_ENT),KC_BSPC,       LT(_DALY,KC_ESC)
+
+
+/* [_IAEOU] = LAYER 00 : IAEOU DEFAULT LAYER
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Q   |    D   |    R   |    B   |    W   |        |    Y   |    H   |    F   |    L   |    P   |
+ * |G[_1APP]|        |        |        |        |        |        |        |        |        |G[_1APP]|
+ * | [_APPS]| [_POWR]| [_LEDS]| [_FUNC]| [_NUMB]|        | [_SYMB]| [_FUNC]| [_LEDS]| [_POWR]| [_APPS]|
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    N   |    S   |    T   |SPACEBAR|    G   |        |    U   |    A   |    E   |    O   |    I   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |   LCtl |   LAlt |  LSft  |  LGui  | [_ACCN]|        | [_ACCN]|  LGui  |  LSft  |   LAlt |   LCtl |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Z   |    X   |    C   |    V   |    J   |        |    K   |    M   |  ENTER |  BACK  | ESCAPE |
+ * |        |        |        |        |        |        |        |        |        |  SPACE |        |
+ * | [_DALY]| [_DVIM]| [_MOUS]| [_SYMB]| [_NUMB]|        | [_FVIM]| [_XVIM]| [_DVIM]|        | [_DALY]|
+ * '--------------------------------------------'        '--------------------------------------------'
+ *///🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+#define ____IAEOU__L1___      TD(APPS_Q),LT(_POWR, KC_R),LT(_LEDS, KC_N),LT(_FUNC, KC_L),LT(_NUMB,KC_W)
+#define ____IAEOU__L2___    LCTL_T(KC_D),   LALT_T(KC_S),   LSFT_T(KC_T), LGUI_T(KC_SPC),LT(_ACCN,KC_G)
+#define ____IAEOU__L3___ LT(_DALY, KC_Z),LT(_DVIM, KC_X),LT(_MOUS, KC_C),LT(_SYMB, KC_V),LT(_NUMB,KC_J)
+
+#define ____IAEOU__R1___ LT(_SYMB,KC_Y),LT(_FUNC,KC_H),LT(_LEDS, KC_F), LT(_POWR,KC_B),TD(APPS_P)
+#define ____IAEOU__R2___ LT(_ACCN,KC_I),LGUI_T(KC_A),  LSFT_T(KC_E),    LALT_T(KC_O),  LCTL_T(KC_U)
+#define ____IAEOU__R3___ LT(_FVIM,KC_K),LT(_XVIM,KC_M),LT(_DVIM,KC_ENT),KC_BSPC,       LT(_DALY,KC_ESC)
+
+
+
+//#if defined(COMPREHENSIVE_30_LAYOUT)
+#elif defined(SIMPLE_30_LAYOUT)
+/* [_IAEOU] = LAYER 00 : IAEOU DEFAULT LAYER
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Q   |    R   |    N   |    L   |    W   |        |    Y   |    H   |    F   |    B   |    P   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    D   |    S   |    T   |SPACEBAR|    G   |        |    I   |    A   |    E   |    O   |    U   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |   LCtl |   LAlt |  LSft  |   LGui |        |        |        |  LGui  |  LSft  |   LAlt |   LCtl |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Z   |    X   |    C   |    V   |    J   |        |    K   |    M   |  Enter |Bckspace| Escape |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * '--------------------------------------------'        '--------------------------------------------'
+ */
+#define ____IAEOU__L1___         KC_Q,         KC_R,         KC_N,           KC_L,         KC_W
+#define ____IAEOU__L2___ LCTL_T(KC_D), LALT_T(KC_S), LSFT_T(KC_T), LGUI_T(KC_SPC),         KC_G
+#define ____IAEOU__L3___         KC_Z,         KC_X,         KC_C,           KC_V,         KC_J
+
+#define      ____IAEOU__R1___             KC_Y,         KC_H,         KC_F,         KC_B,          KC_P
+#define      ____IAEOU__R2___             KC_I, LGUI_T(KC_A), LSFT_T(KC_E),  LALT_T(KC_O), LCTL_T(KC_U)
+#define      ____IAEOU__R3___             KC_K,         KC_M,       KC_ENT,      KC_BSPC,        KC_ESC
+
+//#elif defined(SIMPLE_30_LAYOUT)
+#endif
+//
+// THUMB CLUSTER DEFINED ABOVE
+//
+// END OF [_IAEOU] 00
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+
+
+
+/*
+____IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU__
+____IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU__
+____IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU______IAEOU__
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#if defined(MINI_DACTYL_THUMBS)
+// [_IAEOU] = LAYER 00 : _IAEOU DEFAULT LAYER
+// [_QWERT] = LAYER 00 : _QWERT DEFAULT LAYER
+/*   [DFLT] = LAYER 00 :   DFLT DEFAULT LAYER
+ *                            .-----------------.        .-----------------.
+ *                            |        |        |        |        |ONEshoot|
+ *                            |        |   Tab  |        |        |  layer |
+ *                            |        |        |        |        |        |
+ *                            |@[_LEDS]|@[_FUNC]|        |@[_POWR]|@[_ACCN]|
+ *                   .--------+--------+--------|        |--------+--------|--------.
+ *                   | Delete |        |        |        |        |        |        |
+ *                   |        |        |        |        |        |        |        |
+ *                   |        |        |        |        |        |        |        |
+ *                   |@[_DVIM]|@[_SYMB]|@[_NUMB]|        |@[_APPS]|@[_FVIM]|@[_DALY]|
+ *                   '--------------------------'        '--------------------------'
+ */
+#define _DFLT_LTHMB_RW1_            LT(_LEDS, KC_TAB), OSL(_FUNC)  // OSL(_FUNC)
+#define _DFLT_LTHMB_RW2_        MO(_DALY), OSL(_SYMB),    TT_NUMB  // TT(_NUMB)is SlowerThan TT_NUMB
+//MO(_DALY) instead of OSL(_DALY) is for not getting stucked in _DVIM layer, I don't know why !
+
+#define      _DFLT_RTHMB_RW1_                              MO(_POWR),          OSL(_ACCN)
+#define      _DFLT_RTHMB_RW2_                              TH_R3_APPS_TRIGGER, OSL(_FVIM), TD(DVIM_Del)
+//#if defined(MINI_DACTYL_THUMBS)
+#endif
+//
+// common thumb cluster for both default layers: _iaeou & _qwert
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+
+
+// [_IAEOU]
+#if defined(COMPREHENSIVE_30_LAYOUT)
+/* [_IAEOU] = LAYER 00 : IAEOU DEFAULT LAYER
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Q   |    G   |    N   |    L   |    W   |        |    Y   |    F   |    H   |    B   |    P   |
+ * |G[_1APP]|        |        |        |        |        |        |        |        |        |G[_1APP]|
+ * | [_APPS]| [_POWR]| [_LEDS]| [_FUNC]| [_NUMB]|        | [_SYMB]| [_FUNC]| [_LEDS]| [_POWR]| [_APPS]|
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    D   |    S   |    T   |SPACEBAR|    R   |        |    I   |    A   |    E   |    O   |    U   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |   LCtl |   LAlt |  LSft  |  LGui  | [_ACCN]|        | [_ACCN]|  LGui  |  LSft  |   LAlt |   LCtl |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Z   |    X   |    C   |    V   |    J   |        |    K   |    M   |  ENTER |  BACK  | ESCAPE |
+ * |        |        |        |        |        |        |        |        |        |  SPACE |        |
+ * | [_DALY]| [_DVIM]| [_MOUS]| [_SYMB]| [_NUMB]|        | [_FVIM]| [_XVIM]| [_DVIM]|        | [_DALY]|
+ * '--------------------------------------------'        '--------------------------------------------'
+ */
+// #define ____IAEOU__L1___      TD(APPS_Q),LT(_POWR, KC_G),LT(_LEDS, KC_N),LT(_FUNC, KC_L),LT(_NUMB,KC_W)
+// #define ____IAEOU__L2___    LCTL_T(KC_D),   LALT_T(KC_S),   LSFT_T(KC_T), LGUI_T(KC_SPC),LT(_ACCN,KC_R)
+// #define ____IAEOU__L3___ LT(_DALY, KC_Z),LT(_DVIM, KC_X),LT(_MOUS, KC_C),LT(_SYMB, KC_V),LT(_NUMB,KC_J)
+
+// #define ____IAEOU__R1___ LT(_SYMB,KC_Y),LT(_FUNC,KC_F),LT(_LEDS, KC_H), LT(_POWR,KC_B),TD(APPS_P)
+// #define ____IAEOU__R2___ LT(_ACCN,KC_I),LGUI_T(KC_A),  LSFT_T(KC_E),    LALT_T(KC_O),  LCTL_T(KC_U)
+// #define ____IAEOU__R3___ LT(_FVIM,KC_K),LT(_XVIM,KC_M),LT(_DVIM,KC_ENT),KC_BSPC,       LT(_DALY,KC_ESC)
+
+
+/* [_IAEOU] = LAYER 00 : IAEOU DEFAULT LAYER
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Q   |    R   |    N   |    L   |    W   |        |    Y   |    H   |    F   |    B   |    P   |
+ * |G[_1APP]|        |        |        |        |        |        |        |        |        |G[_1APP]|
+ * | [_APPS]| [_POWR]| [_LEDS]| [_FUNC]| [_NUMB]|        | [_SYMB]| [_FUNC]| [_LEDS]| [_POWR]| [_APPS]|
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    D   |    S   |    T   |SPACEBAR|    G   |        |    I   |    A   |    E   |    O   |    U   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |   LCtl |   LAlt |  LSft  |  LGui  | [_ACCN]|        | [_ACCN]|  LGui  |  LSft  |   LAlt |   LCtl |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Z   |    X   |    C   |    V   |    J   |        |    K   |    M   |  ENTER |  BACK  | ESCAPE |
+ * |        |        |        |        |        |        |        |        |        |  SPACE |        |
+ * | [_DALY]| [_DVIM]| [_MOUS]| [_SYMB]| [_NUMB]|        | [_FVIM]| [_XVIM]| [_DVIM]|        | [_DALY]|
+ * '--------------------------------------------'        '--------------------------------------------'
+ */
+// #define ____IAEOU__L1___      TD(APPS_Q),LT(_POWR, KC_R),LT(_LEDS, KC_N),LT(_FUNC, KC_L),LT(_NUMB,KC_W)
+// #define ____IAEOU__L2___    LCTL_T(KC_D),   LALT_T(KC_S),   LSFT_T(KC_T), LGUI_T(KC_SPC),LT(_ACCN,KC_G)
+// #define ____IAEOU__L3___ LT(_DALY, KC_Z),LT(_DVIM, KC_X),LT(_MOUS, KC_C),LT(_SYMB, KC_V),LT(_NUMB,KC_J)
+
+// #define ____IAEOU__R1___ LT(_SYMB,KC_Y),LT(_FUNC,KC_H),LT(_LEDS, KC_F), LT(_POWR,KC_B),TD(APPS_P)
+// #define ____IAEOU__R2___ LT(_ACCN,KC_I),LGUI_T(KC_A),  LSFT_T(KC_E),    LALT_T(KC_O),  LCTL_T(KC_U)
+// #define ____IAEOU__R3___ LT(_FVIM,KC_K),LT(_XVIM,KC_M),LT(_DVIM,KC_ENT),KC_BSPC,       LT(_DALY,KC_ESC)
+
+
+/* [_IAEOU] = LAYER 00 : IAEOU DEFAULT LAYER
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Q   |    D   |    R   |    B   |    W   |        |    Y   |    H   |    F   |    L   |    P   |
+ * |G[_1APP]|        |        |        |        |        |        |        |        |        |G[_1APP]|
+ * | [_APPS]| [_POWR]| [_LEDS]| [_FUNC]| [_NUMB]|        | [_SYMB]| [_FUNC]| [_LEDS]| [_POWR]| [_APPS]|
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    N   |    S   |    T   |SPACEBAR|    G   |        |    U   |    A   |    E   |    O   |    I   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |   LCtl |   LAlt |  LSft  |  LGui  | [_ACCN]|        | [_ACCN]|  LGui  |  LSft  |   LAlt |   LCtl |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Z   |    X   |    C   |    V   |    J   |        |    K   |    M   |  ENTER |  BACK  | ESCAPE |
+ * |        |        |        |        |        |        |        |        |        |  SPACE |        |
+ * | [_DALY]| [_DVIM]| [_MOUS]| [_SYMB]| [_NUMB]|        | [_FVIM]| [_XVIM]| [_DVIM]|        | [_DALY]|
+ * '--------------------------------------------'        '--------------------------------------------'
+ *///🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+#define ____IAEOU__L1___      TD(APPS_Q),LT(_POWR, KC_R),LT(_LEDS, KC_N),LT(_FUNC, KC_L),LT(_NUMB,KC_W)
+#define ____IAEOU__L2___    LCTL_T(KC_D),   LALT_T(KC_S),   LSFT_T(KC_T), LGUI_T(KC_SPC),LT(_ACCN,KC_G)
+#define ____IAEOU__L3___ LT(_DALY, KC_Z),LT(_DVIM, KC_X),LT(_MOUS, KC_C),LT(_SYMB, KC_V),LT(_NUMB,KC_J)
+
+#define ____IAEOU__R1___ LT(_SYMB,KC_Y),LT(_FUNC,KC_H),LT(_LEDS, KC_F), LT(_POWR,KC_B),TD(APPS_P)
+#define ____IAEOU__R2___ LT(_ACCN,KC_I),LGUI_T(KC_A),  LSFT_T(KC_E),    LALT_T(KC_O),  LCTL_T(KC_U)
+#define ____IAEOU__R3___ LT(_FVIM,KC_K),LT(_XVIM,KC_M),LT(_DVIM,KC_ENT),KC_BSPC,       LT(_DALY,KC_ESC)
+
+
+
+//#if defined(COMPREHENSIVE_30_LAYOUT)
+#elif defined(SIMPLE_30_LAYOUT)
+/* [_IAEOU] = LAYER 00 : IAEOU DEFAULT LAYER
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Q   |    R   |    N   |    L   |    W   |        |    Y   |    H   |    F   |    B   |    P   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    D   |    S   |    T   |SPACEBAR|    G   |        |    I   |    A   |    E   |    O   |    U   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |   LCtl |   LAlt |  LSft  |   LGui |        |        |        |  LGui  |  LSft  |   LAlt |   LCtl |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Z   |    X   |    C   |    V   |    J   |        |    K   |    M   |  Enter |Bckspace| Escape |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * '--------------------------------------------'        '--------------------------------------------'
+ */
+#define ____IAEOU__L1___         KC_Q,         KC_R,         KC_N,           KC_L,         KC_W
+#define ____IAEOU__L2___ LCTL_T(KC_D), LALT_T(KC_S), LSFT_T(KC_T), LGUI_T(KC_SPC),         KC_G
+#define ____IAEOU__L3___         KC_Z,         KC_X,         KC_C,           KC_V,         KC_J
+
+#define      ____IAEOU__R1___             KC_Y,         KC_H,         KC_F,         KC_B,          KC_P
+#define      ____IAEOU__R2___             KC_I, LGUI_T(KC_A), LSFT_T(KC_E),  LALT_T(KC_O), LCTL_T(KC_U) // [BUG] KC_SPC instead of KC_J
+#define      ____IAEOU__R3___             KC_K,         KC_M,       KC_ENT,      KC_BSPC,        KC_ESC   // [bug]
+
+//#elif defined(SIMPLE_30_LAYOUT)
+#endif
+//
+// THUMB CLUSTER DEFINED ABOVE
+//
+// END OF [_IAEOU] 00
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+
+
+#if defined(COMPREHENSIVE_30_LAYOUT)
+/* [_QWERT] = LAYER 00 : QWERT DEFAULT LAYER
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Q   |    W   |    E   |    R   |    T   |        |    Y   |    U   |    I   |    O   |    P   |
+ * |G[_1APP]|        |        |        |        |        |        |        |        |        |G[_1APP]|
+ * | [_APPS]| [_POWR]| [_LEDS]| [_FUNC]| [_NUMB]|        | [_SYMB]| [_FUNC]| [_LEDS]| [_POWR]| [_APPS]|
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    A   |    S   |    D   |    F   |    G   |        |    H   |    J   |    K   |    L   |  Space |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |   LCtl |   LAlt |  LSft  |  LGui  | [_ACCN]|        | [_ACCN]|  LGui  |  LSft  |   LAlt |   LCtl |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Z   |    X   |    C   |    V   |    B   |        |    N   |    M   |  Enter |Bckspace| Escape |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * | [_DALY]| [_DVIM]| [_MOUS]| [_SYMB]| [_NUMB]|        | [_FVIM]| [_XVIM]| [_DVIM]|        | [_DALY]|
+ * '--------------------------------------------'        '--------------------------------------------'
+ */
+#define ____QWERT__L1___ LT(_APPS, KC_Q),LT(_POWR, KC_W),LT(_LEDS, KC_E),LT(_FUNC, KC_R),LT(_NUMB,KC_T)
+#define ____QWERT__L2___    LCTL_T(KC_A),   LALT_T(KC_S),   LSFT_T(KC_D),   LGUI_T(KC_F),LT(_ACCN,KC_G)
+#define ____QWERT__L3___ LT(_DALY, KC_Z),LT(_DVIM, KC_X),LT(_MOUS, KC_C),LT(_SYMB, KC_V),LT(_NUMB,KC_B)
+
+#define ____QWERT__R1___ LT(_SYMB,KC_Y),LT(_FUNC,KC_U), LT(_LEDS, KC_I),LT(_POWR,KC_O), LT(_APPS, KC_P)
+#define ____QWERT__R2___ LT(_ACCN,KC_H),  LGUI_T(KC_J),    LSFT_T(KC_K),  LALT_T(KC_L),  LCTL_T(KC_SPC)
+#define ____QWERT__R3___ LT(_FVIM,KC_N),LT(_XVIM,KC_M),LT(_DVIM,KC_ENT),       KC_BSPC,LT(_DALY,KC_ESC)
+
+//#if defined(COMPREHENSIVE_30_LAYOUT)
+
+
+

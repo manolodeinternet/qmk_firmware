@@ -1,5 +1,4 @@
-// #pragma once
-// #include QMK_KEYBOARD_H
+#pragma once
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // MACROS FOR PROCESS_RECORD_USER()                                                     //
@@ -77,9 +76,28 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 // macros for _?vim 3, 4, 5
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
+
       ,REWIND
       ,PLAY_PAUSE
       ,FORWARD
+
+
+
+
+      ,_SYM_SPC
+      ,_DVIM_BS
+      ,BSPC_DEL
+      ,QUESTION_MARK
+      ,EXCLAMATION_MARK
+      ,CURRENCY_SIGN
+      ,PLUS_EQ
+      ,PERC_CI
+      ,AT_HASH
+      ,QUOTE
+      ,D_QUOTE
+
+
+
 
 #if defined(COMPREHENSIVE_30_LAYOUT)
 // MACROS FOR _APPS LAYER 10
@@ -92,6 +110,9 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 // macros for _apps layer 10
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
+
+
+
 //#if defined(COMPREHENSIVE_30_LAYOUT)
 #elif defined(SIMPLE_30_LAYOUT)
   // MACROS FOR _DFLT LAYER 00
@@ -99,7 +120,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
       // ,OSL_FVIM
       // ,OSL_POWR
       // ,OSL_ACCN
-
+      ,OSL_LEDS
       ,OSL_APPS
 
       ,OSL_DVIM

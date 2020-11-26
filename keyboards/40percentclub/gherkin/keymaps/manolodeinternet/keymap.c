@@ -859,23 +859,78 @@ void avim(char *key)
 //       else return 6;
 //     }
 // }
-//                                                                                      //
-// tap dance general setup section end                                                  //
-//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                   //
+// tap dance general setup section end                                                               //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                   //
+//                        C  O  M  B  O  S      F  E  A  T  U  R  E    -   COMBOS                    //
+//                                                                                                   //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// COMBOS #01 SUPER EASY IMPLEMENTATION WAY !!!
+// const uint16_t PROGMEM test_combo[] = {KC_E, KC_R, COMBO_END};
+// Next line with tap16 keycodes doesn't work.  It needs basic keycodes for working properly.
+// ... and I don't have any free alpha keycode.  I have [_DFLT] plenty of layer and modifiers triggers.
+//
+// For using combos, you need dedicated alphas, if you use LT or MT keys, combo disables them.
+//
+/*
+const uint16_t PROGMEM test_combo[] = {LT(_LEDS, KC_E), LT(_FUNC, KC_R), COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {COMBO(test_combo, KC_C)};
+*/
 
+// ===
+// COMBOS #02 NORMAL IMPLEMENTATION WAY !!!
+// enum combos {
+//   AB_ESC,
+//   JK_TAB
+// };
 
+// const uint16_t PROGMEM ab_combo[] = {KC_A, KC_B, COMBO_END};
+// const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
 
+// combo_t key_combos[COMBO_COUNT] = {
+//   [AB_ESC] = COMBO(ab_combo, KC_ESC),
+//   [JK_TAB] = COMBO(jk_combo, KC_TAB)
+// };
 
+// ===
+// COMBOS #03 HARD & POWERFUL IMPLEMENTATION WAY!!!
+/*
+enum combo_events {
+  ZX_COPY,
+  CV_PASTE
+};
 
+const uint16_t PROGMEM copy_combo[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM paste_combo[] = {KC_C, KC_V, COMBO_END};
 
+combo_t key_combos[COMBO_COUNT] = {
+  [ZX_COPY] = COMBO_ACTION(copy_combo),
+  [CV_PASTE] = COMBO_ACTION(paste_combo)
+};
 
-
-
-
-
-
+void process_combo_event(uint8_t combo_index, bool pressed) {
+  switch(combo_index) {
+    case ZX_COPY:
+      if (pressed) {
+        tap_code16(LGUI(KC_C));
+      }
+      break;
+    case CV_PASTE:
+      if (pressed) {
+        tap_code16(LGUI(KC_V));
+      }
+      break;
+  }
+};
+*/
+//                                                                                                   //
+//                        c  o  m  b  o  s      f  e  a  t  u  r  e    -   combos                    //
+//                                                                                                   //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1112,7 +1167,7 @@ static tap FVIM_iI_tap_state = {
   .state = 0
 };
 
-void FVIM_iI_function (qk_tap_dance_state_t *state, void *user_data) {
+void FVIM_iI_finished (qk_tap_dance_state_t *state, void *user_data) {
   FVIM_iI_tap_state.state = cur_dance(state);
   switch (FVIM_iI_tap_state.state) {
     case SINGLE_TAP:        register_code(KC_LALT);   register_code(KC_LEFT);
@@ -1120,6 +1175,10 @@ void FVIM_iI_function (qk_tap_dance_state_t *state, void *user_data) {
 
     case DOUBLE_TAP:        register_code(KC_LCTL);   register_code(KC_LEFT);
                           unregister_code(KC_LEFT);   unregister_code(KC_LCTL); break;
+  }
+}
+void FVIM_iI_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (FVIM_iI_tap_state.state) {
   }
   FVIM_iI_tap_state.state = 0;
 }
@@ -1146,7 +1205,7 @@ static tap FVIM_oO_tap_state = {
   .state = 0
 };
 
-void FVIM_oO_function (qk_tap_dance_state_t *state, void *user_data) {
+void FVIM_oO_finished (qk_tap_dance_state_t *state, void *user_data) {
   FVIM_oO_tap_state.state = cur_dance(state);
   switch (FVIM_oO_tap_state.state) {
     case SINGLE_TAP:        register_code(KC_LALT);   register_code(KC_RGHT);
@@ -1154,6 +1213,10 @@ void FVIM_oO_function (qk_tap_dance_state_t *state, void *user_data) {
 
     case DOUBLE_TAP:        register_code(KC_LCTL);   register_code(KC_RGHT);
                           unregister_code(KC_RGHT); unregister_code(KC_LCTL); break;
+  }
+}
+void FVIM_oO_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (FVIM_oO_tap_state.state) {
   }
   FVIM_oO_tap_state.state = 0;
 }
@@ -1227,91 +1290,7 @@ void FVIM_oO_function (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//             T A P   D A N C E   F O R    [ _ P O W R ]    L A Y E R                  //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_POWR] KC_Y (V8_TEST)                                                    //
-//                                                                                      //
-//  V O L _ 0 8,   T E S T   L A Y E R                                                  //
-//                                                                                      //
-//  KC_Y:  *  SET VOLUME TO 8                                                           //
-//         @ [_TEST] LAYER                                                              //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'V8_TEST' tap dance.
-static tap V8_TEST_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
 
-void V8_TEST_finished (qk_tap_dance_state_t *state, void *user_data) {
-  V8_TEST_tap_state.state = cur_dance(state);
-  switch (V8_TEST_tap_state.state) {
-    case SINGLE_TAP:        volumeSetToLevel(8);
-                            break;
-
-    case SINGLE_HOLD:       layer_on(_TEST); break;
-  }
-}
-
-void V8_TEST_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (V8_TEST_tap_state.state) {
-    case SINGLE_TAP:        break;
-
-    case SINGLE_HOLD:       layer_off(_TEST); break;
-  }
-  V8_TEST_tap_state.state = 0;
-}
-//                                                                                      //
-// [TAPDANCE] [_POWR] KC_Y (V8_TEST)                                                    //
-//                                                                                      //
-//  V O L _ 0 8,   T E S T   L A Y E R                                                  //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// [TAPDANCE] [_POWR] KC_U (V1_LAST)                                                    //
-//                                                                                      //
-//  V O L _ 0 1,   L A S T   L A Y E R                                                  //
-//                                                                                      //
-//  KC_U:  *  SET VOLUME TO 1                                                           //
-//         @ [_LAST] LAYER                                                              //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'V1_LAST' tap dance.
-static tap V1_LAST_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void V1_LAST_finished (qk_tap_dance_state_t *state, void *user_data) {
-  V1_LAST_tap_state.state = cur_dance(state);
-  switch (V1_LAST_tap_state.state) {
-    case SINGLE_TAP:        volumeSetToLevel(1);
-                            break;
-
-    case SINGLE_HOLD:       layer_on(_LAST); break;
-  }
-}
-
-void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (V1_LAST_tap_state.state) {
-    case SINGLE_TAP:        break;
-
-    case SINGLE_HOLD:       layer_off(_LAST); break;
-  }
-  V1_LAST_tap_state.state = 0;
-}
-//                                                                                      //
-// [tapdance] [_powr] kc_u (v1_last)                                                    //
-//                                                                                      //
-//  v o l _ 0 1,   l a s t   l a y e r                                                  //
-//////////////////////////////////////////////////////////////////////////////////////////
 //
 // //////////////////////////////////////////////////////////////////////////////////////////
 // //                                                                                      //
@@ -1752,7 +1731,7 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 // //////////////////////////////////////////////////////////////////////////////////////////
 // //                                                                                      //
-// // [TAPDANCE] [_POWR] KC_J (RS_ZOIN)                                                    //
+// // [TAPDANCE] [_POWR] KC_J (RG_ZOIN)                                                    //
 // //                                                                                      //
 // //  R I G H T    S H I F T    /    Z O O M   I N                                        //
 // //                                                                                      //
@@ -1760,15 +1739,15 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 // //         @  RIGHT SHIFT                                                               //
 // //                                                                                      //
 // //////////////////////////////////////////////////////////////////////////////////////////
-// //instantalize an instance of 'tap' for the 'RS_ZOIN' tap dance.
-// static tap RS_ZOIN_tap_state = {
+// //instantalize an instance of 'tap' for the 'RG_ZOIN' tap dance.
+// static tap RG_ZOIN_tap_state = {
 //   .is_press_action = true,
 //   .state = 0
 // };
 
-// void RS_ZOIN_finished (qk_tap_dance_state_t *state, void *user_data) {
-//   RS_ZOIN_tap_state.state = cur_dance(state);
-//   switch (RS_ZOIN_tap_state.state) {
+// void RG_ZOIN_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   RG_ZOIN_tap_state.state = cur_dance(state);
+//   switch (RG_ZOIN_tap_state.state) {
 
 // // [SYSTEM PREFERENCES]    
 //     case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
@@ -1781,8 +1760,8 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 //   }
 // }
 
-// void RS_ZOIN_reset (qk_tap_dance_state_t *state, void *user_data) {
-//   switch (RS_ZOIN_tap_state.state) {
+// void RG_ZOIN_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (RG_ZOIN_tap_state.state) {
 //     case SINGLE_TAP:  unregister_code(KC_EQL);
 //                       unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
 //                       break;
@@ -1790,10 +1769,10 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 //     case SINGLE_HOLD: unregister_code(KC_RSFT);
 //                       break;                       
 //   }
-//   RS_ZOIN_tap_state.state = 0;
+//   RG_ZOIN_tap_state.state = 0;
 // }
 // //                                                                                      //
-// // [tapdance] [_powr] kc_j (rs_zoin)                                                    //
+// // [tapdance] [_powr] kc_j (RG_ZOIN)                                                    //
 // //                                                                                      //
 // //  r i g h t    s h i f t    /    z o o m   i n                                        //
 // //////////////////////////////////////////////////////////////////////////////////////////
@@ -1801,7 +1780,7 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 // //////////////////////////////////////////////////////////////////////////////////////////
 // //                                                                                      //
-// // [TAPDANCE] [_POWR] KC_K (RG_ZOUT)                                                    //
+// // [TAPDANCE] [_POWR] KC_K (RA_ZOUT)                                                    //
 // //                                                                                      //
 // //  R I G H T    G U I     /     Z O O M    O U T                                       //
 // //                                                                                      //
@@ -1809,15 +1788,15 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 // //         @  RIGHT GUI                                                                 //
 // //                                                                                      //
 // //////////////////////////////////////////////////////////////////////////////////////////
-// //instantalize an instance of 'tap' for the 'RG_ZOUT' tap dance.
-// static tap RG_ZOUT_tap_state = {
+// //instantalize an instance of 'tap' for the 'RA_ZOUT' tap dance.
+// static tap RA_ZOUT_tap_state = {
 //   .is_press_action = true,
 //   .state = 0
 // };
 
-// void RG_ZOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
-//   RG_ZOUT_tap_state.state = cur_dance(state);
-//   switch (RG_ZOUT_tap_state.state) {
+// void RA_ZOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   RA_ZOUT_tap_state.state = cur_dance(state);
+//   switch (RA_ZOUT_tap_state.state) {
 
 // // [SYSTEM PREFERENCES]
 //     case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
@@ -1830,8 +1809,8 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 //   }
 // }
 
-// void RG_ZOUT_reset (qk_tap_dance_state_t *state, void *user_data) {
-//   switch (RG_ZOUT_tap_state.state) {
+// void RA_ZOUT_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (RA_ZOUT_tap_state.state) {
 //     case SINGLE_TAP:  unregister_code(KC_MINS);
 //                       unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
 //                       break;
@@ -1839,10 +1818,10 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 //     case SINGLE_HOLD: unregister_code(KC_RGUI);
 //                       break;                       
 //   }
-//   RG_ZOUT_tap_state.state = 0;
+//   RA_ZOUT_tap_state.state = 0;
 // }
 // //                                                                                      //
-// // [tapdance] [_powr] kc_k (rg_zout)                                                    //
+// // [tapdance] [_powr] kc_k (RA_ZOUT)                                                    //
 // //                                                                                      //
 // //  r i g h t    g u i     /     z o o m    o u t                                       //
 // //////////////////////////////////////////////////////////////////////////////////////////
@@ -1850,7 +1829,7 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 // //////////////////////////////////////////////////////////////////////////////////////////
 // //                                                                                      //
-// // [TAPDANCE] [_POWR] KC_L (RA_ZOOM)                                                    //
+// // [TAPDANCE] [_POWR] KC_L (RS_ZOOM)                                                    //
 // //                                                                                      //
 // //  R I G H T    A L T    /    Z O O M    O N / O F F                                   //
 // //                                                                                      //
@@ -1858,15 +1837,15 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 // //         @  RIGHT ALT                                                                 //
 // //                                                                                      //
 // //////////////////////////////////////////////////////////////////////////////////////////
-// //instantalize an instance of 'tap' for the 'RA_ZOOM' tap dance.
-// static tap RA_ZOOM_tap_state = {
+// //instantalize an instance of 'tap' for the 'RS_ZOOM' tap dance.
+// static tap RS_ZOOM_tap_state = {
 //   .is_press_action = true,
 //   .state = 0
 // };
 
-// void RA_ZOOM_finished (qk_tap_dance_state_t *state, void *user_data) {
-//   RA_ZOOM_tap_state.state = cur_dance(state);
-//   switch (RA_ZOOM_tap_state.state) {
+// void RS_ZOOM_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   RS_ZOOM_tap_state.state = cur_dance(state);
+//   switch (RS_ZOOM_tap_state.state) {
 
 // // [SYSTEM PREFERENCES]
 //     case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
@@ -1879,8 +1858,8 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 //   }
 // }
 
-// void RA_ZOOM_reset (qk_tap_dance_state_t *state, void *user_data) {
-//   switch (RA_ZOOM_tap_state.state) {
+// void RS_ZOOM_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (RS_ZOOM_tap_state.state) {
 //     case SINGLE_TAP:  unregister_code(KC_SCLN);
 //                       unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
 //                       break;
@@ -1888,10 +1867,10 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 //     case SINGLE_HOLD: unregister_code(KC_RALT);
 //                       break;                       
 //   }
-//   RA_ZOOM_tap_state.state = 0;
+//   RS_ZOOM_tap_state.state = 0;
 // }
 // //                                                                                      //
-// // [tapdance] [_powr] kc_l (ra_zoom)                                                    //
+// // [tapdance] [_powr] kc_l (RS_ZOOM)                                                    //
 // //                                                                                      //
 // //  r i g h t    a l t    /    z o o m    o n / o f f                                   //
 // //////////////////////////////////////////////////////////////////////////////////////////
@@ -1985,25 +1964,30 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // Other declarations would go here, separated by commas, if you have them
 //
 
+// [_DFLT] LAYER
+  [L_APPS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, L_APPS_finished, L_APPS_reset)
+ ,[R_APPS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, R_APPS_finished, R_APPS_reset)
+// [_dflt] layer
+
 // [_SYMB] LAYER  (TWO IN A KEY)
-  [V_RACI] = ACTION_TAP_DANCE_DOUBLE(KC_RABK, KC_CIRC )                                   // & ^
- ,[B_EQPE] = ACTION_TAP_DANCE_DOUBLE(KC_EQL,  KC_PERC )                                   // = %
+ ,[V_RACI]   = ACTION_TAP_DANCE_DOUBLE(KC_RABK, KC_CIRC )                                   // & ^
+ ,[B_EQPE]   = ACTION_TAP_DANCE_DOUBLE(KC_EQL,  KC_PERC )                                   // = %
 //[A_GRAV]  // grave & tilde         //tilde        accessible while holding SHIFT key !  // ` ~
 //[S_QUOT]  // quote & double quote  //double quote accessible while holding SHIFT key !  // ' "
- ,[R_DOEU] = ACTION_TAP_DANCE_DOUBLE(KC_DLR,  EURO)                                       // $ €
- ,[Z_EXCL] = ACTION_TAP_DANCE_DOUBLE(KC_EXLM, INV_EX)                                     // ! ¡
- ,[X_QUES] = ACTION_TAP_DANCE_DOUBLE(KC_QUES, INV_QU)                                     // ? ¿
+ ,[R_DOEU]   = ACTION_TAP_DANCE_DOUBLE(KC_DLR,  EURO)                                       // $ €
+ ,[Z_EXCL]   = ACTION_TAP_DANCE_DOUBLE(KC_EXLM, INV_EX)                                     // ! ¡
+ ,[TD_EXC]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, TD_EXC_finished, TD_EXC_reset, 300)
+ ,[TD_QUE]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, TD_QUE_finished, TD_QUE_reset, 350)
+ ,[X_QUES]   = ACTION_TAP_DANCE_DOUBLE(KC_QUES, INV_QU)                                     // ? ¿
 // [_symb] layer  (two in a key)
 
 // [_NUMB] LAYER
- ,[SLNUMB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLNUMB_finished, SLNUMB_reset)
- ,[NUMBOF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, NUMBOF_finished, NUMBOF_reset)
+ ,[SLNUMB]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLNUMB_finished, SLNUMB_reset)
+ ,[NUMBOF]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, NUMBOF_finished, NUMBOF_reset)
 // [_numb] layer
 
 // [_POWR] LAYER
- ,[V8_TEST]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, V8_TEST_finished, V8_TEST_reset)
- ,[V1_LAST]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, V1_LAST_finished, V1_LAST_reset)
-
+ ,[TG_QWE]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, TG_QWE_finished, TG_QWE_reset, 800)
  ,[LCKLOG]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, LCKLOG_finished, LCKLOG_reset, 800)
  ,[HRESET]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, HRESET_finished, HRESET_reset, 1000)
 
@@ -2013,17 +1997,19 @@ qk_tap_dance_action_t tap_dance_actions[] = {
  ,[SHUT_S]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, SHUT_S_finished, SHUT_S_reset, 1000)
  ,[RSTT_F]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, RSTT_F_finished, RSTT_F_reset, 1000)
 
- // ,[RS_ZOIN]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RS_ZOIN_finished, RS_ZOIN_reset) 
- // ,[RG_ZOUT]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RG_ZOUT_finished, RG_ZOUT_reset) 
- // ,[RA_ZOOM]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RA_ZOOM_finished, RA_ZOOM_reset) 
- // ,[RC_INCO]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RC_INCO_finished, RC_INCO_reset) 
+ ,[RG_ZOIN]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RG_ZOIN_finished, RG_ZOIN_reset) 
+ ,[RA_ZOUT]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RA_ZOUT_finished, RA_ZOUT_reset) 
+ ,[RS_ZOOM]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RS_ZOOM_finished, RS_ZOOM_reset) 
+ ,[RA_INCO]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RA_INCO_finished, RA_INCO_reset) 
  // [_powr] layer
 
 // [_FVIM] LAYER
- ,[FVIM_uU] = ACTION_TAP_DANCE_FN(FVIM_uU_function)
- ,[FVIM_iI] = ACTION_TAP_DANCE_FN(FVIM_iI_function)
- ,[FVIM_oO] = ACTION_TAP_DANCE_FN(FVIM_oO_function)
- ,[FVIM_pP] = ACTION_TAP_DANCE_FN(FVIM_pP_function)
+
+// ,[FVIM_uU] = ACTION_TAP_DANCE_FN(FVIM_uU_function)
+ ,[FVIM_uU] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, FVIM_uU_finished, FVIM_uU_reset, 250)
+ ,[FVIM_iI] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, FVIM_iI_finished, FVIM_iI_reset, 250)
+ ,[FVIM_oO] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, FVIM_oO_finished, FVIM_oO_reset, 250)
+ ,[FVIM_pP] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, FVIM_pP_finished, FVIM_pP_reset, 250)
 // [_fvim] layer
 
 // [_DVIM] LAYER
@@ -2096,20 +2082,33 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-//[_DFLT] LAYER 00 : DEFAULT LAYER
+//[_DFLT] LAYER 00 : UAIH DEFAULT LAYER
   [_DFLT] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
-               ___DEFAULT_L1___,                                          ___DEFAULT_R1___,
+               ____DFLT___L1___,                                          ____DFLT___R1___,
 //|----------------------------------------|                 |----------------------------------------|
-               ___DEFAULT_L2___,                                          ___DEFAULT_R2___,
+               ____DFLT___L2___,                                          ____DFLT___R2___,
 //|----------------------------------------|                 |----------------------------------------|
-               ___DEFAULT_L3___,                                          ___DEFAULT_R3___
+               ____DFLT___L3___,                                          ____DFLT___R3___
 //'----------------------------------------'                 '----------------------------------------'
 ),
 // END OF _DFLT 00
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_ACCN] LAYER 01 : _ACCENTS LAYER
+//[_QWER] LAYER 02 : QWERT DEFAULT LAYER
+  [_QWER] = KEYMAP_gherkin_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ____QWER__L1___,                                          ____QWER__R1___,
+//|----------------------------------------|                 |----------------------------------------|
+               ____QWER__L2___,                                          ____QWER__R2___,
+//|----------------------------------------|                 |----------------------------------------|
+               ____QWER__L3___,                                          ____QWER__R3___
+//'----------------------------------------'                 '----------------------------------------'
+),
+// END OF _QWER 02
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+
+//[_ACCN] LAYER 03 : _ACCENTS LAYER
   [_ACCN] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___ACCENTS_L1___,                                           ___ACCENTS_R1___,
@@ -2119,10 +2118,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                ___ACCENTS_L3___,                                           ___ACCENTS_R3___
 //'----------------------------------------'                 '----------------------------------------'
 ),
-// END OF _ACCN 01
+// END OF _ACCN 03
 /////////////////////////////////////////////////////////////////////////////////////////////////////##
 
-//[_NUMB] LAYER 02 : NUMBERS LAYER
+//[_NUMB] LAYER 04 : NUMBERS LAYER
   [_NUMB] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___NUMBERS_L1___,                                          ___NUMBERS_R1___,
@@ -2132,10 +2131,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                ___NUMBERS_L3___,                                          ___NUMBERS_R3___
 //'----------------------------------------'                 '----------------------------------------'
 ),
-// END OF _NUMB 02
+// END OF _NUMB 04
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_FVIM] LAYER 03 : FAKE EDITION VIM LAYER
+//[_FVIM] LAYER 05 : FAKE EDITION VIM LAYER
   [_FVIM] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___FAKEVIM_L1___,                                          ___FAKEVIM_R1___,
@@ -2145,10 +2144,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                ___FAKEVIM_L3___,                                          ___FAKEVIM_R3___
 //'----------------------------------------'                 '----------------------------------------'
 ),
-// END OF _FVIM 03
+// END OF _FVIM 05
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_XVIM] LAYER 04 : EXTENDED EDITION VIM LAYER
+//[_XVIM] LAYER 06 : EXTENDED EDITION VIM LAYER
   [_XVIM] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___EXT_VIM_L1___,                                          ___EXT_VIM_R1___,
@@ -2158,10 +2157,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                ___EXT_VIM_L3___,                                          ___EXT_VIM_R3___
 //'----------------------------------------'                 '----------------------------------------'
 ),
-// END OF _XVIM 04
+// END OF _XVIM 06
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_DVIM] LAYER 05 : DELETE EDITION VIM LAYER
+//[_DVIM] LAYER 07 : DELETE EDITION VIM LAYER
   [_DVIM] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___DEL_VIM_L1___,                                          ___DEL_VIM_R1___,
@@ -2171,10 +2170,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                ___DEL_VIM_L3___,                                          ___DEL_VIM_R3___
 //'----------------------------------------'                 '----------------------------------------'
 ),
-// END OF _DVIM 05
+// END OF _DVIM 07
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_MOUS] = LAYER 06 : MOUSE LAYER
+//[_MOUS] = LAYER 08 : MOUSE LAYER
   [_MOUS] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ____MOUSE_L1____,                                          ____MOUSE_R1____,
@@ -2184,10 +2183,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                ____MOUSE_L3____,                                          ____MOUSE_R3____
 //'----------------------------------------'                 '----------------------------------------'
 ),
-// END OF _MOUS 06
+// END OF _MOUS 08
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_DALY] = LAYER 07 : DAILY COMMANDS LAYER
+//[_DALY] = LAYER 09 : DAILY COMMANDS LAYER
   [_DALY] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ____DAILY_L1____,                                          ____DAILY_R1____,
@@ -2197,10 +2196,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                ____DAILY_L3____,                                          ____DAILY_R3____
 //'----------------------------------------'                 '----------------------------------------'
 ),
-// END OF _DALY 07
+// END OF _DALY 09
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_FUNC] = LAYER 08 : FUNCTIONS LAYER
+//[_FUNC] = LAYER 10 : FUNCTIONS LAYER
   [_FUNC] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                __FUNCTIONS_L1__,                                          __FUNCTIONS_R1__,
@@ -2210,10 +2209,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                __FUNCTIONS_L3__,                                          __FUNCTIONS_R3__
 //'----------------------------------------'                 '----------------------------------------'
 ),
-// END OF _FUNC 08
+// END OF _FUNC 10
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_SYMB] LAYER 09 : SYMBOLS LAYER
+//[_SYMB] LAYER 11 : SYMBOLS LAYER
   [_SYMB] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___SYMBOLS_L1___,                                          ___SYMBOLS_R1___,
@@ -2223,11 +2222,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                ___SYMBOLS_L3___,                                          ___SYMBOLS_R3___
 //'----------------------------------------'                 '----------------------------------------'
 ),
-// END OF _SYMB 9
+// END OF _SYMB 11
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_APPS] LAYER 10 : APPLICATIONS LAYER
-  [_APPS] = KEYMAP_gherkin_wrapper(
+//[_APPS] LAYER 12 : APPLICATIONS LAYER
+/*  [_APPS] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                __APPLICATS_L1__,                                          __APPLICATS_R1__,
 //|----------------------------------------|                 |----------------------------------------|
@@ -2235,11 +2234,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|----------------------------------------|                 |----------------------------------------|
                __APPLICATS_L3__,                                          __APPLICATS_R3__
 //'----------------------------------------'                 '----------------------------------------'
-),
-// END OF _APPS 10
+),*/
+// END OF _APPS 12
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_LEDS] LAYER 11 : SYMBOLS LAYER
+//[_LEDS] LAYER 12 : LEDS LAYER
   [_LEDS] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                _LEDS_LIGHTS_L1_,                                          _LEDS_LIGHTS_R1_,
@@ -2249,10 +2248,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                _LEDS_LIGHTS_L3_,                                          _LEDS_LIGHTS_R3_
 //'----------------------------------------'                 '----------------------------------------'
 ),
-// END OF _LEDS 11
+// END OF _LEDS 12
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_POWR] LAYER 12 : POWER COMMANDS LAYER
+//[_POWR] LAYER 13 : POWER COMMANDS LAYER
   [_POWR] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ____POWER_L1____,                                          ____POWER_R1____,
@@ -2261,34 +2260,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //|----------------------------------------|                 |----------------------------------------|
                ____POWER_L3____,                                          ____POWER_R3____
 //'----------------------------------------'                 '----------------------------------------'
-),
-// END OF [_POWR] 12
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-//[_TEST] LAYER 13 : TEST LAYER
-  [_TEST] = KEYMAP_gherkin_wrapper(
-//.----------------------------------------.                 .----------------------------------------.
-               ____TEST__L1____,                                          ____TEST__R1____,
-//|----------------------------------------|                 |----------------------------------------|
-               ____TEST__L2____,                                          ____TEST__R2____,
-//|----------------------------------------|                 |----------------------------------------|
-               ____TEST__L3____,                                          ____TEST__R3____
-//'----------------------------------------'                 '----------------------------------------'
-),
-// END OF _TEST 13
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-//[_LAST] LAYER 17 : LAST LAYER //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!
-  [_LAST] = KEYMAP_gherkin_wrapper(
-//.----------------------------------------.                 .----------------------------------------.
-               ____LAST__L1____,                                          ____LAST__R1____,
-//|----------------------------------------|                 |----------------------------------------|
-               ____LAST__L2____,                                          ____LAST__R2____,
-//|----------------------------------------|                 |----------------------------------------|
-               ____LAST__L3____,                                          ____LAST__R3____
-//'----------------------------------------'                 '----------------------------------------'
 )
-// END OF _LAST 17
+// END OF [_POWR] 13
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 };
 //                                                                                      //
@@ -3917,7 +3890,8 @@ void matrix_init_user(void) {
 uint32_t layer_state_set_user(uint32_t state) {
   switch (biton32(state)) {
 
-    case _DFLT:   //  0  
+    case _DFLT:   //  0
+    case _QWER:   //  2
         
         if (hide_other_apps == true)
         {
@@ -3938,62 +3912,62 @@ uint32_t layer_state_set_user(uint32_t state) {
           }
         break; 
 
-    case _ACCN:   //  1
+    case _ACCN:   //  3   // [BUG] increment a unit to the layer from now on...
         backlight_level(BL_ACCN);
         breathing_period_set(BR_ACCN);
         breathing_enable();        
         break;
 
-    case _NUMB:   //  2
+    case _NUMB:   //  4
         backlight_level(BL_NUMB);
         breathing_period_set(BR_NUMB);
         breathing_enable();
         break;
 
-    case _FVIM:   //  3
+    case _FVIM:   //  5
         backlight_level(BL_FVIM);
         break;
 
-    case _XVIM:   //  4
+    case _XVIM:   //  6
  // case _CVIM:   // X4X  // Now it's included in right side of _XVIM
         backlight_level(BL_VIM);
         break;
 
-    case _DVIM:   //  5
+    case _DVIM:   //  7
         backlight_level(BL_DVIM);
         break;
 
-    case _MOUS:   // 6
+    case _MOUS:   // 8
         backlight_level(BL_MOUS);
         break;
 
 
-    case _DALY:   //  7
+    case _DALY:   //  9
         backlight_level(BL_DALY);
         break;
 
-    case _FUNC:   //  8
+    case _FUNC:   //  10
         backlight_level(BL_FUNC);
         break;
 
-    case _SYMB:   //  9
+    case _SYMB:   //  11
         backlight_level(BL_SYMB);
         breathing_period_set(BR_SYMB);
         breathing_enable();
         break;
 
-    case _APPS:   //  10
-      gui_mod = get_mods()&GUI_MODS;
-      if (gui_mod)
-      {
-        hide_other_apps = true;
-      }
-      backlight_level(BL_APPS);
-      break;
+    // case _APPS:   //  11
+    //   gui_mod = get_mods()&GUI_MODS;
+    //   if (gui_mod)
+    //   {
+    //     hide_other_apps = true;
+    //   }
+    //   backlight_level(BL_APPS);
+    //   break;
 
- // case _BLIT :   //  10
+ // case _BLIT _LEDS:   //  12
 
-    case _POWR:   //  12
+    case _POWR:   //  13
         backlight_level(BL_POWR);
         break;
 

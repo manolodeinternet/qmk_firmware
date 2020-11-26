@@ -65,14 +65,20 @@ enum tap_dance_keycodes {
 
 
   // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
-  ,HRESET   // on hold RESET keyboard
+  ,TG_QWE  // toggle _QWER layer ON/OFF 
+  ,LCKLOG  // lock screen / (on hold) logout user session
+  ,HRESET  // on hold RESET keyboard
 
-  ,LCKLOG   // lock screen / (on hold) logout user session
-  ,SLEP_M   //    menu bar / (on hold) SLEEP
-  ,KILA_D   //  tools bar / (on hold) KILL CURRENT APP
-  ,KILM_T   //   dock bar / (on hold) KILL MENU
-  ,SHUT_S   //  status bar / (on hold) SHUT DOWN
-  ,RSTT_F   // floating w / (on hold) COMPUTER   RESTART
+  ,RG_ZOIN // right shift   / zoom in
+  ,RA_ZOUT // right gui     / zoom out
+  ,RS_ZOOM // right alt     / zoom on/off
+  ,RA_INCO // right control / invert colors
+
+  ,SLEP_M  //    menu bar / (on hold) SLEEP
+  ,KILA_D  //  tools bar / (on hold) KILL CURRENT APP
+  ,KILM_T  //   dock bar / (on hold) KILL MENU
+  ,SHUT_S  //  status bar / (on hold) SHUT DOWN
+  ,RSTT_F  // floating w / (on hold) COMPUTER   RESTART
   // tap dance keycodes accessible from _powr layer 12
 
   // common tapdance keycodes accessible from all keyboards
@@ -80,6 +86,10 @@ enum tap_dance_keycodes {
 
 
   #if defined(COMPREHENSIVE_30_LAYOUT)
+    // TAP DANCE KEYCODES ACCESSIBLE FROM _DFLT LAYER 0
+    ,L_APPS
+    ,R_APPS
+
     // TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB LAYER 02
     ,NUMBOF  //   return to *GHKN layer (gherkin default layer)  // ... percent
     ,SLNUMB  //   return to *GHKN layer (gherkin default layer)  // ... slash
@@ -88,7 +98,9 @@ enum tap_dance_keycodes {
     ,V_RACI  // right angle bracket & circumflex accent
     //  ,A_GRAV  // grave & tilde         //tilde        accessible while holding SHIFT key !
     //  ,S_QUOT  // quote & double quote  //double quote accessible while holding SHIFT key !
-    ,Z_EXCL  // exclamation mark: open & close  
+    ,Z_EXCL  // exclamation mark: open & close
+    ,TD_EXC
+    ,TD_QUE  
     ,X_QUES  // question    mark: open & close
 
     // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
@@ -97,17 +109,11 @@ enum tap_dance_keycodes {
     ,RA_PLAY // right alt     / play/pause   // KC_SPC
     ,RG_FRWD // right gui     / forward      // KC_F9
     */
-    // ,RS_ZOIN // right shift   / zoom in
-    // ,RG_ZOUT // right gui     / zoom out
-    // ,RA_ZOOM // right alt     / zoom on/off
-    // ,RC_INCO // right control / invert colors
     // [ADVICE]
     // ,BCKLIT // accessing _BLIT layer from tap dance into _POWR layer
                // ...this way we don't waste a layer from being accesible from Default layer,
                // ...remember that you only can access 16 layer through LT(lyr, key) and LM(layer, mod)
     // [advice]    
-    ,V1_LAST  // accessing _LAST layer from tap dance into _POWR layer
-    ,V8_TEST  // accessing _TEST layer from tap dance into _POWR layer
     // tap dance keycodes accessible from _powr layer 12
 
     // TAP DANCE KEYCODES ACCESSIBLE FROM _FVIM LAYER 03
@@ -162,7 +168,78 @@ int cur_dance (qk_tap_dance_state_t *state);//                                  
 
 
 //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_J (RG_ZOIN)                                                    //
+//                                                                                      //
+//  R I G H T    S H I F T    /    Z O O M   I N                                        //
+//                                                                                      //
+//  KC_J:  *  ZOOM IN,                                                                  //
+//         @  RIGHT SHIFT                                                               //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void RG_ZOIN_finished (qk_tap_dance_state_t *state, void *user_data);
+void RG_ZOIN_reset    (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_powr] kc_j (RG_ZOIN)                                                    //
+//                                                                                      //
+//  r i g h t    s h i f t    /    z o o m   i n                                        //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_K (RA_ZOUT)                                                    //
+//                                                                                      //
+//  R I G H T    G U I     /     Z O O M    O U T                                       //
+//                                                                                      //
+//  KC_K:  *  ZOOM OUT,                                                                 //
+//         @  RIGHT GUI                                                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void RA_ZOUT_finished (qk_tap_dance_state_t *state, void *user_data);
+void RA_ZOUT_reset    (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_powr] kc_k (RA_ZOUT)                                                    //
+//                                                                                      //
+//  r i g h t    g u i     /     z o o m    o u t                                       //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_L (RS_ZOOM)                                                    //
+//                                                                                      //
+//  R I G H T    A L T    /    Z O O M    O N / O F F                                   //
+//                                                                                      //
+//  KC_L:  *  ZOOM ON/OFF,                                                              //
+//         @  RIGHT ALT                                                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void RS_ZOOM_finished (qk_tap_dance_state_t *state, void *user_data);
+void RS_ZOOM_reset    (qk_tap_dance_state_t *state, void *user_data);
+// //                                                                                      //
+// // [tapdance] [_powr] kc_l (RS_ZOOM)                                                    //
+// //                                                                                      //
+// //  r i g h t    a l t    /    z o o m    o n / o f f                                   //
+// //////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_SP (RA_INCO)                                                   //
+//                                                                                      //
+//  R I G H T    A L T    /     I N V E R T    C O L O R S                              //
+//                                                                                      //
+//  KC_SP:  *  INVERT COLORS,                                                           //
+//          @  RIGHT ALT                                                                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void RA_INCO_finished (qk_tap_dance_state_t *state, void *user_data);
+void RA_INCO_reset    (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_powr] kc_sp (ra_inco)                                                   //
+//                                                                                      //
+//  r i g h t    a l t    /     i n v e r t    c o l o r s                              //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 //               T A P   D A N C E   F O R  -  V   I   M  -  L A Y E R S                //
@@ -179,7 +256,8 @@ int cur_dance (qk_tap_dance_state_t *state);//                                  
 //        ** BEGINING OF PARAGRAPH                                                      //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data);
+void FVIM_uU_finished (qk_tap_dance_state_t *state, void *user_data);
+void FVIM_uU_reset    (qk_tap_dance_state_t *state, void *user_data);
 //                                                                                      //
 // [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
 //                                                                                      //
@@ -197,7 +275,20 @@ void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data);
 //        ** END OF PARAGRAPH                                                           //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void FVIM_pP_function (qk_tap_dance_state_t *state, void *user_data);
+void FVIM_pP_finished (qk_tap_dance_state_t *state, void *user_data);
+void FVIM_pP_reset    (qk_tap_dance_state_t *state, void *user_data);
+
+
+
+void FVIM_iI_finished (qk_tap_dance_state_t *state, void *user_data);
+void FVIM_iI_reset    (qk_tap_dance_state_t *state, void *user_data);
+
+
+void FVIM_oO_finished (qk_tap_dance_state_t *state, void *user_data);
+void FVIM_oO_reset    (qk_tap_dance_state_t *state, void *user_data);
+
+
+
 //                                                                                      //
 // [tapdance] [ _fvim ] kc_p (fvim_pp)                                                  //
 //                                                                                      //
@@ -248,6 +339,59 @@ void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data);
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
+//  T A P   D A N C E   F O R   [ _ D F L T ]  L A Y E R    ( I A E O U  /  Q W E R T)  //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_DFLT] KC_J (L_APPS)                                                     //
+//                                                                                      //
+//  _ A P P S     L A Y E R                                                             //
+//                                                                                      //
+//  KC_Y: *  KC_Y                                                                       //
+//        @  _APPS LAYER                                                                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+/*static tap L_APPS_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};*/
+void L_APPS_finished (qk_tap_dance_state_t *state, void *user_data);
+void L_APPS_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_dflt] kc_y (l_apps)                                                     //
+//                                                                                      //
+//  _ a p p s     l a y e r                                                             //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_DFLT] KC_Z (R_APPS)                                                     //
+//                                                                                      //
+//  _ A P P S     L A Y E R                                                             //
+//                                                                                      //
+//  KC_Z: *  KC_Z                                                                       //
+//        @  _APPS LAYER                                                                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+/*static tap R_APPS_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};*/
+void R_APPS_finished (qk_tap_dance_state_t *state, void *user_data);
+void R_APPS_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_dflt] kc_z (r_apps)                                                     //
+//                                                                                      //
+//  _ a p p s     l a y e r                                                             //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
 // [TAPDANCE] [_DFLT] THUMB_L1 (DVIM_Del)                                               //
 //                                                                                      //
 //  D V I M    L A Y E R    /    D E L E T E                                            //
@@ -266,6 +410,26 @@ void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data);
 //  d v i m    l a y e r    /    b a c k s p a c e                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_Q (TG_QWE)                                                     //
+//                                                                                      //
+//  T O G G L E     _ Q W E R T     L A Y E R                                           //
+//                                                                                      //
+//  KC_Q: @  TOGGLE _QWER LAYER                                                        //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+/*static tap TG_QWE_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};*/
+void TG_QWE_finished (qk_tap_dance_state_t *state, void *user_data);
+void TG_QWE_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_powr] kc_q (tg_qwe)                                                     //
+//                                                                                      //
+//  t o g g l e     _ q w e r t     l a y e r                                           //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -385,4 +549,52 @@ void RSTT_F_reset (qk_tap_dance_state_t *state, void *user_data);
 
 void HRESET_finished (qk_tap_dance_state_t *state, void *user_data);
 void HRESET_reset (qk_tap_dance_state_t *state, void *user_data);
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//               T A P   D A N C E   F O R  -  S Y M B O L S  -  L A Y E R S            //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_SYMB] KC_O (TD_EXC)                                                     //
+//                                                                                      //
+//  E X C L A M A T I O N   M A R K    /    O P E N   E X C L A M A T I O N   M A R K   //
+//                                                                                      //
+//  KC_B:  *  EXCLAMATION MARK,                                                         //
+//        **  OPEN EXCLAMATION MARK                                                     //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void TD_EXC_finished (qk_tap_dance_state_t *state, void *user_data);
+void TD_EXC_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_symb] kc_o (td_exc)                                                     //
+//                                                                                      //
+//  e x c l a m a t i o n   m a r k    /    o p e n   e x c l a m a t i o n   m a r k   //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_SYMB] KC_P (TD_QUE)                                                     //
+//                                                                                      //
+//  E X C L A M A T I O N   M A R K    /    O P E N   E X C L A M A T I O N   M A R K   //
+//                                                                                      //
+//  KC_B:  *  EXCLAMATION MARK,                                                         //
+//        **  OPEN EXCLAMATION MARK                                                     //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+void TD_QUE_finished (qk_tap_dance_state_t *state, void *user_data);
+void TD_QUE_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_symb] kc_p (td_que)                                                     //
+//                                                                                      //
+//  e x c l a m a t i o n   m a r k    /    o p e n   e x c l a m a t i o n   m a r k   //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//               t a p   d a n c e   f o r  -  s y m b o l s  -  l a y e r s            //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
 

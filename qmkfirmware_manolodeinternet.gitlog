@@ -1,0 +1,1819 @@
+commit da4a0c53eb3404aac8f4776e4110f4291f32233e
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sun Jun 21 09:12:13 2020 +0200
+
+    [#025_MINIDACTYL_GHERKIN] 2020/06/21
+     * Minor fixes on keymaps.
+     * Move /Users/navarro/qmk_firmware/keyboards/handwired/mini_dactyl/RentalCar/ ...
+      ...to /Users/navarro/qmk_firmware/keyboards/handwired/mini_dactyl/
+      (only my layout: 2 sides x 3x5+5)
+
+commit f9de4a1847db5001067cfe8a54e3beef061400d5
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sat Jun 13 07:40:29 2020 +0200
+
+    [#024_MINIDACTYL_GHERKIN] 2020/06/13
+     * New feature: Mirrored layer thumb triggers through a 'mirrored layer thumb trigger' key at each side.
+     * Symbols layer trigger changed to left hand for allowing typing comma or dot whatever fast you can.
+
+commit 92766377a548019f047af4463326f7d739a05b7b
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Mon Jun 1 08:39:51 2020 +0200
+
+    [#023_MINIDACTYL_GHERKIN] 2020/06/01
+     * Changed TAPPING_TERM from 180 to 200
+    
+     632 firmware bytes free (Mini Dactyl)
+    3162 firmware bytes free (Gherkin)
+
+commit a36af8fcc922dc1bded91516007005210895cd38
+Merge: f1ba6e174 a5893368b
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Mon Jun 1 07:51:34 2020 +0200
+
+    Merge branch 'master' of https://github.com/manolodeinternet/qmk_firmware
+    I have changed TAPPING_TERM from 150 to 180 for config.h of Mini Dactyl.
+
+commit f1ba6e174a1671aa214a17e6f1647980fd0b7d62
+Merge: 570804590 bdbeba157
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Mon Jun 1 07:04:53 2020 +0200
+
+    Merge branch 'apps_without_apps_layer'
+    [#022_MINIDACTYL_GHERKIN] 2020/06/01
+    
+      Conflicts:
+            keyboards/40percentclub/gherkin/keymaps/manolodeinternet/config.h
+            keyboards/40percentclub/gherkin/keymaps/manolodeinternet/keymap.c
+            keyboards/handwired/mini_dactyl/RentalCar/keymaps/manolodeinternet/keymap.c
+            users/manolodeinternet/enum_custom_keycodes.h
+            users/manolodeinternet/fn_actions.c
+            users/manolodeinternet/fn_actions.h
+            users/manolodeinternet/manolodeinternet.c
+            users/manolodeinternet/rules.mk
+            users/manolodeinternet/tapdance_setup.c
+
+commit a5893368b1817fc9c3761136481e07f1e82c3707
+Merge: 570804590 bdbeba157
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Mon Jun 1 07:04:53 2020 +0200
+
+    Merge branch 'apps_without_apps_layer'
+    [#022_MINIDACTYL_GHERKIN] 2020/06/01
+    
+      Conflicts:
+            keyboards/40percentclub/gherkin/keymaps/manolodeinternet/config.h
+            keyboards/40percentclub/gherkin/keymaps/manolodeinternet/keymap.c
+            keyboards/handwired/mini_dactyl/RentalCar/keymaps/manolodeinternet/keymap.c
+            users/manolodeinternet/enum_custom_keycodes.h
+            users/manolodeinternet/fn_actions.c
+            users/manolodeinternet/fn_actions.h
+            users/manolodeinternet/manolodeinternet.c
+            users/manolodeinternet/rules.mk
+            users/manolodeinternet/tapdance_setup.c
+
+commit bdbeba1577d8e9a119b57a59097fe245aaac6b7e
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sat May 9 00:00:49 2020 +0200
+
+    [#022_MINIDACTYL_GHERKIN] 2020/06/01
+    * Now tapdance and fn_actions are split out into 'users/tapdance_setup' and 'users/fn_actions' files.
+    * And rules.mk works for both qmk firmware compilations.
+     // [FIRMWARE_SIZE]
+     *  632 mini_dactyl bytes free
+     * 3162     gherkin bytes free
+
+commit 570804590948bcccbc9169b5e782e45681fd3714
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sat May 9 00:00:49 2020 +0200
+
+    [#022_MINIDACTYL] 2020/05/08
+    * Now tapdance and fn_actions are split out into 'users/tapdance_setup' and 'users/fn_actions' files.
+    * And rules.mk works for both qmk firmware compilations.
+     // [FIRMWARE_SIZE]
+     *   46 firmware bytes free. (102)
+     * 3378 firmware bytes free.
+
+commit 77d287a02ef5fba5cf4db474b9ee4494cf86fce5
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Fri May 1 21:15:08 2020 +0200
+
+    * Now you can choose in 'users/config.h’ between 'Typinator_apps_mode' and 'Karabiner_apps_mode' before compiling firmware.
+     // [FIRMWARE_SIZE]
+     * 54 firmware bytes free.
+
+commit 35b4acd40f7399bd1d9c0455552da7d8bd48484e
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Mon Apr 27 06:57:02 2020 +0200
+
+    [#020_MINIDACTYL]
+    * Quick entry shortcuts for apps do work properly now, because modifiers are now dealing pretty well
+
+commit 0a3cd178aa4d905166ae69eea3ebc2016d7171d9
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Fri Apr 24 07:17:00 2020 +0200
+
+    [#019_MINIDACTYL]
+    * 'MY_CLEAR' now remove all posible stuck modifiers, besides jump to '_DFLT' layer
+    * Increases / decreases volume by quarters instead of units
+
+commit 9a4c7166985777344df3c9a24c06284fc5a1eb86
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Tue Apr 21 01:32:12 2020 +0200
+
+    [#018_MINIDACTYL]
+     * 'keymap.c' cleaned and splitted out process verified again, after trying apps_trigger var working over a dictionary (1 array of keycodes…
+    + 1 array of strings-apps names).  But it didn’t fit into firmware size, then come back to old process: using Typinator.
+
+commit 10cf2d8531743e8ab0acd9562bb695180107c7ea
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Fri Apr 17 08:43:01 2020 +0200
+
+    [#017_MINIDACTYL]
+     * 'keymap.c' cleaned and splitted out process verified again
+    
+     // [FIRMWARE_SIZE]
+     * 566 firmware bytes free !
+
+commit b7e7a4f0e4e99d3ee4dd0dfd7194375190653ad9
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sun Apr 12 07:46:24 2020 +0200
+
+    [#016_MINIDACTYL]
+     * 'keymap.c' splitted out process verified
+    
+     // [FIRMWARE_SIZE]
+     * 8 bytes free, firmware has enlarged with no apparent reason !
+
+commit 18626ea0bd0a164b19712bd8dd805849fc25f7d5
+Merge: 625c0b06e 462838656
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sat Apr 11 18:00:33 2020 +0200
+
+    Merge branch 'master' of https://github.com/manolodeinternet/qmk_firmware
+
+commit 625c0b06edea301380fbe177a468993f8618505d
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sat Apr 11 13:40:25 2020 +0200
+
+    Adding new files after change from one branch to another.
+
+commit 462838656c830c999eea905929902ba0d58c27f8
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sat Apr 11 13:40:25 2020 +0200
+
+    Adding new files after change from one branch to another.
+
+commit ff5b7e1da12c4dda2f4a5ae1280138385addbb19
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sat Apr 11 08:59:35 2020 +0200
+
+    [#015_MINIDACTYL]
+     * 'keymap.c' file is now splitted out into a bunch of '.c' files with its matching '.h' files
+    
+     // [FIRMWARE_SIZE]
+     * Splitting out 'keymap.c', collaterally, we have got more free space.  Even including whole _APPS keymap, we still have 388 free bytes left.
+
+commit 479c14e13c9f31aa0bebd2805bf7e009b60a2619
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Fri Apr 3 21:52:37 2020 +0200
+
+    [#014_MINIDACTYL]
+     * Keymap.c files are now broken down And Matched By Code Line Number
+     * Some minor optimization
+     * Fixed minor bugs
+
+commit 418e9cc2369cfc6038781aaa33d0c25449328552
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Thu Apr 2 19:08:20 2020 +0200
+
+    [#013_MINIDACTYL]
+     * Layers moved to my user 'users/manolodeinternet' and shared by all of my keyboards (gherkins and mini_dactyl)
+     * Some minor optimization
+     * Fixed minor bugs
+
+commit a97260782d7807c1092b6a1bee62c61a93fc53a6
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sun Mar 29 20:49:48 2020 +0200
+
+    [#012_MINIDACTYL]
+    * Working on user layouts, instead of keymaps layouts
+    * Some minor optimization
+    * Fixed minor bugs
+
+commit 3dba6f4f19601da53f5e464f657794388d86808f
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sat Mar 21 06:04:58 2020 +0100
+
+    Compiling now through 'qmk_firmware/users/manolodeinternet' qmk users folder.
+    Adapted and transferred 0...2 keymaps.  Pending rest of them.
+    Now I have all my keymaps unified along all my keyboards.
+    ;-)
+
+commit 5d6c21e59baa457eaa0eb757838ecbf450ba3f7e
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sat Mar 7 06:18:22 2020 +0100
+
+    [#011_MINIDACTYL]
+    * Modifiers change from
+         SFT,CTL,ALT,GUI   GUI,ALT,CTL,SFT
+      to
+         CTL,ALT,GUI,SFT   SFT,GUI,ALT,CTL
+    
+    * Some minor optimization for fitting whole firmware into microcontroller.
+
+commit 36c40bf3ffdb2a2a46817d29925a0cecc8625479
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Wed Feb 19 15:54:21 2020 +0100
+
+    [#010b_MINIDACTYL] 13 LAYERS, 13 LEDS, ALL WORKING FINE, (added optional symmetric layers)
+
+commit 907425f35d9517e6c55974e8ef4008671f504fbe
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Wed Feb 19 11:38:46 2020 +0100
+
+    _ACCN fixed.  Now it returns to _DFLT after pressing the accented vowel or 'n'
+
+commit c8c6e2dce26a2ccad6ec7d8cf500b04d5e5f84f1
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Mon Feb 17 18:01:00 2020 +0100
+
+    LEDs still doesn't work !!!
+
+commit bbf5596cb77ca6980f81a1e360e90a4cac5de2e0
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Fri Feb 14 11:12:38 2020 +0100
+
+    minor fixes
+
+commit 801732262fb498f1f5008dabd745c6784c482907
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Thu Feb 13 16:50:44 2020 +0100
+
+    [#009a_MINIDACTYL] Fixed minor bugs
+
+commit b78a20b60eb45c834db4b35cc3db6bf2cb5a10de
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Thu Feb 6 07:29:07 2020 +0100
+
+    [#009_MINIDACTYL] DON'T WORK !!! Commit after increasing number of right LEDs from 7 until 23.
+
+commit ac971ba383b401a813cdae5466d548eaf9da8771
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Thu Feb 6 05:42:27 2020 +0100
+
+    [#008_MINIDACTYL] Commit before increasing number of right LEDs from 7 until 23.
+
+commit 7cd826e9f0c6b7bae058d52eb8c736744cdeda3d
+Merge: 18219a046 831696611
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Wed Nov 20 05:56:32 2019 +0100
+
+    Merge remote-tracking branch 'upstream/master'
+
+commit 18219a046a00d3e7af2e6d6c786d5d7e5fcbf226
+Merge: 150ab8d07 19e25336e
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Wed Nov 20 05:44:32 2019 +0100
+
+    [#006_MINIDACTYL] All layers working (0...13). Merge branch 'deleting_comments'
+
+commit 19e25336e326f60ad7d16bbeeaa2e0fdef0a78c5
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Tue Nov 19 07:19:25 2019 +0100
+
+    [#006_MINIDACTYL] All layers working (0...13).  Ready for merge 'cleaning branch' with 'master'
+
+
+
+
+
+
+
+
+
+
+commit 150ab8d07859ac5db3f390d3976a12b448f9938e
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Tue Nov 19 07:19:25 2019 +0100
+
+    [#006_MINIDACTYL] All layers working (0...13).  Ready for merge 'cleaning branch' with 'master'
+
+
+
+
+
+
+
+
+
+
+
+
+commit 831370f73912e4c8b52c1e49bddde47cc3e0dced
+Merge: ee5fc508f 1ef3de980
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Mon Nov 18 03:51:03 2019 +0100
+
+    [#005_MINIDACTYL] Merge branch 'master' of https://github.com/manolodeinternet/qmk_firmware
+
+commit ee5fc508fc51310aad6ded252e3188de337dd30e
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Mon Nov 18 03:23:23 2019 +0100
+
+    [#004_MINIDACTYL] Switch off _MOUS and _FUNC for fitting code into maximum hex file
+
+commit 1ef3de98019c30b87244d2e62a053501d95b1e99
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Mon Nov 18 03:23:23 2019 +0100
+
+    Switch off _MOUS and _FUNC for fitting code into maximum hex file
+
+
+
+
+
+
+
+
+
+
+commit d00fa7f0c0d887413da0e80c2b5cba619e0886d4
+Merge: 0612e4d3f cec391df7
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Fri Nov 8 05:54:46 2019 +0100
+
+    Merge remote-tracking branch 'upstream/master'
+
+
+
+
+
+
+
+
+
+
+
+
+commit 0612e4d3f9edd139843cc368d8ab5fd4488809dd
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Tue Nov 5 07:12:32 2019 +0100
+
+    [#002_MINIDACTYL] Minor changes over Gherkin [_DFLT] and QMK environment (fixing qmk_firmware/lib/lufa)
+
+
+
+
+
+
+
+
+
+
+
+commit 0812d35196224318b0e95293ac75ba606999520a
+Merge: 43119ee8e 25d4c0c81
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Mon Nov 4 12:18:27 2019 +0100
+
+    [keymaps] *Mini Dactyl-14 layers(Rental Car) and *Gherkin-16 layers (comprehensive 30_layout)
+    Merge remote-tracking branch 'upstream/master'
+
+
+
+
+
+
+
+
+
+
+commit 43119ee8e3545d9d56c90e720cc952555eb1c787
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Wed Oct 9 07:43:58 2019 +0200
+
+    [STRANGER COMMITS]
+    [#000_MINIDACTYL], [#001_MINIDACTYL] about my brand new hardwired/mini_dactyl/rev2/manolodeinternet.
+    [#009]…[#014], [#04ALPHA]…[#08ALPHA] about Gherkin/30_layout/manolodeinternet and
+    I’m committing all of these changes together because I didn’t committed them before.  I’m sorry !!!
+    
+    ================================================================================================
+    
+    [#001_MINIDACTYL]
+    * [_ACCN] (accents layer) is now 'One Shot Layer' for allowing a faster typing.
+        * For accessing diaeresis, grave and circumflex, we still can hold down the its trigger and select them.
+    * Keyboards/handwired/dactyl_mini_or_rental_car renamed to keyboards/handwired/mini_dactyl
+    * Original 'rgblight' qmk files are restored as brand new:
+        * quantum/rgblight.c,
+        * quantum/rgblight.h,
+        * quantum/rgblight_list.h
+    * Modifications about rgblight are taken apart into 'rgblight_mini_dactyl.c' in my user layouts folder:
+        * keyboards/handwired/mini_dactyl/RentalCar/keymaps/manolodeinternet/rgblight_mini_dactyl.c (added ‘#include "rgblight_mini_dactyl.c”’ in keymap.c)
+        * keyboards/handwired/mini_dactyl/RentalCar/keymaps/manolodeinternet/rgblight_mini_dactyl.h
+    
+    [#000_MINIDACTYL]
+    * 'Mini Dactyl' is a keyboard created (hardware & firmware creator) by u/crystalhand under my request as a customer.
+    * u/crystalhand named this keyboard: 'Rental Car'.
+    * u/crystalhand created it by making modifications after 'Dactyl Lightcycle' keyboard (original invention by u/adereth) (https://github.com/adereth/dactyl-keyboard).
+    * Firmware shared through Google_Drive folder by u/crystalhand (https://drive.google.com/drive/folders/1fYzKXbg66T41S4b8151zNmbXuUXvELtY). After modifying it, it has been merged with...
+    * ...the firmware forked from 'qmk/qmk_firmware'(https://github.com/qmk/qmk_firmware) on GitHub to manolodeinternet(me) (https://github.com/manolodeinternet/qmk_firmware).
+    
+    ================================================================================================
+    
+    [#08ALPHA]
+    
+    * WE IMPLEMENT 'LSHIFT' IN 'KC_Z' AND 'KC_ENTER' BECAUSE WHEN WE ARE TYPING FAST,
+    AND WE TYPE 'KC_SPACE' FOLLOWED BY A CAPITAL WORD, WE GET TWO SPACES INSTEAD OF
+    A SPACE FOLLOWED BY A CAPITAL WORD.
+    THIS IMPLEMENTATION IS IN THREE STEPS:
+    
+    1. [_DIAE] layer moved
+        * from 'KC_R'
+        *   to 'KC_E'
+    
+    2. [_DALY] layer moved
+        * from 'KC_Z' and 'KC_ENTER'
+        *   to 'KC_R' and 'KC_U'
+    
+    3. ’[_DALY] / KC_Z’ and '[_DALY] / KC_ENTER' changed
+        *   to 'LShift / KC_Z' and 'LShift / KC_ENTER'
+    
+    * Include a file in 'qmk_firmware/QMK-my_files’ folder:
+        * '/WHERE CERTAINS KEYCODES ARE/qmk_firmware_quantum/quantum_keycodes.h.txt’ with info about what important keycodes implements the file:
+        * '~/qmk_firmware/quantum/quantum_keycodes.h'; as 'LT(_layer, kc_keycode), RGB keycodes, etc…
+    
+    * MINOR AESTHETIC CHANGES
+    
+    [#07ALPHA]
+    * 'FORMATED FOR PRINTING' CODE VERSION
+    (MAXIMUM LINE WIDTH FOR RIGHT PRINTING: 105  CHARACTERS USING 'SUBLIMEPRINT' PACKAGE PLUGIN FOR 'SUBLIME TEXT' EDITOR
+    * THIS VERSION IS GOING TO BE MERGED WITH MINI DACTYL KEYMAPS NOW !!!
+    
+    [#MERGE intermediate commit]
+    Merge branch 'master' of https://github.com/manolodeinternet/qmk_firmware
+    
+    This merge is necessary after change commit message on local repo.
+    That is because in [#06ALPHA] commit I wrote:
+    
+    '* THIS VERSION NOW IS GOING TO BE MERGED WITH MINI DACTYL KEYMAPS !!!'
+    
+    and that's wrong. (I removed this sentence later).
+    
+    Next commit [#07ALPHA] is a new version of the code for fine printing,
+    before merging with MINI DACTYL keymaps.
+    
+    That's all folks !!!
+    
+    [#06ALPHA]
+    * STABLE AND ROBUST QMK VERSION
+    * CLEANED CODE VERSION
+    * FINAL VERSION FOR 'COMPREHENSIVE_30_LAYOUT'
+    
+    [#05ALPHA]
+    * READY !!!
+    * QMK work FINISHED !!!
+    
+    * CHANGED ALL TAP_DANCE FROM DEFAULT LAYER TO LT(layer_name, kc_key)
+        * LT(layer, kc) - momentarily activates layer when held, and sends kc when tapped. Only supports layers 0-15.
+    
+    * ACCESING [SYMB] LAYER NOW ONLY FROM `N` KEY.
+        * But `T` key is enabled as well for make easier accessing to symbols on the right side.
+    * ACCESING [NUMB] LAYER NOW ONLY FROM `B` KEY.
+        * And setting this layer on by pressing `N` key and releasing `B` key before releasing `N` key.
+    
+    * ACCENT TRIGGER KEYS ARE NOW: `G` AND `H` KEYS.
+        * While pressing these triggers: vowel keys are acuted accented vowels and `N` key is for `Ñ` consonant.
+        * While pressing these triggers: we can access new triggers for …
+        * asd `F`  gh `J` klSP: diaeresis triggers,
+        * as `D` f gh  j `K` lSP: grave      triggers,
+        * a `S` df gh jk `L` SP: circumflex triggers,
+        * when diaeresis, grave or circumflex triggers are hold, we can access to these kind of accented vowels.
+        * Diaeresis triggers (for being pretty frequent in Spanish) are also implemented on `R` key who is the …
+    * trigger for [RSET] layer  (RESET & DIAERESIS layer)
+    * … where RESET lives.  We have a RESET on [SUSR] layer but this one to, over Default layer.
+        * … (R…e s e…T) When we hold `R` key, we must to hold `T` key to, for resetting the keyboard.
+    
+    * LEFT    MODIFIERS KEYS (⇧⌃⌥⌘) ARE ALL IN A ROW IN HOME ROW, TO THE LEFT (ASDF) AND TO THE RIGHT (JKL ).
+    * RIGHT MODIFIERS KEYS (⇧⌃⌥⌘) ARE NOW IN [SUSR] LAYER, ON BOOTH SIDES OF THE HOME ROW AS WELL.
+    
+    * LEFT SIDE AND RIGHT SIDE EXTENDED DEFAULT LAYER ARE NOW CONCENTRATED ON A SINGLE SIDE (LEFT).
+        * TAB IS MOVED TO `P` KEY.
+        * CAPSLOCK IS MOVED TO `SPACE` KEY.
+        * Maybe in the future a layer over `ENTER` (right bottom corner) key is created for hosting Tab & Capslock.
+    
+    * [APPS] LAYER IS ACCESSIBLE FROM `Q` & `P` KEYS IN MULTIAPPS WAY.
+    * IF YOU WANT TO LAUNCH OR CHANGE TO AN APPLICATION IN AN ISOLATED MODE (HIDING THE REST OF THE APPLICATIONS),
+        * … YOU MUST HOLD ⌘ COMMAND KEY BEFORE PRESS [APPS] TRIGGER.
+    
+    * ALL THAT REMAINS IS TO CLEAN THE CODE.
+    
+    [#04ALPHA]
+     * FIXED an issue where BLIT only works during the first keystroke and then BLIT exits suddenly.
+    
+    ================================================================================================
+    
+    [#014]
+    * Tap_dance delay for Shift incremented from 160 to 180.
+    * Tap_dance delay for accents trigger lowered from defaut(200) until 170.
+    * Tap_dance delay for Symbols layer lowered from default(200) until 170 as well.
+    * [APPS] & [MAPS] has a new app now: `Simple Note`, `Keynote`, `Pages` and `Numbers`.
+            * But it’s not completed yet.
+            * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |@@@@@@| EVER |      | TERMI|| TYPI |      | TEXT |@@@@@@|SYSTEM|
+     * |      |@@@@@@|-NOTE |      |-NAL  ||-NATOR|      |-EDIT |@@@@@@|PREFE-|
+     * |      |TWITTR|      |      |      ||      |      |      |OMNIFO|RENCES|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |SIMPLE|      |  DAY |      |GOOGLE||      | SUBLI|KARBNR| CALEN|      |
+     * | NOTE |SAFARI|  ONE |FINDER|CHROME||SKETCH|-ME   | EVENT|-DAR  |      |
+     * |      |      |      |      |      ||      | TEXT |VIEWER|      |      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * | STU  |      | CALCU|      |      ||      |      | KEY- |      | NUM- |
+     * |-DIES |      |-LATOR|      |      || NOTES| MAIL | NOTE | PAGES| BERS |
+     * |      |      |      |      |      ||      |      |      |      |      |
+     * `----------------------------------'`----------------------------------'
+    
+    [#013]
+    * [APPS] & [MAPS] active now.  But not completed yet.
+            * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |@@@@@@| EVER |      | TERMI|| TYPI |      | TEXT |@@@@@@|SYSTEM|
+     * |      |@@@@@@|-NOTE |      |-NAL  ||-NATOR|      |-EDIT |@@@@@@|PREFE-|
+     * |      |TWITTR|      |      |      ||      |      |      |OMNIFO|RENCES|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |  DAY |      |GOOGLE||      | SUBLI|KARBNR| CALEN|      |
+     * |      |SAFARI|  ONE |FINDER|CHROME||SKETCH|-ME   | EVENT|-DAR  |      |
+     * |      |      |      |      |      ||      | TEXT |VIEWER|      |      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * | STU  |      | CALCU|      |      ||      |      |      |      |      |
+     * |-DIES |      |-LATOR|      |      || NOTES| MAIL |      |      |      |
+     * |      |      |      |      |      ||      |      |      |      |      |
+     * `----------------------------------'`----------------------------------'
+    
+    [#012]
+    * Fixed N_TILDE, letter `n` now only can show tilde (enie) in case of single_tap (acute_requested) and the rest of the accents are ignored
+    
+    [#011]
+    * FIXED ALL KIND OF ACCENTS (NOT ONLY ACUTE)
+            * ( MANAGED AS KEY RELEASES, NOT AS KEY PRESSES INTO “action_function()” ),
+    
+    * DefaultKeyBinding.dict file copied into `qmk_firmware/keyboards/40percentclub/gherkin/keymaps/30_layout/` as a reference, …
+    * … because all ?VIM layers use keybindings from the system customised by me, for collecting all possible editor movements
+    * ALL EXTRA FILES ARE MOVED FROM ITS ORIGINAL FOLDER TO “QMK-my_files”,
+    * COPIES OF KEYMAPS ARE NOW STORED IN `keymap_c-copies`,
+    
+    * IMPLEMENTED THE REST OF THE LAYERS (APART FROM GHKN, NMBR, SYMB):
+        * 3 [FNCT]   FuNCTion keys layer,
+        * 4 [L_XTND] (Left side),
+        * 5 [R_XTND] (Right side) for making an eXTeNDed Gherkin(default) layer with frequent functions,
+                * this two counterparts layers collect most frequent combos
+                    * left side:
+     * ,-----------------------------------.,----------------------------------.
+     * |      |      | Vol. | Vol. |      ||      |      |      |      | •Spot|
+     * |      | Mute |      |      |      || Close| Prev | Next |Launch| Light|
+     * |      |      | Down |  Up  |      ||  APP | APP  | APP  |  Pad |••SIRI|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||      |      |      |      |      |
+     * |      |Rewind|  UP  |Forwrd| Play || Close| Prev | Next | Dash | SPACE|
+     * |      |      |      |      |      ||Window|Window|Window| Board|      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |@@@@@@|      |      |      |      ||      |      |      |      |      |
+     * |@@@@@@| LEFT | DOWN | RIGHT|Reopen|| Close| Prev | Next |DELETE| ENTER|
+     * |@@@@@@|      |      |      |  tab ||  tab | tab  | tab  |      |      |
+     * '------+------+------+------+------'`------+------+------+------+------'
+                    * right side:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      ||      | Vol. | Vol. |      |      |
+     * |  Tab | Desk |Windws|Mision|Float.||      |      |      | Mute |      |
+     * |      |      | Apps |Contrl|Window||      |  Up  | Down |      |      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |Sublim|      |      ||      |      |      |      |      |
+     * | Caps |Dictat|Text 3| Speak|Active||      |      |  UP  |      |      |
+     * |      |      |Histry|      |Window||      |      |      |      |      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      | PASTE||      |      |      |      |@@@@@@|
+     * |      |      |      |      |   &  ||      | LEFT | DOWN | RIGHT|@@@@@@|
+     * | UNDO |  CUT | COPY | PASTE| MATCH|| REDO |      |      |      |@@@@@@|
+     * '------+------+------+------+------'`------+------+------+------+------'
+        * 6 [APPS] & [MAPS] APPlicationS & Multiple APplicationS layer implemented,
+                * … layer not complete yet, neither active,
+                * … APPS & MAPS activate the same apps, but with
+                * … with APPS the apps are open alone,
+                * … with MAPS the apps are open on top of all current apps.
+        * 7 [SUSR] Super USeR layer allow us access system functions
+                * i.e.:
+    * ,-----------------------------------.,---------------------------------.
+    * |@@@@@@|      |      |      |      ||      |      |      |      |@@@@@@|
+    * |@@@@@@|      |      |onHold|      ||      |      |      |      |@@@@@@|
+    * | BLIT |LOGOUT|LCKSCR| RESET| REDO ||      |      |      |      | BLIT |
+    * |------+------+------+------+------||------+------+------+------+------|
+    * | Menu | Dock | Tool |Status|Float.||      |      |      |      |      |
+    * | _bar | _bar | _bar | _bar |Window||      |      |      |      |      |
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * |onHold|onHold|onHold|onHold|onHold||      | LGui | LAlt | LCtl | LSft |
+    * | SLEEP|K_MENU|KILL_A|SHUT_D|RSTART||      |      |      |      |      |
+    * |------+------+------+------+------||------+------+------+------+------|
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * | RSft | RCtl | RAlt | RGui |      ||      | RGui | RAlt | RCtl | RSft |
+    * '------+------+------+------+------'`------+------+------+------+------'
+    
+        * 8 [PVIM] Personal VIM layer,
+                * this name is provisional,
+                * this layer makes a kinda of a customised right side keyboard for reflecting natural movements,
+                * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      || Move | Move | Move | Move | Move |
+     * |      |      |      |      |      ||Prgrph| Begin| Word | Word |End Of|
+     * |      |      |      |      |      ||  Up  |Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||Center| Move | Move | Move | Move |
+     * |      |      |      |      |      ||LineIn|      |      |      |      |
+     * |      |      |      |      |      || View | LEFT |  UP  | DOWN | RIGHT|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |@@@@@@|      || Move | Move | Move | Move | Move |
+     * |      |      |      |@@@@@@|      ||Prgrph|      | Page | Page |      |
+     * |      |      |      |@@@@@@|      || Down | HOME |  UP  | DOWN |  END |
+     * `----------------------------------'`----------------------------------'
+        * 9 [DVIM] Delete   VIM layer,
+                * this name is provisional too,
+                * this layer makes a kinda of a customised right side keyboard for reflecting natural movements for deleting,
+                * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      ||      |Delete|Delete|Delete|Delete|
+     * |      |      |      |      |      ||      | Begin| Word | Word |End Of|
+     * |      |      |      |      |      ||      |Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||      |Delete|Delete|Delete|Delete|
+     * |      |      |      |      |      || Yank | Char | Line | Line | Char |
+     * |      |      |      |      |      ||      | LEFT |  UP  | DOWN | RIGHT|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |@@@@@@|      |@@@@@@|      ||      |Delete|Delete|Delete|Delete|
+     * |      |      |      |@@@@@@|      ||      |      | Page | Page |      |
+     * |      |      |      |@@@@@@|      ||      | HOME |  UP  | DOWN |  END |
+     * `----------------------------------'`----------------------------------'
+        * 10 [SVIM] Selecting VIM layer,
+                * this name is provisional as well,
+                * this layer reflect natural movements for select parts of our text,
+                * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      ||Select|Select|Select|Select|Select|
+     * |      |      |      |      |      ||Prgrph| Begin| Word | Word |End Of|
+     * |      |      |      |      |      || Above|Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||      |Select|Select|Select|Select|
+     * |      |      |      |      |      ||      | Char | Line | Line | Char |
+     * |      |      |      |      |      ||      | LEFT |  UP  | DOWN | RIGHT|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |@@@@@@|      |      |@@@@@@|      ||Select|Select|Select|Select|Select|
+     * |      |      |      |@@@@@@|      ||Prgrph|      | Page | Page |      |
+     * |      |      |      |@@@@@@|      || Below| HOME |  UP  | DOWN |  END |
+     * `----------------------------------'`----------------------------------'
+    * 11 [XVIM] eXtended VIM layer,
+            * this name is provisional too,
+            * this layer reflect natural movements for extended functions over our text,
+            * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      || Copy |Upper |Capita|      |Lower |
+     * |      |      |      |      |      || prev.|case  |lize  |      |case  |
+     * |      |      |      |      |      ||prgrph| Word | Word |      | Word |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||Duplct|  25  |  50  |  50  |  25  |
+     * |      |      |      |      |      ||prgrph| lines| lines| lines| lines|
+     * |      |      |      |      |      || Below|  UP  |  UP  | DOWN | DOWN |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |@@@@@@|      || Copy |Scroll|Scroll|Scroll|Scroll|
+     * |@@@@@@|      |      |@@@@@@|      || next |      | Page | Page |      |
+     * |@@@@@@|      |      |@@@@@@|      ||prgrph| HOME |  UP  | DOWN |  END |
+     * `----------------------------------'`----------------------------------'
+    * 12 [ZVIM] `eZtended` VIM layer,
+            * this name is provisional as well,
+            * this layer reflect MORE natural movements for `eZtended` functions over our text,
+            * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      ||Insert|Trans |      |      |Trans |
+     * |      |      |      |      |      ||LnAbve|pose  |      |      |pose  |
+     * |      |      |      |      |      ||prgrph| Words|      |      |Chrctr|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||Select|Select|Select|Select|Select|
+     * |      |      |      |      |      ||& Copy|& Copy|& Copy|& Copy|& Copy|
+     * |      |      |      |      |      ||Chrctr| Word | Line |prgrph|  All |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |@@@@@@|      ||Insert|      |      |      |      |
+     * |      |      |@@@@@@|@@@@@@|      ||LnBlow|      |      |      |      |
+     * |      |      |@@@@@@|@@@@@@|      ||prgrph|      |      |      |      |
+     * `----------------------------------'`----------------------------------'
+    * 13 [AVIM] Alignment VIM layer,
+            * this name is provisional too,
+            * this layer reflect natural movements for alignment elements into our text,
+            * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      || Super|Align |Align |Align |Align |
+     * |      |      |      |      |      ||script|      |      | Justi|      |
+     * |      |      |      |      |      ||      | Left |Center|-fied | Right|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||  Un  |  Out |      |      |  In  |
+     * |      |      |      |      |      ||script|-dent |      |      |-dent |
+     * |      |      |      |      |      ||      |      |      |      |      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |@@@@@@|      || Subs | Check|Ignore|      |      |
+     * |      |@@@@@@|      |@@@@@@|      ||script| spell| spell|      |      |
+     * |      |@@@@@@|      |@@@@@@|      ||      |      |      |      |      |
+     * `----------------------------------'`----------------------------------'
+    * 14 [MOUS] Mouse layer,
+            * this layer allows us to move the pointer and the wheel mouse, and click buttons 1…5 as well,
+    * ,----------------------------------.,----------------------------------.
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * |Accel0|      |      |      |      ||      | wLeft|  wUp | wDown|wRight|
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * |------+------+------+------+------||------+------+------+------+------|
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * | LSft | LCtl | LAlt | LGui |      ||      | mLeft|  mUp | mDown|mRight|
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * |------+------+------+------+------||------+------+------+------+------|
+    * |      |      |@@@@@@|@@@@@@|      ||      |      |      |      |      |
+    * |Accel1|Accel2|      | mBtn1|Accel0|| mBtn1| mBtn2| mBtn3| mBtn4| mBtn5|
+    * |      |      |      |@@@@@@|      ||      |      |      |      |      |
+    * '------+------+------+------+------'`------+------+------+------+------'
+    * 15 [BLIT] Backlight layer,
+            * this layer controls LED diodes (level of brightness and `breathing mode,
+            * i.e.:
+    * .-----------------------------------------------------------------------------------------.
+    * |  BL_1  |  BL_2  |  BL_3  |  BL_4  |  BL_5  |BREATH_1|BREATH_2|BREATH_3|BREATH_4|BREATH_T|
+    * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
+    * |  BL_6  |  BL_7  |  BL_8  |  BL_9  |  BL_10 |BREATH_5|BREATH_6|BREATH_7|BREATH12|BL_TOGGL|
+    * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|F
+    * |  BL_11 |  BL_12 |  BL_13 |  BL_14 |  BL_15 |BREATH15| BL_ON | BL_INC | BL_DEC | BL_OFF |
+    * '-----------------------------------------------------------------------------------------'
+        * 31 [TEST] debugging or testing layer,
+                * this layer is for implementing new or experimental features, before update the consolidated firmware,
+                * be careful: you must call layers from code when it comes to layers between 16 and 31,
+                * … if you invoke them from keycap, it doesn’t work !!!  And layers over 31 are not allowed on QMK.
+    
+    [#010]
+      .gitignore modified to include old copies saved into “keymap_c-copies/“ folder into “keyboards/40percentclub/gherkin/keymaps/30_layout/“
+    
+    git rebase --interactive HEAD~2
+    
+    [#009]
+      BULLETPROOF ACCENTED ACUTE FOR ALL   5   VOWELS AND N TILDE !!!
+    
+    * modified files:  keyboards/40percentclub/gdherkin/keymaps/30_layout/keymap.c
+    
+        * IMPLEMENTING 150 ms keypress time for shift key(space),
+    
+        * A, I, O, U vowels implemented with implicit acute accent included,
+    
+            * As I need having tap_dance functions over KC_A, KC_U, KC_I and
+                    tap_dance doesn’t get acute modifying character when shift is pressed,
+                    I have implemented acute modifying character with action_function,
+                    but over a new [ACUT] layer for not to overlapping previous tap_dance over A, U, I.
+                    And I access this new layer by pressing acute accent trigger (KC_V, KC_M),
+    
+            * It appeared a new problem when once in [ACUT] layer, I need KC_A for two
+                    functions again: ( á  |  Á ) and ( LSHIFT while acute accent trigger is pressed ).
+                    I have solved this issue, by implementing a new tap_dance for KC_A called
+                    A_AC_ON, who calls action_function directly with a NULL keyrecord_t parameter.
+                    This way, I can activate LSHIFT when hold, or call action_function directly
+                     from the code (not from KEYMAP, as I believed that was the only way to call it).
+                     It’s a solution, not too much elegant, but a solution.
+                     A better solution it should be to rewrite tap_dance_function at process_tap_dance
+                     files at ‘qmk_firmware/quantum/process_keycode/process_tap_dance.h & .c’
+    
+    * added files:  QMK POWER tricks,
+        * where I’m going to collect all new power discoveries of C, QMK, algorithms, or whatever it brights by itself !
+            * The first annotation is about how to manage what layer I am at present time, whenever I want to know it.
+
+
+
+
+
+
+
+
+
+
+
+commit cf67ea509d6f2e54939bb053a3321d6008c1e198
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Fri Aug 2 07:00:19 2019 +0200
+
+    [#08ALPHA]
+    
+    * WE IMPLEMENT 'LSHIFT' IN 'KC_Z' AND 'KC_ENTER' BECAUSE WHEN WE ARE TYPING FAST,
+    AND WE TYPE 'KC_SPACE' FOLLOWED BY A CAPITAL WORD, WE GET TWO SPACES INSTEAD OF
+    A SPACE FOLLOWED BY A CAPITAL WORD.
+    THIS IMPLEMENTATION IS IN THREE STEPS:
+    
+    1. [_DIAE] layer moved
+        * from 'KC_R'
+        *   to 'KC_E'
+    
+    2. [_DALY] layer moved
+        * from 'KC_Z' and 'KC_ENTER'
+        *   to 'KC_R' and 'KC_U'
+    
+    3. ’[_DALY] / KC_Z’ and '[_DALY] / KC_ENTER' changed
+        *   to 'LShift / KC_Z' and 'LShift / KC_ENTER'
+    
+    * Include a file in 'qmk_firmware/QMK-my_files’ folder:
+        * '/WHERE CERTAINS KEYCODES ARE/qmk_firmware_quantum/quantum_keycodes.h.txt’ with info about what important keycodes implements the file:
+        * '~/qmk_firmware/quantum/quantum_keycodes.h'; as 'LT(_layer, kc_keycode), RGB keycodes, etc…
+    
+    * MINOR AESTHETIC CHANGES
+
+
+
+
+
+
+
+
+
+
+
+
+commit d9bb66a38fb7b34325af57e2066fa395e6227164
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sun Jul 28 06:40:22 2019 +0200
+
+    [#07ALPHA]
+    * 'FORMATED FOR PRINTING' CODE VERSION
+      (MAXIMUM LINE WIDTH FOR RIGHT PRINTING: 105  CHARACTERS USING 'SUBLIMEPRINT' PACKAGE PLUGIN FOR 'SUBLIME TEXT' EDITOR)
+    * THIS VERSION IS GOING TO BE MERGED WITH MINI DACTYL KEYMAPS NOW !!!
+
+commit 77292947696852b3a70a9a92d70048aac650228f
+Merge: 3895011c3 69c4af7eb
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sun Jul 28 06:26:22 2019 +0200
+
+    Merge branch 'master' of https://github.com/manolodeinternet/qmk_firmware
+    
+    This merge is necessary after change commit message on local repo.
+    That is because in [#06ALPHA] commit I wrote:
+    
+    '* THIS VERSION NOW IS GOING TO BE MERGED WITH MINI DACTYL KEYMAPS !!!'
+    
+    and that's wrong.  (I removed this sentence later).
+    
+    Next commit [#07ALPHA] is a new version of the code for fine printing,
+    before merging with MINI DACTYL keymaps.
+    
+    That's all folks !!!
+
+commit 3895011c38d3f483b3f952a0eb11ae34d6b1e8c9
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Mon Jul 15 08:33:16 2019 +0200
+
+    [#06ALPHA]
+    * STABLE AND ROBUST QMK VERSION
+    * CLEANED CODE VERSION
+    * FINAL VERSION FOR 'COMPREHENSIVE_30_LAYOUT'
+
+
+
+
+
+
+
+
+
+
+
+
+commit 69c4af7eb81b8476f09764f715ffee0c99a4c6b4
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Mon Jul 15 08:33:16 2019 +0200
+
+    [#06ALPHA]
+    * STABLE AND ROBUST QMK VERSION
+    * CLEANED CODE VERSION
+    * FINAL VERSION FOR COMPREHENSIVE_30_LAYOUT
+    
+    * THIS VERSION NOW IS GOING TO BE MERGED WITH DACTYL KEYMAPS !!!
+
+
+
+
+
+
+
+
+
+
+
+commit e103afda7e19af3937af475dfdece83b16517f4f
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Mon May 27 07:50:47 2019 +0200
+
+    [#05ALPHA]
+    * READY !!!
+    * QMK work FINISHED !!!
+    
+    * CHANGED ALL TAP_DANCE FROM DEFAULT LAYER TO LT(layer_name, kc_key)
+        * LT(layer, kc) - momentarily activates layer when held, and sends kc when tapped. Only supports layers 0-15.
+    
+    * ACCESING [SYMB] LAYER NOW ONLY FROM `N` KEY.
+        * But `T` key is enabled as well for make easier accessing to symbols on the right side.
+    * ACCESING [NUMB] LAYER NOW ONLY FROM `B` KEY.
+        * And setting this layer on by pressing `N` key and releasing `B` key before releasing `N` key.
+    
+    * ACCENT TRIGGER KEYS ARE NOW: `G` AND `H` KEYS.
+        * While pressing these triggers: vowel keys are acuted accented vowels and `N` key is for `Ñ` consonant.
+        * While pressing these triggers: we can access new triggers for …
+        * asd `F`  gh `J` klSP: diaeresis triggers,
+        * as `D` f gh  j `K` lSP: grave      triggers,
+        * a `S` df gh jk `L` SP: circumflex triggers,
+        * when diaeresis, grave or circumflex triggers are hold, we can access to these kind of accented vowels.
+        * Diaeresis triggers (for being pretty frequent in Spanish) are also implemented on `R` key who is the …
+    * trigger for [RSET] layer  (RESET & DIAERESIS layer)
+    * … where RESET lives.  We have a RESET on [SUSR] layer but this one to, over Default layer.
+        * … (R…e s e…T) When we hold `R` key, we must to hold `T` key to, for resetting the keyboard.
+    
+    * LEFT    MODIFIERS KEYS (⇧⌃⌥⌘) ARE ALL IN A ROW IN HOME ROW, TO THE LEFT (ASDF) AND TO THE RIGHT (JKL ).
+    * RIGHT MODIFIERS KEYS (⇧⌃⌥⌘) ARE NOW IN [SUSR] LAYER, ON BOOTH SIDES OF THE HOME ROW AS WELL.
+    
+    * LEFT SIDE AND RIGHT SIDE EXTENDED DEFAULT LAYER ARE NOW CONCENTRATED ON A SINGLE SIDE (LEFT).
+        * TAB IS MOVED TO `P` KEY.
+        * CAPSLOCK IS MOVED TO `SPACE` KEY.
+        * Maybe in the future a layer over `ENTER` (right bottom corner) key is created for hosting Tab & Capslock.
+    
+    * [APPS] LAYER IS ACCESSIBLE FROM `Q` & `P` KEYS IN MULTIAPPS WAY.
+    * IF YOU WANT TO LAUNCH OR CHANGE TO AN APPLICATION IN AN ISOLATED MODE (HIDING THE REST OF THE APPLICATIONS),
+        * … YOU MUST HOLD ⌘ COMMAND KEY BEFORE PRESS [APPS] TRIGGER.
+    
+    * ALL THAT REMAINS IS TO CLEAN THE CODE.
+
+
+
+
+
+
+
+
+
+
+
+
+commit db5274c8c5b1c23dbb606b152115670ca21b53ec
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Thu Apr 25 01:19:07 2019 +0200
+
+    [#04ALPHA]
+     * FIXED an issue where BLIT only works during the first keystroke and then BLIT exits suddenly.
+
+
+
+
+
+
+
+
+
+
+
+
+commit eff477f196afa99f2cf45a40c1ec5d76b9b86536
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Wed Apr 24 03:58:27 2019 +0200
+
+    [#03ALPHA]
+    * Modified tapdance access to most of the layers to LT(layer, kc_¿?), getting faster and more accuarate access to layers.
+    * Code cleaner.
+    * QMK shorter 1kb than upper limit.
+
+commit 617ce0838e26d2602b9531615e76a9c2deda72b9
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Wed Apr 24 01:39:30 2019 +0200
+
+    Basic Layout with Alphas and second layer for accessing the rest of the layers.
+     /* Keymap ALPH 0: gherkin default layer
+      * ,--------------------------------------------. ,--------------------------------------------.
+      * |        |        |accented|        |        | |        |accented|accented|accented|        |
+      * |    Q   |    W   |    E   |    R   |   T    | |    Y   |    U   |    I   |    O   |    P   |
+      * |        |        |        |  5* RST|        | |        |        |        |        |        |
+      * |        |        |        |1.4* ACC| *[SYMB]| | *[SYMB]|1.4* ACC|        |        |        |
+      * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
+      * |accented|        |        |        |        | |        |        |        |        |        |
+      * |    A   |    S   |    D   |    F   |    G   | |    H   |    J   |    K   |    L   |  Space |
+      * |        |        |        |        |        | |        |        |        |        |        |
+      * |        |        |        |        | *[NMBR]| | *[SYMB]|        |        |        |        |
+      * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
+      * |        |        |        |        |        | |        |        |        |        |        |
+      * |    Z   |    X   |    C   |    V   |    B   | |    N   |    M   | Escape |Bckspace|  Enter |
+      * |        |        |        |@@ Caps |        | |        |        |        |        |        |
+      * |  LSft  | *[DVIM]|        | *[PVIM]| *[LYRS]| | *[LYRS]|        |        |        |  LSft  |
+      * '--------------------------------------------' '--------------------------------------------'
+      */
+    
+     /* Keymap LYRS 1: gherkin layers
+      * ,--------------------------------------------. ,--------------------------------------------.
+      * |   Tab  |        |        |        |        | |        |        |        |        |   Tab  |
+      * |        |        |        |        |        | |        |        |        |        |        |
+      * |**[BLIT]|**[MAPS]|        |        |        | |        |        |        |**[MAPS]|**[BLIT]|
+      * | *[SUSR]| *[APPS]| *[FNCT]|        | *[SYMB]| | *[SYMB]|        | *[FNCT]| *[APPS]| *[SUSR]|
+      * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
+      * |  Caps  |        |        |        |        | |        |        |        |        |  Caps  |
+      * |        |        |        |        |        | |        |        |        |        |        |
+      * |        |        |        |        |        | |        |        |        |        |        |
+      * |  LSft  |  LCtl  |  LAlt  |  LGui  | *[SYMB]| | *[SYMB]|  LGui  |  LAlt  |  LCtl  |  LSft  |
+      * |--------+--------+--------+--------+--------| |--------+--------+--------+--------+--------|
+      * |        |        |        |        |        | |        |        |        |        |        |
+      * |        |        |        |        |        | |        |        |        |        |        |
+      * |        |        |        |        |##[NMBR]| |##[NMBR]|        |        |        |        |
+      * | *L_XTND| *[DVIM]| *[MOUS]| *[PVIM]| *[NMBR]| | *[NMBR]| *[PVIM]| *[FNCT]| *[DVIM]| *R_XTND|
+      * '--------------------------------------------' '--------------------------------------------'
+      */
+    
+    /* Keymap PVIM 9: PVIM layer
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      || Move | Move | Move | Move | Move |
+     * |      |      |      |      |      ||Prgrph| Begin| Word | Word |End Of|
+     * |      |      |      |      |      ||  Up  |Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||Center| Move | Move | Move | Move |
+     * |[SVIM]|      |      |      |      ||LineIn|      |      |      |      |
+     * |      |      |      |      |      || View | LEFT |  UP  | DOWN | RIGHT|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |@@@@@@|      || Move | Move | Move | Move | Move |
+     * |      |      |      |@@@@@@|      ||Prgrph|      | Page | Page |      |
+     * |[XVIM]|[AVIM]|[ZVIM]|@@@@@@|      || Down | HOME |  UP  | DOWN |  END |
+     * `----------------------------------'`----------------------------------'
+    */
+    
+    /* Keymap DVIM 10: DVIM layer
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      ||      |Delete|Delete|Delete|Delete|
+     * |      |      |      |      |      ||      | Begin| Word | Word |End Of|
+     * |      |      |      |      |      ||      |Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |Delete|Delete|Delete|Delete|      ||      |Delete|Delete|Delete|Delete|
+     * | Char | Line | Line | Char |      || Yank | Char | Line | Line | Char |
+     * | LEFT |  UP  | DOWN | RIGHT|      ||      | LEFT |  UP  | DOWN | RIGHT|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |@@@@@@|      |@@@@@@|      ||      |Delete|Delete|@@@@@@|Delete|
+     * |      |      |      |@@@@@@|      ||      |      | Page |Delete|      |
+     * |      |      |      |@@@@@@|      ||      | HOME |  UP  |PgDown|  END |
+     * `----------------------------------'`----------------------------------'
+    */
+
+
+
+
+
+
+
+
+
+
+
+
+commit 7028783a147692132d1ef6859c401883fb27f486
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Sat Apr 13 00:21:16 2019 +0200
+
+    First commit over branch 'alphas'.  I have just started to modify [ALPH] layer and [LYRS] layer
+
+
+
+
+
+
+
+
+
+
+
+
+commit f5b21d420dfecbbf6e4f3a92242bd8aba4ff83c7
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Thu Apr 11 15:47:06 2019 +0200
+
+    Now the code compiles, this is the first release synced with github that comppiles, since I removed a typo (an letter S at the very beginning of keymap.c.)  But it is 28790 bytes, 118 bytes over max(28672 bytes).  I need to clean the code a little more.
+
+commit 2344a5e8ed47495c34194e6a4573751ae9cdab4e
+Merge: e47130047 45e50948e
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Thu Apr 11 07:26:44 2019 +0200
+
+    Merge branch 'master' of https://github.com/manolodeinternet/qmk_firmware
+
+commit e471300478a1404569806ed4c8d8e2a8a5eb0398
+Merge: 21e3f9f83 fa514e63a
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Thu Apr 11 06:46:58 2019 +0200
+
+    Merge branch 'master' of https://github.com/qmk/qmk_firmware
+
+commit 21e3f9f8322666888a1c782b5896bf96db6683a4
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Thu Apr 11 06:46:38 2019 +0200
+
+    github changes commited before pull
+
+commit be8736894f06be12e932fe11c9704c1927d21d20
+Merge: 61c30ef11 45620fd28
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Thu Apr 11 06:40:41 2019 +0200
+
+    Merge branch 'master' of https://github.com/qmk/qmk_firmware
+    qmk/qmk_firmware or manolodeinternet/qmk_firmware ???
+    
+    I think that my last changes are included too in this commit:
+    [#014]
+    * Tap_dance delay for Shift incremented from 160 to 180.
+    * Tap_dance delay for accents trigger lowered from defaut(200) until 170.
+    * Tap_dance delay for Symbols layer lowered from default(200) until 170 as well.
+    * [APPS] & [MAPS] has a new app now: `Simple Note`, `Keynote`, `Pages` and `Numbers`.
+            * But it’s not completed yet.
+            * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |@@@@@@| EVER |      | TERMI|| TYPI |      | TEXT |@@@@@@|SYSTEM|
+     * |      |@@@@@@|-NOTE |      |-NAL  ||-NATOR|      |-EDIT |@@@@@@|PREFE-|
+     * |      |TWITTR|      |      |      ||      |      |      |OMNIFO|RENCES|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |SIMPLE|      |  DAY |      |GOOGLE||      | SUBLI|KARBNR| CALEN|      |
+     * | NOTE |SAFARI|  ONE |FINDER|CHROME||SKETCH|-ME   | EVENT|-DAR  |      |
+     * |      |      |      |      |      ||      | TEXT |VIEWER|      |      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * | STU  |      | CALCU|      |      ||      |      | KEY- |      | NUM- |
+     * |-DIES |      |-LATOR|      |      || NOTES| MAIL | NOTE | PAGES| BERS |
+     * |      |      |      |      |      ||      |      |      |      |      |
+     * `----------------------------------'`----------------------------------'
+
+
+
+
+
+
+
+
+
+
+
+
+commit 61c30ef112c8e5023ac8fcd4f3f58110c925a9bb
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Wed Apr 10 07:49:16 2019 +0200
+
+    adapting my qmk to github
+
+
+
+
+
+
+
+
+
+
+
+
+commit 8ca133af1559360118f915bcb284e765501b69a4
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Mon Mar 18 01:39:49 2019 +0100
+
+    [#013]
+    * 6 [APPS] & [MAPS] layer 6 active now.  But not completed yet.
+            * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |@@@@@@| EVER |      | TERMI|| TYPI |      | TEXT |@@@@@@|SYSTEM|
+     * |      |@@@@@@|-NOTE |      |-NAL  ||-NATOR|      |-EDIT |@@@@@@|PREFE-|
+     * |      |TWITTR|      |      |      ||      |      |      |OMNIFO|RENCES|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |  DAY |      |GOOGLE||      | SUBLI|KARBNR| CALEN|      |
+     * |      |SAFARI|  ONE |FINDER|CHROME||SKETCH|-ME   | EVENT|-DAR  |      |
+     * |      |      |      |      |      ||      | TEXT |VIEWER|      |      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * | STU  |      | CALCU|      |      ||      |      |      |      |      |
+     * |-DIES |      |-LATOR|      |      || NOTES| MAIL |      |      |      |
+     * |      |      |      |      |      ||      |      |      |      |      |
+     * `----------------------------------'`----------------------------------'
+
+
+
+
+
+
+
+
+
+
+
+
+commit 11acd2a33cbb07e03c316ad74f09b51fcf23a63e
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Sun Mar 17 16:25:59 2019 +0100
+
+    [#012]
+    * Minor bugs fixed:
+      * Fixed N_TILDE; letter `n` now only can show tilde (enie) in case of single_tap (acute_requested) and the rest of the accents are ignored
+
+commit 3402625cb233fa97ad11e3374deab243ee1927d5
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Sun Mar 17 16:01:45 2019 +0100
+
+    [#011]
+    * FIXED ALL KIND OF ACCENTS (NOT ONLY ACUTE)
+            * ( MANAGED AS KEY RELEASES, NOT AS KEY PRESSES INTO “action_function()” ),
+    
+    * DefaultKeyBinding.dict file copied into `qmk_firmware/keyboards/40percentclub/gherkin/keymaps/30_layout/` as a reference, …
+    * … because all ?VIM layers use keybindings from the system customised by me, for collecting all possible editor movements
+    * ALL EXTRA FILES ARE MOVED FROM ITS ORIGINAL FOLDER TO “QMK-my_files”,
+    * COPIES OF KEYMAPS ARE NOW STORED IN `keymap_c-copies`,
+    
+    * IMPLEMENTED THE REST OF THE LAYERS (APART FROM GHKN, NMBR, SYMB):
+        * 3 [FNCT]   FuNCTion keys layer,
+        * 4 [L_XTND] (Left side),
+        * 5 [R_XTND] (Right side) for making an eXTeNDed Gherkin(default) layer with frequent functions,
+                * this two counterparts layers collect most frequent combos
+                    * left side:
+     * ,-----------------------------------.,----------------------------------.
+     * |      |      | Vol. | Vol. |      ||      |      |      |      | •Spot|
+     * |      | Mute |      |      |      || Close| Prev | Next |Launch| Light|
+     * |      |      | Down |  Up  |      ||  APP | APP  | APP  |  Pad |••SIRI|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||      |      |      |      |      |
+     * |      |Rewind|  UP  |Forwrd| Play || Close| Prev | Next | Dash | SPACE|
+     * |      |      |      |      |      ||Window|Window|Window| Board|      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |@@@@@@|      |      |      |      ||      |      |      |      |      |
+     * |@@@@@@| LEFT | DOWN | RIGHT|Reopen|| Close| Prev | Next |DELETE| ENTER|
+     * |@@@@@@|      |      |      |  tab ||  tab | tab  | tab  |      |      |
+     * '------+------+------+------+------'`------+------+------+------+------'
+                    * right side:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      ||      | Vol. | Vol. |      |      |
+     * |  Tab | Desk |Windws|Mision|Float.||      |      |      | Mute |      |
+     * |      |      | Apps |Contrl|Window||      |  Up  | Down |      |      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |Sublim|      |      ||      |      |      |      |      |
+     * | Caps |Dictat|Text 3| Speak|Active||      |      |  UP  |      |      |
+     * |      |      |Histry|      |Window||      |      |      |      |      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      | PASTE||      |      |      |      |@@@@@@|
+     * |      |      |      |      |   &  ||      | LEFT | DOWN | RIGHT|@@@@@@|
+     * | UNDO |  CUT | COPY | PASTE| MATCH|| REDO |      |      |      |@@@@@@|
+     * '------+------+------+------+------'`------+------+------+------+------'
+        * 6 [APPS] & [MAPS] APPlicationS & Multiple APplicationS layer implemented,
+                * … layer not complete yet, neither active,
+                * … APPS & MAPS activate the same apps, but with
+                * … with APPS the apps are open alone,
+                * … with MAPS the apps are open on top of all current apps.
+        * 7 [SUSR] Super USeR layer allow us access system functions
+                * i.e.:
+    * ,-----------------------------------.,---------------------------------.
+    * |@@@@@@|      |      |      |      ||      |      |      |      |@@@@@@|
+    * |@@@@@@|      |      |onHold|      ||      |      |      |      |@@@@@@|
+    * | BLIT |LOGOUT|LCKSCR| RESET| REDO ||      |      |      |      | BLIT |
+    * |------+------+------+------+------||------+------+------+------+------|
+    * | Menu | Dock | Tool |Status|Float.||      |      |      |      |      |
+    * | _bar | _bar | _bar | _bar |Window||      |      |      |      |      |
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * |onHold|onHold|onHold|onHold|onHold||      | LGui | LAlt | LCtl | LSft |
+    * | SLEEP|K_MENU|KILL_A|SHUT_D|RSTART||      |      |      |      |      |
+    * |------+------+------+------+------||------+------+------+------+------|
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * | RSft | RCtl | RAlt | RGui |      ||      | RGui | RAlt | RCtl | RSft |
+    * '------+------+------+------+------'`------+------+------+------+------'
+    
+        * 8 [PVIM] Personal VIM layer,
+                * this name is provisional,
+                * this layer makes a kinda of a customised right side keyboard for reflecting natural movements,
+                * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      || Move | Move | Move | Move | Move |
+     * |      |      |      |      |      ||Prgrph| Begin| Word | Word |End Of|
+     * |      |      |      |      |      ||  Up  |Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||Center| Move | Move | Move | Move |
+     * |      |      |      |      |      ||LineIn|      |      |      |      |
+     * |      |      |      |      |      || View | LEFT |  UP  | DOWN | RIGHT|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |@@@@@@|      || Move | Move | Move | Move | Move |
+     * |      |      |      |@@@@@@|      ||Prgrph|      | Page | Page |      |
+     * |      |      |      |@@@@@@|      || Down | HOME |  UP  | DOWN |  END |
+     * `----------------------------------'`----------------------------------'
+        * 9 [DVIM] Delete   VIM layer,
+                * this name is provisional too,
+                * this layer makes a kinda of a customised right side keyboard for reflecting natural movements for deleting,
+                * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      ||      |Delete|Delete|Delete|Delete|
+     * |      |      |      |      |      ||      | Begin| Word | Word |End Of|
+     * |      |      |      |      |      ||      |Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||      |Delete|Delete|Delete|Delete|
+     * |      |      |      |      |      || Yank | Char | Line | Line | Char |
+     * |      |      |      |      |      ||      | LEFT |  UP  | DOWN | RIGHT|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |@@@@@@|      |@@@@@@|      ||      |Delete|Delete|Delete|Delete|
+     * |      |      |      |@@@@@@|      ||      |      | Page | Page |      |
+     * |      |      |      |@@@@@@|      ||      | HOME |  UP  | DOWN |  END |
+     * `----------------------------------'`----------------------------------'
+        * 10 [SVIM] Selecting VIM layer,
+                * this name is provisional as well,
+                * this layer reflect natural movements for select parts of our text,
+                * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      ||Select|Select|Select|Select|Select|
+     * |      |      |      |      |      ||Prgrph| Begin| Word | Word |End Of|
+     * |      |      |      |      |      || Above|Ln/Prg|Bckwrd|Forwrd|Ln/Prg|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||      |Select|Select|Select|Select|
+     * |      |      |      |      |      ||      | Char | Line | Line | Char |
+     * |      |      |      |      |      ||      | LEFT |  UP  | DOWN | RIGHT|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |@@@@@@|      |      |@@@@@@|      ||Select|Select|Select|Select|Select|
+     * |      |      |      |@@@@@@|      ||Prgrph|      | Page | Page |      |
+     * |      |      |      |@@@@@@|      || Below| HOME |  UP  | DOWN |  END |
+     * `----------------------------------'`----------------------------------'
+    * 11 [XVIM] eXtended VIM layer,
+            * this name is provisional too,
+            * this layer reflect natural movements for extended functions over our text,
+            * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      || Copy |Upper |Capita|      |Lower |
+     * |      |      |      |      |      || prev.|case  |lize  |      |case  |
+     * |      |      |      |      |      ||prgrph| Word | Word |      | Word |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||Duplct|  25  |  50  |  50  |  25  |
+     * |      |      |      |      |      ||prgrph| lines| lines| lines| lines|
+     * |      |      |      |      |      || Below|  UP  |  UP  | DOWN | DOWN |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |@@@@@@|      || Copy |Scroll|Scroll|Scroll|Scroll|
+     * |@@@@@@|      |      |@@@@@@|      || next |      | Page | Page |      |
+     * |@@@@@@|      |      |@@@@@@|      ||prgrph| HOME |  UP  | DOWN |  END |
+     * `----------------------------------'`----------------------------------'
+    * 12 [ZVIM] `eZtended` VIM layer,
+            * this name is provisional as well,
+            * this layer reflect MORE natural movements for `eZtended` functions over our text,
+            * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      ||Insert|Trans |      |      |Trans |
+     * |      |      |      |      |      ||LnAbve|pose  |      |      |pose  |
+     * |      |      |      |      |      ||prgrph| Words|      |      |Chrctr|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||Select|Select|Select|Select|Select|
+     * |      |      |      |      |      ||& Copy|& Copy|& Copy|& Copy|& Copy|
+     * |      |      |      |      |      ||Chrctr| Word | Line |prgrph|  All |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |@@@@@@|      ||Insert|      |      |      |      |
+     * |      |      |@@@@@@|@@@@@@|      ||LnBlow|      |      |      |      |
+     * |      |      |@@@@@@|@@@@@@|      ||prgrph|      |      |      |      |
+     * `----------------------------------'`----------------------------------'
+    * 13 [AVIM] Alignment VIM layer,
+            * this name is provisional too,
+            * this layer reflect natural movements for alignment elements into our text,
+            * i.e.:
+     * ,----------------------------------.,----------------------------------.
+     * |      |      |      |      |      || Super|Align |Align |Align |Align |
+     * |      |      |      |      |      ||script|      |      | Justi|      |
+     * |      |      |      |      |      ||      | Left |Center|-fied | Right|
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |      |      ||  Un  |  Out |      |      |  In  |
+     * |      |      |      |      |      ||script|-dent |      |      |-dent |
+     * |      |      |      |      |      ||      |      |      |      |      |
+     * |------+------+------+------+------||------+------+------+------+------|
+     * |      |      |      |@@@@@@|      || Subs | Check|Ignore|      |      |
+     * |      |@@@@@@|      |@@@@@@|      ||script| spell| spell|      |      |
+     * |      |@@@@@@|      |@@@@@@|      ||      |      |      |      |      |
+     * `----------------------------------'`----------------------------------'
+    * 14 [MOUS] Mouse layer,
+            * this layer allows us to move the pointer and the wheel mouse, and click buttons 1…5 as well,
+    * ,----------------------------------.,----------------------------------.
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * |Accel0|      |      |      |      ||      | wLeft|  wUp | wDown|wRight|
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * |------+------+------+------+------||------+------+------+------+------|
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * | LSft | LCtl | LAlt | LGui |      ||      | mLeft|  mUp | mDown|mRight|
+    * |      |      |      |      |      ||      |      |      |      |      |
+    * |------+------+------+------+------||------+------+------+------+------|
+    * |      |      |@@@@@@|@@@@@@|      ||      |      |      |      |      |
+    * |Accel1|Accel2|      | mBtn1|Accel0|| mBtn1| mBtn2| mBtn3| mBtn4| mBtn5|
+    * |      |      |      |@@@@@@|      ||      |      |      |      |      |
+    * '------+------+------+------+------'`------+------+------+------+------'
+    * 15 [BLIT] Backlight layer,
+            * this layer controls LED diodes (level of brightness and `breathing mode,
+            * i.e.:
+    * .-----------------------------------------------------------------------------------------.
+    * |  BL_1  |  BL_2  |  BL_3  |  BL_4  |  BL_5  |BREATH_1|BREATH_2|BREATH_3|BREATH_4|BREATH_T|
+    * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
+    * |  BL_6  |  BL_7  |  BL_8  |  BL_9  |  BL_10 |BREATH_5|BREATH_6|BREATH_7|BREATH12|BL_TOGGL|
+    * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|F
+    * |  BL_11 |  BL_12 |  BL_13 |  BL_14 |  BL_15 |BREATH15| BL_ON | BL_INC | BL_DEC | BL_OFF |
+    * '-----------------------------------------------------------------------------------------'
+        * 31 [TEST] debugging or testing layer,
+                * this layer is for implementing new or experimental features, before update the consolidated firmware,
+                * be careful: you must call layers from code when it comes to layers between 16 and 31,
+                * … if you invoke them from keycap, it doesn’t work !!!  And layers over 31 are not allowed on QMK.
+
+commit 35e65f6a8530965aee1a3067d45aea80be0401c7
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Sun Mar 17 08:07:08 2019 +0100
+
+    [#010]
+      .gitignore modified to include old copies saved into “keymap_c-copies/“ folder into “keyboards/40percentclub/gherkin/keymaps/30_layout/“
+
+commit a9355e18e9176cca8f9d7f4bfe3dfd57f5cb5eb9
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Sun Mar 17 07:50:46 2019 +0100
+
+    [#010]
+      .gitignore modified to include old copies saved into 'keymap_c-copies/' folder into 'keyboards/40percentclub/gherkin/keymaps/30_layout/'
+
+
+
+
+
+
+
+
+
+
+
+
+commit ca2703c53e991dd9f6f2e4f63b5afbb0f608616e
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Mon Feb 25 02:52:29 2019 +0100
+
+    [#009]
+      BULLETPROOF ACCENTED ACUTE FOR ALL   5   VOWELS AND N TILDE !!!
+    
+    * modified files:  keyboards/40percentclub/gdherkin/keymaps/30_layout/keymap.c
+    
+        * IMPLEMENTING 150 ms keypress time for shift key(space),
+    
+        * A, I, O, U vowels implemented with implicit acute accent included,
+    
+            * As I need having tap_dance functions over KC_A, KC_U, KC_I and
+                    tap_dance doesn’t get acute modifying character when shift is pressed,
+                    I have implemented acute modifying character with action_function,
+                    but over a new [ACUT] layer for not to overlapping previous tap_dance over A, U, I.
+                    And I access this new layer by pressing acute accent trigger (KC_V, KC_M),
+    
+            * It appeared a new problem when once in [ACUT] layer, I need KC_A for two
+                    functions again: ( á  |  Á ) and ( LSHIFT while acute accent trigger is pressed ).
+                    I have solved this issue, by implementing a new tap_dance for KC_A called
+                    A_AC_ON, who calls action_function directly with a NULL keyrecord_t parameter.
+                    And there I switch on or off LSHIFT with add_mods & add_weak_mods, del_mods & del_weak_mods.
+               NOTE:MAYBE THIS 4 MODS FUNCTIONS TOGETHER WORK WELL INTO A TAP_DANCE_FUNCTION. I HAVE TO TRY IT !
+    
+                    This way, I can activate LSHIFT when hold, or call action_function directly
+                    from the code (not from KEYMAP, as I believed that was the only way to call it).
+                    It’s a solution, not too much elegant, but a solution.
+                    A better solution it should be to rewrite tap_dance_function at process_tap_dance
+                    files at ‘qmk_firmware/quantum/process_keycode/process_tap_dance.h & .c’
+    
+    * added files:  QMK POWER tricks,
+        * where I’m going to collect all new power discoveries of C, QMK, algorithms, or whatever it brights by itself !
+            * The first annotation is about how to manage what layer I am at present time, whenever I want to know it.
+
+commit de999d7e00bd4890f32a6a919cd239a43f0b9117
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Mon Feb 18 12:14:30 2019 +0100
+
+    [#008]
+      BULLETPROOF ACCENTED E VOWEL !!!
+      AT LAST, WHAT A RELIEF !!!
+    
+      It’s approached since low level coding, i.e.: modifying mods bits at QMK level of programming.
+    This was inspired from QMK documentation,
+    
+    ‘void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)’
+    and
+    ‘#define GRAVE_MODS  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT)|MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI)|MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))’
+    at
+    ‘https://docs.qmk.fm/#/keymap?id=action_function’
+    
+      The issue with accented acute vowels was that acute modifier for vowels didn’t appear while shift key was pressed.
+    Instead of acute modifier for vowel, it appeared acute symbol followed by a space character.
+      Thus we couldn’t accentuate the vowel, it appeared the acute symbol and the vowel after it.
+    
+      Then, instead of use `bool process_record_user(uint16_t keycode, keyrecord_t *record) }`
+    we use now
+    `void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {`
+    and we modify mods bits directly, using
+    `mod_shift_enable = get_mods()&LSHIFT_MODS;`
+    `del_mods(mod_shift_enable);`
+    `add_mods(mod_shift_enable);`
+    
+      In ˜/qmk_firmware/tmk_core/common/action_code.h we have codification for mods at bit level.
+    /** \brief Key Actions
+     *
+     * Mod bits:    43210
+     *   bit 0      ||||+- Control
+     *   bit 1      |||+-- Shift
+     *   bit 2      ||+--- Alt
+     *   bit 3      |+---- Gui
+     *   bit 4      +----- LR flag(Left:0, Right:1)
+     */
+    enum mods_bit {
+        MOD_LCTL = 0x01,
+        MOD_LSFT = 0x02,
+        MOD_LALT = 0x04,
+        MOD_LGUI = 0x08,
+        MOD_RCTL = 0x11,
+        MOD_RSFT = 0x12,
+        MOD_RALT = 0x14,
+        MOD_RGUI = 0x18,
+    };
+    
+    And by this way, we can press acute accent and get an acute modifier, even while shift key is pressed !!!
+    
+        * modified file:   keyboards/40percentclub/gdherkin/keymaps/30_layout/keymap.c,
+                           for correct acute accent behaviour while shift key is pressed.
+    
+        * renamed file:    qmk_issues_log.txt into QMK_issues_log.txt,
+    
+        * modified file:   QMK_issues_log.txt
+                           by adding the present acute accent issue committed in this commit
+
+
+
+
+
+
+
+
+
+
+
+
+commit 1651170882ab1ed8ebf955f7fd78266a420e44b2
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Tue Feb 12 07:38:53 2019 +0100
+
+    [#007]
+       WORKS PROPERLY (solved issue with SAFE_RANGE at enum declarations for macros)
+    * included a temporary file with works properly, but it’s small and it’s not verified,
+           keyboards/40percentclub/gherkin/keymaps/30_layout/keymap WORKS PROPERLY.c
+    
+    * modified file:   keyboards/40percentclub/gherkin/rules.mk,
+       while trying to minimise the final size of the compiled QMK hex file
+    
+    * modified file:   keyboards/40percentclub/gdherkin/keymaps/30_layout/keymap.c,
+       for avoid abnormal behaviour of keystrokes, missing keystrokes, etc,
+       because of the SAFE_RANGE initial value for the first macro into the enum definition.
+    
+       * tap_dance_states must be enumerated, all of them:
+       FIRST WE DECLARE:
+         enum tap_dance_states { // EACH ONE RECEIVE ITS VALUE...
+           SINGLE_TAP           = 1,
+           SINGLE_HOLD          = 2,
+           ...
+    
+       * tap_dance_keycodes macros must begin by 0:
+       SECOND WE DECLARE:
+         enum tap_dance_keycodes { // IT BEGINS BY 0...
+           Q_SUSR = 0  //        super user layer  // ... **TAB
+          ,W_MOUS      //        mouse layer
+          ...
+    
+       * SAFE_RANGE must be the initial value for the first custom macro keycode, for working with process_record_user():
+       AND AT THE LAST ONE THAT WE DECLARE:
+         enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
+           // MACROS for process_record_user()
+           DICTAD = SAFE_RANGE
+          ,BLIT_OFF
+          ,BLIT_01  ,BLIT_02 ,BLIT_03 ,BLIT_04 ,BLIT_05
+          ...
+
+
+
+
+
+
+
+
+
+
+
+
+commit c94ad8e196b85c6c0fea3f631517e282cdf068d1
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Sat Feb 9 19:30:31 2019 +0100
+
+    [#006]
+    * modified files:
+    
+        * gherkin/config.h,
+            * backlight_breathing added,
+    
+        * gherkin/gherkin.h,
+            * defining LAYOUT_ortho_3x10 with the layout upside down,
+               * This is for having miniUSB port to the left,
+               * As in the original position designed for the Gherkin by di0ib.
+    
+        * gherkin/keymaps/30_layout/keymap.c,
+            * syntax bugs polished, now code runs !
+            * but there’s an issue with *SYMB and *NMBR, they seem to have a mutilate layout:
+    
+              [SYMB]:
+              ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+                 ⁉️      ~      ⁉️      _       %                   \     (      )      *      /
+                 '      @      +      ⁉️       $                   |     {      }      :      ⁉️
+                 !      ?      <      >       #                   &     ⁉️      ⁉️      ,      .
+              ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+    
+              [NMBR]:
+              ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+                 1      2      3      4       5                   6     7      8      9      0
+                 ⎵      ⌦      0      =       $                   -     4      5      6      +
+                 ⏎      ⁉️      ⁉️      ,       .                   /     1      2      3      *
+              ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+commit c902abd35fc716832785092f53758eac78f016ca
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Thu Feb 7 06:40:55 2019 +0100
+
+    [#005]
+    enlarge code:
+    * enlarge keymap.c file with the following content:
+        * IMPLEMENTING keycaps matrices for the following layouts:
+            * GHKN: 0: Default layer,
+            * SYMB: 1: Symbols layer,
+            * NMBR: 2: Numbers layer,
+        * IMPLEMENTING backlight levels for all the layers (layer_state_set_user),
+        * IMPLEMENTING ‘matrix_init_user’ for initialise breathing and backlight status.
+    
+    ❌
+
+
+
+
+
+
+
+
+
+
+
+
+commit b452eed0fa4ba9e24178bf16ffc03d8a27fda481
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Wed Feb 6 08:00:12 2019 +0100
+
+    [#004]
+    enlarge code:
+    * enlarge keymap.c file with the following content:
+        * implement process_record_user function for magement of the following cases:
+            * backlighting levels,
+            * breathing backlighting levels,
+            * DICTAD dictate on/off,
+        * implement global variables for CAPS and BREATHING,
+        * enum general tap dance states,
+        * implement general purpose tap dance function for the management of all cases (SINGLE_TAP, SINGLE_HOLD, …)
+        * implement tap dance keys for *GHKN layer,
+            * Q: SUSR, TAB, BLIT,
+            * W: MOUS,
+            * R: RESET, APPS,
+            * U: DIAERESIS, APPS,
+            * I: CIRCUMFLEX,
+            * P: SUSR,
+            * A: CAPS_LOCK, L_SHIFT,
+            * F: CAPS_LOCK, L_COMMAND,
+            * J: ACUTE ACCENT,  GRAVE ACCENT, L_COMMAND
+            * B: NMBR,
+            * N: NMBR, TILDE FOR Ñ,
+        * implement tap dance keys for *SYMB layer,
+            * Y: BACKSLASH, CIRCUMFLEX,
+            * A: QUOTE, DOUBLE QUOTE,
+            * G: DOLLAR, EURO,
+            * Z: EXCLAMATION MARK, INVERTED EXCLAMATION MARK,
+            * X: QUESTION MARK, INVERTED QUESTION MARK,
+        * implement tap dance keys for *NMBR layer,
+            * A: triple zero, KC_SPC,
+            * S: double zero, KC_DEL,
+            * B: exit *NMBR layer, KC_PDOT,
+            * N: exit *NMBR layer, KC_PSLS,
+        * implement tap dance keys for *SUSR layer,
+            * R: RESET keyboard,
+            * W: LOGOUT,
+            * A: MENU BAR / SLEEP,
+            * S: DOCK BAR / KILL MENU,
+            * D: TOOLS BAR / KILL CURRENT APPLICATION,
+            * F: STATUS BAR / SHUT DOWN,
+            * G: FLOATING WINDOW / RESTART,
+
+
+
+
+
+
+
+
+
+
+
+
+commit 9824f995b6d627960edd0c13fbd8d4a95449f815
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Tue Feb 5 06:02:56 2019 +0100
+
+    [#003]
+    enlarge code:
+    * enlarge keymap.c file with the following content:
+        * super user (SUSR) commands defined for POWER management cases,
+        * enum custom keycodes for:
+            * FUN_MACRO = 0,
+            * tap dance declarations for:
+                * keycodes at *GHKN layer,
+                * keycodes at *NMBR layer,
+                * keycodes at *SYMB  layer,
+                * keycodes for accents at *GHKN layer,
+                * keycodes for *SUSR layer -for POWER management cases,
+                * keycode   for accessing *BCKLIT layer from *GHKN layer,
+                * keycode   for accessing an app (the first of the 30 keycodes we are going to program later) from *APPS.
+
+
+
+
+
+
+
+
+
+
+
+
+commit a4807037e9ee9cbd8e3af0b72fd1fd7460e257df
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Sun Feb 3 10:50:52 2019 +0100
+
+    [#002]
+    added files:
+    * QMK_issues_log.txt          // by grabbing all the problems that I've been finding along the way
+    * sublime_text_shortcuts.txt  // for grabbing all Sublime Text useful shortcuts
+    enlarge code:
+    * enlarged keymap.c file with the following content:
+        * layers defined,
+        * readability codes defined,
+        * backlightning layers levels defined,
+        * backlightning situations defined,
+        * backlight breathing levels defined,
+        * extended (XTND) commands defined -for OSX windows management
+
+
+
+
+
+
+
+
+
+
+
+
+
+commit ab1317babd5e3ffa41f3e59de67b865e525ef0aa
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Sat Feb 2 07:08:18 2019 +0100
+
+    [#001]
+    [30_layout project]
+    This is a project for making a core foundation layout who works over all of my keyboards -but fits on a Gherkin, for easy change from one keyboard to another without having to memorise different keystrokes movements for the same actions. i.e.: I want to press the same core keys (30 minimal layout) for advancing to the next word, or for shut down my computer, or for duplicating a line, or for dictation, or for go to the next tab  into a browser, or for ANYTHING I had programmed into this Gherkin keyboard QMK layout.
+    
+    * This first commit:
+        * creates a try & fail .txt file with some modifiers combinations applied to KC_POWER who allows us to sleep, restart, shut down our computer, etc. named ‘QMK POWER key combinations.txt’.
+        * creates a folder named ’30_layout’ who contains:
+            * an almost finished config.c and rules.mk files,
+            * an empty keymap.c file for filling in from now on.
+
+
+
+
+
+
+
+
+
+
+
+
+commit 45e50948e9e5768b993e145fbee1b0d3f4402cb3
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Wed Jan 2 08:14:27 2019 +0100
+
+    002 - Starting a comprehensive gherkin from scratch
+
+
+
+
+
+
+
+
+
+
+
+
+commit 435dd347cd172f1bf8e3591f75e7e9f3eca663a5
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Mon Oct 8 11:48:45 2018 +0200
+
+    001 - manolo_gherkin folder ADDED (wich initially is a copy of wanleg folder) into keymaps
+

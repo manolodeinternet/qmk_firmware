@@ -16,13 +16,25 @@
 #define USE_SERIAL
 // #define USE_I2C
 #define EE_HANDS
-
 /* Select hand configuration */
 //#define MASTER_LEFT
 //#define MASTER_RIGHT
 
-// //////////////////////////////////////////////////////////////////////////////////////////////////////
-// //////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//[TAP DANCE PREREQUISITES]
+#define TAPPING_TERM 180 //150 //300
+// If you’re having issues with taps (un)registering,
+//...you can add a delay between the register and unregister events
+#define TAP_CODE_DELAY 100
+#define TAPPING_TOGGLE 1
+// #define TAPPING_TERM_PER_KEY
+//[tap dance prerequisites]
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //#define RGBLED_SPLIT { 6, 7 } // 2020/02/17
 
 /*(just added, @drashna)*/
@@ -86,6 +98,18 @@
 //
 
 
+//
+// DEFINE LEDS_TYPE
+//
+// You have to uncomment the lines you don't need:
+//
+/* 1: */ 
+// #define BACKLIT_LEDS
+/* 2: */
+#define RGB_LEDS
+//
+// define apps_triggers
+//
 
 
 
@@ -95,10 +119,13 @@
 
 
 
-//        #define RGBLIGHT_STARTUP_ANIMATION  // $126 bytes (firmare cost)
-//#define RGBLIGHT_ANIMATIONS
+
+//#define RGBLIGHT_STARTUP_ANIMATION  // $126 bytes (firmare cost)
+
+
+//#define RGBLIGHT_ANIMATIONS     // Enable all additional animation modes.
 //#define RGBLIGHT_EFFECT_KNIGHT
-//#define RGBLIGHT_EFFECT_BREATHING
+//#define RGBLIGHT_EFFECT_BREATHING // Enable breathing animation mode.
 //#define RGBLIGHT_MODE_BREATHING   3                         // [MINE] Is it ok ?
 //#define RGBLIGHT_EFFECT_BREATHE_CENTER 2.0  // 1.0 ... 2.7  // [MINE] Is it ok ?
 //#define RGBLIGHT_EFFECT_BREATHE_MAX    200  //     ... 255

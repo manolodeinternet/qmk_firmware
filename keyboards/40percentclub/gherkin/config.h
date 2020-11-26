@@ -2,9 +2,6 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define TAPPING_TERM 200 //180 //150
-// #define TAPPING_TERM_PER_KEY
-
 #include "config_common.h"
 
 /* USB Device descriptor parameter */

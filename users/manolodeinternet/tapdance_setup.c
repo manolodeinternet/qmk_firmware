@@ -124,8 +124,7 @@ int cur_dance (qk_tap_dance_state_t *state) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 //               T A P   D A N C E   F O R  -  V   I   M  -  L A Y E R S                //
@@ -148,7 +147,7 @@ static tap FVIM_uU_tap_state = {
   .state = 0
 };
 
-void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
+void FVIM_uU_finished (qk_tap_dance_state_t *state, void *user_data) {
   FVIM_uU_tap_state.state = cur_dance(state);
   switch (FVIM_uU_tap_state.state) {
     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_LEFT);
@@ -156,6 +155,10 @@ void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
 
     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_UP);
                           unregister_code(KC_UP);   unregister_code(KC_LALT); break;
+  }
+}
+void FVIM_uU_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (FVIM_uU_tap_state.state) {
   }
   FVIM_uU_tap_state.state = 0;
 }
@@ -182,7 +185,7 @@ static tap FVIM_pP_tap_state = {
   .state = 0
 };
 
-void FVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
+void FVIM_pP_finished (qk_tap_dance_state_t *state, void *user_data) {
   FVIM_pP_tap_state.state = cur_dance(state);
   switch (FVIM_pP_tap_state.state) {
     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_RGHT);
@@ -190,6 +193,10 @@ void FVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
 
     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_DOWN);
                           unregister_code(KC_DOWN); unregister_code(KC_LALT); break;
+  }
+}
+void FVIM_pP_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (FVIM_pP_tap_state.state) {
   }
   FVIM_pP_tap_state.state = 0;
 }
@@ -276,6 +283,177 @@ void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_Q (TG_QWE)                                                     //
+//                                                                                      //
+//  T O G G L E     _ Q W E R T     L A Y E R                                           //
+//                                                                                      //
+//  KC_Q: @  TOGGLE _QWER LAYER                                                        //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//instantalize an instance of 'tap' for the 'TG_QWE' tap dance.
+static tap TG_QWE_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void TG_QWE_finished (qk_tap_dance_state_t *state, void *user_data) {
+  TG_QWE_tap_state.state = cur_dance(state);
+  switch (TG_QWE_tap_state.state) {
+
+    case SINGLE_HOLD: register_code(KC_RCTL);
+                      break;
+
+    case DOUBLE_HOLD: layer_invert(_QWER);
+  
+#if defined(RGBLIGHT_ENABLE)
+                      flashing_RGB_LEDs(6, RGB_MY_CORAL, RGB_MY_GREEN);
+#elif defined(BACKLIGHT_ENABLE)
+                      flashing_BCK_LEDs(6, BL_MED, BL_MAX);
+#endif
+                      break;
+  }
+}
+
+void TG_QWE_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (TG_QWE_tap_state.state) {
+
+    case SINGLE_HOLD: unregister_code(KC_RCTL);
+                      break;
+  }
+  TG_QWE_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_powr] kc_q (tg_qwe)                                                     //
+//                                                                                      //
+//  t o g g l e     _ q w e r t     l a y e r                                           //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//  T A P   D A N C E   F O R   [ _ D F L T ]  L A Y E R    ( I A E O U  /  Q W E R T)  //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_DFLT] KC_P (L_APPS)                                                     //
+//                                                                                      //
+//  _ A P P S     L A Y E R                                                             //
+//                                                                                      //
+//  KC_P: *  KC_P                                                                       //
+//        @  _APPS LAYER                                                                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//instantalize an instance of 'tap' for the 'L_APPS' tap dance.
+static tap L_APPS_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+void L_APPS_finished (qk_tap_dance_state_t *state, void *user_data) {
+  L_APPS_tap_state.state = cur_dance(state);
+  switch (L_APPS_tap_state.state) {
+
+    case SINGLE_TAP:  //tap_code(KC_P);
+                      //Function  Description Aliases
+                      //FUNCTION: layer_state_is(layer)
+                      //DESCRIPTION: Checks if the specified layer is enabled globally.
+                      //ALIASES: IS_LAYER_ON(layer), IS_LAYER_OFF(layer)
+                      if (layer_state_is(_QWER))
+                      {
+                        tap_code(KC_W);
+                      }
+                      else
+                      {
+                        tap_code(KC_L);
+                      }
+                      break;
+                      
+    case SINGLE_HOLD: register_code(KC_F21);
+                      break;
+  }
+}
+
+void L_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (L_APPS_tap_state.state) {
+
+    case SINGLE_TAP:  break;
+
+    case SINGLE_HOLD: unregister_code(KC_F21);
+                      break;
+  }
+  L_APPS_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_dflt] kc_p (l_apps)                                                     //
+//                                                                                      //
+//  _ a p p s     l a y e r                                                             //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_DFLT] KC_L (R_APPS)                                                     //
+//                                                                                      //
+//  _ A P P S     L A Y E R                                                             //
+//                                                                                      //
+//  KC_L: *  KC_L                                                                       //
+//        @  _APPS LAYER                                                                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//instantalize an instance of 'tap' for the 'R_APPS' tap dance.
+static tap R_APPS_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+void R_APPS_finished (qk_tap_dance_state_t *state, void *user_data) {
+  R_APPS_tap_state.state = cur_dance(state);
+  switch (R_APPS_tap_state.state) {
+
+    case SINGLE_TAP:  //tap_code(KC_L);
+                      //Function  Description Aliases
+                      //FUNCTION: layer_state_is(layer)
+                      //DESCRIPTION: Checks if the specified layer is enabled globally.
+                      //ALIASES: IS_LAYER_ON(layer), IS_LAYER_OFF(layer)
+                      if (layer_state_is(_QWER))
+                      {
+                        tap_code(KC_O);
+                      }
+                      else
+                      {
+                        tap_code(KC_P);
+                      }
+                      break;
+
+    case SINGLE_HOLD: register_code(KC_F21);
+                      break;
+  }
+}
+
+void R_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (R_APPS_tap_state.state) {
+
+    case SINGLE_TAP:  break;
+
+    case SINGLE_HOLD: unregister_code(KC_F21);
+                      break;
+  }
+  R_APPS_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_dflt] kc_l (r_apps)                                                     //
+//                                                                                      //
+//  _ a p p s     l a y e r                                                             //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [TAPDANCE] [_POWR] KC_E (LCKLOG)                                                     //
@@ -302,13 +480,12 @@ void LCKLOG_finished (qk_tap_dance_state_t *state, void *user_data) {
                       tap_code(KC_Q);
                       unregister_code(KC_LGUI); unregister_code(KC_LCTL);
                       break;
+                    
 
-                    //user log out
+    case DOUBLE_HOLD: //user log out
                       // (guessed by try and fail method)
                       // if we only keystroke SFT+GUI as described at Apple Menu, it appears a menu
                       // if we add ALT, we don't have to answer any menu, we logout directly
-    case SINGLE_HOLD:
-
 #if defined(RGBLIGHT_ENABLE)
                       flashing_RGB_LEDs(6, RGB_MY_MAGENTA, RGB_MY_BLUE);
 #elif defined(BACKLIGHT_ENABLE)
@@ -324,16 +501,261 @@ void LCKLOG_finished (qk_tap_dance_state_t *state, void *user_data) {
 }
 
 void LCKLOG_reset (qk_tap_dance_state_t *state, void *user_data) {
-/*  switch (LCKLOG_tap_state.state) {
-                     
-    case SINGLE_HOLD: break;
-  }
-*/  LCKLOG_tap_state.state = 0;
+  // switch (LCKLOG_tap_state.state) {
+  // }
+  LCKLOG_tap_state.state = 0;
 }
 //                                                                                      //
 // [tapdance] [_powr] kc_e (LCKLOG)                                                     //
 //                                                                                      //
 //  l o g o u t    /    l o c k    s c r e e n                                          //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_R (HRESET)                                                     //
+//                                                                                      //
+//  R E S E T                                                                           //
+//                                                                                      //
+//  KC_R:   @   R E S E T                                                               //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'HRESET' tap dance.
+static tap HRESET_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void HRESET_finished (qk_tap_dance_state_t *state, void *user_data) {
+  HRESET_tap_state.state = cur_dance(state);
+  switch (HRESET_tap_state.state) {
+
+    case SINGLE_HOLD: // starts backlight blinking and then reset the keyboard for about 7 seconds
+                      reset_my_keyboard_function();
+                      break;
+  }
+}
+
+void HRESET_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (HRESET_tap_state.state) {
+    case SINGLE_HOLD:        break;
+  }
+  HRESET_tap_state.state = 0;
+}
+//
+// [FIRMWARE_SIZE]
+  // Next way, we save only 2 bytes (it doesn't matter, I prefer classic way:
+// [firmware_size]
+//
+    /*
+    void HRESET_finished (qk_tap_dance_state_t *state, void *user_data) {
+      switch (cur_dance(state)) {
+
+        case SINGLE_HOLD: // starts backlight blinking and then reset the keyboard for about 7 seconds
+                          reset_my_keyboard_function();
+                          break;
+      }
+      // reset_tap_dance(state);
+    }
+    */
+//                                                                                      //
+// [tapdance] [_powr] kc_r (hreset)                                                     //
+//                                                                                      //
+//  r e s e t                                                                           //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_J (RG_ZOIN)                                                    //
+//                                                                                      //
+//  R I G H T    G U I    /    Z O O M   I N                                            //
+//                                                                                      //
+//  KC_J:  *  ZOOM IN,                                                                  //
+//         @  RIGHT GUI                                                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'RG_ZOIN' tap dance.
+static tap RG_ZOIN_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RG_ZOIN_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RG_ZOIN_tap_state.state = cur_dance(state);
+  switch (RG_ZOIN_tap_state.state) {
+
+// [SYSTEM PREFERENCES]    
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_EQL);
+                      break;
+// [system preferences]                      
+
+    case SINGLE_HOLD: register_code(KC_RGUI);
+                      break;
+  }
+}
+
+void RG_ZOIN_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RG_ZOIN_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_EQL);
+                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
+                      break;
+                     
+    case SINGLE_HOLD: unregister_code(KC_RGUI);
+                      break;                       
+  }
+  RG_ZOIN_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_powr] kc_j (RG_ZOIN)                                                    //
+//                                                                                      //
+//  r i g h t    g u i    /    z o o m   i n                                            //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_K (RA_ZOUT)                                                    //
+//                                                                                      //
+//  R I G H T    A L T     /     Z O O M    O U T                                       //
+//                                                                                      //
+//  KC_K:  *  ZOOM OUT,                                                                 //
+//         @  RIGHT ALT                                                                 //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'RA_ZOUT' tap dance.
+static tap RA_ZOUT_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RA_ZOUT_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RA_ZOUT_tap_state.state = cur_dance(state);
+  switch (RA_ZOUT_tap_state.state) {
+
+// [SYSTEM PREFERENCES]
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_MINS);
+                      break;
+// [system preferences]
+
+    case SINGLE_HOLD: register_code(KC_RALT);
+                      break;
+  }
+}
+
+void RA_ZOUT_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RA_ZOUT_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_MINS);
+                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
+                      break;
+                     
+    case SINGLE_HOLD: unregister_code(KC_RALT);
+                      break;                       
+  }
+  RA_ZOUT_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_powr] kc_k (RA_ZOUT)                                                    //
+//                                                                                      //
+//  r i g h t    a l t     /     z o o m    o u t                                       //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_L (RS_ZOOM)                                                    //
+//                                                                                      //
+//  R I G H T    S F T    /    Z O O M    O N / O F F                                   //
+//                                                                                      //
+//  KC_L:  *  ZOOM ON/OFF,                                                              //
+//         @  RIGHT SHIFT                                                               //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'RS_ZOOM' tap dance.
+static tap RS_ZOOM_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RS_ZOOM_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RS_ZOOM_tap_state.state = cur_dance(state);
+  switch (RS_ZOOM_tap_state.state) {
+
+// [SYSTEM PREFERENCES]
+    case SINGLE_TAP:  register_code(KC_LCTL); register_code(KC_LALT); register_code(KC_LGUI);
+                      register_code(KC_SCLN);
+                      break;
+// [system preferences]
+
+    case SINGLE_HOLD: register_code(KC_RSFT);
+                      break;
+  }
+}
+
+void RS_ZOOM_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RS_ZOOM_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_SCLN);
+                      unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LCTL);
+                      break;
+                     
+    case SINGLE_HOLD: unregister_code(KC_RSFT);
+                      break;                       
+  }
+  RS_ZOOM_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_powr] kc_l (RS_ZOOM)                                                    //
+//                                                                                      //
+//  r i g h t    s f t    /    z o o m    o n / o f f                                   //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_POWR] KC_SP (RA_INCO)                                                   //
+//                                                                                      //
+//  R I G H T    S F T     /     I N V E R T    C O L O R S                             //
+//                                                                                      //
+//  KC_SP:  *  INVERT COLORS,                                                           //
+//          @  RIGHT SFT                                                                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'RA_INCO' tap dance.
+static tap RA_INCO_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void RA_INCO_finished (qk_tap_dance_state_t *state, void *user_data) {
+  RA_INCO_tap_state.state = cur_dance(state);
+  switch (RA_INCO_tap_state.state) {
+
+// [SYSTEM PREFERENCES]
+    case SINGLE_TAP:  register_code(KC_LSFT); register_code(KC_LCTL); register_code(KC_LGUI);
+                      register_code(KC_8);
+                      break;
+// [system preferences]
+
+    case SINGLE_HOLD: register_code(KC_RSFT);
+                      break;
+  }
+}
+
+void RA_INCO_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (RA_INCO_tap_state.state) {
+    case SINGLE_TAP:  unregister_code(KC_8);
+                      unregister_code(KC_LGUI); unregister_code(KC_LCTL); unregister_code(KC_LSFT);
+                      break;
+                     
+    case SINGLE_HOLD: unregister_code(KC_RSFT);
+                      break;                       
+  }
+  RA_INCO_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_powr] kc_sp (ra_inco)                                                   //
+//                                                                                      //
+//  r i g h t    s f t    /     i n v e r t    c o l o r s                              //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -683,63 +1105,109 @@ void RSTT_F_reset (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //  f l o a t i n g   w i n d o w   /   r e s t a r t                                   //
 //////////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_POWR] KC_R (HRESET)                                                     //
-//                                                                                      //
-//  R E S E T                                                                           //
-//                                                                                      //
-//  KC_R:   @   R E S E T                                                               //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'HRESET' tap dance.
-static tap HRESET_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void HRESET_finished (qk_tap_dance_state_t *state, void *user_data) {
-  HRESET_tap_state.state = cur_dance(state);
-  switch (HRESET_tap_state.state) {
-
-    case SINGLE_HOLD: // starts backlight blinking and then reset the keyboard for about 7 seconds
-                      reset_my_keyboard_function();
-                      break;
-  }
-}
-
-void HRESET_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (HRESET_tap_state.state) {
-    case SINGLE_HOLD:        break;
-  }
-  HRESET_tap_state.state = 0;
-}
 //
-// [FIRMWARE_SIZE]
-  // Next way, we save only 2 bytes (it doesn't matter, I prefer classic way:
-// [firmware_size]
-//
-    /*
-    void HRESET_finished (qk_tap_dance_state_t *state, void *user_data) {
-      switch (cur_dance(state)) {
-
-        case SINGLE_HOLD: // starts backlight blinking and then reset the keyboard for about 7 seconds
-                          reset_my_keyboard_function();
-                          break;
-      }
-      // reset_tap_dance(state);
-    }
-    */
-//                                                                                      //
-// [tapdance] [_powr] kc_r (hreset)                                                     //
-//                                                                                      //
-//  r e s e t                                                                           //
-//////////////////////////////////////////////////////////////////////////////////////////
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 //             t a p   d a n c e   f o r    [ _ p o w r ]    l a y e r                  //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//               T A P   D A N C E   F O R  -  S Y M B O L S  -  L A Y E R S            //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_SYMB] KC_O (TD_EXC)                                                     //
+//                                                                                      //
+//  E X C L A M A T I O N   M A R K    /    O P E N   E X C L A M A T I O N   M A R K   //
+//                                                                                      //
+//  KC_B:  *  EXCLAMATION MARK,                                                         //
+//        **  OPEN EXCLAMATION MARK                                                     //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'TD_EXC' tap dance.
+static tap TD_EXC_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void TD_EXC_finished (qk_tap_dance_state_t *state, void *user_data) {
+  TD_EXC_tap_state.state = cur_dance(state);
+  switch (TD_EXC_tap_state.state) {
+
+    case SINGLE_TAP:  register_code(KC_LSFT); tap_code(KC_1); unregister_code(KC_LSFT);
+                      break;
+
+    case DOUBLE_TAP:  B_EXCL;
+                      break;
+  }
+}
+
+void TD_EXC_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (TD_EXC_tap_state.state) {
+    case SINGLE_TAP:
+    case DOUBLE_TAP:  break;                            
+  }
+  TD_EXC_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_symb] kc_o (td_exc)                                                     //
+//                                                                                      //
+//  e x c l a m a t i o n   m a r k    /    o p e n   e x c l a m a t i o n   m a r k   //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_SYMB] KC_P (TD_QUE)                                                     //
+//                                                                                      //
+//  E X C L A M A T I O N   M A R K    /    O P E N   E X C L A M A T I O N   M A R K   //
+//                                                                                      //
+//  KC_B:  *  EXCLAMATION MARK,                                                         //
+//        **  OPEN EXCLAMATION MARK                                                     //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'TD_QUE' tap dance.
+static tap TD_QUE_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void TD_QUE_finished (qk_tap_dance_state_t *state, void *user_data) {
+  TD_QUE_tap_state.state = cur_dance(state);
+  switch (TD_QUE_tap_state.state) {
+
+    case SINGLE_TAP:  register_code(KC_LSFT); tap_code(KC_SLSH); unregister_code(KC_LSFT);
+                      break;
+
+    case DOUBLE_TAP:  B_QUES;
+                      break;
+  }
+}
+
+void TD_QUE_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (TD_QUE_tap_state.state) {
+    case SINGLE_TAP:
+    case DOUBLE_TAP:  break;                            
+  }
+  TD_QUE_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_symb] kc_p (td_que)                                                     //
+//                                                                                      //
+//  e x c l a m a t i o n   m a r k    /    o p e n   e x c l a m a t i o n   m a r k   //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//               t a p   d a n c e   f o r  -  s y m b o l s  -  l a y e r s            //
+//                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 //////////////////////////////////////////////////////////////////////////////////////////

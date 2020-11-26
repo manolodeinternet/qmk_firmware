@@ -21,7 +21,7 @@ ifeq ($(strip $(dfu)), qmk)
 endif
 
 # if next feature doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
-NKRO_ENABLE         = yes # USB Nkey Rollover
+# NKRO_ENABLE         = yes # USB Nkey Rollover
 
 BOOTMAGIC_ENABLE    = no  # Virtual DIP switch configuration(+1000)
 EXTRAKEY_ENABLE     = no  # Audio control and System control(+450)

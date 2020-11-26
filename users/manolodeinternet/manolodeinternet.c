@@ -27,6 +27,8 @@ bool disabled_caps_before_accent = false;
 
           bool numbers_is_active = false;   // flag for _NUMB layer
 
+      bool space_or_symb_pressed = false;
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [FUNCTIONS] [_DALY] KC_A [F(CAPSL)]                                                  //
@@ -130,31 +132,32 @@ void enable_capslock_after_accents_function(void) {  // MY CAPSLOCK RESET FUNCTI
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+// wait_ms(50) works well, I'm going to try with wait_ms(10) for getting a faster answer
 void acute_accent_function(void) {
-  register_code(KC_LALT); register_code(KC_E);
-  unregister_code(KC_E); unregister_code(KC_LALT);
+    register_code(KC_LALT); wait_ms(10); tap_code(KC_E);
+  unregister_code(KC_LALT);
 }
 
 void diaeresis_accent_function(void) {
-    register_code(KC_LALT); register_code(KC_U);
-    unregister_code(KC_U);  unregister_code(KC_LALT);
+      register_code(KC_LALT); wait_ms(10); tap_code(KC_U);
+    unregister_code(KC_LALT);
 }
 
 
 void circumflex_accent_function(void) {
-    register_code(KC_LALT); register_code(KC_I);
-    unregister_code(KC_I);  unregister_code(KC_LALT);
+      register_code(KC_LALT); wait_ms(10); tap_code(KC_I);
+    unregister_code(KC_LALT);
 }
 
 
 void grave_accent_function(void) {
-    register_code(KC_LALT); register_code(KC_GRAVE);
-    unregister_code(KC_GRAVE);  unregister_code(KC_LALT);
+      register_code(KC_LALT); wait_ms(10); tap_code(KC_GRAVE);
+    unregister_code(KC_LALT);
 }
 
 void tilde_accent_function(void) {
-    register_code(KC_LALT); register_code(KC_N);
-    unregister_code(KC_N);  unregister_code(KC_LALT);
+      register_code(KC_LALT); wait_ms(10); tap_code(KC_N);
+    unregister_code(KC_LALT);
 }
 //                                                                                      //
 // [functions] [_daly] kc_a, kc_e, kc_i, kc_o, kc_u, kc_n                               //
@@ -216,7 +219,7 @@ void callApp(char *appName)
     unregister_code (KC_SPC); unregister_code(KC_LGUI);
     send_string  (appName); 
     // next delay is for avoiding that SpotLight remains on screen without calling our app
-    _delay_ms(40); 
+    wait_ms(40); 
     register_code (KC_ENT); unregister_code (KC_ENT);
 }
 #endif
@@ -327,20 +330,20 @@ bool /*triggered_mod*/ check_mod_and_remove_it(uint8_t mod, bool remove_it)
     case ALT_MODS: alt_mod  = get_mods()&ALT_MODS;
                    if (alt_mod)
                    {
-                    if (remove_it)
-                    {
-                     remove_mod(alt_mod);
-                    }
+                     if (remove_it)
+                     {
+                       remove_mod(alt_mod);
+                     }
                      return true;
                    }
                    return false;
     case GUI_MODS: gui_mod     = get_mods()&GUI_MODS;
                    if (gui_mod)
                    {
-                    if (remove_it)
-                    {
-                     remove_mod(gui_mod);
-                    }
+                     if (remove_it)
+                     {
+                       remove_mod(gui_mod);
+                     }
                      return true;
                    }
                    return false;
@@ -349,7 +352,7 @@ bool /*triggered_mod*/ check_mod_and_remove_it(uint8_t mod, bool remove_it)
                     {
                       if (remove_it)
                       {
-                      remove_mod(sft_mod);
+                        remove_mod(sft_mod);
                       }
                       return true;
                     }
@@ -507,11 +510,11 @@ void volumeSetToLevel(uint8_t volume) {
 void brightSetToLevel(uint8_t bright) {
   for (uint8_t i = 0; i < MAX_BRIGHT; i++)
     {
-      tap_code(KC_SLCK);
+      tap_code(DEC_BRGH);
     }
   for (uint8_t i = 0; (i < MAX_BRIGHT) & (i < bright); i++)
     {
-      tap_code(KC_PAUS);
+      tap_code(INC_BRGH);
     }
 }
 //

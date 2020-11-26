@@ -7,25 +7,26 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 //miniDactyl
-#define _DFLT   0  //  gherkin ALPHAS DEFAULT    layer 
-#define _ACCN   1  //  gherkin ACCENTS           layer 
-#define _NUMB   2  //  gherkin numbers           layer 
-#define _FVIM   3  //  Fake                  VIM layer
-#define _XVIM   4  //  power edition         VIM layer
-#define _DVIM   5  //  Delete                VIM layer
-#define _MOUS   6  //  mouse                     layer
-#define _DALY   7  //  gherkin DAiLY commands    layer 
-#define _FUNC   8  //  gherkin functions         layer 
-#define _SYMB   9  //  gherkin symbols           layer 
-#define _LEDS  10  //  backlight                 layer
-#define _POWR  11  //  POWER        productivity layer
+#define _DFLT  0  //  gherkin ALPHAS IAEOU DFLT layer
+// #define _PINKY  1  //  PINKY DEMULTIPLIER        layer for not using notHomeRowPinkiesKeys (BFYX)
+//                    //                                             nor inner right index keys (GH)
+// _PINKY is implemented into _FVIM (BFYX) and _SYMB (GH) layers
+#define _QWER   1  //  gherkin ALPHAS QWERT DFLT layer
+#define _ACCN   2  //  gherkin ACCENTS           layer 
+#define _NUMB   3  //  gherkin numbers           layer 
+#define _FVIM   4  //  Fake                  VIM layer
+#define _XVIM   5  //  power edition         VIM layer
+#define _DVIM   6  //  Delete                VIM layer
+#define _MOUS   7  //  mouse                     layer
+#define _DALY   8  //  gherkin DAiLY commands    layer 
+#define _FUNC   9  //  gherkin functions         layer 
+#define _SYMB  10  //  gherkin symbols           layer 
+#define _LEDS  11  //  backlight                 layer
+#define _POWR  12  //  POWER        productivity layer
+// #define _APPS  13  //  applications shortcuts    layer
 #if defined(COMPREHENSIVE_30_LAYOUT)
-    #define _APPS  12  //  applications shortcuts    layer
-
-    #define _TEST  13  //  LAYER FOR TESTING               // must be over layer number 15 ...
-
-    #define _LAST  17  //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!!!!!!!!!!
-
+    // #define _TEST  14  //  LAYER FOR TESTING               // must be over layer number 15 ...
+    // #define _LAST  17  //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!!!!!!!!!!
 #elif defined(SIMPLE_30_LAYOUT)
     // #define _RGBL  _LGHT
 #endif
@@ -184,87 +185,92 @@ acronym dictionary
  */
 //[info]
 
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// BEGINING OF COMMON LAYERS 01...12
-//
-// [_DFLT]
-#if defined(COMPREHENSIVE_30_LAYOUT)
-/* [_DFLT] = LAYER 00 : DEFAULT LAYER
+/* [_DFLT] = LAYER 00 : UAIH DEFAULT LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |    Q   |    W   |    E   |    R   |    T   |        |    Y   |    U   |    I   |    O   |    P   |
- * |G[_1APP]|        |        |        |        |        |        |        |        |        |G[_1APP]|
- * | [_APPS]| [_POWR]| [_LEDS]| [_FUNC]| [_NUMB]|        | [_SYMB]| [_FUNC]| [_LEDS]| [_POWR]| [_APPS]|
+ * |    B   |    L   |    S   |    C   |BCKSPACE|        |    Z   |    ,   |    O   |    P   |    Y   |
+ * |        |G[_1APP]|        |        |S-DELETE|        |        |        |        |G[_1APP]|        |
+ * |        | [_APPS]| [_POWR]| [_LEDS]| [_DVIM]|        |        | [_LEDS]| [_POWR]| [_APPS]|        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |    A   |    S   |    D   |    F   |    G   |        |    H   |    J   |    K   |    L   |  Space |
+ * |    G   |    N   |    R   |    T   |    M   |        |    .   |    U   |    A   |    I   |    H   |
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |   LCtl |   LAlt |   LGui |   LSft | [_ACCN]|        | [_ACCN]|   LSft |   LGui |   LAlt |   LCtl |
+ * |  LCtl  |  LSft  |  LAlt  |  LGui  | [_ACCN]|        |        |  LGui  |  LAlt  |  LSft  |   LCtl |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |    Z   |    X   |    C   |    V   |    B   |        |    N   |    M   | Escape |Bckspace|  Enter |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * | [_DALY]| [_DVIM]| [_MOUS]| [_NUMB]| [_SYMB]|        | [_FVIM]| [_XVIM]| [_DVIM]|        | [_DALY]|
+ * |        |        |        |        |S- ENTER|        |        |        |        |        |        |
+ * |    F   |    J   |    V   |    D   |  SPACE |        |    E   |    W   |    K   |    Q   |    X   |
+ * |        |        |        |        |A-ESCAPE|        |[_PINKY]|        |        |        |        |
+ * |        | [_DALY]| [_MOUS]| [_NUMB]| [_SYMB]|        |[ _FVIM]| [_XVIM]| [_FUNC]| [_DALY]|        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-// #define ___DEFAULT_L1___ LT(_APPS, KC_Q),LT(_POWR, KC_W),LT(_LEDS, KC_E),LT(_FUNC, KC_R),LT(_SYMB,KC_T)
-// #define ___DEFAULT_L2___    LCTL_T(KC_A),   LALT_T(KC_S),   LGUI_T(KC_D),   LSFT_T(KC_F),LT(_ACCN,KC_G)
-// #define ___DEFAULT_L3___ LT(_DALY, KC_Z),LT(_DVIM, KC_X),LT(_MOUS, KC_C),LT(_FVIM, KC_V),LT(_NUMB,KC_B)
+// home/repos/keygen: customized by me (ieants KEYBOARD LAYOUT ANALYZER)
+// link to original fork: 
+// https://ieants.cc/code/keyboard/klatest/#/main
+/*pub static ZUAIH_NEXT_BACKSPACE_LAYOUT: Layout = Layout(
 
-// #define ___DEFAULT_R1___ LT(_NUMB,KC_Y),LT(_FUNC,KC_U), LT(_LEDS, KC_I),LT(_POWR,KC_O), LT(_APPS, KC_P)
-// #define ___DEFAULT_R2___ LT(_ACCN,KC_H),  LSFT_T(KC_J),    LGUI_T(KC_K),  LALT_T(KC_L),  LCTL_T(KC_SPC)
-// #define ___DEFAULT_R3___ LT(_SYMB,KC_N),LT(_FVIM,KC_M),LT(_XVIM,KC_ESC),       KC_BSPC,LT(_DALY,KC_ENT)
+          'B', 'L', 'S', 'C',  'KC_BSPC',                       'Z',    ,       'O', 'P', 'Y',
+          'G', 'N', 'R', 'T',  'M',                             '.',    'U',    'A', 'I', 'H',
+          'F', 'J', 'V', 'D',  'KC_SPC',                        'E',    'W',    'K', 'Q', 'X', 
+*/
+#if defined(COMPREHENSIVE_30_LAYOUT)
+#define ____DFLT___L1___           KC_B,  TD(L_APPS),LT(_POWR,KC_S),LT(_LEDS,KC_C), _DVIM_BS
+#define ____DFLT___L2___    LCTL_T(KC_G),LSFT_T(KC_N),  LALT_T(KC_R),     LGUI_T(KC_T), LT(_ACCN,KC_M)
+#define ____DFLT___L3___           KC_F, LT(_DALY,KC_J),LT(_MOUS,KC_V),  LT(_NUMB,KC_D),  _SYM_SPC
 
-
-#define ___DEFAULT_L1___ LT(_APPS, KC_Q),LT(_POWR, KC_W),LT(_LEDS, KC_E),LT(_FUNC, KC_R),LT(_NUMB,KC_T)
-#define ___DEFAULT_L2___    LCTL_T(KC_A),   LALT_T(KC_S),   LGUI_T(KC_D),   LSFT_T(KC_F),LT(_ACCN,KC_G)
-#define ___DEFAULT_L3___ LT(_DALY, KC_Z),LT(_DVIM, KC_X),LT(_MOUS, KC_C),LT(_NUMB, KC_V),LT(_SYMB,KC_B)
-
-#define ___DEFAULT_R1___ LT(_SYMB,KC_Y),LT(_FUNC,KC_U), LT(_LEDS, KC_I),LT(_POWR,KC_O), LT(_APPS, KC_P)
-#define ___DEFAULT_R2___ LT(_ACCN,KC_H),  LSFT_T(KC_J),    LGUI_T(KC_K),  LALT_T(KC_L),  LCTL_T(KC_SPC)
-#define ___DEFAULT_R3___ LT(_FVIM,KC_N),LT(_XVIM,KC_M),LT(_DVIM,KC_ESC),       KC_BSPC,LT(_DALY,KC_ENT)
-
+#define ____DFLT___R1___            KC_Z , LT(_LEDS,KC_COMM),LT(_POWR,KC_O),     TD(R_APPS), KC_Y
+#define ____DFLT___R2___           KC_DOT,   LGUI_T(KC_U),  LALT_T(KC_A),   LSFT_T(KC_I),  LCTL_T(KC_H)
+#define ____DFLT___R3___           LT(_FVIM,KC_E),LT(_SYMB,KC_W),LT(_XVIM,KC_K),LT(_DALY, KC_Q), KC_X
 
 //#if defined(COMPREHENSIVE_30_LAYOUT)
 #elif defined(SIMPLE_30_LAYOUT)
-/* [_DFLT] = LAYER 00 : DEFAULT LAYER
+/* [_DFLT] = LAYER 00 : UAIH DEFAULT LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |    Q   |    W   |    E   |    R   |    T   |        |    Y   |    U   |    I   |    O   |    P   |
+ * |    B   |    L   |    S   |    C   |BCKSPACE|        |    Z   |    ,   |    O   |    P   |    Y   |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |    A   |    S   |    D   |    F   |    G   |        |    H   |    J   |    K   |    L   |  Space |
+ * |    G   |    N   |    R   |    T   |    M   |        |    .   |    U   |    A   |    I   |    H   |
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |   LCtl |   LAlt |   LGui |   LSft |        |        |        |   LSft |   LGui |   LAlt |   LCtl |
+ * |  LCtl  |  LSft  |  LAlt  |  LGui  |        |        |        |  LGui  |  LAlt  |  LSft  |   LCtl |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |    Z   |    X   |    C   |    V   |    B   |        |    N   |    M   | Escape |Bckspace|  Enter |
+ * |    F   |    J   |    V   |    D   |  SPACE |        |    E   |    W   |    K   |    Q   |    X   |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-#define ___DEFAULT_L1___         KC_Q,         KC_W,         KC_E,         KC_R,         KC_T
-#define ___DEFAULT_L2___ LCTL_T(KC_A), LALT_T(KC_S), LGUI_T(KC_D), LSFT_T(KC_F),         KC_G
-#define ___DEFAULT_L3___         KC_Z,         KC_X,         KC_C,         KC_V,         KC_B
+#define ____DFLT___L1___        KC_Y,         KC_P,         KC_O,         KC_COMM,       KC_BSPC
+#define ____DFLT___L2___ LCTL_T(KC_H), LSFT_T(KC_I), LALT_T(KC_A), LGUI_T(KC_U),         KC_DOT
+#define ____DFLT___L3___        KC_X,         KC_Q,         KC_K,         KC_W,          KC_E
 
-#define      ___DEFAULT_R1___             KC_Y,         KC_U,         KC_I,         KC_O,          KC_P
-#define      ___DEFAULT_R2___             KC_H, LSFT_T(KC_J), LGUI_T(KC_K), LALT_T(KC_L),LCTL_T(KC_SPC) // [BUG] KC_SPC instead of KC_J
-#define      ___DEFAULT_R3___             KC_N,         KC_M,       KC_ESC,      KC_BSPC,        KC_ENT   // [bug]
-
+#define ____DFLT___R1___             KC_Z,              KC_C,         KC_S,         KC_L,         KC_B
+#define ____DFLT___R2___             KC_M,       LGUI_T(KC_T), LALT_T(KC_R), LSFT_T(KC_N), LCTL_T(KC_G)
+#define ____DFLT___R3___            _SYM_SPC,           KC_D,         KC_V,         KC_J,         KC_F
 //#elif defined(SIMPLE_30_LAYOUT)
 #endif
+//
+// THUMB CLUSTER DEFINED ABOVE
+//
+// END OF [_DFLT] 00
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+//
+// COMMON THUMB CLUSTER FOR BOTH DEFAULT LAYERS: _DFLT & _QWER
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+//
 #if defined(MINI_DACTYL_THUMBS)
-/* [_DFLT] = LAYER 00 : DEFAULT LAYER
+// [_DFLT] = LAYER 00 :  _DFLT (UAIH) DEFAULT LAYER
+// [_QWER] = LAYER 00 : _QWER         DEFAULT LAYER
+/* [DFLT] = LAYER 00 :          _DFLT DEFAULT LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |ONEshoot|
- *                            |   Tab  |        |        |        |  layer |
+ *                            |        |   Tab  |        |        |  layer |
  *                            |        |        |        |        |        |
- *                            |@[_MOUS]|@[_FUNC]|        |@[_POWR]|@[_ACCN]|
+ *                            |@[_LEDS]|@[_FUNC]|        |@[_POWR]|@[_ACCN]|
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   | Delete |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
@@ -272,77 +278,112 @@ acronym dictionary
  *                   |@[_DVIM]|@[_SYMB]|@[_NUMB]|        |@[_APPS]|@[_FVIM]|@[_DALY]|
  *                   '--------------------------'        '--------------------------'
  */
-#define _DFLT_LTHMB_RW1_               OSL(_MOUS), LT(_FUNC, KC_TAB)
-#define _DFLT_LTHMB_RW2_ TD(DVIM_Del),  MO(_SYMB),           TT_NUMB// TT(_NUMB) is slower than TT_NUMB
+// MO(_DALY) instead of OSL(_DALY) is for not getting stucked in _DVIM layer, I don't know why !
+#define _DFLT_LTHMB_RW1_            LT(_LEDS, KC_TAB), OSL(_FUNC)
+#define _DFLT_LTHMB_RW2_        MO(_DALY), OSL(_SYMB),    TT_NUMB  // TT(_NUMB)is slower than TT_NUMB
 
-#define      _DFLT_RTHMB_RW1_                      MO(_POWR),          OSL(_ACCN)
-#define      _DFLT_RTHMB_RW2_                      TH_R3_APPS_TRIGGER, MO(_FVIM), MO(_DALY)
-
+#define      _DFLT_RTHMB_RW1_                              MO(_POWR),          OSL(_ACCN)
+#define      _DFLT_RTHMB_RW2_                              TH_R3_APPS_TRIGGER, OSL(_FVIM), TD(DVIM_Del)
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
-// END OF [_DFLT] 00
+//
+// common thumb cluster for both default layers: _DFLT & _QWER
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+
+
+// [_QWER]
+/* [_QWER] = LAYER 01 : QWERT DEFAULT LAYER
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Q   |    W   |    E   |    R   |    T   |        |    Y   |    U   |    I   |    O   |    P   |
+ * |        |G[_1APP]|        |        |        |        |        |        |        |G[_1APP]|        |
+ * |        | [_APPS]| [_POWR]| [_LEDS]| [_DVIM]|        |        | [_LEDS]| [_POWR]| [_APPS]|        |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    A   |    S   |    D   |    F   |    G   |        |    H   |    J   |    K   |    L   |  Space |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |  LCtl  |  LSft  |  LAlt  |  LGui  | [_ACCN]|        | [_ACCN]|  LGui  |  LAlt  |  LSft  |  LCtl  |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Z   |    X   |    C   |    V   |    B   |        |    N   |    M   |  Enter |Bckspace| Escape |
+ * |        |        |        |        |        |        |[_PINKY]|        |        |        |        |
+ * |        | [_DALY]| [_MOUS]| [_NUMB]| [_SYMB]|        |[ _FVIM]| [_XVIM]| [_FUNC]| [_DALY]|        |
+ * '--------------------------------------------'        '--------------------------------------------'
+ */
+#if defined(COMPREHENSIVE_30_LAYOUT)
+
+#define ____QWER__L1___         KC_Q ,     TD(L_APPS), LT(_POWR, KC_E), LT(_LEDS, KC_R), LT(_DVIM,KC_T) //TD(APPS_Q)
+#define ____QWER__L2___  LCTL_T(KC_A),   LSFT_T(KC_S),    LALT_T(KC_D),    LGUI_T(KC_F), LT(_ACCN,KC_G)
+#define ____QWER__L3___          KC_Z, LT(_DALY,KC_X), LT(_MOUS, KC_C), LT(_NUMB, KC_V), LT(_SYMB,KC_B)
+
+#define ____QWER__R1___          KC_Y ,LT(_LEDS,KC_U), LT(_POWR, KC_I),       TD(R_APPS),       KC_P //TD(APPS_P)
+#define ____QWER__R2___ LT(_ACCN,KC_H),  LGUI_T(KC_J),    LALT_T(KC_K),     LSFT_T(KC_L),LCTL_T(KC_SPC)
+#define ____QWER__R3___ LT(_FVIM,KC_N),LT(_XVIM,KC_M),LT(_FUNC,KC_ENT),LT(_DALY,KC_BSPC),       KC_ESC
+
+//#if defined(COMPREHENSIVE_30_LAYOUT)
+#elif defined(SIMPLE_30_LAYOUT)
+/* [_QWER] = LAYER 01 : QWERT DEFAULT LAYER
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Q   |    W   |    E   |    R   |    T   |        |    Y   |    U   |    I   |    O   |    P   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    A   |    S   |    D   |    F   |    G   |        |    H   |    J   |    K   |    L   |  Space |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |  LCtl  |  LSft  |  LAlt  |  LGui  |        |        |        |  LGui  |  LAlt  |  LSft  |  LCtl  |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    Z   |    X   |    C   |    V   |    B   |        |    N   |    M   |  Enter |Bckspace| Escape |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * '--------------------------------------------'        '--------------------------------------------'
+ */
+#define ____QWER__L1___         KC_Q,         KC_W,         KC_E,         KC_R,         KC_T
+#define ____QWER__L2___ LCTL_T(KC_A), LSFT_T(KC_S), LALT_T(KC_D), LGUI_T(KC_F),         KC_G
+#define ____QWER__L3___         KC_Z,         KC_X,         KC_C,         KC_V,         KC_B
+
+#define      ____QWER__R1___             KC_Y,         KC_U,         KC_I,         KC_O,          KC_P
+#define      ____QWER__R2___             KC_H, LGUI_T(KC_J), LALT_T(KC_K),  LSFT_T(KC_L),LCTL_T(KC_SPC) // [BUG] KC_SPC instead of KC_J
+#define      ____QWER__R3___             KC_N,         KC_M,       KC_ENT,      KC_BSPC,        KC_ESC   // [bug]
+//#elif defined(SIMPLE_30_LAYOUT)
+#endif
+//
+// THUMB CLUSTER DEFINED ABOVE
+//
+// END OF [_QWER] 01
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // [_ACCN]
-#if defined(COMPREHENSIVE_30_LAYOUT)
-/* [_ACCN] = LAYER 01 : ACCENTS LAYER
+/* [_ACCN] = LAYER 02 : ACCENTS LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |        |        |        |        |        |        |        |        |
- * | XXXXXXX| XXXXXXX|        | XXXXXXX| XXXXXXX|        | XXXXXXX|    U   |    I   |    O   | XXXXXXX|
- * |        |        |    E   |        |        |        |        |        |        |        |        |
+ * | XXXXXXX| XXXXXXX| XXXXXXX| CIRCUM-| XXXXXXX|        | XXXXXXX| XXXXXXX|    O   | XXXXXXX| XXXXXXX|
+ * |        |        |        | FLEX   |        |        |        |        |        |        |        |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |@@@@@@@@|        |@@@@@@@@|        |        |        |        |
- * |        | XXXXXXX| XXXXXXX| XXXXXXX|        |        |        | XXXXXXX| XXXXXXX| XXXXXXX| XXXXXXX|
- * |    A   |  CIRCUM|  GRAVE |  DIAE- |        |        |        |  DIAE- |  GRAVE |  CIRCUM|        |
- * |        | -MFLEX |        | RESIS  |        |        |        | RESIS  |        |  -FLEX |        |
+ * |        |        |        |        |@@@@@@@@|        |        |        |        |        |        |
+ * | XXXXXXX|    N   |  GRAVE |  DIAE- |        |        | XXXXXXX|    U   |    A   |    I   | XXXXXXX|
+ * |        |        |        |  RESIS |        |        |        |        |        |        |        |
+ * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
- * | XXXXXXX| XXXXXXX| XXXXXXX| XXXXXXX| XXXXXXX|        |        | XXXXXXX| XXXXXXX| XXXXXXX| XXXXXXX|
- * |        |        |        |        |        |        |    N   |        |        |        |        |
- * |   RCtl |   RAlt |  RGui  |  RSft  |        |        |        |  RSft  |  RGui  |  RAlt  |  RCtl  |
+ * | XXXXXXX| XXXXXXX| XXXXXXX| XXXXXXX|        |        |    E   | XXXXXXX| XXXXXXX| XXXXXXX| XXXXXXX|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |        |        |        |        | L_Shift|        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-#define ___ACCENTS_L1___  XXXXXXX, XXXXXXX, F(ACC_E),XXXXXXX, XXXXXXX
-#define ___ACCENTS_L2___ F(ACC_A),   CIRCU,    GRAVE,  DIAER, XXXXXXX
-#define ___ACCENTS_L3___  KC_RCTL, KC_RALT,  KC_RGUI,KC_RSFT, XXXXXXX
 
-#define      ___ACCENTS_R1___                             XXXXXXX, F(ACC_U), F(ACC_I), F(ACC_O), XXXXXXX
-#define      ___ACCENTS_R2___                             XXXXXXX,    DIAER,    GRAVE,    CIRCU, XXXXXXX
-#define      ___ACCENTS_R3___                             F(TIL_N), KC_RSFT,  KC_RGUI,  KC_RALT, KC_RCTL
+#define ___ACCENTS_L1___  XXXXXXX,  XXXXXXX, XXXXXXX,   CIRCU, XXXXXXX
+#define ___ACCENTS_L2___  XXXXXXX, F(TIL_N),   GRAVE,   DIAER, XXXXXXX
+#define ___ACCENTS_L3___  XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT
 
-//# if defined(COMPREHENSIVE_30_LAYOUT)
-#elif defined(SIMPLE_30_LAYOUT)
-/* [_ACCN] = LAYER 01 : ACCENTS LAYER
- * .--------------------------------------------.        .--------------------------------------------.
- * |        |        |        |        |        |        |        |        |        |        |        |
- * | XXXXXXX| XXXXXXX|        | XXXXXXX| XXXXXXX|        | XXXXXXX|    U   |    I   |    O   | XXXXXXX|
- * |        |        |    E   |        |        |        |        |        |        |        |        |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |        | XXXXXXX| XXXXXXX|        | XXXXXXX|        | XXXXXXX|        | XXXXXXX| XXXXXXX| XXXXXXX|
- * |    A   |        |        |        |        |        |        |        |        |        |        |
- * |        |        |        |  LSft  |        |        |        |  LSft  |        |        |        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |        |        |        |        | XXXXXXX|        |        |        |        |        |        |
- * |        |        |        |        |        |        |    N   |        |        |        |        |
- * |   RCtl |   RAlt |  RGui  |  RSft  |        |        |        |  RSft  |  RGui  |  RAlt  |  RCtl  |
- * '--------------------------------------------'        '--------------------------------------------'
- */
-#define ___ACCENTS_L1___  XXXXXXX, XXXXXXX, F(ACC_E), XXXXXXX, XXXXXXX
-#define ___ACCENTS_L2___ F(ACC_A), XXXXXXX,  XXXXXXX, KC_LSFT, XXXXXXX
-#define ___ACCENTS_L3___  KC_RCTL, KC_RALT,  KC_RGUI, KC_RSFT, XXXXXXX
-
-#define      ___ACCENTS_R1___                           XXXXXXX,  F(ACC_U), F(ACC_I), F(ACC_O), XXXXXXX
-#define      ___ACCENTS_R2___                           XXXXXXX,  KC_LSFT,  XXXXXXX,  XXXXXXX,  XXXXXXX
-#define      ___ACCENTS_R3___                           F(TIL_N), KC_RSFT,  KC_RGUI,  KC_RALT,  KC_RCTL
-//#elif defined(SIMPLE_30_LAYOUT)
-#endif
-
+#define      ___ACCENTS_R1___                            XXXXXXX,  XXXXXXX, F(ACC_O),  XXXXXXX, XXXXXXX
+#define      ___ACCENTS_R2___                            XXXXXXX, F(ACC_U), F(ACC_A), F(ACC_I), XXXXXXX
+#define      ___ACCENTS_R3___                           F(ACC_E),  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX
 #if defined(MINI_DACTYL_THUMBS)
-/* [_ACCN] = LAYER 01 : ACCENTS LAYER
+/* [_ACCN] = LAYER 02 : ACCENTS LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |@@@@@@@@|
  *                            |        |        |        |        |        |
@@ -352,7 +393,7 @@ acronym dictionary
  *                   |        |        |        |        |        |        |        |
  *                   |  GRAVE |  DIAE- |   CIR  |        |        |        |        |
  *                   |        | RESIS  |-CUMFLEX|        |        |        |        |
- *                   |        |        |        |        |@[_NUMB]|@[_SYMB]|@[_DVIM]|
+ *                   |        |        |        |        |@[_NUMB]|@[_SYMB]|@[_DALY]|
  *                   '--------------------------'        '--------------------------'
  */
 #define _ACCN_LTHMB_RW1_        XXXXXXX, XXXXXXX
@@ -360,17 +401,18 @@ acronym dictionary
 
 // With 'OSL(_MOUS)' it allow us not twist our fingers for access mirrored layer trigger keys
 // We can tap it and then: hold the mirrored layer trigger
-#define    _ACCN_RTHMB_RW1_                               MO(_POWR),  OSL(_MOUS)
-#define    _ACCN_RTHMB_RW2_                               OSL(_NUMB), OSL(_SYMB), OSL_DVIM //OSL(_DVIM)
+#define    _ACCN_RTHMB_RW1_                              OSL(_POWR), OSL(_MOUS) //🔥🔥🔥
+#define    _ACCN_RTHMB_RW2_                              OSL(_NUMB), OSL(_SYMB), OSL(_DALY)//OSL(_DVIM)
                                                        // get stuck and doesn't return to default layer
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
-// END OF [_ACCN] 01
+// END OF [_ACCN] 02
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
+
 
 // [_NUMB]
 #if defined(COMPREHENSIVE_30_LAYOUT)
-/* [_NUMB] = LAYER 02 : NUMBERS LAYER
+/* [_NUMB] = LAYER 03 : NUMBERS LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |    1   |    2   |    3   |    4   |    5   |        |    6   |    7   |    8   |    9   |    0   |
@@ -380,7 +422,7 @@ acronym dictionary
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |spacebar| delete |    ,   |    .   |*  $    |        |    -   |    4   |    5   |    6   |    +   |
  * |        |        |        |        |** EURO |        |        |        |        |        |        |
- * |  LCtl  |  LAlt  |  LGui  |  LSft  |        |        |        |        |        |        |        |
+ * |  LCtl  |  LSft  |  LAlt  |  LGui  |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |@@@@@@@@|        |        |        |        |        |        |        |
  * |  enter |bckspace|   tab  |*  EURO |*   =   |        |*   /   |    1   |    2   |    3   |    *   |
@@ -389,8 +431,8 @@ acronym dictionary
  * '--------------------------------------------'        '--------------------------------------------'
 */
 #define ___NUMBERS_L1___           KC_1,          KC_2,           KC_3,           KC_4,       KC_5
-#define ___NUMBERS_L2___ LCTL_T(KC_SPC),LALT_T(KC_DEL),LGUI_T(KC_PCMM),LSFT_T(KC_PDOT), TD(R_DOEU)
-#define ___NUMBERS_L3___        KC_PENT,       KC_BSPC,         KC_TAB,     TD(NUMBOF), TD(B_EQPE)
+#define ___NUMBERS_L2___ LCTL_T(KC_SPC),LSFT_T(KC_DEL),LALT_T(KC_COMM), LGUI_T(KC_DOT), TD(R_DOEU)
+#define ___NUMBERS_L3___         KC_TAB,       KC_BSPC,        KC_PENT,     TD(NUMBOF), TD(B_EQPE)
 
 #define      ___NUMBERS_R1___                                     KC_6,       KC_7, KC_8, KC_9, KC_0
 #define      ___NUMBERS_R2___                                     KC_PMNS,    KC_4, KC_5, KC_6, KC_PPLS
@@ -398,7 +440,7 @@ acronym dictionary
 
 //# if defined(COMPREHENSIVE_30_LAYOUT)
 #elif defined(SIMPLE_30_LAYOUT)
-/* [_NUMB] = LAYER 02 : NUMBERS LAYER
+/* [_NUMB] = LAYER 03 : NUMBERS LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |    1   |    2   |    3   |    4   |    5   |        |    6   |    7   |    8   |    9   |    0   |
@@ -408,17 +450,17 @@ acronym dictionary
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |spacebar| delete |    ,   |    .   |*  $    |        |    -   |    4   |     5  |     6  |    +   |
  * |        |        |        |        |** EURO |        |        |        |        |        |        |
- * |  LCtl  |  LAlt  |  LGui  |  LSft  |        |        |        |        |        |        |        |
+ * |  LCtl  |  LSft  |  LAlt  |  LGui  |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |  enter |bckspace|   tab  |  EURO  |*   =   |        |    /   |    1   |    2   |    3   |    *   |
- * |        |        |        |        |**  %   |        |        |        |        |        |        |
+ * |        |        |        |        |@@@@@@@@|        |        |        |        |        |        |
+ * |  enter |bckspace|   tab  |*   =   |  EURO  |        |    /   |    1   |    2   |    3   |    *   |
+ * |        |        |        |**  %   |        |        |        |        |        |        |        |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-#define ___NUMBERS_L1___           KC_1,           KC_2,            KC_3,            KC_4,       KC_5
-#define ___NUMBERS_L2___ LCTL_T(KC_SPC), LALT_T(KC_DEL), LGUI_T(KC_PCMM), LSFT_T(KC_PDOT), TD(R_DOEU)
-#define ___NUMBERS_L3___        KC_PENT,        KC_BSPC,          KC_TAB,            EURO, TD(B_EQPE)
+#define ___NUMBERS_L1___           KC_1,           KC_2,            KC_3,           KC_4,       KC_5
+#define ___NUMBERS_L2___ LCTL_T(KC_SPC), LSFT_T(KC_DEL), LALT_T(KC_COMM), LGUI_T(KC_DOT), TD(R_DOEU)
+#define ___NUMBERS_L3___         KC_TAB,        KC_BSPC,         KC_PENT,     TD(B_EQPE),       EURO
 
 #define      ___NUMBERS_R1___                                        KC_6,    KC_7, KC_8, KC_9, KC_0
 #define      ___NUMBERS_R2___                                        KC_PMNS, KC_4, KC_5, KC_6, KC_PPLS
@@ -428,123 +470,95 @@ acronym dictionary
 #endif
 
 #if defined(MINI_DACTYL_THUMBS)
-/* [_NUMB] = LAYER 02 : NUMBERS LAYER
+/* [_NUMB] = LAYER 03 : NUMBERS LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |        |
  *                            |   TAB  |        |        |        |  EURO  |
  *                            |        |        |        |        |        |
  *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
- *                   |        |        |@@@@@@@@|        |########|        |        |
- *                   |        |        |        |        |        |        |        |
- *                   |        |        |        |        |        |        |        |
- *                   |        |@[_SYMB]|        |        |        |        |        |
+ *                   |        |        |@@@@@@@@|        |        |        |        |
+ *                   |        |        |        |        | XXXXXXX|        |        |
+ *                   |        |        | Toggle |        |        |        |        |
+ *                   |        |@[_SYMB]|@[_NUMB]|        |        |        |        |
  *                   '--------------------------'        '--------------------------'
  */
-#define _NUMB_LTHMB_RW1_                       KC_TAB, _______
-#define _NUMB_LTHMB_RW2_           _______, MO(_SYMB), _______
+#define _NUMB_LTHMB_RW1_                     KC_TAB, _______
+#define _NUMB_LTHMB_RW2_           _______, _______, _______
 
 #define      _NUMB_RTHMB_RW1_                                               MO(_POWR), EURO
-#define      _NUMB_RTHMB_RW2_                                               _______,   _______, _______
+#define      _NUMB_RTHMB_RW2_                                               XXXXXXX,   _______, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
-// END OF [_NUMB] 02
+// END OF [_NUMB] 03
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
+
 // [_FVIM]
-#if defined(COMPREHENSIVE_30_LAYOUT)
-/* [_FVIM] = LAYER 03 : FAKE VIM LAYER
+/* [_FVIM] = LAYER 04 : FAKE VIM LAYER
  * .--------------------------------------------.        .--------------------------------------------.
- * |        |        |        |        |  Mouse |        |        |        |        |        |        |
- * |  LEFT  |   UP   |  DOWN  |  RIGHT | Button |        |  Shift |  Move  |  Move  |  Move  |  Move  |
- * |        |        |        |        |    1   |        |paragrph|  Begin |  Word  |  Word  | End Of |
- * |        |        |        |        |        |        |   Up   | Ln/Prg | Bckwrd | Forwrd | Ln/Prg |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        | Center |        |        |        |        |        |        |
- * |        |        |        |        |  Line  |        |  Shift |  LEFT  |   UP   |  DOWN  |  RIGHT |
- * |        |        |        |        |   in   |        |paragrph|        |        |        |        |
- * |  LCtl  |  LAlt  |  LGui  |  LSft  |  View  |        |  Down  |        |        |        |        |
+ * |  LEFT  |   UP   |  DOWN  |  RIGHT |  Line  |        |  Shift |  Move  |  Move  |  Move  |  Move  |
+ * |        |        |        |        |   in   |        |paragrph|  Begin |  Word  |  Word  | End Of |
+ * |        |        |        |        |  View  |        |   Up   | Ln/Prg | Bckwrd | Forwrd | Ln/Prg |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |@@@@@@@@|        |        |        |        |
- * |        |        |        |        |        |        |        |  Move  |  Move  |  Move  |  Move  |
- * |        |        |        | TOOGLE |        |        | TOOGLE |        |  Page  |  Page  |        |
- * |@[_DALY]|@[_DVIM]|@[_MOUS]|@[_FVIM]|@[_XVIM]|        |@[_FVIM]|  HOME  |   UP   |  DOWN  |   END  |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |        |    B   |    F   |    Y   |   X    |        |  Shift |  LEFT  |   UP   |  DOWN  |  RIGHT |
+ * |        |        |        |        |        |        |paragrph|        |        |        |        |
+ * |  LCtl  |  LSft  |  LAlt  |  LGui  |        |        |  Down  |        |        |        |        |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |  Mouse |  Mouse |        |        |        |@@@@@@@@|        |        |        |        |
+ * |        | Button | Button |        |        |        |        |  Move  |  Move  |  Move  |  Move  |
+ * |        |    2   |    1   | TOOGLE |        |        | TOOGLE |        |  Page  |  Page  |        |
+ * |        |        |        | [_FVIM]| [_XVIM]|        | [_FVIM]|  HOME  |   UP   |  DOWN  |   END  |
  * '--------------------------------------------'        '--------------------------------------------'
 */
-#define ___FAKEVIM_L1___   KC_LEFT,     KC_UP,   KC_DOWN,   KC_RGHT,   KC_BTN1
-#define ___FAKEVIM_L2___   KC_LCTL,   KC_LALT,   KC_LGUI,   KC_LSFT,    FVIM_H
-#define ___FAKEVIM_L3___ MO(_DALY), MO(_DVIM), MO(_MOUS), TT(_FVIM), MO(_XVIM)
+// PINKIES DEFINITION
+#define PINKY_1  LSFT_T(KC_B)
+#define PINKY_2  LALT_T(KC_F)
+#define PINKY_3  LGUI_T(KC_Y)
+#define PINKY_4  KC_X
+// pinkies definition
+#define ___FAKEVIM_L1___      KC_LEFT,     KC_UP,   KC_DOWN,   KC_RGHT,   FVIM_H
+#define ___FAKEVIM_L2___      KC_LCTL,   PINKY_1,   PINKY_2,   PINKY_3,  PINKY_4
+#define ___FAKEVIM_L3___      XXXXXXX,   KC_BTN2,   KC_BTN1, TT(_FVIM), MO(_XVIM)
 
-#define ___FAKEVIM_R1___ C(G(KC_UP)),   TD(FVIM_uU), A(KC_LEFT), A(KC_RGHT), TD(FVIM_pP)
-#define ___FAKEVIM_R2___ C(G(KC_DOWN)), KC_LEFT,     KC_UP,      KC_DOWN,    KC_RGHT
-#define ___FAKEVIM_R3___ TT(_FVIM),     A(KC_HOME),  A(KC_PGUP), A(KC_PGDN), A(KC_END)
-
-//# if defined(COMPREHENSIVE_30_LAYOUT)
-#elif defined(SIMPLE_30_LAYOUT)
-/* [_FVIM] = LAYER 03 : FAKE VIM LAYER
- * .--------------------------------------------.        .--------------------------------------------.
- * |        |        |        |        |  Mouse |        |  Shift |  Move  |  Move  |  Move  |  Move  |
- * |  LEFT  |   UP   |  DOWN  |  RIGHT | Button |        |paragrph|  Begin |  Word  |  Word  | End Of |
- * |        |        |        |        |    2   |        |   Up   | Ln/Prg | Bckwrd | Forwrd | Ln/Prg |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |  Mouse |        | Center |        |        |        |        |
- * |        |        |        |        | Button |        |  Line  |  LEFT  |   UP   |  DOWN  |  RIGHT |
- * |        |        |        |        |    1   |        |   in   |        |        |        |        |
- * |  LCtl  |  LAlt  |  LGui  |  LSft  |        |        |  View  |        |        |        |        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |  Shift |  Move  |  Move  |  Move  |  Move  |
- * | XXXXXXX| XXXXXXX| XXXXXXX| XXXXXXX| TOGGLE |        |paragrph|        |  Page  |  Page  |        |
- * |        |        |        |        |@[_FVIM]|        |  Down  |  HOME  |   UP   |  DOWN  |   END  |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * '--------------------------------------------'        '--------------------------------------------'
-*/
-#define ___FAKEVIM_L1___ KC_LEFT, KC_UP,   KC_DOWN, KC_RGHT, KC_BTN2
-#define ___FAKEVIM_L2___ KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, KC_BTN1
-#define ___FAKEVIM_L3___ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TT(_FVIM)
-
-#define                ___FAKEVIM_R1___ C(G(KC_UP)),   TD(FVIM_uU), A(KC_LEFT), A(KC_RGHT), TD(FVIM_pP)
-#define                ___FAKEVIM_R2___ FVIM_H,        KC_LEFT,     KC_UP,      KC_DOWN,    KC_RGHT
-#define                ___FAKEVIM_R3___ C(G(KC_DOWN)), A(KC_HOME),  A(KC_PGUP), A(KC_PGDN), A(KC_END)
-//#elif defined(SIMPLE_30_LAYOUT)
-#endif
+// WITHOUT CAMEL CASE JUMPS
+// #define ___FAKEVIM_R1___ C(G(KC_UP)),   TD(FVIM_uU), A(KC_LEFT), A(KC_RGHT), TD(FVIM_pP)
+#define ___FAKEVIM_R1___ C(G(KC_UP)),   TD(FVIM_uU), TD(FVIM_iI), TD(FVIM_oO), TD(FVIM_pP)
+#define ___FAKEVIM_R2___ C(G(KC_DOWN)), KC_LEFT,     KC_UP,       KC_DOWN,     KC_RGHT
+#define ___FAKEVIM_R3___ TT(_FVIM),     A(KC_HOME),  A(KC_PGUP),  A(KC_PGDN),  A(KC_END)
 
 #if defined(MINI_DACTYL_THUMBS)
-/* [_FVIM] = LAYER 03 : FAKE VIM LAYER
+/* [_FVIM] = LAYER 04 : FAKE VIM LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |        |
- *                            |        |        |        |@[_POWR]|        |
+ *                            |@[_MOUS]|        |        |@[_POWR]|@[_MOUS]|
  *                   .--------+--------+--------|        |--------+--------|--------.
- *                   |        |########|        |        |        |@@@@@@@@|        |
+ *                   |        |        |        |        |        |@@@@@@@@|        |
  *                   |        |        |        |        |        |        |        |
- *                   |        |@[_XVIM]|        |        |        | TOGGLE |        |
- *                   |        |        |        |        |        |@[_FVIM]|        |
+ *                   |        | TOGGLE |        |        |        | TOGGLE |        |
+ *                   |@[_DVIM]|@[_FVIM]|@[_XVIM]|        |@[_XVIM]|@[_FVIM]|@[_DVIM]|
  *                   '--------------------------'        '--------------------------'
  */
-#define _FVIM_LTHMB_RW1_                        _______, _______
-#define _FVIM_LTHMB_RW2_             _______, MO(_XVIM), _______
+#define _FVIM_LTHMB_RW1_                      MO(_MOUS),   _______
+#define _FVIM_LTHMB_RW2_           MO(_DVIM), TT(_FVIM), MO(_XVIM)
 
-#define      _FVIM_RTHMB_RW1_                                         MO(_POWR), _______
-#define      _FVIM_RTHMB_RW2_                                         _______,   TT(_FVIM), _______
+#define      _FVIM_RTHMB_RW1_                                           MO(_POWR), MO(_MOUS)
+#define      _FVIM_RTHMB_RW2_                                           MO(_XVIM), TT(_FVIM), MO(_DVIM)
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
 // MO(_DVIM),MO(_XVIM),MO(_FVIM) allow us changing from any ?VIM_layer to each other ?VIM_layer
 // ... because we put '_______' in this locations in the rest of the ?VIM layers
-// END OF [_FVIM] 03
+// END OF [_FVIM] 04
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // [_XVIM]
-/* [_XVIM] = LAYER 04 : EXTENDED EDITION VIM LAYER
- * .--------------------------------------------.        .--------------------------------------------.
- * |  Align |  Align |  Align |  Align |        |        | Insert |  Copy  | Duplict|  Copy  | Insert |
- * | to the | Justi- | in the | to the |Complete|        |  line  |  prev  | current|  next  |  line  |
- * |  left  |  fied  | center |  right |        |        |  above |paragrph|paragrph|paragrph|  below |
- * |        |        |        |        |        |        |paragrph|        |  below |        |paragrph|
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+/* [_XVIM] = LAYER 05 : EXTENDED EDITION VIM LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |  Align |  Align |  Align |  Align |        |        |Duplicat|  Copy  |  Copy  |  Copy  | Insert |
  * | to the | Justi- | in the | to the |Complete|        | current|  prev  |  next  |  next  |  line  |
@@ -556,7 +570,7 @@ acronym dictionary
  * |   up   |  chars |  words |   up   |   up   |        |        |  -case |  -case | -talize|        |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |@@@@@@@@|( @@@@ )|        |        |        |        |@@@@@@@@|        |        |
+ * |        |        |        |( @@@@ )|        |        |        |@@@@@@@@|        |        |        |
  * |   60   | Scroll | Scroll |   20   |    5   |        |        |        |        |        |        |
  * |  lines |  page  |  page  |  lines |  lines |        |  Copy  |  Copy  |  Copy  |  Copy  |  Copy  |
  * |   down |   up   |  down  |   down |   down |        |charactr|  word  |  line  |paragrph|   ALL  |
@@ -572,24 +586,24 @@ acronym dictionary
 #define      ___EXT_VIM_R3___ /*and CVIM_SP neither in Xcode*/CVIM_N, CVIM_M, CVIM_ES, CVIM_BS, CVIM_EN
 
 #if defined(MINI_DACTYL_THUMBS)
-/* [_XVIM] = LAYER 04 : EXTENDED EDITION VIM LAYER
+/* [_XVIM] = LAYER 05 : EXTENDED EDITION VIM LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |        |
- *                            |        |        |        |        |   UP   |
  *                            |        |        |        |        |        |
+ *                            |        |        |        |        |   UP   |
  *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
- *                   |        |@@@@@@@@|        |        |        |( @@@@ )|        |
- *                   |        |        |        |        |  LEFT  |  DOWN  |  RIGHT |
+ *                   |        |        |@@@@@@@@|        |@@@@@@@@|        |        |
  *                   |        |        |        |        |        |        |        |
+ *                   |        |        |        |        |  LEFT  |  DOWN  |  RIGHT |
  *                   |        |        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
  */
 #define _XVIM_LTHMB_RW1_                      _______, _______
 #define _XVIM_LTHMB_RW2_             _______, _______, _______
 
-#define            _XVIM_RTHMB_RW1_                                         MO(_POWR), KC_UP
-#define            _XVIM_RTHMB_RW2_                                         KC_LEFT,   KC_DOWN, KC_RGHT
+#define            _XVIM_RTHMB_RW1_                                         MO(_POWR), _______
+#define            _XVIM_RTHMB_RW2_                                         _______,   _______, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
@@ -597,11 +611,11 @@ acronym dictionary
 // 'OUTDNT = LGUI(KC_LBRC)' implemented because 'OUTDNT:;' in 'DefaultKeyBinding.dict' doesn't work !!!
 // ... it happens the same as in 'transposeWord:;' !!!
 // [bug]
-// END OF [_XVIM] 04
+// END OF [_XVIM] 05
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // [_DVIM]
-/* [_DVIM] = LAYER 05 : DELETE VIM LAYER
+/* [_DVIM] = LAYER 06 : DELETE VIM LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |        |        |        |        | Delete | Delete | Delete | Delete |
  * |        |        |        |        |        |        |  Yank  |  Begin |  Word  |  Word  | End Of |
@@ -628,14 +642,14 @@ acronym dictionary
 #define      ___DEL_VIM_R3___                        XXXXXXX, DVIM_M,      DVIM_ES, DVIM_BS,   DVIM_EN
 
 #if defined(MINI_DACTYL_THUMBS)
-/* [_DVIM] = LAYER 05 : DELETE VIM LAYER
+/* [_DVIM] = LAYER 06 : DELETE VIM LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |        |
  *                            |        |        |        |        |        |
  *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
- *                   |@@@@@@@@|        |        |        |        |        |        |
+ *                   |        |        |        |        |        |        |@@@@@@@@|
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
@@ -652,69 +666,38 @@ acronym dictionary
 //[BUG] DVIM_H is empty
 //[bug]
 //      DVIM_N is empty
-// END OF [_DVIM] 05
+// END OF [_DVIM] 06
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // [_MOUS]
-#if defined(COMPREHENSIVE_30_LAYOUT)
-/* [_MOUS] = LAYER 06 : MOUSE LAYER
+/* [_MOUS] = LAYER 07 : MOUSE LAYER
  * .--------------------------------------------.        .--------------------------------------------.
- * |  Mouse |  Mouse |  Mouse |  Mouse |  Mouse |        |        |        |        |        |        |
- * | Button | Button | Button | Button | Button |        |        |  Wheel |  Wheel |  Wheel |  Wheel |
- * |    3   |    4   |    5   |    1   |    2   |        |        |  Left  |   Up   |  Down  |  Right |
+ * |        |        |        |        |  Mouse |        |        |        |        |        |        |
+ * |  Mouse |  Mouse |  Mouse |  Mouse | Button |        |        |  Wheel |  Wheel |  Wheel |  Wheel |
+ * |  LEFT  |   UP   |  DOWN  |  RIGHT |    3   |        |        |  Left  |   Up   |  Down  |  Right |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |        |        |        |        |        |        |        |  Mouse |  Mouse |  Mouse |  Mouse |
- * |        |        |        |        |        |        |        |  LEFT  |   UP   |  DOWN  |  RIGHT |
- * |  LCtl  |  LAlt  |  LGui  |  LSft  |  LGui  |        |        |        |        |        |        |
+ * |        |        |        |        |  Mouse |        |        |        |        |        |        |
+ * |  LEFT  |   UP   |  DOWN  |  RIGHT | Button |        |        |  Mouse |  Mouse |  Mouse |  Mouse |
+ * |        |        |        |        |    2   |        |        |  LEFT  |   UP   |  DOWN  |  RIGHT |
+ * |  LCtl  |  LAlt  |  LSft  |  LGui  |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |Accelera|Accelera|@@@@@@@@|Accelera|  Mouse |        |  Mouse |  Mouse |  Mouse |  Mouse |  Mouse |
  * |  -tion |  -tion |        |  -tion | Button |        | Button | Button | Button | Button | Button |
- * |    1   |    2   |        |    0   |    1   |        |    5   |    1   |    2   |    3   |    4   |
+ * |    1   |    2   |        |    0   |    1   |        |    1   |    2   |    3   |    4   |    5   |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-#define ____MOUSE_L1____ KC_BTN3, KC_BTN4, KC_BTN5, KC_BTN1, KC_BTN2
-#define ____MOUSE_L2____ _______, _______, _______, _______, KC_LGUI
-#define ____MOUSE_L3____ KC_ACL2, KC_ACL1, XXXXXXX, KC_ACL0, KC_BTN1
+#define ____MOUSE_L1____         KC_MS_L,       KC_MS_U,         KC_MS_D,         KC_MS_R, KC_BTN3
+#define ____MOUSE_L2____ LCTL_T(KC_LEFT), LALT_T(KC_UP), LSFT_T(KC_DOWN), LGUI_T(KC_RGHT), KC_BTN2
+#define ____MOUSE_L3____         KC_ACL2,       KC_ACL1,         XXXXXXX,         KC_ACL0, KC_BTN1
 
 #define      ____MOUSE_R1____                        XXXXXXX, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R
 #define      ____MOUSE_R2____                        XXXXXXX, KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R
-#define      ____MOUSE_R3____                        KC_BTN5, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4
-
-//# if defined(COMPREHENSIVE_30_LAYOUT)
-#elif defined(SIMPLE_30_LAYOUT)
-/* [_MOUS] = LAYER 06 : MOUSE LAYER
- * .--------------------------------------------.        .--------------------------------------------.
- * |  Mouse |  Mouse |  Mouse |  Mouse |  Mouse |        |        |        |        |        |        |
- * | Button | Button | Button | Button | Button |        |        |  Wheel |  Wheel |  Wheel |  Wheel |
- * |    4   |    3   |    2   |    1   |    5   |        |        |  Left  |   Up   |  Down  |  Right |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |        |        |        |        |        |        |        |  Mouse |  Mouse |  Mouse |  Mouse |
- * |        |        |        |        |        |        |        |  LEFT  |   UP   |  DOWN  |  RIGHT |
- * |  LCtl  |  LAlt  |  LGui  |  LSft  |        |        |        |        |        |        |        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |Accelera|Accelera|@@@@@@@@|Accelera|  Mouse |        |  Mouse |  Mouse |  Mouse |  Mouse |  Mouse |
- * |  -tion |  -tion |        |  -tion | Button |        | Button | Button | Button | Button | Button |
- * |    1   |    2   |        |    0   |    1   |        |    5   |    1   |    2   |    3   |    4   |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * '--------------------------------------------'        '--------------------------------------------'
- */
-#define ____MOUSE_L1____ KC_BTN3, KC_BTN4, KC_BTN5, KC_BTN1, KC_BTN2
-#define ____MOUSE_L2____ _______, _______, _______, _______, _______
-#define ____MOUSE_L3____ KC_ACL2, KC_ACL1, XXXXXXX, KC_ACL0, KC_BTN1
-
-#define      ____MOUSE_R1____                        XXXXXXX, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R
-#define      ____MOUSE_R2____                        XXXXXXX, KC_MS_L, KC_MS_U, KC_MS_D, KC_MS_R
-#define      ____MOUSE_R3____                        KC_BTN5, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4
-//#elif defined(SIMPLE_30_LAYOUT)
-#endif
+#define      ____MOUSE_R3____                        KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_BTN5
 
 #if defined(MINI_DACTYL_THUMBS)
-/* [_MOUS] = LAYER 06 : MOUSE LAYER
+/* [_MOUS] = LAYER 07 : MOUSE LAYER
  *                            .-----------------.        .-----------------.
  *                            |@@@@@@@@|        |        |        |        |
  *                            |        |        |        |        |   UP   |
@@ -727,73 +710,73 @@ acronym dictionary
  *                   |@[_DALY]|@[_FVIM]|@[_APPS]|        |        |        |        |
  *                   '--------------------------'        '--------------------------'
  */
-#define _MOUS_LTHMB_RW1_                  OSL(_ACCN), OSL(_POWR)
-#define _MOUS_LTHMB_RW2_      OSL(_DALY), OSL(_FVIM),   OSL_APPS
+#define _MOUS_LTHMB_RW1_               _______, _______
+#define _MOUS_LTHMB_RW2_      _______, _______, _______
 
-#define      _MOUS_RTHMB_RW1_                                               MO(_POWR), KC_UP
-#define      _MOUS_RTHMB_RW2_                                               KC_LEFT,   KC_DOWN, KC_RGHT
+#define      _MOUS_RTHMB_RW1_                                               MO(_POWR), _______
+#define      _MOUS_RTHMB_RW2_                                               _______,   _______, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
-// END OF [_MOUS] 06
+// END OF [_MOUS] 07
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // [_DALY]
-/* [_DALY] = LAYER 07 : DAILY COMMANDS LAYER
+/* [_DALY] = LAYER 08 : DAILY COMMANDS LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |        | Capture| Capture|        |        |        |        |        |        |        |
- * |   Tab  | Dicta  | Screen |  Slide |Floating|        |  Close |  Prev  |  Next  | Mission|  Desk  |
- * |        |  -tion |        |        | Window |        |   App  |   App  |   App  | Control|        |
+ * |  Dicta | Speak  | Screen |  Slide |Floating|        |  Close |  Prev  |  Next  |Applicat| Mission|
+ * |  -tion |        |        |        | Window |        |   App  |   App  |   App  | windows| Control|
  * |        |        |^:cpySCR|^:cpySLD|        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |Applcton|        |
- * | Caps   |  Dash- |XXXXXXXX|  Speak | Active |        |  Close |  Prev  |  Next  | Windows| Space  |
- * |   lock |  board |        |        | Window |        | Window | Window | Window |        |   bar  |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |  Dash- | Launch-|   Tab  |  Caps  | Active |        |  Close |  Prev  |  Next  |  DESK  |Notific.|
+ * |  board |   pad  |        |  lock  | Window |        | Window | Window | Window |        | Center |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |@@@@@@@@|        |  Play  |        | Reopen |        |        |        |        |        |@@@@@@@@|
- * |  Back  | Rewind |  ...   | Forward|        |        |  Close |  Prev  |  Next  | Delete | Launch |
- * |   Tab  |        |  Pause |        | Window |        |   Tab  |   Tab  |   Tab  |        |   -pad |
- * |        |        |        |        |  / Tab |        |        |        |        |        |        |
+ * |        |@@@@@@@@|        |        |        |        |        |        |        |@@@@@@@@|        |
+ * |        |        |  Play  |        | Reopen |        |  Close |  Prev  |  Next  |Previous|  Next  |
+ * |  SIRI  | Rewind |   ...  | Forward| Window |        |   Tab  |   Tab  |   Tab  | browser| browser|
+ * |        |        |  Pause |        |  / Tab |        |        |        |        |  page  |  page  |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-#define ____DAILY_L1____ KC_TAB,   DICTATION,   CAP_SCRN, CAP_SLDE, FLOA_WIN
-#define ____DAILY_L2____ F(CAPSL),  DSHBOARD,       SIRI,    SPEAK, ACTV_WIN
-#define ____DAILY_L3____ S(KC_TAB),   REWIND, PLAY_PAUSE,  FORWARD, REOPEN_L
+#define ____DAILY_L1____ DICTATION,    SPEAK,   CAP_SCRN, CAP_SLDE, FLOA_WIN
+#define ____DAILY_L2____  DSHBOARD, LANCHPAD,     KC_TAB, F(CAPSL), ACTV_WIN
+#define ____DAILY_L3____      SIRI,   REWIND, PLAY_PAUSE,  FORWARD, REOPEN_L
 
-#define      ____DAILY_R1____                        CLOSE_AP, PREV_APP, NEXT_APP, MISS_CTL,     DESK
-#define      ____DAILY_R2____                        CLOSE_WI, PREV_WIN, NEXT_WIN, APP_WIND, KC_SPACE
-#define      ____DAILY_R3____                        CLOSE_TB, PREV_TAB, NEXT_TAB,   KC_DEL, LANCHPAD
+#define      ____DAILY_R1____                        CLOSE_AP, PREV_APP, NEXT_APP, APP_WIND,  MISS_CTL
+#define      ____DAILY_R2____                        CLOSE_WI, PREV_WIN, NEXT_WIN, DESK,      NOTF_CNT
+#define      ____DAILY_R3____                        CLOSE_TB, PREV_TAB, NEXT_TAB, PREV_PAGE, NEXT_PAGE
 
 #if defined(MINI_DACTYL_THUMBS)
-/* [_DALY] = LAYER 07 : DAILY COMMANDS LAYER
+/* [_DALY] = LAYER 08 : DAILY COMMANDS LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |        |
- *                            |   Tab  |        |        |        |        |
+ *                            |        |  Tab   |        |        |   Tab  |
  *                            |        |        |        |        |        |
  *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
- *                   |        |        |        |        |        |        |@@@@@@@@|
- *                   |        |CAPSLOCK|  SIRI  |        |        |        |        |
+ *                   |@@@@@@@@|        |        |        |        |        |        |
+ *                   |        |        |        |        |  SIRI  |CAPSLOCK|        |
  *                   |        |        |        |        |        |        |        |
- *                   |@[_LEDS]|        |        |        |        |        |        |
+ *                   |        |        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
  */
-#define _DALY_LTHMB_RW1_                               KC_TAB, _______
-#define _DALY_LTHMB_RW2_        CHANGE_DALY_TO_LEDS, F(CAPSL),    SIRI
+#define _DALY_LTHMB_RW1_                   KC_TAB, _______  
+#define _DALY_LTHMB_RW2_         _______, _______, _______
 
-#define      _DALY_RTHMB_RW1_                                               MO(_POWR), _______
-#define      _DALY_RTHMB_RW2_                                               _______,   _______, _______
+#define      _DALY_RTHMB_RW1_                                              MO(_POWR), KC_TAB
+#define      _DALY_RTHMB_RW2_                                              SIRI,      F(CAPSL), _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
 // ^ + Capture Screen = Copy Screen
 // ^ + Capture Slide  = Copy Slide
-// END OF [_DALY] 07
+// END OF [_DALY] 08
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // [_FUNC]
-/* [_FUNC] = LAYER 08 : FUNCTIONS LAYER
+/* [_FUNC] = LAYER 09 : FUNCTIONS LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |@@@@@@@@|        |        |        |@@@@@@@@|        |        |        |
  * |        |        |        |        |        |        |        |        |        |        |        |
@@ -803,24 +786,35 @@ acronym dictionary
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |   F11  |   F12  |   F13  |   F14  |   F15  |        |   F16  |   F17  |   F18  |   F19  |   F20  |
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |  LCtl  |  LAlt  |  LGui  |  LSft  |        |        |        |   LSft |  LGui  |  LAlt  |  LCtl  |
+ * |  LCtl  |  LAlt  |  LSft  |  LGui  |        |        |        |  LGui  |  LSft  |  LAlt  |  LCtl  |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |KAR-APPS|        |        |   fn   |        |        |        |   fn   |        |        |KAR-APPS|
- * | trigger|        |        | (Krbnr)|        |        |        | (Krbnr)|        |        | trigger|
- * |   F21  |   F22  |   F23  |   F24  |        |        |        |   F24  |        |        |   F21  |
+ * |KAR-APPS|   fn   |        |        |        |        |        |        |        |   fn   |KAR-APPS|
+ * | trigger| (Krbnr)|        |        |        |        |        |        |        | (Krbnr)| trigger|
+ * |   F21  |   F22  |   F23  |   F24  |        |        |        |        |        |   F22  |   F21  |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
-#define __FUNCTIONS_L1__        KC_F1,        KC_F2,        KC_F3,        KC_F4,   KC_F5
-#define __FUNCTIONS_L2__ LCTL_T(F_11), LALT_T(F_12), LGUI_T(F_13), LSFT_T(F_14),  KC_F15
-#define __FUNCTIONS_L3__       KC_F21,       KC_F22,       KC_F23,       KC_F24, XXXXXXX
+/*  KEYBOARD -> SHORTCUTS -> DISPLAY
+      Decrease display brightness                           F13
+      Increase display brightness                           F14
+ *  KEYBOARD -> SHORTCUTS -> LAUNCHPAD & DOCK
+      Show Launchpad                                        F15
+ *  KEYBOARD -> SHORTCUTS -> MISSION CONTROL
+      Show Desktop                                          F16 
+      Show Dashboard                                        F17
+      Show Notification Center                              F18
+      Turn Do Not Disturb On/Off                            F19
+ */
+#define __FUNCTIONS_L1__          KC_F1,          KC_F2,          KC_F3,          KC_F4,   KC_F5
+#define __FUNCTIONS_L2__ LCTL_T(KC_F11), LALT_T(KC_F12), LSFT_T(KC_F13), LGUI_T(KC_F14),  KC_F15
+#define __FUNCTIONS_L3__         KC_F21,         KC_F22,         KC_F23,         KC_F24, XXXXXXX
 
-#define      __FUNCTIONS_R1__            KC_F6,        KC_F7,        KC_F8,        KC_F9,        KC_F10
-#define      __FUNCTIONS_R2__            LSFT_T(F_16), LGUI_T(F_17), LALT_T(F_18), LCTL_T(F_19), KC_F20
-#define      __FUNCTIONS_R3__            XXXXXXX,      KC_F24,       XXXXXXX,      XXXXXXX,      KC_F21
+#define      __FUNCTIONS_R1__      KC_F6,           KC_F7,          KC_F8,         KC_F9,       KC_F10
+#define      __FUNCTIONS_R2__    (KC_F16), LGUI_T(KC_F17), LSFT_T(KC_F18),LALT_T(KC_F19),LCTL_T(KC_F20)
+#define      __FUNCTIONS_R3__     XXXXXXX,         KC_F24,        XXXXXXX,       XXXXXXX,       KC_F21
 
 #if defined(MINI_DACTYL_THUMBS)
-/* [_FUNC] = LAYER 08 : FUNCTIONS LAYER
+/* [_FUNC] = LAYER 09 : FUNCTIONS LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |@@@@@@@@|        |        |        |//[FUTURE_IMPROVEMENT]
  *                            |        |        |        |        |        | fn+shift+down:slct pageDwn
@@ -837,105 +831,53 @@ acronym dictionary
  *   fn+shift+uparrow:   select page up
  * [future_improvement]
  */
-#define _FUNC_LTHMB_RW1_                       _______, _______
-#define _FUNC_LTHMB_RW2_             _______,  _______, _______
+/*
+#define _FUNC_LTHMB_RW1_                        OSL(_POWR),  _______
+#define _FUNC_LTHMB_RW2_             MO(_DVIM),  MO(_FVIM), OSL_APPS
+*/
+#define _FUNC_LTHMB_RW1_                      _______, TT(_FUNC)
+#define _FUNC_LTHMB_RW2_             _______, _______,   _______
 
-#define      _FUNC_RTHMB_RW1_                                               MO(_POWR), _______
-#define      _FUNC_RTHMB_RW2_                                               KC_F20,    KC_F24, _______
+#define      _FUNC_RTHMB_RW1_                                                MO(_POWR), _______
+#define      _FUNC_RTHMB_RW2_                                                KC_F21,    KC_F22, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
-// END OF [_FUNC] 08
+// END OF [_FUNC] 09
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // [_SYMB]
-#if defined(COMPREHENSIVE_30_LAYOUT)
-/* [_SYMB] = LAYER 09 : SYMBOLS LAYER
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-// Old _SYMB
- * .--------------------------------------------.        .--------------------------------------------.
- * |        |        |        |        |        |        |@@@@@@@@|        |        |        |        |
- * |    +   |    =   |    #   |    *   |    %   |        |    @   |    (   |    )   |    _   |    -   |
+// [_SYMB] = LAYER 10 : SYMBOLS LAYER
+// SUPER New _SYMB
+/* .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |        |  \  |  |    /   |    *   |    &   |        |  %  ˆ  |    (   |    )   |  !  ¡  |  ENTER |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |  `  ~  |  '  "  |    \   |    /   |    |   |        |    &   |    [   |    ]   |     ,  |    .   |
+ * |        |  -  __ |    [   |    ]   | $ EURO |        |  `  ~  |    G   |    H   |  ;  :  |        |
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |  LCtl  |  LAlt  |  LGui  |  LSft  |        |        |        |   LSft |  LGui  |  LAlt  |  LCtl  |
+ * |  LCtl  |  LSft  |  LAlt  |  LGui  |        |        |        |  LGui  |  LAlt  |  LSft  |  LCtl  |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |@@@@@@@@|        |        |        |        |        |        |
- * |  !  ¡  |  ?  ¿  |  <     |  >  ^  |    ^   |        | $ EURO |    {   |    }   |    ;   |    :   |
+ * |        |  +  =  |    '   |    "   |        |        |  @  #  |    {   |    }   |  ?  ¿  |SPACEBAR|
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-// New _SYMB
- * .--------------------------------------------.        .--------------------------------------------.
- * |        |        |        |        |        |        |@@@@@@@@|        |        |        |        |
- * |    +   |    =   |    #   | $ EURO |    %   |        |    *   |    (   |    )   |    _   |    -   |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |  `  ~  |  '  "  |    \   |    /   |    |   |        |    &   |    [   |    ]   |     ,  |    .   |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |  LCtl  |  LAlt  |  LGui  |  LSft  |        |        |        |   LSft |  LGui  |  LAlt  |  LCtl  |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |@@@@@@@@|        |        |        |        |        |        |
- * |  !  ¡  |  ?  ¿  |  <     |  >  ^  |    ^   |        |    @   |    {   |    }   |    ;   |    :   |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * '--------------------------------------------'        '--------------------------------------------'
- */
+ */ // SUPER New _SYMB
+#define PINKY_L2  LGUI_T(KC_G)
+#define PINKY_R2  LALT_T(KC_H)
+#define ___SYMBOLS_L1___  XXXXXXX,         KC_BSLS,        KC_SLSH,        KC_ASTR,       KC_AMPR
+#define ___SYMBOLS_L2___  KC_LCTL, LSFT_T(KC_MINS),LALT_T(KC_LBRC),LGUI_T(KC_RBRC), CURRENCY_SIGN
+#define ___SYMBOLS_L3___  XXXXXXX,         PLUS_EQ,        QUOTE,        D_QUOTE,       XXXXXXX
 
-#define ___SYMBOLS_L1___        KC_PLUS,          KC_EQL,         KC_HASH,      TD(R_DOEU), KC_PERC
-#define ___SYMBOLS_L2___ LCTL_T(KC_GRV), LALT_T(KC_QUOT), LGUI_T(KC_BSLS), LSFT_T(KC_SLSH), KC_PIPE
-#define ___SYMBOLS_L3___     TD(Z_EXCL),      TD(X_QUES),         KC_LABK,      TD(V_RACI), KC_CIRC
-// KC_CIRC is for compatibility with _SIMPLE_30_LAYOUT, because is into tapdance(> ^) as well
-
-#define     ___SYMBOLS_R1___ KC_ASTR, KC_LPRN,         KC_RPRN,         KC_UNDS,         KC_MINS
-#define     ___SYMBOLS_R2___ KC_AMPR, LSFT_T(KC_LBRC), LGUI_T(KC_RBRC), LALT_T(KC_COMM), LCTL_T(KC_DOT)
-#define     ___SYMBOLS_R3___ KC_AT,   KC_LCBR,         KC_RCBR,         KC_SCLN,         KC_COLN
-
-//#if defined(COMPREHENSIVE_30_LAYOUT)
-#elif defined(SIMPLE_30_LAYOUT)
-/* [_SYMB] = LAYER 09 : SYMBOLS LAYER
- * .--------------------------------------------.        .--------------------------------------------.
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |    +   |    =   |    #   | $ EURO |    %   |        |    *   |    (   |    )   |    _   |    -   |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |  `  ~  |  '  "  |    \   |    /   |    |   |        |    &   |    [   |    ]   |     ,  |    .   |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |  LCtl  |  LAlt  |  LGui  |  LSft  |        |        |        |   LSft |  LGui  |  LAlt  |  LCtl  |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |    !   |    ?   |    <   |    >   |    ^   |        |    @   |    {   |    }   |    ;   |    :   |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * |        |        |        |        |        |        |        |        |        |        |        |
- * '--------------------------------------------'        '--------------------------------------------'
- */
-
-#define ___SYMBOLS_L1___        KC_PLUS,          KC_EQL,         KC_HASH,      TD(R_DOEU), KC_PERC
-#define ___SYMBOLS_L2___ LCTL_T(KC_GRV), LALT_T(KC_QUOT), LGUI_T(KC_BSLS), LSFT_T(KC_SLSH), KC_PIPE
-#define ___SYMBOLS_L3___        KC_EXLM,         KC_QUES,         KC_LABK,         KC_RABK, KC_CIRC
-
-#define     ___SYMBOLS_R1___ KC_ASTR, KC_LPRN,         KC_RPRN,         KC_UNDS,         KC_MINS
-#define     ___SYMBOLS_R2___ KC_AMPR, LSFT_T(KC_LBRC), LGUI_T(KC_RBRC), LALT_T(KC_COMM), LCTL_T(KC_DOT)
-#define     ___SYMBOLS_R3___ KC_AT,   KC_LCBR,         KC_RCBR,         KC_SCLN,         KC_COLN
-
-//#elif defined(SIMPLE_30_LAYOUT)
-#endif
+#define                        ___SYMBOLS_R1___ PERC_CI,  KC_LPRN,  KC_RPRN,  EXCLAMATION_MARK, KC_ENT
+#define                        ___SYMBOLS_R2___ KC_GRAVE, PINKY_L2, PINKY_R2, LSFT_T(KC_SCLN),  KC_LCTL
+#define                        ___SYMBOLS_R3___ AT_HASH,  KC_LCBR,  KC_RCBR,  QUESTION_MARK,    KC_SPC
 
 #if defined(MINI_DACTYL_THUMBS)
-/* [_SYMB] = LAYER 09 : SYMBOLS LAYER
+/* [_SYMB] = LAYER 10 : SYMBOLS LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |        |
  *                            |  / *   |   * /  |        |        |  EURO  |
@@ -948,20 +890,20 @@ acronym dictionary
  *                   |        |        |        |        |    ¡   |    ¿   |        |
  *                   '--------------------------'        '--------------------------'
  */
-#define _SYMB_LTHMB_RW1_              O_COMMENT, C_COMMENT
-#define _SYMB_LTHMB_RW2_      XXXXXXX,    XXXXXXX,   XXXXXXX
+#define _SYMB_LTHMB_RW1_               O_COMMENT, C_COMMENT
+#define _SYMB_LTHMB_RW2_      _______, TT(_SYMB),   _______
 
 #define      _SYMB_RTHMB_RW1_                                               MO(_POWR), EURO
 #define      _SYMB_RTHMB_RW2_                                               INV_EX,    INV_QU, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
-// END OF [_SYMB] 09
+// END OF [_SYMB] 10
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 // [_LEDS]
 #if defined(BACKLIGHT_ENABLE)
-  /* [_LEDS] = LAYER 10 : LEDS LIGHTS LAYER
+  /* [_LEDS] = LAYER 11 : LEDS LIGHTS LAYER
    * .--------------------------------------------.        .--------------------------------------------.
    * |        |        |        |        |        |        |        |        |        |        | Toggle |
    * |  Level |  Level |  Level |  Level |  Level |        | Breath | Breath | Breath | Breath | Breath |
@@ -992,7 +934,7 @@ acronym dictionary
   #define      _LEDS_LIGHTS_R3_           BL_TOGG,   BL_ON,  BL_INC,  BL_DEC, BLIT_OFF
 
 #elif defined(RGBLIGHT_ENABLE)
-  /* [_LEDS] = LAYER 10 : LEDS LIGHTS LAYER
+  /* [_LEDS] = LAYER 11 : LEDS LIGHTS LAYER
    * .--------------------------------------------.      .--------------------------------------------.
    * |        |        |        |        |        |      |        |        |        |        | Reverse|
    * |   Red  |  Coral | Orange | Golden |  Gold  |      | Yellow |  Raise |  Lower |  Save  |   RGB  |
@@ -1017,104 +959,81 @@ acronym dictionary
   #define            _LEDS_LIGHTS_R1_                      CH_YLLW, RGB_HUI, RGB_HUD, SAV_COL, RGB_RMOD
   #define            _LEDS_LIGHTS_R2_                      CH_WHIT, RGB_SAI, RGB_SAD, GET_HSV,  RGB_MOD
   #define            _LEDS_LIGHTS_R3_                      CH_PINK, RGB_VAI, RGB_VAD, CH_EMPT,  RGB_TOG
+//#elif defined(RGBLIGHT_ENABLE)
+#endif
 
   #if defined(MINI_DACTYL_THUMBS)
-    /* [_LEDS] = LAYER 10 : LEDS LIGHTS LAYER
-     *                          .-----------------.      .-----------------.
-     *                          |        |        |      |        |        |
-     *                          |        |        |      |        |        |
-     *                          |        |        |      |        |        |
-     *                          |        |        |      |@[_POWR]|        |
-     *                 .--------+--------+--------|      |--------+--------|--------.
-     *                 |@@@@@@@@|        |        |      |        |        |( @@@@ )|
-     *                 |        |  Cyan  |  Azure |      |        |        |        |
-     *                 |        |        |        |      |        |        |        |
-     *                 |        |        |        |      |        |        |        |
-     *                 '--------------------------'      '--------------------------'
-     */
-    #define _LEDS_LTHMB_RW1_                  _______, _______
-    #define _LEDS_LTHMB_RW2_         _______, CH_CYAN, CH_AZUR
+  /* [_LEDS] = LAYER 11 : LEDS LIGHTS LAYER
+   *                            .-----------------.        .-----------------.
+   *                            |@@@@@@@@|        |        |        |        |
+   *                            |        |        |        |        |  White |
+   *                            |        |        |        |        |        |
+   *                            |@[_ACCN]|@[_POWR]|        |@[_POWR]|        |
+   *                   .--------+--------+--------|        |--------+--------|--------.
+   *                   |        |        |        |        |        |        |        |
+   *                   |        |        |        |        |  Pink  |  Cyan  |  Azure |
+   *                   |        |        |        |        |        |        |        |
+   *                   |@[_DVIM]|@[_FVIM]|@[_APPS]|        |        |        |        |
+   *                   '--------------------------'        '--------------------------'
+   */
+/*
+#define _DFLT_LTHMB_RW1_                     OSL_LEDS, LT(_FUNC, KC_TAB)// OSL(_FUNC)
+#define _DFLT_LTHMB_RW2_        MO(_DALY), OSL(_SYMB),           TT_NUMB//TT(_NUMB)isSlowerThan TT_NUMB
 
-    #define      _LEDS_RTHMB_RW1_                                           MO(_POWR), _______
-    #define      _LEDS_RTHMB_RW2_                                           _______,   _______, _______
+#define      _DFLT_RTHMB_RW1_                              MO(_POWR),          OSL(_ACCN)
+#define      _DFLT_RTHMB_RW2_                              TH_R3_APPS_TRIGGER, OSL(_FVIM), TD(DVIM_Del)
+*/
+  #define _LEDS_LTHMB_RW1_                  _______, _______
+  #define _LEDS_LTHMB_RW2_         _______, _______, _______
+
+  #define      _LEDS_RTHMB_RW1_                                          MO(_POWR), CH_WHIT
+  #define      _LEDS_RTHMB_RW2_                                          CH_PINK,   CH_PRPL, CH_AZUR
      
   //#if defined(MINI_DACTYL_THUMBS)
   #endif
-
-//#elif defined(RGBLIGHT_ENABLE)
-#endif
-// END OF [_LEDS] 10
+// END OF [_LEDS] 11
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
+
 // [_POWR]
-#if defined(COMPREHENSIVE_30_LAYOUT)
-/* [_POWR] = LAYER 11 : POWER COMMANDS LAYER
- * .--------------------------------------------.        .--------------------------------------------.
- * |        |@@@@@@@@|  Lock  |        | Clear  |        |        |        |        |@@@@@@@@|        |
- * | XXXXXXX| XXXXXXX| Screen |        | Stuck  |        | Medium |  Raise |  Lower | Minimum|  Mute  |
- * |        |        |    /   |        |Modifirs|        | Volume | Volume | Volume | Volume | Volume |
- * |        |        | Log Out| @RESET |& Layers|        | (Vol.8)|        |        | (Vol.1)|        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |  Play  |        | Toggle |        | Toggle |        |        |        |        |
- * | XXXXXXX| Rewind |  /Pause| Forward|  Zoom  |        |  Zoom  |  Zoom  |  Zoom  |  Zoom  | Invert |
- * |        |        |        |        | Smooth |        |  Focus |   In   |   Out  | Toggle | Colors |
- * |        |        |        |        | Images |        |Followng|        |        |        |        |
- * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |  Menu  |  Dock  |  Tool  | Status |Floating|        |@@@@@@@@|        |        |        |        |
- * |  _Bar  |  _Bar  |  _Bar  |  _Bar  | Window |        |  Raise |  Raise |  Lower | Minimum|  Lower |
- * |        |        |        |        |        |        |Contrast| Bright | Bright | Bright |Contrast|
- * | @SLEEP |@KIL_APP|@KIL_MEN|@SHUTDWN|@RESTART|        |        |        |        |(Bght.1)|        |
- * '--------------------------------------------'        '--------------------------------------------'
-// KC_BRIGHTNESS_DOWN(KC_BRID):->KC_PAUS
-// KC_BRIGHTNESS_UP  (KC_BRIU):->KC_SLCK
-// KC_MRWD:->KC_F7, KC_MPLY:->KC_SPC, KC_MFFD:->KC_F9,
-// ###
-// RSFT_T(kc) <--- [BOOKMARK] [FIXME]
-//             SFT+ALT+CMD+ESC,    ALT+CMD+ESC,
-*/
-#define ____POWER_L1____    XXXXXXX,    XXXXXXX, TD(LCKLOG), TD(HRESET),   MY_CLEAR
-#define ____POWER_L2____    XXXXXXX,      KC_F7,     KC_SPC,      KC_F9,   ZOOMSMTH
-#define ____POWER_L3____ TD(SLEP_M), TD(KILA_D), TD(KILM_T), TD(SHUT_S), TD(RSTT_F)
 
-#define      ____POWER_R1____ TD(V8_TEST), S(A(KC__VOLUP)), S(A(KC__VOLDOWN)), TD(V1_LAST), KC__MUTE
-// #define   ____POWER_R2____ ZOOM_FOL,    TD(RS_ZOIN),     TD(RG_ZOUT),       TD(RA_ZOOM), TD(RC_INCO)
-#define      ____POWER_R2____ ZOOM_FOL,    ZOOM_IN,         ZOOM_OUT,          ZOOM_TOG,    INV_COLO
-#define      ____POWER_R3____ CNTRST_U,    KC_PAUS,         KC_SLCK,           BRIGHT_1,    CNTRST_D
-
-//#if defined(COMPREHENSIVE_30_LAYOUT)
-#elif defined(SIMPLE_30_LAYOUT)
-/* [_POWR] = LAYER 11 : POWER COMMANDS LAYER
+/* [_POWR] = LAYER 12 : POWER COMMANDS LAYER
  * .--------------------------------------------.        .--------------------------------------------.
- * |        |        |  Lock  |        | Clear  |        |        |        |        |        |        |
- * | Toggle |  Cycle | Screen |        | Stuck  |        | Medium |  Raise |  Lower | Minimum|  Mute  |
- * | Whole  |  Steps |    /   |        |Modifirs|        | Volume | Volume | Volume | Volume | Volume |
- * |Indictor|Indictor| Log Out| @RESET |& Layers|        | (Vol.8)|        |        | (Vol.1)|        |
+ * |        |Clear CL|        |        |        |        |        |        |        |        |        |
+ * |        | Stuck  |LckScren| Toggle |  Cycle |        | Medium |  Raise |  Lower | Minimum|  Mute  |
+ * |        |Modifirs|    /   |  Whole |  Steps |        | Volume | Volume | Volume | Volume | Volume |
+ * | @RESET |& Layers| Log Out|Indictor|Indictor|        | (Vol.8)|        |        | (Vol.1)|        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |  Play  |        | Toggle |        | Toggle |        |        |        |        |
- * | XXXXXXX| Rewind |  /Pause| Forward|  Zoom  |        |  Zoom  |  Zoom  |  Zoom  |  Zoom  | Invert |
- * |        |        |        |        | Smooth |        |  Focus |   In   |   Out  | Toggle | Colors |
- * |        |        |        |        | Images |        |Followng|        |        |        |        |
+ * | Toggle |        |        |        | Toggle |        | Toggle |        |        |        |        |
+ * |  layer | Invert |        |        |  Zoom  |        |  Zoom  |  Zoom  |  Zoom  |  Zoom  |   Do   |
+ * | _QWER  | Colors |        |        | Smooth |        |  Focus |   In   |   Out  | Toggle |   Not  |
+ * |   RCtl |  RSft  |  RAlt  |  RGui  | Images |        |Followng|  RGui  |  RAlt  |  RSft  | Disturb|
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |  Menu  |  Dock  |  Tool  | Status |Floating|        |@@@@@@@@|        |        |        |        |
+ * |  Menu  |  Dock  |  Tool  | Status |Floating|        |        |        |        |        |        |
  * |  _Bar  |  _Bar  |  _Bar  |  _Bar  | Window |        |  Raise |  Raise |  Lower | Minimum|  Lower |
  * |        |        |        |        |        |        |Contrast| Bright | Bright | Bright |Contrast|
  * | @SLEEP |^KIL_APP|^KIL_MEN|@SHUTDWN|^RESTART|        |        |        |        |(Bght.1)|        |
  * '--------------------------------------------'        '--------------------------------------------'
- */
-#define ____POWER_L1____     TOG_ID, STP_ID, TD(LCKLOG), TD(HRESET), MY_CLEAR
-#define ____POWER_L2____    XXXXXXX,  KC_F7,     KC_SPC,      KC_F9, ZOOMSMTH
-// #define ____POWER_L3____ TD(SLEP_M), KA_DCK,     KM_TOL, TD(SHUT_S),   RT_FLO // SH_STA
-#define ____POWER_L3____ TD(SLEP_M), TD(KILA_D), TD(KILM_T), TD(SHUT_S), TD(RSTT_F)
+ */ // Toggle Zoom Smooth Images is not in use nowadays.  But its keycode is still alive.    [DELETEME]
+// #define ____POWER_L3____ TD(SLEP_M),     KA_DCK,     KM_TOL, TD(SHUT_S),     RT_FLO
+// TG(_QWER) has been substituted by TD(TG_QWE) for allowing flash animation before toggling.
 
-#define      ____POWER_R1____          VOL_8,    S(A(KC__VOLUP)), S(A(KC__VOLDOWN)), VOL_1,    KC__MUTE
-#define      ____POWER_R2____          ZOOM_FOL, ZOOM_IN,         ZOOM_OUT,          ZOOM_TOG, INV_COLO
-#define      ____POWER_R3____          CNTRST_U, KC_PAUS,         KC_SLCK,           BRIGHT_1, CNTRST_D
-
-//#elif defined(SIMPLE_30_LAYOUT)
+#if defined (RGBLIGHT_ENABLE)
+#define ____POWER_L1____ TD(HRESET),    MY_CLEAR, TD(LCKLOG),     TOG_ID,     STP_ID    
+#else
+#define ____POWER_L1____ TD(HRESET),    MY_CLEAR, TD(LCKLOG),     XXXXXXX,     XXXXXXX    
 #endif
 
+#define ____POWER_L2____ TD(TG_QWE), TD(RA_INCO),    KC_RALT,    KC_RGUI,   ZOOMSMTH  // RALT_T(KC_F7), RSFT_T(KC_SPC), RGUI_T(KC_F9),
+#define ____POWER_L3____ TD(SLEP_M),  TD(KILA_D), TD(KILM_T), TD(SHUT_S), TD(RSTT_F)
+
+
+#define      ____POWER_R1____ VOL_8,    S(A(KC__VOLUP)), S(A(KC__VOLDOWN)),VOL_1,      KC__MUTE
+#define      ____POWER_R2____ ZOOM_FOL, TD(RG_ZOIN),     TD(RA_ZOUT),      TD(RS_ZOOM),LCTL_T(DONT_DST)
+#define      ____POWER_R3____ CNTRST_U, INC_BRGH,        DEC_BRGH,         BRIGHT_1,   CNTRST_D
+
 #if defined(MINI_DACTYL_THUMBS)
-/* [_POWR] = LAYER 11 : POWER COMMANDS LAYER
+/* [_POWR] = LAYER 12 : POWER COMMANDS LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |@@@@@@@@|        |
  *                            |        |        |        |        |        |
@@ -1139,41 +1058,46 @@ acronym dictionary
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
-// END OF [_POWR] 11
+// END OF [_POWR] 12
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
+
 // [_APPS]
-#if defined(COMPREHENSIVE_30_LAYOUT)
+// #if defined(COMPREHENSIVE_30_LAYOUT)
 /* [_APPS] = LAYER 12 : APPLICATIONS LAYER
+//
+ * KARABINER-ELEMENTS
  * .--------------------------------------------.        .--------------------------------------------.
  * |@@@@@@@@|        |        |        |        |        |        |        |        |        |@@@@@@@@|
- * | Simple | Twitter|Evernote|   App  |Terminal|        |  Typi  |  Uroom |Textedit|  Omni  | System |
- * |  Note  |        |        |  Store |        |        | -nator |        |        | -focus | Prefe  |
+ * | simple | tWitter|Evernote|   app  |Terminal|        |  tYpi  | sUblime|textedIt|  Omni  | system |
+ * |  note  |        |        |  stoRe |        |        | -nator | text   |        | -focus | Prefe  |
  * |        |        |*qck_ent|        |   >_   |        |        |        |        |*qck_ent| -rences|
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |        |        |        |        |        |        |        |        |        | XXXXXXX|
- * |  Apple |  Slack |  Day   | Finder | Google |        | Sketch | Sublime|Karbiner|Calendar|        |
- * | Script |(safari)|   One  |        | Chrome |        |        |  Text  |Elements|        |        |
- * |        |        |*qck_ent|        |        |        |        |        |        |        |        |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |   dAy  |  Slack | Discord| Finder | Google |        | sketcH | sUblime|Karbiner|caLendar| sublime|
+ * |   one  |(safari)|        |        | chrome |        |        | text   |elements|        | text   |
+ * |*qck_ent|        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
- * | Studies|  Xcode | Calcu  |Karbiner|  Books |        |  Notes |  Mail  | Keynote|  Pages | Numbers|
- * |        |        | -lator | Event  |        |        |        |        |        |        |        |
+ * | studies|  Xcode | Calcu  |karbiner|  Books |        |  Notes |  Mail  | keynote|  pages | numbers|
+ * |        |        | -lator | event  |        |        |        |        |        |        |        |
  * |        |        |        | Viewer |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
+ * KARABINER-ELEMENTS
+//
 // *qck_ent: QUICK ENTRY
 // [PENDING]
 // Feedly
 // [pending]
 */
 
-#define __APPLICATS_L1__ APP_Q_SNOTE, APP_W_TWTTR, APP_E_EVERN, APP_R_APSTO, APP_T_TERMI
-#define __APPLICATS_L2__ APP_A_SCRPT, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME
-#define __APPLICATS_L3__ APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_KVIEW, APP_B_BOOKS
+// #define __APPLICATS_L1__ APP_Q_SNOTE, APP_W_TWTTR, APP_E_EVERN, APP_R_APSTO, APP_T_TERMI
+// #define __APPLICATS_L2__ APP_A_SCRPT, APP_S_SAFAR, APP_D_D_ONE, APP_F_FINDE, APP_G_CHRME
+// #define __APPLICATS_L3__ APP_Z_STUDI, APP_X_XCODE, APP_C_CALCU, APP_V_KVIEW, APP_B_BOOKS
 
-#define      __APPLICATS_R1__           APP_Y_TYPIN, APP_U_UROOM, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF
-#define      __APPLICATS_R2__           APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, APPSP_EMPTY
-#define      __APPLICATS_R3__           APP_N_NOTES, APP_M_MAIL,  APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB
+// #define      __APPLICATS_R1__           APP_Y_TYPIN, APP_U_UROOM, APP_I_TEDIT, APP_O_OMNIF, APP_P_SPREF
+// #define      __APPLICATS_R2__           APP_H_SKTCH, APP_J_SUBLI, APP_K_KRBNR, APP_L_CLNDR, APPSP_EMPTY
+// #define      __APPLICATS_R3__           APP_N_NOTES, APP_M_MAIL,  APP_ES_KEYN, APP_BS_PAGE, APP_EN_NUMB
 
 // #define __APPLICATS_L1__ _______, _______, _______, _______, _______
 // #define __APPLICATS_L2__ _______, _______, _______, _______, _______
@@ -1191,10 +1115,10 @@ acronym dictionary
  *                            |        |        |        |        |        |
  *                            |        |        |        |@[_POWR]|        |
  *                   ,--------+--------+--------|        |--------+--------|--------.
- *                   | Toggle |  Quit  |        |        |@@@@@@@@|        |        |
+ *                   |  Quit  | Toggle |        |        |@@@@@@@@|        |        |
  *                   | current| current|KAR-APPS|        |        |        |        |
- *                   |    &   |  app   | trigger|        |        |        |        |
- *                   |last app|        |        |        |        |        |        |
+ *                   |   app  |    &   | trigger|        |        |        |        |
+ *                   |        |last app|        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
  */
 // #define _APPS_LTHMB_RW1_                      _______,        _______
@@ -1204,7 +1128,7 @@ acronym dictionary
 // #define      _APPS_RTHMB_RW2_                                               _______,   _______, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
-#endif
+// #endif
 // END OF [_APPS] 12
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 // END OF COMMON LAYERS 01...12
@@ -1212,90 +1136,4 @@ acronym dictionary
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// BEGINING OF SPECIFIC LAYERS 13, 17
-//
-// [_TEST]
-// [_LAST]
-#if defined(COMPREHENSIVE_30_LAYOUT)
-// Layers especifically for Gherkins.
-
-  // #define _TEST  13  //  LAYER FOR TESTING
-  // #define _LAST  17  //  TEST FOR TRYING ACCESS TO A LAYER ABOVE NUMBER 15 !!!!!!!!!!!!!!!!!!!!!!!!!!
-
-  // [_TEST]
-  /* [_TEST] = LAYER 13 : TEST LAYER
-   * .--------------------------------------------.      .--------------------------------------------.
-   * |        |        |        |        |        |      |        |        |        |        |        |
-   * |        |        |        |        |        |      |        |    1   |    2   |    3   |        |
-   * |    +   |    @   |    #   |    =   |    %   |      |    &   |  Beep  |  Beeps |  Beeps |    -   |
-   * |        |        |        |        |        |      |        |        |        |        |        |
-   * |        |        |        |        |        |      |        |        |        |        |        |
-   * |--------+--------+--------+--------+--------|      |--------+--------+--------+--------+--------|
-   * |        |        |        |        |        |      |        |        |        |        |        |
-   * |  `  ~  |  '  "  |    \   |    /   |  $  €  |      |    |   |    [   |    ]   |    ,   |    .   |
-   * |        |        |        |        |        |      |        |        |        |        |        |
-   * |  LCtl  |  LAlt  |  LGui  |  LSft  |        |      |        |  LSft  |  LGui  |  LAlt  |  LCtl  |
-   * |--------+--------+--------+--------+--------|      |--------+--------+--------+--------+--------|
-   * |        |        |        |        |        |      |        |        |        |        |        |
-   * |  !  ¡  |  ?  ¿  |    <   |  >  ^  |    *   |      | XXXXXXX|    {   |    }   |    :   |    ;   |
-   * |        |        |        |        |        |      |        |        |        |        |        |
-   * |        |        |        |        |        |      |@[_SYMB]|        |        |        |        |
-   * '--------------------------------------------'      '--------------------------------------------'
-   */
-  #define ____TEST__L1____       KC_PLUS,          KC_AT,        KC_HASH,          KC_EQL,    KC_PERC
-  #define ____TEST__L2____ CTL_T(KC_GRV), ALT_T(KC_QUOT), GUI_T(KC_BSLS), LSFT_T(KC_SLSH), TD(R_DOEU)
-  #define ____TEST__L3____    TD(Z_EXCL),     TD(X_QUES),        KC_LABK,      TD(V_RACI),    KC_ASTR
-
-  #define      ____TEST__R1____ KC_AMPR, BEEP_1,          BEEP_2,         BEEP_3,         KC_MINS
-  #define      ____TEST__R2____ KC_PIPE, LSFT_T(KC_LBRC), GUI_T(KC_RBRC), ALT_T(KC_COMM), CTL_T(KC_DOT)
-  #define      ____TEST__R3____ LT(_SYMB, KC_NO),KC_LCBR, KC_RCBR,        KC_COLN,        KC_SCLN
-  // END OF _TEST 13
-  ///////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-  // [_LAST]
-  /* [_LAST] = LAYER 17 : LAST LAYER
-   * .--------------------------------------------.      .--------------------------------------------.
-   * |        |        |        |        |        |      |        |        |        |        | Toggle |
-   * |  Level |  Level |  Level |  Level |  Level |      | Breath | Breath | Breath | Breath | Breath |
-   * |   01   |   02   |   03   |   04   |   05   |      |   01   |   02   |   03   |   04   |        |
-   * |        |        |        |        |        |      |        |        |        |        |        |
-   * |--------+--------+--------+--------+--------|      |--------+--------+--------+--------+--------|
-   * |        |        |        |        |        |      |        |        |        |        |        |
-   * |  Level |  Level |  Level |  Level |  Level |      | Breath | Breath | Breath | Breath | Breath |
-   * |   06   |   07   |   08   |   09   |   10   |      |   05   |   06   |   07   |   12   |   15   |
-   * |        |        |        |        |        |      |        |        |        |        |        |
-   * |--------+--------+--------+--------+--------|      |--------+--------+--------+--------+--------|
-   * |        |        |        |        |        |      | Toggle |        |  Raise |  Lower |        |
-   * |  Level |  Level |  Level |  Level |  Level |      |Backlght|Backlght|Backlght|Backlght|Backlght|
-   * |  BL_11 |  BL_12 |  BL_13 |  BL_14 |  BL_15 |      |        |   ON   |        |        |   OFF  |
-   * |        |        |        |        |        |      |        |        |        |        |        |
-   * '--------------------------------------------'      '--------------------------------------------'
-   */
-  #define ____LAST__L1____ BLIT_01, BLIT_02, BLIT_03, BLIT_04, BLIT_05
-  #define ____LAST__L2____ BLIT_06, BLIT_07, BLIT_08, BLIT_09, BLIT_10
-  #define ____LAST__L3____ BLIT_11, BLIT_12, BLIT_13, BLIT_14, BLIT_15
-
-  #define      ____LAST__R1____ BRTH_01, BRTH_02, BRTH_03, BRTH_04,  BL_BRTG
-  #define      ____LAST__R2____ BRTH_05, BRTH_06, BRTH_07, BRTH_12,  BRTH_15
-  #define      ____LAST__R3____ BL_TOGG,   BL_ON,  BL_INC,  BL_DEC, BLIT_OFF
-
-  // END OF _LAST 17
-  ///////////////////////////////////////////////////////////////////////////////////////////////// ###
-
-#elif defined(SIMPLE_30_LAYOUT)
-// Layers especifically for Mini Dactyl
-
-    // No extra layers for 'simple_30_layout'
-
-#endif
-//
-// END OF SPECIFIC LAYERS 13, 17
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
 

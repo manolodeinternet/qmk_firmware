@@ -104,21 +104,29 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 //      KC_CPYP          LCTL   (CAP_SLDE)  // Copy portion of screen  // LCTL (LSFT(LGUI(KC_4)))
 // [unused]
 
-#define PREV_WIN     LSFT(LGUI(KC_GRAVE))  // previous window
-#define NEXT_WIN           LGUI(KC_GRAVE)  //     next window
-#define PREV_TAB       LSFT(LCTL(KC_TAB))  // previous tab
-#define NEXT_TAB             LCTL(KC_TAB)  //     next tab
+#define PREV_WIN     LSFT(LGUI(KC_GRAVE))  //      previous window
+#define NEXT_WIN           LGUI(KC_GRAVE)  //      next     window
+#define PREV_TAB       LSFT(LCTL(KC_TAB))  //      previous tab
+#define NEXT_TAB             LCTL(KC_TAB)  //      next     tab
+#define PREV_PAGE       LGUI(KC_LBRACKET)  // show previous browser page
+#define NEXT_PAGE       LGUI(KC_RBRACKET)  // show next     browser page
 
 
 #define APP_WIND            LCTL(KC_DOWN)  // applications windows
 #define MISS_CTL              LCTL(KC_UP)  // mission control
-#define    SPEAK               LCAG(KC_H)  // start/stop to speak selected text 
-                                                //or all the text if any is selected
-                                                // LCTL = Hold Left Control, Alt and GUI and press kc
+#define    SPEAK LCTL(LALT(LSFT(LGUI(KC_H))))   // start/stop to speak selected text 
+                                                   // or all the text if any is selected
+                                                // HYPR(kc) doesn't work
+                                                // LCAG(KC_H)
+                                                // LCAG(kc) = Hold Left Control, Alt and GUI and press kc
 // [SYSTEM PREFERENCES]
-#define     DESK                    KC_F6  // show desktop
-#define LANCHPAD                   KC_F17  // F17 (set at 'Sys.Pref./Keyboard/Shortcuts/Launchpad & Doc')
-#define DSHBOARD                   KC_F18  // F18 (set at 'Sys.Pref./Keyboard/Shortcuts/Mission Control')
+#define DEC_BRGH                   KC_F13  // F15 (set at 'Sys.Pref./Keyboard/Shortcuts/Launchpad & Doc')
+#define INC_BRGH                   KC_F14  // F16 (set at 'Sys.Pref./Keyboard/Shortcuts/Mission Control')
+#define LANCHPAD                   KC_F15  // F15 (set at 'Sys.Pref./Keyboard/Shortcuts/Launchpad & Doc')
+#define     DESK                   KC_F16  // F16 (set at 'Sys.Pref./Keyboard/Shortcuts/Mission Control')
+#define DSHBOARD                   KC_F17  // F17 (set at 'Sys.Pref./Keyboard/Shortcuts/Mission Control')
+#define NOTF_CNT                   KC_F18  // F18 (set at 'Sys.Pref./Keyboard/Shortcuts/Mission Control')
+#define DONT_DST                   KC_F19  // F19 (set at 'Sys.Pref./Keyboard/Shortcuts/Mission Control')
 #define ACTV_WIN              LCTL(KC_F4)  // active window
 #define FLOA_WIN              LCTL(KC_F6)  // floating window
 // [system preferences]
@@ -150,6 +158,9 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 // [info]
 #define INV_QU      LSFT(LALT(KC_SLSH))  // inverted question mark
 #define INV_EX               LALT(KC_1)  // inverted exclamation mark
+#define B_EXCL     SEND_STRING(SS_LALT("1"))
+#define B_QUES     SEND_STRING(SS_LSFT(SS_LALT("/")))
+
 //                                                                                                   //
 // defining symbols 4 ( for using into 'action_tap_dance_double(symbol1, symbol2)' )                 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -185,18 +196,21 @@ quantum/quantum_keycodes.h:681:17: note: in expansion of macro 'HYPR'
 // implemented as tap_dance function for lock_screen and logout in: TD(LOGOUT)
 // #define KC_LOGO  LSFT(LALT(LGUI(KC_Q))) 
 
+
+#define KC_FN KC_F22
+
 #define LOCK_SCR      LCTL(LGUI(KC_Q))  //LOCK SCREEN (ask for pasword screen)
 // [SYSTEM PREFERENCES]
-#define ZOOM_FOL      LCAG(KC_SLSH)      //QMK: Hold Left Control, Alt and GUI and press kc
-#define ZOOM_TOG      LCAG(KC_SCLN)
-#define ZOOM_IN       LCAG(KC_EQL)
-#define ZOOM_OUT      LCAG(KC_MINS)
 #define ZOOMSMTH      LCAG(KC_BSLS)
+#define ZOOM_FOL      LCAG(KC_SLSH)      //QMK: Hold Left Control, Alt and GUI and press kc
+// #define ZOOM_TOG      LCAG(KC_SCLN)
+// #define ZOOM_IN       LCAG(KC_EQL)
+// #define ZOOM_OUT      LCAG(KC_MINS)
+// #define INV_COLO      LSFT(LCTL(LGUI(KC_8)))  
 #define CNTRST_U      LCAG(KC_DOT)              //Hold Left Control, Alt and GUI and press kc
 #define CNTRST_D      LCAG(KC_COMM)
 //
 // [UNUSED]
-#define INV_COLO      LSFT(LCTL(LGUI(KC_8)))  
 // [INFO]
 // it can't be used into an 'ACTION_TAP_DANCE_DOUBLE()'
 // it can't be used into a statement of tap_dance: 'case SINGLE_TAP: INV_CLR;'  We would get only '8'

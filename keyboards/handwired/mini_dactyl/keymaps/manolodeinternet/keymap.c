@@ -78,10 +78,10 @@
 //                             understanding userspace file structure                                //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include QMK_KEYBOARD_H // is implemented at 'manolodeinternet.h'. Compile process needs this way !
 #include "manolodeinternet.h"
 
 /*
- * '#include QMK_KEYBOARD_H' is implemented at 'manolodeinternet.h'. Compile process needs this way !
 
  * But as I created 'manolodeinternet.c'...
 ...I need to include it manually in 'qmk_firmware/users/manolodeinternet/rules.mk'
@@ -255,13 +255,20 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // [_dflt] layer
 
 // [_POWR] LAYER
+  ,[TG_QWE]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, TG_QWE_finished, TG_QWE_reset, 800)
   ,[LCKLOG]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, LCKLOG_finished, LCKLOG_reset, 800)
+  ,[HRESET]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, HRESET_finished, HRESET_reset, 1000)
+
+  ,[RG_ZOIN]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RG_ZOIN_finished, RG_ZOIN_reset) 
+  ,[RA_ZOUT]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RA_ZOUT_finished, RA_ZOUT_reset) 
+  ,[RS_ZOOM]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RS_ZOOM_finished, RS_ZOOM_reset) 
+  ,[RC_INCO]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RC_INCO_finished, RC_INCO_reset) 
+ 
   ,[SLEP_M]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, SLEP_M_finished, SLEP_M_reset)
   ,[KILA_D]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, KILA_D_finished, KILA_D_reset, 800)
   ,[KILM_T]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, KILM_T_finished, KILM_T_reset)
   ,[SHUT_S]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, SHUT_S_finished, SHUT_S_reset, 1000)
   ,[RSTT_F]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, RSTT_F_finished, RSTT_F_reset, 1000)
-  ,[HRESET]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, HRESET_finished, HRESET_reset, 1000)
 // [_powr] layer
 // [mini_dactyl] specific tap_dance features
 
@@ -271,7 +278,28 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 // [ALL_KEYBOARDS] TAP_DANCE FEATURES
 // [_FVIM] LAYER
-  ,[FVIM_uU] = ACTION_TAP_DANCE_FN(FVIM_uU_function)
+
+
+
+
+
+
+
+
+
+// TRY THIS !!!
+// ,[FVIM_uU] = ACTION_TAP_DANCE_FN_ADVANCED_TIME(FVIM_uU_function, NULL, NULL, 250)
+  ,[FVIM_uU] = ACTION_TAP_DANCE_FN(FVIM_uU_function)  
+
+
+
+
+
+
+
+
+
+
   ,[FVIM_pP] = ACTION_TAP_DANCE_FN(FVIM_pP_function)
 // [_fvim] layer
 
@@ -358,14 +386,14 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-//[_DFLT] LAYER 00 : DEFAULT LAYER
-  [_DFLT] = LAYOUT_mini_dactyl_base_wrapper(
+//[_IAEOU] LAYER 00 : IAEOU DEFAULT LAYER
+  [_IAEOU] = LAYOUT_mini_dactyl_base_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
-               ___DEFAULT_L1___,                                          ___DEFAULT_R1___,
+               ____IAEOU__L1___,                                          ____IAEOU__R1___,
 //|----------------------------------------|                 |----------------------------------------|
-               ___DEFAULT_L2___,                                          ___DEFAULT_R2___,
+               ____IAEOU__L2___,                                          ____IAEOU__R2___,
 //|----------------------------------------|                 |----------------------------------------|
-               ___DEFAULT_L3___,                                          ___DEFAULT_R3___
+               ____IAEOU__L3___,                                          ____IAEOU__R3___
 //'----------------------------------------'                 '----------------------------------------'
 //                          _____LAYOUT_____               _____WRAPPR_____
 //                     .------------------------.     .------------------------.
@@ -375,6 +403,53 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 // END OF _DFLT 00
+
+
+
+//[_PINKY] LAYER 01 : PINKY DEMULTIPLIER LAYER
+  [_PINKY] = LAYOUT_mini_dactyl_base_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ____PINKY__L1___,                                          ____PINKY__R1___,
+//|----------------------------------------|                 |----------------------------------------|
+               ____PINKY__L2___,                                          ____PINKY__R2___,
+//|----------------------------------------|                 |----------------------------------------|
+               ____PINKY__L3___,                                          ____PINKY__R3___
+//'----------------------------------------'                 '----------------------------------------'
+//                          _____LAYOUT_____               _____WRAPPR_____
+//                     .------------------------.     .------------------------.
+//                     |------------------------|     |------------------------|
+//                     |------------------------|     |------------------------|
+//                     '------------------------'     '------------------------'
+),
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+// END OF _PINKY 01
+
+
+
+
+//[_QWER] LAYER 02 : QWERT DEFAULT LAYER
+  [_QWER] = LAYOUT_mini_dactyl_base_wrapper(
+//.----------------------------------------.                 .----------------------------------------.
+               ____QWER__L1___,                                          ____QWER__R1___,
+//|----------------------------------------|                 |----------------------------------------|
+               ____QWER__L2___,                                          ____QWER__R2___,
+//|----------------------------------------|                 |----------------------------------------|
+               ____QWER__L3___,                                          ____QWER__R3___
+//'----------------------------------------'                 '----------------------------------------'
+//                          _____LAYOUT_____               _____WRAPPR_____
+//                     .------------------------.     .------------------------.
+//                     |------------------------|     |------------------------|
+//                     |------------------------|     |------------------------|
+//                     '------------------------'     '------------------------'
+),
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+// END OF _QWER 02
+
+
+
+
+
+// [BUG]// [BUG] increment two units to the layer from now on...
 
 //[_ACCN] LAYER 01 : ACCENTS LAYER
   [_ACCN] = LAYOUT_wrapper(
@@ -1877,67 +1952,69 @@ uint32_t layer_state_set_user(uint32_t state) {
 
   switch (state_number) {
     case _DFLT:   //  0
-//      active_layer = 0;
+    case _PINKY:   //  1
+    case _QWER:   //  2
+//      active_layer = 1;
         numbers_is_active = false;
         show_RGB_LEDs();
         break;     
 
-    case _ACCN:   //  1
-//      active_layer = 1;
+    case _ACCN:   //  2  // [BUG] increment a unit to the layer from now on...
+//      active_layer = 2;
         rgblight_sethsv_noeeprom(COLOR_ACCN); // (0xD9, 0xA5, 0x21)
         break;
 
-    case _NUMB:   //  2
-//      active_layer = 2;
+    case _NUMB:   //  3
+//      active_layer = 3;
         numbers_is_active = true; // #01
         show_RGB_LEDs();
         break;
 
-    case _FVIM:   //  3
-//      active_layer = 3;
+    case _FVIM:   //  4
+//      active_layer = 4;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
      // rgblight_sethsv_noeeprom(COLOR_FVIM); // (0x00, 0x80, 0x80)
         rgblight_setrgb(RGB_MY_MAGENTA); //#define RGB_MY_MAGENTA      0xFF, 0x00, 0xAA  // 0xFF, 0x00, 0xFF
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
         break;
 
-    case _XVIM:   // 4
-//      active_layer = 4;
+    case _XVIM:   // 5
+//      active_layer = 5;
         rgblight_sethsv_noeeprom(COLOR_VIM_); // (320, 255, 255)
         break;
 
-    case _DVIM:   // 5
-//      active_layer = 5;
+    case _DVIM:   // 6
+//      active_layer = 6;
         rgblight_sethsv_noeeprom(COLOR_DVIM); // (0xFF, 0x00, 0x00)
         break;
 
-    case _MOUS:   // 6
-//      active_layer = 6;
+    case _MOUS:   // 7
+//      active_layer = 7;
         rgblight_sethsv_noeeprom(COLOR_MOUS); // (0x00,  0xFF, 0x00)
         break;
 
-    case _DALY:   //  7
-//      active_layer = 7;
+    case _DALY:   //  8
+//      active_layer = 8;
         rgblight_sethsv_noeeprom(COLOR_DALY); // (0x7A, 0x00, 0xFF)
         break;
 
-    case _FUNC:   //  8
-//      active_layer = 8;
+    case _FUNC:   //  9
+//      active_layer = 9;
         rgblight_sethsv_noeeprom(COLOR_FUNC); // (0x99, 0xF5, 0xFF)
         break;
 
-    case _SYMB:   //  9
-//      active_layer = 9;
+    case _SYMB:   //  10
+//      active_layer = 10;
         rgblight_sethsv_noeeprom(COLOR_SYMB); // (0x00,  0xFF, 0x00)
         break;
 
-    case _LEDS:   // 10
-//      active_layer = 10;
-        SS_BEEP_1;
+    case _LEDS:   // 11
+//      active_layer = 11;
+        // SS_BEEP_1;
         break;
 
-    case _POWR:   //  11
-//      active_layer = 11;
+    case _POWR:   //  12
+//      active_layer = 12;
         rgblight_sethsv_noeeprom(COLOR_POWR); // (0xFF, 0xFF, 0x00)
         break;
 
