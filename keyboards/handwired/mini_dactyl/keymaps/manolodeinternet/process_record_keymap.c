@@ -26,284 +26,16 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
                         unregister_code(KC_LGUI);
                         return false; break;
 
-
-//[# #KARABINER & TYPINATOR STUFF]
-//[# #R3-L3 #01]
-
-  //  Left Thumb 3
-  //  Karabiner-apps mode
-      case TT_NUMB:
-
-#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
-
-                        if (multi_apps)
-                        {
-                          add_mod(gui_mod);
-                        }
-                        if (control_apps)
-                        {
-                          add_mod(ctl_mod);
-                        }
-                        if (shift_apps)
-                        {
-                          add_mod(sft_mod);
-                        }
-                        karabiner_apps_trigger = true;  
-                        register_code(KC_F21);                      
-
-#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
-
-                        unregister_code(KC_F21);
-                        apps_trigger = true;
-                        if (multi_apps)
-                        {
-                          remove_mod(gui_mod);
-                        }
-                        if (control_apps)
-                        {
-                          remove_mod(ctl_mod);
-                        }
-                        if (shift_apps)
-                        {
-                          remove_mod(sft_mod);
-                        }
-
-#endif // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ###
-
-                        return false; break;
-
-//#02 #R3-L3
-      default:
-   // default case will call one app for every 3x10 alpha keys
-#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
-
-                if (karabiner_apps_trigger)
-                {
-               // calling apps at 'karabiner style'
-                  return true;
-                }
-                // else
-                // {
-                //   if (apps_trigger)
-                //   {
-                 // calling appps at 'typinator style'
-                    call_app_with_keycode(keycode & 0xFF);//the filter avoids modifiers on home row
-                    return false;                   // i.e. pressing J is no KC_J, but LSFT_T(KC_J)
-                //   }
-                // }
-
-#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
-
-                if (apps_trigger)
-                { // calling appps at 'typinator style'
-                  call_app_with_keycode(keycode & 0xFF);//the filter avoids modifiers on home row
-                  return false;                   // i.e. pressing J is no KC_J, but LSFT_T(KC_J)
-                }
-                // else
-                // {
-                //   if (karabiner_apps_trigger)
-                //   {
-                 // calling apps at 'karabiner style'
-                    return true;
-                //   }
-                // }
-
-#endif // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ###
-
-                break;
+      default:          return  true;
 
     } // switch (keycode)
   } // if (record->event.pressed)
   else 
   {
 //  Do something else when release
-    switch(keycode)
-    {
+    return true;
+  }
 
-
-//#03 #R3-L3
-      case OSL_APPS:
-      case TH_R3_APPS_TRIGGER:// Right Thumb 3
-                              // Switch off 'apps_trigger' variable mode without layer
-                              // first_apps_trigger_pressed = false;
-
-#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
-
-                               apps_trigger = false;
-
-                               if (!karabiner_apps_trigger)
-                               {
-                                 show_RGB_LEDs();
-                                 control_apps = false;
-                                 shift_apps = false;
-                                 if (multi_apps)
-                                 {
-                                   multi_apps = false;
-                                 }
-                                 else
-                                 {
-                                    HIDEOTH;
-                                 }
-                               }
-
-#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
-
-                               unregister_code(KC_F21);
-                               karabiner_apps_trigger = false;
-                               if (multi_apps)
-                               {
-                                 remove_mod(gui_mod);
-                               }
-                               if (control_apps)
-                               {
-                                 remove_mod(ctl_mod);
-                                 control_apps = false;
-                               }
-                               if (shift_apps)
-                               {
-                                 remove_mod(sft_mod);
-                                 shift_apps = false;
-                               }
-
-                               if (!apps_trigger)
-                               {
-                                show_RGB_LEDs();
-                                if (multi_apps)
-                                {
-                                  multi_apps = false;
-                                }
-                               }
-
-#endif // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ###
-                               return false; break;
-
-
-//#04 #R3-L3
-      case TT_NUMB:            // Left Thumb 3
-                               // Karabiner-apps mode
-
-#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
-// leave karabiner_apps mode and return to default compiled mode: typinator_apps mode ...
-// ... if its trigger is still active, switching app modifiers OFF in this case
-
-                               unregister_code(KC_F21);
-                               karabiner_apps_trigger = false;
-
-                               if (multi_apps)
-                               {
-                                remove_mod(gui_mod);
-                               }
-
-
-                              if (control_apps)
-                              {
-                                remove_mod(ctl_mod);
-                              }
-                              if (shift_apps)
-                              {
-                                remove_mod(sft_mod);
-                              }
-
-
-                               if (!apps_trigger)
-                               {
-                                 show_RGB_LEDs();
-                                 // if (multi_apps)
-                                 // {
-                                   multi_apps = false;
-                                 // }
-
-                                 control_apps = false;
-                                 shift_apps = false;
-                               }
-
-#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
-// leave typinator_apps mode and return to default compiled mode: karabiner_apps mode ...
-// ... if its trigger is still active, switching app modifiers ON in this case
-
-                               apps_trigger = false;
-
-                               if (!karabiner_apps_trigger)
-                               {
-                                 show_RGB_LEDs();
-                                 control_apps = false;
-                                 shift_apps = false;
-
-                                 if (multi_apps)
-                                 {
-                                   multi_apps = false;
-                                 }
-                                 else
-                                 {
-                                   HIDEOTH;
-                                 }
-
-                               }// if (!karabiner_apps_trigger)
-                               else
-                               {
-                                if (multi_apps)
-                                {
-                                  add_mod(gui_mod);
-                                }
-                                else
-                                {
-                                  HIDEOTH;
-                                }
-                                register_code(KC_F21);
-
-                                if (control_apps)
-                                {
-                                  add_mod(ctl_mod);
-                                }
-                                if (shift_apps)
-                                {
-                                  add_mod(sft_mod);
-                                }
-
-                               }
-
-#endif // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ###
-
-                               return false; break;
-
-      default:
-
-#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
-
-
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-// I have added next 1 line of code while reviewing.  Maybe it's not necessary.
-               if (karabiner_apps_trigger)
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-               {
-                 return true; break;
-               }
-               // else
-               // {
-               //   if (apps_trigger)
-               //   {
-                   return false; break;
-                 // }
-               // }
-
-#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
-
-               if (apps_trigger)
-               {
-                 return false; break;
-               }
-               // else
-               // {
-                 // if (karabiner_apps_trigger)
-                 // {
-                   return true; break;
-                 // }
-               // }
-
-#endif // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ###
-
-    } // switch(keycode)
-  } // else ( if (record->event.pressed) )
 }; // bool process_record_apps(uint16_t keycode, keyrecord_t *record)
 
 
@@ -339,7 +71,7 @@ bool process_record_apps(uint16_t keycode, keyrecord_t *record) {
 
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 
-  if (apps_trigger || karabiner_apps_trigger)
+  if (apps_trigger)
   {
     case_found = true;
     return process_record_apps(keycode, record);
@@ -458,17 +190,10 @@ If you want to cancel oneshot,   call `reset_oneshot_layer()`.
                                 // else
                                 // {
 
-#if defined(DEFAULT_TYPINATOR_APPS) // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ###
-                                  apps_trigger = true;
-
-                                  if (check_mod_and_remove_it (GUI_MODS, true)) { multi_apps = true;  }
-                                  if (check_mod_and_remove_it(CTRL_MODS, true)) { control_apps = true;}
-                                  if (check_mod_and_remove_it(SHFT_MODS, true)) { shift_apps = true;  }
-
 #elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
 
-                                  register_code(KC_F21);
-                                  karabiner_apps_trigger = true;
+                                  register_code(KC_F22);
+                                  apps_trigger = true;
 
                                   if (check_mod_and_remove_it (GUI_MODS, false)) { multi_apps = true; }
 
@@ -482,173 +207,20 @@ If you want to cancel oneshot,   call `reset_oneshot_layer()`.
                                   case_found = true; return false; break;
 // //////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[# #karabiner & typinator stuff]
-//[# #r3-l3 #01]
-
-
-
-//🔥
-
-      // case MY_RESET:  if (get_mods()&CTRL_MODS)
-      //                 {
-      //                   reset_my_keyboard_function();
-      //                   return false;
-      //                 }
-
-// [FREEING UP SPACE]
-// //////////////////////////////////////////////////////////////////////////////////////////////// ###
-      // case MY_RESET:  if (ctl_mod)
-      //                 {
-      //                   reset_my_keyboard_function();
-      //                   return false;
-      //                 }
-// //////////////////////////////////////////////////////////////////////////////////////////////// ###
-// [freeing up space]
-
-//[_SYMB]
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//[_UNCOMMENT]
-      // case O_COMMENT: tap_code       (KC_SLSH);
-      //                 register_code  (KC_LSFT);
-      //                 tap_code       (KC_8);
-      //                 unregister_code(KC_LSFT);
-      //                 case_found = true; return false; break;
-
-      // case C_COMMENT: register_code  (KC_LSFT);
-      //                 tap_code       (KC_8);
-      //                 unregister_code(KC_LSFT);
-      //                 tap_code       (KC_SLSH);
-      //                 case_found = true; return false; break;
-//[_uncomment]
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-      // case CHANGE_SYMB_TO_NUMB:
-      //                 layer_off(_SYMB);
-      //                 layer_on(_NUMB);
-      //                 case_found = true; return false; break;
-//[_symb]
-
-
-
 //🔥
 //[_DALY]
       case CHANGE_DALY_TO_LEDS: 
                            layer_off(_DALY);
                            layer_on(_LEDS);
                            case_found = true; return false; break;
-//[_daly]
 
-//[_DFLT]
-// next case is not necessary because mirrored layer triggers are now accesed holding master_keys.
-// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
-      // case TH_R1_DALY_MOUS:
-      //                 // if (get_mods()&ALT_MODS)
-      //                 if (check_mod_and_remove_it(ALT_MODS, true))
-      //                 {
-      //                   layer_on(_MOUS);
-      //                 }
-      //                 else
-      //                 {
-      //                   layer_on(_DALY);
-      //                 }
-      //                 case_found = true; return false; break;
       case MO(_DALY):  case_found = true;
 
                        return true; //this line switch on [_DALY] layer automatically.
                        break; 
 
-      // case TH_R2_FVIM_SYMB:
-      //                 if (get_mods()&ALT_MODS)
-      //                 {
-      //                   layer_on(_FVIM);
-      //                 }
-      //                 else
-      //                 {
-      //                   symbols_pressed = true;
-      //                   layer_on(_SYMB);
-      //                 }
-      //                 return false;
-
-
-// next two cases are not necessary because mirrored layer triggers are now accesed holding master_keys.
-// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
-      // case TH_R2_FVIM_SYMB: // SS_BEEP_1;
-      //                 // SS_BEEP_1;
-      //                 if (check_mod_and_remove_it(ALT_MODS, true))
-      //                 {
-      //                   layer_on(_SYMB);
-      //                // symbols_pressed = true;
-      //                 }
-      //                 else
-      //                 {
-      //                   layer_on(_FVIM);
-      //                 }
-      //                 case_found = true; return false; break;
-
-      // case TH_L2_SYMB_FVIM: // SS_BEEP_1;
-      //                 // SS_BEEP_1;
-      //                 if (check_mod_and_remove_it(ALT_MODS, true))
-      //                 {
-      //                   layer_on(_FVIM);
-      //                // symbols_pressed = true;
-      //                 }
-      //                 else
-      //                 {
-      //                   layer_on(_SYMB);
-      //                 }
-      //                 case_found = true; return false; break;
-
-
-
-// #if defined(DEFAULT_TYPINATOR_APPS) // ________________________________________________________________
-//                                   apps_trigger = true;
-//                                   rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)
-
-//                                   if (check_mod_and_remove_it (GUI_MODS, true)) { multi_apps = true;  }
-//                                   if (check_mod_and_remove_it(CTRL_MODS, true)) { control_apps = true;}
-//                                   if (check_mod_and_remove_it(SHFT_MODS, true)) { shift_apps = true;  }
-// #elif defined(DEFAULT_KARABINER_APPS) // ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
-//                                   register_code(KC_F21)
-//                                   karabiner_apps_trigger = true;
-
-//                                   if (check_mod_and_remove_it (GUI_MODS, false)) { multi_apps = true; }
-// #endif                         // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
-
-
-
-
-// #if defined(DEFAULT_TYPINATOR_APPS) // 🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻🔻
-//                                   apps_trigger = true;
-//                                   rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)
-
-//                                   if (check_mod_and_remove_it (GUI_MODS, true)) { multi_apps = true;  }
-//                                   if (check_mod_and_remove_it(CTRL_MODS, true)) { control_apps = true;}
-//                                   if (check_mod_and_remove_it(SHFT_MODS, true)) { shift_apps = true;  }
-// #elif defined(DEFAULT_KARABINER_APPS) // ♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️♦️
-//                                   register_code(KC_F21)
-//                                   karabiner_apps_trigger = true;
-
-//                                   if (check_mod_and_remove_it (GUI_MODS, false)) { multi_apps = true; }
-// #endif                         // 🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺🔺
-
-
-
-
-
-
-
-
-
-
-
-//[_dflt]
-
-//[_POWR]
       case TOG_ID:   
-#if defined(RGBLIGHT_ENABLE)
+// #if defined(RGBLIGHT_ENABLE)
                       if (rgblight_config.enable && (capslock_is_active || numbers_is_active))
                       {
                         if (whole_keyboard_as_indicator)
@@ -664,7 +236,7 @@ If you want to cancel oneshot,   call `reset_oneshot_layer()`.
                         show_RGB_LEDs();                        
                       }
                       case_found = true;
-#endif
+// #endif
                       return false; break;
 
 
@@ -672,7 +244,7 @@ If you want to cancel oneshot,   call `reset_oneshot_layer()`.
 // THIS FUNCTION IS NOT GOING TO BE USED WITH 23 LEDS PER HAND
       //////////////////////////////////////////////////////////////////////////////////////////
       //                                                                                      //
-      // [PROCESS_RECORD_USER] [_POWR] KC_Q (STP_ID)                                 //
+      // [PROCESS_RECORD_USER] [_POWR] KC_Q (STP_ID)                                          //
       //                                                                                      //
       //  S T E P S   U P   W I D T H   O F   RGB   W O R K I N G   A S  I N D I C A T O R S  //
       //                                                                                      //
@@ -683,7 +255,7 @@ If you want to cancel oneshot,   call `reset_oneshot_layer()`.
       //////////////////////////////////////////////////////////////////////////////////////////
       //
       case STP_ID:
-#if defined(RGBLIGHT_ENABLE)
+// #if defined(RGBLIGHT_ENABLE)
           if ( rgblight_config.enable && !whole_keyboard_as_indicator
              && (capslock_is_active || numbers_is_active) )
           {
@@ -691,87 +263,12 @@ If you want to cancel oneshot,   call `reset_oneshot_layer()`.
             show_RGB_LEDs();
           }
           case_found = true;
-#endif
+// #endif
           return false; break;
 // this function is not going to be used with 23 leds per hand
 //[_powr]
 
 
-
-
-
-
-
-
-
-
-
-
-//🔥
-//[_POWR]
-// [FIRMWARE_SIZE]
-//   using triggered_control_mod as a bool function, we save from 38 to 66 bytes --> 28 bytes saved
-// [firmware_size]
-
-// case (holding)sleep computer / (tapping)apple menu bar: 'SL_MEN' now is implemented with tap_dance
-//...which is much more comfortable to press than 'Control+[_POWR]+Z' !!! 
-
-// (holding control)kill current app / (tapping)dock
-      case KA_DCK:    if (check_mod_and_remove_it(CTRL_MODS, true))
-                      {
-                        register_code(KC_LSFT); register_code(KC_LALT); register_code(KC_LGUI);
-                        tap_code(KC_ESC);
-                        unregister_code(KC_LGUI); unregister_code(KC_LALT); unregister_code(KC_LSFT);
-                      }
-                      else
-                      {
-                        register_code(KC_LCTL); tap_code(KC_F3); unregister_code(KC_LCTL); // DOCK BAR
-                      }
-                      case_found = true; return false; break;
-
-// (holding control)call kill app menu / (tapping)tool bar
-      case KM_TOL:    if (check_mod_and_remove_it(CTRL_MODS, true))
-                      {
-                        register_code(KC_LALT); register_code(KC_LGUI);
-                        tap_code(KC_ESC);
-                        unregister_code(KC_LGUI); unregister_code(KC_LALT);
-                      }
-                      else                      
-                      {
-                        register_code(KC_LCTL); tap_code(KC_F5); unregister_code(KC_LCTL); // TOOLS BAR
-                      }
-                      case_found = true; return false; break;
-
-// case (holding)shut down / (tapping)status bar: 'SH_STA' now is implemented through tap_dance
-//...which is much more comfortable to press than 'Control+[_POWR]+V' !!! 
-
-// (holding control)restart computer / (tapping)floating window
-      case RT_FLO:  // [FIRMWARE_SIZE]
-                      //we save unregister control and register again
-                      //if (triggered_mod(KC_C)) 
-                    // [firmware_size]
-
-                      //same 'saving control' issue as in previous case
-                      if (check_mod_and_remove_it(CTRL_MODS, false))
-                      {
-                        volumeSetToLevel(1);
-                      //keystrokes for restarting:  (guessed by try and fail method)
-                        register_code(KC_LGUI);
-                        tap_code(KC_POWER);                      
-                        unregister_code(KC_LGUI); unregister_code(KC_LCTL);
-                      }
-                      else
-                      {
-                      // [SYSTEM PREFERENCES]
-                        register_code(KC_LCTL); tap_code(KC_F6); unregister_code(KC_LCTL);
-                      // [system preferences]
-                      }
-                      case_found = true; return false; break;
-//[_POWR]
-
-
-
-//🔥
 //[_LEDS]
       case RGB_HUI: rgblight_increase_hue_noeeprom();          case_found = true; return false; break;
       case RGB_HUD: rgblight_decrease_hue_noeeprom();          case_found = true; return false; break;
@@ -856,10 +353,16 @@ ROW 3 COLORS
    // this line is responsible of the management of the presses for THE REST of the keys.
       default: case_found = false; return true; break; // Process all other keycodes normally when pressed
 
-
     }// switch (keycode)
   }// if (record->event.pressed)
   else 
+
+
+
+
+
+
+
 
 
 
@@ -937,189 +440,9 @@ ROW 3 COLORS
                                return true;
                                break;
 
-// case 'R3 release' never happens because at the beginning of process_record_user we send the focus to
-//... process_record_apps.
-// This is because we have apps_trigger or karabiner_apps_trigger set to true.
-
-
-
-// #if defined(DEFAULT_TYPINATOR_APPS) // ________________________________________________________________
-//                                {
-//                                  apps_trigger = false;
-
-//                                  if (!karabiner_apps_trigger)
-//                                  {
-//                                    show_RGB_LEDs();
-//                                    if (multi_apps)
-//                                    {
-//                                      multi_apps = false;
-//                                    }
-//                                    else
-//                                    {
-//                                      wait_ms(100);
-//                                      HIDEOTH;
-//                                    }
-//                                  }
-//                                }
-
-// #elif defined(DEFAULT_KARABINER_APPS) // ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
-//                                {
-//                                  karabiner_apps_trigger = false;
-//                                  unregister_code(KC_F21);
-
-//                                  if (!apps_trigger)
-//                                  {
-//                                    show_RGB_LEDs();
-//                                    if (multi_apps)
-//                                    {
-//                                      multi_apps = false;
-//                                      remove_mod(gui_mod);
-//                                    }
-//                                    else
-//                                    {
-//                                      // do nothing
-//                                    }
-//                                  }// if (!apps_trigger)
-//                                }
-
-// #endif                         // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
-
-
-
-// CASE TT_NUMB:
-// #if defined(DEFAULT_TYPINATOR_APPS) // ________________________________________________________________
-
-//                       if (karabiner_apps_trigger)
-//                       {
-//                         karabiner_apps_trigger = false;
-//                         unregister_code(KC_F21);
-
-//                         // remove 'multi_apps' mode
-//                         if (multi_apps)
-//                         {
-//                           remove_mod(gui_mod);
-//                         }
-
-//                         if (!apps_trigger) // if our right thumb doesn't continue holding R3
-//                         {
-//                           show_RGB_LEDs();
-//                           if (multi_apps)
-//                           {
-//                         // only if neither 'karabiner_apps_trigger' nor 'apps_trigger' are no longer working !
-//                             multi_apps = false;
-//                           }
-//                           else
-//                           {
-//                             // HIDEOTH;
-//                           }
-//                         }
-//                       }
-//                       return false;
-
-// #elif defined(DEFAULT_KARABINER_APPS) // ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
-
-//                       if (apps_trigger)
-//                       {
-//                         apps_trigger = false;
-
-//                         if (multi_apps && karabiner_apps_trigger)
-//                         {
-//                           add_mod(gui_mod);
-//                         }
-
-//                         if (!karabiner_apps_trigger)
-//                         {
-//                           show_RGB_LEDs();
-//                           if (multi_apps)
-//                           {
-//                             multi_apps = false;
-//                           }
-//                           else
-//                           {
-//                             HIDEOTH;
-//                           }
-//                         }// if (!karabiner_apps_trigger)
-
-//                       }// if (apps_trigger)
-//                       return false;
-
-// #endif                         // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-// case tt_numb:
-
-
-
-
-      // case CHANGE_SYMB_TO_NUMB:
-      //                 layer_off(_NUMB);
-      //                 if (symbols_pressed)
-      //                 {
-      //                   layer_on(_SYMB);
-      //                 }
-      //                 case_found = true; return false; break;
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
       case CHANGE_DALY_TO_LEDS: layer_off(_LEDS);
                                 case_found = true; return false; break;
-
-      case MO(_DALY): // TH_R1_DALY_MOUS:
-                      // if (state_number == _MOUS)
-                      // {
-                      //    layer_off(_MOUS);
-                      // }
-                      // else
-                      // if (state_number == _DALY)
-                      // {
-                        // remove GUI modifier when coming from _DALY changing apps with CMD+TAB; SHIFT+CMD+TAB
-                        if (changing_apps)
-                        {
-                          changing_apps = false;
-                          unregister_code(KC_LGUI);
-                          // triggered_gui();
-                          // remove_mod(gui_mod);
-                        }
-                        // layer_off(_DALY);
-                      // }
-                      case_found = true; 
-
-                      return true; // this 'return true' switch [_DALY] off automatically
-                      break;
-
-
-// next two cases are not necessary because mirrored layer triggers are now accesed holding master_keys.
-// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
-        // case TH_R2_FVIM_SYMB: 
-        // case TH_L2_SYMB_FVIM: // if else without parenthesis
-        //                       if (state_number == _FVIM)
-        //                         layer_off(_FVIM);
-        //                       else
-        //                    // symbols_pressed = false;
-        //                       if (state_number == _SYMB)
-        //                         layer_off(_SYMB);
-
-        //                       case_found = true; return false; break;
-
-// next case is not necessary because mirrored layer triggers are now accesed holding master_keys.
-// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
-      // case TH_R4_POWR_LEDS:
-      //                 if (state_number == _POWR)
-      //                 {
-      //                    layer_off(_POWR);
-      //                 }
-      //                 else
-      //                 if (state_number == _LEDS)
-      //                 {
-      //                   layer_off(_LEDS);
-      //                 }
-      //                 case_found = true; return false; break;
-
-
-
-
 
 
 

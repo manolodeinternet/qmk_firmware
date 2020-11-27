@@ -375,7 +375,7 @@ void L_APPS_finished (qk_tap_dance_state_t *state, void *user_data) {
                       }
                       break;
                       
-    case SINGLE_HOLD: register_code(KC_F21);
+    case SINGLE_HOLD: register_code(KC_F22);
                       break;
   }
 }
@@ -385,7 +385,7 @@ void L_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
 
     case SINGLE_TAP:  break;
 
-    case SINGLE_HOLD: unregister_code(KC_F21);
+    case SINGLE_HOLD: unregister_code(KC_F22);
                       break;
   }
   L_APPS_tap_state.state = 0;
@@ -432,7 +432,7 @@ void R_APPS_finished (qk_tap_dance_state_t *state, void *user_data) {
                       }
                       break;
 
-    case SINGLE_HOLD: register_code(KC_F21);
+    case SINGLE_HOLD: register_code(KC_F22);
                       break;
   }
 }
@@ -442,7 +442,7 @@ void R_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
 
     case SINGLE_TAP:  break;
 
-    case SINGLE_HOLD: unregister_code(KC_F21);
+    case SINGLE_HOLD: unregister_code(KC_F22);
                       break;
   }
   R_APPS_tap_state.state = 0;

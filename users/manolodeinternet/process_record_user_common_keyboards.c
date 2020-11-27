@@ -213,47 +213,6 @@ case _DVIM_BS:
 //[_LEDS]
 #if defined(COMPREHENSIVE_30_LAYOUT)
 
-      case APP_Q_SNOTE: callApp("Simplenote.app");            return false; break; // simple note
-      case APP_W_TWTTR: callApp("Twitter.app");               return false; break; // t W itter
-      case APP_E_EVERN: callApp("Evernote.app");              return false; break; // E vernote
-      case APP_R_APSTO: callApp("App Store.app");             return false; break; // app sto R e
-      case APP_T_TERMI: callApp("Terminal.app");              return false; break; // T erminal
-
-      case APP_Y_TYPIN: callApp("Typinator.app");             return false; break; // t Y pinator
-      case APP_U_UROOM: callApp("URoom.app");                 return false; break; // U room
-      case APP_I_TEDIT: callApp("TextEdit.app");              return false; break; // textEd I t
-      case APP_O_OMNIF: callApp("OmniFocus.app");             return false; break; // O mnifocus
-      case APP_P_SPREF: callApp("System Preferences.app");    return false; break; // system P references
-
-      case APP_A_SCRPT: callApp("Script Editor.app");         return false; break; // A pple script
-      case APP_S_SAFAR: callApp("Safari.app");                return false; break; // S afari _delay_ms50
-      case APP_D_D_ONE: callApp("Day One Classic.app");       return false; break; // D ay one Classic
-      case APP_F_FINDE: callApp("Finder.app");                return false; break; // F inder
-      case APP_G_CHRME: callApp("Google Chrome.app");         return false; break; // G oogle chrome
-
-      case APP_H_SKTCH: callApp("Sketch.app");                return false; break; // sketc H
-      case APP_J_SUBLI: callApp("Sublime Text.app");          return false; break; // s U blime Text
-      case APP_K_KRBNR: callApp("Karabiner-Elements.app");    return false; break; // K arabiner Elements
-      case APP_L_CLNDR: callApp("Calendar.app");              return false; break; // Calendar
-      case APPSP_EMPTY: callApp("");                          return false; break; //
-
-      case APP_Z_STUDI: callApp("Studies.app");               return false; break; // Studies
-      case APP_X_XCODE: callApp("Xcode.app");                 return false; break; // Xcode
-      case APP_C_CALCU: callApp("Calculator.app");            return false; break; // Calculator
-      case APP_V_KVIEW: callApp("Karabiner-EventViewer.app"); return false; break; // krbnr eVent Viewr
-      case APP_B_BOOKS: callApp("Books.app");                 return false; break; // Books
-
-      case APP_N_NOTES: callApp("Notes.app");                 return false; break;  // Notes
-   // Next 2 lines have been copied & pasted from a command line C program in xcode who run perfectly !
-   // Any of them works properly for opening an app from Terminal !  But they don' work under QMK code !
-   //   system("open //Applications//Notes.app");
-   //   system("osascript -e 'launch application \"Notes\"' -e 'activate application \"Notes\"' -e end");
-      case APP_M_MAIL:  callApp("Mail");                      return false; break; // Mail
-      case APP_ES_KEYN: callApp("Keynote");                   return false; break; // Keynote
-      case APP_BS_PAGE: callApp("Pages");                     return false; break; // Pages
-      case APP_EN_NUMB: callApp("Numbers");                   return false; break; // Numbers
-
-
       case BLIT_OFF: gherkinBacklightLevel =  0; backlight_level(gherkinBacklightLevel); return false;
       case BLIT_01:  gherkinBacklightLevel =  1; backlight_level(gherkinBacklightLevel); return false;
       case BLIT_02:  gherkinBacklightLevel =  2; backlight_level(gherkinBacklightLevel); return false;
@@ -287,19 +246,19 @@ case _DVIM_BS:
 //[_leds]
 
 //[_DALY]
-      case REWIND:    register_code(KC_F24); // asigned to 'fn' in karabiner-elements
+      case REWIND:    register_code(KC_F22); // asigned to 'fn' in karabiner-elements
                            tap_code(KC_F7);       // apple rewind default key in 'magic keyboard'
-                    unregister_code(KC_F24);
+                    unregister_code(KC_F22);
                       return false;
 
-      case PLAY_PAUSE:register_code(KC_F24); // asigned to 'fn' in karabiner-elements
+      case PLAY_PAUSE:register_code(KC_F22); // asigned to 'fn' in karabiner-elements
                            tap_code(KC_F8);       // apple play/pause default key in 'magic keyboard'
-                    unregister_code(KC_F24);
+                    unregister_code(KC_F22);
                       return false;
 
-      case FORWARD:   register_code(KC_F24); // asigned to 'fn' in karabiner-elements
+      case FORWARD:   register_code(KC_F22); // asigned to 'fn' in karabiner-elements
                            tap_code(KC_F9);       // apple forward default key in 'magic keyboard'
-                    unregister_code(KC_F24);
+                    unregister_code(KC_F22);
                       return false;
 
 
@@ -320,19 +279,6 @@ case _DVIM_BS:
 // #endif
 //[_daly]
 
-// when we release [_DALY], we check if we were changing apps and remove command key
-// this paragraph is located lower in this file
-//       case LT(_DALY,KC_Y):
-//       case LT(_DALY,KC_B):
-// //    case MO(_DALY):// remove GUI modifier when coming from _DALY changing apps with CMD+TAB; SHIFT+CMD+TAB
-//                         if (changing_apps)
-//                         {
-//                           changing_apps = false;
-//                           unregister_code(KC_LGUI);
-//                         }
-
-//                       return true; // this 'return true' switch [_DALY] off automatically
-//                       break;
 
 
 //🔥
@@ -462,31 +408,31 @@ case _DVIM_BS:
    // this case is responsible of the management of the presses for THE REST of the keys.
       default: return true; // Process all other keycodes normally when pressed
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }// switch (keycode)
   }// if (record->event pressed)
   else 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   {
 //  Do something else when release
 
@@ -703,6 +649,10 @@ case _DVIM_BS:
 //_QWER LAYER
       case LT(_DALY,KC_X):
       case LT(_DALY,KC_BSPC):
+
+// MINI DACTYL THUMBS
+      case MO(_DALY): // TH_R1_DALY_MOUS
+
 //    case MO(_DALY):// remove GUI modifier when coming from _DALY changing apps with CMD+TAB; SHIFT+CMD+TAB
                         if (changing_apps)
                         {

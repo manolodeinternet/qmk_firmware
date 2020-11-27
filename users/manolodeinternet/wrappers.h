@@ -346,7 +346,7 @@ acronym dictionary
 
 #define      ____QWER__R1___             KC_Y,         KC_U,         KC_I,         KC_O,          KC_P
 #define      ____QWER__R2___             KC_H, LGUI_T(KC_J), LALT_T(KC_K),  LSFT_T(KC_L),LCTL_T(KC_SPC) // [BUG] KC_SPC instead of KC_J
-#define      ____QWER__R3___             KC_N,         KC_M,       KC_ENT,      KC_BSPC,        KC_ESC   // [bug]
+#define      ____QWER__R3___             KC_N,         KC_M,       KC_ENT,      KC_BSPC,        KC_ESC  // BSPC_DEL // [bug]
 //#elif defined(SIMPLE_30_LAYOUT)
 #endif
 //
@@ -788,8 +788,8 @@ acronym dictionary
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |  LCtl  |  LAlt  |  LSft  |  LGui  |        |        |        |  LGui  |  LSft  |  LAlt  |  LCtl  |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |KAR-APPS|   fn   |        |        |        |        |        |        |        |   fn   |KAR-APPS|
- * | trigger| (Krbnr)|        |        |        |        |        |        |        | (Krbnr)| trigger|
+ * |   fn   |KAR-APPS|        |        |        |        |        |        |        |KAR-APPS|   fn   |
+ * | (Krbnr)| trigger|        |        |        |        |        |        |        | trigger| (Krbnr)|
  * |   F21  |   F22  |   F23  |   F24  |        |        |        |        |        |   F22  |   F21  |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
@@ -811,7 +811,7 @@ acronym dictionary
 
 #define      __FUNCTIONS_R1__      KC_F6,           KC_F7,          KC_F8,         KC_F9,       KC_F10
 #define      __FUNCTIONS_R2__    (KC_F16), LGUI_T(KC_F17), LSFT_T(KC_F18),LALT_T(KC_F19),LCTL_T(KC_F20)
-#define      __FUNCTIONS_R3__     XXXXXXX,         KC_F24,        XXXXXXX,       XXXXXXX,       KC_F21
+#define      __FUNCTIONS_R3__     XXXXXXX,        XXXXXXX,        XXXXXXX,        KC_F22,       KC_F21
 
 #if defined(MINI_DACTYL_THUMBS)
 /* [_FUNC] = LAYER 09 : FUNCTIONS LAYER
@@ -839,7 +839,7 @@ acronym dictionary
 #define _FUNC_LTHMB_RW2_             _______, _______,   _______
 
 #define      _FUNC_RTHMB_RW1_                                                MO(_POWR), _______
-#define      _FUNC_RTHMB_RW2_                                                KC_F21,    KC_F22, _______
+#define      _FUNC_RTHMB_RW2_                                                KC_F22,    KC_F21, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif

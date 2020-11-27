@@ -134,9 +134,10 @@ bool disabled_caps_before_accent;
 bool capslock_is_active;
 
 bool numbers_is_active;   // flag for _NUMB layer
+bool space_or_symb_pressed; // flag for choosing between space, enter, escape or _SYMB
 
     uint16_t lt12_timer;  // for using TT_NUMB; my own implementation of TT(layer): Layer Tap/Toggle
-    uint16_t lt13_timer;  // for using FVIM_SPC_ENT_ESC
+    uint16_t lt13_timer;  // for using _SYM_SPC
 
 uint8_t ctl_mod;
 uint8_t alt_mod;
@@ -172,7 +173,7 @@ bool shift_apps;
 
 /* Define layer names
 enum userspace_layers {
-    _QWERTY  = 0,
+    _QWER  = 0,
     _NUMLOCK = 0,
     _COLEMAK,
     _DVORAK,
