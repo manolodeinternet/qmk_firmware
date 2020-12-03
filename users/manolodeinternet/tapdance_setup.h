@@ -51,21 +51,9 @@
 enum tap_dance_keycodes {
 
   // COMMON TAPDANCE KEYCODES ACCESSIBLE FROM ALL KEYBOARDS
-  
-  // TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB LAYER 02
-   R_DOEU  // dolar & euro
-  ,B_EQPE  // equal & percent
-  // tap dance keycodes accessible from _numb layer 02
-
-  // TAP DANCE KEYCODES ACCESSIBLE FROM _FVIM LAYER 03
-  // (i.e. KC_U: *'begin of line'/**'begin of paragraph')
-  ,FVIM_uU ,FVIM_pP
-  ,DVIM_uU ,DVIM_pP
-  // tap dance keycodes accessible from _fvim layer 03
-
 
   // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
-  ,TG_QWE  // toggle _QWER layer ON/OFF 
+   TG_QWE  // toggle _QWER layer ON/OFF 
   ,LCKLOG  // lock screen / (on hold) logout user session
   ,HRESET  // on hold RESET keyboard
 
@@ -93,32 +81,6 @@ enum tap_dance_keycodes {
     // TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB LAYER 02
     ,NUMBOF  //   return to *GHKN layer (gherkin default layer)  // ... percent
     ,SLNUMB  //   return to *GHKN layer (gherkin default layer)  // ... slash
-
-    // TAP DANCE KEYCODES ACCESSIBLE FROM _SYMB  LAYER 09
-    ,V_RACI  // right angle bracket & circumflex accent
-    //  ,A_GRAV  // grave & tilde         //tilde        accessible while holding SHIFT key !
-    //  ,S_QUOT  // quote & double quote  //double quote accessible while holding SHIFT key !
-    ,Z_EXCL  // exclamation mark: open & close
-    ,TD_EXC
-    ,TD_QUE  
-    ,X_QUES  // question    mark: open & close
-
-    // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
-    /*
-    ,RC_RWND // right control / rewind       // KC_F7
-    ,RA_PLAY // right alt     / play/pause   // KC_SPC
-    ,RG_FRWD // right gui     / forward      // KC_F9
-    */
-    // [ADVICE]
-    // ,BCKLIT // accessing _BLIT layer from tap dance into _POWR layer
-               // ...this way we don't waste a layer from being accesible from Default layer,
-               // ...remember that you only can access 16 layer through LT(lyr, key) and LM(layer, mod)
-    // [advice]    
-    // tap dance keycodes accessible from _powr layer 12
-
-    // TAP DANCE KEYCODES ACCESSIBLE FROM _FVIM LAYER 03
-    ,FVIM_iI ,FVIM_oO
-    // tap dance keycodes accessible from _fvim layer 03
       
 //#if defined(COMPREHENSIVE_30_LAYOUT)
 #elif defined(SIMPLE_30_LAYOUT)
@@ -256,14 +218,30 @@ void RA_INCO_reset    (qk_tap_dance_state_t *state, void *user_data);
 //        ** BEGINING OF PARAGRAPH                                                      //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void FVIM_uU_finished (qk_tap_dance_state_t *state, void *user_data);
-void FVIM_uU_reset    (qk_tap_dance_state_t *state, void *user_data);
+// void FVIM_uU_finished (qk_tap_dance_state_t *state, void *user_data);
+// void FVIM_uU_reset    (qk_tap_dance_state_t *state, void *user_data);
 //                                                                                      //
 // [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
 //                                                                                      //
 //  b e g i n n i n g   o f   l i n e    /    p a r a g r a p h                         //
 //////////////////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [ _FVIM ] KC_U (FVIM_uU)                                                  //
+//                                                                                      //
+//  B E G I N N I N G   O F   L I N E    /    P A R A G R A P H                         //
+//                                                                                      //
+//  KC_U:  * BEGINING OF LINE                                                           //
+//        ** BEGINING OF PARAGRAPH                                                      //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+// void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
+//                                                                                      //
+//  b e g i n n i n g   o f   l i n e    /    p a r a g r a p h                         //
+//////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -275,17 +253,17 @@ void FVIM_uU_reset    (qk_tap_dance_state_t *state, void *user_data);
 //        ** END OF PARAGRAPH                                                           //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void FVIM_pP_finished (qk_tap_dance_state_t *state, void *user_data);
-void FVIM_pP_reset    (qk_tap_dance_state_t *state, void *user_data);
+// void FVIM_pP_finished (qk_tap_dance_state_t *state, void *user_data);
+// void FVIM_pP_reset    (qk_tap_dance_state_t *state, void *user_data);
 
 
 
-void FVIM_iI_finished (qk_tap_dance_state_t *state, void *user_data);
-void FVIM_iI_reset    (qk_tap_dance_state_t *state, void *user_data);
+// void FVIM_iI_finished (qk_tap_dance_state_t *state, void *user_data);
+// void FVIM_iI_reset    (qk_tap_dance_state_t *state, void *user_data);
 
 
-void FVIM_oO_finished (qk_tap_dance_state_t *state, void *user_data);
-void FVIM_oO_reset    (qk_tap_dance_state_t *state, void *user_data);
+// void FVIM_oO_finished (qk_tap_dance_state_t *state, void *user_data);
+// void FVIM_oO_reset    (qk_tap_dance_state_t *state, void *user_data);
 
 
 
@@ -306,7 +284,7 @@ void FVIM_oO_reset    (qk_tap_dance_state_t *state, void *user_data);
 //        ** DELETE TO BEGINNING OF PARAGRAPH                                           //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void DVIM_uU_function (qk_tap_dance_state_t *state, void *user_data);
+// void DVIM_uU_function (qk_tap_dance_state_t *state, void *user_data);
 //                                                                                      //
 // [tapdance] [ _dvim ] kc_u (dvim_uu)                                                  //
 //                                                                                      //
@@ -324,7 +302,7 @@ void DVIM_uU_function (qk_tap_dance_state_t *state, void *user_data);
 //        ** DELETE TO END OF PARAGRAPH                                                 //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data);
+// void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data);
 //                                                                                      //
 // [tapdance] [ _dvim ] kc_p (dvim_pp)                                                  //
 //                                                                                      //
@@ -390,6 +368,7 @@ void R_APPS_reset (qk_tap_dance_state_t *state, void *user_data);
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 //
+#if defined(SIMPLE_30_LAYOUT)
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [TAPDANCE] [_DFLT] THUMB_L1 (DVIM_Del)                                               //
@@ -409,6 +388,8 @@ void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data);
 //                                                                                      //
 //  d v i m    l a y e r    /    b a c k s p a c e                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
+//#if defined(SIMPLE_30_LAYOUT)
+#endif
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -550,47 +531,7 @@ void RSTT_F_reset (qk_tap_dance_state_t *state, void *user_data);
 void HRESET_finished (qk_tap_dance_state_t *state, void *user_data);
 void HRESET_reset (qk_tap_dance_state_t *state, void *user_data);
 //
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//               T A P   D A N C E   F O R  -  S Y M B O L S  -  L A Y E R S            //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_SYMB] KC_O (TD_EXC)                                                     //
-//                                                                                      //
-//  E X C L A M A T I O N   M A R K    /    O P E N   E X C L A M A T I O N   M A R K   //
-//                                                                                      //
-//  KC_B:  *  EXCLAMATION MARK,                                                         //
-//        **  OPEN EXCLAMATION MARK                                                     //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-void TD_EXC_finished (qk_tap_dance_state_t *state, void *user_data);
-void TD_EXC_reset (qk_tap_dance_state_t *state, void *user_data);
-//                                                                                      //
-// [tapdance] [_symb] kc_o (td_exc)                                                     //
-//                                                                                      //
-//  e x c l a m a t i o n   m a r k    /    o p e n   e x c l a m a t i o n   m a r k   //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_SYMB] KC_P (TD_QUE)                                                     //
-//                                                                                      //
-//  E X C L A M A T I O N   M A R K    /    O P E N   E X C L A M A T I O N   M A R K   //
-//                                                                                      //
-//  KC_B:  *  EXCLAMATION MARK,                                                         //
-//        **  OPEN EXCLAMATION MARK                                                     //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-void TD_QUE_finished (qk_tap_dance_state_t *state, void *user_data);
-void TD_QUE_reset (qk_tap_dance_state_t *state, void *user_data);
-//                                                                                      //
-// [tapdance] [_symb] kc_p (td_que)                                                     //
-//                                                                                      //
-//  e x c l a m a t i o n   m a r k    /    o p e n   e x c l a m a t i o n   m a r k   //
-//////////////////////////////////////////////////////////////////////////////////////////
+
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //

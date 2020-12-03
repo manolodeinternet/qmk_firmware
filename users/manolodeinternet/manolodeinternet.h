@@ -92,9 +92,20 @@ users/manolodeinternet/tapdance_setup.h:9:8: note: originally defined here
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                   //
+// DEFINING DEFAULT KEYCODES                                                                         //
+//                                                                                                   //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                   //
+#define APPS_TRIGGER KC_F22                                                                          //
+//                                                                                                   //
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                   //
 // DEFINING ABREVIATED MULTIMEDIA KEYCODES                                                           //
 //                                                                                                   //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                   //
 #define KC_FF   KC_MEDIA_FAST_FORWARD // these keycodes skip within the current track when held,
 #define KC_RW   KC_MEDIA_REWIND       // but skip the entire track when tapped.
 //                                                                                                   //

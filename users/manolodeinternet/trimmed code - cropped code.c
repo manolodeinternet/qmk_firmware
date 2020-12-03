@@ -1,3 +1,6 @@
+file: [tapdance_setup.c]
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 //             T A P   D A N C E   F O R    [ _ P O W R ]    L A Y E R                  //
@@ -102,6 +105,7 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
+file: [wrappers.h]
 
 
 #if defined(COMPREHENSIVE_30_LAYOUT)
@@ -156,6 +160,16 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
+
+
+
+
+
+
+
+
+
+file: gherkin/[keymap.c]
 
 
       case APP_Q_SNOTE: callApp("Simplenote.app");            return false; break; // simple note
@@ -226,6 +240,7 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
+file: [process_record_keymap.c]
 
 
 // when we release [_DALY], we check if we were changing apps and remove command key
@@ -927,6 +942,42 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
+// left thumbs
+      // case OSL_DALY:
+      //             // MANAGEMENT OF OSL as part of a macro or tap dance routine:
+      //             // set_oneshot_layer(LAYER, ONESHOT_START)              on key down
+      //             // clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED) on key up
+      //             // reset_oneshot_layer() if you want to cancel the oneshot
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_DALY, ONESHOT_START);
+      //                return false; break;
+      // case OSL_FVIM:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_FVIM, ONESHOT_START);
+      //                return false; break;
+      // case OSL_POWR:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_POWR, ONESHOT_START);
+      //                return false; break;
+      // case OSL_ACCN:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_ACCN, ONESHOT_START);
+      //                return false; break;
+
+// right thumbs
+      //  case OSL_SYMB:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_SYMB, ONESHOT_START);
+      //                return false; break;
+      // case OSL_NUMB:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_NUMB, ONESHOT_START);
+      //                return false; break;
+      // case OSL_MOUS:
+      //                // reset_oneshot_layer();
+      //                set_oneshot_layer(_MOUS, ONESHOT_START);
+      //                return false; break;
+                     
 
 
 
@@ -934,7 +985,146 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
-// process_record_user
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥  remove next 6 lines of code 
+
+// next if statement is not necessary because mirrored layer triggers are now accesed holding master_keys.
+// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
+                                // if (check_mod_and_remove_it(ALT_MODS, true))
+                                // {
+                                //    layer_on(_NUMB);
+                                // }
+                                // else
+                                // {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+...WHEN RELEASED...
+    // [FIRMWARE_SIZE]
+        // 746-674= 72 bytes saved using TT(layer) instead of my implementation
+        // ... but RGB layer color changes too slow.  MY way is instantly changed !
+        // Emulating TT(layer), but better:
+    // [firmware_size]
+
+
+      // case OSL_DALY:
+      //             // MANAGEMENT OF OSL as part of a macro or tap dance routine:
+      //             // set_oneshot_layer(LAYER, ONESHOT_START)              on key down
+      //             // clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED) on key up
+      //             // reset_oneshot_layer() if you want to cancel the oneshot
+      // case OSL_FVIM:
+      // case OSL_POWR:
+      // case OSL_ACCN:
+
+      // case OSL_SYMB:
+      // case OSL_NUMB:
+      // case OSL_MOUS:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+file: [process_record_user_common_keyboards]
+
 
 //🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 [FIXME]
@@ -1003,7 +1193,305 @@ void V1_LAST_reset (qk_tap_dance_state_t *state, void *user_data) {
 
 
 
+// __attribute__ ((weak))
+// bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
+//   return false;
+// }
 
 
 
 
+
+
+
+
+  //    bool keymap_bool = false;
+  //     bool case_found = false;
+  // bool returned_value = false;
+
+  // [\DELETEME]
+  // if (record->event.pressed)
+  // {
+  //   sft_mod   = get_mods()&SHFT_MODS;
+  //   ctl_mod = get_mods()&CTRL_MODS;
+  //   alt_mod  = get_mods()&ALT_MODS;
+  //   gui_mod     = get_mods()&GUI_MODS;
+  // }
+  // [deleteme]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // if (apps_trigger || karabiner_apps_trigger)
+  // {
+  //   return process_record_apps(keycode, record);
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// if we are no in apps_trigger mode: we can be in karabiner_apps_trigger mode or in _DFLT layer mode
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//[DELETEME]
+// 🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞
+      case BSPC_DEL:      if (check_mod_and_remove_it(SHFT_MODS, false))
+                            {
+                              register_code(KC_DEL);
+                            }
+                            else
+                            {
+                              register_code(KC_BSPC);
+                            }
+#if defined(RGB_LEDS)
+  rgblight_sethsv_noeeprom(HSV_MY_RED);
+#endif
+                            return false; break;
+// 🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞
+//[deleteme]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// clear_keyboard();          This will clear all mods and keys currently pressed.
+// clear_mods();              This will clear all mods currently pressed.
+// clear_keyboard_but_mods(); This will clear all keys besides the mods currently pressed.
+                      // remove_mod(SHFT_MODS);
+                      // remove_mod(CTRL_MODS);
+                      // remove_mod(ALT_MODS);
+                      // remove_mod(GUI_MODS);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      
+//       case MY_RESET:
+
+//       case TOG_ID:
+//       case STP_ID:
+
+//       case SL_MEN:
+//       case KA_DCK:
+//       case KM_TOL:
+//       case SH_STA:
+//       case RT_FLO:
+
+//       case VOL_1:
+//       case VOL_8:
+//       case BRIGHT_1:
+
+// // _FVIM
+//    // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
+//    // ... except for the 'H' key:
+//       case FVIM_H:
+
+//       case FVIM_M:
+//       case FVIM_ES:
+//       case FVIM_BS:
+//       case FVIM_EN:
+//    // _fvim
+
+// // _DVIM
+//       case DVIM_Y:
+//       //   DVIM_uU is tap_dance
+//       case DVIM_I:
+//       case DVIM_O:
+//       //   DVIM_pP is tap_dance
+
+//       case DVIM_H:
+//       case DVIM_J:
+//       case DVIM_K:
+//       case DVIM_L:
+//       case DVIM_SP:
+
+//       case DVIM_M:
+//       case DVIM_ES:
+//       case DVIM_BS:
+//       case DVIM_EN: 
+
+
+// select _AVIM
+//            case AVIM_Y:
+//            case AVIM_N:
+// the rest of the keys are combination of _FVIM + SHIFT key            
+
+
+// // _CVIM
+//       case CVIM_Y:
+//       case CVIM_U:
+//       case CVIM_I:
+//       case CVIM_O:
+//       case CVIM_P:
+
+// //    case CVIM_H:
+//       case CVIM_J:
+//       case CVIM_K:
+//       case CVIM_L:
+//       case CVIM_SP:
+
+//       case CVIM_N:
+//       case CVIM_M:
+//       case CVIM_ES:
+//       case CVIM_BS:
+//       case CVIM_EN:
+
+// // _XVIM
+//       case XVIM_Y:
+//       case XVIM_U:
+//       case XVIM_I:
+//       case XVIM_O:
+//       case XVIM_P:
+
+//       case XVIM_H:
+//       case XVIM_J:
+//       case XVIM_K:
+//       case XVIM_L:
+//       case XVIM_SP:
+
+//       case XVIM_N:
+//       case XVIM_M:
+//       case XVIM_ES:
+//       case XVIM_BS:
+//       case XVIM_EN:
+
+
+// // [_LEDS]
+//       case SAV_COL:
+//       case GET_HSV:
+//       case RGB_TOG: return false; // Skip all further processing of ALL these keys when released
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//[FIXME]
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+// UPDATE TO CURRENT LAYOUT

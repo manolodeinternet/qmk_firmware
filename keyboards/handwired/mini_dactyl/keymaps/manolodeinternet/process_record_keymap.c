@@ -93,43 +93,6 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
                     layer_invert(_NUMB);
                     case_found = true; return false; break;
 
-// left thumbs
-      // case OSL_DALY:
-      //             // MANAGEMENT OF OSL as part of a macro or tap dance routine:
-      //             // set_oneshot_layer(LAYER, ONESHOT_START)              on key down
-      //             // clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED) on key up
-      //             // reset_oneshot_layer() if you want to cancel the oneshot
-      //                // reset_oneshot_layer();
-      //                set_oneshot_layer(_DALY, ONESHOT_START);
-      //                return false; break;
-      // case OSL_FVIM:
-      //                // reset_oneshot_layer();
-      //                set_oneshot_layer(_FVIM, ONESHOT_START);
-      //                return false; break;
-      // case OSL_POWR:
-      //                // reset_oneshot_layer();
-      //                set_oneshot_layer(_POWR, ONESHOT_START);
-      //                return false; break;
-      // case OSL_ACCN:
-      //                // reset_oneshot_layer();
-      //                set_oneshot_layer(_ACCN, ONESHOT_START);
-      //                return false; break;
-
-// right thumbs
-      //  case OSL_SYMB:
-      //                // reset_oneshot_layer();
-      //                set_oneshot_layer(_SYMB, ONESHOT_START);
-      //                return false; break;
-      // case OSL_NUMB:
-      //                // reset_oneshot_layer();
-      //                set_oneshot_layer(_NUMB, ONESHOT_START);
-      //                return false; break;
-      // case OSL_MOUS:
-      //                // reset_oneshot_layer();
-      //                set_oneshot_layer(_MOUS, ONESHOT_START);
-      //                return false; break;
-                     
-
        case OSL(_XVIM): clear_oneshot_layer_state(ONESHOT_PRESSED);
                         reset_oneshot_layer();
                         layer_clear();
@@ -164,7 +127,7 @@ If you want to cancel oneshot,   call `reset_oneshot_layer()`.
 //[_dflt]
 
 
-//[# #KARABINER & TYPINATOR STUFF]
+//[# _APPS STUFF]
 //[# #R3-L3 #01]
 
 //#06 #R3-L3
@@ -177,20 +140,8 @@ If you want to cancel oneshot,   call `reset_oneshot_layer()`.
                   // set_oneshot_layer(LAYER, ONESHOT_START)              on key down
                   // clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED) on key up
                   // reset_oneshot_layer() if you want to cancel the oneshot
-                     // reset_oneshot_layer();
 
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥  remove next 6 lines of code 
 
-// next if statement is not necessary because mirrored layer triggers are now accesed holding master_keys.
-// master_key is R5(_ACCN) at the right side and L5(_MOUS) at the left side 
-                                // if (check_mod_and_remove_it(ALT_MODS, true))
-                                // {
-                                //    layer_on(_NUMB);
-                                // }
-                                // else
-                                // {
-
-#elif defined(DEFAULT_KARABINER_APPS) // ---------------------------------------------------------- ###
 
                                   register_code(KC_F22);
                                   apps_trigger = true;
@@ -199,8 +150,6 @@ If you want to cancel oneshot,   call `reset_oneshot_layer()`.
 
                                   if (check_mod_and_remove_it(CTRL_MODS, false)) { control_apps = true;}
                                   if (check_mod_and_remove_it(SHFT_MODS, false)) { shift_apps = true;  }
-
-#endif // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ###
 
                                   rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)
                                 // }
@@ -378,25 +327,7 @@ ROW 3 COLORS
 
     switch(keycode)
     {
-    // [FIRMWARE_SIZE]
-        // 746-674= 72 bytes saved using TT(layer) instead of my implementation
-        // ... but RGB layer color changes too slow.  MY way is instantly changed !
-        // Emulating TT(layer), but better:
-    // [firmware_size]
 
-
-      // case OSL_DALY:
-      //             // MANAGEMENT OF OSL as part of a macro or tap dance routine:
-      //             // set_oneshot_layer(LAYER, ONESHOT_START)              on key down
-      //             // clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED) on key up
-      //             // reset_oneshot_layer() if you want to cancel the oneshot
-      // case OSL_FVIM:
-      // case OSL_POWR:
-      // case OSL_ACCN:
-
-      // case OSL_SYMB:
-      // case OSL_NUMB:
-      // case OSL_MOUS:
       case OSL_LEDS: 
                      clear_oneshot_layer_state(ONESHOT_PRESSED);
                      // reset_oneshot_layer();

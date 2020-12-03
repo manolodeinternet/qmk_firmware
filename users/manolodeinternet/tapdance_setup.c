@@ -124,49 +124,50 @@ int cur_dance (qk_tap_dance_state_t *state) {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
+// //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //                                                                                      //
+// //               T A P   D A N C E   F O R  -  V   I   M  -  L A Y E R S                //
+// //                                                                                      //
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //                                                                                      //
+// // [TAPDANCE] [ _FVIM ] KC_U (FVIM_uU)                                                  //
+// //                                                                                      //
+// //  B E G I N N I N G   O F   L I N E    /    P A R A G R A P H                         //
+// //                                                                                      //
+// //  KC_U:  * BEGINING OF LINE                                                           //
+// //        ** BEGINING OF PARAGRAPH                                                      //
+// //                                                                                      //
+// //////////////////////////////////////////////////////////////////////////////////////////
+// //instantalize an instance of 'tap' for the 'FVIM_uU' tap dance.
+// static tap FVIM_uU_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
+
+// void FVIM_uU_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   FVIM_uU_tap_state.state = cur_dance(state);
+//   switch (FVIM_uU_tap_state.state) {
+//     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_LEFT);
+//                           unregister_code(KC_LEFT); unregister_code(KC_LGUI); break;
+
+//     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_UP);
+//                           unregister_code(KC_UP);   unregister_code(KC_LALT); break;
+//   }
+// }
+// void FVIM_uU_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (FVIM_uU_tap_state.state) {
+//   }
+//   FVIM_uU_tap_state.state = 0;
+// }
+// //                                                                                      //
+// // [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
+// //                                                                                      //
+// //  b e g i n n i n g   o f   l i n e    /    p a r a g r a p h                         //
+// //////////////////////////////////////////////////////////////////////////////////////////
 //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//               T A P   D A N C E   F O R  -  V   I   M  -  L A Y E R S                //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [ _FVIM ] KC_U (FVIM_uU)                                                  //
-//                                                                                      //
-//  B E G I N N I N G   O F   L I N E    /    P A R A G R A P H                         //
-//                                                                                      //
-//  KC_U:  * BEGINING OF LINE                                                           //
-//        ** BEGINING OF PARAGRAPH                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'FVIM_uU' tap dance.
-static tap FVIM_uU_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
-
-void FVIM_uU_finished (qk_tap_dance_state_t *state, void *user_data) {
-  FVIM_uU_tap_state.state = cur_dance(state);
-  switch (FVIM_uU_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_LEFT);
-                          unregister_code(KC_LEFT); unregister_code(KC_LGUI); break;
-
-    case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_UP);
-                          unregister_code(KC_UP);   unregister_code(KC_LALT); break;
-  }
-}
-void FVIM_uU_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (FVIM_uU_tap_state.state) {
-  }
-  FVIM_uU_tap_state.state = 0;
-}
-//                                                                                      //
-// [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
-//                                                                                      //
-//  b e g i n n i n g   o f   l i n e    /    p a r a g r a p h                         //
-//////////////////////////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -180,30 +181,105 @@ void FVIM_uU_reset (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'FVIM_pP' tap dance.
-static tap FVIM_pP_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+// static tap FVIM_pP_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
 
-void FVIM_pP_finished (qk_tap_dance_state_t *state, void *user_data) {
-  FVIM_pP_tap_state.state = cur_dance(state);
-  switch (FVIM_pP_tap_state.state) {
-    case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_RGHT);
-                          unregister_code(KC_RGHT); unregister_code(KC_LGUI); break;
+// void FVIM_pP_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   FVIM_pP_tap_state.state = cur_dance(state);
+//   switch (FVIM_pP_tap_state.state) {
+//     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_RGHT);
+//                           unregister_code(KC_RGHT); unregister_code(KC_LGUI); break;
 
-    case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_DOWN);
-                          unregister_code(KC_DOWN); unregister_code(KC_LALT); break;
-  }
-}
-void FVIM_pP_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (FVIM_pP_tap_state.state) {
-  }
-  FVIM_pP_tap_state.state = 0;
-}
+//     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_DOWN);
+//                           unregister_code(KC_DOWN); unregister_code(KC_LALT); break;
+//   }
+// }
+// void FVIM_pP_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (FVIM_pP_tap_state.state) {
+//   }
+//   FVIM_pP_tap_state.state = 0;
+// }
 //                                                                                      //
 // [tapdance] [ _fvim ] kc_p (fvim_pp)                                                  //
 //                                                                                      //
 //  e n d   o f   l i n e  /  p a r a g r a p h                                         //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [ _FVIM ] KC_I (FVIM_iI)                                                  //
+//                                                                                      //
+//  M O V E   W O R D   B A C K W A R D  /  M O V E   S U B W O R D   B A C K W A R D   //
+//                                                                                      //
+//  KC_I:  * MOVE WORD    BACKWARD                                                      //
+//        ** MOVE SUBWORD BACKWARD                                                      //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'FVIM_iI' tap dance.
+// static tap FVIM_iI_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
+
+// void FVIM_iI_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   FVIM_iI_tap_state.state = cur_dance(state);
+//   switch (FVIM_iI_tap_state.state) {
+//     case SINGLE_TAP:        register_code(KC_LALT);   register_code(KC_LEFT);
+//                           unregister_code(KC_LEFT); unregister_code(KC_LALT); break;
+
+//     case DOUBLE_TAP:        register_code(KC_LCTL);   register_code(KC_LEFT);
+//                           unregister_code(KC_LEFT);   unregister_code(KC_LCTL); break;
+//   }
+// }
+// void FVIM_iI_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (FVIM_iI_tap_state.state) {
+//   }
+//   FVIM_iI_tap_state.state = 0;
+// }
+//                                                                                      //
+// [tapdance] [ _fvim ] kc_i (fvim_ii)                                                  //
+//                                                                                      //
+//  m o v e   w o r d   b a c k w a r d  /  m o v e   s u b w o r d   b a c k w a r d   //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [ _FVIM ] KC_O (FVIM_oO)                                                  //
+//                                                                                      //
+//  M O V E   W O R D   F O R W A R D    /    M O V E   S U B W O R D   F O R W A R D   //
+//                                                                                      //
+//  KC_O:  * MOVE WORD    FORWARD                                                       //
+//        ** MOVE SUBWORD FORWARD                                                       //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'FVIM_oO' tap dance. esterNoCleiDoMastoiDeo
+// static tap FVIM_oO_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
+
+// void FVIM_oO_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   FVIM_oO_tap_state.state = cur_dance(state);
+//   switch (FVIM_oO_tap_state.state) {
+//     case SINGLE_TAP:        register_code(KC_LALT);   register_code(KC_RGHT);
+//                           unregister_code(KC_RGHT); unregister_code(KC_LALT); break;
+
+//     case DOUBLE_TAP:        register_code(KC_LCTL);   register_code(KC_RGHT);
+//                           unregister_code(KC_RGHT); unregister_code(KC_LCTL); break;
+//   }
+// }
+// void FVIM_oO_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (FVIM_oO_tap_state.state) {
+//   }
+//   FVIM_oO_tap_state.state = 0;
+// }
+//                                                                                      //
+// [tapdance] [ _fvim ] kc_o (fvim_oo)                                                  //
+//                                                                                      //
+//  m o v e   w o r d   f o r w a r d    /    m o v e   s u b w o r d   f o r w a r d   //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -218,19 +294,19 @@ void FVIM_pP_reset (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'DVIM_uU' tap dance.
-static tap DVIM_uU_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+// static tap DVIM_uU_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
 
-void DVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
-  DVIM_uU_tap_state.state = cur_dance(state);
-  switch (DVIM_uU_tap_state.state) {
-    case SINGLE_TAP:        dvim("u"); break;
-    case DOUBLE_TAP:        dvim("U"); break;
-  }
-  DVIM_uU_tap_state.state = 0;
-}
+// void DVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
+//   DVIM_uU_tap_state.state = cur_dance(state);
+//   switch (DVIM_uU_tap_state.state) {
+//     case SINGLE_TAP:        dvim("u"); break;
+//     case DOUBLE_TAP:        dvim("U"); break;
+//   }
+//   DVIM_uU_tap_state.state = 0;
+// }
 //                                                                                      //
 // [tapdance] [ _dvim ] kc_u (dvim_uu)                                                  //
 //                                                                                      //
@@ -249,19 +325,19 @@ void DVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //instantalize an instance of 'tap' for the 'DVIM_pP' tap dance.
-static tap DVIM_pP_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
+// static tap DVIM_pP_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
 
-void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
-  DVIM_pP_tap_state.state = cur_dance(state);
-  switch (DVIM_pP_tap_state.state) {
-    case SINGLE_TAP:        dvim("p"); break;
-    case DOUBLE_TAP:        dvim("P"); break;
-  }
-  DVIM_pP_tap_state.state = 0;
-};
+// void DVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
+//   DVIM_pP_tap_state.state = cur_dance(state);
+//   switch (DVIM_pP_tap_state.state) {
+//     case SINGLE_TAP:        dvim("p"); break;
+//     case DOUBLE_TAP:        dvim("P"); break;
+//   }
+//   DVIM_pP_tap_state.state = 0;
+// };
 //                                                                                      //
 // [tapdance] [ _dvim ] kc_p (dvim_pp)                                                  //
 //                                                                                      //

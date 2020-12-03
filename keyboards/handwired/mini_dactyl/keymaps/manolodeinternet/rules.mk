@@ -4,6 +4,13 @@ ifndef QUANTUM_DIR
 	include ../../../../Makefile
 endif
 
+
+TAP_DANCE_ENABLE  = yes # Enable Tap Dance (comment if not being implemented)
+MOUSEKEY_ENABLE   = yes # Mouse keys(+4700)
+UNICODE_ENABLE    = no
+UNICODEMAP_ENABLE = no
+
+
 # [FIXME]
 #    LINK_TIME_OPTIMIZATION_ENABLE = yes
 # [fixme]

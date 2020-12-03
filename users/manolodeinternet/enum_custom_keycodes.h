@@ -38,9 +38,9 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
 
 // MACROS FOR _DVIM LAYER 05
-    ,DVIM_Y         ,DVIM_I  ,DVIM_O            // it's used tap_dance for U,P
-    ,DVIM_H ,DVIM_J ,DVIM_K  ,DVIM_L  ,DVIM_SP
-            ,DVIM_M ,DVIM_ES ,DVIM_BS ,DVIM_EN
+    ,DVIM_Y ,DVIM_uU ,DVIM_I  ,DVIM_O  ,DVIM_pP
+    ,DVIM_H ,DVIM_J  ,DVIM_K  ,DVIM_L  ,DVIM_SP
+            ,DVIM_M  ,DVIM_ES ,DVIM_BS ,DVIM_EN
 // macros for _dvim layer 05
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
@@ -84,18 +84,23 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
 
 
-      ,_SYM_SPC
-      ,_DVIM_BS
-      ,BSPC_DEL
-      ,QUESTION_MARK
-      ,EXCLAMATION_MARK
-      ,CURRENCY_SIGN
-      ,PLUS_EQ
-      ,PERC_CI
+      ,_SYM_SPC          // [_SYMB] layer / Spacebar  / Enter  / Escape
+      ,_DVIM_BS          // [_DVIM] layer / Backspace / Delete
+      ,BSPC_DEL          // Backspace  / Delete
+      ,QUESTION_MARK     // Open       / Close Question   Mark
+      ,EXCLAMATION_MARK  // Open       / Close Excamation Mark
+      ,CURRENCY_SIGN     // Dollar     / Euro
+      ,PLUS_EQ           // Plus       / Equal symbol
+      ,PERC_CI           // Percentage / Circumflex signs
       ,AT_HASH
       ,QUOTE
       ,D_QUOTE
-
+      ,B_LN_PR  // Move   until Begin of Line or Paragraph
+      ,E_LN_PR  // Move   until End   of Line or Paragraph
+      ,B_WD_CC  // Move   until Begin of Word or CamelCase change
+      ,E_WD_CC  // Move   until End   of Word or CamelCase change
+      ,D_B_L_P  // Delete until Begin of Line or Paragraph
+      ,D_E_L_P  // Delete until End   of Line or Paragraph
 
 
 

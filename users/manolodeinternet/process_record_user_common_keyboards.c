@@ -2,32 +2,10 @@
 
 #include "process_record_user_common_keyboards.h"
 
-// __attribute__ ((weak))
-// bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
-//   return false;
-// }
-
 // USER - PROCESS_RECORD_USER
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  //    bool keymap_bool = false;
-  //     bool case_found = false;
-  // bool returned_value = false;
-
-  // [\DELETEME]
-  // if (record->event.pressed)
-  // {
-  //   sft_mod   = get_mods()&SHFT_MODS;
-  //   ctl_mod = get_mods()&CTRL_MODS;
-  //   alt_mod  = get_mods()&ALT_MODS;
-  //   gui_mod     = get_mods()&GUI_MODS;
-  // }
-  // [deleteme]
 
 #if defined(MINI_DACTYL_THUMBS)
-  // if (apps_trigger || karabiner_apps_trigger)
-  // {
-  //   return process_record_apps(keycode, record);
-  // }
 
   keymap_bool = process_record_keymap(keycode, record);
   if (case_found)
@@ -37,24 +15,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 #endif
 
-// if we are no in apps_trigger mode: we can be in karabiner_apps_trigger mode or in _DFLT layer mode
   if (record->event.pressed)
   // Do something when pressed
   {
     switch(keycode)
     {
 
-case _SYM_SPC:       if (check_mod_and_remove_it(SHFT_MODS, true))
+case _SYM_SPC:       if (check_mod_and_remove_it(ALT_MODS, true))
                               {
-                                tap_code(KC_ENT);
-                                register_code(KC_LSFT);
+                                tap_code16(KC_ENT);   // tap_code16 allows tapping SFT(Enter) if needed
+                                register_code(KC_LALT); // allows several iterations of Enter in a row
                               }
                                 else
                                   {
-                                    if (check_mod_and_remove_it(ALT_MODS, true))
+                                    if (check_mod_and_remove_it(CTRL_MODS, true))
                                     {
                                       tap_code(KC_ESC);
-                                      register_code(KC_LALT);
+                                      register_code(KC_LCTL); // allows svrl iterations of ESC in a row
                                     }
                                       else 
                                         {
@@ -64,8 +41,6 @@ case _SYM_SPC:       if (check_mod_and_remove_it(SHFT_MODS, true))
                                         }
                                   }
                                   return false; break;
-
-
 
 case _DVIM_BS:       
 #if defined(RGB_LEDS)
@@ -82,26 +57,6 @@ case _DVIM_BS:
                          layer_on(_DVIM);
                        }
                        return false; break;
-
-//[DELETEME]
-// 🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞
-      case BSPC_DEL:      if (check_mod_and_remove_it(SHFT_MODS, false))
-                            {
-                              register_code(KC_DEL);
-                            }
-                            else
-                            {
-                              register_code(KC_BSPC);
-                            }
-#if defined(RGB_LEDS)
-  rgblight_sethsv_noeeprom(HSV_MY_RED);
-#endif
-                            return false; break;
-// 🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞🐞
-//[deleteme]
-
-
-
 
       case QUESTION_MARK:   if (check_mod_and_remove_it(SHFT_MODS, false))
                             {
@@ -188,27 +143,87 @@ case _DVIM_BS:
                      }
                      return false; break;
 
-      case QUOTE:  //if (check_mod_and_remove_it(SHFT_MODS, false))  // @ #
-                     //{
-                       tap_code(KC_QUOT);
+      case QUOTE:      tap_code(KC_QUOT);
                        tap_code(KC_SPC); // quote sign  plus spacebar
-                     //} 
-/*                     else
-                     {
-                       register_code(KC_LSFT);
-                       tap_code(KC_2);
-                       unregister_code(KC_LSFT); // at sign
-                     }*/
-                     return false; break;
+                       return false; break;
 
-      case D_QUOTE:  //if (check_mod_and_remove_it(SHFT_MODS, false))  // @ #
-                     //{
-                       register_code(KC_LSFT);
+      case D_QUOTE:    register_code(KC_LSFT);
                        tap_code(KC_QUOT);
                        unregister_code(KC_LSFT);
                        tap_code(KC_SPC); // quote sign  plus spacebar
                        return false; break;
 
+
+//🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+//[_FVIM]
+      case B_LN_PR:    if (check_mod_and_remove_it(ALT_MODS, false))
+                       {
+                           // register_code(KC_LALT);
+                                  tap_code(KC_UP);  // begin of parragraph
+                         // unregister_code(KC_LALT);                                
+                       }
+                       else
+                       {
+                           register_code(KC_LGUI);
+                                tap_code(KC_LEFT);  // Begin of line
+                         unregister_code(KC_LGUI);
+                       }
+
+                       return false; break;
+
+
+      case E_LN_PR:    if (check_mod_and_remove_it(ALT_MODS, false))
+                       {
+                           // register_code(KC_LALT);
+                                tap_code(KC_DOWN);  // End of parragraph
+                         // unregister_code(KC_LALT);                                
+                       }
+                       else
+                       {
+                           register_code(KC_LGUI);
+                                tap_code(KC_RGHT);  // End of line
+                         unregister_code(KC_LGUI);
+                       }
+
+                       return false; break;
+
+
+      case B_WD_CC:    if (check_mod_and_remove_it(ALT_MODS, true))
+                       {
+                           register_code(KC_LCTL);
+                                tap_code(KC_LEFT);  // Begin of next camel case change
+                         unregister_code(KC_LCTL);
+                           register_code(KC_LALT);  // enables 2 moves in a row to begin of paragraphs
+                       }
+                       else
+                       {
+                           register_code(KC_LALT);
+                                tap_code(KC_LEFT);  // Begin of word
+                         unregister_code(KC_LALT);
+                       }
+
+                       return false; break;
+
+
+
+      case E_WD_CC:    if (check_mod_and_remove_it(ALT_MODS, true))
+                       {
+                           register_code(KC_LCTL);
+                                tap_code(KC_RGHT);  // End of next camel case change
+                         unregister_code(KC_LCTL);
+                           register_code(KC_LALT);  // enables 2 moves in a row to begin of paragraphs
+
+                       }
+                       else
+                       {
+                           register_code(KC_LALT);
+                                tap_code(KC_RGHT);  // End of word
+                         unregister_code(KC_LALT);
+                       }
+
+                       return false; break;
+//[_fvim]
+//🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
 //[_LEDS]
 #if defined(COMPREHENSIVE_30_LAYOUT)
@@ -246,6 +261,11 @@ case _DVIM_BS:
 //[_leds]
 
 //[_DALY]
+      case VOL_1:    volumeSetToLevel(1);         return false; // set volume to minimum (level 1)
+      case VOL_8:    volumeSetToLevel(8);         return false; // set volume to middle  (level 8)
+
+      case BRIGHT_1: brightSetToLevel(1);         return false; // set bright to minimum (level 1)
+
       case REWIND:    register_code(KC_F22); // asigned to 'fn' in karabiner-elements
                            tap_code(KC_F7);       // apple rewind default key in 'magic keyboard'
                     unregister_code(KC_F22);
@@ -261,10 +281,6 @@ case _DVIM_BS:
                     unregister_code(KC_F22);
                       return false;
 
-
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//[current_medifications]
-// #if defined(SIMPLE_30_LAYOUT)
       case PREV_APP:  register_code  (KC_LGUI);
                       register_code  (KC_LSFT);
                       tap_code       (KC_TAB);
@@ -276,12 +292,14 @@ case _DVIM_BS:
                            tap_code(KC_TAB);
                       changing_apps = true;
                       return false;
-// #endif
+
+      case DICTATION: register_code(KC_LGUI);  wait_ms(100);  unregister_code(KC_LGUI);
+                      return false;
+
+      case SIRI:      register_code(KC_LGUI); register_code(KC_SPC);
+                      return false;
 //[_daly]
 
-
-
-//🔥
 //[_POWR]
       case MY_CLEAR:  
                    // if caps_lock is ON
@@ -294,17 +312,9 @@ case _DVIM_BS:
 
                       clear_keyboard();
                       clear_mods();
-// clear_keyboard();          This will clear all mods and keys currently pressed.
-// clear_mods();              This will clear all mods currently pressed.
-// clear_keyboard_but_mods(); This will clear all keys besides the mods currently pressed.
-                      // remove_mod(SHFT_MODS);
-                      // remove_mod(CTRL_MODS);
-                      // remove_mod(ALT_MODS);
-                      // remove_mod(GUI_MODS);
 
                       layer_clear();
                       return false;
-
 //[_powr]
 
 //[_ACCN]
@@ -315,26 +325,36 @@ case _DVIM_BS:
       case DIAER:    diaeresis_requested  = true; return false; // requested diaeresis  accent
 //[_accn]
 
-//[_DALY]
-      case VOL_1:    volumeSetToLevel(1);         return false; // set volume to minimum (level 1)
-      case VOL_8:    volumeSetToLevel(8);         return false; // set volume to middle  (level 8)
-
-      case BRIGHT_1: brightSetToLevel(1);         return false; // set bright to minimum (level 1)
-//[_daly]
-
 //[_FVIM]
    // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
    // ... except for the 'H' key:
       case FVIM_H: fvim("h");  return false;
 //[_fvim]
 
-// _DVIM
+// [_DVIM]
       case DVIM_Y: dvim("y");  return false;
-//         DVIM_uU is tap_dance
+      case DVIM_uU:    if (check_mod_and_remove_it(ALT_MODS, true))
+                       {
+                           dvim("U");
+                           register_code(KC_LALT);  // enables 2 moves in a row to begin of paragraphs
+                       }
+                       else
+                       {
+                           dvim("u");
+                       }
+                       return false; break;
       case DVIM_I: dvim("i");  return false;
       case DVIM_O: dvim("o");  return false;
-//         DVIM_pP is tap_dance
-
+      case DVIM_pP:    if (check_mod_and_remove_it(ALT_MODS, true))
+                       {
+                           dvim("P");
+                           register_code(KC_LALT);  // enables 2 moves in a row to begin of paragraphs
+                       }
+                       else
+                       {
+                           dvim("p");
+                       }
+                       return false; break;
       case DVIM_H: dvim("h");  return false;
       case DVIM_J: dvim("j");  return false;
       case DVIM_K: dvim("k");  return false;
@@ -349,14 +369,14 @@ case _DVIM_BS:
 //[_dvim]
 
 /*
-// select _AVIM
+// select [_AVIM]
 //            case AVIM_Y: avim("y");  return false;
 //            case AVIM_N: avim("n");  return false;
 // the rest of the keys are combination of _FVIM + SHIFT key            
 */
 
-//[_XVIM]
-// _CVIM
+// [_XVIM]
+// [_CVIM]
       case CVIM_Y: cvim("y");  return false;
       case CVIM_U: cvim("u");  return false;
       case CVIM_I: cvim("i");  return false;
@@ -374,7 +394,7 @@ case _DVIM_BS:
       case CVIM_ES:cvim("\e"); return false;
       case CVIM_BS:cvim("\b"); return false;
       case CVIM_EN:cvim("\n"); return false;
-// _XVIM
+// [_XVIM]
       case XVIM_Y: xvim("y");  return false;
       case XVIM_U: xvim("u");  return false;
       case XVIM_I: xvim("i");  return false;
@@ -392,18 +412,8 @@ case _DVIM_BS:
       case XVIM_ES: xvim("\e"); return false;
       case XVIM_BS: xvim("\b"); return false;
       case XVIM_EN: xvim("\n"); return false;
-
-
-//🔥
-//[_DALY]
-      case DICTATION:
-        register_code(KC_LGUI);  wait_ms(100);  unregister_code(KC_LGUI);
-        return false;
-      case SIRI:
-        register_code(KC_LGUI); register_code(KC_SPC);
-        return false;
-//[_daly]
-
+// [_cvim]
+// [_xvim]
 
    // this case is responsible of the management of the presses for THE REST of the keys.
       default: return true; // Process all other keycodes normally when pressed
@@ -442,8 +452,8 @@ case _DVIM_BS:
   // }
     switch(keycode)
     {
-//                               = if (!get_mods()&SHFT_MODS && !get_mods()&ALT_MODS)
-      case _SYM_SPC:       if (space_or_symb_pressed)
+                           // if (space_or_symb_pressed)
+      case _SYM_SPC:       if ( ( !(get_mods()&ALT_MODS) ) && ( !(get_mods()&CTRL_MODS) ) )
                            {
                              if (timer_elapsed(lt13_timer) < TAPPING_TERM)
                              {  
@@ -473,12 +483,10 @@ case _DVIM_BS:
 
 //🔥
 //[_DFLT]
-
 #if defined(SIMPLE_30_LAYOUT)
   case BSPC_DEL: show_RGB_LEDs();
                    return false;  break;
 #endif
-
 //[_dflt]       
 
 //[_ACCN]
@@ -498,101 +506,6 @@ case _DVIM_BS:
                       layer_clear();
                       return false;
                       break;
-                      
-//       case MY_RESET:
-
-//       case TOG_ID:
-//       case STP_ID:
-
-//       case SL_MEN:
-//       case KA_DCK:
-//       case KM_TOL:
-//       case SH_STA:
-//       case RT_FLO:
-
-//       case VOL_1:
-//       case VOL_8:
-//       case BRIGHT_1:
-
-// // _FVIM
-//    // This layer is implemented without using '/Users/navarro/Library/KeyBindings/DefaultKeyBinding.dict'
-//    // ... except for the 'H' key:
-//       case FVIM_H:
-
-//       case FVIM_M:
-//       case FVIM_ES:
-//       case FVIM_BS:
-//       case FVIM_EN:
-//    // _fvim
-
-// // _DVIM
-//       case DVIM_Y:
-//       //   DVIM_uU is tap_dance
-//       case DVIM_I:
-//       case DVIM_O:
-//       //   DVIM_pP is tap_dance
-
-//       case DVIM_H:
-//       case DVIM_J:
-//       case DVIM_K:
-//       case DVIM_L:
-//       case DVIM_SP:
-
-//       case DVIM_M:
-//       case DVIM_ES:
-//       case DVIM_BS:
-//       case DVIM_EN: 
-
-// 
-// select _AVIM
-//            case AVIM_Y:
-//            case AVIM_N:
-// the rest of the keys are combination of _FVIM + SHIFT key            
-//
-
-// // _CVIM
-//       case CVIM_Y:
-//       case CVIM_U:
-//       case CVIM_I:
-//       case CVIM_O:
-//       case CVIM_P:
-
-// //    case CVIM_H:
-//       case CVIM_J:
-//       case CVIM_K:
-//       case CVIM_L:
-//       case CVIM_SP:
-
-//       case CVIM_N:
-//       case CVIM_M:
-//       case CVIM_ES:
-//       case CVIM_BS:
-//       case CVIM_EN:
-
-// // _XVIM
-//       case XVIM_Y:
-//       case XVIM_U:
-//       case XVIM_I:
-//       case XVIM_O:
-//       case XVIM_P:
-
-//       case XVIM_H:
-//       case XVIM_J:
-//       case XVIM_K:
-//       case XVIM_L:
-//       case XVIM_SP:
-
-//       case XVIM_N:
-//       case XVIM_M:
-//       case XVIM_ES:
-//       case XVIM_BS:
-//       case XVIM_EN:
-
-
-// // [_LEDS]
-//       case SAV_COL:
-//       case GET_HSV:
-//       case RGB_TOG: return false; // Skip all further processing of ALL these keys when released
 
 #if defined(SIMPLE_30_LAYOUT)
       case RGB_HUI:
@@ -635,25 +548,15 @@ case _DVIM_BS:
      case SIRI:      unregister_code(KC_SPC);  unregister_code(KC_LGUI);
                      return false;
 
-
-
-
-//[FIXME]
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-// UPDATE TO CURRENT LAYOUT
-
 // _DFLT LAYER
       case LT(_DALY,KC_J):
       case LT(_DALY, KC_Q):
-
 //_QWER LAYER
       case LT(_DALY,KC_X):
       case LT(_DALY,KC_BSPC):
-
 // MINI DACTYL THUMBS
       case MO(_DALY): // TH_R1_DALY_MOUS
-
-//    case MO(_DALY):// remove GUI modifier when coming from _DALY changing apps with CMD+TAB; SHIFT+CMD+TAB
+// remove GUI modifier when coming from _DALY changing apps with CMD+TAB; SHIFT+CMD+TAB
                         if (changing_apps)
                         {
                           changing_apps = false;
@@ -662,17 +565,6 @@ case _DVIM_BS:
 
                       return true; // this 'return true' switch [_DALY] off automatically
                       break;
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//[fixme]
-
-
-
-
-
-
-
-
-
 
    // this line is responsible of the management of the releases for THE REST of the keys.
       default:       return true; // Process all other keycodes normally when released
