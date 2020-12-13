@@ -22,7 +22,7 @@ bool apps_just_activated    = false;
 bool changing_apps          = false;           
 
 bool keymap_bool            = false;
-bool case_found             = false;
+bool case_found             = true;
 
 
 

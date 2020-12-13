@@ -58,6 +58,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCING_DELAY 5
 
+//[DELETEME]
+// Next #define is for trying to enable waking up computer typing on this split mini dactyl keyboard
+#define SPLIT_USB_DETECT
+//[deleteme]
+
+
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE
 /* Locking resynchronize hack */

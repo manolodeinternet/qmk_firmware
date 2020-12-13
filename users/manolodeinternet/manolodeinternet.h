@@ -145,7 +145,6 @@ bool disabled_caps_before_accent;
 bool capslock_is_active;
 
 bool numbers_is_active;   // flag for _NUMB layer
-bool space_or_symb_pressed; // flag for choosing between space, enter, escape or _SYMB
 
     uint16_t lt12_timer;  // for using TT_NUMB; my own implementation of TT(layer): Layer Tap/Toggle
     uint16_t lt13_timer;  // for using _SYM_SPC

@@ -27,8 +27,6 @@ bool disabled_caps_before_accent = false;
 
           bool numbers_is_active = false;   // flag for _NUMB layer
 
-      bool space_or_symb_pressed = false;
-
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [FUNCTIONS] [_DALY] KC_A [F(CAPSL)]                                                  //

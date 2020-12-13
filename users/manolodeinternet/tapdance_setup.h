@@ -73,7 +73,7 @@ enum tap_dance_keycodes {
 
 
 
-  #if defined(COMPREHENSIVE_30_LAYOUT)
+#if defined(COMPREHENSIVE_30_LAYOUT)
     // TAP DANCE KEYCODES ACCESSIBLE FROM _DFLT LAYER 0
     ,L_APPS
     ,R_APPS
@@ -83,10 +83,10 @@ enum tap_dance_keycodes {
     ,SLNUMB  //   return to *GHKN layer (gherkin default layer)  // ... slash
       
 //#if defined(COMPREHENSIVE_30_LAYOUT)
-#elif defined(SIMPLE_30_LAYOUT)
-    ,DVIM_Del  // Delete when tapping, _DVIM when holding 
+// #elif defined(SIMPLE_30_LAYOUT)
+//     ,DVIM_Del  // Delete when tapping, _DVIM when holding 
 
-//#elif defined(SIMPLE_30_LAYOUT)
+// //#elif defined(SIMPLE_30_LAYOUT)
 #endif
 };
 //                                                                                      //
@@ -368,7 +368,7 @@ void R_APPS_reset (qk_tap_dance_state_t *state, void *user_data);
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 //
-#if defined(SIMPLE_30_LAYOUT)
+// #if defined(SIMPLE_30_LAYOUT)
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // [TAPDANCE] [_DFLT] THUMB_L1 (DVIM_Del)                                               //
@@ -380,16 +380,16 @@ void R_APPS_reset (qk_tap_dance_state_t *state, void *user_data);
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-void DVIM_Del_f_always(qk_tap_dance_state_t *state, void *user_data);
-void DVIM_Del_finished (qk_tap_dance_state_t *state, void *user_data);
-void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data);
+// void DVIM_Del_f_always(qk_tap_dance_state_t *state, void *user_data);
+// void DVIM_Del_finished (qk_tap_dance_state_t *state, void *user_data);
+// void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data);
 //                                                                                      //
 // [tapdance] [_dflt] thumb_l1 (dvim_del)                                               //
 //                                                                                      //
 //  d v i m    l a y e r    /    b a c k s p a c e                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //#if defined(SIMPLE_30_LAYOUT)
-#endif
+// #endif //(COMPREHENSIVE_30_LAYOUT)
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //

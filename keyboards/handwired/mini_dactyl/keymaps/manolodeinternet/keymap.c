@@ -30,12 +30,12 @@
 // [UNDERSTANDING]
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
- * 'qmk_firmware' must be under our user home folder: 'iMac de Navarro/2)thMAIN1500gb/Users/navarro/'
+ * 'qmk_firmware' must be under our user home folder
  * Every time it appears 'my_user_name': 'manolodeinternet', you must change it for 'your_user_name'
 
  * 'qmk_firmware/users/manolodeinternet/' path is automatically included while making and compiling
  * So 'rules.mk' and 'config.h' files from 'qmk_firmware/users/manolodeinternet/' folder are...
-...automatically included when I'm making my '.hex' file.
+...automatically included when '.hex' file is making up
  */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
@@ -49,13 +49,13 @@
 //                                                                                                   //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
- * /users/<name>/ (added to the path automatically when I'm making my '.hex' file)
- * rules.mk (included automatically when I'm making my '.hex' file)
- * config.h (included automatically when I'm making my '.hex' file)
+ * /users/<name>/ (added to the path automatically when I'm making up my '.hex' file)
+ * rules.mk (included automatically when I'm making up my '.hex' file)
+ * config.h (included automatically when I'm making up my '.hex' file)
 
  * readme.md (recommended)                                                                   (optional)
- * <username>.h for common constants and variables BETWEEN ALL THE KEYBOARDS                 (optional)
- * <username>.c for common functions               BETWEEN ALL THE KEYBOARDS                 (optional)
+ * <username>.h for common constants and variables declaration    BETWEEN ALL THE KEYBOARDS  (optional)
+ * <username>.c for common functions and variables initialization BETWEEN ALL THE KEYBOARDS  (optional)
 
  * < file_for_sharing_common_features_between_two_or_more_keyboards.c >i.e.:cool_rgb_stuff.c (optional)
  * < file_for_sharing_common_features_between_two_or_more_keyboards.h >i.e.:cool_rgb_stuff.h (optional)
@@ -63,10 +63,10 @@
  * < file_for_sharing_common_features_between_two_or_more_keyboards.c >i.e.:backlght_stuff.c (optional)
  * < file_for_sharing_common_features_between_two_or_more_keyboards.h >i.e.:backlght_stuff.h (optional)
  
- * < file_for_sharing_common_enum_custom_keycodes.h >         BETWEEN ALL THE KEYBOARDS      (optional)
+ * < file_for_sharing_common_enum_custom_keycodes.h >             BETWEEN ALL THE KEYBOARDS  (optional)
  
- * < file_for_sharing_common_tap_dance_functions.c >          BETWEEN ALL THE KEYBOARDS      (optional)
- * < file_for_sharing_common_tap_dance_functions.h >          BETWEEN ALL THE KEYBOARDS      (optional)
+ * < file_for_sharing_common_tap_dance_functions.c >              BETWEEN ALL THE KEYBOARDS  (optional)
+ * < file_for_sharing_common_tap_dance_functions.h >              BETWEEN ALL THE KEYBOARDS  (optional)
 
  * < file_for_simple_common_30_core_layout.c >FOR CORE KEYBOARDS WITH ALPHAS & MODIFIERS ONLY(optional)
  * < file_for_simple_common_30_core_layout.h > used with keyboards with more than 30 keys    (optional)
@@ -78,11 +78,10 @@
 //                             understanding userspace file structure                                //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include QMK_KEYBOARD_H // is implemented at 'manolodeinternet.h'. Compile process needs this way !
+// #include QMK_KEYBOARD_H // is implemented at 'manolodeinternet.h'. Compile process needs this way !
 #include "manolodeinternet.h"
 
 /*
-
  * But as I created 'manolodeinternet.c'...
 ...I need to include it manually in 'qmk_firmware/users/manolodeinternet/rules.mk'
 
@@ -97,29 +96,11 @@
 // [understanding]
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-// void set_default_hsv(void);
-
-
-
-
-
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 // GLOBAL VARIABLES                                                                     //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-//
-
-
-//                                                                                      //
-// global variables                                                                     //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
@@ -137,11 +118,6 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
 //                                                                                      //
@@ -151,224 +127,11 @@
 // MY OWN TAP_DANCE HARVEST                                                             //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//             T A P   D A N C E   F O R    [ _ A L P H ]  L A Y E R                    //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [_DFLT] THUMB_L1 (DVIM_Del)                                               //
-//                                                                                      //
-//  D V I M    L A Y E R    /    D E L E T E                                            //
-//                                                                                      //
-//  THUMB_L1:  @ [_DVIM] LAYER                                                          //
-//             *  DELETE,                                                               //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//instantalize an instance of 'tap' for the 'DVIM_Del' tap dance.
-static tap DVIM_Del_tap_state = {
-  .is_press_action = true,
-  .state = 0
-};
 
-void DVIM_Del_f_always(qk_tap_dance_state_t *state, void *user_data) {
-  rgblight_sethsv_noeeprom(COLOR_DVIM);
-}
-
-void DVIM_Del_finished (qk_tap_dance_state_t *state, void *user_data) {
-  DVIM_Del_tap_state.state = cur_dance(state);
-  switch (DVIM_Del_tap_state.state) {
-
-    case   SINGLE_TAP:  register_code(KC_DEL);
-                        break;
-
-    case   SINGLE_HOLD: layer_on(_DVIM);
-
-  }
-}
-
-void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (DVIM_Del_tap_state.state) {
-
-    case   SINGLE_TAP:  unregister_code(KC_DEL); break;
-
-    case   SINGLE_HOLD: layer_off(_DVIM);
-
-  }
-  show_RGB_LEDs();
-  DVIM_Del_tap_state.state = 0;
-}
-//                                                                                      //
-// [tapdance] [_dflt] thumb_l1 (dvim_del)                                               //
-//                                                                                      //
-//  d v i m    l a y e r    /    b a c k s p a c e                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//             t a p   d a n c e   f o r    [ _ a l p h ]  l a y e r                    //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// my own tap_dance harvest                                                             //
-//                                                                                      //
-// DOUBLE FUNCTION TAP DANCE PERSONALIZATION SECTION END                                //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [ _FVIM ] KC_P (FVIM_pP)                                                  //
-//                                                                                      //
-//  E N D   O F   L I N E  /  P A R A G R A P H                                         //
-//                                                                                      //
-//  KC_P:  * END OF LINE                                                                //
-//        ** END OF PARAGRAPH                                                           //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'FVIM_pP' tap dance.
-// static tap FVIM_pP_tap_state = {
-//   .is_press_action = true,
-//   .state = 0
-// };
-
-// void FVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
-//   FVIM_pP_tap_state.state = cur_dance(state);
-//   switch (FVIM_pP_tap_state.state) {
-//     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_RGHT);
-//                           unregister_code(KC_RGHT); unregister_code(KC_LGUI); break;
-
-//     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_DOWN);
-//                           unregister_code(KC_DOWN); unregister_code(KC_LALT); break;
-//   }
-//   FVIM_pP_tap_state.state = 0;
-// }
-//                                                                                      //
-// [tapdance] [ _fvim ] kc_p (fvim_pp)                                                  //
-//                                                                                      //
-//  e n d   o f   l i n e  /  p a r a g r a p h                                         //
-//////////////////////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//               T A P   D A N C E   F O R  -  V   I   M  -  L A Y E R S                //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [ _FVIM ] KC_U (FVIM_uU)                                                  //
-//                                                                                      //
-//  B E G I N N I N G   O F   L I N E    /    P A R A G R A P H                         //
-//                                                                                      //
-//  KC_U:  * BEGINING OF LINE                                                           //
-//        ** BEGINING OF PARAGRAPH                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'FVIM_uU' tap dance.
-// static tap FVIM_uU_tap_state = {
-//   .is_press_action = true,
-//   .state = 0
-// };
-
-// void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
-//   FVIM_uU_tap_state.state = cur_dance(state);
-//   switch (FVIM_uU_tap_state.state) {
-//     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_LEFT);
-//                           unregister_code(KC_LEFT); unregister_code(KC_LGUI); break;
-
-//     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_UP);
-//                           unregister_code(KC_UP);   unregister_code(KC_LALT); break;
-//   }
-//   FVIM_uU_tap_state.state = 0;
-// }
-//                                                                                      //
-// [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
-//                                                                                      //
-//  b e g i n n i n g   o f   l i n e    /    p a r a g r a p h                         //
-//////////////////////////////////////////////////////////////////////////////////////////
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//               T A P   D A N C E   F O R  -  V   I   M  -  L A Y E R S                //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// [TAPDANCE] [ _FVIM ] KC_U (FVIM_uU)                                                  //
-//                                                                                      //
-//  B E G I N N I N G   O F   L I N E    /    P A R A G R A P H                         //
-//                                                                                      //
-//  KC_U:  * BEGINING OF LINE                                                           //
-//        ** BEGINING OF PARAGRAPH                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//instantalize an instance of 'tap' for the 'FVIM_uU' tap dance.
-// static tap FVIM_uU_tap_state = {
-//   .is_press_action = true,
-//   .state = 0
-// };
-
-// void FVIM_uU_finished (qk_tap_dance_state_t *state, void *user_data) {
-//   FVIM_uU_tap_state.state = cur_dance(state);
-//   switch (FVIM_uU_tap_state.state) {
-//     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_LEFT);
-//                           unregister_code(KC_LEFT); unregister_code(KC_LGUI); break;
-
-//     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_UP);
-//                           unregister_code(KC_UP);   unregister_code(KC_LALT); break;
-//   }
-// }
-// void FVIM_uU_reset (qk_tap_dance_state_t *state, void *user_data) {
-//   switch (FVIM_uU_tap_state.state) {
-//   }
-//   FVIM_uU_tap_state.state = 0;
-// }
-//                                                                                      //
-// [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
-//                                                                                      //
-//  b e g i n n i n g   o f   l i n e    /    p a r a g r a p h                         //
-//////////////////////////////////////////////////////////////////////////////////////////
-//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-
-
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-//                                                                                      //
-//               T A P    D A N C E    D E C L A R A T I O N S                          //
-//                                                                                      //
-//  THIS SECTION HAS TO BE AT THE END OF THE TAP DANCE SECTION                          //
-//                                                                                      //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-//
 qk_tap_dance_action_t tap_dance_actions[] = {
 
-// [MINI_DACTYL] SPECIFIC TAP_DANCE FEATURES
-// [_DFLT] LAYER
-   // [UNDERSTANDING]
-   // TIME  50: is too dificult to typing   so fast !!!
-   // TIME 100 is a right time for typing very fast !!!
-   // [understanding]
-   [DVIM_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(DVIM_Del_f_always,DVIM_Del_finished,DVIM_Del_reset,100)
-// [_dflt] layer
-
 // [_POWR] LAYER
-  ,[TG_QWE]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, TG_QWE_finished, TG_QWE_reset, 800)
+   [TG_QWE]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, TG_QWE_finished, TG_QWE_reset, 800)
   ,[LCKLOG]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, LCKLOG_finished, LCKLOG_reset, 800)
   ,[HRESET]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, HRESET_finished, HRESET_reset, 1000)
 
@@ -384,11 +147,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   ,[RA_INCO]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RA_INCO_finished, RA_INCO_reset) 
 // [_powr] layer
 
-// [_DVIM] LAYER
-  // ,[DVIM_uU] = ACTION_TAP_DANCE_FN(DVIM_uU_function)
-  // ,[DVIM_pP] = ACTION_TAP_DANCE_FN(DVIM_pP_function)
-// [_dvim] layer
-// [all_keyboards] tap_dance features
 };
 //                                                                                      //
 //               t a p    d a n c e    d e c l a r a t i o n s                          //
@@ -396,11 +154,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 //  this section has to be at the end of the tap dance section                          //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
 
 // CUSTOMIZED MINI DACTTYL from  
@@ -487,28 +240,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
-//[_PINKY] LAYER 01 : PINKY DEMULTIPLIER LAYER
-//   [_PINKY] = LAYOUT_mini_dactyl_base_wrapper(
-// //.----------------------------------------.                 .----------------------------------------.
-//                ____PINKY__L1___,                                          ____PINKY__R1___,
-// //|----------------------------------------|                 |----------------------------------------|
-//                ____PINKY__L2___,                                          ____PINKY__R2___,
-// //|----------------------------------------|                 |----------------------------------------|
-//                ____PINKY__L3___,                                          ____PINKY__R3___
-// //'----------------------------------------'                 '----------------------------------------'
-// //                          _____LAYOUT_____               _____WRAPPR_____
-// //                     .------------------------.     .------------------------.
-// //                     |------------------------|     |------------------------|
-// //                     |------------------------|     |------------------------|
-// //                     '------------------------'     '------------------------'
-// ),
-/////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// END OF _PINKY 01
-
-
-
-
-//[_QWER] LAYER 02 : QWERT DEFAULT LAYER
+//[_QWER] LAYER 01 : QWERT DEFAULT LAYER
   [_QWER] = LAYOUT_mini_dactyl_base_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ____QWER__L1___,                                          ____QWER__R1___,
@@ -524,7 +256,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                     '------------------------'     '------------------------'
 ),
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// END OF _QWER 02
+// END OF _QWER 01
 
 
 
@@ -532,7 +264,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // [BUG]// [BUG] increment two units to the layer from now on...
 
-//[_ACCN] LAYER 01 : ACCENTS LAYER
+//[_ACCN] LAYER 02 : ACCENTS LAYER
   [_ACCN] = LAYOUT_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___ACCENTS_L1___,                                          ___ACCENTS_R1___,
@@ -551,9 +283,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                     '------------------------'     '------------------------'
 ),
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// END OF _ACCN 01
+// END OF _ACCN 02
 
-//[_NUMB] LAYER 02 : NUMBERS LAYER
+//[_NUMB] LAYER 03 : NUMBERS LAYER
   [_NUMB] = LAYOUT_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___NUMBERS_L1___,                                          ___NUMBERS_R1___,
@@ -572,9 +304,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                     '------------------------'     '------------------------'
 ),
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// END OF _NUMB 02
+// END OF _NUMB 03
 
-//[_FVIM] LAYER 03 : FAKE VIM LAYER
+//[_FVIM] LAYER 04 : FAKE VIM LAYER
   [_FVIM] = LAYOUT_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___FAKEVIM_L1___,                                          ___FAKEVIM_R1___,
@@ -593,10 +325,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                     '------------------------'     '------------------------'
 ),
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
-// END OF _FVIM 03
+// END OF _FVIM 04
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_XVIM] LAYER 04 : EXTENDED EDITION VIM LAYER
+//[_XVIM] LAYER 05 : EXTENDED EDITION VIM LAYER
   [_XVIM] = LAYOUT_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___EXT_VIM_L1___,                                          ___EXT_VIM_R1___,
@@ -614,10 +346,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             _XVIM_LTHMB_RW2_,              _XVIM_RTHMB_RW2_
 //                     '------------------------'     '------------------------'
 ),
-// END OF _XVIM 04
+// END OF _XVIM 05
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_DVIM] LAYER 05 : DELETE VIM LAYER
+//[_DVIM] LAYER 06 : DELETE VIM LAYER
   [_DVIM] = LAYOUT_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___DEL_VIM_L1___,                                          ___DEL_VIM_R1___,
@@ -635,10 +367,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             _DVIM_LTHMB_RW2_,              _DVIM_RTHMB_RW2_
 //                     '------------------------'     '------------------------'
 ),
-// END OF _DVIM 05
+// END OF _DVIM 06
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_MOUS] = LAYER 06 : MOUSE LAYER
+//[_MOUS] = LAYER 07 : MOUSE LAYER
   [_MOUS] = LAYOUT_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ____MOUSE_L1____,                                          ____MOUSE_R1____,
@@ -656,10 +388,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             _MOUS_LTHMB_RW2_,              _MOUS_RTHMB_RW2_
 //                     '------------------------'     '------------------------'
 ),
-// END OF _MOUS 06
+// END OF _MOUS 07
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_DALY] = LAYER 07 : MOUSE LAYER
+//[_DALY] = LAYER 08 : MOUSE LAYER
   [_DALY] = LAYOUT_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ____DAILY_L1____,                                          ____DAILY_R1____,
@@ -677,10 +409,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             _DALY_LTHMB_RW2_,              _DALY_RTHMB_RW2_
 //                     '------------------------'     '------------------------'
 ),
-// END OF _DALY 07
+// END OF _DALY 08
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_FUNC] = LAYER 08 : FUNCTIONS LAYER
+//[_FUNC] = LAYER 09 : FUNCTIONS LAYER
   [_FUNC] = LAYOUT_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                __FUNCTIONS_L1__,                                          __FUNCTIONS_R1__,
@@ -698,10 +430,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             _FUNC_LTHMB_RW2_,              _FUNC_RTHMB_RW2_
 //                     '------------------------'     '------------------------'
 ),
-// END OF _FUNC 08
+// END OF _FUNC 09
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
-//[_SYMB] LAYER 09 : SYMBOLS LAYER
+//[_SYMB] LAYER 10 : SYMBOLS LAYER
   [_SYMB] = LAYOUT_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
                ___SYMBOLS_L1___,                                          ___SYMBOLS_R1___,
@@ -718,7 +450,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             _SYMB_LTHMB_RW2_,              _SYMB_RTHMB_RW2_
 //                     '------------------------'     '------------------------'
 ),
-// END OF _SYMB 09
+// END OF _SYMB 10
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 //[_LEDS] LAYER 11 : LEDS LIGHTS LAYER
@@ -773,7 +505,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-
+// [PLACEHOLDER]
 
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //

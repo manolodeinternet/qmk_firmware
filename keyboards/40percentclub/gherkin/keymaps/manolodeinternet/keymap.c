@@ -521,11 +521,11 @@ uint32_t layer_state_set_user(uint32_t state) {
     case _DFLT:   //  0
     case _QWER:   //  2
         
-        if (hide_other_apps == true)
-        {
-          HIDEOTH; //Long: SEND_STRING(SS_LALT(SS_LGUI("h"))); //Wrong: register_code(LALT(LGUI(KC_H)));
-          hide_other_apps = false;
-        }
+        // if (hide_other_apps == true)
+        // {
+        //   HIDEOTH; //Long: SEND_STRING(SS_LALT(SS_LGUI("h"))); //Wrong: register_code(LALT(LGUI(KC_H)));
+        //   hide_other_apps = false;
+        // }
         backlight_level(gherkinBacklightLevel);
 
           if (capslock_is_active)

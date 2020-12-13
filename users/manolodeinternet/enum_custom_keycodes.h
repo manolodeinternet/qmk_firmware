@@ -133,7 +133,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
       // ,OSL_SYMB
       // ,OSL_NUMB
       // ,OSL_MOUS
-
+      ,MO_DALY
       ,TT_NUMB
       // ,TH_L3_KAR_APPS
       // ,TH_R1_DALY_MOUS

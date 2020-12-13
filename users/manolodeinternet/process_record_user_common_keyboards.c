@@ -3,16 +3,21 @@
 #include "process_record_user_common_keyboards.h"
 
 // USER - PROCESS_RECORD_USER
+bool symbol_or_space = false;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #if defined(MINI_DACTYL_THUMBS)
 
   keymap_bool = process_record_keymap(keycode, record);
-  if (case_found)
+  if (case_found) // if process_record_keymap has processed a keystroke ...
   {
-    case_found = false;
     return keymap_bool;
   }
+  else // since process_record_keymap didn't process any keystroke,...
+       // ...process_record_user is responsible for detecting it
+  {
+    case_found = true;
 #endif
 
   if (record->event.pressed)
@@ -20,32 +25,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   {
     switch(keycode)
     {
+//[_DFLT]
+case _SYM_SPC:       if ( get_mods()&GUI_MODS && get_mods()&ALT_MODS )
+                     {
+                       unregister_code(KC_LALT);
+                       unregister_code(KC_LGUI);  
+                              tap_code(KC_ESC);
+                         register_code(KC_LALT); // allows iterations of ESC in a row
+                         register_code(KC_LGUI); // allows iterations of ESC in a row
+                     }
+                     else
+                     {
 
-case _SYM_SPC:       if (check_mod_and_remove_it(ALT_MODS, true))
-                              {
-                                tap_code16(KC_ENT);   // tap_code16 allows tapping SFT(Enter) if needed
-                                register_code(KC_LALT); // allows several iterations of Enter in a row
-                              }
-                                else
-                                  {
-                                    if (check_mod_and_remove_it(CTRL_MODS, true))
-                                    {
-                                      tap_code(KC_ESC);
-                                      register_code(KC_LCTL); // allows svrl iterations of ESC in a row
-                                    }
-                                      else 
-                                        {
-                                          space_or_symb_pressed = true;
-                                          lt13_timer = timer_read();
-                                          layer_on(_SYMB);
-                                        }
-                                  }
-                                  return false; break;
+                       if ( ( get_mods()&CTRL_MODS ) && ( !( get_mods()&GUI_MODS ) ) )// ctrl; ctrl+sft; ctrl+alt -> Enter                        
+                       {
+                       unregister_code(KC_LCTL);
+                            tap_code16(KC_ENT);   // tap_code16 allows tapping SFT(Enter) or ALT(Enter) if needed
+                         register_code(KC_LCTL); // allows several iterations of Enter in a row
+                       }
+                       else// !ctrl; ctrl+gui -> spacebar
+                       {
+                         symbol_or_space = true;
+                         lt13_timer = timer_read();
+                         layer_on(_SYMB);
+                       }
+                     }
+                     return false; break;
 
-case _DVIM_BS:       
-#if defined(RGB_LEDS)
-  rgblight_sethsv_noeeprom(HSV_MY_RED);
-#endif
+case _DVIM_BS:         layer_on(_DVIM);  // this switch on LEDS even when we use DELETE
+
                        if (check_mod_and_remove_it(SHFT_MODS, true))
                        {
                          tap_code(KC_DEL);
@@ -54,10 +62,11 @@ case _DVIM_BS:
                        else 
                        {
                          lt13_timer = timer_read();
-                         layer_on(_DVIM);
                        }
                        return false; break;
+//[_dflt]
 
+//[_SYMB]
       case QUESTION_MARK:   if (check_mod_and_remove_it(SHFT_MODS, false))
                             {
                               register_code(KC_LALT);
@@ -109,15 +118,19 @@ case _DVIM_BS:
 
                               return false; break;
 
-      case PLUS_EQ:  if (check_mod_and_remove_it(SHFT_MODS, true)) {} 
+      case PLUS_EQ:  if (check_mod_and_remove_it(SHFT_MODS, false))
+                     { 
+                       unregister_code(KC_LSFT);
+                              tap_code(KC_EQL);
+                         register_code(KC_LSFT);
+                     } 
                      else
                      {
-                       register_code(KC_LSFT); // prepare for plus sign
+                         register_code(KC_LSFT);
+                              tap_code(KC_EQL);
+                       unregister_code(KC_LSFT);
                      }
-                     tap_code(KC_EQL);         // plus or equal sign, depending on shift
-                     unregister_code(KC_LSFT);
                      return false; break;
-
 
       case PERC_CI:  if (check_mod_and_remove_it(SHFT_MODS, false))  // % ˆ
                      {
@@ -133,26 +146,33 @@ case _DVIM_BS:
 
       case AT_HASH:  if (check_mod_and_remove_it(SHFT_MODS, false))  // @ #
                      {
-                       register_code(KC_3); // hash sign
+                         // shift_pressed = true;
+                         // register_code(KC_LSFT);
+                              tap_code(KC_3); // hash sign
+                       // unregister_code(KC_LSFT);
                      } 
                      else
                      {
-                       register_code(KC_LSFT);
-                       tap_code(KC_2);
+                         register_code(KC_LSFT);
+                              tap_code(KC_2);
                        unregister_code(KC_LSFT); // at sign
                      }
+                     // if (shift_pressed)
+                     // {
+                     //    register_code(KC_LSFT);
+                     // }
                      return false; break;
 
       case QUOTE:      tap_code(KC_QUOT);
                        tap_code(KC_SPC); // quote sign  plus spacebar
                        return false; break;
 
-      case D_QUOTE:    register_code(KC_LSFT);
-                       tap_code(KC_QUOT);
+      case D_QUOTE:      register_code(KC_LSFT);
+                              tap_code(KC_QUOT);
                        unregister_code(KC_LSFT);
-                       tap_code(KC_SPC); // quote sign  plus spacebar
+                              tap_code(KC_SPC); // quote sign  plus spacebar
                        return false; break;
-
+//[_symb]
 
 //🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 //[_FVIM]
@@ -296,8 +316,16 @@ case _DVIM_BS:
       case DICTATION: register_code(KC_LGUI);  wait_ms(100);  unregister_code(KC_LGUI);
                       return false;
 
-      case SIRI:      register_code(KC_LGUI); register_code(KC_SPC);
-                      return false;
+      // case SIRI:      register_code(KC_LCTL);
+      //                 register_code(KC_LSFT);
+      //                 register_code(KC_LALT);
+      //                 register_code(KC_LGUI);
+      //                      tap_code(KC_SPC);
+      //               unregister_code(KC_LCTL);
+      //               unregister_code(KC_LSFT);
+      //               unregister_code(KC_LALT);
+      //               unregister_code(KC_LGUI);
+      //                 return false;
 //[_daly]
 
 //[_POWR]
@@ -443,119 +471,117 @@ case _DVIM_BS:
 
 
 
-  {
+    {
 //  Do something else when release
 
   // if (apps_trigger || karabiner_apps_trigger)
   // {
   //   return process_record_apps(keycode, record);
   // }
-    switch(keycode)
-    {
-                           // if (space_or_symb_pressed)
-      case _SYM_SPC:       if ( ( !(get_mods()&ALT_MODS) ) && ( !(get_mods()&CTRL_MODS) ) )
+      switch(keycode)
+      {
+
+// if ( get_mods()&CTRL_MODS && !(get_mods()&GUI_MODS) )
+// if ( !( get_mods()&CTRL_MODS && !(get_mods()&GuUI_MODS) )
+        case _SYM_SPC:     if (symbol_or_space)
                            {
                              if (timer_elapsed(lt13_timer) < TAPPING_TERM)
                              {  
-                               tap_code(KC_SPC);                        
+                               tap_code16(KC_SPC);                        
                              }
                            }
+                           symbol_or_space = false;
                            layer_off(_SYMB);
-                           space_or_symb_pressed = false;
 
                            return false; break;
 
 
-//                               = if (!get_mods()&SHFT_MODS && !get_mods()&ALT_MODS)
-      case _DVIM_BS:               if (!(check_mod_and_remove_it(SHFT_MODS, false)))
-                                   {
-                                     if (timer_elapsed(lt13_timer) < TAPPING_TERM)
-                                     {  
-                                       tap_code(KC_BSPC);
-                                     }
-                                     layer_off(_DVIM);                                    
-                                   }
-#if defined(RGB_LEDS)
-  show_RGB_LEDs(); // rgblight_sethsv_noeeprom(HSV_MY_RED);
-#endif
-                                   return false; break;
+        case _DVIM_BS:       if (!(check_mod_and_remove_it(SHFT_MODS, false)))
+                           {
+                             if (timer_elapsed(lt13_timer) < TAPPING_TERM)
+                             {  
+                               tap_code(KC_BSPC);
+                             }
+                           }
+                           layer_off(_DVIM);
+
+                           return false; break;
 
 
 //🔥
 //[_DFLT]
-#if defined(SIMPLE_30_LAYOUT)
-  case BSPC_DEL: show_RGB_LEDs();
-                   return false;  break;
-#endif
+// #if defined(SIMPLE_30_LAYOUT)
+//   case BSPC_DEL: show_RGB_LEDs();
+//                    return false;  break;
+// #endif
 //[_dflt]       
 
 //[_ACCN]
-      case CIRCU: circumflex_requested = false; // non-requested circumflex accent
-      return false;                      // Skip all further processing of this key when released
+        case CIRCU: circumflex_requested = false; // non-requested circumflex accent
+        return false;                      // Skip all further processing of this key when released
 
 
-      case GRAVE: grave_requested      = false;  // non-requested grave      accent
-      return false;                      // Skip all further processing of this key when released
+        case GRAVE: grave_requested      = false;  // non-requested grave      accent
+        return false;                      // Skip all further processing of this key when released
 
-      case DIAER: diaeresis_requested  = false;  // non-requested diaeresis  accent
-      return false;                      // Skip all further processing of this key when released
+        case DIAER: diaeresis_requested  = false;  // non-requested diaeresis  accent
+        return false;                      // Skip all further processing of this key when released
 //[_accn]
 
-      case MY_CLEAR:  clear_mods();
-                      clear_keyboard();                      
-                      layer_clear();
-                      return false;
-                      break;
+        case MY_CLEAR:  clear_mods();
+                        clear_keyboard();                      
+                        layer_clear();
+                        return false;
+                        break;
 
 #if defined(SIMPLE_30_LAYOUT)
-      case RGB_HUI:
-      case RGB_HUD:
-      case RGB_SAI:
-      case RGB_SAD:
-      case RGB_VAI:
-      case RGB_VAD:
+        case RGB_HUI:
+        case RGB_HUD:
+        case RGB_SAI:
+        case RGB_SAD:
+        case RGB_VAI:
+        case RGB_VAD:
 
-      case CH_RED: 
-      case CH_CORL:
-      case CH_ORNG:
-      case CH_GOLR:
-      case CH_GOLD:
+        case CH_RED: 
+        case CH_CORL:
+        case CH_ORNG:
+        case CH_GOLR:
+        case CH_GOLD:
 
-      case CH_YLLW:
+        case CH_YLLW:
 
-      case CH_CHRT:
-      case CH_GREN:
-      case CH_SPRG:
-      case CH_TRQS:
-      case CH_TEAL:
+        case CH_CHRT:
+        case CH_GREN:
+        case CH_SPRG:
+        case CH_TRQS:
+        case CH_TEAL:
 
-      case CH_WHIT:
+        case CH_WHIT:
 
-      case CH_CYAN:
-      case CH_AZUR:
-      case CH_BLUE:
-      case CH_PRPL:
-      case CH_MGNT:
+        case CH_CYAN:
+        case CH_AZUR:
+        case CH_BLUE:
+        case CH_PRPL:
+        case CH_MGNT:
 
-      case CH_PINK:
+        case CH_PINK:
 
-      case CH_EMPT: set_default_hsv(); return false;
+        case CH_EMPT: set_default_hsv(); return false;
 #endif
 
-      case DICTATION: register_code(KC_LGUI);  wait_ms(100);  unregister_code(KC_LGUI);
-                      return false;
+      // case DICTATION: return false;
 
-     case SIRI:      unregister_code(KC_SPC);  unregister_code(KC_LGUI);
-                     return false;
+     // case SIRI:      unregister_code(KC_SPC);  unregister_code(KC_LGUI);
+                     // return false;
 
 // _DFLT LAYER
-      case LT(_DALY,KC_J):
-      case LT(_DALY, KC_Q):
+        case LT(_DALY,KC_J):
+        case LT(_DALY, KC_Q):
 //_QWER LAYER
-      case LT(_DALY,KC_X):
-      case LT(_DALY,KC_BSPC):
+        case LT(_DALY,KC_X):
+        case LT(_DALY,KC_BSPC):
 // MINI DACTYL THUMBS
-      case MO(_DALY): // TH_R1_DALY_MOUS
+        case MO(_DALY): // TH_R1_DALY_MOUS
 // remove GUI modifier when coming from _DALY changing apps with CMD+TAB; SHIFT+CMD+TAB
                         if (changing_apps)
                         {
@@ -567,14 +593,17 @@ case _DVIM_BS:
                       break;
 
    // this line is responsible of the management of the releases for THE REST of the keys.
-      default:       return true; // Process all other keycodes normally when released
-    } // switch (keycode)
+        default:       return true; // Process all other keycodes normally when released
+      } // switch (keycode)
 
-  } // if (event->keypressed)
+    } // if (event->keypressed)
 
+#if defined(MINI_DACTYL_THUMBS)
+  } // else (case_found)
+#endif
   // return true;
   
-};// bool process_record_user(uint16_t keycode, keyrecord_t *record)
+}// bool process_record_user(uint16_t keycode, keyrecord_t *record)
 //                                                                                      //
 //                                                                                      //
 //                                  m  a  c  r   o  s                                   //

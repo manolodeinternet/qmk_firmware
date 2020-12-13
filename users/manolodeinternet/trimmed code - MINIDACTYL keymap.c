@@ -456,18 +456,6 @@
 // //[_powr]
 
 // //[_SYMB]
-//       case O_COMMENT: tap_code       (KC_SLSH);
-//                       register_code  (KC_LSFT);
-//                       tap_code       (KC_8);
-//                       unregister_code(KC_LSFT);
-//                       return false;
-
-//       case C_COMMENT: register_code  (KC_LSFT);
-//                       tap_code       (KC_8);
-//                       unregister_code(KC_LSFT);
-//                       tap_code       (KC_SLSH);
-//                       return false;
-
 //       case CHANGE_SYMB_TO_NUMB:
 //                       layer_off(_SYMB);
 //                       layer_on(_NUMB);
@@ -1338,6 +1326,98 @@
 
 
 
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//             T A P   D A N C E   F O R    [ _ A L P H ]  L A Y E R                    //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//                                                                                      //
+//               T A P    D A N C E    D E C L A R A T I O N S                          //
+//                                                                                      //
+//  THIS SECTION HAS TO BE AT THE END OF THE TAP DANCE SECTION                          //
+//                                                                                      //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_DFLT] THUMB_L1 (DVIM_Del)                                               //
+//                                                                                      //
+//  D V I M    L A Y E R    /    D E L E T E                                            //
+//                                                                                      //
+//  THUMB_L1:  @ [_DVIM] LAYER                                                          //
+//             *  DELETE,                                                               //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//instantalize an instance of 'tap' for the 'DVIM_Del' tap dance.
+// static tap DVIM_Del_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
+
+// void DVIM_Del_f_always(qk_tap_dance_state_t *state, void *user_data) {
+//   rgblight_sethsv_noeeprom(COLOR_DVIM);
+// }
+
+// void DVIM_Del_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   DVIM_Del_tap_state.state = cur_dance(state);
+//   switch (DVIM_Del_tap_state.state) {
+
+//     case   SINGLE_TAP:  register_code(KC_DEL);
+//                         break;
+
+//     case   SINGLE_HOLD: layer_on(_DVIM);
+
+//   }
+// }
+
+// void DVIM_Del_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (DVIM_Del_tap_state.state) {
+
+//     case   SINGLE_TAP:  unregister_code(KC_DEL); break;
+
+//     case   SINGLE_HOLD: layer_off(_DVIM);
+
+//   }
+//   show_RGB_LEDs();
+//   DVIM_Del_tap_state.state = 0;
+// }
+//                                                                                      //
+// [tapdance] [_dflt] thumb_l1 (dvim_del)                                               //
+//                                                                                      //
+//  d v i m    l a y e r    /    b a c k s p a c e                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
 
 
 
@@ -1358,4 +1438,346 @@
 
 
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [ _FVIM ] KC_P (FVIM_pP)                                                  //
+//                                                                                      //
+//  E N D   O F   L I N E  /  P A R A G R A P H                                         //
+//                                                                                      //
+//  KC_P:  * END OF LINE                                                                //
+//        ** END OF PARAGRAPH                                                           //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'FVIM_pP' tap dance.
+// static tap FVIM_pP_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
+
+// void FVIM_pP_function (qk_tap_dance_state_t *state, void *user_data) {
+//   FVIM_pP_tap_state.state = cur_dance(state);
+//   switch (FVIM_pP_tap_state.state) {
+//     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_RGHT);
+//                           unregister_code(KC_RGHT); unregister_code(KC_LGUI); break;
+
+//     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_DOWN);
+//                           unregister_code(KC_DOWN); unregister_code(KC_LALT); break;
+//   }
+//   FVIM_pP_tap_state.state = 0;
+// }
+//                                                                                      //
+// [tapdance] [ _fvim ] kc_p (fvim_pp)                                                  //
+//                                                                                      //
+//  e n d   o f   l i n e  /  p a r a g r a p h                                         //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//               T A P   D A N C E   F O R  -  V   I   M  -  L A Y E R S                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [ _FVIM ] KC_U (FVIM_uU)                                                  //
+//                                                                                      //
+//  B E G I N N I N G   O F   L I N E    /    P A R A G R A P H                         //
+//                                                                                      //
+//  KC_U:  * BEGINING OF LINE                                                           //
+//        ** BEGINING OF PARAGRAPH                                                      //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'FVIM_uU' tap dance.
+// static tap FVIM_uU_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
+
+// void FVIM_uU_function (qk_tap_dance_state_t *state, void *user_data) {
+//   FVIM_uU_tap_state.state = cur_dance(state);
+//   switch (FVIM_uU_tap_state.state) {
+//     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_LEFT);
+//                           unregister_code(KC_LEFT); unregister_code(KC_LGUI); break;
+
+//     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_UP);
+//                           unregister_code(KC_UP);   unregister_code(KC_LALT); break;
+//   }
+//   FVIM_uU_tap_state.state = 0;
+// }
+//                                                                                      //
+// [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
+//                                                                                      //
+//  b e g i n n i n g   o f   l i n e    /    p a r a g r a p h                         //
+//////////////////////////////////////////////////////////////////////////////////////////
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+//               T A P   D A N C E   F O R  -  V   I   M  -  L A Y E R S                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [ _FVIM ] KC_U (FVIM_uU)                                                  //
+//                                                                                      //
+//  B E G I N N I N G   O F   L I N E    /    P A R A G R A P H                         //
+//                                                                                      //
+//  KC_U:  * BEGINING OF LINE                                                           //
+//        ** BEGINING OF PARAGRAPH                                                      //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//instantalize an instance of 'tap' for the 'FVIM_uU' tap dance.
+// static tap FVIM_uU_tap_state = {
+//   .is_press_action = true,
+//   .state = 0
+// };
+
+// void FVIM_uU_finished (qk_tap_dance_state_t *state, void *user_data) {
+//   FVIM_uU_tap_state.state = cur_dance(state);
+//   switch (FVIM_uU_tap_state.state) {
+//     case SINGLE_TAP:        register_code(KC_LGUI);   register_code(KC_LEFT);
+//                           unregister_code(KC_LEFT); unregister_code(KC_LGUI); break;
+
+//     case DOUBLE_TAP:        register_code(KC_LALT);   register_code(KC_UP);
+//                           unregister_code(KC_UP);   unregister_code(KC_LALT); break;
+//   }
+// }
+// void FVIM_uU_reset (qk_tap_dance_state_t *state, void *user_data) {
+//   switch (FVIM_uU_tap_state.state) {
+//   }
+//   FVIM_uU_tap_state.state = 0;
+// }
+//                                                                                      //
+// [tapdance] [ _fvim ] kc_u (fvim_uu)                                                  //
+//                                                                                      //
+//  b e g i n n i n g   o f   l i n e    /    p a r a g r a p h                         //
+//////////////////////////////////////////////////////////////////////////////////////////
+//🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// [MINI_DACTYL] SPECIFIC TAP_DANCE FEATURES
+// [_DFLT] LAYER
+   // [UNDERSTANDING]
+   // TIME  50: is too dificult to typing   so fast !!!
+   // TIME 100 is a right time for typing very fast !!!
+   // [understanding]
+   // [DVIM_Del]=ACTION_TAP_DANCE_FN_ADVANCED_TIME(DVIM_Del_f_always,DVIM_Del_finished,DVIM_Del_reset,100)
+// [_dflt] layer
+// [_DVIM] LAYER
+  // ,[DVIM_uU] = ACTION_TAP_DANCE_FN(DVIM_uU_function)
+  // ,[DVIM_pP] = ACTION_TAP_DANCE_FN(DVIM_pP_function)
+// [_dvim] layer
+// [all_keyboards] tap_dance features
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//[_PINKY] LAYER 01 : PINKY DEMULTIPLIER LAYER
+//   [_PINKY] = LAYOUT_mini_dactyl_base_wrapper(
+// //.----------------------------------------.                 .----------------------------------------.
+//                ____PINKY__L1___,                                          ____PINKY__R1___,
+// //|----------------------------------------|                 |----------------------------------------|
+//                ____PINKY__L2___,                                          ____PINKY__R2___,
+// //|----------------------------------------|                 |----------------------------------------|
+//                ____PINKY__L3___,                                          ____PINKY__R3___
+// //'----------------------------------------'                 '----------------------------------------'
+// //                          _____LAYOUT_____               _____WRAPPR_____
+// //                     .------------------------.     .------------------------.
+// //                     |------------------------|     |------------------------|
+// //                     |------------------------|     |------------------------|
+// //                     '------------------------'     '------------------------'
+// ),
+/////////////////////////////////////////////////////////////////////////////////////////////////// ###
+// END OF _PINKY 01
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //  Left Thumb 1
+  //  Quit app
+      // case MO(_DALY): if (apps_trigger)
+      //                 {
+      //                   register_code(KC_LGUI);
+      //                        tap_code(KC_Q);
+      //                 unregister_code(KC_LGUI);
+      //                   return false; break;
+      //                 }
+      //                 else
+      //                 {
+      //                   case_found = false;
+      //                   return true; break;
+      //                 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,9 +9,9 @@
 // DEFINING AUTOMATOR MAC SERVICES SHORTCUTS                                                     //
 //                                                                                               //
 //////////////////////////////////////////////////////////////////////////////////////////
-#define   BEEP_1               HYPR(KC_R)  // 1 beep
+// #define   BEEP_1               HYPR(KC_R)  // 1 beep
 #define   BEEP_2               HYPR(KC_G)  // 2 beeps
-#define   BEEP_3               HYPR(KC_B)  // 3 beeps
+// #define   BEEP_3               HYPR(KC_B)  // 3 beeps
 //                                                                                               //
 // defining system preferences shortcuts                                                         //
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,8 +23,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // #define   BEEP_1               HYPR(KC_R)  // 1 beep
 #define   SS_BEEP_1             SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("r")))))    // 1 beep
-#define   SS_BEEP_2             SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("g")))))    // 2 beeps
-#define   SS_BEEP_3             SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("b")))))    // 3 beeps
+// #define   SS_BEEP_2             SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("g")))))    // 2 beeps
+// #define   SS_BEEP_3             SEND_STRING(SS_LSFT(SS_LCTRL(SS_LALT(SS_LGUI("b")))))    // 3 beeps
 //                                                                                               //
 // defining system preferences shortcuts                                                         //
 ///////////////////////////////////////////////////////////////////////////////////////////////////

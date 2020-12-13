@@ -277,20 +277,15 @@ acronym dictionary
  *                   '--------------------------'        '--------------------------'
  */
 // MO(_DALY) instead of OSL(_DALY) is for not getting stucked in _DVIM layer, I don't know why !
-
-
-
-// #define _DFLT_LTHMB_RW1_            LT(_LEDS,  KC_TAB), OSL(_FUNC)
-#define _DFLT_LTHMB_RW1_            LT(_LEDS,  KC_TAB), OSL(_MOUS)
+#define _DFLT_LTHMB_RW1_            LT(_LEDS,  KC_TAB), OSL(_FUNC)
 // #define _DFLT_LTHMB_RW2_        MO(_DALY), OSL(_SYMB),    TT_NUMB  // TT(_NUMB)is slower than TT_NUMB
-// #define _DFLT_LTHMB_RW2_           MO(_DALY), _SYM_SPC,    TT_NUMB  // TT(_NUMB)is slower than TT_NUMB
-#define _DFLT_LTHMB_RW2_           MO(_MOUS), _SYM_SPC,    TT_NUMB  // TT(_NUMB)is slower than TT_NUMB
+#define _DFLT_LTHMB_RW2_             MO_DALY, _SYM_SPC,    TT_NUMB  // TT(_NUMB)is slower than TT_NUMB
 
 #define      _DFLT_RTHMB_RW1_                              MO(_POWR),     OSL(_ACCN)
 
                                                   // TH_R3_APPS_TRIGGER
 // #define      _DFLT_RTHMB_RW2_                              APPS_TRIGGER , OSL(_FVIM), TD(DVIM_Del) 
-#define      _DFLT_RTHMB_RW2_                              APPS_TRIGGER , LT(_FVIM,KC_E), TD(DVIM_Del) 
+#define      _DFLT_RTHMB_RW2_                              APPS_TRIGGER , LT(_FVIM,KC_E), _DVIM_BS 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
 //
@@ -393,9 +388,9 @@ acronym dictionary
 /* [_ACCN] = LAYER 02 : ACCENTS LAYER
  *                            .-----------------.        .-----------------.
  *                            |        |        |        |        |@@@@@@@@|
- *                            |        |        |        |        |        |
- *                            |        |        |        |        |        |
- *                            |        |        |        |@[_POWR]|@[_MOUS]|
+ *                            |        |   F23  |        |        |        |
+ *                            |        | trigger|        |        |        |
+ *                            |        |KAR-MOUS|        |@[_POWR]|@[_MOUS]|
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   |        |        |        |        |        |        |        |
  *                   |  GRAVE |  DIAE- |   CIR  |        |        |        |        |
@@ -403,13 +398,13 @@ acronym dictionary
  *                   |        |        |        |        |@[_NUMB]|@[_SYMB]|@[_DALY]|
  *                   '--------------------------'        '--------------------------'
  */
-#define _ACCN_LTHMB_RW1_        XXXXXXX, XXXXXXX
+#define _ACCN_LTHMB_RW1_        XXXXXXX,  KC_F23
 #define _ACCN_LTHMB_RW2_ GRAVE,   DIAER,   CIRCU
 
 // With 'OSL(_MOUS)' it allow us not twist our fingers for access mirrored layer trigger keys
 // We can tap it and then: hold the mirrored layer trigger
 #define    _ACCN_RTHMB_RW1_                              OSL(_POWR), OSL(_MOUS) //🔥🔥🔥
-#define    _ACCN_RTHMB_RW2_                              OSL(_NUMB), OSL(_SYMB), OSL(_DALY)//OSL(_DVIM)
+#define    _ACCN_RTHMB_RW2_                              OSL(_NUMB), F(ACC_E),  OSL(_DALY)//OSL(_DVIM)
                                                        // get stuck and doesn't return to default layer
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
@@ -797,9 +792,9 @@ acronym dictionary
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |  LCtl  |  LAlt  |  LSft  |  LGui  |        |        |        |  LGui  |  LSft  |  LAlt  |  LCtl  |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |   fn   |KAR-APPS|        |        |        |        |        |        |        |KAR-APPS|   fn   |
- * | (Krbnr)| trigger|        |        |        |        |        |        |        | trigger| (Krbnr)|
- * |   F21  |   F22  |   F23  |   F24  |        |        |        |        |        |   F22  |   F21  |
+ * |   fn   |KAR-APPS|KAR-MOUS|        |        |        |        |        |KAR-MOUS|KAR-APPS|   fn   |
+ * | (Krbnr)| trigger| trigger|        |        |        |        |        | trigger| trigger| (Krbnr)|
+ * |   F21  |   F22  |   F23  |   F24  |        |        |        |        |   F23  |   F22  |   F21  |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
@@ -820,7 +815,7 @@ acronym dictionary
 
 #define      __FUNCTIONS_R1__      KC_F6,           KC_F7,          KC_F8,         KC_F9,       KC_F10
 #define      __FUNCTIONS_R2__    (KC_F16), LGUI_T(KC_F17), LSFT_T(KC_F18),LALT_T(KC_F19),LCTL_T(KC_F20)
-#define      __FUNCTIONS_R3__     XXXXXXX,        XXXXXXX,        XXXXXXX,        KC_F22,       KC_F21
+#define      __FUNCTIONS_R3__     XXXXXXX,        XXXXXXX,         KC_F23,        KC_F22,       KC_F21
 
 #if defined(MINI_DACTYL_THUMBS)
 /* [_FUNC] = LAYER 09 : FUNCTIONS LAYER
@@ -903,8 +898,7 @@ acronym dictionary
 #define _SYMB_LTHMB_RW2_      _______, TT(_SYMB),   _______
 
 #define      _SYMB_RTHMB_RW1_                                               MO(_POWR), EURO
-#define      _SYMB_RTHMB_RW2_                                               INV_EX,    INV_QU, _______
-
+#define      _SYMB_RTHMB_RW2_                                               _______,   INV_EX,    INV_QU
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
 // END OF [_SYMB] 10
@@ -990,7 +984,7 @@ acronym dictionary
 #define _DFLT_LTHMB_RW2_        MO(_DALY), OSL(_SYMB),           TT_NUMB//TT(_NUMB)isSlowerThan TT_NUMB
 
 #define      _DFLT_RTHMB_RW1_                              MO(_POWR),          OSL(_ACCN)
-#define      _DFLT_RTHMB_RW2_                              TH_R3_APPS_TRIGGER, OSL(_FVIM), TD(DVIM_Del)
+D#define      _DFLT_RTHMB_RW2_                              TH_R3_APPS_TRIGGER, OSL(_FVIM), TD(DVIM_Del)
 */
   #define _LEDS_LTHMB_RW1_                  _______, _______
   #define _LEDS_LTHMB_RW2_         _______, _______, _______

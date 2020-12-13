@@ -1,3 +1,32 @@
+commit c07efd88cedf5a80d3d396274c90000a950ef044 (HEAD -> clean_again)
+Author: Navarro <manolodeinternet@gmail.com>
+Date:   Sun Dec 13 07:44:29 2020 +0100
+
+    [#029_MINIDACTYL_GHERKIN] 2020/12/13
+      * _SYMB_SPC allows shift+enter and alt+enter
+      * some minor bug fixes
+
+commit dcfdab73b7d0823b1546789489ce8ad73de32c17
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Thu Dec 3 05:51:57 2020 +0100
+
+             [#028_MINIDACTYL_GHERKIN] 2020/12/03
+              * commit after checking MINI_DACTYL QMK_FIRMWARE and exceed the flash memory size by more than 400 bytes.
+
+commit 0ea8efc3a49602150a5f05022dcc653122b705d3
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Fri Nov 27 06:56:00 2020 +0100
+
+         [#027_MINIDACTYL_GHERKIN] 2020/11/27
+          * ... commit while cleaning how to accessing to _APPS layer only through karabiner-elements.  No 'typinator + spotlight' anymore; it's too slow.
+
+commit 8d95ae9a5e301c8077a021fafe947f5a40a2ec8e
+Author: manolodeinternet <manolodeinternet@gmail.com>
+Date:   Thu Nov 26 06:32:25 2020 +0100
+
+        [#026_MINIDACTYL_GHERKIN] 2020/11/26
+         * _UAIH layout introduced as default layout.  _QWER layout is now layer 2, accesible from _POWR(key(row2, col1))
+
 commit da4a0c53eb3404aac8f4776e4110f4291f32233e
 Author: manolodeinternet <manolodeinternet@gmail.com>
 Date:   Sun Jun 21 09:12:13 2020 +0200
