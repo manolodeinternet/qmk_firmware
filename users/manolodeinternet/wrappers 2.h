@@ -233,7 +233,7 @@ acronym dictionary
  * |  RCtl  |  RSft  |  RAlt  |  RGui  | [_ACCN]|        | [_ACCN]|  LGui  |  LAlt  |  LSft  |   LCtl |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |    F   |    G   |    V   |    D   |  Space |        |    E   |    W   |    H   |    Q   | Escape |
+ * |    F   |    G   |    V   |    D   |  Space |        |    E   |    W   |    H   |    Q   |  Enter |
  * |        |        |        |        |        |        |[_PINKY]|        |        |        |        |
  * |        | [_DALY]| [_MOUS]| [_NUMB]| [_SYMB]|        |[ _FVIM]| [_XVIM]| [_FUNC]| [_DALY]|        |
  * '--------------------------------------------'        '--------------------------------------------'
@@ -252,12 +252,12 @@ acronym dictionary
 
 #if defined(COMPREHENSIVE_30_LAYOUT)
 #define ____DFLT___L1___         KC_B,     TD(L_APPS), LT(_POWR,KC_S), LT(_LEDS,KC_C),      _DVIM_BS
-#define ____DFLT___L2___ LCTL_T(KC_J),   LSFT_T(KC_N),   LALT_T(KC_R),   LGUI_T(KC_T), LT(_ACCN,KC_M)
+#define ____DFLT___L2___ RCTL_T(KC_J),   RSFT_T(KC_N),   RALT_T(KC_R),   RGUI_T(KC_T), LT(_ACCN,KC_M)
 #define ____DFLT___L3___         KC_F, LT(_DALY,KC_G),     TD(V_MOUS), LT(_NUMB,KC_D),      _SYM_SPC
 
 #define ____DFLT___R1___  KC_Z,             LT(_LEDS,KC_Y), LT(_POWR,KC_O),TD(R_APPS),           KC_X
-#define ____DFLT___R2___  LT(_ACCN,KC_ENT), RGUI_T(KC_U),   RALT_T(KC_A),  RSFT_T(KC_I),  RCTL_T(KC_K)
-#define ____DFLT___R3___  LT(_FVIM,KC_E),   LT(_XVIM,KC_W), LT(_FUNC,KC_H),LT(_DALY, KC_Q),      KC_ESC
+#define ____DFLT___R2___  LT(_ACCN,KC_ENT), LGUI_T(KC_U),   LALT_T(KC_A),  LSFT_T(KC_I),  LCTL_T(KC_K)
+#define ____DFLT___R3___  LT(_FVIM,KC_E),   LT(_XVIM,KC_W), LT(_FUNC,KC_H),LT(_DALY, KC_Q),      KC_ENT
 //#if defined(COMPREHENSIVE_30_LAYOUT)
 #elif defined(SIMPLE_30_LAYOUT)
 /* [_DFLT] = LAYER 00 : UAIH DEFAULT LAYER
@@ -273,18 +273,18 @@ acronym dictionary
  * |  LCtl  |  LSft  |  LAlt  |  LGui  |        |        |        |  LGui  |  LAlt  |  LSft  |   LCtl |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |    F   |    G   |    V   |    D   |  Space |        |    E   |    W   |    H   |    Q   | Escape |
+ * |    F   |    G   |    V   |    D   |  Space |        |    E   |    W   |    H   |    Q   |  Enter |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
 #define ____DFLT___L1___         KC_B,         KC_L,         KC_S,         KC_C,       _DVIM_BS
-#define ____DFLT___L2___ LCTL_T(KC_J), LSFT_T(KC_N), LALT_T(KC_R), LGUI_T(KC_T),         KC_M
+#define ____DFLT___L2___ RCTL_T(KC_J), RSFT_T(KC_N), RALT_T(KC_R), RGUI_T(KC_T),         KC_M
 #define ____DFLT___L3___         KC_F,         KC_G,         KC_V,         KC_D,         KC_SPC
 
 #define ____DFLT___R1___                KC_Z,          KC_Y,         KC_O,         KC_P,         KC_X
-#define ____DFLT___R2___                KC_ENT, RGUI_T(KC_U), RALT_T(KC_A), RSFT_T(KC_I), RCTL_T(KC_K)
-#define ____DFLT___R3___                KC_E,          KC_W,         KC_H,         KC_Q,         KC_ESC
+#define ____DFLT___R2___                KC_ENT, LGUI_T(KC_U), LALT_T(KC_A), LSFT_T(KC_I), LCTL_T(KC_K)
+#define ____DFLT___R3___                KC_E,          KC_W,         KC_H,         KC_Q,         KC_ENT
 //#elif defined(SIMPLE_30_LAYOUT)
 #endif
 //
@@ -707,9 +707,9 @@ acronym dictionary
 #define PINKY_R_R2                      LGUI_T(KC_K)
 #define PINKY_R_R3                             KC_Y
 // pinkies definition
-#define ___FAKEVIM_L1___      KC_DEL,         KC_BTN1,   PINKY_L_R1, PINKY_R_R1, KC_BSPC
-#define ___FAKEVIM_L2___      LCTL_T(KC_ENT), KC_LSFT,   PINKY_L_R2, PINKY_R_R2, FVIM_H
-#define ___FAKEVIM_L3___      KC_ENT,         TT(_FVIM), PINKY_L_R3, PINKY_R_R3, KC_SPC 
+#define ___FAKEVIM_L1___      XXXXXXX, KC_BTN1, PINKY_L_R1, PINKY_R_R1,  KC_BSPC
+#define ___FAKEVIM_L2___      KC_LCTL, KC_LSFT, PINKY_L_R2, PINKY_R_R2,   FVIM_H
+#define ___FAKEVIM_L3___      XXXXXXX, KC_SPC,  PINKY_L_R3, PINKY_R_R3, TT(_FVIM)
 
 // WITHOUT CAMEL CASE JUMPS
 // #define ___FAKEVIM_R1___ C(G(KC_UP)),   TD(FVIM_uU), A(KC_LEFT), A(KC_RGHT), TD(FVIM_pP)
@@ -860,7 +860,7 @@ acronym dictionary
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|        
  * |        |        |        |        |        |        |        | Delete | Delete | Delete | Delete |
- * |        |        |        |        |        |        | DELETE |  until |  Page  |  Page  |  until |
+ * |        |        |        |        |        |        |        |  until |  Page  |  Page  |  until |
  * |        |        |        |        |        |        |        |  HOME  |   Up   |  Down  |   END  |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * '--------------------------------------------'        '--------------------------------------------'
@@ -871,7 +871,7 @@ acronym dictionary
 
 #define      ___DEL_VIM_R1___                        DVIM_Y,  DVIM_uU, DVIM_I,  DVIM_O,  DVIM_pP
 #define      ___DEL_VIM_R2___                        DVIM_H,  DVIM_J,  DVIM_K,  DVIM_L,  DVIM_SP
-#define      ___DEL_VIM_R3___                        KC_DEL,  DVIM_M,  DVIM_ES, DVIM_BS, DVIM_EN
+#define      ___DEL_VIM_R3___                        XXXXXXX, DVIM_M,  DVIM_ES, DVIM_BS, DVIM_EN
 
 #if defined(MINI_DACTYL_THUMBS)
 /* [_DVIM] = LAYER 06 : DELETE VIM LAYER
@@ -882,7 +882,7 @@ acronym dictionary
  *                            |        |        |        |@[_POWR]|        |
  *                   .--------+--------+--------|        |--------+--------|--------.
  *                   |        |        |        |        |        |        |@@@@@@@@|
- *                   |        |        |        |        | DELETE |        |        |
+ *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
  *                   |        |        |        |        |        |        |        |
  *                   '--------------------------'        '--------------------------'
@@ -891,7 +891,7 @@ acronym dictionary
 #define _DVIM_LTHMB_RW2_             _______, _______, _______
 
 #define      _DVIM_RTHMB_RW1_                                               MO(_POWR), _______
-#define      _DVIM_RTHMB_RW2_                                               _______,   KC_DEL, _______
+#define      _DVIM_RTHMB_RW2_                                               _______,   _______, _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
@@ -1104,9 +1104,9 @@ acronym dictionary
 #define ___SYMBOLS_L2___  KC_LCTL, LSFT_T(KC_MINS),LALT_T(KC_LBRC),LGUI_T(KC_RBRC), CURRENCY_SIGN
 #define ___SYMBOLS_L3___  XXXXXXX,         PLUS_EQ,        QUOTE,        D_QUOTE,       XXXXXXX
 
-#define           ___SYMBOLS_R1___ PERC_CI,  KC_LPRN,          KC_RPRN,        EXCLAMATION_MARK, XXXXXXX
-#define           ___SYMBOLS_R2___ KC_GRAVE, LGUI_T(KC_COMMA), LALT_T(KC_DOT), LSFT_T(KC_SCLN),  KC_LCTL
-#define           ___SYMBOLS_R3___ AT_HASH,  KC_LCBR,          KC_RCBR,        QUESTION_MARK,    XXXXXXX
+#define           ___SYMBOLS_R1___ PERC_CI,  KC_LPRN,          KC_RPRN,        EXCLAMATION_MARK, KC_ENT
+#define           ___SYMBOLS_R2___ KC_GRAVE, LGUI_T(KC_COMMA), LALT_T(KC_DOT), LSFT_T(KC_SCLN), KC_LCTL
+#define           ___SYMBOLS_R3___ AT_HASH,  KC_LCBR,          KC_RCBR,        QUESTION_MARK,    KC_SPC
 
 #if defined(MINI_DACTYL_THUMBS)
 /* [_SYMB] = LAYER 10 : SYMBOLS LAYER

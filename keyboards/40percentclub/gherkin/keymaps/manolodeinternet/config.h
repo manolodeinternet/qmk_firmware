@@ -73,19 +73,6 @@
 //
 
 //
-// DEFINE APPS_TRIGGERS
-//
-// You have to uncomment one of these two lines:
-//
-/* 1: */ 
-// #define DEFAULT_TYPINATOR_APPS
-/* 2: */
-#define DEFAULT_KARABINER_APPS
-//
-// define apps_triggers
-//
-
-//
 // DEFINE LEDS_TYPE
 //
 // You have to uncomment the lines you don't need:
@@ -97,6 +84,31 @@
 //
 // define apps_triggers
 //
+
+
+
+/*
+ifeq ($(strip $(SIMPLE_30)), yes)
+    SRC += manolodeinternet.c \
+           simple_30_layout_manolodeinternet.c \
+           process_record_keymap.c
+endif
+
+ifeq ($(strip $(COMPREHENSIVE_30)), yes)
+    SRC += manolodeinternet.c \
+           comprehensive_30_layout_manolodeinternet.c
+endif
+
+ifeq ($(strip $(RGBLIGHT_ENABLE)), yes)
+#   SRC += rgblight_mini_dactyl.c  // doesn't work, it needs the whole path:
+    SRC += /Users/navarro/qmk_firmware/users/manolodeinternet/rgblight_mini_dactyl.c \
+           /Users/navarro/qmk_firmware/users/manolodeinternet/rgblight_manolodeinternet.c
+endif
+
+ifeq ($(strip $(BACKLIGHT_ENABLE)), yes)
+    SRC += /Users/navarro/qmk_firmware/users/manolodeinternet/backlight_manolodeinternet.c
+endif
+*/
 
 
 //🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥

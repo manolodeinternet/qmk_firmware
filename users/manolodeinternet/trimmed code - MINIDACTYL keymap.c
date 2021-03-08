@@ -1,3 +1,36 @@
+[... FROM QMK_FIRMWARE/KEYBOARDS/HANDWIRED/MINI_DACTYL/KEYMAPS/MANOLODEINTERNET/CONFIG.H]:
+//
+// define layout
+//
+
+//
+// DEFINE APPS_TRIGGERS
+//
+// You have to uncomment one of these two lines:
+//
+/* 1: */ 
+// #define DEFAULT_TYPINATOR_APPS
+/* 2: */
+#define DEFAULT_KARABINER_APPS
+//
+// define apps_triggers
+//
+[... from qmk_firmware/keyboards/handwired/mini_dactyl/keymaps/manolodeinternet/config.h]:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
   ,[RC_INCO]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, RC_INCO_finished, RC_INCO_reset) 
 
@@ -1751,6 +1784,38 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // if (apps_trigger || karabiner_apps_trigger)
+  // {
+  //   return process_record_apps(keycode, record);
+  // }
 
 
 

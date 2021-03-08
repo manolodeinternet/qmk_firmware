@@ -44,7 +44,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch(keycode)
     {
 
-case _SYM_SPC:       if (check_mod_and_remove_it(SHFT_MODS, true))
+case _SYM_SPC:       if (check_mod_and_remove_it(SHFT_MODS, false))
                               {
                                 tap_code(KC_ENT);
                                 register_code(KC_LSFT);
@@ -71,10 +71,9 @@ case _DVIM_BS:
 #if defined(RGB_LEDS)
   rgblight_sethsv_noeeprom(HSV_MY_RED);
 #endif
-                       if (check_mod_and_remove_it(SHFT_MODS, true))
+                       if (check_mod_and_remove_it(SHFT_MODS, false))
                        {
-                         tap_code(KC_DEL);
-                         register_code(KC_LSFT);
+                         tap_code(KC_DEL); 
                        }
                        else 
                        {
@@ -338,13 +337,13 @@ case _DVIM_BS:
 //🔥
 //[_POWR]
       case MY_CLEAR:  
-                   // if caps_lock is ON
-                      if (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)){
-                        capslock_tap();
-                      }
-                   // if caps_lock is OFF
-                      else {
-                      };
+                   // // if caps_lock is ON
+                   //    if (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)){
+                   //      capslock_tap();
+                   //    }
+                   // // if caps_lock is OFF
+                   //    else {
+                   //    };
 
                       clear_keyboard();
                       clear_mods();

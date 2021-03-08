@@ -86,6 +86,7 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
 
       ,_SYM_SPC          // [_SYMB] layer / Spacebar  / Enter  / Escape
       ,_DVIM_BS          // [_DVIM] layer / Backspace / Delete
+      ,_APPS_TRIGGER     // [_APPS] layer 
       ,BSPC_DEL          // Backspace  / Delete
       ,QUESTION_MARK     // Open       / Close Question   Mark
       ,EXCLAMATION_MARK  // Open       / Close Excamation Mark

@@ -190,6 +190,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // [_DFLT] LAYER
   [L_APPS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, L_APPS_finished, L_APPS_reset)
  ,[R_APPS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, R_APPS_finished, R_APPS_reset)
+ ,[V_MOUS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, V_MOUS_finished, V_MOUS_reset)
 // [_dflt] layer
 
 // [_NUMB] LAYER
@@ -385,15 +386,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 //[_MOUS] = LAYER 08 : MOUSE LAYER
-  [_MOUS] = KEYMAP_gherkin_wrapper(
+  // [_MOUS] = KEYMAP_gherkin_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
-               ____MOUSE_L1____,                                          ____MOUSE_R1____,
+               // ____MOUSE_L1____,                                          ____MOUSE_R1____,
 //|----------------------------------------|                 |----------------------------------------|
-               ____MOUSE_L2____,                                          ____MOUSE_R2____,
+               // ____MOUSE_L2____,                                          ____MOUSE_R2____,
 //|----------------------------------------|                 |----------------------------------------|
-               ____MOUSE_L3____,                                          ____MOUSE_R3____
+               // ____MOUSE_L3____,                                          ____MOUSE_R3____
 //'----------------------------------------'                 '----------------------------------------'
-),
+// ),
 // END OF _MOUS 08
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
@@ -526,6 +527,14 @@ uint32_t layer_state_set_user(uint32_t state) {
         //   HIDEOTH; //Long: SEND_STRING(SS_LALT(SS_LGUI("h"))); //Wrong: register_code(LALT(LGUI(KC_H)));
         //   hide_other_apps = false;
         // }
+        // if we come from pressing `NEXT_APP` or `PREV_APP` from [_DALY] layer, ...
+        // ...we need to unregister COMMAND key.
+        if (changing_apps)
+        {
+          changing_apps = false;
+          unregister_code(KC_LGUI);
+        }
+
         backlight_level(gherkinBacklightLevel);
 
           if (capslock_is_active)
@@ -565,9 +574,9 @@ uint32_t layer_state_set_user(uint32_t state) {
         backlight_level(BL_DVIM);
         break;
 
-    case _MOUS:   // 8
-        backlight_level(BL_MOUS);
-        break;
+    // case _MOUS:   // 8
+    //     backlight_level(BL_MOUS);
+    //     break;
 
 
     case _DALY:   //  9

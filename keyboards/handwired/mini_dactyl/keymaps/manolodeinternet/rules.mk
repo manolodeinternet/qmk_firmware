@@ -6,7 +6,10 @@ endif
 
 
 TAP_DANCE_ENABLE  = yes # Enable Tap Dance (comment if not being implemented)
-MOUSEKEY_ENABLE   = yes # Mouse keys(+4700)
+
+#🐭
+MOUSEKEY_ENABLE   = no # Mouse keys(+4700)
+
 UNICODE_ENABLE    = no
 UNICODEMAP_ENABLE = no
 

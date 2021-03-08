@@ -26,40 +26,37 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch(keycode)
     {
 //[_DFLT]
-case _SYM_SPC:       if ( get_mods()&GUI_MODS && get_mods()&ALT_MODS )
-                     {
-                       unregister_code(KC_LALT);
-                       unregister_code(KC_LGUI);  
-                              tap_code(KC_ESC);
-                         register_code(KC_LALT); // allows iterations of ESC in a row
-                         register_code(KC_LGUI); // allows iterations of ESC in a row
-                     }
-                     else
-                     {
+      case _APPS_TRIGGER_KEY: 
 
-                       if ( ( get_mods()&CTRL_MODS ) && ( !( get_mods()&GUI_MODS ) ) )// ctrl; ctrl+sft; ctrl+alt -> Enter                        
-                       {
-                       unregister_code(KC_LCTL);
-                            tap_code16(KC_ENT);   // tap_code16 allows tapping SFT(Enter) or ALT(Enter) if needed
-                         register_code(KC_LCTL); // allows several iterations of Enter in a row
-                       }
-                       else// !ctrl; ctrl+gui -> spacebar
-                       {
-                         symbol_or_space = true;
-                         lt13_timer = timer_read();
-                         layer_on(_SYMB);
-                       }
-                     }
-                     return false; break;
+#if defined(RGBLIGHT_ENABLE)
+                            rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)
+                            apps_trigger = true;
+
+#elif defined(BACKLIGHT_ENABLE)
+                            backlight_level(BL_APPS);
+#endif
+                            // register_code(_APPS_TRIGGER_KEY);
+                            // register_code(KC_F22);
+                            return true; break;
+
+case _SYM_SPC:         lt13_timer = timer_read();
+                       layer_on(_SYMB);
+                       return false; break;
 
 case _DVIM_BS:         layer_on(_DVIM);  // this switch on LEDS even when we use DELETE
 
-                       if (check_mod_and_remove_it(SHFT_MODS, true))
+                       if (check_mod_and_remove_it(SHFT_MODS, false))
                        {
                          tap_code(KC_DEL);
-                         register_code(KC_LSFT);
+                         // register_code(KC_LSFT);
                        }
-                       else 
+                       else
+                       if (check_mod_and_remove_it(GUI_MODS, true))
+                       {
+                         tap_code(KC_ESC);
+                         register_code(KC_LGUI);
+                       }
+                       else
                        {
                          lt13_timer = timer_read();
                        }
@@ -246,7 +243,7 @@ case _DVIM_BS:         layer_on(_DVIM);  // this switch on LEDS even when we use
 //🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🗑🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
 //[_LEDS]
-#if defined(COMPREHENSIVE_30_LAYOUT)
+#if defined(BACKLIT_LEDS)
 
       case BLIT_OFF: gherkinBacklightLevel =  0; backlight_level(gherkinBacklightLevel); return false;
       case BLIT_01:  gherkinBacklightLevel =  1; backlight_level(gherkinBacklightLevel); return false;
@@ -331,12 +328,26 @@ case _DVIM_BS:         layer_on(_DVIM);  // this switch on LEDS even when we use
 //[_POWR]
       case MY_CLEAR:  
                    // if caps_lock is ON
-                      if (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)){
-                        capslock_tap();
-                      }
+
+
+
+  if (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK))
+  {
+      PORTD |= (1<<4);
+  }
+  else
+  {
+      PORTD &= ~(1<<4);
+  }
+
+
+
+                      // if (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)){
+                      //   capslock_tap();
+                      // }
                    // if caps_lock is OFF
-                      else {
-                      };
+                      // else {
+                      // };
 
                       clear_keyboard();
                       clear_mods();
@@ -473,30 +484,37 @@ case _DVIM_BS:         layer_on(_DVIM);  // this switch on LEDS even when we use
 
     {
 //  Do something else when release
-
-  // if (apps_trigger || karabiner_apps_trigger)
-  // {
-  //   return process_record_apps(keycode, record);
-  // }
       switch(keycode)
       {
+      case _APPS_TRIGGER_KEY: 
+#if defined(RGB_LEDS)
+                           apps_trigger = false;
 
-// if ( get_mods()&CTRL_MODS && !(get_mods()&GUI_MODS) )
-// if ( !( get_mods()&CTRL_MODS && !(get_mods()&GuUI_MODS) )
-        case _SYM_SPC:     if (symbol_or_space)
-                           {
-                             if (timer_elapsed(lt13_timer) < TAPPING_TERM)
-                             {  
-                               tap_code16(KC_SPC);                        
-                             }
+//                             rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)
+// #elif defined(BACKLIT_LEDS)
+//                             backlight_level(BL_APPS);
+#endif
+                            // unregister_code(_APPS_TRIGGER_KEY); // [_APPS]  // KC_F22
+
+                            // layer_state_set_user(layer_state);  // this function is named the same on both keyboards (gherkin and mini_dactyl)
+
+                            // return false; break;
+
+    
+                           layer_state_set_user(layer_state);  // this function is named the same on both keyboards (gherkin and mini_dactyl)
+                           return true; break;
+
+        case _SYM_SPC:     if (timer_elapsed(lt13_timer) < TAPPING_TERM)
+                           {  
+                             tap_code16(KC_SPC);                        
                            }
-                           symbol_or_space = false;
                            layer_off(_SYMB);
 
                            return false; break;
 
 
-        case _DVIM_BS:       if (!(check_mod_and_remove_it(SHFT_MODS, false)))
+        case _DVIM_BS:     if ( !( (check_mod_and_remove_it(SHFT_MODS, false)) ||
+                                   (check_mod_and_remove_it(GUI_MODS,  false))     ) )
                            {
                              if (timer_elapsed(lt13_timer) < TAPPING_TERM)
                              {  
@@ -504,17 +522,9 @@ case _DVIM_BS:         layer_on(_DVIM);  // this switch on LEDS even when we use
                              }
                            }
                            layer_off(_DVIM);
-
                            return false; break;
-
-
-//🔥
-//[_DFLT]
-// #if defined(SIMPLE_30_LAYOUT)
-//   case BSPC_DEL: show_RGB_LEDs();
-//                    return false;  break;
-// #endif
 //[_dflt]       
+
 
 //[_ACCN]
         case CIRCU: circumflex_requested = false; // non-requested circumflex accent
@@ -528,13 +538,16 @@ case _DVIM_BS:         layer_on(_DVIM);  // this switch on LEDS even when we use
         return false;                      // Skip all further processing of this key when released
 //[_accn]
 
+
+//[_POWR]
         case MY_CLEAR:  clear_mods();
                         clear_keyboard();                      
                         layer_clear();
-                        return false;
-                        break;
+                        return false; break;
+//[_powr]
 
-#if defined(SIMPLE_30_LAYOUT)
+
+#if defined(RGB_LEDS)
         case RGB_HUI:
         case RGB_HUD:
         case RGB_SAI:

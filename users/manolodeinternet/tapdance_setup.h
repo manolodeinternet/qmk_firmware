@@ -52,8 +52,10 @@ enum tap_dance_keycodes {
 
   // COMMON TAPDANCE KEYCODES ACCESSIBLE FROM ALL KEYBOARDS
 
+    V_MOUS
+
   // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
-   TG_QWE  // toggle _QWER layer ON/OFF 
+  ,TG_QWE  // toggle _QWER layer ON/OFF 
   ,LCKLOG  // lock screen / (on hold) logout user session
   ,HRESET  // on hold RESET keyboard
 
@@ -77,7 +79,6 @@ enum tap_dance_keycodes {
     // TAP DANCE KEYCODES ACCESSIBLE FROM _DFLT LAYER 0
     ,L_APPS
     ,R_APPS
-
     // TAP DANCE KEYCODES ACCESSIBLE FROM _NUMB LAYER 02
     ,NUMBOF  //   return to *GHKN layer (gherkin default layer)  // ... percent
     ,SLNUMB  //   return to *GHKN layer (gherkin default layer)  // ... slash
@@ -319,6 +320,31 @@ void RA_INCO_reset    (qk_tap_dance_state_t *state, void *user_data);
 //                                                                                      //
 //  T A P   D A N C E   F O R   [ _ D F L T ]  L A Y E R    ( I A E O U  /  Q W E R T)  //
 //                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// [TAPDANCE] [_DFLT] KC_V (V_MOUS)                                                     //
+//                                                                                      //
+//  _ M O U S     L A Y E R                                                             //
+//                                                                                      //
+//  KC_V: *  KC_V                                                                       //
+//        @  _MOUS LAYER                                                                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//instantalize an instance of 'tap' for the 'V_MOUS' tap dance.
+/*static tap V_MOUS_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};*/
+void V_MOUS_finished (qk_tap_dance_state_t *state, void *user_data);
+void V_MOUS_reset (qk_tap_dance_state_t *state, void *user_data);
+//                                                                                      //
+// [tapdance] [_dflt] kc_p (v_mous)                                                     //
+//                                                                                      //
+//  _ m o u s     l a y e r                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
 //

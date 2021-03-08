@@ -90,17 +90,17 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 
 
 
-//       case O_COMMENT: tap_code       (KC_SLSH);
-//                       register_code  (KC_LSFT);
-//                       tap_code       (KC_8);
-//                       unregister_code(KC_LSFT);
-//                       return false;
+      case O_COMMENT: tap_code       (KC_SLSH);
+                      register_code  (KC_LSFT);
+                      tap_code       (KC_8);
+                      unregister_code(KC_LSFT);
+                      return false;
 
-//       case C_COMMENT: register_code  (KC_LSFT);
-//                       tap_code       (KC_8);
-//                       unregister_code(KC_LSFT);
-//                       tap_code       (KC_SLSH);
-//                       return false;
+      case C_COMMENT: register_code  (KC_LSFT);
+                      tap_code       (KC_8);
+                      unregister_code(KC_LSFT);
+                      tap_code       (KC_SLSH);
+                      return false;
 
 
 
@@ -109,8 +109,8 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 
 
 //[_DFLT]
-      case APPS_TRIGGER: apps_trigger = true;
-                         return true; break;
+      // case _APPS_TRIGGER: apps_trigger = true;
+      //                    return true; break;
 
       case MO_DALY: if (apps_trigger)
                       {
@@ -407,8 +407,8 @@ ROW 3 COLORS
     case_found = true;
     switch(keycode)
     {
-      case APPS_TRIGGER: apps_trigger = false;
-                         return true; break;
+      // case _APPS_TRIGGER: apps_trigger = false;
+      //                    return true; break;
 
       // case OSL_LEDS: 
       //                clear_oneshot_layer_state(ONESHOT_PRESSED);

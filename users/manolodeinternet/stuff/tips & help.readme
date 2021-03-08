@@ -11,6 +11,18 @@ All this precompiler stuff is choosen into the config file of each keyboard who 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+[LIGHTS TIP]
+THE WAY OF IMPLEMENT DIFFERENT LIGHTS IN THE SAME STATEMENT FOR BOTH KEYBOARDS (RGB AND BACKLIT)
+
+#if defined(RGBLIGHT_ENABLE)
+                            rgblight_sethsv_noeeprom(COLOR_APPS); // (0xFF, 0x80, 0xBF)
+#elif defined(BACKLIGHT_ENABLE)
+                            backlight_level(BL_APPS);
+#endif
+[lights tip]
+
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 What is #include QMK_KEYBOARD_H for ?

@@ -96,7 +96,8 @@ users/manolodeinternet/tapdance_setup.h:9:8: note: originally defined here
 //                                                                                                   //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                   //
-#define APPS_TRIGGER KC_F22                                                                          //
+#define _APPS_TRIGGER_KEY KC_F22                                                                         //
+#define _MOUS_TRIGGER_KEY KC_F24                                                                         //
 //                                                                                                   //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 

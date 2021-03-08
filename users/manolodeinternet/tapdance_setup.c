@@ -418,6 +418,122 @@ void TG_QWE_reset (qk_tap_dance_state_t *state, void *user_data) {
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
+// [TAPDANCE] [_DFLT] KC_V (V_MOUS)                                                     //
+//                                                                                      //
+//  _ M O U S     L A Y E R                                                             //
+//                                                                                      //
+//  KC_V: *  KC_V                                                                       //
+//        @  _MOUS LAYER                                                                //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//instantalize an instance of 'tap' for the 'V_MOUS' tap dance.
+static tap V_MOUS_tap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+void V_MOUS_finished (qk_tap_dance_state_t *state, void *user_data) {
+  V_MOUS_tap_state.state = cur_dance(state);
+  switch (V_MOUS_tap_state.state) {
+
+    case SINGLE_TAP:  //tap_code(KC_P);
+                      //Function  Description Aliases
+                      //FUNCTION: layer_state_is(layer)
+                      //DESCRIPTION: Checks if the specified layer is enabled globally.
+                      //ALIASES: IS_LAYER_ON(layer), IS_LAYER_OFF(layer)
+/*
+#if defined(BACKLIT_LEDS)
+                      register_code(KC_V);
+#elif defined(RGB_LEDS)
+                      register_code(KC_ESC);
+#endif
+*/
+#if defined(MINI_DACTYL_THUMBS)
+                      register_code(KC_ESC);
+#else
+                      if(layer_state_is(_QWER))
+                        register_code(KC_C);
+                      else
+                        register_code(KC_V);
+#endif
+                      break;
+
+    case SINGLE_HOLD: register_code(_MOUS_TRIGGER_KEY); // [_MOUS] // KC_F24
+    // case SINGLE_HOLD: register_code(KC_F24); // [_MOUS] // KC_F24
+
+#if defined(BACKLIT_LEDS)
+                            backlight_level(BL_MOUS);
+#elif defined(RGB_LEDS)
+                            rgblight_sethsv_noeeprom(COLOR_MOUS); // (0x00,  0xFF, 0x00)
+#endif
+                      break;
+  }
+}
+
+
+
+/*
+ifeq ($(strip $(SIMPLE_30)), yes)
+    SRC += manolodeinternet.c \
+           simple_30_layout_manolodeinternet.c \
+           process_record_keymap.c
+endif
+
+ifeq ($(strip $(COMPREHENSIVE_30)), yes)
+    SRC += manolodeinternet.c \
+           comprehensive_30_layout_manolodeinternet.c
+endif
+
+ifeq ($(strip $(RGBLIGHT_ENABLE)), yes)
+#   SRC += rgblight_mini_dactyl.c  // doesn't work, it needs the whole path:
+    SRC += /Users/navarro/qmk_firmware/users/manolodeinternet/rgblight_mini_dactyl.c \
+           /Users/navarro/qmk_firmware/users/manolodeinternet/rgblight_manolodeinternet.c
+endif
+
+ifeq ($(strip $(BACKLIGHT_ENABLE)), yes)
+    SRC += /Users/navarro/qmk_firmware/users/manolodeinternet/backlight_manolodeinternet.c
+endif
+*/
+
+
+
+
+void V_MOUS_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (V_MOUS_tap_state.state) {
+
+    case SINGLE_TAP:
+#if defined(MINI_DACTYL_THUMBS)
+                      unregister_code(KC_ESC);
+#else
+                      if(layer_state_is(_QWER))
+                        unregister_code(KC_C);
+                      else
+                        unregister_code(KC_V);
+#endif
+                      break;
+
+    case SINGLE_HOLD: unregister_code(_MOUS_TRIGGER_KEY); // [_MOUS]  // KC_F24
+    // case SINGLE_HOLD: unregister_code(KC_F24); // [_MOUS]  // KC_F24
+
+                      layer_state_set_user(layer_state);  // this function is named the same on both keyboards (gherkin and mini_dactyl)
+                      break;
+  }
+  V_MOUS_tap_state.state = 0;
+}
+//                                                                                      //
+// [tapdance] [_dflt] kc_p (v_mous)                                                     //
+//                                                                                      //
+//  _ m o u s     l a y e r                                                             //
+//////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
 // [TAPDANCE] [_DFLT] KC_P (L_APPS)                                                     //
 //                                                                                      //
 //  _ A P P S     L A Y E R                                                             //
@@ -475,11 +591,11 @@ void L_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [_DFLT] KC_L (R_APPS)                                                     //
+// [TAPDANCE] [_DFLT] KC_P (R_APPS)                                                     //
 //                                                                                      //
 //  _ A P P S     L A Y E R                                                             //
 //                                                                                      //
-//  KC_L: *  KC_L                                                                       //
+//  KC_P: *  KC_P                                                                       //
 //        @  _APPS LAYER                                                                //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -524,7 +640,7 @@ void R_APPS_reset (qk_tap_dance_state_t *state, void *user_data) {
   R_APPS_tap_state.state = 0;
 }
 //                                                                                      //
-// [tapdance] [_dflt] kc_l (r_apps)                                                     //
+// [tapdance] [_dflt] kc_p (r_apps)                                                     //
 //                                                                                      //
 //  _ a p p s     l a y e r                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -130,8 +130,10 @@
 
 qk_tap_dance_action_t tap_dance_actions[] = {
 
+  [V_MOUS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, V_MOUS_finished, V_MOUS_reset)
+
 // [_POWR] LAYER
-   [TG_QWE]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, TG_QWE_finished, TG_QWE_reset, 800)
+  ,[TG_QWE]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, TG_QWE_finished, TG_QWE_reset, 800)
   ,[LCKLOG]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, LCKLOG_finished, LCKLOG_reset, 800)
   ,[HRESET]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, HRESET_finished, HRESET_reset, 1000)
 
@@ -371,23 +373,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
 //[_MOUS] = LAYER 07 : MOUSE LAYER
-  [_MOUS] = LAYOUT_wrapper(
+  // [_MOUS] = LAYOUT_wrapper(
 //.----------------------------------------.                 .----------------------------------------.
-               ____MOUSE_L1____,                                          ____MOUSE_R1____,
+               // ____MOUSE_L1____,                                          ____MOUSE_R1____,
 //|----------------------------------------|                 |----------------------------------------|
-               ____MOUSE_L2____,                                          ____MOUSE_R2____,
+               // ____MOUSE_L2____,                                          ____MOUSE_R2____,
 //|----------------------------------------|                 |----------------------------------------|
-               ____MOUSE_L3____,                                          ____MOUSE_R3____,
+               // ____MOUSE_L3____,                                          ____MOUSE_R3____,
 //'----------------------------------------'                 '----------------------------------------'
 //
 //                     .------------------------.     .------------------------.
-                            _MOUS_LTHMB_RW1_,              _MOUS_RTHMB_RW1_,
+                            // _MOUS_LTHMB_RW1_,              _MOUS_RTHMB_RW1_,
 //                     |------------------------|     |------------------------|
-                                      KC_NO ,               KC_NO,
+                                      // KC_NO ,               KC_NO,
 //                     |------------------------|     |------------------------|
-                            _MOUS_LTHMB_RW2_,              _MOUS_RTHMB_RW2_
+                            // _MOUS_LTHMB_RW2_,              _MOUS_RTHMB_RW2_
 //                     '------------------------'     '------------------------'
-),
+// ),
 // END OF _MOUS 07
 /////////////////////////////////////////////////////////////////////////////////////////////////// ###
 
@@ -590,9 +592,9 @@ uint32_t layer_state_set_user(uint32_t state) {
         rgblight_sethsv_noeeprom(COLOR_DVIM); // (0xFF, 0x00, 0x00)
         break;
 
-    case _MOUS:   // 7
-        rgblight_sethsv_noeeprom(COLOR_MOUS); // (0x00,  0xFF, 0x00)
-        break;
+    // case _MOUS:   // 7
+    //     rgblight_sethsv_noeeprom(COLOR_MOUS); // (0x00,  0xFF, 0x00)
+    //     break;
 
     case _DALY:   //  8
         rgblight_sethsv_noeeprom(COLOR_DALY); // (0x7A, 0x00, 0xFF)
