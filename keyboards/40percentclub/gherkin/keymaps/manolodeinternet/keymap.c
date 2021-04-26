@@ -190,7 +190,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 // [_DFLT] LAYER
   [L_APPS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, L_APPS_finished, L_APPS_reset)
  ,[R_APPS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, R_APPS_finished, R_APPS_reset)
- ,[V_MOUS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, V_MOUS_finished, V_MOUS_reset)
+ ,[G_MOUS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, G_MOUS_finished, G_MOUS_reset)
 // [_dflt] layer
 
 // [_NUMB] LAYER

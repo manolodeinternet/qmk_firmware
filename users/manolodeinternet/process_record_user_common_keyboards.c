@@ -160,11 +160,11 @@ case _DVIM_BS:         layer_on(_DVIM);  // this switch on LEDS even when we use
                      // }
                      return false; break;
 
-      case QUOTE:      tap_code(KC_QUOT);
+      case QUOTE_SP:   tap_code(KC_QUOT);
                        tap_code(KC_SPC); // quote sign  plus spacebar
                        return false; break;
 
-      case D_QUOTE:      register_code(KC_LSFT);
+      case D_QUOTE_SP:   register_code(KC_LSFT);
                               tap_code(KC_QUOT);
                        unregister_code(KC_LSFT);
                               tap_code(KC_SPC); // quote sign  plus spacebar

@@ -130,7 +130,7 @@
 
 qk_tap_dance_action_t tap_dance_actions[] = {
 
-  [V_MOUS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, V_MOUS_finished, V_MOUS_reset)
+   [G_MOUS]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, G_MOUS_finished, G_MOUS_reset)
 
 // [_POWR] LAYER
   ,[TG_QWE]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, TG_QWE_finished, TG_QWE_reset, 800)

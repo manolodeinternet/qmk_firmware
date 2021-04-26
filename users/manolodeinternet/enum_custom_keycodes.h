@@ -94,8 +94,8 @@ enum custom_keycodes { // IT BEGINS AT A SAFE_RANGE... (this is the last enum)
       ,PLUS_EQ           // Plus       / Equal symbol
       ,PERC_CI           // Percentage / Circumflex signs
       ,AT_HASH
-      ,QUOTE
-      ,D_QUOTE
+      ,QUOTE_SP
+      ,D_QUOTE_SP
       ,B_LN_PR  // Move   until Begin of Line or Paragraph
       ,E_LN_PR  // Move   until End   of Line or Paragraph
       ,B_WD_CC  // Move   until Begin of Word or CamelCase change

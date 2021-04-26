@@ -418,23 +418,23 @@ void TG_QWE_reset (qk_tap_dance_state_t *state, void *user_data) {
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [_DFLT] KC_V (V_MOUS)                                                     //
+// [TAPDANCE] [_DFLT] KC_G (G_MOUS)                                                     //
 //                                                                                      //
 //  _ M O U S     L A Y E R                                                             //
 //                                                                                      //
-//  KC_V: *  KC_V                                                                       //
+//  KC_G: *  KC_G                                                                       //
 //        @  _MOUS LAYER                                                                //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-//instantalize an instance of 'tap' for the 'V_MOUS' tap dance.
-static tap V_MOUS_tap_state = {
+//instantalize an instance of 'tap' for the 'G_MOUS' tap dance.
+static tap G_MOUS_tap_state = {
   .is_press_action = true,
   .state = 0
 };
-void V_MOUS_finished (qk_tap_dance_state_t *state, void *user_data) {
-  V_MOUS_tap_state.state = cur_dance(state);
-  switch (V_MOUS_tap_state.state) {
+void G_MOUS_finished (qk_tap_dance_state_t *state, void *user_data) {
+  G_MOUS_tap_state.state = cur_dance(state);
+  switch (G_MOUS_tap_state.state) {
 
     case SINGLE_TAP:  //tap_code(KC_P);
                       //Function  Description Aliases
@@ -443,7 +443,7 @@ void V_MOUS_finished (qk_tap_dance_state_t *state, void *user_data) {
                       //ALIASES: IS_LAYER_ON(layer), IS_LAYER_OFF(layer)
 /*
 #if defined(BACKLIT_LEDS)
-                      register_code(KC_V);
+                      register_code(KC_G);
 #elif defined(RGB_LEDS)
                       register_code(KC_ESC);
 #endif
@@ -454,7 +454,7 @@ void V_MOUS_finished (qk_tap_dance_state_t *state, void *user_data) {
                       if(layer_state_is(_QWER))
                         register_code(KC_C);
                       else
-                        register_code(KC_V);
+                        register_code(KC_G);
 #endif
                       break;
 
@@ -498,8 +498,8 @@ endif
 
 
 
-void V_MOUS_reset (qk_tap_dance_state_t *state, void *user_data) {
-  switch (V_MOUS_tap_state.state) {
+void G_MOUS_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (G_MOUS_tap_state.state) {
 
     case SINGLE_TAP:
 #if defined(MINI_DACTYL_THUMBS)
@@ -508,7 +508,7 @@ void V_MOUS_reset (qk_tap_dance_state_t *state, void *user_data) {
                       if(layer_state_is(_QWER))
                         unregister_code(KC_C);
                       else
-                        unregister_code(KC_V);
+                        unregister_code(KC_G);
 #endif
                       break;
 
@@ -518,10 +518,10 @@ void V_MOUS_reset (qk_tap_dance_state_t *state, void *user_data) {
                       layer_state_set_user(layer_state);  // this function is named the same on both keyboards (gherkin and mini_dactyl)
                       break;
   }
-  V_MOUS_tap_state.state = 0;
+  G_MOUS_tap_state.state = 0;
 }
 //                                                                                      //
-// [tapdance] [_dflt] kc_p (v_mous)                                                     //
+// [tapdance] [_dflt] kc_p (g_mous)                                                     //
 //                                                                                      //
 //  _ m o u s     l a y e r                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////

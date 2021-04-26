@@ -52,7 +52,7 @@ enum tap_dance_keycodes {
 
   // COMMON TAPDANCE KEYCODES ACCESSIBLE FROM ALL KEYBOARDS
 
-    V_MOUS
+   G_MOUS
 
   // TAP DANCE KEYCODES ACCESSIBLE FROM _POWR LAYER 12
   ,TG_QWE  // toggle _QWER layer ON/OFF 
@@ -325,7 +325,7 @@ void RA_INCO_reset    (qk_tap_dance_state_t *state, void *user_data);
 //
 //////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                      //
-// [TAPDANCE] [_DFLT] KC_V (V_MOUS)                                                     //
+// [TAPDANCE] [_DFLT] KC_V (G_MOUS)                                                     //
 //                                                                                      //
 //  _ M O U S     L A Y E R                                                             //
 //                                                                                      //
@@ -334,15 +334,15 @@ void RA_INCO_reset    (qk_tap_dance_state_t *state, void *user_data);
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 //
-//instantalize an instance of 'tap' for the 'V_MOUS' tap dance.
-/*static tap V_MOUS_tap_state = {
+//instantalize an instance of 'tap' for the 'G_MOUS' tap dance.
+/*static tap G_MOUS_tap_state = {
   .is_press_action = true,
   .state = 0
 };*/
-void V_MOUS_finished (qk_tap_dance_state_t *state, void *user_data);
-void V_MOUS_reset (qk_tap_dance_state_t *state, void *user_data);
+void G_MOUS_finished (qk_tap_dance_state_t *state, void *user_data);
+void G_MOUS_reset (qk_tap_dance_state_t *state, void *user_data);
 //                                                                                      //
-// [tapdance] [_dflt] kc_p (v_mous)                                                     //
+// [tapdance] [_dflt] kc_p (g_mous)                                                     //
 //                                                                                      //
 //  _ m o u s     l a y e r                                                             //
 //////////////////////////////////////////////////////////////////////////////////////////

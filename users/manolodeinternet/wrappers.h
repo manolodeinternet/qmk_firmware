@@ -202,8 +202,9 @@ acronym dictionary
  * |        |        |        |        |A-ESCAPE|        |[_PINKY]|        |        |        |        |
  * |        | [_DALY]| [_MOUS]| [_NUMB]| [_SYMB]|        |[ _FVIM]| [_XVIM]| [_FUNC]| [_DALY]|        |
  * '--------------------------------------------'        '--------------------------------------------'
+ */
 
- * .--------------------------------------------.        .--------------------------------------------.
+/* .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |        |BCKSPACE|        |        |        |        |        |        |
  * |    B   |    L   |    S   |    C   |S-DELETE|        |    Z   |    Y   |    O   |    P   |    X   |
  * |        |G[_1APP]|        |        |CM-ESCPE|        |        |        |        |G[_1APP]|        |
@@ -220,6 +221,7 @@ acronym dictionary
  * |        | [_DALY]| [_MOUS]| [_NUMB]| [_SYMB]|        |[ _FVIM]| [_XVIM]| [_FUNC]| [_DALY]|        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
+
 /* acomodating G and H over less used keys: J ond K
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |        |Bckspace|        |        |        |        |        |        |
@@ -238,6 +240,28 @@ acronym dictionary
  * |        | [_DALY]| [_MOUS]| [_NUMB]| [_SYMB]|        |[ _FVIM]| [_XVIM]| [_FUNC]| [_DALY]|        |
  * '--------------------------------------------'        '--------------------------------------------'
  */
+
+/* acomodating G one step right for enabling rolling in with the pretty frecuent sufix 'ing'
+ * G and V are interchanged
+ * .--------------------------------------------.        .--------------------------------------------.
+ * |        |        |        |        |Bckspace|        |        |        |        |        |        |
+ * |    B   |    L   |    S   |    C   |S-Delete|        |    Z   |    Y   |    O   |    P   |    X   |
+ * |        |G[_1APP]|        |        |M-Escape|        |        |        |        |G[_1APP]|        |
+ * |        | [_APPS]| [_POWR]| [_LEDS]| [_DVIM]|        |        | [_LEDS]| [_POWR]| [_APPS]|        |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    J   |    N   |    R   |    T   |    M   |        |  Enter |    U   |    A   |    I   |    K   |
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |  RCtl  |  RSft  |  RAlt  |  RGui  | [_ACCN]|        | [_ACCN]|  RGui  |  RAlt  |  RSft  |   RCtl |
+ * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |
+ * |    F   |    V   |    G   |    D   |  Space |        |    E   |    W   |    H   |    Q   | Escape |
+ * |        |        |        |        |        |        |[_PINKY]|        |        |        |        |
+ * |        | [_DALY]| [_MOUS]| [_NUMB]| [_SYMB]|        |[ _FVIM]| [_XVIM]| [_FUNC]| [_DALY]|        |
+ * '--------------------------------------------'        '--------------------------------------------'
+ */
+
+
 // home/repos/keygen: customized by me (ieants KEYBOARD LAYOUT ANALYZER)
 // link to original fork: 
 // https://ieants.cc/code/keyboard/klatest/#/main
@@ -253,7 +277,7 @@ acronym dictionary
 #if defined(COMPREHENSIVE_30_LAYOUT)
 #define ____DFLT___L1___         KC_B,     TD(L_APPS), LT(_POWR,KC_S), LT(_LEDS,KC_C),      _DVIM_BS
 #define ____DFLT___L2___ LCTL_T(KC_J),   LSFT_T(KC_N),   LALT_T(KC_R),   LGUI_T(KC_T), LT(_ACCN,KC_M)
-#define ____DFLT___L3___         KC_F, LT(_DALY,KC_G),     TD(V_MOUS), LT(_NUMB,KC_D),      _SYM_SPC
+#define ____DFLT___L3___         KC_F, LT(_DALY,KC_V),     TD(G_MOUS), LT(_NUMB,KC_D),      _SYM_SPC
 
 #define ____DFLT___R1___  KC_Z,             LT(_LEDS,KC_Y), LT(_POWR,KC_O),TD(R_APPS),           KC_X
 #define ____DFLT___R2___  LT(_ACCN,KC_ENT), RGUI_T(KC_U),   RALT_T(KC_A),  RSFT_T(KC_I),  RCTL_T(KC_K)
@@ -270,7 +294,7 @@ acronym dictionary
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |    J   |    N   |    R   |    T   |    M   |        |  Enter |    U   |    A   |    I   |    K   |
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |  LCtl  |  LSft  |  LAlt  |  LGui  |        |        |        |  LGui  |  LAlt  |  LSft  |   LCtl |
+ * |  LCtl  |  LSft  |  LAlt  |  LGui  |        |        |        |  RGui  |  RAlt  |  RSft  |   RCtl |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |    F   |    G   |    V   |    D   |  Space |        |    E   |    W   |    H   |    Q   | Escape |
@@ -400,7 +424,7 @@ acronym dictionary
 #define _DFLT_LTHMB_RW2_            MO_DALY, _SYM_SPC,           TT_NUMB  // TT(_NUMB)is slower than TT_NUMB
 
 #define      _DFLT_RTHMB_RW1_                              MO(_POWR),         OSL(_ACCN)
-#define      _DFLT_RTHMB_RW2_                              _APPS_TRIGGER_KEY, LT(_FVIM,KC_E), TD(V_MOUS)
+#define      _DFLT_RTHMB_RW2_                              _APPS_TRIGGER_KEY, LT(_FVIM,KC_E), TD(G_MOUS)
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
 //
@@ -431,7 +455,7 @@ acronym dictionary
 
 #define ____QWER__L1___         KC_Q ,     TD(L_APPS), LT(_POWR, KC_E), LT(_LEDS, KC_R), LT(_DVIM,KC_T) //TD(APPS_Q)
 #define ____QWER__L2___  LCTL_T(KC_A),   LSFT_T(KC_S),    LALT_T(KC_D),    LGUI_T(KC_F), LT(_ACCN,KC_G)
-#define ____QWER__L3___          KC_Z, LT(_DALY,KC_X),      TD(V_MOUS), LT(_NUMB, KC_V), LT(_SYMB,KC_B)
+#define ____QWER__L3___          KC_Z, LT(_DALY,KC_X),      TD(G_MOUS), LT(_NUMB, KC_V), LT(_SYMB,KC_B)
 
 #define ____QWER__R1___          KC_Y ,LT(_LEDS,KC_U), LT(_POWR, KC_I),       TD(R_APPS),       KC_P //TD(APPS_P)
 #define ____QWER__R2___ LT(_ACCN,KC_H),  LGUI_T(KC_J),    LALT_T(KC_K),     LSFT_T(KC_L),LCTL_T(KC_SPC)
@@ -513,7 +537,7 @@ acronym dictionary
  *                   |  LSft  |@[_FVIM]|@[_APPS]|        |@[_NUMB]|        |@[_DALY]|
  *                   '--------------------------'        '--------------------------'
  */
-#define _ACCN_LTHMB_RW1_          LT(_XVIM, KC_TAB), TD(V_MOUS)
+#define _ACCN_LTHMB_RW1_          LT(_XVIM, KC_TAB), TD(G_MOUS)
 #define _ACCN_LTHMB_RW2_ KC_LSFT,         MO(_FVIM), _APPS_TRIGGER_KEY
 
 // With 'OSL(_MOUS)' it allow us not twist our fingers for access mirrored layer trigger keys
@@ -578,9 +602,10 @@ acronym dictionary
 #define ___NUMBERS_L2___ LCTL_T(KC_EQL),LSFT_T(KC_DEL),LALT_T(KC_COMM), LGUI_T(KC_DOT), CURRENCY_SIGN
 #define ___NUMBERS_L3___         KC_TAB,      _DVIM_BS,        KC_PERC,     TD(NUMBOF),      _SYM_SPC
 
-#define      ___NUMBERS_R1___           KC_6,         KC_7,         KC_8,         KC_9,            KC_0
-#define      ___NUMBERS_R2___        KC_PMNS, LGUI_T(KC_4), LALT_T(KC_5), LSFT_T(KC_6), LCTL_T(KC_PPLS)
-#define      ___NUMBERS_R3___     TD(SLNUMB),         KC_1,         KC_2,         KC_3,         KC_PAST
+#define      ___NUMBERS_R1___           KC_6,      KC_KP_7,      KC_KP_8,      KC_KP_9,         KC_KP_0
+//#define    ___NUMBERS_R2___        KC_PMNS, LGUI_T(KC_4), LALT_T(KC_5), LSFT_T(KC_6), LCTL_T(KC_PPLS)
+#define      ___NUMBERS_R2___        KC_PMNS,      KC_KP_4,      KC_KP_5,      KC_KP_6,         KC_PPLS
+#define      ___NUMBERS_R3___     TD(SLNUMB),      KC_KP_1,      KC_KP_2,      KC_KP_3,         KC_PAST
 
 //# if defined(COMPREHENSIVE_30_LAYOUT)
 #elif defined(SIMPLE_30_LAYOUT)
@@ -632,7 +657,7 @@ acronym dictionary
 #define _NUMB_LTHMB_RW2_           _______, MO(_SYMB), _______
 
 #define      _NUMB_RTHMB_RW1_                                               MO(_POWR), EURO
-#define      _NUMB_RTHMB_RW2_                                               _______,   TD(V_MOUS), _______
+#define      _NUMB_RTHMB_RW2_                                               _______,   TD(G_MOUS), _______
 
 //#if defined(MINI_DACTYL_THUMBS)
 #endif
@@ -681,8 +706,8 @@ acronym dictionary
 /* [_FVIM] = LAYER 04 : FAKE VIM LAYER
  * .--------------------------------------------.        .--------------------------------------------.
  * |        |  Mouse |        |        |        |        |        |        |  Move  |  Move  |        |
- * |        | Button |    B   |    X   |Bckspace|        |  Shift |  Move  |  Word  |  Word  |  Move  |
- * |        |    2   |        |        |        |        |paragrph|  Begin |CamelCas|CamelCas| End Of |
+ * | Delete | Button |    B   |    X   |Bckspace|        |  Shift |  Move  |  Word  |  Word  |  Move  |
+ * |        |    1   |        |        |        |        |paragrph|  Begin |CamelCas|CamelCas| End Of |
  * |        |        |        |        |        |        |   Up   | Ln/Prg | Bckwrd | Forwrd | Ln/Prg |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        | Center |        |        |        |        |        |        |
@@ -690,10 +715,10 @@ acronym dictionary
  * |        |        |        |        |   in   |        |paragrph|        |        |        |        |
  * |  LCtl  |  LSft  |  LAlt  |  LGui  |  View  |        |  Down  |  LGui  |  LAlt  |  LSft  |  LCtl  |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
- * |        |  Mouse |        |        |        |        |@@@@@@@@|        |        |        |        |
- * |        | Button |    F   |    Y   |        |        |        |  Move  |  Move  |  Move  |  Move  |
- * |        |    1   |        |        | TOOGLE |        | TOOGLE |        |  Page  |  Page  |        |
- * |        |        |        |        | [_FVIM]|        | [_FVIM]|  HOME  |   UP   |  DOWN  |   END  |
+ * |        |        |        |        |        |        |@@@@@@@@|        |        |        |        |
+ * |  Enter |        |    F   |    Y   |Spacebar|        |        |  Move  |  Move  |  Move  |  Move  |
+ * |        | TOOGLE |        |        |        |        | TOOGLE |        |  Page  |  Page  |        |
+ * |        | [_FVIM]|        |        |        |        | [_FVIM]|  HOME  |   UP   |  DOWN  |   END  |
  * '--------------------------------------------'        '--------------------------------------------'
 */
 // PINKIES DEFINITION
@@ -707,9 +732,9 @@ acronym dictionary
 #define PINKY_R_R2                      LGUI_T(KC_K)
 #define PINKY_R_R3                             KC_Y
 // pinkies definition
-#define ___FAKEVIM_L1___      KC_DEL,         KC_BTN1,   PINKY_L_R1, PINKY_R_R1, KC_BSPC
-#define ___FAKEVIM_L2___      LCTL_T(KC_ENT), KC_LSFT,   PINKY_L_R2, PINKY_R_R2, FVIM_H
-#define ___FAKEVIM_L3___      KC_ENT,         TT(_FVIM), PINKY_L_R3, PINKY_R_R3, KC_SPC 
+#define ___FAKEVIM_L1___      KC_DEL,    KC_BTN1, PINKY_L_R1, PINKY_R_R1, KC_BSPC
+#define ___FAKEVIM_L2___      KC_LCTL,   KC_LSFT, PINKY_L_R2, PINKY_R_R2, FVIM_H
+#define ___FAKEVIM_L3___      KC_ENT,  TT(_FVIM), PINKY_L_R3, PINKY_R_R3, KC_SPC 
 
 // WITHOUT CAMEL CASE JUMPS
 // #define ___FAKEVIM_R1___ C(G(KC_UP)),   TD(FVIM_uU), A(KC_LEFT), A(KC_RGHT), TD(FVIM_pP)
@@ -962,8 +987,8 @@ acronym dictionary
  * |        |        |^:cpySCR|^:cpySLD|        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |  Dash- | Launch-|  Speak |  Caps  | Active |        |  Close |  Prev  |  Next  |  DESK  |Notific.|
- * |  board |   pad  |        |  lock  | Window |        | Window | Window | Window |        | Center |
+ * |  Dash- |  Caps  |  Speak | Launch-| Active |        |  Close |  Prev  |  Next  |  DESK  |Notific.|
+ * |  board |  lock  |        |   pad  | Window |        | Window | Window | Window |        | Center |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |@@@@@@@@|        |        |        |        |        |        |        |@@@@@@@@|        |
@@ -973,7 +998,7 @@ acronym dictionary
  * '--------------------------------------------'        '--------------------------------------------'
  */
 #define ____DAILY_L1____ DICTATION,   KC_TAB,   CAP_SCRN, CAP_SLDE, FLOA_WIN
-#define ____DAILY_L2____  DSHBOARD, LANCHPAD,      SPEAK, F(CAPSL), ACTV_WIN
+#define ____DAILY_L2____  DSHBOARD, F(CAPSL),      SPEAK, LANCHPAD, ACTV_WIN
 #define ____DAILY_L3____      SIRI,   REWIND, PLAY_PAUSE,  FORWARD, REOPEN_L
 
 #define      ____DAILY_R1____                        CLOSE_AP, PREV_APP, NEXT_APP, APP_WIND,  MISS_CTL
@@ -1083,12 +1108,12 @@ acronym dictionary
 // SUPER New _SYMB
 /* .--------------------------------------------.        .--------------------------------------------.
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |        |  \  |  |    /   |    *   |    &   |        |  %  ˆ  |    (   |    )   |  !  ¡  |        |
+ * |        |    -   |   __   |    *   |    &   |        |  %  ˆ  |    (   |    )   |  !  ¡  |        |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
  * |        |        |        |        |        |        |        |        |        |        |        |
- * |        |  -  __ |    [   |    ]   | $ EURO |        |  `  ~  |  ,  <  |  .  >  |  ;  :  |        |
+ * |  \  |  |    /   |    [   |    ]   | $ EURO |        |    :   |  ,  <  |  .  >  |    ;   |  `  ~  |
  * |        |        |        |        |        |        |        |        |        |        |        |
  * |  LCtl  |  LSft  |  LAlt  |  LGui  |        |        |        |  LGui  |  LAlt  |  LSft  |  LCtl  |
  * |--------+--------+--------+--------+--------|        |--------+--------+--------+--------+--------|
@@ -1100,13 +1125,13 @@ acronym dictionary
  */ // SUPER New _SYMB
 #define PINKY_L2  LGUI_T(KC_G)
 #define PINKY_R2  LALT_T(KC_H)
-#define ___SYMBOLS_L1___  XXXXXXX,         KC_BSLS,        KC_SLSH,        KC_ASTR,       KC_AMPR
-#define ___SYMBOLS_L2___  KC_LCTL, LSFT_T(KC_MINS),LALT_T(KC_LBRC),LGUI_T(KC_RBRC), CURRENCY_SIGN
-#define ___SYMBOLS_L3___  XXXXXXX,         PLUS_EQ,        QUOTE,        D_QUOTE,       XXXXXXX
+#define ___SYMBOLS_L1___  KC_UNDS,         KC_MINS,        KC_UNDS,        KC_ASTR,       KC_AMPR
+#define ___SYMBOLS_L2___  LCTL_T(KC_BSLS), LSFT_T(KC_SLSH),LALT_T(KC_LBRC),LGUI_T(KC_RBRC), CURRENCY_SIGN
+#define ___SYMBOLS_L3___  KC_EQL,          PLUS_EQ,       QUOTE_SP,     D_QUOTE_SP,       XXXXXXX
 
-#define           ___SYMBOLS_R1___ PERC_CI,  KC_LPRN,          KC_RPRN,        EXCLAMATION_MARK, XXXXXXX
-#define           ___SYMBOLS_R2___ KC_GRAVE, LGUI_T(KC_COMMA), LALT_T(KC_DOT), LSFT_T(KC_SCLN),  KC_LCTL
-#define           ___SYMBOLS_R3___ AT_HASH,  KC_LCBR,          KC_RCBR,        QUESTION_MARK,    XXXXXXX
+#define ___SYMBOLS_R1___ PERC_CI,  KC_LPRN,          KC_RPRN,        EXCLAMATION_MARK, A(KC_1)
+#define ___SYMBOLS_R2___ KC_COLN, LGUI_T(KC_COMMA), LALT_T(KC_DOT), LSFT_T(KC_SCLN),   LCTL_T(KC_GRAVE)
+#define ___SYMBOLS_R3___ AT_HASH,  KC_LCBR,          KC_RCBR,        QUESTION_MARK,    S(A(KC_SLSH))
 
 #if defined(MINI_DACTYL_THUMBS)
 /* [_SYMB] = LAYER 10 : SYMBOLS LAYER
